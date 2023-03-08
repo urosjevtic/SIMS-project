@@ -55,25 +55,6 @@ namespace InitialProject.View
             }
         }
 
-        /* private AccommodationType _accommodationType;
-
-         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-         {
-             string nesto = accommodationType.Text;
-             switch (nesto)
-             {
-                 case "Appartment":
-                     _accommodationType = AccommodationType.appartment;
-                     break;
-                 case "House":
-                     _accommodationType = AccommodationType.house;
-                     break;
-                 case "Cabin":
-                     _accommodationType = AccommodationType.cabin;
-                     break;
-
-             }
-         }*/
         private string _accommodationType;
         public string AccommodationTypes
         {
