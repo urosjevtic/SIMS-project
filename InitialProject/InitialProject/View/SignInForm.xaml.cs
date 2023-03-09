@@ -50,8 +50,16 @@ namespace InitialProject
             {
                 if(user.Password == txtPassword.Password)
                 {
+<<<<<<< Updated upstream
                     CommentsOverview commentsOverview = new CommentsOverview(user);
                     commentsOverview.Show();
+=======
+                    if(user.Role == UserRole.Owner)
+                    {
+                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
+                        ownerMainWindow.Show();
+                    }
+>>>>>>> Stashed changes
                     Close();
                 } 
                 else
