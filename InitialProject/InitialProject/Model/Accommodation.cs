@@ -47,13 +47,13 @@ namespace InitialProject.Model
             Location = values[2];
             switch(values[3])
             {
-                case "Appartment":
+                case "appartment":
                     Type = AccommodationType.appartment;
                     break;
-                case "House":
+                case "house":
                     Type = AccommodationType.house; 
                     break;
-                case "Cabin":
+                case "cabin":
                     Type = AccommodationType.cabin;
                     break;
             }

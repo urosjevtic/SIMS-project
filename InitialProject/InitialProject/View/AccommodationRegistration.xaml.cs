@@ -132,13 +132,13 @@ namespace InitialProject.View
             accommodation.Location = _location;
             switch(_accommodationType)
             {
-                case "House":
+                case "house":
                     accommodation.Type = AccommodationType.house;
                     break;
-                case "Cabin":
+                case "cabin":
                     accommodation.Type = AccommodationType.cabin;
                     break;
-                case "Appartment":
+                case "appartment":
                     accommodation.Type = AccommodationType.appartment;
                     break;
             }
