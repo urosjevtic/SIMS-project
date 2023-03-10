@@ -23,5 +23,15 @@ namespace InitialProject.View
         {
             InitializeComponent();
         }
+
+        private void SerchButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
