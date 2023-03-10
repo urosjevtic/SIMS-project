@@ -16,14 +16,14 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-
+using System.Text.RegularExpressions;
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for AccommodationRegistration.xaml
     /// </summary>
-    public partial class AccommodationRegistration : Window
+    public partial class AccommodationRegistration : Window, IDataErrorInfo
     {
         private readonly AccommodationRepository _repository;
 
@@ -112,6 +112,7 @@ namespace InitialProject.View
         }
 
 
+        //public string this[string columnName] => throw new NotImplementedException();
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -127,31 +128,104 @@ namespace InitialProject.View
 
         private void Button_Click_Save(object sender, RoutedEventArgs e)
         {
-            Accommodation accommodation = new Accommodation();
-            accommodation.Name = _accommodationName;
-            accommodation.Location = _location;
-            switch(_accommodationType)
+            if (IsValid)
             {
-                case "house":
-                    accommodation.Type = AccommodationType.house;
-                    break;
-                case "cabin":
-                    accommodation.Type = AccommodationType.cabin;
-                    break;
-                case "appartment":
-                    accommodation.Type = AccommodationType.appartment;
-                    break;
+                Accommodation accommodation = new Accommodation();
+                accommodation.Name = _accommodationName;
+                accommodation.Location = _location;
+                switch (_accommodationType)
+                {
+                    case "house":
+                        accommodation.Type = AccommodationType.house;
+                        break;
+                    case "cabin":
+                        accommodation.Type = AccommodationType.cabin;
+                        break;
+                    case "appartment":
+                        accommodation.Type = AccommodationType.appartment;
+                        break;
+                }
+                accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
+                accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
+                accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
+                _repository.Save(accommodation);
+                this.Close();
             }
-            accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
-            accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
-            accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
-            _repository.Save(accommodation);
-            this.Close();
         }
 
         private void Button_Click_Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+
+        private Regex locationPattern = new Regex("^[a-zA-Z\\s]+,[\\s]*[a-zA-Z\\s]+$");
+        private Regex positiveNumbersPattern = new Regex("^[1-9][0-9]*$");
+        public string Error => null;
+
+        public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "Location")
+                {
+                    if (string.IsNullOrEmpty(Location))
+                        return "Location is required";
+                    Match match = locationPattern.Match(Location);
+                    if (!match.Success)
+                        return "Location format should be: Country, City";
+                }
+                else if (columnName == "AccommodationName")
+                {
+                    if (string.IsNullOrEmpty(AccommodationName))
+                        return "Accommodation name is required";
+                }
+                else if (columnName == "AccommodationTypes")
+                {
+                    if (string.IsNullOrEmpty(AccommodationTypes))
+                        return "Accommodation type is required";
+                }
+                else if (columnName == "MaxGuests")
+                {
+                    if (string.IsNullOrEmpty(MaxGuests))
+                        return "Maximum number of guests is required";
+                    Match match = positiveNumbersPattern.Match(MaxGuests);
+                    if (!match.Success)
+                        return "Maximum guests format should be: positive number";
+                }
+                else if (columnName == "MinReservationDays")
+                {
+                    if (string.IsNullOrEmpty(MinReservationDays))
+                        return "Minimum reservation days is required";
+                    Match match = positiveNumbersPattern.Match(MinReservationDays);
+                    if (!match.Success)
+                        return "Minimum reservation days format should be: positive number";
+                }
+                else if (columnName == "CancelationPeriod")
+                {
+                    if (string.IsNullOrEmpty(CancelationPeriod))
+                        return "Cancelation period is required";
+                    Match match = positiveNumbersPattern.Match(CancelationPeriod);
+                    if (!match.Success)
+                        return "Cancelation period format should be: positive number (number of days for cancelation)";
+                }
+                return null;
+            }
+        }
+        private readonly string[] _validatedProperties = { "Location" };
+
+        public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
         }
 
     }
