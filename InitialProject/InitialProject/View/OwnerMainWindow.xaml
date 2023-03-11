@@ -15,11 +15,11 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <DataGrid Grid.Row="1" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False">
+                <DataGrid x:Name="accommodationDataGrid" Grid.Row="1" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                        <DataGridTextColumn Header="Location" Binding="{Binding Location}" />
+                        <DataGridTextColumn Header="Location" Binding="{Binding Location.City}" />
                         <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
                         <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" />
                     </DataGrid.Columns>

@@ -25,7 +25,24 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationRegistration : Window, IDataErrorInfo
     {
-        private readonly AccommodationRepository _repository;
+        private readonly AccommodationRepository _accommodationRepository;
+        private readonly LocationRepository _locationRepository;
+
+        private OwnerMainWindow _ownerMainWindow;       
+        public AccommodationRegistration(OwnerMainWindow ownerMainWindow)
+        {
+            _accommodationRepository = new AccommodationRepository();
+            _locationRepository = new LocationRepository(); 
+            _ownerMainWindow = ownerMainWindow;
+            InitializeComponent();
+            DataContext = this;
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
 
         private string _accommodationName;
         public string AccommodationName
@@ -112,44 +129,60 @@ namespace InitialProject.View
         }
 
 
-        //public string this[string columnName] => throw new NotImplementedException();
+        private int getLocationId(string location)
+        {
+            string[] splitedLocation = splitLocation(location);
+            List<Location> locations = _locationRepository.GetAll();
+            foreach(Location loc in locations)
+            {
+                if(loc.Country == splitedLocation[0])
+                {
+                    if (loc.City == splitedLocation[1])
+                        return loc.Id;
+                }
+            }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            Location newLocation = new Location();
+            newLocation.Country = splitedLocation[0];
+            newLocation.City = splitedLocation[1];
+            return _locationRepository.Save(newLocation).Id;
         }
-        public AccommodationRegistration()
+
+        private string[] splitLocation(string location)
         {
-            InitializeComponent();
-            DataContext = this;
-            _repository = new AccommodationRepository();
+            return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+        private void confirmAccommodationRegistration()
+        {
+            Accommodation accommodation = new Accommodation();
+            accommodation.Name = _accommodationName;
+            accommodation.Location.Id = getLocationId(_location);
+            switch (_accommodationType)
+            {
+                case "house":
+                    accommodation.Type = AccommodationType.house;
+                    break;
+                case "cabin":
+                    accommodation.Type = AccommodationType.cabin;
+                    break;
+                case "appartment":
+                    accommodation.Type = AccommodationType.appartment;
+                    break;
+            }
+            accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
+            accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
+            accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
+            _accommodationRepository.Save(accommodation);
+            _ownerMainWindow.UpdateDataGrid();
+            this.Close();
         }
 
         private void Button_Click_Save(object sender, RoutedEventArgs e)
         {
             if (IsValid)
             {
-                Accommodation accommodation = new Accommodation();
-                accommodation.Name = _accommodationName;
-                accommodation.Location = _location;
-                switch (_accommodationType)
-                {
-                    case "house":
-                        accommodation.Type = AccommodationType.house;
-                        break;
-                    case "cabin":
-                        accommodation.Type = AccommodationType.cabin;
-                        break;
-                    case "appartment":
-                        accommodation.Type = AccommodationType.appartment;
-                        break;
-                }
-                accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
-                accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
-                accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
-                _repository.Save(accommodation);
-                this.Close();
+                confirmAccommodationRegistration();
             }
         }
 
@@ -158,7 +191,7 @@ namespace InitialProject.View
             this.Close();
         }
 
-
+        //Input validation
         private Regex locationPattern = new Regex("^[a-zA-Z\\s]+,[\\s]*[a-zA-Z\\s]+$");
         private Regex positiveNumbersPattern = new Regex("^[1-9][0-9]*$");
         public string Error => null;

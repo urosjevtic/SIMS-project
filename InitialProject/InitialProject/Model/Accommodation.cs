@@ -12,7 +12,7 @@ namespace InitialProject.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Location { get; set; }
+        public Location Location { get; set; }
         public AccommodationType Type { get; set; }
         public int MaxGuests { get; set; }
         public int MinReservationDays { get; set; }
@@ -20,9 +20,12 @@ namespace InitialProject.Model
         public List<String> Images { get; set; }
 
         
-        public Accommodation() { }
+        public Accommodation() 
+        {
+            Location = new Location();
+        }
 
-        public Accommodation(int id, string name, string location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> images)
+        public Accommodation(int id, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> images)
         {
             Id = id;
             Name = name;
@@ -36,7 +39,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location, Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString() };
+            string[] csvValues = { Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString() };
             return csvValues;
         }
 
@@ -44,7 +47,7 @@ namespace InitialProject.Model
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            Location = values[2];
+            Location.Id = Convert.ToInt32(values[2]);
             switch(values[3])
             {
                 case "appartment":
