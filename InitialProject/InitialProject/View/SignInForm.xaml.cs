@@ -56,6 +56,11 @@ namespace InitialProject
                         //OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
                         //ownerMainWindow.Show();
                     }
+                    if(user.Role == UserRole.Guest)
+                    {
+                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                        accommodationSearch.Show();
+                    }
                     Close();
                 } 
                 else
