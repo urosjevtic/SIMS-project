@@ -53,7 +53,7 @@ namespace InitialProject
                 {
                     if(user.Role == UserRole.Owner)
                     {
-                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
+                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
                         ownerMainWindow.Show();
                     }
                     Close();

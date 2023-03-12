@@ -28,12 +28,15 @@ namespace InitialProject.View
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
 
-        private OwnerMainWindow _ownerMainWindow;       
-        public AccommodationRegistration(OwnerMainWindow ownerMainWindow)
+        private OwnerMainWindow _ownerMainWindow;
+
+        public User LoggedInUser { get; set; }
+        public AccommodationRegistration(OwnerMainWindow ownerMainWindow, User user)
         {
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository(); 
             _ownerMainWindow = ownerMainWindow;
+            LoggedInUser = user;
             InitializeComponent();
             DataContext = this;
         }
@@ -156,6 +159,7 @@ namespace InitialProject.View
         private void confirmAccommodationRegistration()
         {
             Accommodation accommodation = new Accommodation();
+            accommodation.Owner.Id = LoggedInUser.Id;
             accommodation.Name = _accommodationName;
             accommodation.Location.Id = getLocationId(_location);
             switch (_accommodationType)

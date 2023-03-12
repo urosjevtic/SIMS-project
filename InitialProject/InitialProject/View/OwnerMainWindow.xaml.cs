@@ -22,16 +22,19 @@ namespace InitialProject.View
     /// </summary>
     public partial class OwnerMainWindow : Window
     {
+        public User LoggedInUser { get; set; }
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
 
         public List<Accommodation> accommodations;
         public List<Location> locations;
-        public OwnerMainWindow()
+        public OwnerMainWindow(User user)
         {
             InitializeComponent();
             this.DataContext = this;
+
+            LoggedInUser = user;
 
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository();
@@ -42,8 +45,7 @@ namespace InitialProject.View
       
         private void loadData()
         {
-            accommodations = new List<Accommodation>();
-            accommodations = _accommodationRepository.GetAll();
+            accommodations = loadAccommodations();
             locations = new List<Location>();
             locations = _locationRepository.GetAll();
             foreach(Accommodation accommodation in accommodations)
@@ -58,15 +60,30 @@ namespace InitialProject.View
                 }
             }
         }
+
+        private List<Accommodation> loadAccommodations()
+        {
+            List<Accommodation> allAccommodations = new List<Accommodation>();
+            allAccommodations = _accommodationRepository.GetAll();
+            accommodations = new List<Accommodation>();
+            foreach(Accommodation accommodation in allAccommodations)
+            {
+                if(accommodation.Owner.Id == LoggedInUser.Id)
+                {
+                    accommodations.Add(accommodation);
+                }
+            }
+            return accommodations;
+        }
         private void Button_Click_AddAccommodation(object sender, RoutedEventArgs e)
         {
-            AccommodationRegistration accommodationRegistration = new AccommodationRegistration(this);
+            AccommodationRegistration accommodationRegistration = new AccommodationRegistration(this, LoggedInUser);
             accommodationRegistration.Show();
         }
 
         public void UpdateDataGrid()
         {
-            var accommodations = _accommodationRepository.GetAll();
+            var accommodations = loadAccommodations();
             var locations = _locationRepository.GetAll();
 
             foreach (var accommodation in accommodations)
