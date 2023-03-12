@@ -1,0 +1,228 @@
+﻿<Window x:Class="InitialProject.View.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="Window1" Height="450" Width="800">
+    
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="64"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="12"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="64"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="96"/>
+                <ColumnDefinition Width="96"/>
+                <ColumnDefinition Width="128"/>
+                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="128"/>
+                <ColumnDefinition Width="96"/>
+                <ColumnDefinition Width="96"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Row="1" Grid.Column="1"
+				Grid.RowSpan="21" Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-30"/>
+
+            <Border Grid.Row="1" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="3" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="5" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="7" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="9" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="11" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="13" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="15" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="17" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+            <Border Grid.Row="19" Grid.Column="1"
+				Grid.ColumnSpan="5"
+				CornerRadius="10"
+				Margin="-5"/>
+
+            <!--Name-->
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Name:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Tour.Name, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <!--Location-->
+            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Location:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Tour.Location, UpdateSourceTrigger=PropertyChanged}"/>
+
+        <!--Description-->
+            <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Description:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Student.DatumRodjenja, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+				 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+            <!--Adresa stanovanja-->
+            <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Adresa stanovanja:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Student.AdresaStanovanja, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+				 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+            <!--Kontakt telefon-->
+            <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Broj telefona:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Student.KontaktTelefon, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+				 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+            <!--Email adresa-->
+            <Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="E-mail adresa:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="11" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Student.EMailAdresa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+				 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+            <!--Broj indeksa-->
+            <Label Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Broj indeksa:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Student.BrojIndeksa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+				 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+            <!--Godina upisa-->
+            <Label Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Godina upisa:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <TextBox Grid.Row="15" Grid.Column="4" Grid.ColumnSpan="2"
+				 Height="20"
+				 VerticalAlignment="Top"
+				 Text="{Binding Path=Student.GodinaUpisa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+				 Validation.ErrorTemplate="{StaticResource ValidationTemplate}"/>
+
+            <!--Trenutna godina studija-->
+            <Label Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Trenutna godina studija:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <ComboBox Grid.Row="17" Grid.Column="4" Grid.ColumnSpan="2"
+				  Name="GodStudBox"
+				  SelectedValue="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+            <!--Nacin finansiranja-->
+            <Label Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="2"
+			   Content="Nacin finansiranja:"
+			   FontSize="16"
+			   FontWeight="Bold"
+			   HorizontalContentAlignment="Left"
+			   VerticalContentAlignment="Center"/>
+            <ComboBox Grid.Row="19" Grid.Column="4" Grid.ColumnSpan="2"
+				  Name="FinansiranjeBox"
+				  SelectedValue="{Binding Path=Student.StatusStudija, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+
+            <!--Dugmad-->
+            <Button Grid.Column="2" Grid.Row="20"
+				Content="Potvrdi"
+				IsDefault="True"
+				Click="Potvrdi_Click" Margin="0,96,0,0" Grid.RowSpan="2"/>
+            <Button Grid.Column="4" Grid.Row="21"
+				Content="Odustani"
+				IsCancel="True"
+				Click="Odustani_Click"/>
+        </Grid>
+    
+</Window>
