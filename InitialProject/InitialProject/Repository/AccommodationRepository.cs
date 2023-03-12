@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace InitialProject.Repository
 {
@@ -22,12 +23,26 @@ namespace InitialProject.Repository
             _accommodations = _serializer.FromCSV(FilePath);
         }
 
+        public int NextId()
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            if (_accommodations.Count < 1)
+            {
+                return 1;
+            }
+            return _accommodations.Max(c => c.Id) + 1;
+        }
         public void Save(Accommodation accommodation)
         {
-            accommodation.Id = 1;
+            accommodation.Id = NextId();
             _accommodations = _serializer.FromCSV(FilePath);
             _accommodations.Add(accommodation);
             _serializer.ToCSV(FilePath, _accommodations);
+        }
+
+        public List<Accommodation> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
         }
     }
 }

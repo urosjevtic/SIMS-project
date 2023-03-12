@@ -11,8 +11,9 @@ namespace InitialProject.Model
     public class Accommodation : ISerializable
     {
         public int Id { get; set; }
+        public User Owner { get; set; } 
         public string Name { get; set; }
-        public string Location { get; set; }
+        public Location Location { get; set; }
         public AccommodationType Type { get; set; }
         public int MaxGuests { get; set; }
         public int MinReservationDays { get; set; }
@@ -20,11 +21,16 @@ namespace InitialProject.Model
         public List<String> Images { get; set; }
 
         
-        public Accommodation() { }
+        public Accommodation() 
+        {
+            Owner = new User();
+            Location = new Location();
+        }
 
-        public Accommodation(int id, string name, string location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> images)
+        public Accommodation(int id,User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> images)
         {
             Id = id;
+            Owner = owner;
             Name = name;
             Location = location;
             Type = type;
@@ -36,16 +42,17 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Name, Location, Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString() };
+            string[] csvValues = { Id.ToString(),Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString() };
             return csvValues;
         }
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Name = values[1];
-            Location = values[2];
-            switch(values[3])
+            Owner.Id = Convert.ToInt32(values[1]);
+            Name = values[2];
+            Location.Id = Convert.ToInt32(values[3]);
+            switch(values[4])
             {
                 case "appartment":
                     Type = AccommodationType.appartment;
@@ -57,9 +64,9 @@ namespace InitialProject.Model
                     Type = AccommodationType.cabin;
                     break;
             }
-            MaxGuests = Convert.ToInt32(values[4]);
-            MinReservationDays = Convert.ToInt32(values[5]);
-            CancelationPeriod = Convert.ToInt32(values[6]);
+            MaxGuests = Convert.ToInt32(values[5]);
+            MinReservationDays = Convert.ToInt32(values[6]);
+            CancelationPeriod = Convert.ToInt32(values[7]);
 
         }
 

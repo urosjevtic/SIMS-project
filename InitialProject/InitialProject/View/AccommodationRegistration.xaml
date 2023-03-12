@@ -6,6 +6,16 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="AccommodationRegistration" Height="500" Width="450">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationTemplate">
+            <StackPanel>
+                <!-- Placeholder for the TextBox itself -->
+                <AdornedElementPlaceholder x:Name="textBox" />
+                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
+            </StackPanel>
+
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -33,18 +43,18 @@
 
             </StackPanel>
             <StackPanel Grid.Column="1" >
-                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <ComboBox x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes}"  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
-                    <ComboBoxItem Content = "House"  />
-                    <ComboBoxItem Content = "Appartment" />
-                    <ComboBoxItem Content = "Cabin" />
+                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <ComboBox x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
+                    <ComboBoxItem Content = "house"  />
+                    <ComboBoxItem Content = "appartment" />
+                    <ComboBoxItem Content = "cabin" />
                 </ComboBox>
-                <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
                 <TextBox  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
- 
+
 
 
             </StackPanel>
