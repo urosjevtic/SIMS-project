@@ -53,8 +53,13 @@ namespace InitialProject
                 {
                     if(user.Role == UserRole.Owner)
                     {
-                        //OwnerMainWindow ownerMainWindow = new OwnerMainWindow();
-                        //ownerMainWindow.Show();
+                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
+                        ownerMainWindow.Show();
+                    }
+                    if(user.Role == UserRole.Guest)
+                    {
+                        AccommodationSearch accommodationSearch = new AccommodationSearch();
+                        accommodationSearch.Show();
                     }
                     Close();
                 } 
