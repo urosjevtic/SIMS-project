@@ -33,5 +33,10 @@ namespace InitialProject.Model
             Country=values[1];
             City = values[2];        
         }
+
+        public static Location ToLocation(string country, string city)
+        {
+            return new Location { Country = country, City = city };
+        }
     }
 }
