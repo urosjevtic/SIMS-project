@@ -23,12 +23,16 @@ namespace InitialProject.View
     public partial class OwnerMainWindow : Window
     {
         public User LoggedInUser { get; set; }
-        public ObservableCollection<Accommodation> Accommodations { get; set; }
+
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly UnratedGuestRepository _unratedGuestRepository;
+        private readonly UserRepository _userRepository;
 
         public List<Accommodation> accommodations;
         public List<Location> locations;
+        public List<UnratedGuest> unratedGuests;
+        public List<User> users;
         public OwnerMainWindow(User user)
         {
             InitializeComponent();
@@ -38,27 +42,33 @@ namespace InitialProject.View
 
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository();
+            _unratedGuestRepository = new UnratedGuestRepository();
+            _userRepository = new UserRepository();
+
             loadData();
             accommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
+            unratedGuestsDataGrid.ItemsSource = new ObservableCollection<UnratedGuest>(unratedGuests);
+
+            if (unratedGuests.Count > 0)
+            {
+                MessageBox.Show("You have unrated guest!", "Unrated guests", MessageBoxButton.OK);
+            }
 
         }
-      
+
         private void loadData()
         {
-            accommodations = loadAccommodations();
+            loadLocations();
+            loadAccommodations();
+            loadUnratedGuests();
+        }
+
+        private List<Location> loadLocations()
+        {
             locations = new List<Location>();
             locations = _locationRepository.GetAll();
-            foreach(Accommodation accommodation in accommodations)
-            {
-                foreach(Location location in locations)
-                {
-                    if(location.Id == accommodation.Location.Id)
-                    {
-                        accommodation.Location = location;
-                        break;
-                    }
-                }
-            }
+
+            return locations;
         }
 
         private List<Accommodation> loadAccommodations()
@@ -66,6 +76,7 @@ namespace InitialProject.View
             List<Accommodation> allAccommodations = new List<Accommodation>();
             allAccommodations = _accommodationRepository.GetAll();
             accommodations = new List<Accommodation>();
+
             foreach(Accommodation accommodation in allAccommodations)
             {
                 if(accommodation.Owner.Id == LoggedInUser.Id)
@@ -73,7 +84,42 @@ namespace InitialProject.View
                     accommodations.Add(accommodation);
                 }
             }
+            foreach (Accommodation accommodation in accommodations)
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Id == accommodation.Location.Id)
+                    {
+                        accommodation.Location = location;
+                        break;
+                    }
+                }
+            }
             return accommodations;
+        }
+
+        private List<UnratedGuest> loadUnratedGuests()
+        {
+            List<UnratedGuest> allUnratedGuests = _unratedGuestRepository.GetAll();
+            unratedGuests = new List<UnratedGuest>();
+            List<User> allUsers = _userRepository.GetAll();
+            foreach(UnratedGuest unratedGuest in allUnratedGuests)
+            {
+                foreach(Accommodation accommodation in accommodations)
+                {
+                    if(accommodation.Id == unratedGuest.ReservedAccommodation.Id)
+                    {
+                        unratedGuest.ReservedAccommodation = accommodation;
+                        break;
+                    }
+                }
+                
+                unratedGuest.User = _userRepository.GetById(unratedGuest.User.Id);
+                unratedGuests.Add(unratedGuest);
+            }
+
+
+            return unratedGuests;
         }
         private void Button_Click_AddAccommodation(object sender, RoutedEventArgs e)
         {
@@ -83,8 +129,9 @@ namespace InitialProject.View
 
         public void UpdateDataGrid()
         {
-            var accommodations = loadAccommodations();
             var locations = _locationRepository.GetAll();
+            var accommodations = loadAccommodations();
+            
 
             foreach (var accommodation in accommodations)
             {

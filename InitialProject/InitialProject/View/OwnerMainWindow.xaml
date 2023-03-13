@@ -33,12 +33,14 @@
         </TabItem>
 
         <!-- Second Tab Item -->
-        <TabItem Header="Guests">
-            <DataGrid ItemsSource="{Binding Orders}">
+        <TabItem Header="Rate guests">
+            <DataGrid x:Name="unratedGuestsDataGrid" ItemsSource="{Binding UnratedGuest}" AutoGenerateColumns="False">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="OrderID" Binding="{Binding OrderID}" />
-                    <DataGridTextColumn Header="CustomerID" Binding="{Binding CustomerID}" />
-                    <DataGridTextColumn Header="OrderDate" Binding="{Binding OrderDate}" />
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                    <DataGridTextColumn Header="Guest Username" Binding="{Binding User.Username}" />
+                    <DataGridTextColumn Header="Accommodation" Binding="{Binding ReservedAccommodation.Name}" />
+                    <DataGridTextColumn Header="Start Date" Binding="{Binding ReservationStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                    <DataGridTextColumn Header="End Date" Binding="{Binding ReservationEndDate}" />
                 </DataGrid.Columns>
             </DataGrid>
         </TabItem>
