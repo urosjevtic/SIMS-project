@@ -75,7 +75,7 @@ namespace InitialProject.View
             {
                 foreach (Accommodation accommodation in accommodations)
                 {
-                    if (accommodation.Location.ToLower().Contains(tbCityName.Text.ToLower()))
+                    if (accommodation.Location.City.ToLower().Contains(tbCityName.Text.ToLower()))
                     {
                         AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
                     }
@@ -85,7 +85,7 @@ namespace InitialProject.View
             {
                 foreach (Accommodation accommodation in accommodations)
                 {
-                    if (accommodation.Location.ToLower().Contains(tbCountryName.Text.ToLower()))
+                    if (accommodation.Location.Country.ToLower().Contains(tbCountryName.Text.ToLower()))
                     {
                         AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
                     }
