@@ -121,11 +121,7 @@ namespace InitialProject.View
 
             return unratedGuests;
         }
-        private void Button_Click_AddAccommodation(object sender, RoutedEventArgs e)
-        {
-            AccommodationRegistration accommodationRegistration = new AccommodationRegistration(this, LoggedInUser);
-            accommodationRegistration.Show();
-        }
+
 
         public void UpdateDataGrid()
         {
@@ -147,5 +143,19 @@ namespace InitialProject.View
 
             accommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
         }
+
+
+        private void ButtonClickAddAccommodation(object sender, RoutedEventArgs e)
+        {
+            AccommodationRegistration accommodationRegistration = new AccommodationRegistration(this, LoggedInUser);
+            accommodationRegistration.Show();
+        }
+
+        private void ButtonClikRateGuest(object sender, RoutedEventArgs e)
+        {
+            GuestRatingForm guestRatingForm = new GuestRatingForm();
+            guestRatingForm.Show();
+        }
+
     }
 }

@@ -26,7 +26,7 @@
                 </DataGrid>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Content="Add" Margin="10" Click="Button_Click_AddAccommodation"/>
+                    <Button Content="Add" Margin="10" Click="ButtonClickAddAccommodation"/>
                     <Button Content="Delete" Margin="10"/>
                 </StackPanel>
             </Grid>
@@ -34,15 +34,26 @@
 
         <!-- Second Tab Item -->
         <TabItem Header="Rate guests">
-            <DataGrid x:Name="unratedGuestsDataGrid" ItemsSource="{Binding UnratedGuest}" AutoGenerateColumns="False">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
-                    <DataGridTextColumn Header="Guest Username" Binding="{Binding User.Username}" />
-                    <DataGridTextColumn Header="Accommodation" Binding="{Binding ReservedAccommodation.Name}" />
-                    <DataGridTextColumn Header="Start Date" Binding="{Binding ReservationStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                    <DataGridTextColumn Header="End Date" Binding="{Binding ReservationEndDate}" />
-                </DataGrid.Columns>
-            </DataGrid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="unratedGuestsDataGrid" ItemsSource="{Binding UnratedGuest}" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Guest Username" Binding="{Binding User.Username}" />
+                        <DataGridTextColumn Header="Accommodation" Binding="{Binding ReservedAccommodation.Name}" />
+                        <DataGridTextColumn Header="Start Date" Binding="{Binding ReservationStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                        <DataGridTextColumn Header="End Date" Binding="{Binding ReservationEndDate}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                    <Button Content="Cancel" Margin="10" Width="100" Click="ButtonClikRateGuest"/>
+                </StackPanel>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

@@ -1,0 +1,35 @@
+﻿<Window x:Class="InitialProject.View.GuestRatingForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="GuestRatingForm" Height="450" Width="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="350"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Rate guest" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0" Orientation="Vertical"   >
+
+                <TextBlock Text="Cleanliness"  HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                <TextBlock Text="Rule following" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                <TextBlock Text="Additional comment" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Slider  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                <Slider  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
