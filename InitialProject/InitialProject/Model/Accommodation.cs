@@ -18,16 +18,17 @@ namespace InitialProject.Model
         public int MaxGuests { get; set; }
         public int MinReservationDays { get; set; }
         public int CancelationPeriod { get; set; }
-        public List<String> Images { get; set; }
+        public Image Images { get; set; }
 
         
         public Accommodation() 
         {
             Owner = new User();
             Location = new Location();
+            Images = new Image();
         }
 
-        public Accommodation(int id,User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> images)
+        public Accommodation(int id,User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, Image images)
         {
             Id = id;
             Owner = owner;
@@ -42,7 +43,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString() };
+            string[] csvValues = { Id.ToString(),Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString(), Images.Id.ToString() };
             return csvValues;
         }
 
@@ -67,6 +68,7 @@ namespace InitialProject.Model
             MaxGuests = Convert.ToInt32(values[5]);
             MinReservationDays = Convert.ToInt32(values[6]);
             CancelationPeriod = Convert.ToInt32(values[7]);
+            Images.Id = Convert.ToInt32(values[8]);
 
         }
 

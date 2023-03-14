@@ -27,6 +27,7 @@ namespace InitialProject.View
     {
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly ImageRepository _imageRepository;
 
         private OwnerMainWindow _ownerMainWindow;
 
@@ -35,6 +36,7 @@ namespace InitialProject.View
         {
             _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository(); 
+            _imageRepository = new ImageRepository();
             _ownerMainWindow = ownerMainWindow;
             LoggedInUser = user;
             InitializeComponent();
@@ -131,10 +133,27 @@ namespace InitialProject.View
             }
         }
 
+        private string _imagesLinks;
+        public string ImagesLinks
+        {
+            get => _imagesLinks;
+            set
+            {
+                if(value != _imagesLinks)
+                {
+                    _imagesLinks = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
+        private string[] splitString(string location)
+        {
+            return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
         private int getLocationId(string location)
         {
-            string[] splitedLocation = splitLocation(location);
+            string[] splitedLocation = splitString(location);
             List<Location> locations = _locationRepository.GetAll();
             foreach(Location loc in locations)
             {
@@ -151,9 +170,18 @@ namespace InitialProject.View
             return _locationRepository.Save(newLocation).Id;
         }
 
-        private string[] splitLocation(string location)
+        private int saveImages(string urls, int entityId)
         {
-            return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+            Model.Image images = new Model.Image();
+            images.EntityLd = entityId;
+            string[] imagesUrls = splitString(urls);
+            foreach(string imageUrl in imagesUrls)
+            {
+                images.Url.Add(imageUrl);
+            }
+
+            return _imageRepository.Save(images).Id;
+
         }
 
         private void confirmAccommodationRegistration()
@@ -177,12 +205,14 @@ namespace InitialProject.View
             accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
             accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
             accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
+            int imagesId = saveImages(ImagesLinks, 0);
+            accommodation.Images.Id = imagesId;
             _accommodationRepository.Save(accommodation);
             _ownerMainWindow.UpdateDataGrid();
             this.Close();
         }
 
-        private void Button_Click_Save(object sender, RoutedEventArgs e)
+        private void ButtonClickSave(object sender, RoutedEventArgs e)
         {
             if (IsValid)
             {
@@ -190,7 +220,7 @@ namespace InitialProject.View
             }
         }
 
-        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
+        private void ButtonClickCancel(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

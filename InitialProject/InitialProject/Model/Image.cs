@@ -13,7 +13,10 @@ namespace InitialProject.Model
         public List<string> Url;
         public int EntityLd;
 
-        public Image() { }
+        public Image() 
+        {
+            Url = new List<string>();
+        }
         public Image(int id, List<string> url, int entityld) {
             Id = id;
             Url= url;
