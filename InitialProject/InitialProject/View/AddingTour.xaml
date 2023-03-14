@@ -38,12 +38,12 @@
         <Label Content="Duration: " Grid.Row="7" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <Label Content="Image URL: " Grid.Row="8" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-       
 
-        <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+
+        <TextBox Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2"  Margin="0,0,0,15" Height="60" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox Text="{Binding Path=Laanguage, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=Languagee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=Start, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>

@@ -53,7 +53,7 @@ namespace InitialProject.View
         }
 
         private string _tourName;
-        public string Name
+        public string Namee
         {
             get => _tourName;
             set
@@ -94,7 +94,7 @@ namespace InitialProject.View
             }
         }
         private string _language;
-        public string Language
+        public new string Languagee
         {
             get => _language;
             set
@@ -160,16 +160,58 @@ namespace InitialProject.View
             }
         }
 
+        private int getLocationId(string location)
+        {
+            string[] splitedLocation = splitLocation(location);
+            List<Location> locations = _locationRepository.GetAll();
+            foreach (Location loc in locations)
+            {
+                if (loc.Country == splitedLocation[0])
+                {
+                    if (loc.City == splitedLocation[1])
+                        return loc.Id;
+                }
+            }
+
+            Location newLocation = new Location();
+            newLocation.Country = splitedLocation[0];
+            newLocation.City = splitedLocation[1];
+            return _locationRepository.Save(newLocation).Id;
+        }
+
+        private void confirmAddingTour()
+        {
+            Tour tour = new Tour();
+            tour.Guide.Id = LoggedUser.Id;
+            tour.Name = _tourName;
+            tour.Location.Id = getLocationId(_location);
+
+            tour.Description = _description;
+            tour.Language = _language;
+            tour.MaxGuests = Convert.ToInt32(_maxGuests);
+            tour.Start = Convert.ToDateTime(_start);
+            tour.Duration = Convert.ToInt32(_duration);
+            tour.CoverImageUrl = _imageUrl;
+
+            _tourRepository.Save(tour);
+            _guideMainWindow.UpdateDataGrid();
+            this.Close();
+        }
+
+        private string[] splitLocation(string location)
+        {
+            return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
 
 
         private void ClickSave(object sender, RoutedEventArgs e)
         {
-
+            confirmAddingTour();
         }
 
         private void ClickCancel(object sender, RoutedEventArgs e)
         {
-
+            this.Close();
         }
     }
 }

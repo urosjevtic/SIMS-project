@@ -78,7 +78,7 @@ namespace InitialProject.View
         }
         private void AddTour(object sender, RoutedEventArgs e)
         {
-            AddingTour addingTour = new AddingTour();
+            AddingTour addingTour = new AddingTour(this,LoggedUser);
             addingTour.Show();
         }
        

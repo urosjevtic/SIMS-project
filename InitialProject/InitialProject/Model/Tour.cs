@@ -14,11 +14,11 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public Location Location { get; set; }       
         public string Description { get; set; }
-        public String Language { get; set; }
+        public string Language { get; set; }
         public int MaxGuests { get; set; }  
         public DateTime Start { get; set; }
         public int Duration { get; set; }   
-        public String CoverImageUrl { get; set; }   
+        public string CoverImageUrl { get; set; }   
 
         public Tour()
         {
