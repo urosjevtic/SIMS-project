@@ -12,8 +12,8 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public User User { get; set; }
         public Accommodation ReservedAccommodation { get; set; }
-        DateOnly ReservationStartDate { get; set; }
-        DateOnly ReservationEndDate { get; set; }
+        public DateOnly ReservationStartDate { get; set; }
+        public DateOnly ReservationEndDate { get; set; }
 
         public UnratedGuest() 
         {

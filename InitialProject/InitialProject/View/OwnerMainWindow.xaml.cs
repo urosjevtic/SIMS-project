@@ -33,6 +33,8 @@ namespace InitialProject.View
         public List<Location> locations;
         public List<UnratedGuest> unratedGuests;
         public List<User> users;
+
+        public UnratedGuest SelectedUnratedGuest { get; set; }
         public OwnerMainWindow(User user)
         {
             InitializeComponent();
@@ -153,7 +155,7 @@ namespace InitialProject.View
 
         private void ButtonClikRateGuest(object sender, RoutedEventArgs e)
         {
-            GuestRatingForm guestRatingForm = new GuestRatingForm();
+            GuestRatingForm guestRatingForm = new GuestRatingForm(SelectedUnratedGuest);
             guestRatingForm.Show();
         }
 
