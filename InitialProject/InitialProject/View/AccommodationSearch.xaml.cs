@@ -24,22 +24,60 @@ namespace InitialProject.View
     public partial class AccommodationSearch : Window
     {
 
-       /*-------------------------------------------------*/
-        public ObservableCollection<Accommodation> Accommodations{ get; set; }
 
+        
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+        private readonly AccommodationRepository _accommodationRepository;
+        private readonly LocationRepository _locationRepository;
+
+        public List<Accommodation> accommodations;
+        public List<Location> locations;
+
+        /*-------------------------------------------------*/
+        //OVO MI TREBA ZA SELEKTOVANJE!!!!!!!!!
         public Accommodation SelectedAccommodation { get; set; }
 
-        public User LoggedInUser { get; set; }   /*???*/
-
-        private readonly AccommodationRepository _accommodationRepository;
         /*------------------------------------------------*/
 
         public AccommodationSearch()
         {
             InitializeComponent();
-           /* this.DataContext = this;
+            this.DataContext = this;
             _accommodationRepository= new AccommodationRepository();
-           Accommodations= new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());*/
+            _locationRepository = new LocationRepository();
+            loadData();
+            AccommodationList.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
+        }
+
+
+        private void loadData()
+        {
+            accommodations = loadAccommodations();
+            locations = new List<Location>();
+            locations = _locationRepository.GetAll();
+            foreach (Accommodation accommodation in accommodations)
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Id == accommodation.Location.Id)
+                    {
+                        accommodation.Location = location;
+                        break;
+                    }
+                }
+            }
+        }
+
+        private List<Accommodation> loadAccommodations()
+        {
+            List<Accommodation> allAccommodations = new List<Accommodation>();
+            allAccommodations = _accommodationRepository.GetAll();
+            accommodations = new List<Accommodation>();
+            foreach (Accommodation accommodation in allAccommodations)
+            {
+                    accommodations.Add(accommodation);
+            }
+            return accommodations;
         }
 
 
@@ -54,11 +92,14 @@ namespace InitialProject.View
             return AccommodationSearch;
         }*/
 
+
+
         private void SerchButton_Click(object sender, RoutedEventArgs e)
         {
-            AccommodationList.Items.Clear();
+            //AccommodationList.Items.Clear();
+            AccommodationList.ItemsSource = null;
             List<Accommodation>accommodations= new List<Accommodation>();
-            /*accommodations = _accommodationRepository.GetAll();*/
+            accommodations = _accommodationRepository.GetAll();  //GRESKAAAA
 
             if (tbAccommodationName.Text != null)
             {
@@ -66,7 +107,11 @@ namespace InitialProject.View
                 { 
                     if(accommodation.Name.ToLower().Contains(tbAccommodationName.Text.ToLower()))
                     {
-                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
+                        //AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
+                        //accommodations.Add(accommodation);
+                        //AccommodationList.Items.Add(accommodation);
+                       // var a=accommodation;
+                        AccommodationList.ItemsSource = accommodations;
                     }
                 }
 
@@ -77,7 +122,8 @@ namespace InitialProject.View
                 {
                     if (accommodation.Location.City.ToLower().Contains(tbCityName.Text.ToLower()))
                     {
-                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
+                        // AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
+                        AccommodationList.ItemsSource = accommodations;
                     }
                 }
             }
@@ -87,7 +133,7 @@ namespace InitialProject.View
                 {
                     if (accommodation.Location.Country.ToLower().Contains(tbCountryName.Text.ToLower()))
                     {
-                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
+                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
                     }
                 }
             }
@@ -99,21 +145,21 @@ namespace InitialProject.View
                     {
                         if (accommodation.Type.ToString() == cbAccommodationType.SelectedItem)
                         {
-                            AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
+                            AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
                         }
                     }
                     if (accommodation.Type == AccommodationType.house)
                     {
                         if (accommodation.Type.ToString() == cbAccommodationType.SelectedItem)
                         {
-                            AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
+                            AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
                         }
                     }
                     if (accommodation.Type == AccommodationType.cabin)
                     {
                         if (accommodation.Type.ToString() == cbAccommodationType.SelectedItem)
                         {
-                            AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
+                            AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays });
                         }
                     }
                 }
@@ -125,7 +171,7 @@ namespace InitialProject.View
                 {
                     if (accommodation.MaxGuests>=Convert.ToInt32(tbGuestNumber.Text))
                     {
-                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
+                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
                     }
                 }
             }
@@ -135,7 +181,7 @@ namespace InitialProject.View
                 {
                     if (accommodation.MinReservationDays <= Convert.ToInt32(tbReservationDays.Text))
                     {
-                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location/*, accommodation.Location*/, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
+                        AccommodationList.Items.Add(new { Name = accommodation.Name, accommodation.Location.City, accommodation.Location.Country, accommodation.Type, accommodation.MaxGuests, accommodation.MinReservationDays }); ;
                     }
                 }
             }
