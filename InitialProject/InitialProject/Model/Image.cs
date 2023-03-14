@@ -44,7 +44,7 @@ namespace InitialProject.Model
 
             return csvValues;
         }
-        //majkooo milaaa
+        
         public void FromCSV(string[] values)
         {
 

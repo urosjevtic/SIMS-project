@@ -10,6 +10,7 @@ namespace InitialProject.Model
     public class Tour : ISerializable
     {
         public int Id { get; set; }
+        public User Guide { get; set; } 
         public string Name { get; set; }
         public Location Location { get; set; }       
         public string Description { get; set; }
@@ -19,11 +20,31 @@ namespace InitialProject.Model
         public int Duration { get; set; }   
         public String CoverImageUrl { get; set; }   
 
+        public Tour()
+        {
+            Location = new Location();
+            Guide = new User();
+        }
+        public Tour(int id, User giude, string name, Location location, string description, string language, int maxGuests, DateTime start, int duration, string coverImageUrl)
+        {
+            Id = id;
+            Guide = giude;
+            Name = name;
+            Location = location;
+            Description = description;
+            Language = language;
+            MaxGuests = maxGuests;
+            Start = start;
+            Duration = duration;
+            CoverImageUrl = coverImageUrl;
+
+        }
 
         public string[] ToCSV()
         {
             string[] csvValues = {
                Id.ToString(),
+               Guide.Id.ToString(),
                Name,
                Location.Id.ToString(),
                Description,
@@ -39,14 +60,15 @@ namespace InitialProject.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Name = values[1];
-            Location.Id = Convert.ToInt32(values[2]);   
-            Description = values[3];
-            Language = values[4];   
-            MaxGuests = Convert.ToInt32(values[5]); 
-            Start = DateTime.Parse(values[6]);
-            Duration = Convert.ToInt32(values[7]);  
-            CoverImageUrl = values[8];  
+            Guide.Id = Convert.ToInt32(values[1]);  
+            Name = values[2];
+            Location.Id = Convert.ToInt32(values[3]);   
+            Description = values[4];
+            Language = values[5];   
+            MaxGuests = Convert.ToInt32(values[6]); 
+            Start = DateTime.Parse(values[7]);
+            Duration = Convert.ToInt32(values[8]);  
+            CoverImageUrl = values[9];  
         }
 
 
