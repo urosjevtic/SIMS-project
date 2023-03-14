@@ -5,218 +5,57 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="Window1" Height="450" Width="800">
-    
+        Title="AddingTour" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="64"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="12"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="64"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="96"/>
-                <ColumnDefinition Width="96"/>
-                <ColumnDefinition Width="128"/>
-                <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="128"/>
-                <ColumnDefinition Width="96"/>
-                <ColumnDefinition Width="96"/>
-            </Grid.ColumnDefinitions>
+            <RowDefinition Height="1*" ></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
 
-            <Border Grid.Row="1" Grid.Column="1"
-				Grid.RowSpan="21" Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-30"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
 
-            <Border Grid.Row="1" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="3" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="5" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="7" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="9" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="11" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="13" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="15" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="17" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
-            <Border Grid.Row="19" Grid.Column="1"
-				Grid.ColumnSpan="5"
-				CornerRadius="10"
-				Margin="-5"/>
+        <Label Content="Name: " Grid.Row="1" Grid.Column="1" FontSize="16"  FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Location: " Grid.Row="2" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Description: " Grid.Row="3" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Language: " Grid.Row="4" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Max Guests: " Grid.Row="5" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Start: " Grid.Row="6" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Duration: " Grid.Row="7" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Image URL: " Grid.Row="8" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-            <!--Name-->
-            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Name:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Tour.Name, UpdateSourceTrigger=PropertyChanged}"/>
+       
 
-            <!--Location-->
-            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Location:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Tour.Location, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox Text="{Binding Path=Name, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2"  Margin="0,0,0,15" Height="60" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=Laanguage, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=Start, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <TextBox Text="{Binding Path=CoverImageUrl, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
 
-        <!--Description-->
-            <Label Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Description:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Student.DatumRodjenja, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+       
 
-            <!--Adresa stanovanja-->
-            <Label Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Adresa stanovanja:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Student.AdresaStanovanja, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+       
+        <Button Content="Save"  Grid.Row="10" Grid.Column="1" Width="100" Height="30" Margin="120,0,0,0" Click="ClickSave"></Button>
+        <Button Content="Cancel"  Grid.Row="10" Grid.Column="2" Width="100" Height="30" Margin="10,0,0,0" Click="ClickCancel"></Button>
 
-            <!--Kontakt telefon-->
-            <Label Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Broj telefona:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Student.KontaktTelefon, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
 
-            <!--Email adresa-->
-            <Label Grid.Row="11" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="E-mail adresa:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="11" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Student.EMailAdresa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+    </Grid>
 
-            <!--Broj indeksa-->
-            <Label Grid.Row="13" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Broj indeksa:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="13" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Student.BrojIndeksa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-
-            <!--Godina upisa-->
-            <Label Grid.Row="15" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Godina upisa:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <TextBox Grid.Row="15" Grid.Column="4" Grid.ColumnSpan="2"
-				 Height="20"
-				 VerticalAlignment="Top"
-				 Text="{Binding Path=Student.GodinaUpisa, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-
-            <!--Trenutna godina studija-->
-            <Label Grid.Row="17" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Trenutna godina studija:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <ComboBox Grid.Row="17" Grid.Column="4" Grid.ColumnSpan="2"
-				  Name="GodStudBox"
-				  SelectedValue="{Binding Path=Student.TrenutnaGodinaStudija, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-
-            <!--Nacin finansiranja-->
-            <Label Grid.Row="19" Grid.Column="1" Grid.ColumnSpan="2"
-			   Content="Nacin finansiranja:"
-			   FontSize="16"
-			   FontWeight="Bold"
-			   HorizontalContentAlignment="Left"
-			   VerticalContentAlignment="Center"/>
-            <ComboBox Grid.Row="19" Grid.Column="4" Grid.ColumnSpan="2"
-				  Name="FinansiranjeBox"
-				  SelectedValue="{Binding Path=Student.StatusStudija, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
-
-            <!--Dugmad-->
-            <Button Grid.Column="2" Grid.Row="20"
-				Content="Potvrdi"
-				IsDefault="True"
-				Margin="0,96,0,0" Grid.RowSpan="2"/>
-            <Button Grid.Column="4" Grid.Row="21"
-				Content="Odustani"
-				IsCancel="True"
-				/>
-        </Grid>
-    
 </Window>
