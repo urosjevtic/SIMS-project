@@ -39,8 +39,8 @@ namespace InitialProject.View
 
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
-            loadData();
-            toursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
+            loadData();                                                  //PROBATI ZAKOMENTARISATII
+            toursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);   //koje tre proslijedjujem
 
         }
 
@@ -62,6 +62,7 @@ namespace InitialProject.View
             }
         }
 
+        
         private List<Tour> loadTours()
         {
             List<Tour> allTours = new List<Tour>();
@@ -85,7 +86,7 @@ namespace InitialProject.View
 
         public void UpdateDataGrid()
         {
-            var accommodations = loadTours();
+            var tours = loadTours();
             var locations = _locationRepository.GetAll();
 
             foreach (var tour in tours)

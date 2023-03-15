@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="GuideMainWindow" Height="550" Width="900">
     <TabControl>
-        <!-- First Tab Item -->
         <TabItem Header="My tours">
             <Grid>
                 <Grid.RowDefinitions>

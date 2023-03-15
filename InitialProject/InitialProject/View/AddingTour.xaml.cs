@@ -28,23 +28,24 @@ namespace InitialProject.View
 
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly ImageRepository _imageRepository;
 
         private GuideMainWindow _guideMainWindow;
 
+        
         public User LoggedUser { get; set; }
         public AddingTour(GuideMainWindow guideMainWindow, User user)
 
         {
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
+            _imageRepository = new ImageRepository();
             _guideMainWindow = guideMainWindow;
             LoggedUser = user;
             InitializeComponent();
             DataContext = this;
         }
 
-        
- 
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -146,23 +147,23 @@ namespace InitialProject.View
                 }
             }
         }
-        private string _imageUrl;
-        public string CoverImageUrl
+        private string _imagesUrl;
+        public string ImagesUrl
         {
-            get => _imageUrl;
+            get => _imagesUrl;
             set
             {
-                if (value != _imageUrl)
+                if (value != _imagesUrl)
                 {
-                    _imageUrl = value;
+                    _imagesUrl = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private int getLocationId(string location)
+        private int GetLocationId(string location)
         {
-            string[] splitedLocation = splitLocation(location);
+            string[] splitedLocation = SplitString(location);
             List<Location> locations = _locationRepository.GetAll();
             foreach (Location loc in locations)
             {
@@ -177,33 +178,47 @@ namespace InitialProject.View
             newLocation.Country = splitedLocation[0];
             newLocation.City = splitedLocation[1];
             return _locationRepository.Save(newLocation).Id;
+        } 
+        public Model.Image images = new Model.Image();
+        private int saveImages(string urls, int entityId)
+        {
+            //Model.Image images = new Model.Image();
+            images.EntityLd = entityId;
+            string[] imagesUrls = SplitString(urls);  //OVJDEEEE PUCAAAAA
+            foreach (string imageUrl in imagesUrls)
+            {
+                images.Url.Add(imageUrl);
+            }
+
+            return _imageRepository.Save(images).Id;
+
         }
 
+        private string[] SplitString(string s)
+        {
+            return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+       
         private void confirmAddingTour()
         {
             Tour tour = new Tour();
             tour.Guide.Id = LoggedUser.Id;
             tour.Name = _tourName;
-            tour.Location.Id = getLocationId(_location);
+            tour.Location.Id = GetLocationId(_location);
 
             tour.Description = _description;
             tour.Language = _language;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
             tour.Start = Convert.ToDateTime(_start);
             tour.Duration = Convert.ToInt32(_duration);
-            tour.CoverImageUrl = _imageUrl;
-
+            //tour.CoverImageUrl.Id = saveImages(_imageUrl,0);
+            int imagesId = saveImages(_imagesUrl, 0);
+            tour.CoverImageUrl.Id = imagesId;
             _tourRepository.Save(tour);
             _guideMainWindow.UpdateDataGrid();
             this.Close();
         }
-
-        private string[] splitLocation(string location)
-        {
-            return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
-        }
-
-
         private void ClickSave(object sender, RoutedEventArgs e)
         {
             confirmAddingTour();
