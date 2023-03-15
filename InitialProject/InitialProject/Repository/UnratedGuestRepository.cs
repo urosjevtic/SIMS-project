@@ -43,5 +43,18 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
+
+        public void Remove(UnratedGuest unratedGuest)
+        {
+            foreach(UnratedGuest guest in _unratedGuests)
+            {
+                if(guest.Id == unratedGuest.Id)
+                {
+                    _unratedGuests.Remove(guest);
+                    break;
+                }
+            }
+            _serializer.ToCSV(FilePath, _unratedGuests);
+        }
     }
 }

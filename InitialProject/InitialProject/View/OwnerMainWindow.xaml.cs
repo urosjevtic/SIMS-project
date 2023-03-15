@@ -34,6 +34,9 @@ namespace InitialProject.View
         public List<UnratedGuest> unratedGuests;
         public List<User> users;
 
+        public ObservableCollection<UnratedGuest> UnratedGuests { get; set; }
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+
         public UnratedGuest SelectedUnratedGuest { get; set; }
         public OwnerMainWindow(User user)
         {
@@ -48,8 +51,8 @@ namespace InitialProject.View
             _userRepository = new UserRepository();
 
             loadData();
-            accommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
-            unratedGuestsDataGrid.ItemsSource = new ObservableCollection<UnratedGuest>(unratedGuests);
+            Accommodations = new ObservableCollection<Accommodation>(accommodations);
+            UnratedGuests = new ObservableCollection<UnratedGuest>(unratedGuests);
 
             if (unratedGuests.Count > 0)
             {
@@ -79,9 +82,9 @@ namespace InitialProject.View
             allAccommodations = _accommodationRepository.GetAll();
             accommodations = new List<Accommodation>();
 
-            foreach(Accommodation accommodation in allAccommodations)
+            foreach (Accommodation accommodation in allAccommodations)
             {
-                if(accommodation.Owner.Id == LoggedInUser.Id)
+                if (accommodation.Owner.Id == LoggedInUser.Id)
                 {
                     accommodations.Add(accommodation);
                 }
@@ -105,25 +108,42 @@ namespace InitialProject.View
             List<UnratedGuest> allUnratedGuests = _unratedGuestRepository.GetAll();
             unratedGuests = new List<UnratedGuest>();
             List<User> allUsers = _userRepository.GetAll();
-            foreach(UnratedGuest unratedGuest in allUnratedGuests)
+            foreach (UnratedGuest unratedGuest in allUnratedGuests)
             {
-                foreach(Accommodation accommodation in accommodations)
+                foreach (Accommodation accommodation in accommodations)
                 {
-                    if(accommodation.Id == unratedGuest.ReservedAccommodation.Id)
+                    if (accommodation.Id == unratedGuest.ReservedAccommodation.Id)
                     {
                         unratedGuest.ReservedAccommodation = accommodation;
                         break;
                     }
                 }
-                
+
                 unratedGuest.User = _userRepository.GetById(unratedGuest.User.Id);
                 unratedGuests.Add(unratedGuest);
             }
 
+            unratedGuests = removeUnratedGuestAfterFiveDays(unratedGuests);
 
             return unratedGuests;
         }
 
+        public List<UnratedGuest> removeUnratedGuestAfterFiveDays(List<UnratedGuest> unratedGuests)
+        {
+            var today = DateTime.Now;
+            TimeSpan dateDifference;
+            for (int i = unratedGuests.Count - 1; i >= 0; i--)
+            {
+                UnratedGuest unratedGuest = unratedGuests[i];
+                dateDifference = today - unratedGuest.ReservationEndDate;
+                if (dateDifference.TotalDays > 5)
+                {
+                    _unratedGuestRepository.Remove(unratedGuest);
+                    unratedGuests.Remove(unratedGuest);
+                }
+            }
+            return unratedGuests;
+        }
 
         public void UpdateDataGrid()
         {
@@ -155,8 +175,11 @@ namespace InitialProject.View
 
         private void ButtonClikRateGuest(object sender, RoutedEventArgs e)
         {
-            GuestRatingForm guestRatingForm = new GuestRatingForm(SelectedUnratedGuest);
-            guestRatingForm.Show();
+            if (SelectedUnratedGuest != null)
+            {
+                GuestRatingForm guestRatingForm = new GuestRatingForm(SelectedUnratedGuest, this);
+                guestRatingForm.Show();
+            }
         }
 
     }

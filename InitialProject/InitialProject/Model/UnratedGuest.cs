@@ -12,8 +12,8 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public User User { get; set; }
         public Accommodation ReservedAccommodation { get; set; }
-        public DateOnly ReservationStartDate { get; set; }
-        public DateOnly ReservationEndDate { get; set; }
+        public DateTime ReservationStartDate { get; set; }
+        public DateTime ReservationEndDate { get; set; }
 
         public UnratedGuest() 
         {
@@ -21,7 +21,7 @@ namespace InitialProject.Model
             ReservedAccommodation = new Accommodation();
         }
 
-        public UnratedGuest(int id, User user,  Accommodation reservedAccommodation, DateOnly reservationStartDate, DateOnly reservationEndDate)
+        public UnratedGuest(int id, User user,  Accommodation reservedAccommodation, DateTime reservationStartDate, DateTime reservationEndDate)
         {
             Id = id;
             User = user;
@@ -41,8 +41,8 @@ namespace InitialProject.Model
             Id = Convert.ToInt32(values[0]);
             User.Id = Convert.ToInt32(values[1]);
             ReservedAccommodation.Id = Convert.ToInt32(values[2]);
-            ReservationStartDate = DateOnly.Parse(values[3]);
-            ReservationEndDate = DateOnly.Parse(values[4]);
+            ReservationStartDate = DateTime.Parse(values[3]);
+            ReservationEndDate = DateTime.Parse(values[4]);
 
         }
     }

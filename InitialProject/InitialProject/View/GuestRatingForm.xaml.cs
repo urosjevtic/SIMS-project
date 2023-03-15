@@ -24,16 +24,20 @@ namespace InitialProject.View
     public partial class GuestRatingForm : Window
     {
         private readonly RatedGuestRepository _ratedGuestRepository;
+        private readonly UnratedGuestRepository _unratedGuestRepository;
         public int CleanlinessRating { get; set; }
         public int RuleFollowingRating { get; set; }
 
         public UnratedGuest UnratedGuest { get; set; }
-        public GuestRatingForm(UnratedGuest unratedGuest)
+        private OwnerMainWindow _ownerMainWindow;
+        public GuestRatingForm(UnratedGuest unratedGuest, OwnerMainWindow ownerMainWindow)
         {
             InitializeComponent();
-            this.DataContext = this;
+            this.DataContext = ownerMainWindow;
             UnratedGuest = unratedGuest;
             _ratedGuestRepository = new RatedGuestRepository();
+            _unratedGuestRepository = new UnratedGuestRepository();
+            _ownerMainWindow = ownerMainWindow;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -77,8 +81,9 @@ namespace InitialProject.View
             ratedGuest.ReservationStartDate = UnratedGuest.ReservationStartDate;
             ratedGuest.ReservationEndDate = UnratedGuest.ReservationEndDate;
 
-
             _ratedGuestRepository.Save(ratedGuest);
+            _unratedGuestRepository.Remove(UnratedGuest);
+            _ownerMainWindow.UnratedGuests.Remove(UnratedGuest);
             this.Close();   
             
         }

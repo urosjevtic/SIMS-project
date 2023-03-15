@@ -15,8 +15,8 @@ namespace InitialProject.Model
         public int CleanlinessRating { get; set; }
         public string AdditionalComment { get; set; }
         public Accommodation Accommodation { get; set; }
-        public DateOnly ReservationStartDate { get; set; }
-        public DateOnly ReservationEndDate { get; set; }
+        public DateTime ReservationStartDate { get; set; }
+        public DateTime ReservationEndDate { get; set; }
 
 
         public RatedGuest() 
@@ -25,7 +25,7 @@ namespace InitialProject.Model
             Accommodation = new Accommodation();
         }
 
-        public RatedGuest(int id, User user, int ruleFollowingRating, int cleanlinessRating, string additionalComment, Accommodation accommodation, DateOnly reservationStartDate, DateOnly reservationEndDate)
+        public RatedGuest(int id, User user, int ruleFollowingRating, int cleanlinessRating, string additionalComment, Accommodation accommodation, DateTime reservationStartDate, DateTime reservationEndDate)
         {
             Id = id;
             User = user;
@@ -51,8 +51,8 @@ namespace InitialProject.Model
             CleanlinessRating = Convert.ToInt32(values[3]);
             AdditionalComment = values[4];
             Accommodation.Id = Convert.ToInt32(values[5]);
-            ReservationStartDate = DateOnly.Parse(values[6]);
-            ReservationEndDate = DateOnly.Parse(values[7]);
+            ReservationStartDate = DateTime.Parse(values[6]);
+            ReservationEndDate = DateTime.Parse(values[7]);
         }
     }
 }
