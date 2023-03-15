@@ -133,15 +133,15 @@ namespace InitialProject.View
             }
         }
 
-        private string _imagesLinks;
-        public string ImagesLinks
+        private string _imagesUrl;
+        public string ImagesUrl
         {
-            get => _imagesLinks;
+            get => _imagesUrl;
             set
             {
-                if(value != _imagesLinks)
+                if(value != _imagesUrl)
                 {
-                    _imagesLinks = value;
+                    _imagesUrl = value;
                     OnPropertyChanged();
                 }
             }
@@ -205,7 +205,7 @@ namespace InitialProject.View
             accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
             accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
             accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
-            int imagesId = saveImages(ImagesLinks, 0);
+            int imagesId = saveImages(ImagesUrl, 0);
             accommodation.Images.Id = imagesId;
             _accommodationRepository.Save(accommodation);
             _ownerMainWindow.UpdateDataGrid();
@@ -228,6 +228,7 @@ namespace InitialProject.View
         //Input validation
         private Regex locationPattern = new Regex("^[a-zA-Z\\s]+,[\\s]*[a-zA-Z\\s]+$");
         private Regex positiveNumbersPattern = new Regex("^[1-9][0-9]*$");
+        private Regex imagesUrlPattern = new Regex("\\bhttps?://\\S+\\b(?:,\\s*\\bhttps?://\\S+\\b)*");
         public string Error => null;
 
         public string this[string columnName]
@@ -276,10 +277,18 @@ namespace InitialProject.View
                     if (!match.Success)
                         return "Cancelation period format should be: positive number (number of days for cancelation)";
                 }
+                else if(columnName == "ImagesUrl")
+                {
+                    if (string.IsNullOrEmpty(ImagesUrl))
+                        return "Images are required";
+                    Match match = imagesUrlPattern.Match(ImagesUrl);
+                    if (!match.Success)
+                        return "Images input format should be: url1, url2, ...";
+                }
                 return null;
             }
         }
-        private readonly string[] _validatedProperties = { "Location" };
+        private readonly string[] _validatedProperties = { "Location", "AccommodationName", "AccommodationTypes", "MaxGuests", "MinReservationDays", "CancelationPeriod", "ImagesUrl" };
 
         public bool IsValid
         {
