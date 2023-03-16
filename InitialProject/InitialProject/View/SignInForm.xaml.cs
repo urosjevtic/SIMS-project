@@ -61,6 +61,11 @@ namespace InitialProject
                         AccommodationSearch accommodationSearch = new AccommodationSearch();
                         accommodationSearch.Show();
                     }
+                    if (user.Role == UserRole.Guest2)
+                    {
+                        ShowTour showTour = new ShowTour();
+                        showTour.Show();
+                    }
                     Close();
                 } 
                 else
