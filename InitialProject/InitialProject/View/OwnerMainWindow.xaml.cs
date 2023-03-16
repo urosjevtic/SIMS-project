@@ -54,10 +54,6 @@ namespace InitialProject.View
             Accommodations = new ObservableCollection<Accommodation>(accommodations);
             UnratedGuests = new ObservableCollection<UnratedGuest>(unratedGuests);
 
-            if (unratedGuests.Count > 0)
-            {
-                MessageBox.Show("You have unrated guest!", "Unrated guests", MessageBoxButton.OK);
-            }
 
         }
 
@@ -182,5 +178,14 @@ namespace InitialProject.View
             }
         }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (unratedGuests.Count > 0)
+            {
+                UnratedGuestNotification unratedGuestNotification = new UnratedGuestNotification(unratedGuests);
+                unratedGuestNotification.Owner = this;
+                unratedGuestNotification.ShowDialog();
+            }
+        }
     }
 }
