@@ -3,7 +3,7 @@ using System;
 
 namespace InitialProject.Model
 {
-    public enum UserRole { Guest, Owner, Guide}
+    public enum UserRole { Guest, Owner, Guide, Guest2}
     public class User : ISerializable
     {
         public int Id { get; set; }
@@ -36,6 +36,9 @@ namespace InitialProject.Model
             {
                 case "Guest":
                     Role = UserRole.Guest;
+                    break;
+                case "Guest2":
+                    Role = UserRole.Guest2;
                     break;
                 case "Owner":
                     Role = UserRole.Owner;
