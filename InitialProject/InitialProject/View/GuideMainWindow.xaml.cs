@@ -30,6 +30,10 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         public List<Tour> tours;
         public List<Location> locations;
+
+        // DANAS TURE 
+        public ObservableCollection<Tour> TodayTours { get; set; }
+
         public GuideMainWindow(User user)
         {
             InitializeComponent();
@@ -104,9 +108,6 @@ namespace InitialProject.View
             toursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
 
-
-
-
-        
+      
     }
 }

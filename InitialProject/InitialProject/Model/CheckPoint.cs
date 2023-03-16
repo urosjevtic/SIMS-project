@@ -34,27 +34,14 @@ namespace InitialProject.Model
             };
             return csvValues;
         }
-        public CheckPoint FindById(int id)
-        {
-            CheckPoint checkPoint = new CheckPoint();
-            List<CheckPoint> checkPoints = new List<CheckPoint>();
-            checkPoints = _checkPointRepository.GetAll();
-            foreach(CheckPoint point in checkPoints)
-            {
-                if(checkPoint.Id == id)
-                {
-                    return checkPoint;
-                }
-            }
-            return checkPoint;
-        }
+       
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Name = values[2];
-            SerialNumber = Convert.ToInt32(values[3]);  
-            IsChecked = Convert.ToBoolean(values[4]);
+            Name = values[1];
+            SerialNumber = Convert.ToInt32(values[2]);  
+            IsChecked = Convert.ToBoolean(values[3]);
             
         }
         public string MakeString()

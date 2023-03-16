@@ -29,6 +29,7 @@ namespace InitialProject.View
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
         private readonly ImageRepository _imageRepository;
+        private readonly CheckPointRepository _checkPointRepository;
 
         private GuideMainWindow _guideMainWindow;
 
@@ -40,6 +41,7 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _imageRepository = new ImageRepository();
+            _checkPointRepository = new CheckPointRepository();
             _guideMainWindow = guideMainWindow;
             LoggedUser = user;
             InitializeComponent();
@@ -161,6 +163,20 @@ namespace InitialProject.View
             }
         }
 
+
+        private string _checkPoints;
+        public string CheckPoints
+        {
+            get => _checkPoints;
+            set
+            {
+                if (value != _checkPoints)
+                {
+                    _checkPoints = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         private int GetLocationId(string location)
         {
             string[] splitedLocation = SplitString(location);
@@ -179,10 +195,10 @@ namespace InitialProject.View
             newLocation.City = splitedLocation[1];
             return _locationRepository.Save(newLocation).Id;
         } 
-        public Model.Image images = new Model.Image();
+        //public Model.Image images = new Model.Image();
         private int saveImages(string urls, int entityId)
         {
-            //Model.Image images = new Model.Image();
+            Model.Image images = new Model.Image();
             images.EntityLd = entityId;
             string[] imagesUrls = SplitString(urls);  //OVJDEEEE PUCAAAAA
             foreach (string imageUrl in imagesUrls)
@@ -198,6 +214,28 @@ namespace InitialProject.View
         {
             return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
+        private List<CheckPoint> AddCheckPoint(string checkPoints)
+        {
+            string[] checkPoint = SplitString(checkPoints);
+            List<CheckPoint> checkPointsList = new List<CheckPoint>();
+            int i = 1;
+            foreach(string point in checkPoint)
+            {
+                checkPointsList.Add(MakeNewCheckPoint(point, i));
+                i++;
+            }
+            return checkPointsList;
+        }
+
+        private CheckPoint MakeNewCheckPoint(string point, int i)
+        {
+            CheckPoint checkPoint = new CheckPoint();   
+            checkPoint.Name = point;
+            checkPoint.SerialNumber = i;
+            checkPoint.IsChecked = false;
+            return _checkPointRepository.Save(checkPoint);
+
+        }
 
        
         private void confirmAddingTour()
@@ -212,9 +250,11 @@ namespace InitialProject.View
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
             tour.Start = Convert.ToDateTime(_start);
             tour.Duration = Convert.ToInt32(_duration);
+            /////////////////////////////////////////////////////////////////////
             //tour.CoverImageUrl.Id = saveImages(_imageUrl,0);
             int imagesId = saveImages(_imagesUrl, 0);
             tour.CoverImageUrl.Id = imagesId;
+            tour.CheckPoints = AddCheckPoint(_checkPoints);
             _tourRepository.Save(tour);
             _guideMainWindow.UpdateDataGrid();
             this.Close();

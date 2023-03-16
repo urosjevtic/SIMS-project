@@ -10,7 +10,7 @@ namespace InitialProject.Repository
 {
     public class CheckPointRepository
     {
-        private const string FilePath = "../../../Resources/Data/checkPoint.csv";
+        private const string FilePath = "../../../Resources/Data/checkPoints.csv";
 
         private readonly Serializer<CheckPoint> _serializer;
 
@@ -25,6 +25,20 @@ namespace InitialProject.Repository
         public List<CheckPoint> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+        public CheckPoint FindById(int id)
+        {
+            CheckPoint checkPoint = new CheckPoint();
+            List<CheckPoint> checkPoints = new List<CheckPoint>();
+            checkPoints = GetAll();
+            foreach (CheckPoint point in checkPoints)
+            {
+                if (checkPoint.Id == id)
+                {
+                    checkPoint = point;
+                }
+            }
+            return checkPoint;  
         }
 
         public CheckPoint Save(CheckPoint checkPoint)

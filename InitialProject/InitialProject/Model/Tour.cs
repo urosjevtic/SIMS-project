@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
+using InitialProject.Repository;
 
 namespace InitialProject.Model
 {
@@ -25,6 +26,8 @@ namespace InitialProject.Model
         {
             Location = new Location();
             Guide = new User();
+            CheckPoints = new List<CheckPoint>();
+            CoverImageUrl = new Image();
         }
         public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl)
         {
@@ -88,10 +91,12 @@ namespace InitialProject.Model
 
             int i = 10;
             CheckPoints.Clear();
-            CheckPoint checkPoint = new CheckPoint();
+            //CheckPoint checkPoint = new CheckPoint();
+            CheckPointRepository _checkPointRepository = new CheckPointRepository();
+
             while (values[i] != "[END]")
             {
-                CheckPoints.Add(checkPoint.FindById(Convert.ToInt32(values[i])));  
+                CheckPoints.Add(_checkPointRepository.FindById(Convert.ToInt32(values[i])));  
                 i++;
             }
         }
