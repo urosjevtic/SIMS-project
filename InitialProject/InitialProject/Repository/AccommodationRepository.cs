@@ -32,12 +32,14 @@ namespace InitialProject.Repository
             }
             return _accommodations.Max(c => c.Id) + 1;
         }
-        public void Save(Accommodation accommodation)
+        public Accommodation Save(Accommodation accommodation)
         {
             accommodation.Id = NextId();
             _accommodations = _serializer.FromCSV(FilePath);
             _accommodations.Add(accommodation);
             _serializer.ToCSV(FilePath, _accommodations);
+
+            return accommodation;
         }
 
         public List<Accommodation> GetAll()
