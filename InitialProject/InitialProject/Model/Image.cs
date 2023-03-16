@@ -13,8 +13,11 @@ namespace InitialProject.Model
         public List<string> Url;
         public int EntityLd;
 
-        public Image() { }
-        public Image(int id, List<string> url, int entityld) {
+        public Image() {
+            Url = new List<string>();
+        }
+        public Image(int id, List<string> url, int entityld)
+        {
             Id = id;
             Url= url;
             EntityLd = entityld;
@@ -44,6 +47,7 @@ namespace InitialProject.Model
 
             return csvValues;
         }
+
         public void FromCSV(string[] values)
         {
 
