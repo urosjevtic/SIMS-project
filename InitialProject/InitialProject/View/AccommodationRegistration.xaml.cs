@@ -32,15 +32,21 @@ namespace InitialProject.View
         private OwnerMainWindow _ownerMainWindow;
 
         public User LoggedInUser { get; set; }
+
+        public List<Location> Locations { get; set; }
         public AccommodationRegistration(OwnerMainWindow ownerMainWindow, User user)
         {
             _accommodationRepository = new AccommodationRepository();
-            _locationRepository = new LocationRepository(); 
+            _locationRepository = new LocationRepository();
             _imageRepository = new ImageRepository();
             _ownerMainWindow = ownerMainWindow;
             LoggedInUser = user;
+            Locations = new List<Location>();
+            Locations = _locationRepository.GetAll();
             InitializeComponent();
             DataContext = this;
+            locations = new Dictionary<string, List<string>>();
+            updateLocations();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -63,8 +69,60 @@ namespace InitialProject.View
             }
         }
 
-        private string _location;
-        public string Location
+        public Dictionary<string, List<string>> locations { get; set; }
+
+        private void updateLocations()
+        {
+            List<Location> allLocations = _locationRepository.GetAll();
+
+            foreach (Location location in allLocations)
+            {
+                if (!locations.ContainsKey(location.Country))
+                {
+                    locations.Add(location.Country, new List<string>());
+                }
+
+                locations[location.Country].Add(location.City);
+            }
+        }
+
+
+        private string _country;
+        public string Country
+        {
+            get { return _country; }
+            set
+            {
+                _country = value;
+                if(value != null)
+                {
+                    CityComboBox.IsEnabled = true;
+                    CityComboBox.ItemsSource = locations[_country];
+                }
+                else
+                {
+                    CityComboBox.IsEnabled=false;
+                }
+
+                OnPropertyChanged();
+            }
+            
+        }
+
+        private string _city;   
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                _city = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Location _location;
+        public Location Location
         {
             get => _location;
             set
@@ -184,12 +242,24 @@ namespace InitialProject.View
 
         }
 
+        private int getLocationId(string country, string city)
+        {
+            List<Location> allLocations = _locationRepository.GetAll();
+            foreach(Location location in allLocations)
+            {
+                if(location.City == city && location.Country == country)
+                {
+                    return location.Id;
+                }
+            }
+            throw new Exception("Error has occured");
+        }
         private void confirmAccommodationRegistration()
         {
             Accommodation accommodation = new Accommodation();
             accommodation.Owner.Id = LoggedInUser.Id;
             accommodation.Name = _accommodationName;
-            accommodation.Location.Id = getLocationId(_location);
+            accommodation.Location.Id = getLocationId(Country, City);
             switch (_accommodationType)
             {
                 case "house":
@@ -235,13 +305,15 @@ namespace InitialProject.View
         {
             get
             {
-                if (columnName == "Location")
+                if (columnName == "Country")
                 {
-                    if (string.IsNullOrEmpty(Location))
-                        return "Location is required";
-                    Match match = locationPattern.Match(Location);
-                    if (!match.Success)
-                        return "Location format should be: Country, City";
+                    if (string.IsNullOrEmpty(Country))
+                        return "Select a country";
+                }
+                else if (columnName == "City")
+                {
+                    if (string.IsNullOrEmpty(City))
+                        return "Select a city";
                 }
                 else if (columnName == "AccommodationName")
                 {
@@ -288,7 +360,7 @@ namespace InitialProject.View
                 return null;
             }
         }
-        private readonly string[] _validatedProperties = { "Location", "AccommodationName", "AccommodationTypes", "MaxGuests", "MinReservationDays", "CancelationPeriod", "ImagesUrl" };
+        private readonly string[] _validatedProperties = { "Location", "AccommodationName", "AccommodationTypes", "MaxGuests", "MinReservationDays", "CancelationPeriod", "ImagesUrl", "Country", "City" };
 
         public bool IsValid
         {
