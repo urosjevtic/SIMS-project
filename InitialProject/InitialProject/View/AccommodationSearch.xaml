@@ -49,12 +49,12 @@
 
         <DataGrid Name="AccommodationList" Grid.Row="2" ItemsSource="{Binding Accommodation}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding Path=SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" />
-                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" />
-                <DataGridTextColumn Header="Min reservation days" Binding="{Binding MinReservationDays}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" Width="*"/>
+                <DataGridTextColumn Header="Min reservation days" Binding="{Binding MinReservationDays}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="3">
