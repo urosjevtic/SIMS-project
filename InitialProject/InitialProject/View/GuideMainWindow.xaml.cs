@@ -30,9 +30,10 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         public List<Tour> tours;
         public List<Location> locations;
+        public Tour SelectedTodayTour { get; set; }
 
         // DANAS TURE 
-        public ObservableCollection<Tour> TodayTours { get; set; }
+        public List<Tour> TodayTours { get; set; }
 
         public GuideMainWindow(User user)
         {
@@ -43,31 +44,43 @@ namespace InitialProject.View
 
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
-            loadData();                                                  //PROBATI ZAKOMENTARISATII
-            toursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);   //koje tre proslijedjujem
-
+            loadData();                                                  
+            ToursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);   
+            
+            TodayToursDataGrid.ItemsSource = new ObservableCollection<Tour>(TodayTours);
+            //UpdateTodayTours();
         }
 
         private void loadData()
         {
             tours = loadTours();
-            locations = new List<Location>();
-            locations = _locationRepository.GetAll();
+            locations = LoadLocations();
+            AddTourLocation(tours,locations);
+            TodayTours = GetTodayTours();
+           
+        }
+        public List<Tour> GetTodayTours()
+        {
+            var tours = loadTours();
+            var locations = LoadLocations();
+            List<Tour> todayTours = new List<Tour>();
+            AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
             {
-                foreach (Location location in locations)
+                if (tour.Start.Date == DateTime.Today.Date)
                 {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-                        break;
-                    }
+                    todayTours.Add(tour);
                 }
             }
+            return todayTours;
+        }
+        private List<Location> LoadLocations()
+        {
+            return _locationRepository.GetAll();
         }
 
         
-        private List<Tour> loadTours()
+        private List<Tour> loadTours() // za svakog vodica da ucita njegove ture
         {
             List<Tour> allTours = new List<Tour>();
             allTours = _tourRepository.GetAll();
@@ -85,14 +98,31 @@ namespace InitialProject.View
         {
             AddingTour addingTour = new AddingTour(this,LoggedUser);
             addingTour.Show();
+            
         }
        
 
         public void UpdateDataGrid()
         {
             var tours = loadTours();
-            var locations = _locationRepository.GetAll();
+            var locations  = LoadLocations();
+            AddTourLocation(tours, locations);
+            ToursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
+        }
 
+        public void UpdateTodayTours()
+        {
+            var tours = loadTours();
+            var locations = LoadLocations();
+            List<Tour> todayTours = new List<Tour>();
+            AddTourLocation(tours, locations);
+            todayTours = GetTodayTours();
+            TodayToursDataGrid.ItemsSource = new ObservableCollection<Tour>(todayTours);
+        }
+       
+        
+        public void AddTourLocation(List<Tour> tours, List<Location> locations)  //veza lokacije i ture
+        {
             foreach (var tour in tours)
             {
                 foreach (var location in locations)
@@ -100,14 +130,20 @@ namespace InitialProject.View
                     if (location.Id == tour.Location.Id)
                     {
                         tour.Location = location;
+
                         break;
                     }
                 }
             }
-
-            toursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
 
-      
+        private void StartTour(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTodayTour != null)
+            {
+                StartedTour startedTour = new StartedTour(SelectedTodayTour);
+                startedTour.Show();
+            }
+        }
     }
 }

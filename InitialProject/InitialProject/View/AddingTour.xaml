@@ -45,11 +45,11 @@
         <TextBox Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="2"  Margin="0,0,0,15" Height="60" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=Languagee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="2"  Margin="0,0,0,15" Height="45" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="6" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" />
+        <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged }"  Grid.Row="6" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" />
+       
         <TextBox Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=ImagesUrl, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox Text="{Binding Path=CheckPoints, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-
 
 
         <Button Content="Save"  Grid.Row="10" Grid.Column="1" Width="100" Height="30" Margin="120,0,0,0" Click="ClickSave"></Button>

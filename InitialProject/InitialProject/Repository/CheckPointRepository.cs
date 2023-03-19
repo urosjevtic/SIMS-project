@@ -26,6 +26,7 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
+
         public CheckPoint FindById(int id)
         {
             CheckPoint checkPoint = new CheckPoint();
@@ -33,7 +34,7 @@ namespace InitialProject.Repository
             checkPoints = GetAll();
             foreach (CheckPoint point in checkPoints)
             {
-                if (checkPoint.Id == id)
+                if (point.Id == id)
                 {
                     checkPoint = point;
                 }

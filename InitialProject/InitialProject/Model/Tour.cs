@@ -8,6 +8,7 @@ using InitialProject.Repository;
 
 namespace InitialProject.Model
 {
+    
     public class Tour : ISerializable
     {
         public int Id { get; set; }
@@ -20,14 +21,16 @@ namespace InitialProject.Model
         public int MaxGuests { get; set; }  
         public DateTime Start { get; set; }
         public int Duration { get; set; }   
-        public Image CoverImageUrl { get; set; }   
+        public Image CoverImageUrl { get; set; }
 
+        public CheckPointRepository _checkPointRepository { get; set; }
         public Tour()
         {
             Location = new Location();
             Guide = new User();
             CheckPoints = new List<CheckPoint>();
             CoverImageUrl = new Image();
+            _checkPointRepository = new CheckPointRepository();
         }
         public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl)
         {
@@ -91,15 +94,18 @@ namespace InitialProject.Model
 
             int i = 10;
             CheckPoints.Clear();
-            //CheckPoint checkPoint = new CheckPoint();
-            CheckPointRepository _checkPointRepository = new CheckPointRepository();
+
+            
 
             while (values[i] != "[END]")
             {
-                CheckPoints.Add(_checkPointRepository.FindById(Convert.ToInt32(values[i])));  
+                int ids = Convert.ToInt32(values[i]);
+                CheckPoints.Add(_checkPointRepository.FindById(ids));  
                 i++;
             }
         }
+
+       
 
 
 
