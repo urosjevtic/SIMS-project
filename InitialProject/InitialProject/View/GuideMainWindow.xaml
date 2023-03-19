@@ -48,8 +48,7 @@
                           CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" IsReadOnly="True"  Height="427" VerticalAlignment="Center" 
                           SelectionMode="Single">
 
-                <DataGrid x:Name="todayTours" Grid.Row="1" ItemsSource="{Binding Tours}" AutoGenerateColumns="True" Margin="0,0,0,-10" Grid.ColumnSpan="3" Height="525" VerticalAlignment="Bottom">
-
+               
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="130" />
                         <DataGridTextColumn Header="Location" Binding="{Binding Location.City}"  Width="120"/>
