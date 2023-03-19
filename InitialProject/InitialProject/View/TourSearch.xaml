@@ -26,11 +26,11 @@
         <Label Grid.Column="1" Content="Number of people:" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" VerticalAlignment="Center" FontSize="36" Width="310" Height="64"/>
         <Label Grid.Column="2" Content="State:" HorizontalAlignment="Left" Margin="10,22,0,0" VerticalAlignment="Top" FontSize="24" RenderTransformOrigin="0.49,0.505" Width="73"/>
         <Label Grid.Column="2" Content="City:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top" FontSize="24" Width="73"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="88,10,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="220" Height="65"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="88,103,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="220" Height="65"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="220" Height="65"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="220" Height="65"/>
-        <TextBox Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Center" Width="220" Height="65"/>
-        <Button Grid.Column="3" Content="Search" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Height="168" Width="230" FontSize="48"/>
+        <TextBox x:Name="stateTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="88,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="65"/>
+        <TextBox x:Name="cityTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="88,103,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="65"/>
+        <TextBox x:Name="durationTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Center" Width="220" Height="65"/>
+        <TextBox x:Name="languageTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Center" Width="220" Height="65"/>
+        <TextBox x:Name="numberTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Center" Width="220" Height="65"/>
+        <Button Grid.Column="3" Content="Search" HorizontalAlignment="Center" Grid.Row="3" VerticalAlignment="Center" Height="168" Width="230" FontSize="48" Click="searchButtonClick"/>
     </Grid>
 </Window>
