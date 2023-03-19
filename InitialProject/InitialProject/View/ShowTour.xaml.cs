@@ -27,11 +27,13 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         public List<Tour> tours;
         public List<Location> locations;
+        public Tour SelectedTour;
         public User LoggedUser { get;set; }
         public ShowTour()
         {
             InitializeComponent();
             this.DataContext = this;
+            SelectedTour = null;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             loadData();
@@ -63,6 +65,11 @@ namespace InitialProject.View
                 }
             }
         }
+        public void SearchUpdateDataGrid(List<Tour> tour)
+        {
+            tourDataGrid.Items.Clear();
+            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tour);
+        }
         private void loadData()
         {
             tours = _tourRepository.GetAll();
@@ -81,10 +88,30 @@ namespace InitialProject.View
         }
 
       
-        private void OpenTourSearch(object sender, RoutedEventArgs e)
+        private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
             TourSearch tourSearch = new TourSearch();
             tourSearch.Show();
+        }
+
+        private void ReserveButtonClick(object sender, RoutedEventArgs e)
+        {
+            SelectedTour = (Tour)tourDataGrid.SelectedItem;
+            ТоurReservation reservation = new ТоurReservation();
+
+            if (SelectedTour == null)
+            {
+                MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (nrOfPeopleTextBox.Text == String.Empty)
+            {
+                MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (int.Parse(nrOfPeopleTextBox.Text) > SelectedTour.MaxGuests - 1)
+            {
+                MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
         }
     }
 }

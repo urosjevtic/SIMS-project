@@ -8,7 +8,7 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    internal class TourRepository
+    public class TourRepository
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
