@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
-using InitialProject.Repository;
 
 namespace InitialProject.Model
 {
@@ -22,8 +21,6 @@ namespace InitialProject.Model
             SerialNumber = serialNumber;
             IsChecked = isChecked;
         }
-
-        private readonly CheckPointRepository _checkPointRepository;
         public string[] ToCSV()
         {
             string[] csvValues = {
@@ -44,10 +41,7 @@ namespace InitialProject.Model
             IsChecked = Convert.ToBoolean(values[3]);
             
         }
-        public string MakeString()
-        {
-            return Name;
-        }
 
+        
     }
 }

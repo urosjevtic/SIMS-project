@@ -38,14 +38,18 @@ namespace InitialProject.View
         public AddingTour(GuideMainWindow guideMainWindow, User user)
 
         {
+            InitializeComponent();
+            DataContext = this;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _imageRepository = new ImageRepository();
             _checkPointRepository = new CheckPointRepository();
             _guideMainWindow = guideMainWindow;
             LoggedUser = user;
-            InitializeComponent();
-            DataContext = this;
+            Start = DateTime.Now;
+            _guideMainWindow.UpdateDataGrid();
+            _guideMainWindow.UpdateTodayTours();
+
         }
 
 
@@ -214,6 +218,7 @@ namespace InitialProject.View
         {
             return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
+
         private List<CheckPoint> AddCheckPoint(string checkPoints)
         {
             string[] checkPoint = SplitString(checkPoints);
@@ -244,19 +249,17 @@ namespace InitialProject.View
             tour.Guide.Id = LoggedUser.Id;
             tour.Name = _tourName;
             tour.Location.Id = GetLocationId(_location);
-
             tour.Description = _description;
             tour.Language = _language;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
             tour.Start = Convert.ToDateTime(_start);
             tour.Duration = Convert.ToInt32(_duration);
-            /////////////////////////////////////////////////////////////////////
-            //tour.CoverImageUrl.Id = saveImages(_imageUrl,0);
             int imagesId = saveImages(_imagesUrl, 0);
             tour.CoverImageUrl.Id = imagesId;
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             _tourRepository.Save(tour);
             _guideMainWindow.UpdateDataGrid();
+            _guideMainWindow.UpdateTodayTours();
             this.Close();
         }
         private void ClickSave(object sender, RoutedEventArgs e)
