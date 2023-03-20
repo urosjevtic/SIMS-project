@@ -45,7 +45,7 @@ namespace InitialProject.View
             _accommodationRepository= new AccommodationRepository();
             _locationRepository = new LocationRepository();
             loadData();
-            AccommodationList.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
+            AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
         }
 
        
@@ -61,7 +61,7 @@ namespace InitialProject.View
             var accommodations = _accommodationRepository.GetAll();
             var locations = LoadLocations();
             AddAccommodationLocation(accommodations, locations);
-            AccommodationList.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
+            AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
         }
         
         public void AddAccommodationLocation(List<Accommodation>accommodations, List<Location> locations)   //veza smestaja i lokacije
@@ -187,7 +187,7 @@ namespace InitialProject.View
                     }
                 }
             }
-            AccommodationList.ItemsSource = filteredList;       
+            AccommodationDataGrid.ItemsSource = filteredList;       
         }
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)

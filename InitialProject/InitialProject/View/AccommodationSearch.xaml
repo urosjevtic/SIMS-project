@@ -51,7 +51,7 @@
             </StackPanel>
         </Grid>
 
-        <DataGrid Name="AccommodationList" Grid.Row="2" ItemsSource="{Binding Accommodation}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid Name="AccommodationDataGrid" Grid.Row="2" ItemsSource="{Binding Accommodation}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
