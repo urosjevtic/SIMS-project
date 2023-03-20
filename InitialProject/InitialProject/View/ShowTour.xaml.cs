@@ -34,7 +34,6 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = this;
-            //SelectedTour = null;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _tourReservationRepository = new TourReservationRepository();
@@ -45,28 +44,6 @@ namespace InitialProject.View
         private List<Location> LoadLocations()
         {
             return _locationRepository.GetAll();
-        }
-        public void UpdateDataGrid()
-        {
-            var tours = _tourRepository.GetAll();
-            var locations = LoadLocations();
-            AddTourLocation(tours, locations);
-            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
-        }
-        public void AddTourLocation(List<Tour> tours, List<Location> locations)  //veza lokacije i ture
-        {
-            foreach (var tour in tours)
-            {
-                foreach (var location in locations)
-                {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-
-                        break;
-                    }
-                }
-            }
         }
         private void loadData()
         {
@@ -88,52 +65,8 @@ namespace InitialProject.View
       
         private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
-            TourSearch tourSearch = new TourSearch();
+            TourSearch tourSearch = new TourSearch(LoggedUser);
             tourSearch.Show();
-        }
-
-        private void ReserveButtonClick(object sender, RoutedEventArgs e)
-        {
-            SelectedTour = (Tour)tourDataGrid.SelectedItem;
-            try
-            {
-                int numberOfPeople = int.Parse(nrOfPeopleTextBox.Text);
-                if(numberOfPeople < (SelectedTour.MaxGuests - _tourReservationRepository.CountUnreservedSeats(SelectedTour)))
-                {
-                    _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser);
-                    MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                }else if(SelectedTour.MaxGuests == _tourReservationRepository.CountUnreservedSeats(SelectedTour))
-                {
-                    MessageBox.Show("Tour is completely reserved! Now there are shown other tours on this location.", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
-                    FindAlternatives(SelectedTour);
-                }
-                else
-                {
-                    MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-   
-            }
-            catch (Exception ex)
-            {
-                if (SelectedTour == null)
-                {
-                    MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                if (nrOfPeopleTextBox.Text == String.Empty)
-                {
-                    MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else if (int.Parse(nrOfPeopleTextBox.Text) > SelectedTour.MaxGuests)
-                {
-                    MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-            
-        }
-        public void FindAlternatives(Tour tour)
-        {
-            List<Tour> tours = _tourRepository.FindAllAlternatives(tour);
-            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
     }
 }
