@@ -18,24 +18,24 @@
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="Cleanliness"  VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5,0"/>
-                <Slider x:Name="CleanlinessSlider" ValueChanged="CleanlinessSliderValueChanged" Margin="27,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                <Slider x:Name="CleanlinessSlider" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}"  Margin="27,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
                 <TextBlock Text="{Binding ElementName=CleanlinessSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                 <TextBlock Text="Rule following" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5,0"/>
-                <Slider x:Name="RuleFollowingSlider" ValueChanged="RuleFollowingSliderValueChanged" Margin="10,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                <Slider x:Name="RuleFollowingSlider" Value="{Binding RuleFollowingRating, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
                 <TextBlock Text="{Binding ElementName=RuleFollowingSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" Margin="0,0,0,10">
                 <TextBlock Text="Additional comment" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5,0"/>
-                <TextBox x:Name="AdditionalCommentTextBox" Text="{Binding Path=AdditionalComment, UpdateSourceTrigger=LostFocus}" Margin="0,0,0,0" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <TextBox x:Name="AdditionalCommentTextBox" Text="{Binding Path=AdditionalComment, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
             </StackPanel>
 
         </StackPanel>
 
-        <Button Content="Submit" Click="SubmitButton" Grid.Row="2" Margin="10" Width="100" HorizontalAlignment="Center"/>
+        <Button Content="Submit" Click="ButtonClick_Submit" Grid.Row="2" Margin="10" Width="100" HorizontalAlignment="Center"/>
 
     </Grid>
 </Window>
