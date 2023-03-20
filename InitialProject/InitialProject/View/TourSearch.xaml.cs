@@ -27,40 +27,64 @@ namespace InitialProject.View
         public ObservableCollection<Tour> toursObservable { get; set; }
 
         private readonly TourRepository _tourRepository;
-        public List<Tour> tours { get; set; }
 
-        public ShowTour showTour { get; set; }
+        private readonly LocationRepository _locationRepository;
+        public List<Tour> tours { get; set; }
+        public List<Tour> filteredTours { get; set; }
+
+
+        public ShowTour showTour;
 
         public TourSearch()
         {
             InitializeComponent();
             this.DataContext = this;
             _tourRepository = new TourRepository();
+            _locationRepository = new LocationRepository();
+            filteredTours = new List<Tour>();
         }
-
-        private void searchButtonClick(object sender, RoutedEventArgs e)
+        private void AddTourLocation(List<Tour> tours, List<Location> locations)
         {
-            ShowTour showTour = new ShowTour();
-            List<Tour> tours = new List<Tour>();
-            tours = _tourRepository.GetAll();
-
-            if(stateTextBox.Text != String.Empty)
+            foreach (Tour tour in tours)
             {
-                foreach(Tour tour in tours)
+                foreach (Location location in locations)
                 {
-                    if (tour.Location.Country.ToLower().Contains(stateTextBox.Text.ToLower()))
+                    if (location.Id == tour.Location.Id)
                     {
-                        tours.Add(tour);
+                        tour.Location = location;
+                        break;
                     }
                 }
             }
-            if(cityTextBox.Text != String.Empty)
+        }
+        public List<Tour> Search()
+        {
+            List<Location> locations = new List<Location>();
+            
+            tours = _tourRepository.GetAll();
+            locations = _locationRepository.GetAll();
+            AddTourLocation(tours, locations);
+
+            if (stateTextBox.Text != String.Empty)
             {
-                foreach(Tour tour in tours)
+                foreach (Tour tour in tours)
+                {
+                    if (tour.Location.Country.ToLower().Contains(stateTextBox.Text.ToLower()))
+                    {
+                        if (!Exists(tour))
+                        {
+                            filteredTours.Add(tour);
+                        }
+                    }
+                }
+            }
+            if (cityTextBox.Text != String.Empty)
+            {
+                foreach (Tour tour in tours)
                 {
                     if (tour.Location.City.ToLower().Contains(cityTextBox.Text.ToLower()))
                     {
-                        tours.Add(tour);
+                        filteredTours.Add(tour);
                     }
                 }
             }
@@ -68,9 +92,9 @@ namespace InitialProject.View
             {
                 foreach (Tour tour in tours)
                 {
-                    if (tour.Duration >= int.Parse(durationTextBox.Text))
+                    if (tour.Duration <= int.Parse(durationTextBox.Text))
                     {
-                        tours.Add(tour);
+                        filteredTours.Add(tour);
                     }
                 }
             }
@@ -80,7 +104,7 @@ namespace InitialProject.View
                 {
                     if (tour.Language.ToLower().Contains(languageTextBox.Text.ToLower()))
                     {
-                        tours.Add(tour);
+                        filteredTours.Add(tour);
                     }
                 }
             }
@@ -90,12 +114,24 @@ namespace InitialProject.View
                 {
                     if (tour.MaxGuests >= int.Parse(cityTextBox.Text))
                     {
-                        tours.Add(tour);
+                        filteredTours.Add(tour);
                     }
                 }
             }
-            showTour.SearchUpdateDataGrid(tours);
-            showTour.Show();
+
+            return filteredTours;
+        }
+
+        public bool Exists(Tour tour)
+        {
+
+            return true;
+        }
+        public void searchButtonClick(object sender, RoutedEventArgs e)
+        {
+            filteredTours = Search();
+            SearchResult searchResult = new SearchResult(filteredTours);
+            searchResult.Show();
             this.Close();
         }
 

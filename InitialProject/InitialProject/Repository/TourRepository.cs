@@ -15,11 +15,12 @@ namespace InitialProject.Repository
         private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
-
+        private readonly LocationRepository _locationRepository;
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
             _tours = _serializer.FromCSV(FilePath);
+            _locationRepository = new LocationRepository();
         }
 
         public int NextId()
@@ -31,6 +32,34 @@ namespace InitialProject.Repository
             }
             return _tours.Max(c => c.Id) + 1;
         }
+        public List<Tour> FindAllAlternatives(Tour tour) 
+        {
+            List<Tour> alternative = new List<Tour>();
+            //TourRepository _tourRepository = new TourRepository();
+           // LocationRepository _locationRepository = new LocationRepository();
+            List<Tour> tours = GetAll();
+            var locations = _locationRepository.GetAll();
+
+            foreach (Tour t in tours)
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Id == tour.Location.Id)
+                    {
+                        tour.Location = location;
+                        break;
+                    }
+                }
+            }
+            foreach (Tour t in tours)
+            {
+                if(t.Location.City.Equals(tour.Location.City))
+                {
+                    alternative.Add(t);
+                }
+            }
+            return alternative;
+        }
         public void Save(Tour tour)
         {
             tour.Id = NextId();
@@ -38,7 +67,7 @@ namespace InitialProject.Repository
             _tours.Add(tour);
             _serializer.ToCSV(FilePath, _tours);
         }
-
+        
         public List<Tour> GetAll()
         {
             return _serializer.FromCSV(FilePath);

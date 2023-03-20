@@ -25,17 +25,20 @@ namespace InitialProject.View
         public ObservableCollection<Tour> Tours { get; set; }
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
         public List<Tour> tours;
         public List<Location> locations;
-        public Tour SelectedTour;
+        public Tour SelectedTour { get; set; }
         public User LoggedUser { get;set; }
-        public ShowTour()
+        public ShowTour(User user)
         {
             InitializeComponent();
             this.DataContext = this;
-            SelectedTour = null;
+            //SelectedTour = null;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
+            _tourReservationRepository = new TourReservationRepository();
+            LoggedUser = user;
             loadData();
             tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
@@ -65,11 +68,6 @@ namespace InitialProject.View
                 }
             }
         }
-        public void SearchUpdateDataGrid(List<Tour> tour)
-        {
-            tourDataGrid.Items.Clear();
-            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tour);
-        }
         private void loadData()
         {
             tours = _tourRepository.GetAll();
@@ -97,21 +95,45 @@ namespace InitialProject.View
         private void ReserveButtonClick(object sender, RoutedEventArgs e)
         {
             SelectedTour = (Tour)tourDataGrid.SelectedItem;
-            ТоurReservation reservation = new ТоurReservation();
-
-            if (SelectedTour == null)
+            try
             {
-                MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                int numberOfPeople = int.Parse(nrOfPeopleTextBox.Text);
+                if(numberOfPeople < (SelectedTour.MaxGuests - _tourReservationRepository.CountUnreservedSeats(SelectedTour)))
+                {
+                    _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser);
+                    MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                }else if(SelectedTour.MaxGuests == _tourReservationRepository.CountUnreservedSeats(SelectedTour))
+                {
+                    MessageBox.Show("Tour is completely reserved! Now there are shown other tours on this location.", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    FindAlternatives(SelectedTour);
+                }
+                else
+                {
+                    MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+   
             }
-            if (nrOfPeopleTextBox.Text == String.Empty)
+            catch (Exception ex)
             {
-                MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                if (SelectedTour == null)
+                {
+                    MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                if (nrOfPeopleTextBox.Text == String.Empty)
+                {
+                    MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else if (int.Parse(nrOfPeopleTextBox.Text) > SelectedTour.MaxGuests)
+                {
+                    MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
-            else if (int.Parse(nrOfPeopleTextBox.Text) > SelectedTour.MaxGuests - 1)
-            {
-                MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
+            
+        }
+        public void FindAlternatives(Tour tour)
+        {
+            List<Tour> tours = _tourRepository.FindAllAlternatives(tour);
+            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
     }
 }
