@@ -29,10 +29,9 @@ namespace InitialProject.View
         private readonly UnratedGuestRepository _unratedGuestRepository;
         private readonly UserRepository _userRepository;
 
-        public List<Accommodation> accommodations;
-        public List<Location> locations;
-        public List<UnratedGuest> unratedGuests;
-        public List<User> users;
+        private List<Accommodation> _accommodations;
+        private List<Location> _locations;
+        private List<UnratedGuest> _unratedGuests;
 
         public ObservableCollection<UnratedGuest> UnratedGuests { get; set; }
         public ObservableCollection<Accommodation> Accommodations { get; set; }
@@ -51,22 +50,22 @@ namespace InitialProject.View
             _userRepository = new UserRepository();
 
             loadData();
-            Accommodations = new ObservableCollection<Accommodation>(accommodations);
-            UnratedGuests = new ObservableCollection<UnratedGuest>(unratedGuests);
+            Accommodations = new ObservableCollection<Accommodation>(_accommodations);
+            UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuests);
 
 
         }
 
         private void loadData()
         {
-            loadLocations();
-            loadAccommodations();
-            loadUnratedGuests();
+            _locations = loadLocations();
+            _accommodations = loadAccommodations();
+            _unratedGuests = loadUnratedGuests();
         }
 
         private List<Location> loadLocations()
         {
-            locations = new List<Location>();
+            List<Location> locations = new List<Location>();
             locations = _locationRepository.GetAll();
 
             return locations;
@@ -76,7 +75,7 @@ namespace InitialProject.View
         {
             List<Accommodation> allAccommodations = new List<Accommodation>();
             allAccommodations = _accommodationRepository.GetAll();
-            accommodations = new List<Accommodation>();
+            List<Accommodation> accommodations = new List<Accommodation>();
 
             foreach (Accommodation accommodation in allAccommodations)
             {
@@ -87,7 +86,7 @@ namespace InitialProject.View
             }
             foreach (Accommodation accommodation in accommodations)
             {
-                foreach (Location location in locations)
+                foreach (Location location in _locations)
                 {
                     if (location.Id == accommodation.Location.Id)
                     {
@@ -101,12 +100,23 @@ namespace InitialProject.View
 
         private List<UnratedGuest> loadUnratedGuests()
         {
+            List<UnratedGuest> unratedGuests = new List<UnratedGuest>();
+            unratedGuests = getAllUnratedGuests();
+
+            unratedGuests = RemoveUnratedGuestsNotBelongingToCurrentUser(unratedGuests);
+            
+            unratedGuests = removeUnratedGuestAfterFiveDays(unratedGuests);
+
+            return unratedGuests;
+        }
+
+        private List<UnratedGuest> getAllUnratedGuests()
+        {
+            List<UnratedGuest> unratedGuests = new List<UnratedGuest>();
             List<UnratedGuest> allUnratedGuests = _unratedGuestRepository.GetAll();
-            unratedGuests = new List<UnratedGuest>();
-            List<User> allUsers = _userRepository.GetAll();
             foreach (UnratedGuest unratedGuest in allUnratedGuests)
             {
-                foreach (Accommodation accommodation in accommodations)
+                foreach (Accommodation accommodation in _accommodations)
                 {
                     if (accommodation.Id == unratedGuest.ReservedAccommodation.Id)
                     {
@@ -118,12 +128,22 @@ namespace InitialProject.View
                 unratedGuest.User = _userRepository.GetById(unratedGuest.User.Id);
                 unratedGuests.Add(unratedGuest);
             }
-
-            unratedGuests = removeUnratedGuestAfterFiveDays(unratedGuests);
-
             return unratedGuests;
         }
 
+        private List<UnratedGuest> RemoveUnratedGuestsNotBelongingToCurrentUser(List<UnratedGuest> unratedGuests)
+        {
+            for (int i = unratedGuests.Count - 1; i >= 0; i--)
+            {
+                UnratedGuest unratedGuest = unratedGuests[i];
+                if (LoggedInUser.Id != unratedGuest.ReservedAccommodation.Owner.Id)
+                {
+                    unratedGuests.RemoveAt(i);
+                }
+            }
+
+            return unratedGuests;
+        }
         public List<UnratedGuest> removeUnratedGuestAfterFiveDays(List<UnratedGuest> unratedGuests)
         {
             var today = DateTime.Now;
@@ -180,9 +200,9 @@ namespace InitialProject.View
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (unratedGuests.Count > 0)
+            if (_unratedGuests.Count > 0)
             {
-                UnratedGuestNotification unratedGuestNotification = new UnratedGuestNotification(unratedGuests);
+                UnratedGuestNotification unratedGuestNotification = new UnratedGuestNotification(_unratedGuests);
                 unratedGuestNotification.Owner = this;
                 unratedGuestNotification.ShowDialog();
             }

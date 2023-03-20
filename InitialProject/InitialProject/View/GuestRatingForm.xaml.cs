@@ -25,15 +25,13 @@ namespace InitialProject.View
     {
         private readonly RatedGuestRepository _ratedGuestRepository;
         private readonly UnratedGuestRepository _unratedGuestRepository;
-        public int CleanlinessRating { get; set; }
-        public int RuleFollowingRating { get; set; }
 
         public UnratedGuest UnratedGuest { get; set; }
         private OwnerMainWindow _ownerMainWindow;
         public GuestRatingForm(UnratedGuest unratedGuest, OwnerMainWindow ownerMainWindow)
         {
             InitializeComponent();
-            this.DataContext = ownerMainWindow;
+            this.DataContext = this;
             UnratedGuest = unratedGuest;
             _ratedGuestRepository = new RatedGuestRepository();
             _unratedGuestRepository = new UnratedGuestRepository();
@@ -60,23 +58,43 @@ namespace InitialProject.View
             }
         }
 
-        private void CleanlinessSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+
+        private int _ruleFollowingRating;
+        public int RuleFollowingRating
         {
-            CleanlinessRating = (int)e.NewValue;
+            get { return _ruleFollowingRating; }
+            set
+            {
+                if (value != _ruleFollowingRating)
+                {
+                    _ruleFollowingRating = value;
+                    OnPropertyChanged();
+                }
+            }
         }
 
-        private void RuleFollowingSliderValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        private int _cleanlinessRating;
+        public int CleanlinessRating
         {
-            RuleFollowingRating = (int)e.NewValue;
+            get { return _cleanlinessRating; }
+            set
+            {
+                if (value != _cleanlinessRating)
+                {
+                    _cleanlinessRating = value;
+                    OnPropertyChanged();
+                }
+            }
         }
+
 
         private void SubmitButton(object sender, RoutedEventArgs e)
         {
             RatedGuest ratedGuest = new RatedGuest();
             ratedGuest.User.Id = UnratedGuest.Id;
-            ratedGuest.RuleFollowingRating = RuleFollowingRating;
-            ratedGuest.CleanlinessRating = CleanlinessRating;
-            ratedGuest.AdditionalComment = AdditionalComment;
+            ratedGuest.RuleFollowingRating = _ruleFollowingRating;
+            ratedGuest.CleanlinessRating = _cleanlinessRating;
+            ratedGuest.AdditionalComment = _additionalComment;
             ratedGuest.Accommodation = UnratedGuest.ReservedAccommodation;
             ratedGuest.ReservationStartDate = UnratedGuest.ReservationStartDate;
             ratedGuest.ReservationEndDate = UnratedGuest.ReservationEndDate;

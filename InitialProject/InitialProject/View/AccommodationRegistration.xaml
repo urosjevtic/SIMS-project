@@ -73,8 +73,8 @@
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center">
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="Save" Width="100" Height="30" Margin="120,0,0,0" Click="ButtonClickSave"></Button>
-                <Button Content="Cancel" Width="100" Height="30" Margin="10,0,0,0" Click="ButtonClickCancel"></Button>
+                <Button Content="Save" Width="100" Height="30" Margin="120,0,0,0" Click="ButtonClick_Save"></Button>
+                <Button Content="Cancel" Width="100" Height="30" Margin="10,0,0,0" Click="ButtonClick_Cancel"></Button>
             </StackPanel>
 
         </StackPanel>
