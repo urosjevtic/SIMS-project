@@ -35,7 +35,7 @@
 
         </StackPanel>
 
-        <Button Content="Submit" Click="SubmitButton" Grid.Row="2" Margin="10" Width="100" HorizontalAlignment="Center"/>
+        <Button Content="Submit" Click="ButtonClick_Submit" Grid.Row="2" Margin="10" Width="100" HorizontalAlignment="Center"/>
 
     </Grid>
 </Window>

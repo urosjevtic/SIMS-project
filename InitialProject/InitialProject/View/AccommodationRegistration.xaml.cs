@@ -45,7 +45,7 @@ namespace InitialProject.View
             LoggedInUser = user;
 
             locations = new Dictionary<string, List<string>>();
-            uploadLocations();
+            loadLocations();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -70,7 +70,7 @@ namespace InitialProject.View
 
         
 
-        private void uploadLocations()
+        private void loadLocations()
         {
             List<Location> allLocations = _locationRepository.GetAll();
 
@@ -249,7 +249,7 @@ namespace InitialProject.View
             int imagesId = SaveImagesAndGetId(ImagesUrl, 0);
             accommodation.Images.Id = imagesId;
             _accommodationRepository.Save(accommodation);
-            _ownerMainWindow.UpdateDataGrid();
+            _ownerMainWindow.UpdateAccommodations();
             this.Close();
         }
 

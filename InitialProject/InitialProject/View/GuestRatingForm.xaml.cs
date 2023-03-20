@@ -88,7 +88,7 @@ namespace InitialProject.View
         }
 
 
-        private void SubmitButton(object sender, RoutedEventArgs e)
+        private void ButtonClick_Submit(object sender, RoutedEventArgs e)
         {
             RatedGuest ratedGuest = new RatedGuest();
             ratedGuest.User.Id = UnratedGuest.Id;
