@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="Accommodation Reservation" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="15"/>
-        <DataGrid Name="resrvationDataGrid" ItemsSource="{Binding SelectedAccommodation}" Grid.Row="1">
+        <DataGrid Name="reservationDataGrid" ItemsSource="{Binding Path=Accommodations}" Grid.Row="1" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
                 <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>

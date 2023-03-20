@@ -1,5 +1,7 @@
-﻿using System;
+﻿using InitialProject.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,26 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationReservation : Window
     {
-        public AccommodationReservation()
+
+        public Accommodation SelectedAccommodation { get; set; }
+        public List<Accommodation> Accommodations { get; set; }
+       
+        public AccommodationReservation(Accommodation selectedAccommodation)
         {
             InitializeComponent();
+           // this.DataContext = selectedAccommodation;
+           this.DataContext=this;
+            SelectedAccommodation = selectedAccommodation;
+            Accommodations = new List<Accommodation>();
+            Accommodations.Add(SelectedAccommodation);
+            reservationDataGrid.ItemsSource= Accommodations;
+            //reservationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(Accommodations);
+
         }
     }
 }
+
+
+
+
+
