@@ -51,7 +51,7 @@ namespace InitialProject.View
             {
                 int numberOfPeople = int.Parse(nrOfPeopleTextBox.Text);
                 int freeSeats = SelectedTour.MaxGuests - _tourReservationRepository.CountUnreservedSeats(SelectedTour);
-                if (numberOfPeople < freeSeats)
+                if (numberOfPeople <= freeSeats)
                 {
                     _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);

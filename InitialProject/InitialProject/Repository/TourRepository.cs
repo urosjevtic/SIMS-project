@@ -15,6 +15,7 @@ namespace InitialProject.Repository
         private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
+
         private readonly LocationRepository _locationRepository;
         public TourRepository()
         {
@@ -35,22 +36,11 @@ namespace InitialProject.Repository
         public List<Tour> FindAllAlternatives(Tour tour) 
         {
             List<Tour> alternative = new List<Tour>();
-            //TourRepository _tourRepository = new TourRepository();
-           // LocationRepository _locationRepository = new LocationRepository();
             List<Tour> tours = GetAll();
             var locations = _locationRepository.GetAll();
 
-            foreach (Tour t in tours)
-            {
-                foreach (Location location in locations)
-                {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-                        break;
-                    }
-                }
-            }
+            AddTourLocation(tours, locations);
+
             foreach (Tour t in tours)
             {
                 if(t.Location.City.Equals(tour.Location.City))
@@ -59,6 +49,20 @@ namespace InitialProject.Repository
                 }
             }
             return alternative;
+        }
+        public void AddTourLocation(List<Tour> tours, List<Location> locations)
+        {
+            foreach (Tour t in tours)
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Id == t.Location.Id)
+                    {
+                        t.Location = location;
+                        break;
+                    }
+                }
+            }
         }
         public void Save(Tour tour)
         {

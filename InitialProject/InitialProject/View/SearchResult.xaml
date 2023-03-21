@@ -27,9 +27,9 @@
                 <DataGridTextColumn Header="Duration" Binding="{Binding Duration }" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Column="1" Content="Reserve" HorizontalAlignment="Left" Margin="655,0,0,0" Grid.Row="1" Click="ReserveClick" VerticalAlignment="Center" FontSize="36" Width="180" Height="64"/>
-        <Button Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="449,0,0,0" Grid.Row="1" Click="CancelClick" VerticalAlignment="Center" FontSize="36" Height="64" Width="180"/>
-        <Label Content="Number of people:" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="1" VerticalAlignment="Center" FontSize="36" Width="311" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="nrOfPeopleTextBox" HorizontalAlignment="Left" Margin="306,0,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="42" Height="42" FontSize="36" RenderTransformOrigin="0.507,0.551" Grid.Column="1"/>
+        <Button Grid.Column="1" Content="Reserve" HorizontalAlignment="Left" Margin="693,30,0,0" Grid.Row="1" Click="ReserveClick" VerticalAlignment="Top" FontSize="30" Width="140" Height="50"/>
+        <Button Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="524,30,0,0" Grid.Row="1" Click="CancelClick" VerticalAlignment="Top" FontSize="30" Height="50" Width="140"/>
+        <Label Content="Number of people:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Center" FontSize="30" Width="262" Grid.Column="1" Margin="10,0,0,0"/>
+        <TextBox x:Name="nrOfPeopleTextBox" HorizontalAlignment="Left" Margin="277,0,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Center" Width="70" Height="42" FontSize="30" RenderTransformOrigin="0.507,0.551" Grid.Column="1"/>
     </Grid>
 </Window>
