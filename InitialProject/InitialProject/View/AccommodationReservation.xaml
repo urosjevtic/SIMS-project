@@ -31,15 +31,19 @@
                 <TextBlock Text="Number of guests" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <DatePicker SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="0, 15, 0, 0"/>
-                <DatePicker SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="0, 20, 0, 0"/>
-                <TextBox Name="tbGuestNumber" Text="{Binding Path=GuestsNumber, UpdateSourceTrigger=PropertyChanged}" Margin="0,25,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
-                <TextBox Name="tbReservationDays" Text="{Binding Path=ReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                <DatePicker Name="dpStart" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="0, 15, 0, 0"/>
+                <DatePicker Name="dpEnd" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="0, 20, 0, 0"/>
+                <TextBox Name="tbReservationDays" Text="{Binding Path=ReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="0,25,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                <TextBox Name="tbGuestNumber" Text="{Binding Path=GuestsNumber, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
             </StackPanel>
-            <DataGrid Width="235" Height="200" Margin="200, 10">
-                
+            <DataGrid Name="resultDataGrid" Width="235" Height="200" Margin="190, 10">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Start date" Binding="{Binding StarDate}" Width="*" />
+                <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="*"/>
+                    </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Button Content="Reserve" Grid.Row="2" Height="40" Width="140" Margin="576,236,85,-56" Click="ReserveClick" />
+        <Button Content="Reserve" Grid.Row="2" Height="40" Width="120" Margin="603,243,57,-63" Click="ReserveClick" />
+        <Button Content="Cancel" Grid.Row="2" Height="40" Width="100" Margin="491,243,209,-63" Click="Button_Click"/>
     </Grid>
 </Window>

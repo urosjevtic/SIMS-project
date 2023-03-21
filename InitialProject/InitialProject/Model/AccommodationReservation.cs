@@ -27,7 +27,7 @@ namespace InitialProject.Model
             Accommodation= new Accommodation();
         }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation,int guestNumber List<DateTime>freeDates)
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation,int guestNumber) //List<DateTime>freeDates
         {  
             Id = id;
             StartDate = startDate;

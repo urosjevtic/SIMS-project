@@ -41,5 +41,15 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
+        public void SaveReservation(DateTime startDate, DateTime endDate, User LoggedUser, Accommodation accommodation, int guestNumber)
+        {
+            AccommodationReservation reservation= new AccommodationReservation();
+            reservation.StartDate= startDate;
+            reservation.EndDate= endDate;
+            reservation.UserId=LoggedUser.Id;
+            reservation.Id=accommodation.Id;
+            reservation.GuestNumber= guestNumber;
+            Save(reservation);
+        }
     }
 }

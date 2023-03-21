@@ -32,11 +32,9 @@ namespace InitialProject.View
         public List<Accommodation> accommodations;
         public List<Location> locations;
 
-        /*-------------------------------------------------*/
-        //OVO MI TREBA ZA SELEKTOVANJE!!!!!!!!!
+
         public Accommodation SelectedAccommodation { get; set; }
         public AccommodationType SelectedType;
-        /*------------------------------------------------*/
 
         public AccommodationSearch()
         {
@@ -49,7 +47,6 @@ namespace InitialProject.View
         }
 
        
-        //=======================================
         private List<Location> LoadLocations()
         {
             return _locationRepository.GetAll();
@@ -95,44 +92,10 @@ namespace InitialProject.View
             }
         }
 
-        //=======================================
-
-       /* private void loadData()
-        {
-            accommodations = loadAccommodations();
-            locations = new List<Location>();
-            locations = _locationRepository.GetAll();
-            foreach (Accommodation accommodation in accommodations)
-            {
-                foreach (Location location in locations)
-                {
-                    if (location.Id == accommodation.Location.Id)
-                    {
-                        accommodation.Location = location;
-                        break;
-                    }
-                }
-            }
-        }
-
-        private List<Accommodation> loadAccommodations()
-        {
-            List<Accommodation> allAccommodations = new List<Accommodation>();
-            allAccommodations = _accommodationRepository.GetAll();
-            accommodations = new List<Accommodation>();
-            foreach (Accommodation accommodation in allAccommodations)
-            {
-                    accommodations.Add(accommodation);
-            }
-            return accommodations;
-        }
-       */
-
 
         private void SerchButton_Click(object sender, RoutedEventArgs e)
         {
             loadData();
-            //AccommodationList.ItemsSource = null;
 
             var filteredList = new ObservableCollection<Accommodation>();
 
@@ -194,8 +157,6 @@ namespace InitialProject.View
         {
             if (SelectedAccommodation != null)
             {
-               // CommentForm viewCommentForm = new CommentForm(SelectedComment);
-               // viewCommentForm.Show();
                 AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation);
                 accommodationReservation.Show();
             }
