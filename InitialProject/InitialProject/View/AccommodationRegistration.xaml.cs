@@ -1,5 +1,4 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
+﻿using InitialProject.Model;
 using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -7,15 +6,6 @@ using System.Windows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Text.RegularExpressions;
 
 namespace InitialProject.View
@@ -31,7 +21,7 @@ namespace InitialProject.View
 
         private OwnerMainWindow _ownerMainWindow;
 
-        public Dictionary<string, List<string>> locations { get; set; }
+        public Dictionary<string, List<string>> Locations { get; set; }
         private User LoggedInUser { get; set; }
 
         public AccommodationRegistration(OwnerMainWindow ownerMainWindow, User user)
@@ -44,8 +34,23 @@ namespace InitialProject.View
             _ownerMainWindow = ownerMainWindow;
             LoggedInUser = user;
 
-            locations = new Dictionary<string, List<string>>();
-            loadLocations();
+            Locations = new Dictionary<string, List<string>>();
+            LoadLocations();
+        }
+
+        private void LoadLocations()
+        {
+            List<Location> allLocations = _locationRepository.GetAll();
+
+            foreach (Location location in allLocations)
+            {
+                if (!Locations.ContainsKey(location.Country))
+                {
+                    Locations.Add(location.Country, new List<string>());
+                }
+
+                Locations[location.Country].Add(location.City);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -54,10 +59,11 @@ namespace InitialProject.View
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+
         private string _accommodationName;
         public string AccommodationName
         {
-            get => _accommodationName;
+            get { return _accommodationName; }
             set
             {
                 if (value != _accommodationName)
@@ -68,24 +74,6 @@ namespace InitialProject.View
             }
         }
 
-        
-
-        private void loadLocations()
-        {
-            List<Location> allLocations = _locationRepository.GetAll();
-
-            foreach (Location location in allLocations)
-            {
-                if (!locations.ContainsKey(location.Country))
-                {
-                    locations.Add(location.Country, new List<string>());
-                }
-
-                locations[location.Country].Add(location.City);
-            }
-        }
-
-
         private string _country;
         public string Country
         {
@@ -93,22 +81,22 @@ namespace InitialProject.View
             set
             {
                 _country = value;
-                if(value != null)
+                if (value != null)
                 {
                     CityComboBox.IsEnabled = true;
-                    CityComboBox.ItemsSource = locations[_country];
+                    CityComboBox.ItemsSource = Locations[_country];
                 }
                 else
                 {
-                    CityComboBox.IsEnabled=false;
+                    CityComboBox.IsEnabled = false;
                 }
 
                 OnPropertyChanged();
             }
-            
+
         }
 
-        private string _city;   
+        private string _city;
 
         public string City
         {
@@ -120,19 +108,6 @@ namespace InitialProject.View
             }
         }
 
-        private Location _location;
-        public Location Location
-        {
-            get { return _location; }
-            set
-            {
-                if (value != _location)
-                {
-                    _location = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
 
         private string _accommodationType;
         public string AccommodationTypes
@@ -162,21 +137,21 @@ namespace InitialProject.View
             }
         }
 
-        private string _minReservationDays;
+        private string _minimumReservationDays;
         public string MinReservationDays
         {
-            get { return _minReservationDays; }
+            get { return _minimumReservationDays; }
             set
             {
-                if (value != _minReservationDays)
+                if (value != _minimumReservationDays)
                 {
-                    _minReservationDays = value;
+                    _minimumReservationDays = value;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private string _cancelationPeriod;
+        private string _cancelationPeriod = "1";
         public string CancelationPeriod
         {
             get { return _cancelationPeriod; }
@@ -196,7 +171,7 @@ namespace InitialProject.View
             get { return _imagesUrl; }
             set
             {
-                if(value != _imagesUrl)
+                if (value != _imagesUrl)
                 {
                     _imagesUrl = value;
                     OnPropertyChanged();
@@ -206,51 +181,39 @@ namespace InitialProject.View
 
 
 
-        private int SaveImagesAndGetId(string urls, int entityId)
-        {
-            Model.Image images = new Model.Image();
-            images.EntityLd = entityId;
-            string[] imagesUrls = SplitStringByComma(urls);
-            foreach(string imageUrl in imagesUrls)
-            {
-                images.Url.Add(imageUrl);
-            }
-
-            return _imageRepository.Save(images).Id;
-
-        }
-
-        private string[] SplitStringByComma(string location)
-        {
-            return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
-        }
-
         private void RegistrateNewAccommodation()
         {
             Accommodation accommodation = new Accommodation();
+            CreateNewAccommodation(accommodation);
+            _accommodationRepository.Save(accommodation);
+        }
+
+        private void CreateNewAccommodation(Accommodation accommodation)
+        {
             accommodation.Owner.Id = LoggedInUser.Id;
             accommodation.Name = _accommodationName;
             accommodation.Location.Id = GetLocationId(Country, City);
+            accommodation.Type = GetType();
+            accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
+            accommodation.MinReservationDays = Convert.ToInt32(_minimumReservationDays);
+            accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
+            SaveImages(_imagesUrl, 0);
+            accommodation.Images.Id = GetImagesId(_imagesUrl);
+        }
+
+        private AccommodationType GetType()
+        {
             switch (_accommodationType)
             {
                 case "house":
-                    accommodation.Type = AccommodationType.house;
-                    break;
+                    return AccommodationType.house;
                 case "cabin":
-                    accommodation.Type = AccommodationType.cabin;
-                    break;
+                    return AccommodationType.cabin;
                 case "appartment":
-                    accommodation.Type = AccommodationType.appartment;
-                    break;
+                    return AccommodationType.appartment;
+                default:
+                    throw new Exception("Error has occured");
             }
-            accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
-            accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
-            accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
-            int imagesId = SaveImagesAndGetId(ImagesUrl, 0);
-            accommodation.Images.Id = imagesId;
-            _accommodationRepository.Save(accommodation);
-            _ownerMainWindow.UpdateAccommodations();
-            this.Close();
         }
 
         private int GetLocationId(string country, string city)
@@ -266,11 +229,44 @@ namespace InitialProject.View
             throw new Exception("Error has occured");
         }
 
+        private void SaveImages(string urls, int entityId)
+        {
+            Image images = new Image();
+            images.EntityLd = entityId;
+            string[] imagesUrls = SplitStringByComma(urls);
+            foreach (string imageUrl in imagesUrls)
+            {
+                images.Url.Add(imageUrl);
+            }
+
+            _imageRepository.Save(images);
+
+        }
+        private int GetImagesId(string urls)
+        {
+            List<Image> allImages = _imageRepository.GetAll();
+            string[] imageUrls = SplitStringByComma(urls);
+            foreach (Image image in allImages)
+            {
+                if (image.Url.SequenceEqual(imageUrls))
+                {
+                    return image.Id;
+                }
+            }
+            throw new Exception("Error has occured");
+        }
+
+        private string[] SplitStringByComma(string str)
+        {
+            return str.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
         private void ButtonClick_Save(object sender, RoutedEventArgs e)
         {
             if (IsValid)
             {
                 RegistrateNewAccommodation();
+                _ownerMainWindow.UpdateAccommodations();
+                this.Close();
             }
         }
 
@@ -332,7 +328,7 @@ namespace InitialProject.View
                     if (!match.Success)
                         return "Cancelation period format should be: positive number (number of days for cancelation)";
                 }
-                else if(columnName == "ImagesUrl")
+                else if (columnName == "ImagesUrl")
                 {
                     if (string.IsNullOrEmpty(ImagesUrl))
                         return "Images are required";

@@ -44,15 +44,8 @@
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <!--<ComboBox ItemsSource="{Binding Locations}" SelectedValue="{Binding Location}"  Margin="0,0,10,15" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding City}"/>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>-->
                 <StackPanel Margin="0,0,0,15"  Orientation="Horizontal">
-                    <ComboBox x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=locations.Keys}" Height="30" Margin="0, 0, 10, 0" Width="100"></ComboBox>
+                    <ComboBox x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Locations.Keys}" Height="30" Margin="0, 0, 10, 0" Width="100"></ComboBox>
                     <ComboBox x:Name="CityComboBox" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="100"></ComboBox>
                 </StackPanel>
                 <ComboBox x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" FontSize="15">
