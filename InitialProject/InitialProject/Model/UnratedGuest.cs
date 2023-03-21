@@ -1,6 +1,7 @@
 ﻿using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,7 +33,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = {Id.ToString(),  User.Id.ToString(), ReservedAccommodation.Id.ToString(), ReservationStartDate.ToString(), ReservationEndDate.ToString()};
+            string[] csvValues = {Id.ToString(),  User.Id.ToString(), ReservedAccommodation.Id.ToString(), ReservationStartDate.ToString("dd'/'MM'/'yyyy"), ReservationEndDate.ToString("dd'/'MM'/'yyyy") };
             return csvValues;
         }
 
@@ -41,8 +42,8 @@ namespace InitialProject.Model
             Id = Convert.ToInt32(values[0]);
             User.Id = Convert.ToInt32(values[1]);
             ReservedAccommodation.Id = Convert.ToInt32(values[2]);
-            ReservationStartDate = DateTime.Parse(values[3]);
-            ReservationEndDate = DateTime.Parse(values[4]);
+            ReservationStartDate = DateTime.ParseExact(values[3], "dd'/'MM'/'yyyy", CultureInfo.InvariantCulture);
+            ReservationEndDate = DateTime.ParseExact(values[4], "dd'/'MM'/'yyyy", CultureInfo.InvariantCulture);
 
         }
     }
