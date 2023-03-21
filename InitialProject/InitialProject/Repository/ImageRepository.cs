@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Repository
 {
@@ -44,6 +45,12 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _images.Max(c => c.Id) + 1;
+        }
+
+        public Image GetById(int id)
+        {
+            _images = _serializer.FromCSV(FilePath);
+            return _images.FirstOrDefault(i => i.Id == id);
         }
 
         public void Delete(Image image)
