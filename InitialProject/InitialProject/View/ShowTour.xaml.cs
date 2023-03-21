@@ -25,50 +25,25 @@ namespace InitialProject.View
         public ObservableCollection<Tour> Tours { get; set; }
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
         public List<Tour> tours;
         public List<Location> locations;
-        public Tour SelectedTour;
+        public Tour SelectedTour { get; set; }
         public User LoggedUser { get;set; }
-        public ShowTour()
+        public ShowTour(User user)
         {
             InitializeComponent();
             this.DataContext = this;
-            SelectedTour = null;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
+            _tourReservationRepository = new TourReservationRepository();
+            LoggedUser = user;
             loadData();
             tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
         private List<Location> LoadLocations()
         {
             return _locationRepository.GetAll();
-        }
-        public void UpdateDataGrid()
-        {
-            var tours = _tourRepository.GetAll();
-            var locations = LoadLocations();
-            AddTourLocation(tours, locations);
-            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
-        }
-        public void AddTourLocation(List<Tour> tours, List<Location> locations)  //veza lokacije i ture
-        {
-            foreach (var tour in tours)
-            {
-                foreach (var location in locations)
-                {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-
-                        break;
-                    }
-                }
-            }
-        }
-        public void SearchUpdateDataGrid(List<Tour> tour)
-        {
-            tourDataGrid.Items.Clear();
-            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tour);
         }
         private void loadData()
         {
@@ -90,28 +65,8 @@ namespace InitialProject.View
       
         private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
-            TourSearch tourSearch = new TourSearch();
+            TourSearch tourSearch = new TourSearch(LoggedUser);
             tourSearch.Show();
-        }
-
-        private void ReserveButtonClick(object sender, RoutedEventArgs e)
-        {
-            SelectedTour = (Tour)tourDataGrid.SelectedItem;
-            ТоurReservation reservation = new ТоurReservation();
-
-            if (SelectedTour == null)
-            {
-                MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            if (nrOfPeopleTextBox.Text == String.Empty)
-            {
-                MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            else if (int.Parse(nrOfPeopleTextBox.Text) > SelectedTour.MaxGuests - 1)
-            {
-                MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-
         }
     }
 }
