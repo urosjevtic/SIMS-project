@@ -19,7 +19,7 @@ namespace InitialProject.Model
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
         public int GuestNumber { get; set; }
-        //public List<DateTime> FreeDates { get; set; }
+        public List<DateTime> ReservedDates { get; set; }
 
         public AccommodationReservation()
         {
@@ -27,7 +27,7 @@ namespace InitialProject.Model
             Accommodation= new Accommodation();
         }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation,int guestNumber) //List<DateTime>freeDates
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation,int guestNumber, List<DateTime>reservedDates)
         {  
             Id = id;
             StartDate = startDate;
@@ -36,7 +36,7 @@ namespace InitialProject.Model
             AccommodationId= accommodationId;
             Accommodation = accommodation;
             GuestNumber = guestNumber;
-            //FreeDates = freeDates;
+            ReservedDates = reservedDates;
             
         }
 
@@ -54,7 +54,8 @@ namespace InitialProject.Model
             UserId= Convert.ToInt32(values[3]); 
             AccommodationId= Convert.ToInt32(values[4]);
             Accommodation.Id= Convert.ToInt32(values[5]);
-            GuestNumber= Convert.ToInt32(values[6]);    
+            GuestNumber= Convert.ToInt32(values[6]);
+            //ReservedDates = DateTime.Parse(values[7]);
         }
 
     }

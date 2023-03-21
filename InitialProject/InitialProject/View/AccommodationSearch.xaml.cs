@@ -32,16 +32,17 @@ namespace InitialProject.View
         public List<Accommodation> accommodations;
         public List<Location> locations;
 
-
+        public User LoggedUser { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
         public AccommodationType SelectedType;
 
-        public AccommodationSearch()
+        public AccommodationSearch(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             _accommodationRepository= new AccommodationRepository();
             _locationRepository = new LocationRepository();
+            LoggedUser = user;
             loadData();
             AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
         }
@@ -99,22 +100,22 @@ namespace InitialProject.View
 
             var filteredList = new ObservableCollection<Accommodation>();
 
-           
-           foreach(Accommodation accommodation in accommodations)
+
+            foreach (Accommodation accommodation in accommodations)
             {
                 if (tbAccommodationName.Text != "")
                 {
                     if (accommodation.Name.ToLower().Contains((tbAccommodationName.Text).ToLower()))
-                    {
+
                         filteredList.Add(accommodation);
-                    }
+
                 }
                 if (tbCityName.Text != "")
-                {
+                { 
                     if (accommodation.Location.City.ToLower().Contains(tbCityName.Text.ToLower()))
                     {
-                        if(!filteredList.Contains(accommodation))
-                        filteredList.Add(accommodation);
+                        if (!filteredList.Contains(accommodation))
+                            filteredList.Add(accommodation);
                     }
                 }
                 if (tbCountryName.Text != "")
@@ -157,7 +158,7 @@ namespace InitialProject.View
         {
             if (SelectedAccommodation != null)
             {
-                AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation);
+                AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation, LoggedUser);
                 accommodationReservation.Show();
             }
         }
