@@ -7,60 +7,51 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Model
 {
-    public class Image : ISerializable
+    public class CheckPointGuests : ISerializable
     {
-        public int Id;
-        public List<string> Url;
-        public int EntityLd;
-
-        public Image() {
-            Url = new List<string>();
-        }
-        public Image(int id, List<string> url, int entityld) {
-            Id = id;
-            Url= url;
-            EntityLd = entityld;
-        }
-
-
+        public int Id { get; set; } 
+        public int CheckPointId { get; set; } 
+        public List<int> GuestId { get; set; }
 
         public string[] ToCSV()
         {
-            string[] csvValues =
-            {
+            string[] csvValues = {
                 Id.ToString(),
-                EntityLd.ToString(),
+               CheckPointId.ToString()
+
             };
 
-            if (Url.Count() > 0)
+            if (GuestId.Count() > 0)
             {
-                foreach (string url in Url)
+                foreach (int id in GuestId)
                 {
                     Array.Resize(ref csvValues, csvValues.Length + 1);
-                    csvValues[csvValues.Length - 1] = url;
+                    csvValues[csvValues.Length - 1] = id.ToString();
                 }
             }
 
             Array.Resize(ref csvValues, csvValues.Length + 1);
             csvValues[csvValues.Length - 1] = "[END]";
 
+           
             return csvValues;
         }
 
+
         public void FromCSV(string[] values)
         {
-
-            Id = int.Parse(values[0]);
-            EntityLd = int.Parse(values[1]);
+            Id = Convert.ToInt32(values[0]);
+            CheckPointId = Convert.ToInt32(values[1]);
             int i = 2;
-            Url.Clear();
+
+            GuestId.Clear();
 
             while (values[i] != "[END]")
             {
-                Url.Add(values[i]);
+                int ids = Convert.ToInt32(values[i]);
+                GuestId.Add(ids);
                 i++;
             }
-
         }
 
     }

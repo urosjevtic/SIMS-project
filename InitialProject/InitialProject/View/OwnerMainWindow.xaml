@@ -5,6 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
+        Loaded="MainWindow_Loaded"
+        WindowStartupLocation="CenterScreen"
         Title="OwnerMainWindow" Height="350" Width="525">
     <TabControl>
         <!-- First Tab Item -->
@@ -26,21 +28,34 @@
                 </DataGrid>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Content="Add" Margin="10" Click="Button_Click_AddAccommodation"/>
-                    <Button Content="Delete" Margin="10"/>
+                    <Button Content="Add" Margin="10" Click="ButtonClick_AddAccommodation"/>
                 </StackPanel>
             </Grid>
         </TabItem>
 
         <!-- Second Tab Item -->
-        <TabItem Header="Guests">
-            <DataGrid ItemsSource="{Binding Orders}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="OrderID" Binding="{Binding OrderID}" />
-                    <DataGridTextColumn Header="CustomerID" Binding="{Binding CustomerID}" />
-                    <DataGridTextColumn Header="OrderDate" Binding="{Binding OrderDate}" />
-                </DataGrid.Columns>
-            </DataGrid>
+        <TabItem Header="Rate guests">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <DataGrid x:Name="unratedGuestsDataGrid" Grid.Row="1" ItemsSource="{Binding UnratedGuests}" AutoGenerateColumns="False" SelectedItem="{Binding Path=SelectedUnratedGuest}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                        <DataGridTextColumn Header="Guest Username" Binding="{Binding User.Username}" />
+                        <DataGridTextColumn Header="Accommodation" Binding="{Binding ReservedAccommodation.Name}" />
+                        <DataGridTextColumn Header="Start Date" Binding="{Binding ReservationStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                        <DataGridTextColumn Header="End Date" Binding="{Binding ReservationEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                    <Button Content="Rate guest" Margin="10" Width="100" Click="ButtonClik_RateGuest"/>
+                </StackPanel>
+            </Grid>
         </TabItem>
     </TabControl>
 </Window>

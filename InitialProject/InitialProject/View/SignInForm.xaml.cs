@@ -61,6 +61,16 @@ namespace InitialProject
                         AccommodationSearch accommodationSearch = new AccommodationSearch(user);
                         accommodationSearch.Show();
                     }
+                    if(user.Role == UserRole.Guide)
+                    {
+                        GuideMainWindow guideMainWindow = new GuideMainWindow(user);  
+                        guideMainWindow.Show();
+                    }
+                    if (user.Role == UserRole.Guest2)
+                    {
+                        ShowTour showTour = new ShowTour(user);
+                        showTour.Show();
+                    }
                     Close();
                 } 
                 else
