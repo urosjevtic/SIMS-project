@@ -38,6 +38,7 @@ namespace InitialProject.Model
         {
             return new Location { Country = country, City = city };
         }
+
         public override string ToString()
         {
             return $"{Country}, {City}";

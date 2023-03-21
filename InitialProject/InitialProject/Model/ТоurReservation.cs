@@ -14,6 +14,10 @@ namespace InitialProject.Model
         public int IdGuest { get; set; }
         public int NumberOfPeople { get; set; }
 
+        public ТоurReservation()
+        {
+
+        }
         public string[] ToCSV()
         {
             string[] csvValues = {

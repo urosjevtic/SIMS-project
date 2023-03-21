@@ -53,7 +53,11 @@ namespace InitialProject.Repository
             _locations.Remove(founded);
             _serializer.ToCSV(FilePath, _locations);
         }
-
+        public Location GetById(int id)
+        {
+            Location location = _locations.Find(c => c.Id == id);
+            return location;
+        }
         public Location Update(Location location)
         {
             _locations = _serializer.FromCSV(FilePath);

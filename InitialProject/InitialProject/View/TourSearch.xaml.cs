@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using System.Data;
 
 namespace InitialProject.View
@@ -27,75 +27,64 @@ namespace InitialProject.View
         public ObservableCollection<Tour> toursObservable { get; set; }
 
         private readonly TourRepository _tourRepository;
+
+        private readonly LocationRepository _locationRepository;
         public List<Tour> tours { get; set; }
+        public List<Location> locations { get; set; }
+        public User LoggedUser { get; set; }
 
-        public ShowTour showTour { get; set; }
+        public ShowTour showTour;
 
-        public TourSearch()
+        public TourSearch(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             _tourRepository = new TourRepository();
-        }
-
-        private void searchButtonClick(object sender, RoutedEventArgs e)
-        {
-            ShowTour showTour = new ShowTour();
-            List<Tour> tours = new List<Tour>();
+            _locationRepository = new LocationRepository();
             tours = _tourRepository.GetAll();
+            locations = _locationRepository.GetAll();
+            LoggedUser = user;
+        }
+        private void AddTourLocation(List<Tour> tours, List<Location> locations)
+        {
+            foreach (Tour tour in tours)
+            {
+                foreach (Location location in locations)
+                {
+                    if (location.Id == tour.Location.Id)
+                    {
+                        tour.Location = location;
+                        break;
+                    }
+                }
+            }
+        }
+        public List<Tour> Search()
+        {
+            AddTourLocation(tours, locations);
 
-            if(stateTextBox.Text != String.Empty)
-            {
-                foreach(Tour tour in tours)
-                {
-                    if (tour.Location.Country.ToLower().Contains(stateTextBox.Text.ToLower()))
-                    {
-                        tours.Add(tour);
-                    }
-                }
-            }
-            if(cityTextBox.Text != String.Empty)
-            {
-                foreach(Tour tour in tours)
-                {
-                    if (tour.Location.City.ToLower().Contains(cityTextBox.Text.ToLower()))
-                    {
-                        tours.Add(tour);
-                    }
-                }
-            }
-            if (durationTextBox.Text != String.Empty)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (tour.Duration >= int.Parse(durationTextBox.Text))
-                    {
-                        tours.Add(tour);
-                    }
-                }
-            }
-            if (languageTextBox.Text != String.Empty)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (tour.Language.ToLower().Contains(languageTextBox.Text.ToLower()))
-                    {
-                        tours.Add(tour);
-                    }
-                }
-            }
-            if (numberTextBox.Text != String.Empty)
-            {
-                foreach (Tour tour in tours)
-                {
-                    if (tour.MaxGuests >= int.Parse(cityTextBox.Text))
-                    {
-                        tours.Add(tour);
-                    }
-                }
-            }
-            showTour.SearchUpdateDataGrid(tours);
-            showTour.Show();
+            string[] searchValues = { stateTextBox.Text, cityTextBox.Text, languageTextBox.Text };
+            int searchDuration = durationTextBox.Text == "" ? -1 : Convert.ToInt32(durationTextBox.Text);
+            int searchMaxGuests = numberTextBox.Text == "" ? -1 : Convert.ToInt32(numberTextBox.Text);
+
+            List<Tour> searchResults = tours.ToList();
+
+            // Removing all by location and language
+            foreach (string value in searchValues)
+                searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+
+            // Removing by numbers
+            if (searchDuration > 0) searchResults.RemoveAll(x => x.Duration != searchDuration);
+            if (searchMaxGuests > 0) searchResults.RemoveAll(x => x.MaxGuests < searchMaxGuests);
+
+            return searchResults;
+          
+        }
+        public void searchButtonClick(object sender, RoutedEventArgs e)
+        {
+            List<Tour> filteredTours = Search();
+            SearchResult searchResult = new SearchResult(filteredTours, LoggedUser);
+            searchResult.Show();
             this.Close();
         }
 

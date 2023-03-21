@@ -47,7 +47,10 @@ namespace InitialProject.Model
             CoverImageUrl = coverImageUrl;
 
         }
-
+        public string Concatenate()
+        {
+            return Location.Country + " " + Location.City + " " + Language;
+        }
         public string[] ToCSV()
         {
             string[] csvValues = {
