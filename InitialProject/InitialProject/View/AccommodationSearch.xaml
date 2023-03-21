@@ -6,6 +6,10 @@
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         Title="AccommodationSearch" Height="550" Width="800">
+
+ 
+
+
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -23,7 +27,7 @@
                     <TextBlock Text="Location (Country)"  HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBox Name="tbAccommodationName" Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <TextBox Name="tbAccommodationName" Text="{Binding AccommodationName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                     <TextBox Name="tbCityName" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                     <TextBox Name="tbCountryName" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                 </StackPanel>
@@ -33,10 +37,10 @@
                     <TextBlock Text="Reservation days" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <ComboBox x:Name="cbAccommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes}"  Margin="20,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
-                        <ComboBoxItem Content = "House"  />
-                        <ComboBoxItem Content = "Appartment" />
-                        <ComboBoxItem Content = "Cabin" />
+                    <ComboBox x:Name="cbAccommodationType" SelectedValuePath="content" Text="{Binding AccommodationType}" ItemsSource="{Binding Path=AccommodationType}" SelectedItem="{Binding SelectedType}" Margin="20,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
+                        <ComboBoxItem Content = "house"  />
+                        <ComboBoxItem Content = "appartment" />
+                        <ComboBoxItem Content = "cabin" />
                     </ComboBox>
                     <TextBox Name="tbGuestNumber" Text="{Binding Path=GuestsNumber, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                     <StackPanel Orientation="Horizontal">
@@ -47,14 +51,14 @@
             </StackPanel>
         </Grid>
 
-        <DataGrid Name="AccommodationList" Grid.Row="2" ItemsSource="{Binding Accommodation}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding Path=SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
+        <DataGrid Name="AccommodationDataGrid" Grid.Row="2" ItemsSource="{Binding Accommodation}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="City" Binding="{Binding City}" />
-                <DataGridTextColumn Header="Country" Binding="{Binding Country}" />
-                <DataGridTextColumn Header="Type" Binding="{Binding Type}" />
-                <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" />
-                <DataGridTextColumn Header="Min reservation days" Binding="{Binding MinReservatonDays}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" Width="*"/>
+                <DataGridTextColumn Header="Min reservation days" Binding="{Binding MinReservationDays}" Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="3">
