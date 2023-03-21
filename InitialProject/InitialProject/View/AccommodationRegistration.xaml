@@ -42,18 +42,28 @@
                 <TextBlock Text="Images links" HorizontalAlignment="Left" Margin="50,0,0,10" Padding="10"/>
 
             </StackPanel>
-            <StackPanel Grid.Column="1" >
-                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox Text="{Binding Path=Location, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"  Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <ComboBox x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}"  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
-                    <ComboBoxItem Content = "house"  />
-                    <ComboBoxItem Content = "appartment" />
-                    <ComboBoxItem Content = "cabin" />
+            <StackPanel Grid.Column="1">
+                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <!--<ComboBox ItemsSource="{Binding Locations}" SelectedValue="{Binding Location}"  Margin="0,0,10,15" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding City}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>-->
+                <StackPanel Margin="0,0,0,15"  Orientation="Horizontal">
+                    <ComboBox x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=locations.Keys}" Height="30" Margin="0, 0, 10, 0" Width="100"></ComboBox>
+                    <ComboBox x:Name="CityComboBox" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="100"></ComboBox>
+                </StackPanel>
+                <ComboBox x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" FontSize="15">
+                    <ComboBoxItem Content="house"/>
+                    <ComboBoxItem Content="appartment"/>
+                    <ComboBoxItem Content="cabin"/>
                 </ComboBox>
-                <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-                <TextBox  Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox Text="{Binding Path=ImagesUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
 
 
 
@@ -63,8 +73,8 @@
 
         <StackPanel Grid.Row="2" VerticalAlignment="Center">
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center">
-                <Button Content="Save" Width="100" Height="30" Margin="120,0,0,0" Click="Button_Click_Save"></Button>
-                <Button Content="Cancel" Width="100" Height="30" Margin="10,0,0,0" Click="Button_Click_Cancel"></Button>
+                <Button Content="Save" Width="100" Height="30" Margin="120,0,0,0" Click="ButtonClick_Save"></Button>
+                <Button Content="Cancel" Width="100" Height="30" Margin="10,0,0,0" Click="ButtonClick_Cancel"></Button>
             </StackPanel>
 
         </StackPanel>

@@ -15,13 +15,19 @@ namespace InitialProject.Repository
         private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
+        private List<CheckPoint> _checkpoints;
 
         private readonly LocationRepository _locationRepository;
         public TourRepository()
         {
             _serializer = new Serializer<Tour>();
+            
             _tours = _serializer.FromCSV(FilePath);
+
             _locationRepository = new LocationRepository();
+
+
+
         }
 
         public int NextId()
@@ -75,6 +81,18 @@ namespace InitialProject.Repository
         public List<Tour> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+
+        public CheckPoint GetTourFirstCheckPoint(Tour tour)
+        {
+            foreach (var item in tour.CheckPoints)
+            {
+                if (item.SerialNumber == 1)
+                    return item;
+            }
+
+            return null;
         }
     }
 }

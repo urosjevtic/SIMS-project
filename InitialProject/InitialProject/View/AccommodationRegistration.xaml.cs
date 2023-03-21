@@ -27,18 +27,25 @@ namespace InitialProject.View
     {
         private readonly AccommodationRepository _accommodationRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly ImageRepository _imageRepository;
 
         private OwnerMainWindow _ownerMainWindow;
 
-        public User LoggedInUser { get; set; }
+        public Dictionary<string, List<string>> locations { get; set; }
+        private User LoggedInUser { get; set; }
+
         public AccommodationRegistration(OwnerMainWindow ownerMainWindow, User user)
         {
+            InitializeComponent();
+            this.DataContext = this;
             _accommodationRepository = new AccommodationRepository();
-            _locationRepository = new LocationRepository(); 
+            _locationRepository = new LocationRepository();
+            _imageRepository = new ImageRepository();
             _ownerMainWindow = ownerMainWindow;
             LoggedInUser = user;
-            InitializeComponent();
-            DataContext = this;
+
+            locations = new Dictionary<string, List<string>>();
+            loadLocations();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -61,10 +68,62 @@ namespace InitialProject.View
             }
         }
 
-        private string _location;
-        public string Location
+        
+
+        private void loadLocations()
         {
-            get => _location;
+            List<Location> allLocations = _locationRepository.GetAll();
+
+            foreach (Location location in allLocations)
+            {
+                if (!locations.ContainsKey(location.Country))
+                {
+                    locations.Add(location.Country, new List<string>());
+                }
+
+                locations[location.Country].Add(location.City);
+            }
+        }
+
+
+        private string _country;
+        public string Country
+        {
+            get { return _country; }
+            set
+            {
+                _country = value;
+                if(value != null)
+                {
+                    CityComboBox.IsEnabled = true;
+                    CityComboBox.ItemsSource = locations[_country];
+                }
+                else
+                {
+                    CityComboBox.IsEnabled=false;
+                }
+
+                OnPropertyChanged();
+            }
+            
+        }
+
+        private string _city;   
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                _city = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Location _location;
+        public Location Location
+        {
+            get { return _location; }
             set
             {
                 if (value != _location)
@@ -92,7 +151,7 @@ namespace InitialProject.View
         private string _maxGuests;
         public string MaxGuests
         {
-            get => _maxGuests;
+            get { return _maxGuests; }
             set
             {
                 if (value != _maxGuests)
@@ -106,7 +165,7 @@ namespace InitialProject.View
         private string _minReservationDays;
         public string MinReservationDays
         {
-            get => _minReservationDays;
+            get { return _minReservationDays; }
             set
             {
                 if (value != _minReservationDays)
@@ -120,7 +179,7 @@ namespace InitialProject.View
         private string _cancelationPeriod;
         public string CancelationPeriod
         {
-            get => _cancelationPeriod;
+            get { return _cancelationPeriod; }
             set
             {
                 if (value != _cancelationPeriod)
@@ -131,37 +190,47 @@ namespace InitialProject.View
             }
         }
 
-
-        private int getLocationId(string location)
+        private string _imagesUrl;
+        public string ImagesUrl
         {
-            string[] splitedLocation = splitLocation(location);
-            List<Location> locations = _locationRepository.GetAll();
-            foreach(Location loc in locations)
+            get { return _imagesUrl; }
+            set
             {
-                if(loc.Country == splitedLocation[0])
+                if(value != _imagesUrl)
                 {
-                    if (loc.City == splitedLocation[1])
-                        return loc.Id;
+                    _imagesUrl = value;
+                    OnPropertyChanged();
                 }
             }
-
-            Location newLocation = new Location();
-            newLocation.Country = splitedLocation[0];
-            newLocation.City = splitedLocation[1];
-            return _locationRepository.Save(newLocation).Id;
         }
 
-        private string[] splitLocation(string location)
+
+
+        private int SaveImagesAndGetId(string urls, int entityId)
+        {
+            Model.Image images = new Model.Image();
+            images.EntityLd = entityId;
+            string[] imagesUrls = SplitStringByComma(urls);
+            foreach(string imageUrl in imagesUrls)
+            {
+                images.Url.Add(imageUrl);
+            }
+
+            return _imageRepository.Save(images).Id;
+
+        }
+
+        private string[] SplitStringByComma(string location)
         {
             return location.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        private void confirmAccommodationRegistration()
+        private void RegistrateNewAccommodation()
         {
             Accommodation accommodation = new Accommodation();
             accommodation.Owner.Id = LoggedInUser.Id;
             accommodation.Name = _accommodationName;
-            accommodation.Location.Id = getLocationId(_location);
+            accommodation.Location.Id = GetLocationId(Country, City);
             switch (_accommodationType)
             {
                 case "house":
@@ -177,40 +246,57 @@ namespace InitialProject.View
             accommodation.MaxGuests = Convert.ToInt32(_maxGuests);
             accommodation.MinReservationDays = Convert.ToInt32(_minReservationDays);
             accommodation.CancelationPeriod = Convert.ToInt32(_cancelationPeriod);
+            int imagesId = SaveImagesAndGetId(ImagesUrl, 0);
+            accommodation.Images.Id = imagesId;
             _accommodationRepository.Save(accommodation);
-            _ownerMainWindow.UpdateDataGrid();
+            _ownerMainWindow.UpdateAccommodations();
             this.Close();
         }
 
-        private void Button_Click_Save(object sender, RoutedEventArgs e)
+        private int GetLocationId(string country, string city)
+        {
+            List<Location> allLocations = _locationRepository.GetAll();
+            foreach (Location location in allLocations)
+            {
+                if (location.City == city && location.Country == country)
+                {
+                    return location.Id;
+                }
+            }
+            throw new Exception("Error has occured");
+        }
+
+        private void ButtonClick_Save(object sender, RoutedEventArgs e)
         {
             if (IsValid)
             {
-                confirmAccommodationRegistration();
+                RegistrateNewAccommodation();
             }
         }
 
-        private void Button_Click_Cancel(object sender, RoutedEventArgs e)
+        private void ButtonClick_Cancel(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
         //Input validation
-        private Regex locationPattern = new Regex("^[a-zA-Z\\s]+,[\\s]*[a-zA-Z\\s]+$");
-        private Regex positiveNumbersPattern = new Regex("^[1-9][0-9]*$");
+        private readonly Regex _positiveNumbersPattern = new Regex("^[1-9][0-9]*$");
+        private readonly Regex _imagesUrlPattern = new Regex("\\bhttps?://\\S+\\b(?:,\\s*\\bhttps?://\\S+\\b)*");
         public string Error => null;
 
         public string this[string columnName]
         {
             get
             {
-                if (columnName == "Location")
+                if (columnName == "Country")
                 {
-                    if (string.IsNullOrEmpty(Location))
-                        return "Location is required";
-                    Match match = locationPattern.Match(Location);
-                    if (!match.Success)
-                        return "Location format should be: Country, City";
+                    if (string.IsNullOrEmpty(Country))
+                        return "Select a country";
+                }
+                else if (columnName == "City")
+                {
+                    if (string.IsNullOrEmpty(City))
+                        return "Select a city";
                 }
                 else if (columnName == "AccommodationName")
                 {
@@ -226,7 +312,7 @@ namespace InitialProject.View
                 {
                     if (string.IsNullOrEmpty(MaxGuests))
                         return "Maximum number of guests is required";
-                    Match match = positiveNumbersPattern.Match(MaxGuests);
+                    Match match = _positiveNumbersPattern.Match(MaxGuests);
                     if (!match.Success)
                         return "Maximum guests format should be: positive number";
                 }
@@ -234,7 +320,7 @@ namespace InitialProject.View
                 {
                     if (string.IsNullOrEmpty(MinReservationDays))
                         return "Minimum reservation days is required";
-                    Match match = positiveNumbersPattern.Match(MinReservationDays);
+                    Match match = _positiveNumbersPattern.Match(MinReservationDays);
                     if (!match.Success)
                         return "Minimum reservation days format should be: positive number";
                 }
@@ -242,14 +328,22 @@ namespace InitialProject.View
                 {
                     if (string.IsNullOrEmpty(CancelationPeriod))
                         return "Cancelation period is required";
-                    Match match = positiveNumbersPattern.Match(CancelationPeriod);
+                    Match match = _positiveNumbersPattern.Match(CancelationPeriod);
                     if (!match.Success)
                         return "Cancelation period format should be: positive number (number of days for cancelation)";
+                }
+                else if(columnName == "ImagesUrl")
+                {
+                    if (string.IsNullOrEmpty(ImagesUrl))
+                        return "Images are required";
+                    Match match = _imagesUrlPattern.Match(ImagesUrl);
+                    if (!match.Success)
+                        return "Images input format should be: url1, url2, ...";
                 }
                 return null;
             }
         }
-        private readonly string[] _validatedProperties = { "Location" };
+        private readonly string[] _validatedProperties = { "Location", "AccommodationName", "AccommodationTypes", "MaxGuests", "MinReservationDays", "CancelationPeriod", "ImagesUrl", "Country", "City" };
 
         public bool IsValid
         {
