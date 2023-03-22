@@ -15,7 +15,6 @@ namespace InitialProject.Repository
         private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
-        private List<CheckPoint> _checkpoints;
 
         public TourRepository()
         {
@@ -41,6 +40,7 @@ namespace InitialProject.Repository
             _tours.Add(tour);
             _serializer.ToCSV(FilePath, _tours);
         }
+        
 
         public List<Tour> GetAll()
         {
@@ -57,6 +57,37 @@ namespace InitialProject.Repository
             }
 
             return null;
+        }
+        public void Delete(Tour tour)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            Tour founded = _tours.Find(c => c.Id == tour.Id);
+            _tours.Remove(founded);
+            _serializer.ToCSV(FilePath, _tours);
+        }
+        
+
+        public void SaveAll(List<Tour> tours)
+        {
+            _serializer.ToCSV(FilePath, tours);
+        }
+        public void Update(Tour tour)
+        {
+            Tour newTour = _tours.Find(p1 => p1.Id == tour.Id);
+            newTour.Id = tour.Id;
+            newTour.Name = tour.Name;
+            newTour.Guide.Id = tour.Guide.Id;
+            newTour.Location = tour.Location;
+            newTour.Description = tour.Description;
+            newTour.Language = tour.Language;
+            newTour.MaxGuests = tour.MaxGuests;
+            newTour.Start = tour.Start;
+            newTour.Duration = tour.Duration;
+            newTour.CoverImageUrl.Id = tour.CoverImageUrl.Id;
+            newTour.IsActive = tour.IsActive;
+
+            SaveAll(_tours);
+            
         }
     }
 }

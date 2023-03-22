@@ -31,8 +31,10 @@ namespace InitialProject.View
 
         public ShowTour showTour { get; set; }
 
-        public TourSearch()
+        public User LoggedInUser { get; set; }
+        public TourSearch(User user)
         {
+            LoggedInUser= user;
             InitializeComponent();
             this.DataContext = this;
             _tourRepository = new TourRepository();
@@ -40,7 +42,7 @@ namespace InitialProject.View
 
         private void searchButtonClick(object sender, RoutedEventArgs e)
         {
-            ShowTour showTour = new ShowTour();
+            ShowTour showTour = new ShowTour(LoggedInUser);
             List<Tour> tours = new List<Tour>();
             tours = _tourRepository.GetAll();
 

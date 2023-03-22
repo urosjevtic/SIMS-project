@@ -13,7 +13,7 @@ namespace InitialProject
     /// </summary>
     public partial class SignInForm : Window
     {
-
+        public bool alreadyStartedTourFlag { get; set; }
         private readonly UserRepository _repository;
 
         private string _username;
@@ -41,6 +41,7 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
+            alreadyStartedTourFlag = false;
             _repository = new UserRepository();
         }
 
@@ -66,9 +67,9 @@ namespace InitialProject
                         GuideMainWindow guideMainWindow = new GuideMainWindow(user);  
                         guideMainWindow.Show();
                     }
-                    if (user.Role == UserRole.Guest2)
+                    if (user.Role == UserRole.Guest)
                     {
-                        ShowTour showTour = new ShowTour();
+                        ShowTour showTour = new ShowTour(user); 
                         showTour.Show();
                     }
                     Close();

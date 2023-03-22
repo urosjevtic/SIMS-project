@@ -25,12 +25,14 @@ namespace InitialProject.View
     public partial class GuideMainWindow : Window
     {
         public User LoggedUser { get; set; }
-        public ObservableCollection<Tour> Tours { get; set; }
+        public List<Tour> ActiveTours { get; set; } 
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
         public List<Tour> tours;
         public List<Location> locations;
+        
         public Tour SelectedTodayTour { get; set; }
+        public Tour ActiveTour { get; set; }
 
         // DANAS TURE 
         public List<Tour> TodayTours { get; set; }
@@ -41,14 +43,14 @@ namespace InitialProject.View
             this.DataContext = this;
 
             LoggedUser = user;
-
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             loadData();                                                  
-            ToursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);   
-            
+            ToursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
+            ActiveTour = SelectedTodayTour;
             TodayToursDataGrid.ItemsSource = new ObservableCollection<Tour>(TodayTours);
-            //UpdateTodayTours();
+            ActiveToursDataGrid.ItemsSource = new ObservableCollection<Tour>(ActiveTours);
+            
         }
 
         private void loadData()
@@ -57,7 +59,7 @@ namespace InitialProject.View
             locations = LoadLocations();
             AddTourLocation(tours,locations);
             TodayTours = GetTodayTours();
-           
+            ActiveTours = FindActiveTours();
         }
         public List<Tour> GetTodayTours()
         {
@@ -136,14 +138,56 @@ namespace InitialProject.View
                 }
             }
         }
-
-        private void StartTour(object sender, RoutedEventArgs e)
+        public List<Tour> FindActiveTours()
         {
-            if (SelectedTodayTour != null)
+
+            var tours = loadTours();
+            var locations = LoadLocations();
+            List<Tour> active = new List<Tour>();
+            AddTourLocation(tours, locations);
+            foreach (Tour tour in tours)
             {
-                StartedTour startedTour = new StartedTour(SelectedTodayTour);
+                if (tour.IsActive)
+                {
+                    active.Add(tour);
+                }
+            }
+            return active;
+        }
+
+        private bool FindToursActivity(List<Tour> tours)
+        {
+            foreach (Tour tour in tours)
+            {
+                if (tour.IsActive == true)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public void StartTour(object sender, RoutedEventArgs e)
+        {
+            if (SelectedTodayTour != null && (FindToursActivity(loadTours()) == false))
+            {
+                SelectedTodayTour.IsActive = true;
+                _tourRepository.Update(SelectedTodayTour);
+                StartedTour startedTour = new StartedTour(SelectedTodayTour,this);
                 startedTour.Show();
             }
+            else
+            {
+                MessageBox.Show("Vec postoji zapoceta tura!" ,"Greska!", MessageBoxButton.OK,MessageBoxImage.Error);
+            }
         }
+        
+        private void ShowTour(object sender, RoutedEventArgs e)
+        {
+            CheckedCheckPointRepository ccpr = new CheckedCheckPointRepository();
+            List<CheckedCheckPoint> listCCP = ccpr.GetAll();
+            ActiveTour activeTour = new ActiveTour(ActiveTour, listCCP);
+            activeTour.Show();
+        }
+        
     }
 }

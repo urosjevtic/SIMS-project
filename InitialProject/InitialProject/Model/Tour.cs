@@ -22,6 +22,7 @@ namespace InitialProject.Model
         public DateTime Start { get; set; }
         public int Duration { get; set; }   
         public Image CoverImageUrl { get; set; }
+        public bool IsActive { get; set; }  
 
         public CheckPointRepository _checkPointRepository { get; set; }
         public Tour()
@@ -32,7 +33,7 @@ namespace InitialProject.Model
             CoverImageUrl = new Image();
             _checkPointRepository = new CheckPointRepository();
         }
-        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl)
+        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl,bool isActve)
         {
             Id = id;
             Guide = giude;
@@ -45,6 +46,7 @@ namespace InitialProject.Model
             Start = start;
             Duration = duration;
             CoverImageUrl = coverImageUrl;
+            IsActive = isActve;
 
         }
 
@@ -60,7 +62,8 @@ namespace InitialProject.Model
                MaxGuests.ToString(),
                Start.ToString(),
                Duration.ToString(),
-               CoverImageUrl.Id.ToString()
+               CoverImageUrl.Id.ToString(),
+               IsActive.ToString(),
             };
 
             if (CheckPoints.Count() > 0)
@@ -91,8 +94,9 @@ namespace InitialProject.Model
             Start = DateTime.Parse(values[7]);
             Duration = Convert.ToInt32(values[8]);  
             CoverImageUrl.Id = Convert.ToInt32(values[9]);
+            IsActive = Convert.ToBoolean(values[10]);
 
-            int i = 10;
+            int i = 11;
             CheckPoints.Clear();
 
             

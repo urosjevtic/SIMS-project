@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.Model;
 
 namespace InitialProject.Repository
 {
     public class TourReservationRepository
     {
-        private const string FilePath = "../../../Resources/Data/tourReservation.csv";
+        private const string FilePath = "../../../Resources/Data/tourReservations.csv";
 
-        private readonly Serializer<ТоurReservation> _serializer;
+        private readonly Serializer<InitialProject.Model.TourReservation> _serializer;
 
-        private List<ТоurReservation> _reservations;
+        private List<TourReservation> _reservations;
+        public UserRepository _userRepository { get; set; }
 
         public TourReservationRepository()
         {
-            _serializer = new Serializer<ТоurReservation>();
+            _userRepository = new UserRepository();
+            _serializer = new Serializer<TourReservation>();
             _reservations = _serializer.FromCSV(FilePath);
         }
         public int NextId()
@@ -30,7 +32,7 @@ namespace InitialProject.Repository
             }
             return _reservations.Max(c => c.IdReservation) + 1;
         }
-        public void Save(ТоurReservation reservation)
+        public void Save(TourReservation reservation)
         {
             reservation.IdReservation = NextId();
             _reservations = _serializer.FromCSV(FilePath);
@@ -38,9 +40,23 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _reservations);
         }
 
-        public List<ТоurReservation> GetAll()
+        public List<TourReservation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public List<User> GetReservationGuest(Tour tour)
+        {
+            List<User> guests = new List<User>();
+            List<TourReservation> reservations = GetAll();
+            foreach(TourReservation tourReservation in reservations)
+            {
+                if(tourReservation.IdTour == tour.Id)
+                {
+                    guests.Add(_userRepository.GetById(tourReservation.IdGuest));
+                }
+            }
+            return guests;
         }
     }
 }
