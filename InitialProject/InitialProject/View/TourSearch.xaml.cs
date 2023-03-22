@@ -35,16 +35,18 @@ namespace InitialProject.View
 
         public ShowTour showTour;
 
+
+        public User LoggedInUser { get; set; }
         public TourSearch(User user)
         {
+            LoggedInUser= user;
             InitializeComponent();
             this.DataContext = this;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
-            tours = _tourRepository.GetAll();
-            locations = _locationRepository.GetAll();
-            LoggedUser = user;
         }
+
+       
         private void AddTourLocation(List<Tour> tours, List<Location> locations)
         {
             foreach (Tour tour in tours)

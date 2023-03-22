@@ -238,6 +238,7 @@ namespace InitialProject.View
             checkPoint.Name = point;
             checkPoint.SerialNumber = i;
             checkPoint.IsChecked = false;
+            checkPoint.CurrentGuests = new List<User>();
             return _checkPointRepository.Save(checkPoint);
 
         }
@@ -257,6 +258,7 @@ namespace InitialProject.View
             int imagesId = saveImages(_imagesUrl, 0);
             tour.CoverImageUrl.Id = imagesId;
             tour.CheckPoints = AddCheckPoint(_checkPoints);
+            tour.IsActive = false;
             _tourRepository.Save(tour);
             _guideMainWindow.UpdateDataGrid();
             _guideMainWindow.UpdateTodayTours();

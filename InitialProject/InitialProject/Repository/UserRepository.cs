@@ -34,5 +34,22 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
+
+        public void SaveAll(List<User> _users)
+        {
+            _serializer.ToCSV(FilePath, _users);
+        }
+        public void Update(User user)
+        {
+            User newUser = _users.Find(p1 => p1.Id == user.Id);
+            newUser.Id = user.Id;
+            newUser.Username = user.Username;
+            newUser.Password = user.Password;
+            newUser.Presence = user.Presence;
+            newUser.Role = user.Role;
+            
+            SaveAll(_users);
+
+        }
     }
 }
