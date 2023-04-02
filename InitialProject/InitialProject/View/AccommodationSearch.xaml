@@ -1,0 +1,72 @@
+﻿<Window x:Class="InitialProject.View.AccommodationSearch"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="AccommodationSearch" Height="550" Width="800">
+
+ 
+
+
+    <Grid Margin="0,0,0,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="150"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Accommodation Search" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" RenderTransformOrigin="0,0"/>
+        <Grid Grid.Row="1">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Name" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                    <TextBlock Text="Location (City)"  HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                    <TextBlock Text="Location (Country)"  HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBox Name="tbAccommodationName" Text="{Binding AccommodationName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <TextBox Name="tbCityName" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <TextBox Name="tbCountryName" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <TextBlock Text="Accommodation type" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                    <TextBlock Text="Number of guests" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                    <TextBlock Text="Reservation days" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <ComboBox x:Name="cbAccommodationType" SelectedValuePath="content" Text="{Binding AccommodationType}" ItemsSource="{Binding Path=AccommodationType}" SelectedItem="{Binding SelectedType}" Margin="20,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" FontSize="15">
+                        <ComboBoxItem Content = "house"  />
+                        <ComboBoxItem Content = "appartment" />
+                        <ComboBoxItem Content = "cabin" />
+                    </ComboBox>
+                    <TextBox Name="tbGuestNumber" Text="{Binding Path=GuestsNumber, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Name="tbReservationDays" Text="{Binding Path=ReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                        <Button x:Name="SerchButton" Content="Search" Width="100" Click="SerchButton_Click" Margin="20, 0, 0, 0" RenderTransformOrigin="0.865,0.482"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+
+        <DataGrid Name="AccommodationDataGrid" Grid.Row="2" ItemsSource="{Binding Accommodation}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
+                <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
+                <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
+                <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
+                <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" Width="*"/>
+                <DataGridTextColumn Header="Min reservation days" Binding="{Binding MinReservationDays}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="153*"/>
+                <ColumnDefinition Width="7*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="ViewButton" Content="View" Click="ViewButton_Click" Margin="632,-56,7,36"/>
+        </Grid>
+    </Grid>
+</Window>
