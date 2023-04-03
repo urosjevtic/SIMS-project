@@ -68,6 +68,14 @@ namespace InitialProject.Repository
             _checkPoints.Remove(founded);
             _serializer.ToCSV(FilePath, _checkPoints);
         }
+        public void DeleteAll()
+        {
+            _checkPoints = _serializer.FromCSV(FilePath);
+            foreach (CheckedCheckPoint checkPoint in _checkPoints)
+            {
+                Delete(checkPoint);
+            }
+        }
 
         public CheckedCheckPoint Update(CheckedCheckPoint checkPoint)
         {

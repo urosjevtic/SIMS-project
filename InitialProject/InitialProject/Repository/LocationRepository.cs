@@ -68,7 +68,28 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
+        private string[] SplitString(string s)
+        {
+            return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
+        public int GetLocationId(string location)
+        {
+            string[] splitedLocation = SplitString(location);
+            List<Location> locations = GetAll();
+            foreach (Location loc in locations)
+            {
+                if (loc.Country == splitedLocation[0])
+                {
+                    if (loc.City == splitedLocation[1])
+                        return loc.Id;
+                }
+            }
+            Location newLocation = new Location();
+            newLocation.Country = splitedLocation[0];
+            newLocation.City = splitedLocation[1];
+            return Save(newLocation).Id;
+        }
 
-      
+
     }
 }

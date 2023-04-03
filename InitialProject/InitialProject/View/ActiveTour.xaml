@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="ActiveTour" Height="800" Width="1000">
@@ -34,7 +33,7 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox x:Name="checkBooox" 
-                                              Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked" 
+                                              Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxCheckPoint" 
                                               IsChecked="{Binding IsChacked}"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -46,7 +45,7 @@
             </ListView.View>
         </ListView>
 
-
+       
 
         <ListView Height="238" 
           HorizontalAlignment="Left" 
@@ -76,7 +75,7 @@
             </ListView.View>
         </ListView>
 
-        <Button Grid.Column="1" Content="End tour" Margin="71,15,214,24" Grid.Row="2" Click="EndTour"/>
+        <Button Grid.Column="1" Content="End tour" Margin="71,15,214,24" Grid.Row="2" Click="EndTourClick"/>
 
         <DataGrid x:Name="CheckedPointsDataGrid" Grid.Column="0" Grid.Row="0" ItemsSource="{Binding CheckedCheckPoints}" AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" >
             <DataGrid.Columns>

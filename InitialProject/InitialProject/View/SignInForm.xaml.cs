@@ -67,7 +67,7 @@ namespace InitialProject
                         GuideMainWindow guideMainWindow = new GuideMainWindow(user);  
                         guideMainWindow.Show();
                     }
-                    if (user.Role == UserRole.Guest)
+                    if (user.Role == UserRole.Guest2)
                     {
                         ShowTour showTour = new ShowTour(user);
                         showTour.Show();

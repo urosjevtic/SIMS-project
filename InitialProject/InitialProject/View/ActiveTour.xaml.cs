@@ -28,12 +28,10 @@ namespace InitialProject.View
         private readonly NotificationRepository _notificationRepository;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly UserRepository _userRepository;
+        private readonly CheckedCheckPointRepository _checkedCheckPointRepository;
+        private readonly CheckPointRepository _checkPointRepository;
 
-        //private readonly ActiveTourStatusRepository _activeTourStatusRepository;
-        //public List<GuestDTO> GuestsDTO { get; set; }//ovo treba biti binding
-        public CheckBox checkBox { get; set; }
-        public int firstSerialNumber { get; set; }
-        public bool isChecked { get; set; }
+
         public List<User> Guests { get; set; }
         List<User> TourGuests { get; set; }
         public User User { get; set; }
@@ -43,6 +41,7 @@ namespace InitialProject.View
         public List<Notification> Notifications { get; set; }
         public List<GuestDTO> CalledGuests { get; set; }
         public List<GuestDTO> UncalledGuests { get; set; }
+        public CheckPoint LastCheckedCheckPoint { get; set; }   
 
         public List<GuestDTO> GuestsDTO { get; set; }
         public CheckedCheckPointRepository checkedCheckPointRepository { get; set; }
@@ -57,6 +56,8 @@ namespace InitialProject.View
             _notificationRepository = new NotificationRepository();
             _tourReservationRepository = new TourReservationRepository();
             _userRepository = new UserRepository();
+            _checkedCheckPointRepository = new CheckedCheckPointRepository();
+            _checkPointRepository = new CheckPointRepository();
             GuestsDTO = new List<GuestDTO>();
             CalledGuests = new List<GuestDTO>();
             UncalledGuests = new List<GuestDTO>();
@@ -64,17 +65,13 @@ namespace InitialProject.View
             checkedCheckPointRepository = new CheckedCheckPointRepository();
 
             CheckedCheckPoints = listCCP;
-            foreach(var checkPoint in CheckedCheckPoints)
-            {
-                checkPoint.IsChecked = true;
-
-            }
+            
             Notifications = _notificationRepository.GetAll();
             User = new User();
             SelectedTour = selectedTour;
             CheckPoints = new List<CheckPoint>(); ;
             Guests = _tourReservationRepository.GetReservationGuest(SelectedTour);
-
+            LastCheckedCheckPoint = _checkPointRepository.FindTourLastCheckPoint(SelectedTour);
             CreateAllDTOForms();
             CreateUncheckedListCP();
             CreateUncalledGuestsDTO();
@@ -82,19 +79,19 @@ namespace InitialProject.View
 
         private void CreateUncalledGuestsDTO()
         {
-            List<int> guestsIndexes = new List<int>();
-            List<int> dtoIndexes = new List<int>();
+            List<int> allGuestsIndexes = new List<int>();
+            List<int> calledGuestsIndexes = new List<int>();
             foreach(var guest in Guests)
             {
-                guestsIndexes.Add(guest.Id);
+                allGuestsIndexes.Add(guest.Id);
             }
             foreach(var dto in CalledGuests)
             {
-                dtoIndexes.Add(dto.Id);
+                calledGuestsIndexes.Add(dto.Id);
             }
-            foreach(var ind in guestsIndexes)
+            foreach(var ind in allGuestsIndexes)
             {
-                if(!dtoIndexes.Contains(ind))
+                if(!calledGuestsIndexes.Contains(ind))
                 {
                     GuestDTO dto = CreateOneDTOForm(Guests.Find(t => t.Id == ind));
                     UncalledGuests.Add(dto);
@@ -105,19 +102,19 @@ namespace InitialProject.View
         private void CreateUncheckedListCP()
         {
             List<CheckPoint> checkPoints = SelectedTour.CheckPoints;
-            List<string> cpNames = new List<string>();
-            List<string> ccpNames = new List<string>();
+            List<string> checkPointsNames = new List<string>();
+            List<string> checkedCheckPointNames = new List<string>();
             foreach(var cp in checkPoints)
             {
-                cpNames.Add(cp.Name);
+                checkPointsNames.Add(cp.Name);
             }
             foreach(var ccp in CheckedCheckPoints)
             {
-                ccpNames.Add(ccp.Name);
+                checkedCheckPointNames.Add(ccp.Name);
             }
-            foreach(var cp in cpNames)
+            foreach(var cp in checkPointsNames)
             {
-                if(!ccpNames.Contains(cp))
+                if(!checkedCheckPointNames.Contains(cp))
                 {
                     CheckPoints.Add(checkPoints.Find(t => t.Name.Equals(cp)));
                 }
@@ -146,17 +143,29 @@ namespace InitialProject.View
             return guestDTO;
         }
 
-        private void CheckBoxChecked(object sender, RoutedEventArgs e)
+        private void CheckBoxCheckPoint(object sender, RoutedEventArgs e)
         {
-
             CheckPoint checkedCheckPoint = ((CheckBox)sender).DataContext as CheckPoint;
             checkedCheckPoint.IsChecked = true;
-            //CheckedCheckPoints.Add(checkedCheckPoint); // cuva mi cekirane checkPointe
             CheckedCheckPoint ccp = checkedCheckPointRepository.Transform(checkedCheckPoint);
             checkedCheckPointRepository.Save(ccp);
+            if(checkedCheckPoint == LastCheckedCheckPoint)
+            {
+                SelectedTour.IsActive = false;
+                _tourRepository.Update(SelectedTour);
+                foreach (User guest in Guests)
+                {
+                    guest.Presence = UserPresence.Unknown;
+                    _userRepository.Update(guest);
+                }
+                _notificationRepository.DeleteAll();
+                _checkedCheckPointRepository.DeleteAll();
+                this.Close();
+            }
+
         }
 
-        private void EndTour(object sender, RoutedEventArgs e)
+        private void EndTourClick(object sender, RoutedEventArgs e)
         {
             SelectedTour.IsActive = false;
             _tourRepository.Update(SelectedTour);
@@ -165,25 +174,26 @@ namespace InitialProject.View
                 guest.Presence = UserPresence.Unknown;
                 _userRepository.Update(guest);
             }
+            _notificationRepository.DeleteAll();
+            _checkedCheckPointRepository.DeleteAll();
             this.Close();
         }
 
         private void CheckedGuests(object sender, RoutedEventArgs e)
         {
+            GuestDTO checkedGuest = ((CheckBox)sender).DataContext as GuestDTO;
+            MakeNotification(checkedGuest);
+        }
+
+        private void MakeNotification(GuestDTO checkedGuest)
+        {
             Notification notification = new Notification();
             notification.TourId = SelectedTour.Id;
             notification.IsChecked = true;
-            notification.CheckPointId = CheckedCheckPoints.Last().Id;          //cuva zadnju cekiranu checkPoint
-            GuestDTO checkedGuest = ((CheckBox)sender).DataContext as GuestDTO;
+            notification.CheckPointId = CheckedCheckPoints.Last().Id;
             notification.GuestId = checkedGuest.Id;
             Notifications.Add(notification);
             _notificationRepository.Save(notification);
-            //ActiveTourStatus status = new ActiveTourStatus();
-            //status.GuestId = checkedGuest.Id;
-            //status.Username = checkedGuest.Username;
-            //status.Presence = UserPresence.Unknown;
-            //status.CheckPoint = CheckedCheckPoints.Last();
-            //_activeTourStatusRepository.Save(status);
 
         }
     }

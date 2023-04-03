@@ -56,16 +56,6 @@ namespace InitialProject.Model
             Name = values[1];
             SerialNumber = Convert.ToInt32(values[2]);  
             IsChecked = Convert.ToBoolean(values[3]);
-            int i = 4;
-            CurrentGuests.Clear();
-            UserRepository _userRepository = new UserRepository();
-
-            while (values[i] != "[END]")
-            {
-                int ids = Convert.ToInt32(values[i]);
-                CurrentGuests.Add(_userRepository.GetById(ids));
-                i++;
-            }
         }
 
         

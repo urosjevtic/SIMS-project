@@ -1,36 +1,53 @@
-1|sad|1|False
-2|cek|1|False
-3|cek|2|False
-4|druga|1|False
-5|treca|2|False
-6|ch1|1|False
-7|ch2|2|False
-8|ca|1|False
-9|cas|2|False
-10|sda|1|False
-11|to|1|False
-12|to|2|False
-13|Nesto|1|False
-14|Nesto|2|False
-15|Kalemegdan|1|False
-16|Knez Mihailova|2|False
-17|prvaCek|1|False
-18|drugaCek|2|False
-19|trecacek|3|False
-20|la|1|False
-21|la|2|False
-22|lala|1|False
-23|laa|2|False
-24|ccc|1|False
-25|msm|1|False
-26|ll|1|False
-27|e|1|False
-28|e|1|False
-29|dd|1|False
-30|ss|1|False
-31|s|1|False
-32|dd|1|False
-33|Petrovaradin|1|False
-34|Centrr|2|False
-35|Petrovaradin|1|False
-36|Centar|2|False
+1|sad|1|False|[END]
+2|cek|1|False|[END]
+3|cek|2|False|[END]
+4|druga|1|False|[END]
+5|treca|2|False|[END]
+6|ch1|1|False|[END]
+7|ch2|2|False|[END]
+8|ca|1|False|[END]
+9|cas|2|False|[END]
+10|sda|1|False|[END]
+11|to|1|False|[END]
+12|to|2|False|[END]
+13|Nesto|1|False|[END]
+14|Nesto|2|False|[END]
+15|Kalemegdan|1|False|[END]
+16|Knez Mihailova|2|False|[END]
+17|prvaCek|1|False|[END]
+18|drugaCek|2|False|[END]
+19|trecacek|3|False|[END]
+20|la|1|False|[END]
+21|la|2|False|[END]
+22|lala|1|False|[END]
+23|laa|2|False|[END]
+24|ccc|1|False|[END]
+25|msm|1|False|[END]
+26|ll|1|False|[END]
+27|e|1|False|[END]
+28|e|1|False|[END]
+29|dd|1|False|[END]
+30|ss|1|False|[END]
+31|s|1|False|[END]
+32|dd|1|False|[END]
+33|Petrovaradin|1|False|[END]
+34|Centrr|2|False|[END]
+35|Petrovaradin|1|False|[END]
+36|Centar|2|False|[END]
+37|Knez Mihajlova|1|False|[END]
+38|Kalemegdan|2|False|[END]
+39|cek|1|False|[END]
+40|cek|2|False|[END]
+41|Manhattan|1|False|[END]
+42|Statue of Liberty|2|False|[END]
+43|Central Park|3|False|[END]
+44|Manhattan|1|False|[END]
+45|Zoo Park|2|False|[END]
+46|City center|1|False|[END]
+47|Park|2|False|[END]
+48|Amusement park|3|False|[END]
+49|CheckPoint1|1|False|[END]
+50|checkpoint2|2|False|[END]
+51|tacka1|1|False|[END]
+52|tacka2|2|False|[END]
+53|tacka3|3|False|[END]

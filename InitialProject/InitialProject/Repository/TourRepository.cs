@@ -77,10 +77,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _tours);
         }
         
-<<<<<<< HEAD
-=======
 
->>>>>>> feat/list_of_guests_on_tour
         public List<Tour> GetAll()
         {
             return _serializer.FromCSV(FilePath);

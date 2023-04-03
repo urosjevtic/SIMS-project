@@ -49,7 +49,6 @@ namespace InitialProject.Repository
             _notifications = _serializer.FromCSV(FilePath);
             _notifications.Add(notification);
             _serializer.ToCSV(FilePath, _notifications);
-            //return notification;
         }
 
         public int NextId()
@@ -84,6 +83,14 @@ namespace InitialProject.Repository
            
             SaveAll(_notifications);
 
+        }
+        public void DeleteAll()
+        {
+            _notifications = _serializer.FromCSV(FilePath);
+            foreach(Notification notification in _notifications)
+            {
+                Delete(notification);
+            }
         }
     }
 }

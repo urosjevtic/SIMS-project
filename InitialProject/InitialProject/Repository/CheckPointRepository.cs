@@ -69,6 +69,19 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _checkPoints);
         }
 
+        public CheckPoint FindTourLastCheckPoint(Tour tour)
+        {
+            int max = 0;
+            List<CheckPoint> checkPoints = tour.CheckPoints;
+            foreach(CheckPoint checkPoint in checkPoints)
+            {
+                if (checkPoint.SerialNumber > max)
+                {
+                    max = checkPoint.SerialNumber;
+                }
+            }
+            return checkPoints.Find(c => c.SerialNumber == max);
+        }
         public CheckPoint Update(CheckPoint checkPoint)
         {
             _checkPoints = _serializer.FromCSV(FilePath);

@@ -30,7 +30,8 @@
                         <GridViewColumn>
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox x:Name="checkBox" Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}" />
+                                    <CheckBox x:Name="checkBox" Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked"
+                                              IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

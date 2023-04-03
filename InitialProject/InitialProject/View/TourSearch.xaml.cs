@@ -44,6 +44,7 @@ namespace InitialProject.View
             this.DataContext = this;
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
+            //tours = _tourRepository.GetAll();
         }
 
        

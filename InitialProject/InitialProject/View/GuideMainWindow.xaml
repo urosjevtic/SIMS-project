@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
         Title="GuideMainWindow" Height="600" Width="800">
     <TabControl>
@@ -27,8 +27,7 @@
                 </DataGrid>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Content="Add tour" Margin="10" Click="AddTour"/>
-                    <Button Content="Cancel tour" Margin="10"/>
+                    <Button Content="Add tour" Margin="10" Click="AddTourClick"/>
                 </StackPanel>
             </Grid>
         </TabItem>
@@ -61,7 +60,7 @@
                     </DataGrid.Columns>
 
                 </DataGrid>
-                <Button Content="Start tour" Margin="603,466,75,0" Grid.RowSpan="2" Click="StartTour"/>
+                <Button Content="Start tour" Margin="603,466,75,0" Grid.RowSpan="2" Click="StartTourClick"/>
 
             </Grid>
 
@@ -92,7 +91,7 @@
                 </DataGrid>
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Content="Show tour" Margin="10" Click="ShowTour" Height="31" Width="77"/>
+                    <Button Content="Show tour" Margin="10" Click="ShowTourClick" Height="31" Width="77"/>
                     
                 </StackPanel>
             </Grid>

@@ -47,8 +47,8 @@ namespace InitialProject.View
             _guideMainWindow = guideMainWindow;
             LoggedUser = user;
             Start = DateTime.Now;
-            _guideMainWindow.UpdateDataGrid();
-            _guideMainWindow.UpdateTodayTours();
+            _guideMainWindow.UpdateToursDataGrid();
+            _guideMainWindow.UpdateTodayToursDataGrid();
 
         }
 
@@ -181,37 +181,17 @@ namespace InitialProject.View
                 }
             }
         }
-        private int GetLocationId(string location)
-        {
-            string[] splitedLocation = SplitString(location);
-            List<Location> locations = _locationRepository.GetAll();
-            foreach (Location loc in locations)
-            {
-                if (loc.Country == splitedLocation[0])
-                {
-                    if (loc.City == splitedLocation[1])
-                        return loc.Id;
-                }
-            }
-
-            Location newLocation = new Location();
-            newLocation.Country = splitedLocation[0];
-            newLocation.City = splitedLocation[1];
-            return _locationRepository.Save(newLocation).Id;
-        } 
-        //public Model.Image images = new Model.Image();
+        
         private int saveImages(string urls, int entityId)
         {
             Model.Image images = new Model.Image();
             images.EntityLd = entityId;
-            string[] imagesUrls = SplitString(urls);  //OVJDEEEE PUCAAAAA
+            string[] imagesUrls = SplitString(urls);  
             foreach (string imageUrl in imagesUrls)
             {
                 images.Url.Add(imageUrl);
             }
-
             return _imageRepository.Save(images).Id;
-
         }
 
         private string[] SplitString(string s)
@@ -249,7 +229,7 @@ namespace InitialProject.View
             Tour tour = new Tour();
             tour.Guide.Id = LoggedUser.Id;
             tour.Name = _tourName;
-            tour.Location.Id = GetLocationId(_location);
+            tour.Location.Id = _locationRepository.GetLocationId(_location);
             tour.Description = _description;
             tour.Language = _language;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
@@ -260,16 +240,16 @@ namespace InitialProject.View
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             tour.IsActive = false;
             _tourRepository.Save(tour);
-            _guideMainWindow.UpdateDataGrid();
-            _guideMainWindow.UpdateTodayTours();
+            _guideMainWindow.UpdateToursDataGrid();
+            _guideMainWindow.UpdateTodayToursDataGrid();
             this.Close();
         }
-        private void ClickSave(object sender, RoutedEventArgs e)
+        private void SaveClick(object sender, RoutedEventArgs e)
         {
             confirmAddingTour();
         }
 
-        private void ClickCancel(object sender, RoutedEventArgs e)
+        private void CancelClick(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
