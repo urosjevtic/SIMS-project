@@ -107,7 +107,7 @@ namespace InitialProject.Model
             while (values[i] != "[END]")
             {
                 int ids = Convert.ToInt32(values[i]);
-                CheckPoints.Add(_checkPointRepository.FindById(ids));  
+                CheckPoints.Add(_checkPointRepository.GetById(ids));  
                 i++;
             }
         }

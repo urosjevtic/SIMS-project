@@ -8,7 +8,7 @@ using InitialProject.Model;
 
 namespace InitialProject.Repository
 {
-    public class CheckPointRepository
+    public class CheckPointRepository : ICheckPointRepository
     {
         private const string FilePath = "../../../Resources/Data/checkPoints.csv";
 
@@ -27,7 +27,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public CheckPoint FindById(int id)
+        public CheckPoint GetById(int id)
         {
             CheckPoint checkPoint = new CheckPoint();
             List<CheckPoint> checkPoints = new List<CheckPoint>();
@@ -91,6 +91,25 @@ namespace InitialProject.Repository
             _checkPoints.Insert(index, checkPoint);       // keep ascending order of ids in file 
             _serializer.ToCSV(FilePath, _checkPoints);
             return checkPoint;
+        }
+
+        
+
+        
+
+        public void SaveAll(List<CheckPoint> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<CheckPoint>.Update(CheckPoint entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<CheckPoint>.Save(CheckPoint entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

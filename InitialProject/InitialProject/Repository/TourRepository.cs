@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using InitialProject.Model;
 using InitialProject.Serializer;
 
-namespace InitialProject.Repository
+namespace InitialProject.Repository 
 {
-    public class TourRepository
+    public class TourRepository : ITourRepository 
     {
         private const string FilePath = "../../../Resources/Data/tours.csv";
 
@@ -124,6 +124,12 @@ namespace InitialProject.Repository
 
             SaveAll(_tours);
             
+        }
+
+        public Tour GetById(int id)
+        {
+            _tours = _serializer.FromCSV(FilePath);
+            return _tours.FirstOrDefault(i => i.Id == id);
         }
     }
 }

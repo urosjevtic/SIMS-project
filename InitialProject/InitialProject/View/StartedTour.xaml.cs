@@ -27,9 +27,6 @@ namespace InitialProject.View
         private readonly UserRepository _userRepository;
         private readonly CheckedCheckPointRepository _checkedCheckPointRepository;
         public List<GuestDTO> GuestsDTO { get; set; }//ovo treba biti binding
-        public GuideMainWindow _guideMainWindow { get; set; }
-        public CheckBox checkBox { get; set; }
-        public int firstSerialNumber { get; set; }
         public bool isChecked { get; set; }
         public List<User> Guests { get; set; }
         public List<User> allUsersInfo { get; set; }
@@ -39,7 +36,7 @@ namespace InitialProject.View
         public List<CheckPoint> CheckedCheckPoints { get; set; }
         public List<Notification> Notifications { get; set; }
 
-        public StartedTour(Tour selectedTour, GuideMainWindow guideMainWindow)
+        public StartedTour(Tour selectedTour)
         {
             InitializeComponent();
             this.DataContext = this;
@@ -54,7 +51,6 @@ namespace InitialProject.View
             CheckedCheckPoints = new List<CheckPoint>();
             Notifications = _notificationRepository.GetAll();
             User = new User();
-            _guideMainWindow = guideMainWindow;
             SelectedTour = selectedTour;
 
             CheckPoints = SelectedTour.CheckPoints;
