@@ -61,7 +61,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _images);
         }
 
-        void Save(Image image)
+        public void Save(Image image)
         {
             image.Id = NextId();
             _images = _serializer.FromCSV(FilePath);

@@ -21,10 +21,14 @@ namespace InitialProject.Model
         public int GuestNumber { get; set; }
         public List<DateTime> ReservedDates { get; set; }
 
+        public User User { get; set; }
+
         public AccommodationReservation()
         {
           //  Guest = new User();
             Accommodation= new Accommodation();
+            ReservedDates= new List<DateTime>();
+            User = new User();
         }
 
         public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation,int guestNumber, List<DateTime>reservedDates)
@@ -37,7 +41,7 @@ namespace InitialProject.Model
             Accommodation = accommodation;
             GuestNumber = guestNumber;
             ReservedDates = reservedDates;
-            
+
         }
 
         public string[] ToCSV()
@@ -53,9 +57,9 @@ namespace InitialProject.Model
             EndDate = DateTime.Parse(values[2]);
             UserId= Convert.ToInt32(values[3]); 
             AccommodationId= Convert.ToInt32(values[4]);
-            Accommodation.Id= Convert.ToInt32(values[5]);
-            GuestNumber= Convert.ToInt32(values[6]);
-            //ReservedDates = DateTime.Parse(values[7]);
+            Accommodation.Id= Convert.ToInt32(values[4]);
+            GuestNumber= Convert.ToInt32(values[5]);
+            //ReservedDates = DateTime.Parse(values[6]);
         }
 
     }

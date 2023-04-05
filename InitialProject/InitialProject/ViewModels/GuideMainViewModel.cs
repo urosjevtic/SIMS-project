@@ -52,7 +52,7 @@ namespace InitialProject.ViewModel
         public void LoadData()
         {
             tours = _tourService.LoadGuideTours(LoggedUser);
-            locations = _locationService.LoadLocations();
+            locations = _locationService.GetLocations();
             _tourService.AddTourLocation(tours, locations);
             TodayTours = _tourService.GetTodayTours(LoggedUser);
             ActiveTours = _tourService.FindActiveTours(LoggedUser);
@@ -69,7 +69,7 @@ namespace InitialProject.ViewModel
         public ObservableCollection<Tour> UpdateToursDataGrid()
         {
             var tours = _tourService.LoadGuideTours(LoggedUser);
-            var locations = _locationService.LoadLocations();
+            var locations = _locationService.GetLocations();
             _tourService.AddTourLocation(tours, locations);
             return new ObservableCollection<Tour>(tours);
         }
@@ -77,7 +77,7 @@ namespace InitialProject.ViewModel
         public ObservableCollection<Tour> UpdateTodayToursDataGrid()
         {
             var tours = _tourService.LoadGuideTours(LoggedUser);
-            var locations = _locationService.LoadLocations();
+            var locations = _locationService.GetLocations();
             List<Tour> todayTours = new List<Tour>();
             _tourService.AddTourLocation(tours, locations);
             todayTours = _tourService.GetTodayTours(LoggedUser);

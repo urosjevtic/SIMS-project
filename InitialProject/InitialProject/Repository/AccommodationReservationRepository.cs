@@ -52,6 +52,14 @@ namespace InitialProject.Repository
             Save(reservation);
         }
 
-        
+        public void Delete(AccommodationReservation reservation)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation founded = _reservations.Find(c => c.Id == reservation.Id);
+            _reservations.Remove(founded);
+            _serializer.ToCSV(FilePath, _reservations);
+        }
+
+
     }
 }
