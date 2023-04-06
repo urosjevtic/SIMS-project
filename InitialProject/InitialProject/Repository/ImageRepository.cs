@@ -9,7 +9,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Repository
 {
-    public class ImageRepository
+    public class ImageRepository : IImageRepository
     {
         private const string FilePath = "../../../Resources/Data/images.csv";
 
@@ -28,7 +28,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Image Save(Image image)
+        public Image ReturnSaved(Image image)
         {
             image.Id = NextId();
             _images = _serializer.FromCSV(FilePath);
@@ -61,6 +61,27 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _images);
         }
 
-      
+        void Save(Image image)
+        {
+            image.Id = NextId();
+            _images = _serializer.FromCSV(FilePath);
+            _images.Add(image);
+            _serializer.ToCSV(FilePath, _images);
+        }
+
+        public void SaveAll(List<Image> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Image entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Image>.Save(Image entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

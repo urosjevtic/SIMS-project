@@ -8,7 +8,7 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class LocationRepository
+    public class LocationRepository : ILocationRepository
     {
         private const string FilePath = "../../../Resources/Data/locations.csv";
 
@@ -27,7 +27,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Location Save(Location location)
+        public Location ReturnSaved(Location location)
         {
             location.Id = NextId();
             _locations = _serializer.FromCSV(FilePath);
@@ -68,7 +68,44 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _locations);
             return location;
         }
+        private string[] SplitString(string s)
+        {
+            return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
+        public int GetLocationId(string location)
+        {
+            string[] splitedLocation = SplitString(location);
+            List<Location> locations = GetAll();
+            foreach (Location loc in locations)
+            {
+                if (loc.Country == splitedLocation[0])
+                {
+                    if (loc.City == splitedLocation[1])
+                        return loc.Id;
+                }
+            }
+            Location newLocation = new Location();
+            newLocation.Country = splitedLocation[0];
+            newLocation.City = splitedLocation[1];
+            return ReturnSaved(newLocation).Id;
+        }
 
-      
+        public void Save(Location location)
+        {
+                location.Id = NextId();
+                _locations = _serializer.FromCSV(FilePath);
+                _locations.Add(location);
+                _serializer.ToCSV(FilePath, _locations);            
+        }
+
+        public void SaveAll(List<Location> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        void IRepository<Location>.Update(Location entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

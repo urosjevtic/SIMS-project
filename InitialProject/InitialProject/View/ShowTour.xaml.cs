@@ -26,10 +26,18 @@ namespace InitialProject.View
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
         private readonly TourReservationRepository _tourReservationRepository;
+        private readonly TourGuestsRepository _tourGuestsRepository;
         public List<Tour> tours;
         public List<Location> locations;
         public Tour SelectedTour { get; set; }
         public User LoggedUser { get;set; }
+        public Guest Guest { get; set; }
+
+        private readonly NotificationRepository _notificationRepository;
+        private readonly UserRepository _userRepository;
+       
+        public List<Notification> Notifications { get; set; }
+
         public ShowTour(User user)
         {
             InitializeComponent();
@@ -37,9 +45,18 @@ namespace InitialProject.View
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _tourReservationRepository = new TourReservationRepository();
+            _tourGuestsRepository = new TourGuestsRepository();
             LoggedUser = user;
+
+            SelectedTour = null;
+            Guest = new Guest();
+            MakeGuest(user);
+            _notificationRepository = new NotificationRepository();
+            _userRepository = new UserRepository();
+            Notifications = new List<Notification>(_notificationRepository.GetAll());
             loadData();
             tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
+
         }
         private List<Location> LoadLocations()
         {
@@ -62,11 +79,83 @@ namespace InitialProject.View
             }
         }
 
-      
+        public void MakeGuest(User user)
+        {
+            foreach(Guest guest in _tourGuestsRepository.GetAll())
+            {
+                if(guest.Id == user.Id)
+                {
+                    Guest = guest;
+                }
+            }
+        }
+
         private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
             TourSearch tourSearch = new TourSearch(LoggedUser);
             tourSearch.Show();
+        }
+
+        private void ReserveButtonClick(object sender, RoutedEventArgs e)
+        {
+            /*
+            SelectedTour = (Tour)tourDataGrid.SelectedItem;
+            InitialProject.Model.TourReservation reservation = new InitialProject.Model.TourReservation();
+
+            if (SelectedTour == null)
+            {
+                MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if (nrOfPeopleTextBox.Text == String.Empty)
+            {
+                MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else if (int.Parse(nrOfPeopleTextBox.Text) > SelectedTour.MaxGuests - 1)
+            {
+                MessageBox.Show("There is no enough free seats! Change number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            */
+
+        }
+
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                GetNotification();
+            }));
+        }
+        private void GetNotification()
+        {
+            foreach (Notification notification in Notifications)
+            {
+                if (notification.GuestId == LoggedUser.Id)
+                {
+                    MessageBoxResult result = MessageBox.Show("Da li ste prisutni na turi?", "Potvrda prisustva", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Guest.Presence = UserPresence.Yes;
+                        _tourGuestsRepository.Update(Guest);
+                        notification.IsGoing = true;
+                        _notificationRepository.Update(notification);
+                    }
+                    else if (result == MessageBoxResult.No)
+                    {
+                        Guest.Presence = UserPresence.No;
+                        _tourGuestsRepository.Update(Guest);
+                        notification.IsGoing = false;
+                        _notificationRepository.Update(notification);
+                    }
+                    else
+                    {
+                        Guest.Presence = UserPresence.Unknown;
+                        _tourGuestsRepository.Update(Guest);
+                        notification.IsGoing = false;
+                        _notificationRepository.Update(notification);
+                    }
+
+                }
+            }
         }
     }
 }

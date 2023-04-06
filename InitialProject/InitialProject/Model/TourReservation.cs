@@ -7,17 +7,18 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Model
 {
-    public class ТоurReservation : ISerializable
+    public class TourReservation : ISerializable
     {
         public int IdReservation { get; set; }
         public int IdTour { get; set; }
         public int IdGuest { get; set; }
         public int NumberOfPeople { get; set; }
 
-        public ТоurReservation()
-        {
+       
 
-        }
+        public TourReservation() { }
+        
+
         public string[] ToCSV()
         {
             string[] csvValues = {

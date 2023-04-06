@@ -68,8 +68,7 @@ namespace InitialProject.View
                 SelectedAccommodation.MaxGuests -= guestNumber;
                 _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
             }
-            MessageBox.Show("Please enter a valid number and select a tour\n" +
-                                "in order to make a reservation!");
+           
         }
         private void SearchClick(object sender, RoutedEventArgs e)
         {

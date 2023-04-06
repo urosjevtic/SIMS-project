@@ -15,6 +15,7 @@ using InitialProject.Model;
 using InitialProject.Serializer;
 using InitialProject.Repository;
 using System.Collections.ObjectModel;
+using InitialProject.ViewModel;
 
 
 namespace InitialProject.View
@@ -25,125 +26,39 @@ namespace InitialProject.View
     public partial class GuideMainWindow : Window
     {
         public User LoggedUser { get; set; }
-        public ObservableCollection<Tour> Tours { get; set; }
-        private readonly TourRepository _tourRepository;
-        private readonly LocationRepository _locationRepository;
-        public List<Tour> tours;
-        public List<Location> locations;
-        public Tour SelectedTodayTour { get; set; }
+        
 
-        // DANAS TURE 
-        public List<Tour> TodayTours { get; set; }
-
+        public GuideMainViewModel GuideMainViewModel { get; set; }
         public GuideMainWindow(User user)
         {
             InitializeComponent();
-            this.DataContext = this;
-
+            GuideMainViewModel = new GuideMainViewModel(user);
+            this.DataContext = GuideMainViewModel;
             LoggedUser = user;
 
-            _tourRepository = new TourRepository();
-            _locationRepository = new LocationRepository();
-            loadData();                                                  
-            ToursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);   
-            
-            TodayToursDataGrid.ItemsSource = new ObservableCollection<Tour>(TodayTours);
-            //UpdateTodayTours();
-        }
-
-        private void loadData()
-        {
-            tours = loadTours();
-            locations = LoadLocations();
-            AddTourLocation(tours,locations);
-            TodayTours = GetTodayTours();
-           
-        }
-        public List<Tour> GetTodayTours()
-        {
-            var tours = loadTours();
-            var locations = LoadLocations();
-            List<Tour> todayTours = new List<Tour>();
-            AddTourLocation(tours, locations);
-            foreach (Tour tour in tours)
-            {
-                if (tour.Start.Date == DateTime.Today.Date)
-                {
-                    todayTours.Add(tour);
-                }
-            }
-            return todayTours;
-        }
-        private List<Location> LoadLocations()
-        {
-            return _locationRepository.GetAll();
+            ToursDataGrid.ItemsSource = GuideMainViewModel.UpdateToursDataGrid();
+            TodayToursDataGrid.ItemsSource = GuideMainViewModel.UpdateTodayToursDataGrid();
+            ActiveToursDataGrid.ItemsSource = new ObservableCollection<Tour>(GuideMainViewModel.ActiveTours);
         }
 
         
-        private List<Tour> loadTours() // za svakog vodica da ucita njegove ture
+        private void AddTourClick(object sender, RoutedEventArgs e)
         {
-            List<Tour> allTours = new List<Tour>();
-            allTours = _tourRepository.GetAll();
-            tours = new List<Tour>();
-            foreach (Tour tour in allTours)
-            {
-                if (tour.Guide.Id == LoggedUser.Id)
-                {
-                    tours.Add(tour);
-                }
-            }
-            return tours;
-        }
-        private void AddTour(object sender, RoutedEventArgs e)
-        {
-            AddingTour addingTour = new AddingTour(this,LoggedUser);
-            addingTour.Show();
-            
-        }
-       
-
-        public void UpdateDataGrid()
-        {
-            var tours = loadTours();
-            var locations  = LoadLocations();
-            AddTourLocation(tours, locations);
-            ToursDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
+            GuideMainViewModel.AddTour();
         }
 
-        public void UpdateTodayTours()
-        {
-            var tours = loadTours();
-            var locations = LoadLocations();
-            List<Tour> todayTours = new List<Tour>();
-            AddTourLocation(tours, locations);
-            todayTours = GetTodayTours();
-            TodayToursDataGrid.ItemsSource = new ObservableCollection<Tour>(todayTours);
-        }
-       
         
-        public void AddTourLocation(List<Tour> tours, List<Location> locations)  //veza lokacije i ture
+        public void StartTourClick(object sender, RoutedEventArgs e)
         {
-            foreach (var tour in tours)
-            {
-                foreach (var location in locations)
-                {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-
-                        break;
-                    }
-                }
-            }
+            GuideMainViewModel.StartTour();
         }
 
-        private void StartTour(object sender, RoutedEventArgs e)
+        private void ShowTourClick(object sender, RoutedEventArgs e)
         {
-            if (SelectedTodayTour != null)
-            {
-                StartedTour startedTour = new StartedTour(SelectedTodayTour);
-                startedTour.Show();
-            }
+            GuideMainViewModel.ShowTour();
         }
+
     }
 }
+    
+

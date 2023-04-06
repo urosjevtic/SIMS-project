@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
+using InitialProject.Repository;
 
 namespace InitialProject.Model
 {
@@ -13,7 +14,11 @@ namespace InitialProject.Model
         public string Name { get; set; }
         public int SerialNumber { get; set; }   
         public bool IsChecked { get; set; } 
-        public CheckPoint() { }
+        public List<User> CurrentGuests { get; set; }
+
+        public CheckPoint() {
+            CurrentGuests = new List<User>();
+        }
         public CheckPoint(int id, string name,int serialNumber, bool isChecked)
         {
             Id = id;    
@@ -29,6 +34,18 @@ namespace InitialProject.Model
                SerialNumber.ToString(),
                IsChecked.ToString(),
             };
+            if (CurrentGuests.Count() > 0)
+            {
+                foreach (User u in CurrentGuests)
+                {
+                    Array.Resize(ref csvValues, csvValues.Length + 1);
+                    csvValues[csvValues.Length - 1] = u.Id.ToString();
+                }
+            }
+
+            Array.Resize(ref csvValues, csvValues.Length + 1);
+            csvValues[csvValues.Length - 1] = "[END]";
+
             return csvValues;
         }
        
@@ -39,7 +56,6 @@ namespace InitialProject.Model
             Name = values[1];
             SerialNumber = Convert.ToInt32(values[2]);  
             IsChecked = Convert.ToBoolean(values[3]);
-            
         }
 
         

@@ -9,7 +9,6 @@ namespace InitialProject.Model
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-
         public UserRole Role { get; set; }
 
         public User() { }
@@ -23,7 +22,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password, Role.ToString() };
+            string[] csvValues = { Id.ToString(), Username, Password, Role.ToString()};
             return csvValues;
         }
 
@@ -47,6 +46,7 @@ namespace InitialProject.Model
                     Role = UserRole.Guide;
                     break;
             }
+           
         }
     }
 }
