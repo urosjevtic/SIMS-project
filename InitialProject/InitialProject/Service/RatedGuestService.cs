@@ -1,19 +1,20 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Service
 {
     public class RatedGuestService
     {
-        private readonly RatedGuestRepository _ratedGuestRepository;
+        private readonly IRatedGuestRepository _ratedGuestRepository;
         public RatedGuestService() 
         {
-            _ratedGuestRepository = new RatedGuestRepository();
+            _ratedGuestRepository = Injector.Injector.CreateInstance<IRatedGuestRepository>();
         }
 
         public List<RatedGuest> GetAll()

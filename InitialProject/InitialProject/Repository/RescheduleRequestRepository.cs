@@ -1,14 +1,15 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class RescheduleRequestRepository
+    public class RescheduleRequestRepository : IRescheduleRequestRepository
     {
         private const string FilePath = "../../../Resources/Data/rescheduleRequests.csv";
 
@@ -22,7 +23,7 @@ namespace InitialProject.Repository
             _rescheduleRequests = _serializer.FromCSV(FilePath);
         }
 
-        public int NextId()
+        private int NextId()
         {
             _rescheduleRequests = _serializer.FromCSV(FilePath);
             if (_rescheduleRequests.Count < 1)
@@ -31,6 +32,8 @@ namespace InitialProject.Repository
             }
             return _rescheduleRequests.Max(c => c.Id) + 1;
         }
+
+
         public RescheduleRequest Save(RescheduleRequest rescheduleRequest)
         {
             rescheduleRequest.Id = NextId();
@@ -40,6 +43,7 @@ namespace InitialProject.Repository
 
             return rescheduleRequest;
         }
+
 
         public List<RescheduleRequest> GetAll()
         {
@@ -53,5 +57,6 @@ namespace InitialProject.Repository
             _rescheduleRequests.Remove(founded);
             _serializer.ToCSV(FilePath, _rescheduleRequests);
         }
+
     }
 }

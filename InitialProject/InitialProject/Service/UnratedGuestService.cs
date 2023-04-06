@@ -1,21 +1,22 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Service
 {
     public class UnratedGuestService
     {
-        private readonly UnratedGuestRepository _unratedGuestRepository;
+        private readonly IUnratedGuestRepository _unratedGuestRepository;
         private readonly AccommodationService _accommodationService;
         private readonly UserService _userService;
         public UnratedGuestService()
         {
-            _unratedGuestRepository = new UnratedGuestRepository();
+            _unratedGuestRepository = Injector.Injector.CreateInstance<IUnratedGuestRepository>();
             _accommodationService = new AccommodationService();
             _userService = new UserService();
         }

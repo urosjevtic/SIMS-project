@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.DTO;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.View
 {

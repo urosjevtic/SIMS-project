@@ -5,22 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
-    public class RescheduleRequest:ISerializable
+    public class RescheduleRequest : ISerializable
     {
         public int Id;
         public AccommodationReservation Reservation { get; set; }
         public DateTime RescheduleStartDate { get; set; }
         public DateTime RescheduleEndDate { get; set; }
-        public bool IsAlreadyReserved {get; set; }
+        public bool IsAlreadyReserved { get; set; }
 
         public RescheduleRequest()
         {
             Reservation = new AccommodationReservation();
         }
 
-        public RescheduleRequest( AccommodationReservation reservation, DateTime rescheduleStartDate, DateTime rescheduleEndDate, bool isAlreadyReserved = false)
+        public RescheduleRequest(AccommodationReservation reservation, DateTime rescheduleStartDate, DateTime rescheduleEndDate, bool isAlreadyReserved = false)
         {
             Reservation = reservation;
             RescheduleStartDate = rescheduleStartDate;
@@ -33,7 +33,7 @@ namespace InitialProject.Model
         {
             string[] csvValues =
                 {Id.ToString(), Reservation.Id.ToString(), RescheduleStartDate.ToString(), RescheduleEndDate.ToString() };
-            return  csvValues;
+            return csvValues;
         }
 
         public void FromCSV(string[] values)

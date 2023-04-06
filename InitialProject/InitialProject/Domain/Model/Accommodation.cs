@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Model
-{   
-    public enum AccommodationType { appartment, house, cabin}
+namespace InitialProject.Domain.Model
+{
+    public enum AccommodationType { appartment, house, cabin }
     public class Accommodation : ISerializable
     {
         public int Id { get; set; }
-        public User Owner { get; set; } 
+        public User Owner { get; set; }
         public string Name { get; set; }
         public Location Location { get; set; }
         public AccommodationType Type { get; set; }
@@ -20,15 +20,15 @@ namespace InitialProject.Model
         public int CancelationPeriod { get; set; }
         public Image Images { get; set; }
 
-        
-        public Accommodation() 
+
+        public Accommodation()
         {
             Owner = new User();
             Location = new Location();
             Images = new Image();
         }
 
-        public Accommodation(int id,User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, Image images)
+        public Accommodation(int id, User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, Image images)
         {
             Id = id;
             Owner = owner;
@@ -43,7 +43,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(),Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString(), Images.Id.ToString() };
+            string[] csvValues = { Id.ToString(), Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString(), Images.Id.ToString() };
             return csvValues;
         }
 
@@ -53,13 +53,13 @@ namespace InitialProject.Model
             Owner.Id = Convert.ToInt32(values[1]);
             Name = values[2];
             Location.Id = Convert.ToInt32(values[3]);
-            switch(values[4])
+            switch (values[4])
             {
                 case "appartment":
                     Type = AccommodationType.appartment;
                     break;
                 case "house":
-                    Type = AccommodationType.house; 
+                    Type = AccommodationType.house;
                     break;
                 case "cabin":
                     Type = AccommodationType.cabin;

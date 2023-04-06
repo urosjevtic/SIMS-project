@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
 
 namespace InitialProject.Service

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using InitialProject.Serializer;
 using InitialProject.Repository;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
-    public class CheckedCheckPoint : ISerializable
+    public class CheckPoint : ISerializable
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -16,17 +16,16 @@ namespace InitialProject.Model
         public bool IsChecked { get; set; }
         public List<User> CurrentGuests { get; set; }
 
-        public CheckedCheckPoint()
+        public CheckPoint()
         {
             CurrentGuests = new List<User>();
         }
-        public CheckedCheckPoint(int id, string name, int serialNumber, bool isChecked)
+        public CheckPoint(int id, string name, int serialNumber, bool isChecked)
         {
             Id = id;
             Name = name;
             SerialNumber = serialNumber;
             IsChecked = isChecked;
-            CurrentGuests = new List<User>();
         }
         public string[] ToCSV()
         {
@@ -58,16 +57,6 @@ namespace InitialProject.Model
             Name = values[1];
             SerialNumber = Convert.ToInt32(values[2]);
             IsChecked = Convert.ToBoolean(values[3]);
-            int i = 4;
-            CurrentGuests.Clear();
-            UserRepository _userRepository = new UserRepository();
-
-            while (values[i] != "[END]")
-            {
-                int ids = Convert.ToInt32(values[i]);
-                CurrentGuests.Add(_userRepository.GetById(ids));
-                i++;
-            }
         }
 
 

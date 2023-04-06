@@ -1,9 +1,9 @@
 ﻿using InitialProject.Serializer;
 using System;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
-    public enum UserRole { Guest, Owner, Guide, Guest2}
+    public enum UserRole { Guest, Owner, Guide, Guest2 }
     public enum UserPresence { Yes, No, Unknown }
     public class User : ISerializable
     {

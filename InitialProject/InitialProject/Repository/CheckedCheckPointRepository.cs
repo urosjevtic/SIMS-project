@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Repository
 {

@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Service;
 
 namespace InitialProject.View

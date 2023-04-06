@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
 using InitialProject.Serializer;
 using InitialProject.Repository;
 using System.Collections.ObjectModel;
@@ -19,6 +18,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using InitialProject.View;
 using InitialProject.Service;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.ViewModel
 {

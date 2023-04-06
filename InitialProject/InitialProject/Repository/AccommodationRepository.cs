@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
@@ -6,10 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class AccommodationRepository
+    public class AccommodationRepository : IAccommodationRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodation.csv";
 
@@ -23,7 +24,7 @@ namespace InitialProject.Repository
             _accommodations = _serializer.FromCSV(FilePath);
         }
 
-        public int NextId()
+        private int NextId()
         {
             _accommodations = _serializer.FromCSV(FilePath);
             if (_accommodations.Count < 1)

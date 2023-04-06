@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Repository
 {
@@ -12,7 +12,7 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/tourReservations.csv";
 
-        private readonly Serializer<InitialProject.Model.TourReservation> _serializer;
+        private readonly Serializer<TourReservation> _serializer;
 
         private List<TourReservation> _reservations;
         public UserRepository _userRepository { get; set; }

@@ -3,19 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
     public class RescheduleRequestService
     {
-        private readonly RescheduleRequestRepository _rescheduleRequestRepository;
+        private readonly IRescheduleRequestRepository _rescheduleRequestRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
         public RescheduleRequestService()
         {
-            _rescheduleRequestRepository = new RescheduleRequestRepository();
+            _rescheduleRequestRepository = Injector.Injector.CreateInstance<IRescheduleRequestRepository>();
             _accommodationReservationService = new AccommodationReservationService();
         }
 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Repository;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Service
 {

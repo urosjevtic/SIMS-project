@@ -1,20 +1,21 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Service
 {
     public class ImageService
     {
-        private readonly ImageRepository _imageRepository;
+        private readonly IImageRepository _imageRepository;
 
         public ImageService()
         {
-            _imageRepository = new ImageRepository();
+            _imageRepository = Injector.Injector.CreateInstance<IImageRepository>();
         }
 
         public void SaveImages(int entityId, string urls)

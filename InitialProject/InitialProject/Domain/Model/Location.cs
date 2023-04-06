@@ -5,20 +5,20 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class Location : ISerializable
     {
-        public int Id { get; set; } 
-        public String Country { get; set; } 
-        public String City { get; set; }    
+        public int Id { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
 
         public Location() { }
-        public Location(int id, String country, String city)
+        public Location(int id, string country, string city)
         {
             Id = id;
-            Country = country;  
-            City = city;    
+            Country = country;
+            City = city;
         }
 
         public string[] ToCSV()
@@ -29,9 +29,9 @@ namespace InitialProject.Model
 
         public void FromCSV(string[] values)
         {
-            Id = Convert.ToInt32(values[0]);    
-            Country=values[1];
-            City = values[2];        
+            Id = Convert.ToInt32(values[0]);
+            Country = values[1];
+            City = values[2];
         }
 
         public static Location ToLocation(string country, string city)

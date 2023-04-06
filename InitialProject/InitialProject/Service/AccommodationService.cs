@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using System;
@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Service
 {
@@ -13,13 +14,13 @@ namespace InitialProject.Service
 
     public class AccommodationService
     {
-        private readonly AccommodationRepository _accommodationRepository;
+        private readonly IAccommodationRepository _accommodationRepository;
         private readonly LocationService _locationService;
         private readonly ImageService _imageService;
 
         public AccommodationService()
         {
-            _accommodationRepository = new AccommodationRepository();
+            _accommodationRepository = Injector.Injector.CreateInstance<IAccommodationRepository>();
             _locationService = new LocationService();
             _imageService = new ImageService();
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.DTO
 {
@@ -15,7 +15,7 @@ namespace InitialProject.DTO
         public int Id { get; set; }
         public string Username { get; set; }
         public UserRole Role { get; set; }
-        public InitialProject.Model.UserPresence Presence { get; set; }
+        public UserPresence Presence { get; set; }
 
         public GuestDTO() { }
 
