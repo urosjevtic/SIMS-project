@@ -72,7 +72,7 @@ namespace InitialProject.Service
             return unratedGuests;
         }
 
-        public UnratedGuest Get(int id)
+        public UnratedGuest GetById(int id)
         {
             List<UnratedGuest> unratedGuests = GetAll();
             return unratedGuests.FirstOrDefault(r => r.Id == id);

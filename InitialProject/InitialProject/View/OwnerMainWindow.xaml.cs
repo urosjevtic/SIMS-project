@@ -214,5 +214,13 @@ namespace InitialProject.View
                 unratedGuestNotification.ShowDialog();
             }
         }
+
+        private void RescheduleRequest_Click(object sender, RoutedEventArgs e)
+        {
+            RescheduleRequestWindow rescheduleRequestWindow = new RescheduleRequestWindow(LoggedInUser);
+            this.Close();
+            rescheduleRequestWindow.Show();
+
+        }
     }
 }
