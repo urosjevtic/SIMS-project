@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -24,7 +25,7 @@ namespace InitialProject.View
     public partial class SearchResult : Window
     {
         public ObservableCollection<Tour> Tours { get; set; }
-        private readonly TourRepository _tourRepository;
+        private readonly TourService _tourService;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly VoucherRepository _voucherRepository;
         public List<Tour> tours { get; set; }
@@ -37,7 +38,7 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = this;
-            _tourRepository = new TourRepository();
+            _tourService = new TourService();
             _tourReservationRepository = new TourReservationRepository();
             _voucherRepository = new VoucherRepository();
             tours = filteredTours;
@@ -50,7 +51,6 @@ namespace InitialProject.View
         {
             this.Close();
         }
-
         private void ReserveClick(object sender, RoutedEventArgs e)
         {
             SelectedTour = (Tour)resultDataGrid.SelectedItem;
@@ -78,8 +78,7 @@ namespace InitialProject.View
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     if (SelectedVoucher != null)
                     {
-                        _voucherRepository.ChangeToUsed(SelectedVoucher);
-                        
+                        _voucherRepository.ChangeToUsed(SelectedVoucher);    
                     }
                     this.Close();
                 }
@@ -96,7 +95,7 @@ namespace InitialProject.View
         }
         public void FindAlternatives(Tour tour)
         {
-            List<Tour> tours = _tourRepository.FindAllAlternatives(tour);
+            List<Tour> tours = _tourService.FindAllAlternatives(tour);
             resultDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
     }

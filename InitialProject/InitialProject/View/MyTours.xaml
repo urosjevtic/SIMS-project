@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
         <TabControl Grid.Column="1">
             <TabItem Header="Active Tours " FontSize="28">
@@ -28,7 +28,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Active tours" Grid.Row="1" Grid.Column="0" Margin="3">
+                    <GroupBox Header="Active tours" Grid.Row="1" Grid.Column="0" Margin="3,3,3,65">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -37,9 +37,9 @@
                             </Grid.RowDefinitions>
                             <Label Grid.Row="1" Content="Click on the tour to see how far the tour gone!" FontSize="15"/>
                             <Border Grid.Column="0" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Padding="5" Height="345" Margin="5">
-                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto" >
                                     <StackPanel>
-                                        <ItemsControl ItemsSource="{Binding Vouchers}" x:Name="activeTours">
+                                        <ItemsControl ItemsSource="{Binding Tours}" x:Name="activeTours" >
                                             <ItemsControl.ItemTemplate>
                                                 <DataTemplate>
                                                     <Border BorderBrush="Black" BorderThickness="1" Margin="5">
@@ -57,16 +57,16 @@
                                                                 <RowDefinition></RowDefinition>
                                                             </Grid.RowDefinitions>
                                                             <Label Content="Name of tour:" FontSize="15" Grid.Row="0" Grid.Column="0"/>
-                                                            <TextBlock Text="{Binding ExpiryDate}" FontSize="15" Grid.Row="0" Grid.Column="1" Padding="5"/>
+                                                            <TextBlock Text="{Binding Name}" FontSize="15" Grid.Row="0" Grid.Column="1" Padding="5"/>
                                                             <Label Content="Country:" FontSize="15" Grid.Row="1" Grid.Column="0"/>
-                                                            <TextBlock Text="{Binding ExpiryDate}" FontSize="15" Grid.Row="1" Grid.Column="1" Padding="5"/>
+                                                            <TextBlock Text="{Binding Path = Location.Country}" FontSize="15" Grid.Row="1" Grid.Column="1" Padding="5"/>
                                                             <Label Content="City:" FontSize="15" Grid.Row="2" Grid.Column="0"/>
-                                                            <TextBlock Text="{Binding ExpiryDate}" FontSize="15" Grid.Row="2" Grid.Column="1" Padding="5"/>
+                                                            <TextBlock Text="{Binding Path = Location.City}" FontSize="15" Grid.Row="2" Grid.Column="1" Padding="5"/>
                                                             <Label Content="Language:" FontSize="15" Grid.Row="3" Grid.Column="0"/>
-                                                            <TextBlock Text="{Binding ExpiryDate}" FontSize="15" Grid.Row="3" Grid.Column="1" Padding="5"/>
+                                                            <TextBlock Text="{Binding Language}" FontSize="15" Grid.Row="3" Grid.Column="1" Padding="5"/>
                                                             <Label Content="Number of people:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
-                                                            <TextBlock Text="{Binding ExpiryDate}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
-                                                            <Button Content="View" FontSize="15" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" Click="ViewCheckpointsButton" Padding="5" Margin="8"/>
+                                                            <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
+                                                            <Button Content="View" FontSize="18" Width="100" Grid.Column="2" Grid.Row="4" HorizontalAlignment="Right" Click="ViewCheckpointsButton" Padding="5" Margin="8"/>
                                                         </Grid>
                                                     </Border>
                                                 </DataTemplate>
@@ -78,19 +78,19 @@
                             <ContentPresenter Grid.Row="1" Margin="0,0,440,0"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="Checkpoints" Grid.Row="1" Grid.Column="1" Margin="3">
+                    <GroupBox Header="Checkpoints" Grid.Row="1" Grid.Column="1" Margin="3,3,3,65">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
                             <Border Grid.Column="1" Grid.Row="2" BorderBrush="Black" BorderThickness="1" Padding="5" Height="374" Margin="5">
-                                <ListBox x:Name="listBox" Margin="5" ItemsSource="{Binding Checkpoints}">
+                                <ListBox x:Name="listBox" Margin="0" ItemsSource="{Binding CheckPoints}">
                                     <ListBox.ItemTemplate>
                                         <DataTemplate>
                                             <StackPanel Orientation="Horizontal">
-                                                <CheckBox IsChecked="{Binding IsSelected}" />
-                                                <TextBlock Text="{Binding CheckpointName}" />
+                                                <CheckBox IsChecked="{Binding IsChecked}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="20" Height="20" IsEnabled="False"/>
+                                                <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24"/>
                                             </StackPanel>
                                         </DataTemplate>
                                     </ListBox.ItemTemplate>
@@ -99,6 +99,8 @@
                             <ContentPresenter Grid.Row="1" Margin="0,0,440,0"/>
                         </Grid>
                     </GroupBox>
+                    <Button x:Name="GoBack" Content="Go Back" FontSize="24" HorizontalAlignment="Left" Margin="21,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Click="GoBackButton" Grid.RowSpan="2"/>
+                    <Button x:Name="JoinTour" Grid.Column="1" Content="Join Tour" FontSize="24" HorizontalAlignment="Left" Margin="265,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Click="SubmitRateButton" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Ended Tours  " FontSize="28">
@@ -210,7 +212,5 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <Button x:Name="GoBack" Grid.Column="1" Content="Go Back" FontSize="24" HorizontalAlignment="Left" Margin="20,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="150" Height="50" Click="GoBackButton"/>
-        <Button x:Name="SubmitRate" Grid.Column="1" Content="Submit rate" FontSize="24" HorizontalAlignment="Left" Margin="705,0,0,0" Grid.Row="1" VerticalAlignment="Center" Width="150" Height="50" Click="SubmitRateButton"/>
     </Grid>
 </Window>

@@ -12,9 +12,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Command;
 using InitialProject.Forms;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -24,18 +26,21 @@ namespace InitialProject.View
     public partial class MyTours : Window
     {
         private readonly VoucherRepository _voucherRepository;
-        private List<Voucher> Vouchers { get; set; }
+        public CheckPointService _checkPointService;
+        public TourService _tourService;
+        public Tour SelectedTour { get; set; }
+        public List<Tour> Tours { get; set; }
         public User LoggedUser { get; set; } 
         public MyTours(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             LoggedUser = user;
-            _voucherRepository = new VoucherRepository();
-            Vouchers = _voucherRepository.GetAll();
-            activeTours.ItemsSource = new ObservableCollection<Voucher>(Vouchers);
+            _tourService = new TourService();
+            _checkPointService = new CheckPointService();
+            Tours = _tourService.FindAllActiveTours();
+            activeTours.ItemsSource = new ObservableCollection<Tour>(Tours);
         }
-
         private void GoBackButton(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -43,7 +48,10 @@ namespace InitialProject.View
 
         private void ViewCheckpointsButton(object sender, RoutedEventArgs e)
         {
-
+            SelectedTour = (Tour)((Button)sender).DataContext;
+            // Set the SelectedTour property to the selected tour item
+            List<CheckPoint> CheckPoints = SelectedTour.CheckPoints;
+            listBox.ItemsSource = new ObservableCollection<CheckPoint>(CheckPoints);
         }
 
         private void SubmitRateButton(object sender, RoutedEventArgs e)
@@ -53,7 +61,7 @@ namespace InitialProject.View
 
         private void OpenCommentFormButton(object sender, RoutedEventArgs e)
         {
-            CommentForm commentForm = new CommentForm(LoggedUser);
+            CommentForm commentForm = new(LoggedUser);
             commentForm.Show();
         }
     }

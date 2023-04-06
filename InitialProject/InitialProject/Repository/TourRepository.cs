@@ -15,7 +15,7 @@ namespace InitialProject.Repository
         private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
-
+        
         private readonly LocationRepository _locationRepository;
         public TourRepository()
         {
@@ -24,9 +24,6 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
 
             _locationRepository = new LocationRepository();
-
-
-
         }
 
         public int NextId()
