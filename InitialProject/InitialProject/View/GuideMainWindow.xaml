@@ -14,21 +14,20 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <DataGrid x:Name="ToursDataGrid" Grid.Row="1" ItemsSource="{Binding Tours}" AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" >
+                <DataGrid x:Name="ToursDataGrid" Grid.Row="1" ItemsSource="{Binding GuideMainViewModel.Tours}" AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" Margin="127,0,0,0" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="130" />
-                        <DataGridTextColumn Header="Location" Binding="{Binding Location.City}"  Width="120"/>
-                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="150" />
-                        <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="100"/>
-                        <DataGridTextColumn Header="MaxGuests " Binding="{Binding MaxGuests }"  Width="100"/>
-                        <DataGridTextColumn Header="Start " Binding="{Binding Start }" Width="100" />
-                        <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="100" />
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*" />
+                        <DataGridTextColumn Header="Location" Binding="{Binding Location.City}"  Width="12*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*" />
+                        <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
+                        <DataGridTextColumn Header="MaxGuests " Binding="{Binding MaxGuests }"  Width="10*"/>
+                        <DataGridTextColumn Header="Start " Binding="{Binding Start }" Width="10*" />
+                        <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
                     </DataGrid.Columns>
                 </DataGrid>
 
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Button Content="Add tour" Margin="10" Click="AddTourClick"/>
-                </StackPanel>
+                <StackPanel Grid.Row="0" Orientation="Horizontal"/>
+                <Button Content="Add tour" Click="AddTourClick" RenderTransformOrigin="0.85,2.358" Margin="10,39,733,475" Grid.Row="1"/>
             </Grid>
         </TabItem>
 
@@ -43,7 +42,7 @@
                 </Grid.RowDefinitions>
 
 
-                <DataGrid x:Name="TodayToursDataGrid" ItemsSource="{Binding TodayTours}" SelectedItem="{Binding SelectedTodayTour, UpdateSourceTrigger=PropertyChanged}"
+                <DataGrid x:Name="TodayToursDataGrid" ItemsSource="{Binding GuideMainViewModel.TodayTours}" SelectedItem="{Binding SelectedTodayTour, UpdateSourceTrigger=PropertyChanged}"
                           CanUserResizeColumns="False" CanUserResizeRows="False" AutoGenerateColumns="False" IsReadOnly="True"  Height="427" VerticalAlignment="Center" 
                           SelectionMode="Single">
 
@@ -75,7 +74,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <DataGrid x:Name="ActiveToursDataGrid" Grid.Row="1" ItemsSource="{Binding ActiveTours}"
+                <DataGrid x:Name="ActiveToursDataGrid" Grid.Row="1" ItemsSource="{Binding GuideMainViewModel.ActiveTours}"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           SelectedItem="{Binding ActiveTour, UpdateSourceTrigger=PropertyChanged}"
                           CanUserResizeColumns="False" CanUserResizeRows="False" >
@@ -92,7 +91,7 @@
 
                 <StackPanel Grid.Row="0" Orientation="Horizontal">
                     <Button Content="Show tour" Margin="10" Click="ShowTourClick" Height="31" Width="77"/>
-                    
+
                 </StackPanel>
             </Grid>
         </TabItem>

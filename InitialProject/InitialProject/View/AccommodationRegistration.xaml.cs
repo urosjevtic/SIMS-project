@@ -239,7 +239,7 @@ namespace InitialProject.View
                 images.Url.Add(imageUrl);
             }
 
-            _imageRepository.Save(images);
+            _imageRepository.ReturnSaved(images);
 
         }
         private int GetImagesId(string urls)
