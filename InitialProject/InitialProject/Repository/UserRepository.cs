@@ -45,7 +45,6 @@ namespace InitialProject.Repository
             newUser.Id = user.Id;
             newUser.Username = user.Username;
             newUser.Password = user.Password;
-            newUser.Presence = user.Presence;
             newUser.Role = user.Role;
             
             SaveAll(_users);

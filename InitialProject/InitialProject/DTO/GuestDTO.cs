@@ -13,27 +13,23 @@ namespace InitialProject.DTO
     public class GuestDTO
     {
         public int Id { get; set; }
-        public string Username { get; set; }
-        public UserRole Role { get; set; }
-        public InitialProject.Model.UserPresence Presence { get; set; }
+        public string Name { get; set; }
+        public  String Surname { get; set; }
+        public UserPresence Presence { get; set; }
+        public String CheckPointName { get; set; }  
 
         public GuestDTO() { }
 
-        public GuestDTO(int id, string username, UserRole role)
+        public GuestDTO(int id, String name,String surname, String checkPoint)
         {
             Id = id;
-            Username = username;
-            Role = role;
+            Name = name;
+            Surname = surname;
+            CheckPointName = checkPoint;
             Presence = UserPresence.Unknown;
         }
 
-        public GuestDTO(int id, string username, UserRole role, UserPresence presence)
-        {
-            Id = id;
-            Username = username;
-            Role = role;
-            Presence = presence;
-        }
+       
 
     }
 }

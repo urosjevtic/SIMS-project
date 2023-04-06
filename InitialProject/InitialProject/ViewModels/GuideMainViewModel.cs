@@ -31,6 +31,7 @@ namespace InitialProject.ViewModel
         public LocationService _locationService { get; set; } 
         public TourService _tourService { get; set; }
         public LocationRepository _locationRepository { get; set; }   
+        public CheckPointRepository _checkPointRepository { get; set; }
         public List<Tour> tours;
         public List<Location> locations;
 
@@ -47,6 +48,7 @@ namespace InitialProject.ViewModel
             _tourRepository = new TourRepository();
             _locationService = new LocationService();
             _tourService = new TourService();
+            _checkPointRepository = new CheckPointRepository();
             LoadData();
         }
         public void LoadData()
@@ -90,6 +92,15 @@ namespace InitialProject.ViewModel
             if (SelectedTodayTour != null && !SelectedTodayTour.IsActive)
             {
                 SelectedTodayTour.IsActive = true;
+                List<CheckPoint> checkPoints = SelectedTodayTour.CheckPoints;
+                foreach(CheckPoint cp in checkPoints)
+                {
+                    if(cp.SerialNumber == 1)
+                    {
+                        cp.IsChecked = true;
+                        _checkPointRepository.Update(cp);
+                    }
+                }
                 _tourRepository.Update(SelectedTodayTour);
                 StartedTour startedTour = new StartedTour(SelectedTodayTour);
                 startedTour.Show();
@@ -101,10 +112,11 @@ namespace InitialProject.ViewModel
         }
         public void ShowTour()
         {
-            CheckedCheckPointRepository ccpr = new CheckedCheckPointRepository();
-            List<CheckedCheckPoint> listCCP = ccpr.GetAll();
-            ActiveTour activeTour = new ActiveTour(ActiveTour, listCCP);
-            activeTour.Show();
+            if (ActiveTour != null)
+            {
+                StartedTour startedTour = new StartedTour(ActiveTour);
+                startedTour.Show();
+            }
         }
 
     }

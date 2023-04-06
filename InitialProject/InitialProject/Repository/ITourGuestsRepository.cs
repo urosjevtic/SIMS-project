@@ -7,8 +7,7 @@ using InitialProject.Model;
 
 namespace InitialProject.Repository
 {
-    public interface ICheckPointRepository : IRepository<CheckPoint>
+    public interface ITourGuestsRepository : IRepository<Guest>
     {
-        public CheckPoint FindTourLastCheckPoint(Tour tour);
     }
 }

@@ -39,7 +39,6 @@ namespace InitialProject.View
             ToursDataGrid.ItemsSource = GuideMainViewModel.UpdateToursDataGrid();
             TodayToursDataGrid.ItemsSource = GuideMainViewModel.UpdateTodayToursDataGrid();
             ActiveToursDataGrid.ItemsSource = new ObservableCollection<Tour>(GuideMainViewModel.ActiveTours);
-
         }
 
         

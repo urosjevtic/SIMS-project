@@ -4,13 +4,11 @@ using System;
 namespace InitialProject.Model
 {
     public enum UserRole { Guest, Owner, Guide, Guest2}
-    public enum UserPresence { Yes, No, Unknown }
     public class User : ISerializable
     {
         public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public UserPresence Presence { get; set; }
         public UserRole Role { get; set; }
 
         public User() { }
@@ -20,12 +18,11 @@ namespace InitialProject.Model
             Username = username;
             Password = password;
             Role = role;
-            Presence = UserPresence.Unknown;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Username, Password, Role.ToString(), Presence.ToString() };
+            string[] csvValues = { Id.ToString(), Username, Password, Role.ToString()};
             return csvValues;
         }
 
@@ -49,18 +46,7 @@ namespace InitialProject.Model
                     Role = UserRole.Guide;
                     break;
             }
-            switch (values[4])
-            {
-                case "Yes":
-                    Presence = UserPresence.Yes;
-                    break;
-                case "No":
-                    Presence = UserPresence.No;
-                    break;
-                case "Unknown":
-                    Presence = UserPresence.Unknown;
-                    break;
-            }
+           
         }
     }
 }

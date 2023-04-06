@@ -31,12 +31,12 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox x:Name="checkBox" Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked"
-                                              IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}" />
+                                              IsChecked="{Binding Path=IsChecked}" />
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                        <GridViewColumn DisplayMemberBinding="{Binding SerialNumber}" Header="SerialNumber" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding SerialNumber}" Header="SerialNumber" Width="70" />
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
@@ -50,22 +50,15 @@
           Grid.Column="1"
           VerticalAlignment="Top" 
           Width="378"
-          ItemsSource="{Binding GuestsDTO}"
+          ItemsSource="{Binding TourGuests}"
           IsSynchronizedWithCurrentItem="True">
             <ListView.View>
                 <GridView>
                     <GridView.Columns>
-                        <GridViewColumn>
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox x:Name="checkBox" Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckedGuests" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Username}" Header="Username" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Role}" Header="Role" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Presence}" Header="Presence" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" Width="70" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Presence}" Header="Presence"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CheckPointName}" Header="Check point"  Width="90"/>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>

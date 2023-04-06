@@ -82,7 +82,7 @@ namespace InitialProject.Repository
             }
             return checkPoints.Find(c => c.SerialNumber == max);
         }
-        public CheckPoint Update(CheckPoint checkPoint)
+        public CheckPoint ReturnUpdated(CheckPoint checkPoint)
         {
             _checkPoints = _serializer.FromCSV(FilePath);
             CheckPoint current = _checkPoints.Find(c => c.Id == checkPoint.Id);
@@ -99,12 +99,23 @@ namespace InitialProject.Repository
 
         public void SaveAll(List<CheckPoint> entities)
         {
-            throw new NotImplementedException();
+            
+           _serializer.ToCSV(FilePath, entities);
+            
         }
 
-        void IRepository<CheckPoint>.Update(CheckPoint entity)
+        public void Update(CheckPoint checkPoint)
         {
-            throw new NotImplementedException();
+                CheckPoint newCheckPoint = _checkPoints.Find(p1 => p1.Id == checkPoint.Id);
+                newCheckPoint.Id = checkPoint.Id;
+                newCheckPoint.Name = checkPoint.Name;
+                newCheckPoint.IsChecked = checkPoint.IsChecked;
+                newCheckPoint.SerialNumber = checkPoint.SerialNumber;
+                newCheckPoint.CurrentGuests = checkPoint.CurrentGuests;
+               
+
+                SaveAll(_checkPoints);
+            
         }
 
         void IRepository<CheckPoint>.Save(CheckPoint entity)
