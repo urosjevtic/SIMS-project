@@ -31,6 +31,6 @@
         <TextBox x:Name="durationTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,30,0,0" Grid.Row="1" TextWrapping="Wrap" FontSize="24" VerticalAlignment="Top" Width="220" Height="35"/>
         <TextBox x:Name="languageTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="2" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Center" Width="220" Height="35"/>
         <TextBox x:Name="numberTextBox" Grid.Column="2" HorizontalAlignment="Left" Margin="10,26,0,0" Grid.Row="3" FontSize="24" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" Height="35"/>
-        <Button Grid.Column="3" Content="Search" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="64" Width="189" FontSize="36" Click="searchButtonClick"/>
+        <Button Grid.Column="3" Content="Search" HorizontalAlignment="Center" Grid.Row="2" VerticalAlignment="Center" Height="64" Width="189" FontSize="36" Click="SearchButtonClick"/>
     </Grid>
 </Window>

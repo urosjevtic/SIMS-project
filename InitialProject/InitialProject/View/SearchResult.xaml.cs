@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,20 +26,26 @@ namespace InitialProject.View
         public ObservableCollection<Tour> Tours { get; set; }
         private readonly TourRepository _tourRepository;
         private readonly TourReservationRepository _tourReservationRepository;
+        private readonly VoucherRepository _voucherRepository;
         public List<Tour> tours { get; set; }
+        private List<Voucher> vouchers { get; set; }
 
         public Tour SelectedTour;
+        public Voucher SelectedVoucher;
         public User LoggedUser { get; set; }
         public SearchResult(List<Tour> filteredTours, User user)
         {
             InitializeComponent();
+            this.DataContext = this;
             _tourRepository = new TourRepository();
             _tourReservationRepository = new TourReservationRepository();
+            _voucherRepository = new VoucherRepository();
             tours = filteredTours;
+            vouchers = _voucherRepository.GetAllCreated();
             LoggedUser = user;
             resultDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
-        }
-
+            vouchersComboBox.ItemsSource = new ObservableCollection<Voucher>(vouchers);
+        }  
         private void CancelClick(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -47,14 +54,34 @@ namespace InitialProject.View
         private void ReserveClick(object sender, RoutedEventArgs e)
         {
             SelectedTour = (Tour)resultDataGrid.SelectedItem;
-            try
+            SelectedVoucher = (Voucher)vouchersComboBox.SelectedItem;
+
+            if(SelectedTour == null || nrOfPeopleTextBox.Text == String.Empty)
+            {
+                if (SelectedTour == null)
+                {
+                    MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                if (nrOfPeopleTextBox.Text == String.Empty)
+                {
+                    MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            } 
+            else
             {
                 int numberOfPeople = int.Parse(nrOfPeopleTextBox.Text);
                 int freeSeats = SelectedTour.MaxGuests - _tourReservationRepository.CountUnreservedSeats(SelectedTour);
+
                 if (numberOfPeople <= freeSeats)
                 {
                     _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                    if (SelectedVoucher != null)
+                    {
+                        _voucherRepository.ChangeToUsed(SelectedVoucher);
+                        
+                    }
+                    this.Close();
                 }
                 else if (SelectedTour.MaxGuests == _tourReservationRepository.CountUnreservedSeats(SelectedTour))
                 {
@@ -65,20 +92,7 @@ namespace InitialProject.View
                 {
                     MessageBox.Show("There is no enough free seats! Change number of people! Number of free seats: " + freeSeats, "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-
             }
-            catch (Exception ex)
-            {
-                if (SelectedTour == null)
-                {
-                    MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                if (nrOfPeopleTextBox.Text == String.Empty)
-                {
-                    MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-            }
-
         }
         public void FindAlternatives(Tour tour)
         {
