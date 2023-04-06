@@ -7,7 +7,7 @@ using InitialProject.Model;
 
 namespace InitialProject.Repository
 {
-    public interface ITourGuestsRepository : IRepository<Guest>
+    public interface ITourGuestsRepository
     {
     }
 }

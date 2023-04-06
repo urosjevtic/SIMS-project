@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using InitialProject.Repository;
 using InitialProject.DTO;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
 
 namespace InitialProject.View
 {
