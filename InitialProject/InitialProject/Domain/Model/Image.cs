@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class Image : ISerializable
     {
@@ -13,12 +13,14 @@ namespace InitialProject.Model
         public List<string> Url;
         public int EntityLd;
 
-        public Image() {
+        public Image()
+        {
             Url = new List<string>();
         }
-        public Image(int id, List<string> url, int entityld) {
+        public Image(int id, List<string> url, int entityld)
+        {
             Id = id;
-            Url= url;
+            Url = url;
             EntityLd = entityld;
         }
 

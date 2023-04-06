@@ -1,11 +1,12 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Linq;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private const string FilePath = "../../../Resources/Data/users.csv";
 

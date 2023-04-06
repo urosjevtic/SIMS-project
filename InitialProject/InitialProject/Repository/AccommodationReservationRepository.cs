@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
@@ -52,6 +52,14 @@ namespace InitialProject.Repository
             Save(reservation);
         }
 
-        
+        public void Delete(AccommodationReservation reservation)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            AccommodationReservation founded = _reservations.Find(c => c.Id == reservation.Id);
+            _reservations.Remove(founded);
+            _serializer.ToCSV(FilePath, _reservations);
+        }
+
+
     }
 }

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class RatedGuest : ISerializable
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public User User { get; set; }
         public int RuleFollowingRating { get; set; }
         public int CleanlinessRating { get; set; }
@@ -20,7 +20,7 @@ namespace InitialProject.Model
         public DateTime ReservationEndDate { get; set; }
 
 
-        public RatedGuest() 
+        public RatedGuest()
         {
             User = new User();
             Accommodation = new Accommodation();

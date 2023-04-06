@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Repository;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class GuestPresence
     {
@@ -26,7 +26,7 @@ namespace InitialProject.Model
             string[] csvValues = {
                GuestId.ToString(),
                CheckPointId.ToString(),
-               Present.ToString(),               
+               Present.ToString(),
             };
             return csvValues;
         }

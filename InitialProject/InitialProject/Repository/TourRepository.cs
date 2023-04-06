@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 
-namespace InitialProject.Repository 
+namespace InitialProject.Repository
 {
     public class TourRepository : ITourRepository 
     {

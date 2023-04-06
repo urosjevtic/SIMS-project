@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class TourReservation : ISerializable
     {
@@ -14,10 +14,10 @@ namespace InitialProject.Model
         public int IdGuest { get; set; }
         public int NumberOfPeople { get; set; }
 
-       
+
 
         public TourReservation() { }
-        
+
 
         public string[] ToCSV()
         {

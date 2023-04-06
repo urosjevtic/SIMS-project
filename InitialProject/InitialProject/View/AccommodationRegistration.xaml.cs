@@ -1,5 +1,4 @@
-﻿using InitialProject.Model;
-using InitialProject.Repository;
+﻿using InitialProject.Repository;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -7,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.View
 {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Repository;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Service
 {
@@ -22,7 +22,7 @@ namespace InitialProject.Service
         public List<Tour> GetTodayTours(User user)
         {
             var tours = LoadGuideTours(user);
-            var locations = _locationService.LoadLocations();
+            var locations = _locationService.GetLocations();
             List<Tour> todayTours = new List<Tour>();
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
@@ -70,7 +70,7 @@ namespace InitialProject.Service
         {
 
             var tours = LoadGuideTours(user);
-            var locations = _locationService.LoadLocations();
+            var locations = _locationService.GetLocations();
             List<Tour> active = new List<Tour>();
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)

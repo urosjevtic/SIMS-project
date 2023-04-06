@@ -1,14 +1,15 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class UnratedGuestRepository
+    public class UnratedGuestRepository: IUnratedGuestRepository
     {
         private const string FilePath = "../../../Resources/Data/unratedGuests.csv";
         private readonly Serializer<UnratedGuest> _serializer;

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class UnratedGuest : ISerializable
     {
@@ -16,13 +16,13 @@ namespace InitialProject.Model
         public DateTime ReservationStartDate { get; set; }
         public DateTime ReservationEndDate { get; set; }
 
-        public UnratedGuest() 
+        public UnratedGuest()
         {
             User = new User();
             ReservedAccommodation = new Accommodation();
         }
 
-        public UnratedGuest(int id, User user,  Accommodation reservedAccommodation, DateTime reservationStartDate, DateTime reservationEndDate)
+        public UnratedGuest(int id, User user, Accommodation reservedAccommodation, DateTime reservationStartDate, DateTime reservationEndDate)
         {
             Id = id;
             User = user;
@@ -33,7 +33,7 @@ namespace InitialProject.Model
 
         public string[] ToCSV()
         {
-            string[] csvValues = {Id.ToString(),  User.Id.ToString(), ReservedAccommodation.Id.ToString(), ReservationStartDate.ToString("dd'/'MM'/'yyyy"), ReservationEndDate.ToString("dd'/'MM'/'yyyy") };
+            string[] csvValues = { Id.ToString(), User.Id.ToString(), ReservedAccommodation.Id.ToString(), ReservationStartDate.ToString("dd'/'MM'/'yyyy"), ReservationEndDate.ToString("dd'/'MM'/'yyyy") };
             return csvValues;
         }
 

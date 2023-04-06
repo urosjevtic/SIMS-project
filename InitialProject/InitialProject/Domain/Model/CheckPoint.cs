@@ -6,22 +6,23 @@ using System.Threading.Tasks;
 using InitialProject.Serializer;
 using InitialProject.Repository;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public class CheckPoint : ISerializable
     {
-        public int Id { get; set; } 
+        public int Id { get; set; }
         public string Name { get; set; }
-        public int SerialNumber { get; set; }   
-        public bool IsChecked { get; set; } 
+        public int SerialNumber { get; set; }
+        public bool IsChecked { get; set; }
         public List<User> CurrentGuests { get; set; }
 
-        public CheckPoint() {
+        public CheckPoint()
+        {
             CurrentGuests = new List<User>();
         }
-        public CheckPoint(int id, string name,int serialNumber, bool isChecked)
+        public CheckPoint(int id, string name, int serialNumber, bool isChecked)
         {
-            Id = id;    
+            Id = id;
             Name = name;
             SerialNumber = serialNumber;
             IsChecked = isChecked;
@@ -48,16 +49,16 @@ namespace InitialProject.Model
 
             return csvValues;
         }
-       
+
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
             Name = values[1];
-            SerialNumber = Convert.ToInt32(values[2]);  
+            SerialNumber = Convert.ToInt32(values[2]);
             IsChecked = Convert.ToBoolean(values[3]);
         }
 
-        
+
     }
 }

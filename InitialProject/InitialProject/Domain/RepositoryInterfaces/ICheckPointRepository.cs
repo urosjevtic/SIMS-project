@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 
-namespace InitialProject.Repository
+namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ICheckPointRepository : IRepository<CheckPoint>
+    public interface ICheckPointRepository
     {
         public CheckPoint FindTourLastCheckPoint(Tour tour);
     }

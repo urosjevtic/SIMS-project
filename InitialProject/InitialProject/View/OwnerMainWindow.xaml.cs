@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -213,6 +213,14 @@ namespace InitialProject.View
                 unratedGuestNotification.Owner = this;
                 unratedGuestNotification.ShowDialog();
             }
+        }
+
+        private void RescheduleRequest_Click(object sender, RoutedEventArgs e)
+        {
+            RescheduleRequestWindow rescheduleRequestWindow = new RescheduleRequestWindow(LoggedInUser);
+            this.Close();
+            rescheduleRequestWindow.Show();
+
         }
     }
 }

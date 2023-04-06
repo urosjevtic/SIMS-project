@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
@@ -171,7 +171,7 @@ namespace InitialProject.ViewModels
 
         public int saveImages(string urls, int entityId)
         {
-            Model.Image images = new Model.Image();
+            Image images = new Domain.Model.Image();
             images.EntityLd = entityId;
             string[] imagesUrls = SplitString(urls);
             foreach (string imageUrl in imagesUrls)

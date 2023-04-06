@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 using InitialProject.Serializer;
 using InitialProject.Repository;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
-    
+
     public class Tour : ISerializable
     {
         public int Id { get; set; }
-        public User Guide { get; set; } 
+        public User Guide { get; set; }
         public string Name { get; set; }
-        public Location Location { get; set; }       
+        public Location Location { get; set; }
         public string Description { get; set; }
         public string Language { get; set; }
         public List<CheckPoint> CheckPoints { get; set; }
-        public int MaxGuests { get; set; }  
+        public int MaxGuests { get; set; }
         public DateTime Start { get; set; }
-        public int Duration { get; set; }   
+        public int Duration { get; set; }
         public Image CoverImageUrl { get; set; }
-        public bool IsActive { get; set; }  
+        public bool IsActive { get; set; }
 
         public CheckPointRepository _checkPointRepository { get; set; }
         public Tour()
@@ -33,7 +33,7 @@ namespace InitialProject.Model
             CoverImageUrl = new Image();
             _checkPointRepository = new CheckPointRepository();
         }
-        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl,bool isActve)
+        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl, bool isActve)
         {
             Id = id;
             Guide = giude;
@@ -83,36 +83,36 @@ namespace InitialProject.Model
 
             return csvValues;
         }
-        
+
 
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            Guide.Id = Convert.ToInt32(values[1]);  
+            Guide.Id = Convert.ToInt32(values[1]);
             Name = values[2];
-            Location.Id = Convert.ToInt32(values[3]);   
+            Location.Id = Convert.ToInt32(values[3]);
             Description = values[4];
-            Language = values[5];   
-            MaxGuests = Convert.ToInt32(values[6]); 
+            Language = values[5];
+            MaxGuests = Convert.ToInt32(values[6]);
             Start = DateTime.Parse(values[7]);
-            Duration = Convert.ToInt32(values[8]);  
+            Duration = Convert.ToInt32(values[8]);
             CoverImageUrl.Id = Convert.ToInt32(values[9]);
             IsActive = Convert.ToBoolean(values[10]);
 
             int i = 11;
             CheckPoints.Clear();
 
-            
+
 
             while (values[i] != "[END]")
             {
                 int ids = Convert.ToInt32(values[i]);
-                CheckPoints.Add(_checkPointRepository.GetById(ids));  
+                CheckPoints.Add(_checkPointRepository.GetById(ids));
                 i++;
             }
         }
 
-       
+
 
 
 
