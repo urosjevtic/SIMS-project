@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Domain.Model;
-using InitialProject.Repository;
+using InitialProject.Domain.Model.Reservations;
+using InitialProject.Repository.ReservationRepo;
 
-namespace InitialProject.Service
+namespace InitialProject.Service.ReservationServices
 {
     public class AccommodationReservationService
     {
@@ -23,7 +23,7 @@ namespace InitialProject.Service
 
         public List<AccommodationReservation> GetAll()
         {
-            List< AccommodationReservation > accommodationReservations = new List < AccommodationReservation >();
+            List<AccommodationReservation> accommodationReservations = new List<AccommodationReservation>();
             accommodationReservations = _accommodationReservationRepository.GetAll();
             BindAccommodationToReservations(accommodationReservations);
             BindUserToReservations(accommodationReservations);
@@ -35,6 +35,10 @@ namespace InitialProject.Service
             _accommodationReservationRepository.Save(reservation);
         }
 
+        public void Update(AccommodationReservation reservation)
+        {
+            _accommodationReservationRepository.Update(reservation);
+        }
         public AccommodationReservation Create(int Id, DateTime startDate, DateTime endDate, int userId, int accommodationId, int guestNumber)
         {
             AccommodationReservation newReservation = new AccommodationReservation();

@@ -5,34 +5,37 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Domain.Model
+namespace InitialProject.Domain.Model.Reservations
 {
-    public class RescheduleRequest : ISerializable
+    public enum RescheduleStatus{approved, declined, pending}
+    public class AccommodationReservationRescheduleRequest : ISerializable
     {
         public int Id;
         public AccommodationReservation Reservation { get; set; }
         public DateTime RescheduleStartDate { get; set; }
         public DateTime RescheduleEndDate { get; set; }
         public bool IsAlreadyReserved { get; set; }
+        public RescheduleStatus Status {get; set; }
 
-        public RescheduleRequest()
+        public AccommodationReservationRescheduleRequest()
         {
             Reservation = new AccommodationReservation();
         }
 
-        public RescheduleRequest(AccommodationReservation reservation, DateTime rescheduleStartDate, DateTime rescheduleEndDate, bool isAlreadyReserved = false)
+        public AccommodationReservationRescheduleRequest(AccommodationReservation reservation, DateTime rescheduleStartDate, DateTime rescheduleEndDate, bool isAlreadyReserved = false, RescheduleStatus status = RescheduleStatus.pending)
         {
             Reservation = reservation;
             RescheduleStartDate = rescheduleStartDate;
             RescheduleEndDate = rescheduleEndDate;
             IsAlreadyReserved = isAlreadyReserved;
+            Status = status;
         }
 
 
         public string[] ToCSV()
         {
             string[] csvValues =
-                {Id.ToString(), Reservation.Id.ToString(), RescheduleStartDate.ToString(), RescheduleEndDate.ToString() };
+                {Id.ToString(), Reservation.Id.ToString(), RescheduleStartDate.ToString(), RescheduleEndDate.ToString(), Status.ToString() };
             return csvValues;
         }
 
@@ -42,6 +45,18 @@ namespace InitialProject.Domain.Model
             Reservation.Id = Convert.ToInt32(values[1]);
             RescheduleStartDate = Convert.ToDateTime(values[2]);
             RescheduleEndDate = Convert.ToDateTime(values[3]);
+            switch (values[4])
+            {
+                case "pending":
+                    Status = RescheduleStatus.pending;
+                    break;
+                case "approved":
+                    Status = RescheduleStatus.approved;
+                    break;
+                case "declined":
+                    Status = RescheduleStatus.declined;
+                    break;
+            }
         }
     }
 
