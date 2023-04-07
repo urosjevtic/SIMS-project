@@ -36,7 +36,7 @@ namespace InitialProject.View
             InitializeComponent();
             LoggedUser = user;
             AddingTourViewModel = new AddingTourViewModel(LoggedUser);
-            DataContext = AddingTourViewModel;            
+            this.DataContext = AddingTourViewModel;            
         }
 
 

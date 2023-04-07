@@ -35,6 +35,7 @@ namespace InitialProject.ViewModel
         public List<Tour> tours;
         public List<Location> locations;
 
+        public Tour SelectedTour { get; set; }
         public Tour SelectedTodayTour { get; set; }
         public Tour ActiveTour { get; set; }
 
@@ -64,7 +65,6 @@ namespace InitialProject.ViewModel
         {
             AddingTour addingTour = new AddingTour(LoggedUser);
             addingTour.Show();
-
         }
 
 
@@ -116,6 +116,22 @@ namespace InitialProject.ViewModel
             {
                 StartedTour startedTour = new StartedTour(ActiveTour);
                 startedTour.Show();
+            }
+        }
+        public void CancelTour()
+        {
+            if (SelectedTour != null)
+            {
+                if (DateTime.Now.Hour <= SelectedTour.Start.Hour)
+                {
+                    _tourService.SendVauchers(SelectedTour);
+                    _tourService.Delete(SelectedTour);
+                    MessageBox.Show("Tura je uspjesno otkazana.","Information", MessageBoxButton.OK,MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Do pocetka ture je ostalo manje od 48h!","Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
