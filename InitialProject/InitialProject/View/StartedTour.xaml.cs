@@ -11,67 +11,125 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.DTO;
+using InitialProject.Domain.Model;
+using InitialProject.Model;
 
 namespace InitialProject.View
 {
-    
+
     public partial class StartedTour : Window
     {
         private readonly TourRepository _tourRepository;
         private readonly LocationRepository _locationRepository;
+        private readonly NotificationRepository _notificationRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly UserRepository _userRepository;
         private readonly CheckPointRepository _checkPointRepository;
-        private readonly CheckPointGuestsRepository _checkPointGuestRepository;
-        
-        public CheckBox checkBox { get; set; }
-        public int firstSerialNumber { get; set; }
-        public bool isChecked { get; set; } 
-
+        private readonly TourGuestsRepository _tourGuestsRepository;
+        public List<User> Guests { get; set; }
+        public User User { get; set; }
         public Tour SelectedTour { get; set; }
         public List<CheckPoint> CheckPoints { get; set; }
-        
+        public List<CheckPoint> CheckedCheckPoints { get; set; }
+        public List<Notification> Notifications { get; set; }
+        public List<Guest> TourGuests { get; set; }   
         public StartedTour(Tour selectedTour)
         {
             InitializeComponent();
             this.DataContext = this;
-            _checkPointRepository = new CheckPointRepository();
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
-            _checkPointGuestRepository = new CheckPointGuestsRepository();
+            _notificationRepository = new NotificationRepository();
+            _tourReservationRepository = new TourReservationRepository();
+            _tourGuestsRepository = new TourGuestsRepository(); 
+            _userRepository = new UserRepository();
+            _checkPointRepository = new CheckPointRepository();
+
+            CheckedCheckPoints = new List<CheckPoint>();
+            Notifications = _notificationRepository.GetAll();
+            User = new User();
             SelectedTour = selectedTour;
+            TourGuests = new List<Guest>();
 
             CheckPoints = SelectedTour.CheckPoints;
-
-            CheckPoint cp = _tourRepository.GetTourFirstCheckPoint(selectedTour);
-            firstSerialNumber = cp.SerialNumber;
-            cp.IsChecked = true;
-            //checkBox.Checked += CheckBoxChecked;   //ovako pukne samo pri startovanju ture
-            //CheckBox checkBox;
-            // Označi CheckBox ako je pronađen
-           
-
+            Guests = _tourReservationRepository.GetReservationGuest(SelectedTour);
+            MakeGuests();
         }
-        //Lista gostiju iz reservationRepository.
-        //TJ lista Id 
+
+     
 
         public void CheckBoxChecked(object sender, RoutedEventArgs e)
         {
-            
             CheckPoints = SelectedTour.CheckPoints;
             CheckPoint checkedCheckPoint = ((CheckBox)sender).DataContext as CheckPoint;
-
-            checkedCheckPoint.IsChecked = true;
-            MessageBox.Show("DAJANA DEBILL"); // zasto na dugme start tour ovo otvara????? mozda zati sto je prva cekirana automtski???
-            //treba mi lista gostiju za tu tacku
-            CheckPointGuests checkPointGuests = new CheckPointGuests();
-            checkPointGuests.CheckPointId = checkedCheckPoint.Id;
-             
+            CheckCheckPoint(checkedCheckPoint);
+            foreach(User guest in Guests)
+            {
+                Notification notification = new Notification();
+                notification.TourId = SelectedTour.Id;
+                notification.CheckPointId = checkedCheckPoint.Id;
+                notification.GuestId = guest.Id;
+                Notifications.Add(notification);
+                _notificationRepository.Save(notification);
+                // sada treba da azuriram tabelu za prikaz podataka
+                MakeGuests();
+                
+            } 
         }
+        
 
-        private void CheckBoxUnchecked(object sender, RoutedEventArgs e)
+        
+
+        public void MakeGuests()
         {
-
+            foreach(User user in Guests)
+            {
+                foreach(Guest guest in _tourGuestsRepository.GetAll())
+                {
+                    if(user.Id == guest.Id)
+                    {
+                        TourGuests.Add(guest);
+                    }
+                }
+            }
         }
+        
+
+        public void CheckCheckPoint(CheckPoint checkPoint)
+        {
+            foreach(CheckPoint check in CheckPoints)
+            {
+                if(check.Id == checkPoint.Id)
+                {
+                    check.IsChecked = true;
+                    _checkPointRepository.Update(check);
+                }
+            }
+        }
+        public void UncheckCheckPoint(Tour tour)
+        {
+            foreach (CheckPoint check in tour.CheckPoints)
+            {
+                check.IsChecked = false;
+                _checkPointRepository.Update(check);
+            }
+        }
+
+        private void EndTour(object sender, RoutedEventArgs e)
+        {
+            SelectedTour.IsActive = false;
+            _tourRepository.Update(SelectedTour);
+            foreach (User guest in Guests)
+            {
+                _userRepository.Update(guest);
+            }
+            _notificationRepository.DeleteAll();
+            UncheckCheckPoint(SelectedTour);
+        }
+
+
+       
     }
 }

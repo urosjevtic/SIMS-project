@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Repository
 {
-    public class ImageRepository
+    public class ImageRepository : IImageRepository
     {
         private const string FilePath = "../../../Resources/Data/images.csv";
 
@@ -27,7 +29,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public Image Save(Image image)
+        public Image ReturnSaved(Image image)
         {
             image.Id = NextId();
             _images = _serializer.FromCSV(FilePath);
@@ -46,6 +48,12 @@ namespace InitialProject.Repository
             return _images.Max(c => c.Id) + 1;
         }
 
+        public Image GetById(int id)
+        {
+            _images = _serializer.FromCSV(FilePath);
+            return _images.FirstOrDefault(i => i.Id == id);
+        }
+
         public void Delete(Image image)
         {
             _images = _serializer.FromCSV(FilePath);
@@ -54,6 +62,22 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _images);
         }
 
-      
+        public void Save(Image image)
+        {
+            image.Id = NextId();
+            _images = _serializer.FromCSV(FilePath);
+            _images.Add(image);
+            _serializer.ToCSV(FilePath, _images);
+        }
+
+        public void SaveAll(List<Image> entities)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Image entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

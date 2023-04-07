@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
 
 namespace InitialProject.View
@@ -22,33 +22,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class ShowTour : Window
     {
-        public ObservableCollection<Tour> Tours { get; set; }
-        private readonly TourRepository _tourRepository;
-        private readonly LocationRepository _locationRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
-        public List<Tour> tours;
-        public List<Location> locations;
-        public Tour SelectedTour { get; set; }
-        public User LoggedUser { get;set; }
+        public User LoggedUser { get; set; }
         public ShowTour(User user)
         {
             InitializeComponent();
             this.DataContext = this;
-            _tourRepository = new TourRepository();
-            _locationRepository = new LocationRepository();
-            _tourReservationRepository = new TourReservationRepository();
             LoggedUser = user;
-            loadData();
-            tourDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
-        private List<Location> LoadLocations()
-        {
-            return _locationRepository.GetAll();
-        }
-        private void loadData()
+        /*private void loadData()
         {
             tours = _tourRepository.GetAll();
-            locations = LoadLocations();
+            locations = _locationRepository.GetAll();
             foreach (Tour tour in tours)
             {
                 foreach (Location location in locations)
@@ -60,13 +44,23 @@ namespace InitialProject.View
                     }
                 }
             }
-        }
-
-      
+        }*/
         private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
             TourSearch tourSearch = new TourSearch(LoggedUser);
             tourSearch.Show();
+        }
+
+        private void OpenVouchersButtonClick(object sender, RoutedEventArgs e)
+        {
+            ShowVouchers showVouchers = new ShowVouchers();
+            showVouchers.Show();
+        }
+
+        private void OpenMyToursButtonClick(object sender, RoutedEventArgs e)
+        {
+            MyTours myTours = new MyTours(LoggedUser);
+            myTours.Show();
         }
     }
 }

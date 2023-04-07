@@ -1,0 +1,156 @@
+﻿<Window x:Class="InitialProject.View.RescheduleRequestWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="RescheduleRequestWindow" Height="700" Width="356"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen">
+    <Window.Background>
+        <SolidColorBrush Color="#fafafa" />
+    </Window.Background>
+    <Window.Resources>
+        <!--LogIn button style-->
+        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#484b6a"/>
+            <!-- set the button background color -->
+            <Setter Property="Foreground" Value="#fafafa"/>
+            <!-- set the text color of the button -->
+            <Setter Property="FontSize" Value="20"/>
+            <!-- set the font size of the button -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+        <!--Naslovi-->
+        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#484b6a"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+
+        </Button>
+
+
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Reservation rescheduling"></TextBlock>
+
+        <ListBox Grid.Row="2" x:Name="accommodationListBox"
+                 ItemsSource="{Binding RescheduleRequests}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Auto"
+                 Background="White"
+                 BorderThickness="0"
+                 HorizontalContentAlignment="Stretch">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Blue">
+                        <Grid Margin="10,10,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="0">
+                                <TextBlock Text="Guest username: " 
+                                           FontWeight="Bold"
+                                           Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Reservation.User.Username}" />
+                            </StackPanel>
+
+
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                                <TextBlock Text="Accommodation: " 
+                                       FontWeight="Bold"
+                                       Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Reservation.Accommodation.Name}" />
+                            </StackPanel>
+
+                            <TextBlock Text="Initial Dates" Grid.Row="2"></TextBlock>
+
+                            <StackPanel Grid.Row="3"  Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Grid.Row="2">
+                                <TextBlock Text="Start Date: " 
+                                       FontWeight="Bold"
+                                       Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                                <TextBlock Text="EndDate: " 
+                                       FontWeight="Bold"
+                                       Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                            </StackPanel>
+                            </StackPanel>
+
+                            <TextBlock Text="New Date" Grid.Row="4"></TextBlock>
+
+                            <StackPanel Grid.Row="5" Orientation="Horizontal">
+                                <StackPanel Orientation="Horizontal" Grid.Row="4">
+                                <TextBlock Text="Start Date: " 
+                                           FontWeight="Bold"
+                                           Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding RescheduleStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="5">
+                                <TextBlock Text="EndDate: " 
+                                           FontWeight="Bold"
+                                           Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding RescheduleEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                            </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Grid.Row="6">
+                                <TextBlock Text="Is already occupied: " 
+                                       FontWeight="Bold"
+                                       Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding IsAlreadyReserved}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="Reschedule" Style="{StaticResource LogInButtonStyle}" Click="RescheduleButton_Click"/>
+                                <Button Content="Decline"
+                                Margin="10,10,0,10"
+                                 Style="{StaticResource LogInButtonStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Window>

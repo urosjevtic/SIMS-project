@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -50,14 +50,14 @@ namespace InitialProject.View
             _unratedGuestRepository = new UnratedGuestRepository();
             _userRepository = new UserRepository();
 
-            loadData();
+            LoadData();
             Accommodations = new ObservableCollection<Accommodation>(_accommodations);
             UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuests);
 
 
         }
 
-        private void loadData()
+        private void LoadData()
         {
             _locations = LoadLocations();
             _accommodations = LoadAccommodations();
@@ -81,8 +81,7 @@ namespace InitialProject.View
 
         private List<Accommodation> LoadOwnersAccommodation()
         {
-            List<Accommodation> allAccommodations = new List<Accommodation>();
-            allAccommodations = _accommodationRepository.GetAll();
+            List<Accommodation> allAccommodations = _accommodationRepository.GetAll();
             List<Accommodation> accommodations = new List<Accommodation>();
 
             foreach (Accommodation accommodation in allAccommodations)
@@ -114,8 +113,7 @@ namespace InitialProject.View
 
         private List<UnratedGuest> LoadUnratedGuests()
         {
-            List<UnratedGuest> unratedGuests = new List<UnratedGuest>();
-            unratedGuests = GetAllUnratedGuests();
+            List<UnratedGuest> unratedGuests = GetAllUnratedGuests();
 
             unratedGuests = RemoveUnratedGuestsNotBelongingToCurrentUser(unratedGuests);
             
@@ -130,19 +128,28 @@ namespace InitialProject.View
             List<UnratedGuest> allUnratedGuests = _unratedGuestRepository.GetAll();
             foreach (UnratedGuest unratedGuest in allUnratedGuests)
             {
-                foreach (Accommodation accommodation in _accommodations)
-                {
-                    if (accommodation.Id == unratedGuest.ReservedAccommodation.Id)
-                    {
-                        unratedGuest.ReservedAccommodation = accommodation;
-                        break;
-                    }
-                }
-
-                unratedGuest.User = _userRepository.GetById(unratedGuest.User.Id);
+                ConnectAccommodationToUnratedGuest(unratedGuest);
+                ConnectUserToUnratedGuest(unratedGuest);
                 unratedGuests.Add(unratedGuest);
             }
             return unratedGuests;
+        }
+
+        private void ConnectAccommodationToUnratedGuest(UnratedGuest unratedGuest)
+        {
+            foreach (Accommodation accommodation in _accommodations)
+            {
+                if (accommodation.Id == unratedGuest.ReservedAccommodation.Id)
+                {
+                    unratedGuest.ReservedAccommodation = accommodation;
+                    break;
+                }
+            }
+        }
+
+        private void ConnectUserToUnratedGuest(UnratedGuest unratedGuest)
+        {
+            unratedGuest.User = _userRepository.GetById(unratedGuest.User.Id);
         }
 
         private List<UnratedGuest> RemoveUnratedGuestsNotBelongingToCurrentUser(List<UnratedGuest> unratedGuests)
@@ -206,6 +213,14 @@ namespace InitialProject.View
                 unratedGuestNotification.Owner = this;
                 unratedGuestNotification.ShowDialog();
             }
+        }
+
+        private void RescheduleRequest_Click(object sender, RoutedEventArgs e)
+        {
+            RescheduleRequestWindow rescheduleRequestWindow = new RescheduleRequestWindow(LoggedInUser);
+            this.Close();
+            rescheduleRequestWindow.Show();
+
         }
     }
 }

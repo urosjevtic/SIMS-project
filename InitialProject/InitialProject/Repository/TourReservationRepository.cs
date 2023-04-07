@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Repository
 {
@@ -12,13 +12,15 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/tourReservations.csv";
 
-        private readonly Serializer<ТоurReservation> _serializer;
+        private readonly Serializer<TourReservation> _serializer;
 
-        private List<ТоurReservation> _reservations;
+        private List<TourReservation> _reservations;
+        public UserRepository _userRepository { get; set; }
 
         public TourReservationRepository()
         {
-            _serializer = new Serializer<ТоurReservation>();
+            _userRepository = new UserRepository();
+            _serializer = new Serializer<TourReservation>();
             _reservations = _serializer.FromCSV(FilePath);
         }
         public int NextId()
@@ -30,7 +32,7 @@ namespace InitialProject.Repository
             }
             return _reservations.Max(c => c.IdReservation) + 1;
         }
-        public void Save(ТоurReservation reservation)
+        public void Save(TourReservation reservation)
         {
             reservation.IdReservation = NextId();
             _reservations = _serializer.FromCSV(FilePath);
@@ -40,10 +42,10 @@ namespace InitialProject.Repository
         public int CountUnreservedSeats(Tour tour)
         {
             int sum = 0;
-            List<ТоurReservation> reservations = new List<ТоurReservation>();
+            List<TourReservation> reservations = new List<TourReservation>();
             TourReservationRepository reservationsRepository = new TourReservationRepository(); 
             reservations = reservationsRepository.GetAll();
-            foreach (ТоurReservation reservation in reservations)
+            foreach (TourReservation reservation in reservations)
             {
                 if(reservation.IdTour == tour.Id)
                 {
@@ -54,15 +56,31 @@ namespace InitialProject.Repository
         }
         public void SaveReservation(Tour tour, int numberOfPeople, User LoggedUser)
         {
-            ТоurReservation reservation = new ТоurReservation();
+            TourReservation reservation = new TourReservation();
             reservation.IdTour = tour.Id;
             reservation.IdGuest = LoggedUser.Id;
             reservation.NumberOfPeople = numberOfPeople;
             Save(reservation);
         }
-        public List<ТоurReservation> GetAll()
+
+
+        public List<TourReservation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public List<User> GetReservationGuest(Tour tour)
+        {
+            List<User> guests = new List<User>();
+            List<TourReservation> reservations = GetAll();
+            foreach(TourReservation tourReservation in reservations)
+            {
+                if(tourReservation.IdTour == tour.Id)
+                {
+                    guests.Add(_userRepository.GetById(tourReservation.IdGuest));
+                }
+            }
+            return guests;
         }
     }
 }

@@ -7,27 +7,63 @@
         mc:Ignorable="d"
         Title="StartedTour" Height="450" Width="800">
 
-    <ListView Height="238" 
+    <Grid Margin="0,0,-54,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <ListView Height="238" 
           HorizontalAlignment="Left" 
           Name="listView1" 
+          Grid.Column="0"
           VerticalAlignment="Top" 
-          Width="503"
+          Width="379"
           ItemsSource="{Binding CheckPoints}"
           IsSynchronizedWithCurrentItem="True">
-        <ListView.View>
-            <GridView>
-                <GridView.Columns>
-                    <GridViewColumn>
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <CheckBox x:Name="checkBox" Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked" Unchecked="CheckBoxUnchecked" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=ListViewItem},Path=IsSelected}" />
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    <GridViewColumn DisplayMemberBinding="{Binding SerialNumber}" Header="SerialNumber" />
-                </GridView.Columns>
-            </GridView>
-        </ListView.View>
-    </ListView>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn>
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="checkBox" Content="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Checked="CheckBoxChecked"
+                                              IsChecked="{Binding Path=IsChecked}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding SerialNumber}" Header="SerialNumber" Width="70" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+        <ListView Height="238" 
+          HorizontalAlignment="Left" 
+          Name="listView2" 
+          Grid.Column="1"
+          VerticalAlignment="Top" 
+          Width="378"
+          ItemsSource="{Binding TourGuests}"
+          IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" Width="70" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Surname}" Header="Surname"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding Presence}" Header="Presence"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding CheckPointName}" Header="Check point"  Width="90"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <Button Grid.Column="1" Content="End tour" Margin="71,15,214,24" Grid.Row="1" Click="EndTour"/>
+    </Grid>
 </Window>

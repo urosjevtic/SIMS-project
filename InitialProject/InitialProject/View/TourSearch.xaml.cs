@@ -12,10 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
 using InitialProject.Repository;
-//using System.Windows.Forms;
 using System.Data;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.View
 {
@@ -24,16 +23,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourSearch : Window
     {
-        public ObservableCollection<Tour> toursObservable { get; set; }
-
         private readonly TourRepository _tourRepository;
 
         private readonly LocationRepository _locationRepository;
         public List<Tour> tours { get; set; }
         public List<Location> locations { get; set; }
         public User LoggedUser { get; set; }
-
-        public ShowTour showTour;
 
         public TourSearch(User user)
         {
@@ -63,24 +58,32 @@ namespace InitialProject.View
         {
             AddTourLocation(tours, locations);
 
-            string[] searchValues = { stateTextBox.Text, cityTextBox.Text, languageTextBox.Text };
-            int searchDuration = durationTextBox.Text == "" ? -1 : Convert.ToInt32(durationTextBox.Text);
-            int searchMaxGuests = numberTextBox.Text == "" ? -1 : Convert.ToInt32(numberTextBox.Text);
-
             List<Tour> searchResults = tours.ToList();
 
-            // Removing all by location and language
+            RemoveByLocation(searchResults);
+            RemoveByNumbers(searchResults);
+
+            return searchResults;   
+        }
+
+        public List<Tour> RemoveByLocation(List<Tour> searchResults)
+        {
+            string[] searchValues = { stateTextBox.Text, cityTextBox.Text, languageTextBox.Text };
             foreach (string value in searchValues)
                 searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+            return searchResults;
+        }
 
-            // Removing by numbers
+        public List<Tour> RemoveByNumbers(List<Tour> searchResults)
+        {
+            int searchDuration = durationTextBox.Text == "" ? -1 : Convert.ToInt32(durationTextBox.Text);
+            int searchMaxGuests = numberTextBox.Text == "" ? -1 : Convert.ToInt32(numberTextBox.Text);
             if (searchDuration > 0) searchResults.RemoveAll(x => x.Duration != searchDuration);
             if (searchMaxGuests > 0) searchResults.RemoveAll(x => x.MaxGuests < searchMaxGuests);
 
             return searchResults;
-          
         }
-        public void searchButtonClick(object sender, RoutedEventArgs e)
+        public void SearchButtonClick(object sender, RoutedEventArgs e)
         {
             List<Tour> filteredTours = Search();
             SearchResult searchResult = new SearchResult(filteredTours, LoggedUser);

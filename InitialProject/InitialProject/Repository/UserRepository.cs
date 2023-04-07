@@ -1,11 +1,12 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Linq;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class UserRepository
+    public class UserRepository : IUserRepository
     {
         private const string FilePath = "../../../Resources/Data/users.csv";
 
@@ -32,6 +33,22 @@ namespace InitialProject.Repository
         public List<User> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public void SaveAll(List<User> _users)
+        {
+            _serializer.ToCSV(FilePath, _users);
+        }
+        public void Update(User user)
+        {
+            User newUser = _users.Find(p1 => p1.Id == user.Id);
+            newUser.Id = user.Id;
+            newUser.Username = user.Username;
+            newUser.Password = user.Password;
+            newUser.Role = user.Role;
+            
+            SaveAll(_users);
+
         }
     }
 }

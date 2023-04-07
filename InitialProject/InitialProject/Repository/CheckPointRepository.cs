@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class CheckPointRepository
+    public class CheckPointRepository : ICheckPointRepository
     {
         private const string FilePath = "../../../Resources/Data/checkPoints.csv";
 
@@ -27,7 +28,7 @@ namespace InitialProject.Repository
             return _serializer.FromCSV(FilePath);
         }
 
-        public CheckPoint FindById(int id)
+        public CheckPoint GetById(int id)
         {
             CheckPoint checkPoint = new CheckPoint();
             List<CheckPoint> checkPoints = new List<CheckPoint>();
@@ -69,7 +70,20 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _checkPoints);
         }
 
-        public CheckPoint Update(CheckPoint checkPoint)
+        public CheckPoint FindTourLastCheckPoint(Tour tour)
+        {
+            int max = 0;
+            List<CheckPoint> checkPoints = tour.CheckPoints;
+            foreach(CheckPoint checkPoint in checkPoints)
+            {
+                if (checkPoint.SerialNumber > max)
+                {
+                    max = checkPoint.SerialNumber;
+                }
+            }
+            return checkPoints.Find(c => c.SerialNumber == max);
+        }
+        public CheckPoint ReturnUpdated(CheckPoint checkPoint)
         {
             _checkPoints = _serializer.FromCSV(FilePath);
             CheckPoint current = _checkPoints.Find(c => c.Id == checkPoint.Id);
@@ -79,5 +93,31 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _checkPoints);
             return checkPoint;
         }
+
+        
+
+        
+
+        public void SaveAll(List<CheckPoint> entities)
+        {
+            
+           _serializer.ToCSV(FilePath, entities);
+            
+        }
+
+        public void Update(CheckPoint checkPoint)
+        {
+                CheckPoint newCheckPoint = _checkPoints.Find(p1 => p1.Id == checkPoint.Id);
+                newCheckPoint.Id = checkPoint.Id;
+                newCheckPoint.Name = checkPoint.Name;
+                newCheckPoint.IsChecked = checkPoint.IsChecked;
+                newCheckPoint.SerialNumber = checkPoint.SerialNumber;
+                newCheckPoint.CurrentGuests = checkPoint.CurrentGuests;
+               
+
+                SaveAll(_checkPoints);
+            
+        }
+
     }
 }

@@ -1,5 +1,5 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
 using System.ComponentModel;
@@ -13,7 +13,7 @@ namespace InitialProject
     /// </summary>
     public partial class SignInForm : Window
     {
-
+        public bool alreadyStartedTourFlag { get; set; }
         private readonly UserRepository _repository;
 
         private string _username;
@@ -41,6 +41,7 @@ namespace InitialProject
         {
             InitializeComponent();
             DataContext = this;
+            alreadyStartedTourFlag = false;
             _repository = new UserRepository();
         }
 

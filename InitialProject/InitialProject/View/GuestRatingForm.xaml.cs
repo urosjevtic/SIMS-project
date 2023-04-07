@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
@@ -91,6 +91,17 @@ namespace InitialProject.View
         private void ButtonClick_Submit(object sender, RoutedEventArgs e)
         {
             RatedGuest ratedGuest = new RatedGuest();
+            CreateNewRatedGuest(ratedGuest);
+
+            _ratedGuestRepository.Save(ratedGuest);
+            _unratedGuestRepository.Remove(UnratedGuest);
+            _ownerMainWindow.UnratedGuests.Remove(UnratedGuest);
+            this.Close();   
+            
+        }
+
+        private void CreateNewRatedGuest(RatedGuest ratedGuest)
+        {
             ratedGuest.User.Id = UnratedGuest.Id;
             ratedGuest.RuleFollowingRating = _ruleFollowingRating;
             ratedGuest.CleanlinessRating = _cleanlinessRating;
@@ -98,12 +109,6 @@ namespace InitialProject.View
             ratedGuest.Accommodation = UnratedGuest.ReservedAccommodation;
             ratedGuest.ReservationStartDate = UnratedGuest.ReservationStartDate;
             ratedGuest.ReservationEndDate = UnratedGuest.ReservationEndDate;
-
-            _ratedGuestRepository.Save(ratedGuest);
-            _unratedGuestRepository.Remove(UnratedGuest);
-            _ownerMainWindow.UnratedGuests.Remove(UnratedGuest);
-            this.Close();   
-            
         }
     }
 }

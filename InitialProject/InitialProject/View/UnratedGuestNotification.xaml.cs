@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
