@@ -33,7 +33,8 @@ namespace InitialProject.ViewModels
             _guideMainWindow = new GuideMainViewModel(user);
             LoggedUser = user;
             Start = DateTime.Now;
-            _guideMainWindow.LoadData();
+            _guideMainWindow.UpdateToursDataGrid();
+            _guideMainWindow.UpdateTodayToursDataGrid();
             _guideMainWindow.LoadData();
         }
             
@@ -225,7 +226,7 @@ namespace InitialProject.ViewModels
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             tour.IsActive = false;
             _tourRepository.Save(tour);
-            _guideMainWindow.LoadData();
+            
             _guideMainWindow.LoadData();
         }
         

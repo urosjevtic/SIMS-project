@@ -11,12 +11,18 @@ namespace InitialProject.Service
     public class TourService
     {
         private readonly TourRepository _tourRepository;    
+        private readonly TourGuestsRepository _tourGuestsRepository;
+        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly VoucherRepository _voucherRepository;
         public LocationService _locationService { get; set; }
 
         public TourService()
         {
             _tourRepository = new TourRepository(); 
-            _locationService = new LocationService();   
+            _locationService = new LocationService(); 
+            _tourGuestsRepository = new TourGuestsRepository(); 
+            _tourReservationRepository = new TourReservationRepository();   
+            _voucherRepository = new VoucherRepository();   
         }
 
         public List<Tour> GetTodayTours(User user)
@@ -42,7 +48,7 @@ namespace InitialProject.Service
             List<Tour> tours = new List<Tour>();
             foreach (Tour tour in allTours)
             {
-                if (tour.Guide.Id == user.Id)
+                if (tour.Guide.Id == user.Id && tour.Start.DayOfYear >= DateTime.Today.DayOfYear)
                 {
                     tours.Add(tour);
                 }
@@ -81,6 +87,28 @@ namespace InitialProject.Service
                 }
             }
             return active;
+        }
+        public void Delete(Tour tour)
+        {
+            _tourRepository.Delete(tour);
+        }
+        public void SendVauchers(Tour tour)
+        {
+            foreach (User guste in _tourReservationRepository.GetReservationGuest(tour))
+            {
+                Guest guest = _tourGuestsRepository.GetGuest(guste);
+                MakeVaucher(guest);
+            }
+        }
+
+        public void MakeVaucher(Guest guest)
+        {
+            Voucher voucher = new Voucher();
+            voucher.IdUser = guest.Id;
+            voucher.CreationDate = DateTime.Now;
+            voucher.Status = VoucherStatus.Created;
+            voucher.Text = "Ovaj vaucer mozete koristiti 2 godine od datuma kreiranja";
+            _voucherRepository.Save(voucher);
         }
 
     }

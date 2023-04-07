@@ -74,13 +74,14 @@ namespace InitialProject.View
                 _notificationRepository.Save(notification);
                 // sada treba da azuriram tabelu za prikaz podataka
                 MakeGuests();
+                if(CheckPoints.Last().Id == checkedCheckPoint.Id)
+                {
+                    EndTour();
+                }
                 
             } 
         }
         
-
-        
-
         public void MakeGuests()
         {
             foreach(User user in Guests)
@@ -90,6 +91,7 @@ namespace InitialProject.View
                     if(user.Id == guest.Id)
                     {
                         TourGuests.Add(guest);
+                        _tourGuestsRepository.Update(guest);
                     }
                 }
             }
@@ -116,16 +118,23 @@ namespace InitialProject.View
             }
         }
 
-        private void EndTour(object sender, RoutedEventArgs e)
+        private void EndTourClick(object sender, RoutedEventArgs e)
+        {
+            EndTour();
+        }
+        private void EndTour()
         {
             SelectedTour.IsActive = false;
             _tourRepository.Update(SelectedTour);
-            foreach (User guest in Guests)
+            foreach (Guest guest in TourGuests)
             {
-                _userRepository.Update(guest);
+                guest.Presence = UserPresence.Unknown;
+                guest.CheckPointName = "";
+                _tourGuestsRepository.Update(guest);
             }
             _notificationRepository.DeleteAll();
             UncheckCheckPoint(SelectedTour);
+            MessageBox.Show("Tura je uspjesno zavrsena!","", MessageBoxButton.OK,MessageBoxImage.Information);
         }
 
 
