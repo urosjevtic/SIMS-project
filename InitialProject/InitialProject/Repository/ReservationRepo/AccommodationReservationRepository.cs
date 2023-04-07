@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
+using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Serializer;
 
-namespace InitialProject.Repository
+namespace InitialProject.Repository.ReservationRepo
 {
-    public class AccommodationReservationRepository
+    public class AccommodationReservationRepository : IAccommodationReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/accommodationReservation.csv";
         private readonly Serializer<AccommodationReservation> _serializer;
@@ -20,7 +22,7 @@ namespace InitialProject.Repository
             _serializer = new Serializer<AccommodationReservation>();
             _reservations = _serializer.FromCSV(FilePath);
         }
-        public int NextId()
+        private int NextId()
         {
             _reservations = _serializer.FromCSV(FilePath);
             if (_reservations.Count < 1)
@@ -43,12 +45,12 @@ namespace InitialProject.Repository
         }
         public void SaveReservation(DateTime startDate, DateTime endDate, User LoggedUser, Accommodation accommodation, int guestNumber)
         {
-            AccommodationReservation reservation= new AccommodationReservation();
-            reservation.StartDate= startDate;
-            reservation.EndDate= endDate;
-            reservation.UserId=LoggedUser.Id;
-            reservation.Id=accommodation.Id;
-            reservation.GuestNumber= guestNumber;
+            AccommodationReservation reservation = new AccommodationReservation();
+            reservation.StartDate = startDate;
+            reservation.EndDate = endDate;
+            reservation.UserId = LoggedUser.Id;
+            reservation.Id = accommodation.Id;
+            reservation.GuestNumber = guestNumber;
             Save(reservation);
         }
 
@@ -58,6 +60,23 @@ namespace InitialProject.Repository
             AccommodationReservation founded = _reservations.Find(c => c.Id == reservation.Id);
             _reservations.Remove(founded);
             _serializer.ToCSV(FilePath, _reservations);
+        }
+
+        public void Update(AccommodationReservation updatedReservation)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            foreach (var reservation in _reservations)
+            {
+                if (reservation.Id == updatedReservation.Id)
+                {
+                    _reservations.Remove(reservation);
+                    _reservations.Add(updatedReservation);
+                    break;
+                }
+            }
+
+            _serializer.ToCSV(FilePath, _reservations);
+
         }
 
 

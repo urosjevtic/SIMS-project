@@ -53,7 +53,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Click="GoBack_Click" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
@@ -143,6 +143,7 @@
                             <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="Reschedule" Style="{StaticResource LogInButtonStyle}" Click="RescheduleButton_Click"/>
                                 <Button Content="Decline"
+                                        Click="DeclineRescheduleButton_Click"
                                 Margin="10,10,0,10"
                                  Style="{StaticResource LogInButtonStyle}"/>
                             </StackPanel>
