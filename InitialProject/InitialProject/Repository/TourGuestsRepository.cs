@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class TourGuestsRepository : ITourGuestsRepository
+    public class TourGuestsRepository : ITourGuestRepository
     {
 
         private const string FilePath = "../../../Resources/Data/tourGuests.csv";

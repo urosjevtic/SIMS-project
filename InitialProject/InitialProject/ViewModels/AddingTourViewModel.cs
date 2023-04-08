@@ -10,35 +10,45 @@ using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
 using InitialProject.ViewModel;
+using InitialProject.Domain.RepositoryInterfaces;
+using System.Windows.Controls;
+using System.Windows.Input;
+using InitialProject.Utilities;
 
 namespace InitialProject.ViewModels
 {
-    public class AddingTourViewModel
+    public class AddingTourViewModel : INotifyPropertyChanged
     {
-        private readonly TourRepository _tourRepository;
-        private readonly LocationRepository _locationRepository;
-        private readonly ImageRepository _imageRepository;
-        private readonly CheckPointRepository _checkPointRepository;
+        private readonly ITourRepository _tourRepository;
+        private readonly ILocationRepository _locationRepository;
+        private readonly IImageRepository _imageRepository;
+        private readonly ICheckPointRepository _checkPointRepository;
+        public LocationService _locationService;
+        public Dictionary<string, List<string>> Locations { get; set; }
 
         private GuideMainViewModel _guideMainWindow;
 
         public User LoggedUser { get; set; }
-        
-       public AddingTourViewModel(User user)
+
+        public AddingTourViewModel(User user)
         {
             _tourRepository = new TourRepository();
             _locationRepository = new LocationRepository();
             _imageRepository = new ImageRepository();
             _checkPointRepository = new CheckPointRepository();
             _guideMainWindow = new GuideMainViewModel(user);
+            
             LoggedUser = user;
             Start = DateTime.Now;
+            _locationService = new LocationService();
+            Locations = _locationService.GetCountriesAndCities();
             _guideMainWindow.UpdateToursDataGrid();
             _guideMainWindow.UpdateTodayToursDataGrid();
             _guideMainWindow.LoadData();
         }
-            
-       
+
+
+        
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -56,22 +66,43 @@ namespace InitialProject.ViewModels
                 if (value != _tourName)
                 {
                     _tourName = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Namee));
                 }
             }
         }
 
-        private string _location;
-        public string Location
+        private string _country;
+        public string Country
         {
-            get => _location;
+            get { return _country; }
             set
             {
-                if (value != _location)
-                {
-                    _location = value;
-                    OnPropertyChanged();
-                }
+                _country = value;
+                Cities = Locations[_country];
+                OnPropertyChanged(nameof(Country));
+            }
+
+        }
+
+        private IEnumerable<string> _cities;
+
+        public IEnumerable<string> Cities
+        {
+            get { return _cities; }
+            set
+            {
+                _cities = Locations[Country];
+                OnPropertyChanged(nameof(Cities));
+            }
+        }
+        private string _city;
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                _city = value;
+                OnPropertyChanged(nameof(City));
             }
         }
 
@@ -84,7 +115,7 @@ namespace InitialProject.ViewModels
                 if (value != _description)
                 {
                     _description = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Description));
                 }
             }
         }
@@ -97,7 +128,7 @@ namespace InitialProject.ViewModels
                 if (value != _language)
                 {
                     _language = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Languagee));
                 }
             }
         }
@@ -110,7 +141,7 @@ namespace InitialProject.ViewModels
                 if (value != _maxGuests)
                 {
                     _maxGuests = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(MaxGuests));
                 }
             }
         }
@@ -123,7 +154,7 @@ namespace InitialProject.ViewModels
                 if (value != _start)
                 {
                     _start = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Start));
                 }
             }
         }
@@ -137,7 +168,7 @@ namespace InitialProject.ViewModels
                 if (value != _duration)
                 {
                     _duration = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Duration));
                 }
             }
         }
@@ -150,7 +181,7 @@ namespace InitialProject.ViewModels
                 if (value != _imagesUrl)
                 {
                     _imagesUrl = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(ImagesUrl));
                 }
             }
         }
@@ -165,14 +196,14 @@ namespace InitialProject.ViewModels
                 if (value != _checkPoints)
                 {
                     _checkPoints = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(CheckPoints));
                 }
             }
         }
 
         public int saveImages(string urls, int entityId)
         {
-            Image images = new Domain.Model.Image();
+            Domain.Model.Image images = new Domain.Model.Image();
             images.EntityLd = entityId;
             string[] imagesUrls = SplitString(urls);
             foreach (string imageUrl in imagesUrls)
@@ -210,12 +241,16 @@ namespace InitialProject.ViewModels
             return _checkPointRepository.Save(checkPoint);
 
         }
+
+        public ICommand SaveTourCommand => new RelayCommand(ConfirmAddingTour);
+
         public void ConfirmAddingTour()
         {
             Tour tour = new Tour();
             tour.Guide.Id = LoggedUser.Id;
             tour.Name = _tourName;
-            tour.Location.Id = _locationRepository.GetLocationId(_location);
+            tour.Location.City = _city;
+            tour.Location.Country = _country;
             tour.Description = _description;
             tour.Language = _language;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
@@ -226,11 +261,13 @@ namespace InitialProject.ViewModels
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             tour.IsActive = false;
             _tourRepository.Save(tour);
-            
+            _guideMainWindow.UpdateTodayToursDataGrid();
+            _guideMainWindow.UpdateToursDataGrid();
             _guideMainWindow.LoadData();
         }
-        
 
        
+
+
     }
 }

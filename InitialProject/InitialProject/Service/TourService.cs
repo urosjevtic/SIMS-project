@@ -5,23 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Repository;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Service
 {
     public class TourService
     {
-        private readonly TourRepository _tourRepository;    
-        private readonly TourGuestsRepository _tourGuestsRepository;
-        private readonly TourReservationRepository _tourReservationRepository;
+        private readonly ITourRepository _tourRepository;    
+        private readonly ITourGuestRepository _tourGuestsRepository;
+        private readonly ITourReservationRepository _tourReservationRepository;
+
         private readonly VoucherRepository _voucherRepository;
         public LocationService _locationService { get; set; }
 
         public TourService()
         {
-            _tourRepository = new TourRepository(); 
+            _tourRepository = Injector.Injector.CreateInstance<ITourRepository>(); 
             _locationService = new LocationService(); 
-            _tourGuestsRepository = new TourGuestsRepository(); 
-            _tourReservationRepository = new TourReservationRepository();   
+            _tourGuestsRepository = Injector.Injector.CreateInstance<ITourGuestRepository>(); 
+            _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();   
             _voucherRepository = new VoucherRepository();   
         }
 
@@ -110,6 +113,53 @@ namespace InitialProject.Service
             voucher.Text = "Ovaj vaucer mozete koristiti 2 godine od datuma kreiranja";
             _voucherRepository.Save(voucher);
         }
+        /////////////////////////////////////////
+        ///
 
+        public int NextId()
+        {
+            return _tourRepository.NextId();
+        }
+        public List<Tour> FindAllAlternatives(Tour tour)
+        {
+            return _tourRepository.FindAllAlternatives(tour);
+        }
+        
+        public void Save(Tour tour)
+        {
+            _tourRepository.Save(tour);
+        }
+
+
+        public List<Tour> GetAll()
+        {
+            return _tourRepository.GetAll();
+        }
+
+
+        public CheckPoint GetTourFirstCheckPoint(Tour tour)
+        {
+            return _tourRepository.GetTourFirstCheckPoint(tour);
+        }
+       
+
+        public void SaveAll(List<Tour> tours)
+        {
+            _tourRepository.SaveAll(tours);
+        }
+        public void Update(Tour tour)
+        {
+            _tourRepository.Update(tour);
+        }
+
+        public Tour GetById(int id)
+        {
+            return _tourRepository.GetById(id);
+        }
+
+        public string GetMostVisitedEver(string year)
+        {
+            return "";
+        }
     }
 }

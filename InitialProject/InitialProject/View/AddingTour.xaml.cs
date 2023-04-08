@@ -18,6 +18,8 @@ using System.Runtime.CompilerServices;
 using InitialProject.ViewModel;
 using InitialProject.ViewModels;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using System.Collections;
 
 namespace InitialProject.View
 {
@@ -26,19 +28,28 @@ namespace InitialProject.View
     /// </summary>
     public partial class AddingTour : Window
     {   
-        public AddingTourViewModel AddingTourViewModel { get; set; }    
+        public AddingTourViewModel AddingTourViewModel { get; set; }
 
-        
         public User LoggedUser { get; set; }
         public AddingTour(User user)
 
         {
+            
             InitializeComponent();
+            AddingTourViewModel = new AddingTourViewModel(user);
+            this.DataContext = AddingTourViewModel;
             LoggedUser = user;
-            AddingTourViewModel = new AddingTourViewModel(LoggedUser);
-            this.DataContext = AddingTourViewModel;            
+   
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+
+       
 
         private void SaveClick(object sender, RoutedEventArgs e)
         {
@@ -50,5 +61,9 @@ namespace InitialProject.View
         {
             this.Close();
         }
+
+
+       
+
     }
 }

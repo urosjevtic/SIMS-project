@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Repository;
-using InitialProject.DTO;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 
@@ -25,7 +24,6 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         private readonly NotificationRepository _notificationRepository;
         private readonly TourReservationRepository _tourReservationRepository;
-        private readonly UserRepository _userRepository;
         private readonly CheckPointRepository _checkPointRepository;
         private readonly TourGuestsRepository _tourGuestsRepository;
         public List<User> Guests { get; set; }
@@ -44,7 +42,6 @@ namespace InitialProject.View
             _notificationRepository = new NotificationRepository();
             _tourReservationRepository = new TourReservationRepository();
             _tourGuestsRepository = new TourGuestsRepository(); 
-            _userRepository = new UserRepository();
             _checkPointRepository = new CheckPointRepository();
 
             CheckedCheckPoints = new List<CheckPoint>();

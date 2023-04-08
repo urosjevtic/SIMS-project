@@ -19,6 +19,7 @@ using System.Runtime.CompilerServices;
 using InitialProject.View;
 using InitialProject.Service;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.ViewModel
 {
@@ -27,11 +28,10 @@ namespace InitialProject.ViewModel
 
         public User LoggedUser { get; set; }
         public List<Tour> ActiveTours { get; set; }
-        public TourRepository _tourRepository { get; set; }
         public LocationService _locationService { get; set; } 
         public TourService _tourService { get; set; }
-        public LocationRepository _locationRepository { get; set; }   
-        public CheckPointRepository _checkPointRepository { get; set; }
+        public ILocationRepository _locationRepository { get; set; }   
+        public ICheckPointRepository _checkPointRepository { get; set; }
         public List<Tour> tours;
         public List<Location> locations;
 
@@ -46,7 +46,7 @@ namespace InitialProject.ViewModel
         {
             LoggedUser = user;
             _locationRepository = new LocationRepository();
-            _tourRepository = new TourRepository();
+           // _tourRepository = new TourRepository();
             _locationService = new LocationService();
             _tourService = new TourService();
             _checkPointRepository = new CheckPointRepository();
@@ -101,7 +101,7 @@ namespace InitialProject.ViewModel
                         _checkPointRepository.Update(cp);
                     }
                 }
-                _tourRepository.Update(SelectedTodayTour);
+                _tourService.Update(SelectedTodayTour);
                 StartedTour startedTour = new StartedTour(SelectedTodayTour);
                 startedTour.Show();
             }
@@ -122,7 +122,7 @@ namespace InitialProject.ViewModel
         {
             if (SelectedTour != null)
             {
-                if (DateTime.Now.Hour <= SelectedTour.Start.Hour)
+                if (DateTime.Now.DayOfYear <= SelectedTour.Start.DayOfYear)
                 {
                     _tourService.SendVauchers(SelectedTour);
                     _tourService.Delete(SelectedTour);

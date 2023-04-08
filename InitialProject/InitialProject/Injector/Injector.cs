@@ -18,7 +18,15 @@ namespace InitialProject.Injector
             {typeof(ILocationRepository), new LocationRepository()},
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
             {typeof(IRescheduleRequestRepository), new RescheduleRequestRepository()},
-            {typeof(IUnratedGuestRepository), new UnratedGuestRepository()}
+            {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
+            {typeof(ITourGuestRepository), new TourGuestsRepository()},
+            {typeof(ITourRepository), new TourRepository()},
+            {typeof(ITourReservationRepository), new TourReservationRepository()},
+            {typeof(INotificationRepository), new NotificationRepository()}
+
+
+
+
 
             // Add more implementations here
         };
