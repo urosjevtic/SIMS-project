@@ -129,6 +129,23 @@ namespace InitialProject.Service
             }
             return active;
         }
+        public List<Tour> FindAllEndedTours()
+        {
+            List<Tour> tours = _tourRepository.GetAll();
+            List<Location> locations = _locationService.LoadLocations();
+            List<Tour> ended = new List<Tour>();
+            AddTourLocation(tours, locations);
+
+            foreach(Tour tour in tours)
+            {
+                TimeSpan ts = new(tour.Duration, 0, 0);
+                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false)
+                {
+                    ended.Add(tour);
+                }
+            }
+            return ended;
+        }
         public List<Tour> FindActiveTours(User user)
         {
 

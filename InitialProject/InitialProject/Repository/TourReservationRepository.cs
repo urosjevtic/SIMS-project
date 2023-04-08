@@ -54,12 +54,14 @@ namespace InitialProject.Repository
             }
             return sum;
         }
-        public void SaveReservation(Tour tour, int numberOfPeople, User LoggedUser)
+        public void SaveReservation(Tour tour, int numberOfPeople, User LoggedUser, bool IsUsingVoucher, double age)
         {
             TourReservation reservation = new TourReservation();
             reservation.IdTour = tour.Id;
             reservation.IdGuest = LoggedUser.Id;
             reservation.NumberOfPeople = numberOfPeople;
+            reservation.IsUsingVoucher = IsUsingVoucher;
+            reservation.AverageAge = age;
             Save(reservation);
         }
 

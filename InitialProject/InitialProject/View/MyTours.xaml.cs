@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -28,9 +30,58 @@ namespace InitialProject.View
         private readonly VoucherRepository _voucherRepository;
         public CheckPointService _checkPointService;
         public TourService _tourService;
-        public Tour SelectedTour { get; set; }
-        public List<Tour> Tours { get; set; }
-        public User LoggedUser { get; set; } 
+        public Tour SelectedActiveTour { get; set; }
+        public Tour SelectedEndedTour { get; set; }
+        public List<Tour> ActiveTours { get; set; }
+        public List<Tour> EndedTours { get; set; }
+        public User LoggedUser { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+        private int _guideKnowledge;
+        public int GuideKnowledge
+        {
+            get { return _guideKnowledge; }
+            set
+            {
+                if (value != _guideKnowledge)
+                {
+                    _guideKnowledge = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private int _guideLanguage;
+        public int GuideLanguage
+        {
+            get { return _guideLanguage; }
+            set
+            {
+                if (value != _guideLanguage)
+                {
+                    _guideLanguage = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+        private int _interestingTour;
+        public int InterestingTour
+        {
+            get { return _interestingTour; }
+            set
+            {
+                if (value != _interestingTour)
+                {
+                    _interestingTour = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
         public MyTours(User user)
         {
             InitializeComponent();
@@ -38,8 +89,11 @@ namespace InitialProject.View
             LoggedUser = user;
             _tourService = new TourService();
             _checkPointService = new CheckPointService();
-            Tours = _tourService.FindAllActiveTours();
-            activeTours.ItemsSource = new ObservableCollection<Tour>(Tours);
+            ActiveTours = _tourService.FindAllActiveTours();
+            EndedTours = _tourService.FindAllEndedTours();
+            activeTours.ItemsSource = new ObservableCollection<Tour>(ActiveTours);
+            endedTours.ItemsSource = new ObservableCollection<Tour>(EndedTours);
+            groupBoxRate.Header = "Rate tour:";
         }
         private void GoBackButton(object sender, RoutedEventArgs e)
         {
@@ -48,9 +102,9 @@ namespace InitialProject.View
 
         private void ViewCheckpointsButton(object sender, RoutedEventArgs e)
         {
-            SelectedTour = (Tour)((Button)sender).DataContext;
+            SelectedActiveTour = (Tour)((Button)sender).DataContext;
             // Set the SelectedTour property to the selected tour item
-            List<CheckPoint> CheckPoints = SelectedTour.CheckPoints;
+            List<CheckPoint> CheckPoints = SelectedActiveTour.CheckPoints;
             listBox.ItemsSource = new ObservableCollection<CheckPoint>(CheckPoints);
         }
 
@@ -63,6 +117,17 @@ namespace InitialProject.View
         {
             CommentForm commentForm = new(LoggedUser);
             commentForm.Show();
+        }
+
+        private void RatingButton(object sender, RoutedEventArgs e)
+        {
+            SelectedEndedTour = (Tour)((Button)sender).DataContext;
+            groupBoxRate.Header = "Rate tour: " + SelectedEndedTour.Name;
+        }
+
+        private void JoinTourButton(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

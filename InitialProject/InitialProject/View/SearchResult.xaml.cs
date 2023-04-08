@@ -28,6 +28,7 @@ namespace InitialProject.View
         private readonly TourService _tourService;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly VoucherRepository _voucherRepository;
+        private readonly VoucherService _voucherService;
         public List<Tour> tours { get; set; }
         private List<Voucher> vouchers { get; set; }
 
@@ -41,6 +42,7 @@ namespace InitialProject.View
             _tourService = new TourService();
             _tourReservationRepository = new TourReservationRepository();
             _voucherRepository = new VoucherRepository();
+            _voucherService = new VoucherService();
             tours = filteredTours;
             vouchers = _voucherRepository.GetAllCreated();
             LoggedUser = user;
@@ -71,10 +73,11 @@ namespace InitialProject.View
             {
                 int numberOfPeople = int.Parse(nrOfPeopleTextBox.Text);
                 int freeSeats = SelectedTour.MaxGuests - _tourReservationRepository.CountUnreservedSeats(SelectedTour);
+                double age = double.Parse(averageAge.Text);
 
                 if (numberOfPeople <= freeSeats)
                 {
-                    _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser);
+                    _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     if (SelectedVoucher != null)
                     {
