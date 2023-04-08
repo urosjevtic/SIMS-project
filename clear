@@ -1,0 +1,256 @@
+[33mcommit 4be724b80a466e54b0814835e8a807ed2593c036[m[33m ([m[1;36mHEAD -> [m[1;32mdevelop[m[33m)[m
+Merge: c6a9462 d7017be
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Thu Apr 6 23:34:33 2023 +0200
+
+    Merging refactored code
+
+[33mcommit d7017bebe7af9c5973a5924db64bc91885454932[m[33m ([m[1;31morigin/feat/code_refactoring[m[33m)[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Thu Apr 6 23:08:26 2023 +0200
+
+    Repository reorganisation
+
+[33mcommit 627bc4550bc535c7dd072daa9e8067498574cacd[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Thu Apr 6 21:42:25 2023 +0200
+
+    Reschedule requests window
+
+[33mcommit c6a946266f5f4a0d6cd583e09b907a69aa989118[m[33m ([m[1;31morigin/develop[m[33m)[m
+Merge: d6cb7a9 3e8a594
+Author: Lukaa01 <116888438+Lukaa01@users.noreply.github.com>
+Date:   Thu Apr 6 15:29:27 2023 +0200
+
+    Merge pull request #14 from urosjevtic/feat/voucher
+    
+    Feat/voucher
+
+[33mcommit 3e8a5942d3c7c773a6e42644f999879df99615ab[m[33m ([m[1;31morigin/feat/voucher[m[33m)[m
+Author: Luka Milanko <milankoluka01@gmail.com>
+Date:   Thu Apr 6 15:22:10 2023 +0200
+
+    Vauceri
+
+[33mcommit eff7e59f8b410bb0bb1ec9e4c85d690fceaab808[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmain[m[33m)[m
+Merge: 7c33af2 f04aa2d
+Author: Dajana00 <74311884+Dajana00@users.noreply.github.com>
+Date:   Thu Apr 6 14:40:49 2023 +0200
+
+    Merge pull request #13 from urosjevtic/feat/appearance_change
+    
+    Feat/appearance change
+
+[33mcommit f04aa2d3538f65326d3804b68013167778e28682[m[33m ([m[1;31morigin/feat/appearance_change[m[33m)[m
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Thu Apr 6 13:03:08 2023 +0200
+
+    Manje izmjene
+
+[33mcommit 805b267ddb8cd4c551638dc1c93da64419e898cb[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Wed Apr 5 17:10:01 2023 +0200
+
+    Refactoring and adding services
+
+[33mcommit dee516c0c938350c2defffb9f804fd90463687f6[m
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Tue Apr 4 20:10:34 2023 +0200
+
+    Novi raspored po folderima
+
+[33mcommit d6cb7a9cbdeead052c1057e9a7fec8d61f0f6aa1[m
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Mon Apr 3 13:44:55 2023 +0200
+
+    Ispravljeni konflikti
+
+[33mcommit 7c33af20b5069ed95b7a68b63a144fbc056542f1[m
+Merge: cc673e6 96f4306
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Sun Apr 2 15:50:24 2023 +0200
+
+    Fixed conflicts
+
+[33mcommit 07f61f8ae789147fe85c4c696fd56f5880ebf7a8[m
+Merge: 96f4306 864b187
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Wed Mar 22 03:09:32 2023 +0100
+
+    Finish
+
+[33mcommit 864b187d05cbfd7c820e3dff494fb28eba828383[m[33m ([m[1;31morigin/feat/list_of_guests_on_tour[m[33m)[m
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Wed Mar 22 02:48:14 2023 +0100
+
+    Finish
+
+[33mcommit 96f4306cda21ca6e6d5aa68962c40fdd7f77dd15[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Tue Mar 21 22:57:57 2023 +0100
+
+    Fixed CSV files
+
+[33mcommit f2fc5455a4f61e36ae20bb91ef6e99f7b92d8ddf[m
+Merge: 4cfb9a5 fcfea20
+Author: Uros Jevtic <116621759+urosjevtic@users.noreply.github.com>
+Date:   Tue Mar 21 22:47:58 2023 +0100
+
+    Merge pull request #12 from urosjevtic/feat/bugfixing
+    
+    Bug fixing
+
+[33mcommit fcfea2087532889c90602165f4c58d051899476e[m
+Merge: a94c1c7 4cfb9a5
+Author: Uros Jevtic <116621759+urosjevtic@users.noreply.github.com>
+Date:   Tue Mar 21 22:47:42 2023 +0100
+
+    Merge branch 'develop' into feat/bugfixing
+
+[33mcommit a94c1c70e65924dc635be034143508c1625d4b54[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Tue Mar 21 22:41:18 2023 +0100
+
+    Bug fixing
+
+[33mcommit 4cfb9a5aa1fe8c5e0a3f219aca08504de5138f1c[m
+Merge: 34dab69 7da50cc
+Author: Uros Jevtic <116621759+urosjevtic@users.noreply.github.com>
+Date:   Tue Mar 21 22:10:15 2023 +0100
+
+    Merge pull request #11 from urosjevtic/feat/refactoring
+    
+    Code refactoring
+
+[33mcommit 7da50cc7f80e21e143928c5c465231b7e6958632[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Tue Mar 21 22:06:58 2023 +0100
+
+    Code refactoring
+
+[33mcommit 34dab69beae175302411746790040e78efe7a7cb[m
+Merge: 04541a9 73b0323
+Author: moracaj <71277661+moracaj@users.noreply.github.com>
+Date:   Tue Mar 21 20:40:27 2023 +0100
+
+    Merge pull request #10 from urosjevtic/feat/accommodation_show
+    
+    Feat/accommodation show
+
+[33mcommit 73b03234b0ec082cdbede4848b88910eca65afee[m[33m ([m[1;31morigin/feat/accommodation_show[m[33m)[m
+Merge: c4b902e 04541a9
+Author: moracaj <71277661+moracaj@users.noreply.github.com>
+Date:   Tue Mar 21 20:40:13 2023 +0100
+
+    Merge branch 'develop' into feat/accommodation_show
+
+[33mcommit c4b902e7e21e229dd788d9a3308d7c12baf2e7d8[m
+Author: Jelena Moraca <moracajelena1@gmail.com>
+Date:   Tue Mar 21 20:06:19 2023 +0100
+
+    Reservation of accommodation
+
+[33mcommit 04541a98038495a2f49c1e6bc5931076a13b0cd2[m
+Merge: 01eb953 56ff273
+Author: Lukaa01 <116888438+Lukaa01@users.noreply.github.com>
+Date:   Tue Mar 21 14:37:28 2023 +0100
+
+    Merge pull request #9 from urosjevtic/feat/reservation_tour
+    
+    Feat/reservation tour
+
+[33mcommit 56ff27321c65ddd9fffaacad59c13a6f0fb95978[m[33m ([m[1;31morigin/feat/reservation_tour[m[33m)[m
+Merge: 7432f98 01eb953
+Author: Lukaa01 <116888438+Lukaa01@users.noreply.github.com>
+Date:   Tue Mar 21 14:37:17 2023 +0100
+
+    Merge branch 'develop' into feat/reservation_tour
+
+[33mcommit 7432f981cd09ccb0d6bcda77247bef1c678e1b42[m
+Author: Luka Milanko <milankoluka01@gmail.com>
+Date:   Tue Mar 21 14:12:49 2023 +0100
+
+    Guest2 search and reservation ended
+
+[33mcommit b9a3e9b06061d06360998312572e7e7ecba4095b[m
+Author: Jelena Moraca <moracajelena1@gmail.com>
+Date:   Tue Mar 21 02:10:46 2023 +0100
+
+    reservation
+
+[33mcommit 8579d5c05e54de80da67604cff7db795e1957553[m
+Author: Luka Milanko <milankoluka01@gmail.com>
+Date:   Mon Mar 20 23:15:52 2023 +0100
+
+    Reservation ended
+
+[33mcommit e6afb6be95b5c7bc2b94fcb0971624e67e50e423[m
+Author: Jelena Moraca <moracajelena1@gmail.com>
+Date:   Mon Mar 20 23:03:36 2023 +0100
+
+    Window accommodation reservation ready
+
+[33mcommit d4eb308ade5b88cb2d24929e6b8ad99cec533938[m
+Author: Jelena Moraca <moracajelena1@gmail.com>
+Date:   Mon Mar 20 20:01:51 2023 +0100
+
+    filter accommodation
+
+[33mcommit 01eb953a5a3270b4d46b85ee728366b52743ee29[m
+Merge: 15c32b5 4a02572
+Author: Uros Jevtic <116621759+urosjevtic@users.noreply.github.com>
+Date:   Mon Mar 20 17:17:46 2023 +0100
+
+    Merge pull request #8 from urosjevtic/feat/refactoring_and_bugfixing
+    
+    Feat/refactoring and bugfixing
+
+[33mcommit 315f4754b3ba4d96bc07cc64aeee0bdf3c2f56df[m
+Author: Luka Milanko <milankoluka01@gmail.com>
+Date:   Mon Mar 20 13:57:44 2023 +0100
+
+    Finding alternative
+
+[33mcommit 4a02572dd1aa0b050db572755fc7838fbe80d3b8[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Mon Mar 20 13:31:25 2023 +0100
+
+    Refatoring owner main window and bug fixing
+
+[33mcommit 60cac567324bc4c1e9cb3433810415f511e3de48[m
+Author: Uros Jevtic <uros.jevtic888@gmail.com>
+Date:   Mon Mar 20 10:10:23 2023 +0100
+
+    Refactoring accommodation registration and bug fixing
+
+[33mcommit 34c2711af1867367792094409fa1d5c51adc60ba[m
+Author: Jelena Moraca <moracajelena1@gmail.com>
+Date:   Sun Mar 19 23:06:17 2023 +0100
+
+    Repository and Resources for reservation
+
+[33mcommit 15c32b556e02336e3bff7bc4dfc0bde7e27b42d7[m
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Sun Mar 19 16:44:32 2023 +0100
+
+    Ispravljene greske
+
+[33mcommit 2a025996e94eabab40a876c3562390fca7cd6deb[m
+Merge: 198e594 b0233fd
+Author: Dajana00 <74311884+Dajana00@users.noreply.github.com>
+Date:   Sun Mar 19 13:41:02 2023 +0100
+
+    Merge pull request #7 from urosjevtic/feat/today_tours
+    
+    Today tours
+
+[33mcommit b0233fd978c17dc027391e577ca350fb09769586[m[33m ([m[1;31morigin/feat/today_tours[m[33m)[m
+Merge: c7233f9 198e594
+Author: Dajana00 <74311884+Dajana00@users.noreply.github.com>
+Date:   Sun Mar 19 13:40:49 2023 +0100
+
+    Merge branch 'develop' into feat/today_tours
+
+[33mcommit c7233f9bcfc67fde5d6389daa344c10b05288626[m
+Author: Dajana00 <dajanaskocajic18@gmail.com>
+Date:   Sun Mar 19 13:33:

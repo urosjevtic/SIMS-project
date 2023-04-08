@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using Microsoft.VisualBasic.ApplicationServices;
 
@@ -61,7 +62,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _images);
         }
 
-        void Save(Image image)
+        public void Save(Image image)
         {
             image.Id = NextId();
             _images = _serializer.FromCSV(FilePath);
@@ -75,11 +76,6 @@ namespace InitialProject.Repository
         }
 
         public void Update(Image entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRepository<Image>.Save(Image entity)
         {
             throw new NotImplementedException();
         }

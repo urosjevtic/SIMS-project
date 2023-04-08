@@ -1,5 +1,5 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
 using System.ComponentModel;

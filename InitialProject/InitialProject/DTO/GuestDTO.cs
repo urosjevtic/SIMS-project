@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
 
 namespace InitialProject.DTO

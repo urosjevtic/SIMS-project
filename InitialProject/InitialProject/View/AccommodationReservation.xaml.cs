@@ -1,5 +1,6 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Repository.ReservationRepo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -67,8 +68,8 @@ namespace InitialProject.View
             {
                 SelectedAccommodation.MaxGuests -= guestNumber;
                 _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
+                MessageBox.Show("Reservation successful!");
             }
-           
         }
         private void SearchClick(object sender, RoutedEventArgs e)
         {
