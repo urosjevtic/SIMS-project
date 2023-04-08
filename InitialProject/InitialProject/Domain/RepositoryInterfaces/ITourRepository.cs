@@ -9,5 +9,32 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface ITourRepository
     {
+
+        public int NextId();
+
+        public List<Tour> FindAllAlternatives(Tour tour);
+
+        public void AddTourLocation(List<Tour> tours, List<Location> locations);
+
+        public void Save(Tour tour);
+
+
+
+        public List<Tour> GetAll();
+
+
+
+        public CheckPoint GetTourFirstCheckPoint(Tour tour);
+
+        public void Delete(Tour tour);
+
+
+
+        public void SaveAll(List<Tour> tours);
+        public void Update(Tour tour);
+
+
+        public Tour GetById(int id);
+      
     }
 }

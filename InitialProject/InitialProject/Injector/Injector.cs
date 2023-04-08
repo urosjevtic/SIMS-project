@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +19,14 @@ namespace InitialProject.Injector
             {typeof(IAccommodationRepository), new AccommodationRepository()}, 
             {typeof(ILocationRepository), new LocationRepository()},
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
-            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
+            {typeof(IRescheduleRequestRepository), new RescheduleRequestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
-            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()}
+            {typeof(ITourGuestRepository), new TourGuestsRepository()},
+            {typeof(ITourRepository), new TourRepository()},
+            {typeof(ITourReservationRepository), new TourReservationRepository()},
+            {typeof(INotificationRepository), new NotificationRepository()},
+            {typeof(IAccommodationReservationRescheduleRequestRepository), 
+            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository)}
 
             // Add more implementations here
         };

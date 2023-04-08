@@ -9,9 +9,14 @@ using InitialProject.Serializer;
 namespace InitialProject.Model 
 {
     public enum UserPresence { Yes, No, Unknown }
-    public class Guest : User
+    public class Guest : ISerializable
     {
        
+        public int Id { get; set; }    
+        public String Username { get; set; }
+        public string Password { get; set; } 
+        public UserRole Role { get; set; }
+
         public String Name { get; set; }    
         public String Surname { get; set; }
         public UserPresence Presence { get; set; }  

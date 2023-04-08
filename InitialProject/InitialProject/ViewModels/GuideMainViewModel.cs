@@ -19,6 +19,7 @@ using System.Runtime.CompilerServices;
 using InitialProject.View;
 using InitialProject.Service;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.ViewModel
 {
@@ -27,14 +28,14 @@ namespace InitialProject.ViewModel
 
         public User LoggedUser { get; set; }
         public List<Tour> ActiveTours { get; set; }
-        public TourRepository _tourRepository { get; set; }
         public LocationService _locationService { get; set; } 
         public TourService _tourService { get; set; }
-        public LocationRepository _locationRepository { get; set; }   
-        public CheckPointRepository _checkPointRepository { get; set; }
+        public ILocationRepository _locationRepository { get; set; }   
+        public ICheckPointRepository _checkPointRepository { get; set; }
         public List<Tour> tours;
         public List<Location> locations;
 
+        public Tour SelectedTour { get; set; }
         public Tour SelectedTodayTour { get; set; }
         public Tour ActiveTour { get; set; }
 
@@ -45,7 +46,7 @@ namespace InitialProject.ViewModel
         {
             LoggedUser = user;
             _locationRepository = new LocationRepository();
-            _tourRepository = new TourRepository();
+           // _tourRepository = new TourRepository();
             _locationService = new LocationService();
             _tourService = new TourService();
             _checkPointRepository = new CheckPointRepository();
@@ -64,7 +65,6 @@ namespace InitialProject.ViewModel
         {
             AddingTour addingTour = new AddingTour(LoggedUser);
             addingTour.Show();
-
         }
 
 
@@ -101,7 +101,7 @@ namespace InitialProject.ViewModel
                         _checkPointRepository.Update(cp);
                     }
                 }
-                _tourRepository.Update(SelectedTodayTour);
+                _tourService.Update(SelectedTodayTour);
                 StartedTour startedTour = new StartedTour(SelectedTodayTour);
                 startedTour.Show();
             }
@@ -116,6 +116,22 @@ namespace InitialProject.ViewModel
             {
                 StartedTour startedTour = new StartedTour(ActiveTour);
                 startedTour.Show();
+            }
+        }
+        public void CancelTour()
+        {
+            if (SelectedTour != null)
+            {
+                if (DateTime.Now.DayOfYear <= SelectedTour.Start.DayOfYear)
+                {
+                    _tourService.SendVauchers(SelectedTour);
+                    _tourService.Delete(SelectedTour);
+                    MessageBox.Show("Tura je uspjesno otkazana.","Information", MessageBoxButton.OK,MessageBoxImage.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Do pocetka ture je ostalo manje od 48h!","Error",MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 

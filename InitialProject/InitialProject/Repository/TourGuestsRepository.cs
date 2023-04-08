@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class TourGuestsRepository : ITourGuestsRepository
+    public class TourGuestsRepository : ITourGuestRepository
     {
 
         private const string FilePath = "../../../Resources/Data/tourGuests.csv";
         private readonly Serializer<Guest> _serializer;
 
+        private readonly UserRepository _userRepository;    
         private List<Guest> _guests;
 
         public TourGuestsRepository()
         {
             _serializer = new Serializer<Guest>();
             _guests = _serializer.FromCSV(FilePath);
+            _userRepository = new UserRepository(); 
         }
 
         public int NextId()
@@ -77,6 +81,21 @@ namespace InitialProject.Repository
             SaveAll(_guests);
         }
        
-       
+        public Guest GetGuest(User user)
+        {
+            foreach(User u in _userRepository.GetAll())
+            {
+                foreach(Guest guest in GetAll())
+                {
+                    if(guest.Id == u.Id)
+                    {
+                        return guest;
+                    }
+                }
+            }
+            return null;
+        }
+
+
     }
 }
