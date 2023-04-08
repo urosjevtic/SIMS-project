@@ -192,8 +192,8 @@ namespace InitialProject.View
 
         private void ButtonClick_AddAccommodation(object sender, RoutedEventArgs e)
         {
-            AccommodationRegistration accommodationRegistration = new AccommodationRegistration(this, LoggedInUser);
-            accommodationRegistration.Show();
+            //AccommodationRegistration accommodationRegistration = new AccommodationRegistration(this, LoggedInUser);
+            //accommodationRegistration.Show();
         }
 
         private void ButtonClik_RateGuest(object sender, RoutedEventArgs e)

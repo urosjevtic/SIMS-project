@@ -1,29 +1,26 @@
-﻿using InitialProject.Model;
-using InitialProject.Utilities;
+﻿using InitialProject.Utilities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.MyAccommodations;
-using System.Linq;
 
-namespace InitialProject.ViewModel
+namespace InitialProject.ViewModels
 {
-    public class OwnerMainViewModel : INotifyPropertyChanged
+    public class MyAccommodationsMainViewModel : INotifyPropertyChanged
     {
-        private User _loggedInUser;
 
-        public User LogedInUser
+        public User LogedInUser;
+        public MyAccommodationsMainViewModel(User logedInUser)
         {
-            get { return _loggedInUser; }
-            set
-            {
-                _loggedInUser = value;
-                OnPropertyChanged(nameof(LogedInUser));
-            }
+            LogedInUser = logedInUser;
         }
 
-        public string WelcomeMessage => "Welcome";
 
         private Visibility _sideScreenVisibility = Visibility.Collapsed;
 
@@ -48,17 +45,8 @@ namespace InitialProject.ViewModel
                 OnPropertyChanged(nameof(MainScreenVisibility));
             }
         }
-
         public ICommand BurgerBarClosedCommand => new RelayCommand(BurgerBarClosed);
         public ICommand BurgerBarOpenCommand => new RelayCommand(BurgerBarOpen);
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public OwnerMainViewModel(User user)
-        {
-            LogedInUser = user;
-        }
-
         private void BurgerBarOpen()
         {
             SideScreenVisibility = Visibility.Visible;
@@ -71,14 +59,26 @@ namespace InitialProject.ViewModel
             MainScreenVisibility = Visibility.Visible;
         }
 
-        public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
+        public ICommand OpenRegistrationFormCommand => new RelayCommand(OpenRegistrationForm);
 
-        private void MyAccommoadionsOpen()
+        private void OpenRegistrationForm()
         {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            myAccommodationsMainWindow.Show();
+            AccommodationRegistrationForm accommodationRegistrationForm = new AccommodationRegistrationForm(LogedInUser);
+            accommodationRegistrationForm.Show();
+
         }
 
+        public ICommand OpenAccommodationListCommand => new RelayCommand(OpenAccommodationList);
+
+        private void OpenAccommodationList()
+        {
+            MyAccommodationsList myAccommodationsList = new MyAccommodationsList(LogedInUser);
+            myAccommodationsList.Show();
+
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
