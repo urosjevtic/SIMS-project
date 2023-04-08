@@ -33,5 +33,7 @@
         <TextBox x:Name="nrOfPeopleTextBox" HorizontalAlignment="Left" Margin="268,17,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Height="42" FontSize="30" RenderTransformOrigin="0.507,0.551" Grid.Column="1"/>
         <Label Content="All vouchers:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="30" Width="179" Grid.Column="1" Margin="0,62,0,0"/>
         <ComboBox x:Name="vouchersComboBox" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding vouchers}" DisplayMemberPath="ExpiryDate" SelectedItem="{Binding SelectedVoucher}" Margin="197,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="150"/>
+        <Label Content="Average age of people you reserved for:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="30" Width="544" Grid.Column="1" Margin="0,107,0,0"/>
+        <TextBox x:Name="averageAge" HorizontalAlignment="Left" Margin="559,111,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="70" Height="42" FontSize="30" RenderTransformOrigin="0.507,0.551" Grid.Column="1"/>
     </Grid>
 </Window>

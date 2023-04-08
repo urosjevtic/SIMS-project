@@ -1,10 +1,12 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Repository;
+using InitialProject.Repository.ReservationRepo;
 
 namespace InitialProject.Injector
 {
@@ -22,11 +24,9 @@ namespace InitialProject.Injector
             {typeof(ITourGuestRepository), new TourGuestsRepository()},
             {typeof(ITourRepository), new TourRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
-            {typeof(INotificationRepository), new NotificationRepository()}
-
-
-
-
+            {typeof(INotificationRepository), new NotificationRepository()},
+            {typeof(IAccommodationReservationRescheduleRequestRepository), 
+            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository)}
 
             // Add more implementations here
         };

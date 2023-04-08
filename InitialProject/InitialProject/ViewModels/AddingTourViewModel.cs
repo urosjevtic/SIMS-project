@@ -263,6 +263,7 @@ namespace InitialProject.ViewModels
             _tourRepository.Save(tour);
             _guideMainWindow.UpdateTodayToursDataGrid();
             _guideMainWindow.UpdateToursDataGrid();
+
             _guideMainWindow.LoadData();
         }
 

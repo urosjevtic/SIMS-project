@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
+using InitialProject.Repository;
 
 namespace InitialProject.Service
 {
@@ -45,6 +47,7 @@ namespace InitialProject.Service
 
         public CheckPoint FindTourLastCheckPoint(Tour tour)
         {
+
             return _checkPointRepository.FindTourLastCheckPoint(tour);
         }
         public CheckPoint ReturnUpdated(CheckPoint checkPoint)
@@ -64,6 +67,12 @@ namespace InitialProject.Service
         {
            _checkPointRepository.Update(checkPoint);
 
+        }
+        private readonly CheckPointRepository _checkPointRepository;
+
+        public List<CheckPoint> LoadCheckPoints()
+        {
+            return _checkPointRepository.GetAll();
         }
     }
 }
