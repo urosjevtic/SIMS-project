@@ -226,7 +226,6 @@ namespace InitialProject.ViewModels
             tour.IsActive = false;
             _tourRepository.Save(tour);
             _guideMainWindow.LoadData();
-            _guideMainWindow.LoadData();
         }
         
 

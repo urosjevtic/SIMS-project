@@ -18,7 +18,6 @@ namespace InitialProject.Service
             _tourRepository = new TourRepository(); 
             _locationService = new LocationService();   
         }
-
         public List<Tour> GetTodayTours(User user)
         {
             var tours = LoadGuideTours(user);
@@ -34,7 +33,40 @@ namespace InitialProject.Service
             }
             return todayTours;
         }
+        public List<Tour> Search(string state, string city, string language, string duration, string number)
+        {
+            List<Tour> tours = _tourRepository.GetAll();
+            List<Location> locations = _locationService.LoadLocations();
+            AddTourLocation(tours, locations);
 
+            List<Tour> searchResults = tours.ToList();
+
+            RemoveByLocation(searchResults, state, city, language);
+            RemoveByNumbers(searchResults, duration, number);
+
+            return searchResults;
+        }
+        public List<Tour> LoadTours()
+        {
+            return _tourRepository.GetAll();
+        }
+        public List<Tour> RemoveByLocation(List<Tour> searchResults, string state, string city, string language)
+        {
+            string[] searchValues = { state, city, language };
+            foreach (string value in searchValues)
+                searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+            return searchResults;
+        }
+
+        public List<Tour> RemoveByNumbers(List<Tour> searchResults, string duration, string number)
+        {
+            int searchDuration = duration == "" ? -1 : Convert.ToInt32(duration);
+            int searchMaxGuests = number == "" ? -1 : Convert.ToInt32(number);
+            if (searchDuration > 0) searchResults.RemoveAll(x => x.Duration != searchDuration);
+            if (searchMaxGuests > 0) searchResults.RemoveAll(x => x.MaxGuests < searchMaxGuests);
+
+            return searchResults;
+        }
         public List<Tour> LoadGuideTours(User user)
         {
             List<Tour> allTours = new List<Tour>();
@@ -65,7 +97,55 @@ namespace InitialProject.Service
                 }
             }
         }
+        public List<Tour> FindAllAlternatives(Tour tour)
+        {
+            List<Tour> alternative = new List<Tour>();
+            List<Tour> tours = _tourRepository.GetAll();
+            var locations = _locationService.LoadLocations();
 
+            AddTourLocation(tours, locations);
+
+            foreach (Tour t in tours)
+            {
+                if (t.Location.City.Equals(tour.Location.City))
+                {
+                    alternative.Add(t);
+                }
+            }
+            return alternative;
+        }
+        public List<Tour> FindAllActiveTours()
+        {
+            List<Tour> tours = _tourRepository.GetAll();
+            List<Location> locations = _locationService.LoadLocations();
+            List<Tour> active = new List<Tour>();
+            AddTourLocation(tours, locations);
+            foreach (Tour tour in tours)
+            {
+                if (tour.IsActive)
+                {
+                    active.Add(tour);
+                }
+            }
+            return active;
+        }
+        public List<Tour> FindAllEndedTours()
+        {
+            List<Tour> tours = _tourRepository.GetAll();
+            List<Location> locations = _locationService.LoadLocations();
+            List<Tour> ended = new List<Tour>();
+            AddTourLocation(tours, locations);
+
+            foreach(Tour tour in tours)
+            {
+                TimeSpan ts = new(tour.Duration, 0, 0);
+                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false)
+                {
+                    ended.Add(tour);
+                }
+            }
+            return ended;
+        }
         public List<Tour> FindActiveTours(User user)
         {
 

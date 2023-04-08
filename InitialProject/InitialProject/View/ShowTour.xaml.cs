@@ -29,22 +29,6 @@ namespace InitialProject.View
             this.DataContext = this;
             LoggedUser = user;
         }
-        /*private void loadData()
-        {
-            tours = _tourRepository.GetAll();
-            locations = _locationRepository.GetAll();
-            foreach (Tour tour in tours)
-            {
-                foreach (Location location in locations)
-                {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-                        break;
-                    }
-                }
-            }
-        }*/
         private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
             TourSearch tourSearch = new TourSearch(LoggedUser);

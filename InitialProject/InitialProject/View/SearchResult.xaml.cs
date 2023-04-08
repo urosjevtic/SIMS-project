@@ -16,6 +16,7 @@ using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -25,9 +26,10 @@ namespace InitialProject.View
     public partial class SearchResult : Window
     {
         public ObservableCollection<Tour> Tours { get; set; }
-        private readonly TourRepository _tourRepository;
+        private readonly TourService _tourService;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly VoucherRepository _voucherRepository;
+        private readonly VoucherService _voucherService;
         public List<Tour> tours { get; set; }
         private List<Voucher> vouchers { get; set; }
 
@@ -38,9 +40,10 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = this;
-            _tourRepository = new TourRepository();
+            _tourService = new TourService();
             _tourReservationRepository = new TourReservationRepository();
             _voucherRepository = new VoucherRepository();
+            _voucherService = new VoucherService();
             tours = filteredTours;
             vouchers = _voucherRepository.GetAllCreated();
             LoggedUser = user;
@@ -51,7 +54,6 @@ namespace InitialProject.View
         {
             this.Close();
         }
-
         private void ReserveClick(object sender, RoutedEventArgs e)
         {
             SelectedTour = (Tour)resultDataGrid.SelectedItem;
@@ -72,15 +74,15 @@ namespace InitialProject.View
             {
                 int numberOfPeople = int.Parse(nrOfPeopleTextBox.Text);
                 int freeSeats = SelectedTour.MaxGuests - _tourReservationRepository.CountUnreservedSeats(SelectedTour);
+                double age = double.Parse(averageAge.Text);
 
                 if (numberOfPeople <= freeSeats)
                 {
-                    _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser);
+                    _tourReservationRepository.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     if (SelectedVoucher != null)
                     {
-                        _voucherRepository.ChangeToUsed(SelectedVoucher);
-                        
+                        _voucherRepository.ChangeToUsed(SelectedVoucher);    
                     }
                     this.Close();
                 }
@@ -97,7 +99,7 @@ namespace InitialProject.View
         }
         public void FindAlternatives(Tour tour)
         {
-            List<Tour> tours = _tourRepository.FindAllAlternatives(tour);
+            List<Tour> tours = _tourService.FindAllAlternatives(tour);
             resultDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
         }
     }
