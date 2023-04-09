@@ -12,7 +12,7 @@ using InitialProject.View.OwnerView.Ratings;
 using Microsoft.VisualBasic.ApplicationServices;
 using User = InitialProject.Domain.Model.User;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.RatingsViewModel
 {
     public class RatingsMainViewModel : INotifyPropertyChanged
     {

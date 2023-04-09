@@ -52,7 +52,7 @@
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
         <!--SIDE SCREEN-->
-        <Grid Name="SideScreen" Grid.Column="0" Width="300" Height="700" Background="#9394a5"  Visibility="Collapsed">
+        <Grid Name="SideScreen" Grid.Column="0" Width="300" Height="700" Background="#9394a5"  Visibility="{Binding SideScreenVisibility}">
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -156,7 +156,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Reservation rescheduling" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="Here you can see all requests for rescheduling reservations" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenUnratedGuestsCommand}" Content="Handle rescheduling" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding HandeReschedulesCommand}" Content="Handle rescheduling" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
 
                 </Grid>
             </Border>

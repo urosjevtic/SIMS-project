@@ -1,31 +1,26 @@
-﻿using InitialProject.Model;
-using InitialProject.Utilities;
+﻿using InitialProject.Utilities;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
-using System.Windows;
-using System.Windows.Input;
-using InitialProject.Domain.Model;
-using InitialProject.View.OwnerView.MyAccommodations;
 using System.Linq;
-using InitialProject.View.OwnerView.Ratings;
-using InitialProject.View.OwnerView.Reservations;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using System.Windows;
+using InitialProject.Domain.Model;
+using InitialProject.View;
 
-namespace InitialProject.ViewModel
+namespace InitialProject.ViewModels.ReservationsViewModels
 {
-    public class OwnerMainViewModel : INotifyPropertyChanged
+    public class ReservationsMainViewModel : INotifyPropertyChanged
     {
-        private User _loggedInUser;
+        private readonly User _logedInUser;
 
-        public User LogedInUser
+        public ReservationsMainViewModel(User logedInUser)
         {
-            get { return _loggedInUser; }
-            set
-            {
-                _loggedInUser = value;
-                OnPropertyChanged(nameof(LogedInUser));
-            }
+            _logedInUser = logedInUser;
         }
 
-        public string WelcomeMessage => "Welcome";
 
         private Visibility _sideScreenVisibility = Visibility.Collapsed;
 
@@ -54,12 +49,6 @@ namespace InitialProject.ViewModel
         public ICommand BurgerBarClosedCommand => new RelayCommand(BurgerBarClosed);
         public ICommand BurgerBarOpenCommand => new RelayCommand(BurgerBarOpen);
 
-
-        public OwnerMainViewModel(User user)
-        {
-            LogedInUser = user;
-        }
-
         private void BurgerBarOpen()
         {
             SideScreenVisibility = Visibility.Visible;
@@ -72,31 +61,13 @@ namespace InitialProject.ViewModel
             MainScreenVisibility = Visibility.Visible;
         }
 
-        public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
+        public ICommand HandeReschedulesCommand => new RelayCommand(HandleReschedules);
 
-        private void MyAccommoadionsOpen()
+        private void HandleReschedules()
         {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            myAccommodationsMainWindow.Show();
+            RescheduleRequestWindow rescheduleRequestWindow = new RescheduleRequestWindow(_logedInUser);
+            rescheduleRequestWindow.Show();
         }
-
-        public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
-
-        private void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
-            ratingsMain.Show();
-        }
-
-        public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
-
-        private void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
-            reservationsMain.Show();
-        }
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

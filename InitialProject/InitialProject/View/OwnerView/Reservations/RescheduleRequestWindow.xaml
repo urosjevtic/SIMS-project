@@ -53,14 +53,14 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Click="GoBack_Click" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Reservation rescheduling"></TextBlock>
 
-        <ListBox Grid.Row="2" x:Name="accommodationListBox"
+        <ListBox Grid.Row="2" x:Name="reschedulingListBox"
                  ItemsSource="{Binding RescheduleRequests}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -141,9 +141,12 @@
                             </StackPanel>
 
                             <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Reschedule" Style="{StaticResource LogInButtonStyle}" Click="RescheduleButton_Click"/>
+                                <Button Content="Reschedule" Style="{StaticResource LogInButtonStyle}" 
+                                        Command="{Binding DataContext.ApproveRescheduleCommand, ElementName=reschedulingListBox}"
+                                        CommandParameter="{Binding}"/>
                                 <Button Content="Decline"
-                                        Click="DeclineRescheduleButton_Click"
+                                        Command="{Binding DataContext.DeclineRescheduleCommand, ElementName=reschedulingListBox}"
+                                        CommandParameter="{Binding}"
                                 Margin="10,10,0,10"
                                  Style="{StaticResource LogInButtonStyle}"/>
                             </StackPanel>

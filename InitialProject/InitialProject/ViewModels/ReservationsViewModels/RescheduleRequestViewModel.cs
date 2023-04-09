@@ -6,13 +6,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
+using InitialProject.Utilities;
 using InitialProject.View;
 using InitialProject.View.OwnerView;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.ReservationsViewModels
 {
     public class RescheduleRequestViewModel : INotifyPropertyChanged
     {
@@ -30,24 +32,30 @@ namespace InitialProject.ViewModels
             RescheduleRequests = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetAllByOwnerId(_loggedInUser.Id));
         }
 
-        public void ApproveReschedule(AccommodationReservationRescheduleRequest rescheduleRequest)
+
+        public ICommand ApproveRescheduleCommand => new RelayCommandWithParams(ApproveReschedule);
+
+        private void ApproveReschedule(object parameter)
         {
-            _accommodationReservationRescheduleRequestService.ApproveReschedule(rescheduleRequest);
-            RescheduleRequests.Remove(rescheduleRequest);
+            if (parameter is AccommodationReservationRescheduleRequest selectedRescheduleRequest)
+            {
+                _accommodationReservationRescheduleRequestService.ApproveReschedule(selectedRescheduleRequest);
+                RescheduleRequests.Remove(selectedRescheduleRequest);
+
+            }
         }
 
-        public void DeclineReschedule(AccommodationReservationRescheduleRequest rescheduleRequest)
-        {
-            RescheduleDeclineWindow rescheduleDeclineWindow = new RescheduleDeclineWindow(rescheduleRequest);
-            rescheduleDeclineWindow.Show();
-            RescheduleRequests.Remove(rescheduleRequest);
-        }
+        public ICommand DeclineRescheduleCommand => new RelayCommandWithParams(DeclineReschedule);
 
-        public void GoBack()
+        private void DeclineReschedule(object parameter)
         {
-            OwnerMainWindow ownerMainWindpWindow = new OwnerMainWindow(_loggedInUser);
-            CloseAction();
-            ownerMainWindpWindow.Show();
+            if (parameter is AccommodationReservationRescheduleRequest selectedRescheduleRequest)
+            {
+                RescheduleDeclineWindow rescheduleDeclineWindow = new RescheduleDeclineWindow(selectedRescheduleRequest);
+                rescheduleDeclineWindow.Show();
+                RescheduleRequests.Remove(selectedRescheduleRequest);
+
+            }
         }
 
 

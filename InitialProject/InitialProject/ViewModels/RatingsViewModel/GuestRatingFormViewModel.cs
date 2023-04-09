@@ -10,7 +10,7 @@ using System.Windows.Input;
 using InitialProject.Service;
 using InitialProject.Utilities;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.RatingsViewModel
 {
     public class GuestRatingFormViewModel : INotifyPropertyChanged
     {
@@ -73,7 +73,7 @@ namespace InitialProject.ViewModels
         private void RateAGuest()
         {
             _guestRatingService.SubmitRating(_unratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
-            var window = App.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
             window.Close();
         }
 

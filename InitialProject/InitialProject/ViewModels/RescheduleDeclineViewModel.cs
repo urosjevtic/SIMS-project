@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
-using static InitialProject.ViewModels.RescheduleRequestViewModel;
+using static InitialProject.ViewModels.ReservationsViewModels.RescheduleRequestViewModel;
 
 namespace InitialProject.ViewModels
 {

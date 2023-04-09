@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,20 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
-using InitialProject.ViewModels;
-using InitialProject.ViewModels.RatingsViewModel;
+using InitialProject.Domain.Model.Reservations;
+using InitialProject.Service.ReservationServices;
+using InitialProject.ViewModels.ReservationsViewModels;
 
-namespace InitialProject.View.OwnerView.Ratings
+namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for GuestRatingForm.xaml
+    /// Interaction logic for RescheduleRequestWindow.xaml
     /// </summary>
-    public partial class GuestRatingForm : Window
+    public partial class RescheduleRequestWindow : Window
     {
-        public GuestRatingForm(UnratedGuest unratedGuest)
+
+        public RescheduleRequestWindow(User loggedInUser)
         {
             InitializeComponent();
-            DataContext = new GuestRatingFormViewModel(unratedGuest);
+            DataContext = new RescheduleRequestViewModel(loggedInUser);
         }
+
     }
 }

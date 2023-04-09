@@ -12,18 +12,18 @@ using InitialProject.Utilities;
 using InitialProject.View;
 using InitialProject.View.OwnerView.Ratings;
 
-namespace InitialProject.ViewModels
+namespace InitialProject.ViewModels.RatingsViewModel
 {
     public class UnratedGuestsListViewModel : INotifyPropertyChanged
     {
-        public ObservableCollection<UnratedGuest> UnratedGuests {get; set; }
+        public ObservableCollection<UnratedGuest> UnratedGuests { get; set; }
         private readonly UnratedGuestService _unratedGuestService;
         public UnratedGuestsListViewModel(User logedInUser)
         {
             _unratedGuestService = new UnratedGuestService();
             UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuestService.GettUnratedGuestsByOwnerId(logedInUser.Id));
         }
-        
+
         public ICommand OpenRatingWindowCommand => new RelayCommandWithParams(OpenRatingWindow);
         private void OpenRatingWindow(object parameter)
         {

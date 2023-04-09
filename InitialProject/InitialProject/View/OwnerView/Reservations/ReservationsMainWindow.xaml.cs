@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
+using InitialProject.ViewModels.ReservationsViewModels;
 
 namespace InitialProject.View.OwnerView.Reservations
 {
@@ -19,9 +21,10 @@ namespace InitialProject.View.OwnerView.Reservations
     /// </summary>
     public partial class ReservationsMainWindow : Window
     {
-        public ReservationsMainWindow()
+        public ReservationsMainWindow(User logedInUser)
         {
             InitializeComponent();
+            DataContext = new ReservationsMainViewModel(logedInUser);
         }
     }
 }
