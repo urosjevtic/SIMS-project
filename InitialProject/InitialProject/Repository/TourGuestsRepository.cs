@@ -14,14 +14,14 @@ namespace InitialProject.Repository
     {
 
         private const string FilePath = "../../../Resources/Data/tourGuests.csv";
-        private readonly Serializer<Guest> _serializer;
+        private readonly Serializer<TourGuest> _serializer;
 
         private readonly UserRepository _userRepository;    
-        private List<Guest> _guests;
+        private List<TourGuest> _guests;
 
         public TourGuestsRepository()
         {
-            _serializer = new Serializer<Guest>();
+            _serializer = new Serializer<TourGuest>();
             _guests = _serializer.FromCSV(FilePath);
             _userRepository = new UserRepository(); 
         }
@@ -36,7 +36,7 @@ namespace InitialProject.Repository
             return _guests.Max(c => c.Id) + 1;
         }
 
-        public void Save(Guest guest)
+        public void Save(TourGuest guest)
         {
             guest.Id = NextId();
             _guests = _serializer.FromCSV(FilePath);
@@ -44,32 +44,32 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _guests);
         }
 
-        public List<Guest> GetAll()
+        public List<TourGuest> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Guest GetById(int id)
+        public TourGuest GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(Guest entity)
+        public void Delete(TourGuest entity)
         {
             _guests = _serializer.FromCSV(FilePath);
-            Guest founded = _guests.Find(c => c.Id == entity.Id);
+            TourGuest founded = _guests.Find(c => c.Id == entity.Id);
             _guests.Remove(founded);
             _serializer.ToCSV(FilePath, _guests);
         }
 
-        public void SaveAll(List<Guest> entities)
+        public void SaveAll(List<TourGuest> entities)
         {
             _serializer.ToCSV(FilePath, _guests);
         }
 
-        public void Update(Guest entity)
+        public void Update(TourGuest entity)
         {
-            Guest newGuest = _guests.Find(p=> p.Id == entity.Id);
+            TourGuest newGuest = _guests.Find(p=> p.Id == entity.Id);
             newGuest.Id = entity.Id;
             newGuest.Username = entity.Username;
             newGuest.Role = entity.Role;
@@ -81,11 +81,11 @@ namespace InitialProject.Repository
             SaveAll(_guests);
         }
        
-        public Guest GetGuest(User user)
+        public TourGuest GetGuest(User user)
         {
             foreach(User u in _userRepository.GetAll())
             {
-                foreach(Guest guest in GetAll())
+                foreach(TourGuest guest in GetAll())
                 {
                     if(guest.Id == u.Id)
                     {

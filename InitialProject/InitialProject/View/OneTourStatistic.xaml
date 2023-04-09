@@ -1,0 +1,43 @@
+﻿<Window x:Class="InitialProject.View.OneTourStatistic"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="OneTourStatistic" Height="450" Width="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label Content="Broj ljudi po starosnim grupama:" FontSize="25" Grid.ColumnSpan="2" HorizontalAlignment="Center"> </Label>
+        <Label Grid.Row="1" Grid.Column="0" Content="Broj ljudi do 18 god: " FontSize="20"></Label>
+        <Label Grid.Row="2" Grid.Column="0" Content="Broj ljudi od 18 do 50 god: " FontSize="20"></Label>
+        <Label Grid.Row="3" Grid.Column="0" Content="Broj ljudi starijih od 50 godina: " FontSize="20"></Label>
+        <Label Grid.Row="5" Grid.ColumnSpan="2" FontSize="25" Content="Vauceri: " HorizontalAlignment="Center"></Label>
+        <Label Grid.Row="7" Grid.Column="0" Content="Procenat ljudi koji dolaze sa vaucerom: " FontSize="20"></Label>
+        <Label Grid.Row="8" Grid.Column="0" Content="Procenat ljudi koji dolaze bez vaucera: " FontSize="20"></Label>
+        
+        <TextBlock x:Name="until18TextBlock" Grid.Column="1" Grid.Row="1" FontSize="20" />
+        <TextBlock x:Name="between18and50TextBlock" Grid.Column="1" Grid.Row="2" FontSize="20"/>
+        <TextBlock x:Name="over50TextBlock" Grid.Column="1" Grid.Row="3" FontSize="20" />
+        <TextBlock x:Name="withVoucherTextBlock" Grid.Column="1" Grid.Row="7" FontSize="20" />
+        <TextBlock x:Name="withoutVoucherTextBlock" Grid.Column="1" Grid.Row="8" FontSize="20" />
+
+    </Grid>
+</Window>

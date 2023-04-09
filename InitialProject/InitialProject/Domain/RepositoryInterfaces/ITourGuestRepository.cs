@@ -12,24 +12,24 @@ namespace InitialProject.Domain.RepositoryInterfaces
     {
         public int NextId();
 
-        public void Save(Guest guest);
+        public void Save(TourGuest guest);
 
 
-        public List<Guest> GetAll();
+        public List<TourGuest> GetAll();
 
 
-        public Guest GetById(int id);
+        public TourGuest GetById(int id);
 
-        public void Delete(Guest entity);
-
-
-        public void SaveAll(List<Guest> entities);
+        public void Delete(TourGuest entity);
 
 
-        public void Update(Guest entity);
+        public void SaveAll(List<TourGuest> entities);
 
 
-        public Guest GetGuest(User user);
+        public void Update(TourGuest entity);
+
+
+        public TourGuest GetGuest(User user);
        
     }
 }

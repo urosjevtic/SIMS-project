@@ -3,9 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:local="clr-namespace:InitialProject.ViewModels"
         mc:Ignorable="d"
         Title="AddingTour" Height="726" Width="987">
+   
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
@@ -57,8 +59,8 @@
         <TextBox Text="{Binding Path=CheckPoints, UpdateSourceTrigger=PropertyChanged}" Grid.Row="10" Grid.Column="2"  Margin="0,0,0,15" Height="30" Width="350" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
 
 
-        <Button Content="Save"  Grid.Row="11" Grid.Column="1" Width="100" Height="30" Margin="120,0,0,0" Click="SaveClick"></Button>
-        <Button Content="Cancel"  Grid.Row="11" Grid.Column="2" Width="100" Height="30" Margin="10,0,0,0" Click="CancelClick"></Button>
+        <Button Content="Save"  Grid.Row="11" Grid.Column="1" Width="100" Height="30" Margin="120,0,0,0" Command="{Binding SaveCommand}"></Button>
+        <Button Content="Cancel"  Grid.Row="11" Grid.Column="2" Width="100" Height="30" Margin="10,0,0,0" Command="{Binding CancelCommand}"></Button>
 
 
     </Grid>

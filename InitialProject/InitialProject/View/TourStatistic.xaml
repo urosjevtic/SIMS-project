@@ -17,6 +17,8 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -29,20 +31,21 @@
         <Label Grid.Row="3" FontSize="32" Content="Most visited tour in year: " ></Label>
         <ComboBox Grid.Row="3" Height="50" Width="300" Margin="410,10,40,27" x:Name="YearsComboBox"
           SelectionChanged="GodineComboBoxSelectionChanged">
+            <ComboBoxItem Content="2023"></ComboBoxItem>
             <ComboBoxItem Content="2022"></ComboBoxItem>
             <ComboBoxItem Content="2021"></ComboBoxItem>
             <ComboBoxItem Content="2020"></ComboBoxItem>
             <ComboBoxItem Content="2019"></ComboBoxItem>
         </ComboBox>
         <TextBlock x:Name="mostVisitedTourTextBlock" Grid.Column="1" Grid.Row="2" FontSize="22"/>
-        <TextBlock x:Name="mostVisitedTourYearTextBlock" Grid.Column="1" Grid.Row="3" FontSize="22" />
+        <TextBlock x:Name="mostVisitedTourInYearTextBlock" Grid.Column="1" Grid.Row="3" FontSize="22" />
 
 
 
         <DataGrid Grid.Row="5" Grid.ColumnSpan="2" CanUserAddRows="False" CanUserReorderColumns="False" FontSize="22"
                   CanUserSortColumns="True" ItemsSource="{Binding EndedTours}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
                   AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False"
-                  CanUserResizeRows="False" Margin="36,0,139,87" Grid.RowSpan="2"  >
+                  CanUserResizeRows="False" Margin="36,0,139,87" Grid.RowSpan="5" VerticalScrollBarVisibility="Auto"  >
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*" />
@@ -52,5 +55,7 @@
                 <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
             </DataGrid.Columns>
         </DataGrid>
+
+        <Button Grid.Row="9" Grid.Column="1" Width="150" Height="50" Content="Show Statistic" Click="ShowOneTourStatisticClick"></Button>
     </Grid>
 </Window>
