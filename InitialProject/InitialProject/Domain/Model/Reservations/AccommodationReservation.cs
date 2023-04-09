@@ -14,7 +14,6 @@ namespace InitialProject.Domain.Model.Reservations
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int UserId { get; set; }
-        //public User Guest { get; set; } 
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
         public int GuestNumber { get; set; }
@@ -24,7 +23,6 @@ namespace InitialProject.Domain.Model.Reservations
 
         public AccommodationReservation()
         {
-            //  Guest = new User();
             Accommodation = new Accommodation();
             ReservedDates = new List<DateTime>();
             User = new User();
@@ -56,7 +54,6 @@ namespace InitialProject.Domain.Model.Reservations
             EndDate = DateTime.Parse(values[2]);
             UserId = Convert.ToInt32(values[3]);
             AccommodationId = Convert.ToInt32(values[4]);
-            Accommodation.Id = Convert.ToInt32(values[4]);
             GuestNumber = Convert.ToInt32(values[5]);
             //ReservedDates = DateTime.Parse(values[6]);
         }

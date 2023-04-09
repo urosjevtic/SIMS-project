@@ -71,6 +71,9 @@ namespace InitialProject.Domain.Model
             Images.Id = Convert.ToInt32(values[8]);
 
         }
-
+        public string Concatenate()
+        {
+            return Name + " " + Location.Country + " " + Location.City + " " + Type;
+        }
     }
 }

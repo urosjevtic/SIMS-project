@@ -41,6 +41,7 @@
                         <ComboBoxItem Content = "house"  />
                         <ComboBoxItem Content = "appartment" />
                         <ComboBoxItem Content = "cabin" />
+                        <ComboBoxItem Content = "" />
                     </ComboBox>
                     <TextBox Name="tbGuestNumber" Text="{Binding Path=GuestsNumber, UpdateSourceTrigger=PropertyChanged}" Margin="20,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                     <StackPanel Orientation="Horizontal">
