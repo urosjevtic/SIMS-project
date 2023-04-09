@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class TourReservationRepository
+    public class TourReservationRepository : ITourReservationRepository
     {
         private const string FilePath = "../../../Resources/Data/tourReservations.csv";
 
@@ -83,6 +84,10 @@ namespace InitialProject.Repository
                 }
             }
             return guests;
+        }
+        public void SaveReservation(Tour tour,int m , User n)
+        {
+
         }
     }
 }

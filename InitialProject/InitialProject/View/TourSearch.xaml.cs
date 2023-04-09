@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using InitialProject.Repository;
 using System.Data;
 using InitialProject.Service;
+
 using InitialProject.Domain.Model;
 
 namespace InitialProject.View

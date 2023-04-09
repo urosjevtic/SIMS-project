@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
+using InitialProject.Domain.Model;
 using InitialProject.Forms;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
