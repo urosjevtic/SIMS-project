@@ -42,6 +42,29 @@ namespace InitialProject.Service
             return unratedGuests;
         }
 
+        public List<UnratedGuest> GettUnratedGuestsByOwnerId(int id)
+        {
+            List<UnratedGuest> unratedGuestsByOwnerId = new List<UnratedGuest>();
+            List<UnratedGuest> allUnratedGuests = _unratedGuestRepository.GetAll();
+
+            foreach (UnratedGuest unratedGuest in allUnratedGuests)
+            {
+                ConnectAccommodationToUnratedGuest(unratedGuest);
+                ConnectUserToUnratedGuest(unratedGuest);
+            }
+
+            foreach (var unratedGuest in allUnratedGuests)
+            {
+                if(unratedGuest.ReservedAccommodation.Owner.Id == id)
+                    unratedGuestsByOwnerId.Add(unratedGuest);
+
+            }
+            //povezi usere sa accommodations
+
+            RemoveUnratedGuestAfterFiveDays(unratedGuestsByOwnerId);
+            return unratedGuestsByOwnerId;
+        }
+
         private void ConnectAccommodationToUnratedGuest(UnratedGuest unratedGuest)
         {
             foreach (Accommodation accommodation in _accommodationService.GetAll())

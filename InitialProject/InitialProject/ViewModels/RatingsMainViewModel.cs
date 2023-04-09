@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows;
 using InitialProject.Domain.Model;
+using InitialProject.View.OwnerView.Ratings;
 using Microsoft.VisualBasic.ApplicationServices;
 using User = InitialProject.Domain.Model.User;
 
@@ -58,6 +59,14 @@ namespace InitialProject.ViewModels
         {
             SideScreenVisibility = Visibility.Collapsed;
             MainScreenVisibility = Visibility.Visible;
+        }
+
+        public ICommand OpenUnratedGuestsCommand => new RelayCommand(OpenUnratedGuests);
+
+        private void OpenUnratedGuests()
+        {
+            UnratedGuestsList unratedGuests = new UnratedGuestsList(_logedInUser);
+            unratedGuests.Show();
         }
 
 

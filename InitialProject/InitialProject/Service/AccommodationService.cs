@@ -17,12 +17,14 @@ namespace InitialProject.Service
         private readonly IAccommodationRepository _accommodationRepository;
         private readonly LocationService _locationService;
         private readonly ImageService _imageService;
+        private readonly UserService _userService;
 
         public AccommodationService()
         {
             _accommodationRepository = Injector.Injector.CreateInstance<IAccommodationRepository>();
             _locationService = new LocationService();
             _imageService = new ImageService();
+            _userService = new UserService();
         }
 
         public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
@@ -46,7 +48,25 @@ namespace InitialProject.Service
 
         public List<Accommodation> GetAll()
         {
-            return _accommodationRepository.GetAll();
+            List <Accommodation> accommodations = _accommodationRepository.GetAll();
+            BindUserToAccommodation(accommodations);
+            return accommodations;
+        }
+
+        private void BindUserToAccommodation(List<Accommodation> accommodations)
+        {
+            foreach (var accommodation in accommodations)
+            {
+                foreach (var user in _userService.GetAll())
+                {
+                    if (accommodation.Owner.Id == user.Id)
+                    {
+                        accommodation.Owner = user;
+                        break;
+                    }
+
+                }
+            }
         }
         private AccommodationType GetType(string type)
         {

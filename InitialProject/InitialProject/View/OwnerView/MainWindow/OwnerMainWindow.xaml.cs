@@ -14,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.View.OwnerView.Ratings;
 
 namespace InitialProject.View
 {
@@ -200,7 +201,7 @@ namespace InitialProject.View
         {
             if (SelectedUnratedGuest != null)
             {
-                GuestRatingForm guestRatingForm = new GuestRatingForm(SelectedUnratedGuest, this);
+                GuestRatingForm guestRatingForm = new GuestRatingForm(SelectedUnratedGuest);
                 guestRatingForm.Show();
             }
         }
