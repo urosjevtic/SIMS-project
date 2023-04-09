@@ -119,6 +119,7 @@ namespace InitialProject.Repository
             newTour.Duration = tour.Duration;
             newTour.CoverImageUrl.Id = tour.CoverImageUrl.Id;
             newTour.IsActive = tour.IsActive;
+            newTour.IsRated = tour.IsRated;
 
             SaveAll(_tours);
             

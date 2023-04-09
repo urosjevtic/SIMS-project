@@ -5,22 +5,26 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Repository;
 using InitialProject.Domain.Model;
-using InitialProject.Model;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
+using InitialProject.Model;
 
 namespace InitialProject.Service
 {
     public class TourService
     {
-        private readonly ITourRepository _tourRepository;    
+        private readonly ITourRepository _tourRepository;
+        private readonly IImageRepository _imageRepository;    
         private readonly ITourGuestRepository _tourGuestsRepository;
         private readonly ITourReservationRepository _tourReservationRepository;
 
         private readonly VoucherRepository _voucherRepository;
+
         public LocationService _locationService { get; set; }
 
         public TourService()
         {
+            _imageRepository = Injector.Injector.CreateInstance<IImageRepository>();
             _tourRepository = Injector.Injector.CreateInstance<ITourRepository>(); 
             _locationService = new LocationService(); 
             _tourGuestsRepository = Injector.Injector.CreateInstance<ITourGuestRepository>(); 
@@ -73,23 +77,6 @@ namespace InitialProject.Service
                     }
                 }
             }
-        }
-
-        public List<Tour> FindActiveTours(User user)
-        {
-
-            var tours = LoadGuideTours(user);
-            var locations = _locationService.GetLocations();
-            List<Tour> active = new List<Tour>();
-            AddTourLocation(tours, locations);
-            foreach (Tour tour in tours)
-            {
-                if (tour.IsActive)
-                {
-                    active.Add(tour);
-                }
-            }
-            return active;
         }
         public void Delete(Tour tour)
         {
@@ -244,6 +231,10 @@ namespace InitialProject.Service
             }
             return active;
         }
+        private string[] SplitStringByComma(string str)
+        {
+            return str.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
         public List<Tour> FindAllEndedTours()
         {
             List<Tour> tours = _tourRepository.GetAll();
@@ -254,14 +245,37 @@ namespace InitialProject.Service
             foreach (Tour tour in tours)
             {
                 TimeSpan ts = new(tour.Duration, 0, 0);
-                if (tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false)
+                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
                 {
                     ended.Add(tour);
                 }
             }
             return ended;
         }
-       
+        public void RateTour(Tour SelectedTour)
+        {
+            SelectedTour.IsRated = true;
+            _tourRepository.Update(SelectedTour);
+        }
+        public void AddGuestsImage(Tour tour, string text)
+        {
+            _imageRepository.Update(tour, SplitStringByComma(text));
+        }
+        public List<Tour> FindActiveTours(User user)
+        {
 
+            var tours = LoadGuideTours(user);
+            var locations = _locationService.GetLocations();
+            List<Tour> active = new List<Tour>();
+            AddTourLocation(tours, locations);
+            foreach (Tour tour in tours)
+            {
+                if (tour.IsActive)
+                {
+                    active.Add(tour);
+                }
+            }
+            return active;
+        }
     }
 }

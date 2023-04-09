@@ -153,8 +153,5 @@ namespace InitialProject.View
             UncheckCheckPoint(SelectedTour);
             MessageBox.Show("Tura je uspjesno zavrsena!","", MessageBoxButton.OK,MessageBoxImage.Information);
         }
-
-
-       
     }
 }

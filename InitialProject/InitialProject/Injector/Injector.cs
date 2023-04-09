@@ -14,18 +14,20 @@ namespace InitialProject.Injector
     {
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
-            { typeof(IImageRepository), new ImageRepository() },
-            { typeof(IUserRepository), new UserRepository()}, 
+            {typeof(IImageRepository), new ImageRepository()},
+            {typeof(IUserRepository), new UserRepository()}, 
             {typeof(IAccommodationRepository), new AccommodationRepository()}, 
             {typeof(ILocationRepository), new LocationRepository()},
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
+            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
+            {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
+            {typeof(IVoucherRepository), new VoucherRepository()},
+            {typeof(ITourRepository), new TourRepository()}
             {typeof(ITourGuestRepository), new TourGuestsRepository()},
-            {typeof(ITourRepository), new TourRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
-            {typeof(ICheckPointRepository), new CheckPointRepository()},
-
+            {typeof(ICheckPointRepository), new CheckPointRepository()}
 
             // Add more implementations here
         };

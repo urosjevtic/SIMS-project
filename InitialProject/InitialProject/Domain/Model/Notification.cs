@@ -16,16 +16,23 @@ namespace InitialProject.Domain.Model
         public bool IsGoing { get; set; }
         public bool IsChecked { get; set; }
 
+        public Notification()
+        {
 
-
+        }
+        public Notification(Tour tour, User user)
+        {
+            GuestId = user.Id;
+            TourId = tour.Id;
+        }
         public string[] ToCSV()
         {
             string[] csvValues = {
                Id.ToString(),
                TourId.ToString(),
                CheckPointId.ToString(),
-               IsGoing.ToString(),
                GuestId.ToString(),
+               IsGoing.ToString(),
                IsChecked.ToString(),
             };
             return csvValues;
@@ -37,12 +44,9 @@ namespace InitialProject.Domain.Model
             Id = Convert.ToInt32(values[0]);
             TourId = Convert.ToInt32(values[1]);
             CheckPointId = Convert.ToInt32(values[2]);
-            IsGoing = Convert.ToBoolean(values[3]);
-            GuestId = Convert.ToInt32(values[4]);
+            GuestId = Convert.ToInt32(values[3]);
+            IsGoing = Convert.ToBoolean(values[4]);
             IsChecked = Convert.ToBoolean(values[5]);
-
         }
-
-
     }
 }
