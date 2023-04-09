@@ -9,6 +9,7 @@ using System.Windows.Input;
 using System.Windows;
 using InitialProject.Domain.Model;
 using InitialProject.View;
+using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.ReservationsViewModels
 {
@@ -59,6 +60,14 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         {
             SideScreenVisibility = Visibility.Collapsed;
             MainScreenVisibility = Visibility.Visible;
+        }
+
+        public ICommand ShowAllReservationsCommand => new RelayCommand(ShowAllReservations);
+
+        private void ShowAllReservations()
+        {
+            ReservationListWindow reservationListWindow = new ReservationListWindow(_logedInUser);
+            reservationListWindow.Show();
         }
 
         public ICommand HandeReschedulesCommand => new RelayCommand(HandleReschedules);
