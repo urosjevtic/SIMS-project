@@ -66,9 +66,17 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private void OpenUnratedGuests()
         {
             UnratedGuestsList unratedGuests = new UnratedGuestsList(_logedInUser);
+            CloseCurrentWindow();
             unratedGuests.Show();
         }
-
+        private void CloseCurrentWindow()
+        {
+            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

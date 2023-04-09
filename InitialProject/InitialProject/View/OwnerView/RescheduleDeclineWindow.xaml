@@ -16,7 +16,7 @@
         </Grid.RowDefinitions>
         <Label Content="Unesite comment za odbijanje:" Grid.Row="0"></Label>
         <TextBox Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1"></TextBox>
-        <Button Click="Confirm_Button" Grid.Row="2" Content="Confirm"></Button>
+        <Button Command="{Binding ConfirmDeclineCommand}" Grid.Row="2" Content="Confirm"></Button>
 
     </Grid>
 </Window>

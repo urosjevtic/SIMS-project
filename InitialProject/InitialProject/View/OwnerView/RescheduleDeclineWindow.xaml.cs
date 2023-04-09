@@ -25,17 +25,9 @@ namespace InitialProject.View.OwnerView
         public RescheduleDeclineWindow(AccommodationReservationRescheduleRequest rescheduleRequest)
         {
             InitializeComponent();
-            ViewModel = new RescheduleDeclineViewModel(rescheduleRequest);
-            DataContext = ViewModel;
-
-            ViewModel.CloseAction = () => Close();
+            DataContext = new RescheduleDeclineViewModel(rescheduleRequest);
         }
 
 
-
-        private void Confirm_Button(object sender, RoutedEventArgs e)
-        {
-            ViewModel.ConfirmReschedule();
-        }
     }
 }

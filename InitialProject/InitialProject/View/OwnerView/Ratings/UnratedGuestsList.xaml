@@ -53,7 +53,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 

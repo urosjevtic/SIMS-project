@@ -77,7 +77,9 @@ namespace InitialProject.ViewModel
         private void MyAccommoadionsOpen()
         {
             MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
+            CloseCurrentWindow();
             myAccommodationsMainWindow.Show();
+           
         }
 
         public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
@@ -85,6 +87,7 @@ namespace InitialProject.ViewModel
         private void RatingsOpen()
         {
             RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
+            CloseCurrentWindow();
             ratingsMain.Show();
         }
 
@@ -93,10 +96,18 @@ namespace InitialProject.ViewModel
         private void ReservationsOpen()
         {
             ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
+            CloseCurrentWindow();
             reservationsMain.Show();
         }
 
-
+        private void CloseCurrentWindow()
+        {
+            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)

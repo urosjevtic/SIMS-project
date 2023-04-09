@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
@@ -13,6 +14,7 @@ using InitialProject.Service.ReservationServices;
 using InitialProject.Utilities;
 using InitialProject.View;
 using InitialProject.View.OwnerView;
+using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.ReservationsViewModels
 {
@@ -52,16 +54,30 @@ namespace InitialProject.ViewModels.ReservationsViewModels
             if (parameter is AccommodationReservationRescheduleRequest selectedRescheduleRequest)
             {
                 RescheduleDeclineWindow rescheduleDeclineWindow = new RescheduleDeclineWindow(selectedRescheduleRequest);
-                rescheduleDeclineWindow.Show();
+                rescheduleDeclineWindow.ShowDialog();
                 RescheduleRequests.Remove(selectedRescheduleRequest);
 
             }
         }
 
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
 
+        private void GoBack()
+        {
+            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_loggedInUser);
+            CloseCurrentWindow();
+            reservationsMain.Show();
+        }
 
-        public delegate void CloseWindowAction();
-        public CloseWindowAction CloseAction { get; set; }
+        private void CloseCurrentWindow()
+        {
+            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+            }
+        }
+
 
 
         public event PropertyChangedEventHandler? PropertyChanged;

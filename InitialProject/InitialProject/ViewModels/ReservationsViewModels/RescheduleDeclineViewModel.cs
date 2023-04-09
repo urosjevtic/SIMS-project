@@ -5,8 +5,11 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
+using InitialProject.Utilities;
 using static InitialProject.ViewModels.ReservationsViewModels.RescheduleRequestViewModel;
 
 namespace InitialProject.ViewModels
@@ -15,19 +18,14 @@ namespace InitialProject.ViewModels
     {
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
         private readonly AccommodationReservationRescheduleRequestService _reservationRescheduleRequestService;
-        private AccommodationReservationRescheduleRequest RescheduleRequest;
+        private readonly AccommodationReservationRescheduleRequest _rescheduleRequest;
         public RescheduleDeclineViewModel(AccommodationReservationRescheduleRequest rescheduleRequest)
         {
             _declinedReservationRescheduleRequestService = new DeclinedAccommodationReservationRescheduleRequestService();
             _reservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
-            RescheduleRequest = rescheduleRequest;
+            _rescheduleRequest = rescheduleRequest;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
 
         private string _comment;
         public string Comment
@@ -41,21 +39,37 @@ namespace InitialProject.ViewModels
                     OnPropertyChanged();
                 }
             }
-        } 
+        }
 
-        public void ConfirmReschedule()
+        public ICommand ConfirmDeclineCommand => new RelayCommand(ConfirmDecline);
+
+        public void ConfirmDecline()
         {
-            _reservationRescheduleRequestService.DeclineReschedule(RescheduleRequest);
+            _reservationRescheduleRequestService.DeclineReschedule(_rescheduleRequest);
             DeclinedAccommodationReservationRescheduleRequest declinedRequest =
                 new DeclinedAccommodationReservationRescheduleRequest();
 
-            declinedRequest.RescheduleRequest = RescheduleRequest;
+            declinedRequest.RescheduleRequest = _rescheduleRequest;
             declinedRequest.ReasonForDeclining = _comment;
             _declinedReservationRescheduleRequestService.Save(declinedRequest);
+            CloseCurrentWindow();
 
-            CloseAction();
         }
 
-        public CloseWindowAction CloseAction { get; set; }
+        private void CloseCurrentWindow()
+        {
+            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+            }
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
