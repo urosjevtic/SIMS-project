@@ -144,7 +144,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="My Ratings" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="Here you can see ratings and reviews that guests have left"  TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Content="See accommodations"  Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenOwnerRatingsCommand}" Content="See accommodations"  Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
             <Border Grid.Row="4" BorderBrush="#484b6a" BorderThickness="2">

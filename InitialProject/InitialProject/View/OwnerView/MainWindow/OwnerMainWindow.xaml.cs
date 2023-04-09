@@ -116,9 +116,6 @@ namespace InitialProject.View
         {
             List<UnratedGuest> unratedGuests = GetAllUnratedGuests();
 
-            unratedGuests = RemoveUnratedGuestsNotBelongingToCurrentUser(unratedGuests);
-            
-            unratedGuests = RemoveUnratedGuestAfterFiveDays(unratedGuests);
 
             return unratedGuests;
         }
@@ -138,49 +135,22 @@ namespace InitialProject.View
 
         private void ConnectAccommodationToUnratedGuest(UnratedGuest unratedGuest)
         {
-            foreach (Accommodation accommodation in _accommodations)
-            {
-                if (accommodation.Id == unratedGuest.ReservedAccommodation.Id)
-                {
-                    unratedGuest.ReservedAccommodation = accommodation;
-                    break;
-                }
-            }
+
         }
 
         private void ConnectUserToUnratedGuest(UnratedGuest unratedGuest)
         {
-            unratedGuest.User = _userRepository.GetById(unratedGuest.User.Id);
+            
         }
 
-        private List<UnratedGuest> RemoveUnratedGuestsNotBelongingToCurrentUser(List<UnratedGuest> unratedGuests)
+        private void RemoveUnratedGuestsNotBelongingToCurrentUser(List<UnratedGuest> unratedGuests)
         {
-            for (int i = unratedGuests.Count - 1; i >= 0; i--)
-            {
-                UnratedGuest unratedGuest = unratedGuests[i];
-                if (LoggedInUser.Id != unratedGuest.ReservedAccommodation.Owner.Id)
-                {
-                    unratedGuests.RemoveAt(i);
-                }
-            }
 
-            return unratedGuests;
         }
 
-        public List<UnratedGuest> RemoveUnratedGuestAfterFiveDays(List<UnratedGuest> unratedGuests)
+        public void RemoveUnratedGuestAfterFiveDays(List<UnratedGuest> unratedGuests)
         {
-            var today = DateTime.Now;
-            for (int i = unratedGuests.Count - 1; i >= 0; i--)
-            {
-                UnratedGuest unratedGuest = unratedGuests[i];
-                TimeSpan dateDifference = today - unratedGuest.ReservationEndDate;
-                if (dateDifference.TotalDays > 5)
-                {
-                    _unratedGuestRepository.Remove(unratedGuest);
-                    unratedGuests.Remove(unratedGuest);
-                }
-            }
-            return unratedGuests;
+
         }
 
         public void UpdateAccommodations()
@@ -208,12 +178,6 @@ namespace InitialProject.View
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            if (_unratedGuests.Count > 0)
-            {
-                UnratedGuestNotification unratedGuestNotification = new UnratedGuestNotification(_unratedGuests);
-                unratedGuestNotification.Owner = this;
-                unratedGuestNotification.ShowDialog();
-            }
         }
 
         private void RescheduleRequest_Click(object sender, RoutedEventArgs e)

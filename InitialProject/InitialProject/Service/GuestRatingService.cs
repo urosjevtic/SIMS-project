@@ -23,13 +23,11 @@ namespace InitialProject.Service
         {
             RatedGuest ratedGuest = new RatedGuest
             {
-                User = new User { Id = unratedGuest.Id },
+                Reservation = unratedGuest.Reservation,
                 RuleFollowingRating = ruleFollowingRating,
                 CleanlinessRating = cleanlinessRating,
                 AdditionalComment = additionalComment,
-                Accommodation = unratedGuest.ReservedAccommodation,
-                ReservationStartDate = unratedGuest.ReservationStartDate,
-                ReservationEndDate = unratedGuest.ReservationEndDate
+
             };
 
             _ratedGuestService.Save(ratedGuest);

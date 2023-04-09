@@ -69,6 +69,18 @@ namespace InitialProject.ViewModels.RatingsViewModel
             CloseCurrentWindow();
             unratedGuests.Show();
         }
+
+
+        public ICommand OpenOwnerRatingsCommand => new RelayCommand(OpenOwnerRatings);
+
+        private void OpenOwnerRatings()
+        {
+            AccommodationReviewsSelectionWindow unratedGuests = new AccommodationReviewsSelectionWindow(_logedInUser);
+            CloseCurrentWindow();
+            unratedGuests.Show();
+        }
+
+
         private void CloseCurrentWindow()
         {
             Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
