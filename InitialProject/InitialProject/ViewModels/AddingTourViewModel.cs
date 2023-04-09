@@ -14,6 +14,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 using System.Windows.Controls;
 using System.Windows.Input;
 using InitialProject.Utilities;
+using System.Windows;
 
 namespace InitialProject.ViewModels
 {
@@ -29,6 +30,8 @@ namespace InitialProject.ViewModels
         private GuideMainViewModel _guideMainWindow;
 
         public User LoggedUser { get; set; }
+        public ICommand SaveCommand { get; private set; }
+        public ICommand CancelCommand { get; private set; }
 
         public AddingTourViewModel(User user)
         {
@@ -37,7 +40,8 @@ namespace InitialProject.ViewModels
             _imageRepository = new ImageRepository();
             _checkPointRepository = new CheckPointRepository();
             _guideMainWindow = new GuideMainViewModel(user);
-            
+            SaveCommand = new RelayCommand(Save);
+            CancelCommand = new RelayCommand(Cancel);
             LoggedUser = user;
             Start = DateTime.Now;
             _locationService = new LocationService();
@@ -241,8 +245,27 @@ namespace InitialProject.ViewModels
             return _checkPointRepository.Save(checkPoint);
 
         }
+        private void Save()
+        {
+            ConfirmAddingTour();
+            Window currentWindow = System.Windows.Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
 
-        public ICommand SaveTourCommand => new RelayCommand(ConfirmAddingTour);
+            // zatvaramo prozor ako postoji
+            currentWindow?.Close();
+        }
+
+       
+        private void Cancel()
+        {
+            // uzimamo referencu na aktivni prozor
+            Window currentWindow = System.Windows.Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
+
+            // zatvaramo prozor ako postoji
+            currentWindow?.Close();
+        }
+
+        public ICommand SaveTourCommand => new RelayCommand(Save);
+
 
         public void ConfirmAddingTour()
         {
@@ -261,10 +284,15 @@ namespace InitialProject.ViewModels
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             tour.IsActive = false;
             _tourRepository.Save(tour);
+            Window currentWindow = Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
+
+            currentWindow?.Close();
             _guideMainWindow.UpdateTodayToursDataGrid();
             _guideMainWindow.UpdateToursDataGrid();
 
             _guideMainWindow.LoadData();
+            
+            
         }
 
        

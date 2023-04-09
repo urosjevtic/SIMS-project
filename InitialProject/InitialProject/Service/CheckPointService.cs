@@ -68,7 +68,6 @@ namespace InitialProject.Service
            _checkPointRepository.Update(checkPoint);
 
         }
-        private readonly CheckPointRepository _checkPointRepository;
 
         public List<CheckPoint> LoadCheckPoints()
         {

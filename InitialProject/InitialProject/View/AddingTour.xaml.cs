@@ -20,6 +20,7 @@ using InitialProject.ViewModels;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using System.Collections;
+using InitialProject.Utilities;
 
 namespace InitialProject.View
 {
@@ -31,6 +32,8 @@ namespace InitialProject.View
         public AddingTourViewModel AddingTourViewModel { get; set; }
 
         public User LoggedUser { get; set; }
+        
+
         public AddingTour(User user)
 
         {
@@ -39,7 +42,8 @@ namespace InitialProject.View
             AddingTourViewModel = new AddingTourViewModel(user);
             this.DataContext = AddingTourViewModel;
             LoggedUser = user;
-   
+            
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -51,17 +55,7 @@ namespace InitialProject.View
 
        
 
-        private void SaveClick(object sender, RoutedEventArgs e)
-        {
-            AddingTourViewModel.ConfirmAddingTour();
-            this.Close();
-        }
-
-        private void CancelClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
+        
 
        
 

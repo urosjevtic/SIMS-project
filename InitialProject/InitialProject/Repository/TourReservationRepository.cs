@@ -85,5 +85,9 @@ namespace InitialProject.Repository
             }
             return guests;
         }
+        public void SaveReservation(Tour tour,int m , User n)
+        {
+
+        }
     }
 }

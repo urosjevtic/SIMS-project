@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Service;
+using InitialProject.ViewModels;
 
 namespace InitialProject.View
 {
@@ -21,24 +22,30 @@ namespace InitialProject.View
     public partial class TourStatistic : Window
     {
         public TourService _tourService;
+        public TourStatisticViewModel TourStatisticViewModel { get; set; }
+        
         public TourStatistic()
         {
             InitializeComponent();
+            TourStatisticViewModel = new TourStatisticViewModel();
+            this.DataContext = TourStatisticViewModel;
             _tourService = new TourService();
+            mostVisitedTourTextBlock.Text =  "Najposjećenija tura ikad je:  " + _tourService.FindMostVisited().Name + "."; ;
         }
 
         private void GodineComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-               // Dohvati odabranu godinu
                 string year = ((ComboBoxItem)YearsComboBox.SelectedItem).Content.ToString();
 
-                // Dohvati ime najposjećenije ture za odabranu godinu
-                string Name = _tourService.GetMostVisitedEver(year);
+                string Name = _tourService.GetMostVisitedInYear(year).Name;
 
-                // Postavi tekst u TextBlock elementu
-                mostVisitedTourTextBlock.Text = "Najposjećenija tura za " + year + " je " + Name + ".";
-            
+                mostVisitedTourInYearTextBlock.Text = "Najposjećenija tura za " + year + " je " + Name + ".";
+         
+        }
 
+        private void ShowOneTourStatisticClick(object sender, RoutedEventArgs e)
+        {
+            TourStatisticViewModel.ShowStatistics();
         }
     }
 }

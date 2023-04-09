@@ -9,7 +9,7 @@ using InitialProject.Serializer;
 namespace InitialProject.Model 
 {
     public enum UserPresence { Yes, No, Unknown }
-    public class Guest : ISerializable
+    public class TourGuest : ISerializable
     {
        
         public int Id { get; set; }    
@@ -24,12 +24,12 @@ namespace InitialProject.Model
         public String CheckPointName { get; set; }
         
 
-        public Guest()
+        public TourGuest()
         {
           Presence = UserPresence.Unknown;
             CheckPointName = "";
         }
-       public Guest(int id,string username,string pass,UserRole role, String name, string surname, UserPresence userPresence, String checkPointName)
+       public TourGuest(int id,string username,string pass,UserRole role, String name, string surname, UserPresence userPresence, String checkPointName)
         {
             Id = id;
             Username = username;

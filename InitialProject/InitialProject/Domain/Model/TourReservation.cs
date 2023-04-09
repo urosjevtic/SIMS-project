@@ -28,9 +28,6 @@ namespace InitialProject.Domain.Model
                NumberOfPeople.ToString(),
                IsUsingVoucher.ToString(),
                AverageAge.ToString()
-
-               NumberOfPeople.ToString()
-
             };
 
             return csvValues;

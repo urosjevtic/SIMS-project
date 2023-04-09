@@ -86,10 +86,10 @@ namespace InitialProject.ViewModel
             return new ObservableCollection<Tour>(todayTours);
         }
 
-        public void StartTour()
+        public void StartTour()   // refaktorisatiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
         {
 
-            if (SelectedTodayTour != null && !SelectedTodayTour.IsActive)
+            if (SelectedTodayTour != null && _tourService.FindActiveTours(LoggedUser).Count == 0)
             {
                 SelectedTodayTour.IsActive = true;
                 List<CheckPoint> checkPoints = SelectedTodayTour.CheckPoints;
@@ -122,7 +122,7 @@ namespace InitialProject.ViewModel
         {
             if (SelectedTour != null)
             {
-                if (DateTime.Now.DayOfYear <= SelectedTour.Start.DayOfYear)
+                if (DateTime.Now.Hour <= SelectedTour.Start.Hour + 2 && DateTime.Now.DayOfYear<= SelectedTour.Start.DayOfYear)
                 {
                     _tourService.SendVauchers(SelectedTour);
                     _tourService.Delete(SelectedTour);
@@ -133,6 +133,12 @@ namespace InitialProject.ViewModel
                     MessageBox.Show("Do pocetka ture je ostalo manje od 48h!","Error",MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        public void ShowStatistic()
+        {
+            TourStatistic tourStatistic = new TourStatistic();
+            tourStatistic.Show();
         }
 
     }
