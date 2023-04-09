@@ -5,19 +5,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Service.ReservationServices;
 
 namespace InitialProject.Service
 {
     public class UnratedGuestService
     {
         private readonly IUnratedGuestRepository _unratedGuestRepository;
-        private readonly AccommodationService _accommodationService;
+        private readonly AccommodationReservationService _reservationService;
         private readonly UserService _userService;
         public UnratedGuestService()
         {
             _unratedGuestRepository = Injector.Injector.CreateInstance<IUnratedGuestRepository>();
-            _accommodationService = new AccommodationService();
+            _reservationService = new AccommodationReservationService();
             _userService = new UserService();
         }
 
@@ -32,8 +34,7 @@ namespace InitialProject.Service
             List<UnratedGuest> allUnratedGuests = _unratedGuestRepository.GetAll();
             foreach (UnratedGuest unratedGuest in allUnratedGuests)
             {
-                ConnectAccommodationToUnratedGuest(unratedGuest);
-                ConnectUserToUnratedGuest(unratedGuest);
+                ConnectReservationToUnratedGuest(unratedGuest);
                 unratedGuests.Add(unratedGuest);
             }
 
@@ -49,44 +50,39 @@ namespace InitialProject.Service
 
             foreach (UnratedGuest unratedGuest in allUnratedGuests)
             {
-                ConnectAccommodationToUnratedGuest(unratedGuest);
-                ConnectUserToUnratedGuest(unratedGuest);
+                ConnectReservationToUnratedGuest(unratedGuest);
             }
 
             foreach (var unratedGuest in allUnratedGuests)
             {
-                if(unratedGuest.ReservedAccommodation.Owner.Id == id)
+                if(unratedGuest.Reservation.Accommodation.Owner.Id == id)
                     unratedGuestsByOwnerId.Add(unratedGuest);
 
             }
-            //povezi usere sa accommodations
 
             RemoveUnratedGuestAfterFiveDays(unratedGuestsByOwnerId);
             return unratedGuestsByOwnerId;
         }
 
-        private void ConnectAccommodationToUnratedGuest(UnratedGuest unratedGuest)
+        private void ConnectReservationToUnratedGuest(UnratedGuest unratedGuest)
         {
-            foreach (Accommodation accommodation in _accommodationService.GetAll())
+            foreach (AccommodationReservation reservation in _reservationService.GetAll())
             {
-                if (accommodation.Id == unratedGuest.ReservedAccommodation.Id)
+                if (reservation.Id == unratedGuest.Reservation.Id)
                 {
-                    unratedGuest.ReservedAccommodation = accommodation;
+                    unratedGuest.Reservation = reservation;
                     break;
                 }
             }
         }
-        private void ConnectUserToUnratedGuest(UnratedGuest unratedGuest)
-        {
-            unratedGuest.User = _userService.GetUserById(unratedGuest.User.Id);
-        }
+
         private List<UnratedGuest> RemoveUnratedGuestAfterFiveDays(List<UnratedGuest> unratedGuests)
         {
             var today = DateTime.Now;
             for (int i = unratedGuests.Count - 1; i >= 0; i--)
             {
                 UnratedGuest unratedGuest = unratedGuests[i];
-                TimeSpan dateDifference = today - unratedGuest.ReservationEndDate;
+                TimeSpan dateDifference = today - unratedGuest.Reservation.EndDate;
                 if (dateDifference.TotalDays > 5)
                 {
                     _unratedGuestRepository.Remove(unratedGuest);
