@@ -10,12 +10,14 @@ namespace InitialProject.Service
 {
     public class TourService
     {
-        private readonly TourRepository _tourRepository;    
+        private readonly TourRepository _tourRepository;
+        private readonly ImageRepository _imageRepository;
         public LocationService _locationService { get; set; }
 
         public TourService()
         {
-            _tourRepository = new TourRepository(); 
+            _tourRepository = new TourRepository();
+            _imageRepository = new ImageRepository();
             _locationService = new LocationService();   
         }
         public List<Tour> GetTodayTours(User user)
@@ -36,7 +38,7 @@ namespace InitialProject.Service
         public List<Tour> Search(string state, string city, string language, string duration, string number)
         {
             List<Tour> tours = _tourRepository.GetAll();
-            List<Location> locations = _locationService.LoadLocations();
+            List<Location> locations = _locationService.GetLocations();
             AddTourLocation(tours, locations);
 
             List<Tour> searchResults = tours.ToList();
@@ -101,7 +103,7 @@ namespace InitialProject.Service
         {
             List<Tour> alternative = new List<Tour>();
             List<Tour> tours = _tourRepository.GetAll();
-            var locations = _locationService.LoadLocations();
+            var locations = _locationService.GetLocations();
 
             AddTourLocation(tours, locations);
 
@@ -117,7 +119,7 @@ namespace InitialProject.Service
         public List<Tour> FindAllActiveTours()
         {
             List<Tour> tours = _tourRepository.GetAll();
-            List<Location> locations = _locationService.LoadLocations();
+            List<Location> locations = _locationService.GetLocations();
             List<Tour> active = new List<Tour>();
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
@@ -132,19 +134,28 @@ namespace InitialProject.Service
         public List<Tour> FindAllEndedTours()
         {
             List<Tour> tours = _tourRepository.GetAll();
-            List<Location> locations = _locationService.LoadLocations();
+            List<Location> locations = _locationService.GetLocations();
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
             foreach(Tour tour in tours)
             {
                 TimeSpan ts = new(tour.Duration, 0, 0);
-                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false)
+                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
                 {
                     ended.Add(tour);
                 }
             }
             return ended;
+        }
+        public void RateTour(Tour SelectedTour)
+        {
+            SelectedTour.IsRated = true;
+            _tourRepository.Update(SelectedTour);
+        }
+        public void AddGuestsImage(Tour tour, string text)
+        {
+            _imageRepository.Update(tour, text);
         }
         public List<Tour> FindActiveTours(User user)
         {

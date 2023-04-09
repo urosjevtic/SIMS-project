@@ -21,7 +21,8 @@ namespace InitialProject.Injector
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
             {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
-            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()}
+            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
+            {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()}
 
             // Add more implementations here
         };

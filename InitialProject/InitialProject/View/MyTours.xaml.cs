@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Forms;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 
@@ -27,13 +27,13 @@ namespace InitialProject.View
     /// </summary>
     public partial class MyTours : Window
     {
-        private readonly VoucherRepository _voucherRepository;
-        public CheckPointService _checkPointService;
-        public TourService _tourService;
+        private readonly RatedGuideTourService _ratedGuideTourService;
+        private readonly TourService _tourService;
         public Tour SelectedActiveTour { get; set; }
         public Tour SelectedEndedTour { get; set; }
         public List<Tour> ActiveTours { get; set; }
         public List<Tour> EndedTours { get; set; }
+        public List<CheckPoint> Checkpoints { get; set; }
         public User LoggedUser { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -88,7 +88,7 @@ namespace InitialProject.View
             this.DataContext = this;
             LoggedUser = user;
             _tourService = new TourService();
-            _checkPointService = new CheckPointService();
+            _ratedGuideTourService = new RatedGuideTourService();
             ActiveTours = _tourService.FindAllActiveTours();
             EndedTours = _tourService.FindAllEndedTours();
             activeTours.ItemsSource = new ObservableCollection<Tour>(ActiveTours);
@@ -104,19 +104,39 @@ namespace InitialProject.View
         {
             SelectedActiveTour = (Tour)((Button)sender).DataContext;
             // Set the SelectedTour property to the selected tour item
-            List<CheckPoint> CheckPoints = SelectedActiveTour.CheckPoints;
-            listBox.ItemsSource = new ObservableCollection<CheckPoint>(CheckPoints);
+            Checkpoints = SelectedActiveTour.CheckPoints;
+            listBox.ItemsSource = new ObservableCollection<CheckPoint>(Checkpoints);
         }
 
         private void SubmitRateButton(object sender, RoutedEventArgs e)
         {
-
+            if (SelectedEndedTour != null)
+            {
+                _ratedGuideTourService.Create(LoggedUser, SelectedEndedTour.Id, GuideKnowledge, GuideLanguage, InterestingTour);
+                _tourService.RateTour(SelectedEndedTour);
+                if(imageTextBox.Text != "")
+                {
+                    _tourService.AddGuestsImage(SelectedEndedTour, imageTextBox.Text);
+                }
+                MessageBox.Show("Tour sucessfully rated!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                EndedTours.Remove(SelectedEndedTour);
+                endedTours.ItemsSource = new ObservableCollection<Tour>(EndedTours);
+            } else
+            {
+                MessageBox.Show("You didn't select any tour! Click on Button View to select tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void OpenCommentFormButton(object sender, RoutedEventArgs e)
         {
-            CommentForm commentForm = new(LoggedUser);
-            commentForm.Show();
+            if (SelectedEndedTour != null)
+            {
+                CommentsOverview commentOverview = new(LoggedUser);
+                commentOverview.Show();
+            } else
+            {
+                MessageBox.Show("You didn't select any tour! Click on Button View to select tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void RatingButton(object sender, RoutedEventArgs e)
