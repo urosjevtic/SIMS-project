@@ -44,7 +44,7 @@ namespace InitialProject.View
             _voucherRepository = new VoucherRepository();
             _voucherService = new VoucherService();
             tours = filteredTours;
-            vouchers = _voucherRepository.GetAllCreated();
+            vouchers = _voucherService.GetAllCreated();
             LoggedUser = user;
             resultDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
             vouchersComboBox.ItemsSource = new ObservableCollection<Voucher>(vouchers);

@@ -74,11 +74,14 @@ namespace InitialProject.Repository
         {
             throw new NotImplementedException();
         }
-        public void Update(Tour tour, string text)
+        public void Update(Tour tour, string[] text)
         {
             _images = _serializer.FromCSV(FilePath);
             Image found = _images.Find(c => c.Id == tour.CoverImageUrl.Id);
-            found.Url.Add(text);
+            foreach(string s in text)
+            {
+                found.Url.Add(s);
+            }
             _serializer.ToCSV(FilePath, _images);
         }
         public void Update(Image entity)

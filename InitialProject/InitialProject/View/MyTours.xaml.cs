@@ -29,6 +29,7 @@ namespace InitialProject.View
     {
         private readonly RatedGuideTourService _ratedGuideTourService;
         private readonly TourService _tourService;
+        private readonly NotificationService _notificationService;
         public Tour SelectedActiveTour { get; set; }
         public Tour SelectedEndedTour { get; set; }
         public List<Tour> ActiveTours { get; set; }
@@ -89,6 +90,7 @@ namespace InitialProject.View
             LoggedUser = user;
             _tourService = new TourService();
             _ratedGuideTourService = new RatedGuideTourService();
+            _notificationService = new NotificationService();
             ActiveTours = _tourService.FindAllActiveTours();
             EndedTours = _tourService.FindAllEndedTours();
             activeTours.ItemsSource = new ObservableCollection<Tour>(ActiveTours);
@@ -147,7 +149,22 @@ namespace InitialProject.View
 
         private void JoinTourButton(object sender, RoutedEventArgs e)
         {
-
-        }
+            if (SelectedActiveTour == null)
+            {
+                MessageBox.Show("You didn't select any tour! Click on Button View to select tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
+            {
+                if (!_notificationService.Create(SelectedActiveTour, LoggedUser))
+                {
+                    MessageBox.Show("You have already sent request for this tour.", "Information", MessageBoxButton.OK);
+                }
+                else
+                {
+                    _notificationService.Create(SelectedActiveTour, LoggedUser);
+                    MessageBox.Show("Join request is successfully sent", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+        } 
     }
 }

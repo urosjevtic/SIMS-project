@@ -128,8 +128,5 @@ namespace InitialProject.View
             _notificationRepository.DeleteAll();
             UncheckCheckPoint(SelectedTour);
         }
-
-
-       
     }
 }

@@ -16,7 +16,7 @@
             <ColumnDefinition Width="270"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="1" Text="All vouchers" FontSize="36" TextAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" TextDecorations="Underline"/>
-        <DataGrid x:Name="vouchersDataGrid" VerticalScrollBarVisibility="Auto" Grid.Column="1" ItemsSource="{Binding vouchers}" AutoGenerateColumns="False" IsReadOnly="True" ScrollBar.Scroll="DataGrid_Scroll" Margin="0,53,0,98">
+        <DataGrid x:Name="vouchersDataGrid" VerticalScrollBarVisibility="Auto" Grid.Column="1" ItemsSource="{Binding Vouchers}" AutoGenerateColumns="False" IsReadOnly="True" ScrollBar.Scroll="DataGrid_Scroll" Margin="0,53,0,98">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Expiry date" Binding="{Binding ExpiryDate}" FontSize="24" Width="*">
                     <DataGridTextColumn.HeaderStyle>

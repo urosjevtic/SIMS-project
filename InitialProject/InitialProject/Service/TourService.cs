@@ -5,20 +5,23 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Repository;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Injector;
 
 namespace InitialProject.Service
 {
     public class TourService
     {
-        private readonly TourRepository _tourRepository;
-        private readonly ImageRepository _imageRepository;
+        private readonly ITourRepository _tourRepository;
+        private readonly IImageRepository _imageRepository;
+        //private readonly ITourReservationRepository _tourReservationRepository;
         public LocationService _locationService { get; set; }
 
         public TourService()
         {
-            _tourRepository = new TourRepository();
-            _imageRepository = new ImageRepository();
-            _locationService = new LocationService();   
+            _tourRepository = Injector.Injector.CreateInstance<ITourRepository>();
+            _imageRepository = Injector.Injector.CreateInstance<IImageRepository>();
+            _locationService = new LocationService();
         }
         public List<Tour> GetTodayTours(User user)
         {
@@ -131,6 +134,10 @@ namespace InitialProject.Service
             }
             return active;
         }
+        private string[] SplitStringByComma(string str)
+        {
+            return str.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
         public List<Tour> FindAllEndedTours()
         {
             List<Tour> tours = _tourRepository.GetAll();
@@ -155,7 +162,7 @@ namespace InitialProject.Service
         }
         public void AddGuestsImage(Tour tour, string text)
         {
-            _imageRepository.Update(tour, text);
+            _imageRepository.Update(tour, SplitStringByComma(text));
         }
         public List<Tour> FindActiveTours(User user)
         {

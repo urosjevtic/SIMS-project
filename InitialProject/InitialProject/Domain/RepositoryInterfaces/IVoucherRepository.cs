@@ -7,11 +7,10 @@ using InitialProject.Domain.Model;
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
-    public interface ITourRepository
+    public interface IVoucherRepository
     {
+        List<Voucher> GetAll();
+        void Save(Voucher voucher);
         int NextId();
-        void Save(Tour tour);
-        List<Tour> GetAll();
-        void Update(Tour tour);
     }
 }
