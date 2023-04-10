@@ -1,0 +1,36 @@
+﻿<Window x:Class="InitialProject.View.AccommodationRatingForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="AccommodationRatingForm" Height="450" Width="800">
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Rating Accommodation" VerticalAlignment="Center" HorizontalAlignment="Left" FontSize="15" RenderTransformOrigin="0,0" Margin="26,0,0,0"/>
+            <Grid Grid.Row="1">
+                <StackPanel Orientation='Horizontal'>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="Rating" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
+                        <TextBlock Text="Cleanness" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
+                        <Slider x:Name="sCleanliness" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}"  Margin="40,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <TextBlock Text="Correctness the owner" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
+                        <Slider x:Name="sOwnerCorrectness" Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}"  Margin="40,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <TextBlock Text="Additional comment" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
+                        <TextBox x:Name="tbAdditionalComment" Text="{Binding Path=AdditionalComment, UpdateSourceTrigger=PropertyChanged}" Margin="40,0,0,0" Height="60" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <TextBlock Text="Post a picture url" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
+                        <TextBox x:Name="tbImageUrl" Text="{Binding ImageUrl, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="160" Margin="-80, 0, 0, 0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Button Content="Submit" Click="ButtonClick_Submit" Width="117" Margin="320" Height="40"/>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

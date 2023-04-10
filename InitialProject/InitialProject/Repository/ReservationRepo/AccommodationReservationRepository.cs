@@ -49,7 +49,7 @@ namespace InitialProject.Repository.ReservationRepo
             reservation.StartDate = startDate;
             reservation.EndDate = endDate;
             reservation.UserId = LoggedUser.Id;
-            reservation.Id = accommodation.Id;
+            reservation.AccommodationId = accommodation.Id;
             reservation.GuestNumber = guestNumber;
             Save(reservation);
         }

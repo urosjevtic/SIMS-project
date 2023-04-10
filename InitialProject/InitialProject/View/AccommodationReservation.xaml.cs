@@ -15,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Service.ReservationServices;
 
 namespace InitialProject.View
 {
@@ -66,7 +67,6 @@ namespace InitialProject.View
             }
             else
             {
-                SelectedAccommodation.MaxGuests -= guestNumber;
                 _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
                 MessageBox.Show("Reservation successful!");
             }

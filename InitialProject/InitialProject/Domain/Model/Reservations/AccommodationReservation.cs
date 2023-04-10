@@ -23,7 +23,7 @@ namespace InitialProject.Domain.Model.Reservations
 
         public AccommodationReservation()
         {
-            Accommodation = new Accommodation();
+           // Accommodation = new Accommodation();
             ReservedDates = new List<DateTime>();
             User = new User();
         }
@@ -37,7 +37,7 @@ namespace InitialProject.Domain.Model.Reservations
             AccommodationId = accommodationId;
             Accommodation = accommodation;
             GuestNumber = guestNumber;
-            ReservedDates = reservedDates;
+            //ReservedDates = reservedDates;
 
         }
 

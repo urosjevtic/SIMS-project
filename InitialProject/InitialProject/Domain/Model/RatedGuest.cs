@@ -18,12 +18,14 @@ namespace InitialProject.Domain.Model
         public Accommodation Accommodation { get; set; }
         public DateTime ReservationStartDate { get; set; }
         public DateTime ReservationEndDate { get; set; }
+        
 
 
         public RatedGuest()
         {
             User = new User();
             Accommodation = new Accommodation();
+           
         }
 
         public RatedGuest(int id, User user, int ruleFollowingRating, int cleanlinessRating, string additionalComment, Accommodation accommodation, DateTime reservationStartDate, DateTime reservationEndDate)
@@ -36,11 +38,12 @@ namespace InitialProject.Domain.Model
             Accommodation = accommodation;
             ReservationStartDate = reservationStartDate;
             ReservationEndDate = reservationEndDate;
+           
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), User.Id.ToString(), RuleFollowingRating.ToString(), CleanlinessRating.ToString(), AdditionalComment, Accommodation.Id.ToString(), ReservationStartDate.ToString("dd'/'MM'/'yyyy"), ReservationEndDate.ToString("dd'/'MM'/'yyyy") };
+            string[] csvValues = { Id.ToString(), User.Id.ToString(), RuleFollowingRating.ToString(), CleanlinessRating.ToString(), AdditionalComment, Accommodation.Id.ToString(), ReservationStartDate.ToString("dd'/'MM'/'yyyy"), ReservationEndDate.ToString("dd'/'MM'/'yyyy")};
             return csvValues;
         }
 
@@ -54,6 +57,7 @@ namespace InitialProject.Domain.Model
             Accommodation.Id = Convert.ToInt32(values[5]);
             ReservationStartDate = DateTime.ParseExact(values[6], "dd'/'MM'/'yyyy", CultureInfo.InvariantCulture);
             ReservationEndDate = DateTime.ParseExact(values[7], "dd'/'MM'/'yyyy", CultureInfo.InvariantCulture);
+           
         }
     }
 }
