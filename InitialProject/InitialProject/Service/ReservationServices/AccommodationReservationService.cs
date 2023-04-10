@@ -98,5 +98,35 @@ namespace InitialProject.Service.ReservationServices
         {
             _accommodationReservationRepository.Delete(reservation);
         }
+        public List<AccommodationReservation> GetPastReservations()
+        {
+            List<AccommodationReservation> pastReservations = new List<AccommodationReservation>();
+            List<AccommodationReservation> allAccommodationReservations = GetAll();
+
+            foreach (AccommodationReservation reservation in allAccommodationReservations)
+            {
+                if (reservation.EndDate < DateTime.Now)
+                {
+                    pastReservations.Add(reservation);
+                }
+            }
+
+            return pastReservations;
+        }
+        public List<AccommodationReservation> GetFutureReservations()
+        {
+            List<AccommodationReservation> futureReservations = new List<AccommodationReservation>();
+            List<AccommodationReservation> allAccommodationReservations = GetAll();
+
+            foreach (AccommodationReservation reservation in allAccommodationReservations)
+            {
+                if (reservation.StartDate > DateTime.Now)
+                {
+                    futureReservations.Add(reservation);
+                }
+            }
+
+            return futureReservations;
+        }
     }
 }

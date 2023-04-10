@@ -76,9 +76,8 @@ namespace InitialProject.Repository.ReservationRepo
             }
 
             _serializer.ToCSV(FilePath, _reservations);
-
         }
 
-
+        
     }
 }

@@ -39,8 +39,8 @@
             </StackPanel>
             <DataGrid Name="resultDataGrid" Width="235" Height="200" Margin="190, 10">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Start date" Binding="{Binding StarDate}" Width="*" />
-                    <DataGridTextColumn Header="End date" Binding="{Binding EndDate}" Width="*"/>
+                    <DataGridTextColumn Header="Start date" Binding="{Binding Path=StarDate}" Width="*" />
+                    <DataGridTextColumn Header="End date" Binding="{Binding Path=EndDate}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>

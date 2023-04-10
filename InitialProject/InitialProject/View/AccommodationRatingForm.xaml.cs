@@ -88,8 +88,8 @@ namespace InitialProject.View
             }
         }
 
-        private int _imageUrl;
-        public int ImageUrl
+        private string _imageUrl;
+        public string ImageUrl
         {
             get { return _imageUrl; }
             set
@@ -121,7 +121,7 @@ namespace InitialProject.View
             ratedOwner.OwnerCorrectness = _ownerCorrectnessRating;
             ratedOwner.CleanlinessRating = _cleanlinessRating;
             ratedOwner.AdditionalComment = _additionalComment;
-           // ratedOwner.ImageUrl = _imageUrl;
+            ratedOwner.ImageUrl = new Domain.Model.Image();
             ratedOwner.Reservation = UnratedOwner.Reservation;
         }
        

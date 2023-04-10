@@ -25,7 +25,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class SearchResult : Window
     {
-        public ObservableCollection<Tour> Tours { get; set; }
+        
         private readonly TourService _tourService;
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly VoucherRepository _voucherRepository;

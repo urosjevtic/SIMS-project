@@ -43,7 +43,7 @@ namespace InitialProject.Domain.Model.Reservations
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), StartDate.ToString(), EndDate.ToString(), UserId.ToString(),  Accommodation.Id.ToString(), GuestNumber.ToString() };
+            string[] csvValues = { Id.ToString(), StartDate.ToString(), EndDate.ToString(), UserId.ToString(), AccommodationId.ToString(), GuestNumber.ToString() };
             return csvValues;
         }
 
