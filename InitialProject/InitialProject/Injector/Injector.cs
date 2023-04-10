@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
+using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
 using InitialProject.Repository.ReservationRepo;
+using InitialProject.Repository.UserRepo;
 
 namespace InitialProject.Injector
 {
@@ -21,9 +23,11 @@ namespace InitialProject.Injector
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
             {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
+            {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
+            {typeof(IOwnerRepository), new OwnerRepository()},
             {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
             {typeof(IVoucherRepository), new VoucherRepository()},
-            {typeof(ITourRepository), new TourRepository()}
+            {typeof(ITourRepository), new TourRepository()},
             {typeof(ITourGuestRepository), new TourGuestsRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
