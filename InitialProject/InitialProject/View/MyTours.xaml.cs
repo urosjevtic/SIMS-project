@@ -133,7 +133,7 @@ namespace InitialProject.View
         {
             if (SelectedEndedTour != null)
             {
-                CommentsOverview commentOverview = new(LoggedUser);
+                CommentsOverview commentOverview = new(LoggedUser, SelectedEndedTour);
                 commentOverview.Show();
             } else
             {
