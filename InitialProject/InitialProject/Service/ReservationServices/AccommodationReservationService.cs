@@ -64,6 +64,21 @@ namespace InitialProject.Service.ReservationServices
             return reservations;
         }
 
+        public List<AccommodationReservation> GetReservationByOwnerId(int id)
+        {
+            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
+            List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAll();
+            BindAccommodationToReservations(allReservations);
+            BindUserToReservations(allReservations);
+            foreach (AccommodationReservation accommodationReservation in allReservations)
+            {
+                if (accommodationReservation.Accommodation.Owner.Id == id)
+                    reservations.Add(accommodationReservation);
+            }
+
+            return reservations;
+        }
+
         private void BindAccommodationToReservations(List<AccommodationReservation> reservations)
         {
             foreach (var reservation in reservations)
@@ -78,6 +93,7 @@ namespace InitialProject.Service.ReservationServices
                 }
             }
         }
+
 
         private void BindUserToReservations(List<AccommodationReservation> reservations)
         {

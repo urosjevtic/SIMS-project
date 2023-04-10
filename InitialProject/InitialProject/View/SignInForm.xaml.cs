@@ -5,6 +5,7 @@ using InitialProject.View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using InitialProject.View.OwnerView;
 
 namespace InitialProject
 {
@@ -54,8 +55,9 @@ namespace InitialProject
                 {
                     if(user.Role == UserRole.Owner)
                     {
-                        OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
-                        ownerMainWindow.Show();
+                        MainWindowOwner mainWindowOwner = new MainWindowOwner(user);
+                        //OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
+                        mainWindowOwner.Show();
                     }
                     if(user.Role == UserRole.Guest)
                     {
