@@ -35,7 +35,7 @@ namespace InitialProject.View
         public Tour SelectedEndedTour { get; set; }
         public List<Tour> ActiveTours { get; set; }
         public List<Tour> EndedTours { get; set; }
-        public List<CheckPoint> Checkpoints { get; set; }
+        public List<CheckPoint> CheckPoints { get; set; }
         public User LoggedUser { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -96,7 +96,7 @@ namespace InitialProject.View
             EndedTours = _tourService.FindAllEndedTours();
             activeTours.ItemsSource = new ObservableCollection<Tour>(ActiveTours);
             endedTours.ItemsSource = new ObservableCollection<Tour>(EndedTours);
-            groupBoxRate.Header = "Rate tour:";
+            groupBoxRate.Header = "Rate tour";
         }
         private void GoBackButton(object sender, RoutedEventArgs e)
         {
@@ -107,8 +107,8 @@ namespace InitialProject.View
         {
             SelectedActiveTour = (Tour)((Button)sender).DataContext;
             // Set the SelectedTour property to the selected tour item
-            Checkpoints = SelectedActiveTour.CheckPoints;
-            listBox.ItemsSource = new ObservableCollection<CheckPoint>(Checkpoints);
+            CheckPoints = SelectedActiveTour.CheckPoints;
+            listBox.ItemsSource = new ObservableCollection<CheckPoint>(CheckPoints);
         }
 
         private void SubmitRateButton(object sender, RoutedEventArgs e)
@@ -134,7 +134,7 @@ namespace InitialProject.View
         {
             if (SelectedEndedTour != null)
             {
-                CommentsOverview commentOverview = new(LoggedUser);
+                CommentsOverview commentOverview = new(LoggedUser, SelectedEndedTour);
                 commentOverview.Show();
             } else
             {
