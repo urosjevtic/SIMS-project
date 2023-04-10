@@ -18,7 +18,8 @@
             <ColumnDefinition Width="3*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <Button Height="50" Width="120" Content="Statistics" Grid.ColumnSpan="2" Margin="0,111,337,395" Click="ShowStatisticClick"></Button>
+        <Button Height="50" Content="Statistics" Margin="0,111,30,395" Click="ShowStatisticClick"/>
+        <Button Height="50" Content="Ratings" Margin="0,191,30,315" Command="{Binding ShowAllRatingsCommand}"/>
         <TabControl TabStripPlacement="Left" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
             <TabItem Header="My tours" Margin="-2,26,0,-40">
                 <Grid>

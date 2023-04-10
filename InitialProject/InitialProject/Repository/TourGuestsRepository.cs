@@ -51,7 +51,9 @@ namespace InitialProject.Repository
 
         public TourGuest GetById(int id)
         {
-            throw new NotImplementedException();
+                _guests = _serializer.FromCSV(FilePath);
+                return _guests.FirstOrDefault(u => u.Id == id);
+            
         }
 
         public void Delete(TourGuest entity)
@@ -77,7 +79,7 @@ namespace InitialProject.Repository
             newGuest.Name = entity.Name;
             newGuest.Surname = entity.Surname;
             newGuest.Presence = entity.Presence;
-
+            newGuest.CheckPointName = entity.CheckPointName;
             SaveAll(_guests);
         }
        
