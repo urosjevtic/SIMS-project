@@ -16,7 +16,7 @@ using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
-    public class RatingsMainViewModel : BaseViewModel
+    public class RatingsMainViewModel : SideScreenViewModel
     {
         private readonly User _logedInUser;
         public RatingsMainViewModel(User logedInUser)
@@ -82,9 +82,8 @@ namespace InitialProject.ViewModels.RatingsViewModel
             unratedGuests.Show();
         }
 
-        public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
 
-        private void MyAccommoadionsOpen()
+        protected override void MyAccommoadionsOpen()
         {
             MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(_logedInUser);
             CloseCurrentWindow();
@@ -92,18 +91,16 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         }
 
-        public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
 
-        private void RatingsOpen()
+        protected override void RatingsOpen()
         {
             RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
             CloseCurrentWindow();
             ratingsMain.Show();
         }
 
-        public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
 
-        private void ReservationsOpen()
+        protected override void ReservationsOpen()
         {
             ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
             CloseCurrentWindow();

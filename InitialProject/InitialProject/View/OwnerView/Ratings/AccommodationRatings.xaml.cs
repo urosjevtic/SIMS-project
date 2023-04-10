@@ -21,10 +21,10 @@ namespace InitialProject.View.OwnerView.Ratings
     /// </summary>
     public partial class AccommodationRatings : Window
     {
-        public AccommodationRatings(User logedInUser, int accommodationId)
+        public AccommodationRatings(User logedInUser, Accommodation accommodation)
         {
             InitializeComponent();
-            DataContext = new AccommodationRatingsViewModel(logedInUser, accommodationId);
+            DataContext = new AccommodationRatingsViewModel(logedInUser, accommodation);
         }
     }
 }

@@ -12,7 +12,7 @@ using InitialProject.ViewModels;
 
 namespace InitialProject.ViewModel
 {
-    public class OwnerMainViewModel : BaseViewModel
+    public class OwnerMainViewModel : SideScreenViewModel
     {
         private User _loggedInUser;
 
@@ -73,9 +73,8 @@ namespace InitialProject.ViewModel
             MainScreenVisibility = Visibility.Visible;
         }
 
-        public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
 
-        private void MyAccommoadionsOpen()
+        protected override void MyAccommoadionsOpen()
         {
             MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
             CloseCurrentWindow();
@@ -83,18 +82,16 @@ namespace InitialProject.ViewModel
            
         }
 
-        public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
 
-        private void RatingsOpen()
+        protected override void RatingsOpen()
         {
             RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
             CloseCurrentWindow();
             ratingsMain.Show();
         }
 
-        public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
 
-        private void ReservationsOpen()
+        protected override void ReservationsOpen()
         {
             ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
             CloseCurrentWindow();

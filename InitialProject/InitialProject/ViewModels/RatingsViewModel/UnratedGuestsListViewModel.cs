@@ -24,7 +24,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public UnratedGuestsListViewModel(User logedInUser)
         {
             _unratedGuestService = new UnratedGuestService();
-            UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuestService.GettUnratedGuestsByOwnerId(logedInUser.Id));
+            UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuestService.GetUnratedGuestsByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
         }
 

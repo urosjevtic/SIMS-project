@@ -90,10 +90,24 @@ namespace InitialProject.Service
             foreach(Accommodation accommodation in allAccommodation)
             {
                 if (accommodation.Owner.Id == ownerId)
+                {
+                    BindLocationToAccommodation(accommodation);
                     accommodations.Add(accommodation);
+                }
             }
 
             return accommodations;
+        }
+
+        private void BindLocationToAccommodation(Accommodation accommodation)
+        {
+            foreach (var location in _locationService.GetLocations())
+            {
+                if (accommodation.Location.Id == location.Id)
+                {
+                    accommodation.Location = location;
+                }
+            }
         }
 
     }

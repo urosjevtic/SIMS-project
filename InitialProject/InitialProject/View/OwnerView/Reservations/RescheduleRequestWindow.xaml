@@ -147,7 +147,7 @@
                                 <Button Content="Decline"
                                         Command="{Binding DataContext.DeclineRescheduleCommand, ElementName=reschedulingListBox}"
                                         CommandParameter="{Binding}"
-                                Margin="10,10,0,10"
+                                Margin="10,0,0,0"
                                  Style="{StaticResource LogInButtonStyle}"/>
                             </StackPanel>
                         </Grid>
