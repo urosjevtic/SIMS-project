@@ -64,6 +64,6 @@
             </ListView.View>
         </ListView>
 
-        <Button Grid.Column="1" Content="End tour" Margin="71,15,214,24" Grid.Row="1" Click="EndTour"/>
+        <Button Grid.Column="1" Content="End tour" Margin="71,15,214,24" Grid.Row="1" Click="EndTourClick"/>
     </Grid>
 </Window>

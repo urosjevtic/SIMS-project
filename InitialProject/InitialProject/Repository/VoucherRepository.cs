@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
 {
-    public class VoucherRepository
+    public class VoucherRepository : IVoucherRepository
     {
         private const string FilePath = "../../../Resources/Data/vouchers.csv";
 
@@ -24,18 +25,6 @@ namespace InitialProject.Repository
         public List<Voucher> GetAll()
         {
             return _serializer.FromCSV(FilePath);
-        }
-        public List<Voucher> GetAllCreated()
-        {
-            List<Voucher> created = new List<Voucher>();
-            foreach(Voucher voucher in _vouchers)
-            {
-                if(voucher.Status == VoucherStatus.Created)
-                {
-                    created.Add(voucher);
-                }
-            }
-            return created;
         }
         public int NextId()
         {

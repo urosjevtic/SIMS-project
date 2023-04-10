@@ -5,24 +5,27 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public enum VoucherStatus{ Created, Expired, Used };
     public class Voucher : ISerializable
     {
         public int Id { get; set; }
         public int IdUser { get; set; }
-        public DateOnly ExpiryDate { get; set; }
+        public DateTime CreationDate { get; set; }
         public VoucherStatus Status { get; set; }
+
+        public String Text { get; set; }    
         public Voucher()
         {
 
         }
-        public Voucher(int id, int idUser, DateOnly date)
+        public Voucher(int id, int idUser, DateTime date,String text)
         {
             Id = id;
             IdUser = idUser;
-            ExpiryDate = date;
+            CreationDate = date;
+            Text = text;
         }
 
         public string[] ToCSV()
@@ -30,8 +33,9 @@ namespace InitialProject.Model
             string[] csvValues = {
                Id.ToString(),
                IdUser.ToString(),
-               ExpiryDate.ToString(),
-               Status.ToString()
+               CreationDate.ToString(),
+               Status.ToString(),
+               Text
             };
 
             return csvValues;
@@ -40,8 +44,9 @@ namespace InitialProject.Model
         {
             Id = Convert.ToInt32(values[0]);
             IdUser = Convert.ToInt32(values[1]);
-            ExpiryDate = DateOnly.Parse(values[2]);
+            CreationDate = DateTime.Parse(values[2]);
             Status = (VoucherStatus)Enum.Parse(typeof(VoucherStatus),values[3]);
+            Text = values[4];
         }
 
     }

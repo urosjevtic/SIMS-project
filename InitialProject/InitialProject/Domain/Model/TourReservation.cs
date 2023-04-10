@@ -14,8 +14,8 @@ namespace InitialProject.Domain.Model
         public int IdGuest { get; set; }
         public int NumberOfPeople { get; set; }
 
-
-
+        public bool IsUsingVoucher { get; set; }
+        public double AverageAge { get; set; }
         public TourReservation() { }
 
 
@@ -25,7 +25,9 @@ namespace InitialProject.Domain.Model
                IdReservation.ToString(),
                IdTour.ToString(),
                IdGuest.ToString(),
-               NumberOfPeople.ToString()
+               NumberOfPeople.ToString(),
+               IsUsingVoucher.ToString(),
+               AverageAge.ToString()
             };
 
             return csvValues;
@@ -36,6 +38,10 @@ namespace InitialProject.Domain.Model
             IdTour = Convert.ToInt32(values[1]);
             IdGuest = Convert.ToInt32(values[2]);
             NumberOfPeople = Convert.ToInt32(values[3]);
+            IsUsingVoucher = Convert.ToBoolean(values[4]);
+            AverageAge = Convert.ToDouble(values[5]);
+
+
         }
     }
 }

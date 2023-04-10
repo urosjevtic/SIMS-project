@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Repository;
-using InitialProject.DTO;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
 
@@ -25,7 +24,6 @@ namespace InitialProject.View
         private readonly LocationRepository _locationRepository;
         private readonly NotificationRepository _notificationRepository;
         private readonly TourReservationRepository _tourReservationRepository;
-        private readonly UserRepository _userRepository;
         private readonly CheckPointRepository _checkPointRepository;
         private readonly TourGuestsRepository _tourGuestsRepository;
         public List<User> Guests { get; set; }
@@ -34,7 +32,7 @@ namespace InitialProject.View
         public List<CheckPoint> CheckPoints { get; set; }
         public List<CheckPoint> CheckedCheckPoints { get; set; }
         public List<Notification> Notifications { get; set; }
-        public List<Guest> TourGuests { get; set; }   
+        public List<TourGuest> TourGuests { get; set; }   
         public StartedTour(Tour selectedTour)
         {
             InitializeComponent();
@@ -44,18 +42,17 @@ namespace InitialProject.View
             _notificationRepository = new NotificationRepository();
             _tourReservationRepository = new TourReservationRepository();
             _tourGuestsRepository = new TourGuestsRepository(); 
-            _userRepository = new UserRepository();
             _checkPointRepository = new CheckPointRepository();
 
             CheckedCheckPoints = new List<CheckPoint>();
             Notifications = _notificationRepository.GetAll();
             User = new User();
             SelectedTour = selectedTour;
-            TourGuests = new List<Guest>();
+            TourGuests = new List<TourGuest>();
 
             CheckPoints = SelectedTour.CheckPoints;
             Guests = _tourReservationRepository.GetReservationGuest(SelectedTour);
-            MakeGuests();
+            MakeGuestsFirst();
         }
 
      
@@ -74,28 +71,49 @@ namespace InitialProject.View
                 Notifications.Add(notification);
                 _notificationRepository.Save(notification);
                 // sada treba da azuriram tabelu za prikaz podataka
-                MakeGuests();
+                MakeGuests(checkedCheckPoint);
+                if(CheckPoints.Last().Id == checkedCheckPoint.Id)
+                {
+                    EndTour();
+                }
                 
             } 
         }
         
-
-        
-
-        public void MakeGuests()
+        public void MakeGuests(CheckPoint checkPoint)
         {
             foreach(User user in Guests)
             {
-                foreach(Guest guest in _tourGuestsRepository.GetAll())
+                foreach(TourGuest guest in _tourGuestsRepository.GetAll())
                 {
                     if(user.Id == guest.Id)
                     {
+                        if(guest.CheckPointName == "")
+                        {
+                            guest.CheckPointName = checkPoint.Name;
+                        }
+                        _tourGuestsRepository.Update(guest);
                         TourGuests.Add(guest);
                     }
                 }
             }
         }
-        
+
+        public void MakeGuestsFirst()
+        {
+            foreach (User user in Guests)
+            {
+                foreach (TourGuest guest in _tourGuestsRepository.GetAll())
+                {
+                    if (user.Id == guest.Id)
+                    {
+                       
+                        _tourGuestsRepository.Update(guest);
+                        TourGuests.Add(guest);
+                    }
+                }
+            }
+        }
 
         public void CheckCheckPoint(CheckPoint checkPoint)
         {
@@ -117,19 +135,23 @@ namespace InitialProject.View
             }
         }
 
-        private void EndTour(object sender, RoutedEventArgs e)
+        private void EndTourClick(object sender, RoutedEventArgs e)
+        {
+            EndTour();
+        }
+        private void EndTour()
         {
             SelectedTour.IsActive = false;
             _tourRepository.Update(SelectedTour);
-            foreach (User guest in Guests)
+            foreach (TourGuest guest in TourGuests)
             {
-                _userRepository.Update(guest);
+                guest.Presence = UserPresence.Unknown;
+                guest.CheckPointName = "";
+                _tourGuestsRepository.Update(guest);
             }
             _notificationRepository.DeleteAll();
             UncheckCheckPoint(SelectedTour);
+            MessageBox.Show("Tura je uspjesno zavrsena!","", MessageBoxButton.OK,MessageBoxImage.Information);
         }
-
-
-       
     }
 }

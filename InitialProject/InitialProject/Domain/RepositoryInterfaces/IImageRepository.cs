@@ -18,5 +18,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         void Save(Image image);
         void SaveAll(List<Image> entities);
         void Update(Image entity);
+        void Update(Tour tour, string[] text);
     }
 }

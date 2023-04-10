@@ -23,6 +23,7 @@ namespace InitialProject.Domain.Model
         public int Duration { get; set; }
         public Image CoverImageUrl { get; set; }
         public bool IsActive { get; set; }
+        public bool IsRated { get; set; }
 
         public CheckPointRepository _checkPointRepository { get; set; }
         public Tour()
@@ -33,7 +34,7 @@ namespace InitialProject.Domain.Model
             CoverImageUrl = new Image();
             _checkPointRepository = new CheckPointRepository();
         }
-        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl, bool isActve)
+        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl, bool isActve, bool rated)
         {
             Id = id;
             Guide = giude;
@@ -47,7 +48,7 @@ namespace InitialProject.Domain.Model
             Duration = duration;
             CoverImageUrl = coverImageUrl;
             IsActive = isActve;
-
+            IsRated = rated;
         }
         public string Concatenate()
         {
@@ -67,6 +68,7 @@ namespace InitialProject.Domain.Model
                Duration.ToString(),
                CoverImageUrl.Id.ToString(),
                IsActive.ToString(),
+               IsRated.ToString(),
             };
 
             if (CheckPoints.Count() > 0)
@@ -98,8 +100,9 @@ namespace InitialProject.Domain.Model
             Duration = Convert.ToInt32(values[8]);
             CoverImageUrl.Id = Convert.ToInt32(values[9]);
             IsActive = Convert.ToBoolean(values[10]);
+            IsRated = Convert.ToBoolean(values[11]);
 
-            int i = 11;
+            int i = 12;
             CheckPoints.Clear();
 
 
