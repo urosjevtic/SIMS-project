@@ -9,10 +9,12 @@ using System.Windows;
 using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.MyAccommodations;
+using InitialProject.View.OwnerView.Ratings;
+using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels
 {
-    public class MyAccommodationsMainViewModel : INotifyPropertyChanged
+    public class MyAccommodationsMainViewModel : BaseViewModel
     {
 
         public User LogedInUser;
@@ -64,6 +66,7 @@ namespace InitialProject.ViewModels
         private void OpenRegistrationForm()
         {
             AccommodationRegistrationForm accommodationRegistrationForm = new AccommodationRegistrationForm(LogedInUser);
+            CloseCurrentWindow();
             accommodationRegistrationForm.Show();
 
         }
@@ -73,15 +76,40 @@ namespace InitialProject.ViewModels
         private void OpenAccommodationList()
         {
             MyAccommodationsList myAccommodationsList = new MyAccommodationsList(LogedInUser);
+            CloseCurrentWindow();
             myAccommodationsList.Show();
 
         }
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
+
+        private void MyAccommoadionsOpen()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
+            CloseCurrentWindow();
+            myAccommodationsMainWindow.Show();
+
         }
+
+        public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
+
+        private void RatingsOpen()
+        {
+            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
+            CloseCurrentWindow();
+            ratingsMain.Show();
+        }
+
+        public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
+
+        private void ReservationsOpen()
+        {
+            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
+            CloseCurrentWindow();
+            reservationsMain.Show();
+        }
+
+
     }
 }

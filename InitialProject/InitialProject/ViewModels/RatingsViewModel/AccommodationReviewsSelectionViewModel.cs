@@ -13,13 +13,15 @@ using InitialProject.View.OwnerView.Ratings;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
-    public class AccommodationReviewsSelectionViewModel : INotifyPropertyChanged
+    public class AccommodationReviewsSelectionViewModel : BaseViewModel
     {
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private readonly AccommodationService _accommodationService;
+        private readonly User _logedInUser;
         public AccommodationReviewsSelectionViewModel(User logedInUser)
         {
             _accommodationService = new AccommodationService();
+            _logedInUser = logedInUser;
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
         }
 
@@ -31,15 +33,21 @@ namespace InitialProject.ViewModels.RatingsViewModel
             if (parameter is Accommodation selectedAccommodation)
             {
                 // Navigate to the other window passing the selected guest as a parameter
+                AccommodationRatings accommodationRatings =
+                    new AccommodationRatings(_logedInUser, selectedAccommodation.Id);
+                CloseCurrentWindow();
+                accommodationRatings.Show();
 
             }
         }
 
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+        private void GoBack()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
+            CloseCurrentWindow();
+            ratingsMain.Show();
         }
+
     }
 }

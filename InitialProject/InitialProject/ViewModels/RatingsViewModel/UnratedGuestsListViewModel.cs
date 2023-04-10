@@ -16,7 +16,7 @@ using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
-    public class UnratedGuestsListViewModel : INotifyPropertyChanged
+    public class UnratedGuestsListViewModel : BaseViewModel
     {
         public ObservableCollection<UnratedGuest> UnratedGuests { get; set; }
         private readonly UnratedGuestService _unratedGuestService;
@@ -34,7 +34,8 @@ namespace InitialProject.ViewModels.RatingsViewModel
             if (parameter is UnratedGuest selectedGuest)
             {
                 // Navigate to the other window passing the selected guest as a parameter
-                GuestRatingForm guestRatingForm = new GuestRatingForm(selectedGuest);
+                GuestRatingForm guestRatingForm = new GuestRatingForm(_logedInUser, selectedGuest);
+                CloseCurrentWindow();
                 guestRatingForm.Show();
             }
         }
@@ -49,19 +50,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
             ratingsMain.Show();
         }
 
-        private void CloseCurrentWindow()
-        {
-            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (currentWindow != null)
-            {
-                currentWindow.Close();
-            }
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
     }
 }

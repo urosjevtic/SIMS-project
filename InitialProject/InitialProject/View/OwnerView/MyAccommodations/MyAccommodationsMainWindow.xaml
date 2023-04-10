@@ -80,7 +80,7 @@
                     <TextBlock Padding="5">Notifications</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="3"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Command="{Binding RatingsOpenCommand}" Grid.Row="3"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/ratings.png" Width="20"/>
                     <TextBlock Padding="5">Ratings</TextBlock>
@@ -92,7 +92,7 @@
                     <TextBlock Padding="5">Renovations</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="5"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Command="{Binding ReservationsOpenCommand}" Grid.Row="5"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/reservations.png" Width="20"/>
                     <TextBlock Padding="5">Reservations</TextBlock>

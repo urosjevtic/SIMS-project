@@ -11,10 +11,12 @@ using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.Ratings;
 using Microsoft.VisualBasic.ApplicationServices;
 using User = InitialProject.Domain.Model.User;
+using InitialProject.View.OwnerView.MyAccommodations;
+using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
-    public class RatingsMainViewModel : INotifyPropertyChanged
+    public class RatingsMainViewModel : BaseViewModel
     {
         private readonly User _logedInUser;
         public RatingsMainViewModel(User logedInUser)
@@ -80,20 +82,34 @@ namespace InitialProject.ViewModels.RatingsViewModel
             unratedGuests.Show();
         }
 
+        public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
 
-        private void CloseCurrentWindow()
+        private void MyAccommoadionsOpen()
         {
-            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (currentWindow != null)
-            {
-                currentWindow.Close();
-            }
+            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(_logedInUser);
+            CloseCurrentWindow();
+            myAccommodationsMainWindow.Show();
+
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
+
+        private void RatingsOpen()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
+            CloseCurrentWindow();
+            ratingsMain.Show();
         }
+
+        public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
+
+        private void ReservationsOpen()
+        {
+            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
+            CloseCurrentWindow();
+            reservationsMain.Show();
+        }
+
+
     }
 }

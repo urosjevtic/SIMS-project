@@ -5,8 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
+using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
 using InitialProject.Repository.ReservationRepo;
+using InitialProject.Repository.UserRepo;
 
 namespace InitialProject.Injector
 {
@@ -21,7 +23,9 @@ namespace InitialProject.Injector
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
             {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
-            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()}
+            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
+            {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
+            {typeof(IOwnerRepository), new OwnerRepository()}
 
             // Add more implementations here
         };

@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
+using InitialProject.ViewModels.RatingsViewModel;
 
 namespace InitialProject.View.OwnerView.Ratings
 {
@@ -19,9 +21,10 @@ namespace InitialProject.View.OwnerView.Ratings
     /// </summary>
     public partial class AccommodationRatings : Window
     {
-        public AccommodationRatings()
+        public AccommodationRatings(User logedInUser, int accommodationId)
         {
             InitializeComponent();
+            DataContext = new AccommodationRatingsViewModel(logedInUser, accommodationId);
         }
     }
 }

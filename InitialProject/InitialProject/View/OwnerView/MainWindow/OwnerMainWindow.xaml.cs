@@ -171,7 +171,7 @@ namespace InitialProject.View
         {
             if (SelectedUnratedGuest != null)
             {
-                GuestRatingForm guestRatingForm = new GuestRatingForm(SelectedUnratedGuest);
+                GuestRatingForm guestRatingForm = new GuestRatingForm(LoggedInUser, SelectedUnratedGuest);
                 guestRatingForm.Show();
             }
         }

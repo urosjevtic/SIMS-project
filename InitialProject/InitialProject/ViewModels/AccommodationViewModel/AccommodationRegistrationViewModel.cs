@@ -9,21 +9,23 @@ using InitialProject.Service;
 using InitialProject.Utilities;
 using System.Windows.Input;
 using System.Windows;
+using InitialProject.View.OwnerView.MyAccommodations;
+using InitialProject.View.OwnerView.Ratings;
 
 namespace InitialProject.ViewModels
 {
-    public class AccommodationRegistrationViewModel : INotifyPropertyChanged
+    public class AccommodationRegistrationViewModel : BaseViewModel
     {
         private readonly AccommodationService _accommodationService;
         private readonly LocationService _locationService;
-        private readonly User _logeInUser;
+        private readonly User _logedInUser;
         public AccommodationRegistrationViewModel(User logedInUser)
         {
             _accommodationService = new AccommodationService();
             _locationService = new LocationService();
 
             Locations = _locationService.GetCountriesAndCities();
-            _logeInUser = logedInUser;
+            _logedInUser = logedInUser;
         }
         public Dictionary<string, List<string>> Locations { get; set; }
 
@@ -138,16 +140,19 @@ namespace InitialProject.ViewModels
         private void ConfirmRegistration()
         {
             _accommodationService.CreateAccommodation
-                (_accommodationName, _country, _city, _accommodationTypes, _maxGuests, _minReservationDays, Convert.ToInt32(_cancelationPeriod), _imagesUrl, _logeInUser.Id);
+                (_accommodationName, _country, _city, _accommodationTypes, _maxGuests, _minReservationDays, Convert.ToInt32(_cancelationPeriod), _imagesUrl, _logedInUser.Id);
 
-            var window = App.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            window.Close();
+            CloseCurrentWindow();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+
+        private void GoBack()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
+            CloseCurrentWindow();
+            myAccommodationsMain.Show();
         }
+
     }
 }

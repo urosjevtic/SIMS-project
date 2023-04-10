@@ -9,19 +9,22 @@ using System.Windows;
 using System.Windows.Input;
 using InitialProject.Service;
 using InitialProject.Utilities;
+using InitialProject.View.OwnerView.Ratings;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
-    public class GuestRatingFormViewModel : INotifyPropertyChanged
+    public class GuestRatingFormViewModel : BaseViewModel
     {
 
         private readonly UnratedGuest _unratedGuest;
         private readonly GuestRatingService _guestRatingService;
+        private readonly User _logedInUser;
 
-        public GuestRatingFormViewModel(UnratedGuest unratedGuest)
+        public GuestRatingFormViewModel(User logedInUser, UnratedGuest unratedGuest)
         {
             _unratedGuest = unratedGuest;
             _guestRatingService = new GuestRatingService();
+            _logedInUser = logedInUser;
         }
 
 
@@ -73,14 +76,19 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private void RateAGuest()
         {
             _guestRatingService.SubmitRating(_unratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            window.Close();
+            UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
+            CloseCurrentWindow();
+            unratedGuestsList.Show();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+
+        private void GoBack()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
+            CloseCurrentWindow();
+            unratedGuestsList.Show();
         }
+
     }
 }

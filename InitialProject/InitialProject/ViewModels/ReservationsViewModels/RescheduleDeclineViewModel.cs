@@ -14,7 +14,7 @@ using static InitialProject.ViewModels.ReservationsViewModels.RescheduleRequestV
 
 namespace InitialProject.ViewModels
 {
-    public class RescheduleDeclineViewModel : INotifyPropertyChanged
+    public class RescheduleDeclineViewModel : BaseViewModel
     {
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
         private readonly AccommodationReservationRescheduleRequestService _reservationRescheduleRequestService;
@@ -36,7 +36,7 @@ namespace InitialProject.ViewModels
                 if (value != _comment)
                 {
                     _comment = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Comment));
                 }
             }
         }
@@ -56,20 +56,6 @@ namespace InitialProject.ViewModels
 
         }
 
-        private void CloseCurrentWindow()
-        {
-            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (currentWindow != null)
-            {
-                currentWindow.Close();
-            }
-        }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }

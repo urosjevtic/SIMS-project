@@ -8,10 +8,11 @@ using InitialProject.View.OwnerView.MyAccommodations;
 using System.Linq;
 using InitialProject.View.OwnerView.Ratings;
 using InitialProject.View.OwnerView.Reservations;
+using InitialProject.ViewModels;
 
 namespace InitialProject.ViewModel
 {
-    public class OwnerMainViewModel : INotifyPropertyChanged
+    public class OwnerMainViewModel : BaseViewModel
     {
         private User _loggedInUser;
 
@@ -100,19 +101,8 @@ namespace InitialProject.ViewModel
             reservationsMain.Show();
         }
 
-        private void CloseCurrentWindow()
-        {
-            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (currentWindow != null)
-            {
-                currentWindow.Close();
-            }
-        }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+
+
     }
 }

@@ -62,7 +62,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Ac Name Bind"></TextBlock>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding Reservation.Accommodation.Name}"></TextBlock>
             <StackPanel Grid.Row="1"  Orientation="Horizontal">
                 <TextBlock Text="Country: " 
                            FontWeight="Bold"
@@ -75,7 +75,7 @@
 
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
-                 ItemsSource="{Binding UnratedGuests}"
+                 ItemsSource="{Binding Ratings}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
                  Background="White"
@@ -96,10 +96,13 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="0">
-                                <TextBlock Text="USERNAME" 
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="{Binding Reservation.User.Username}" 
                                            FontWeight="Bold"
-                                           Margin="0,0,5,0"/>
+                                           FontSize="16"
+                                           Margin="0,0,5,0"
+                                           HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
                             </StackPanel>
 
 
@@ -108,14 +111,14 @@
                                     <TextBlock Text="Start Date: " 
                                                FontWeight="Bold"
                                                Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding ReservationStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                    <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                                 </StackPanel>
 
                                 <StackPanel Orientation="Horizontal" Grid.Row="3">
                                     <TextBlock Text="EndDate: " 
                                                FontWeight="Bold"
                                                Margin="0,0,5,0"/>
-                                    <TextBlock Text="{Binding ReservationEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                    <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                                 </StackPanel>
                             </StackPanel>
 
@@ -130,19 +133,22 @@
                                 <TextBlock Text="Cleanlines: " 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding CleanlinessRating}"></TextBlock>
                                 <TextBlock Text="Owner fairnes:"                      
                                            FontWeight="Bold"
                                            Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding OwnerFairnesRating}"></TextBlock>
                             </StackPanel>
 
 
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="6">
-                                <TextBlock Text="Days left to rate guest: " 
+                            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                                <TextBlock Text="Additional comment: " 
                                        FontWeight="Bold"
                                        Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding IsAlreadyReserved}" />
                             </StackPanel>
+
+                            <TextBlock Grid.Row="5" TextWrapping="Wrap" Text="{Binding AdditionalComment}" />
                         </Grid>
                     </Border>
                 </DataTemplate>

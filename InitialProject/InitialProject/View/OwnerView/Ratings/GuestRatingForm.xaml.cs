@@ -22,10 +22,10 @@ namespace InitialProject.View.OwnerView.Ratings
     /// </summary>
     public partial class GuestRatingForm : Window
     {
-        public GuestRatingForm(UnratedGuest unratedGuest)
+        public GuestRatingForm(User logedInUser, UnratedGuest unratedGuest)
         {
             InitializeComponent();
-            DataContext = new GuestRatingFormViewModel(unratedGuest);
+            DataContext = new GuestRatingFormViewModel(logedInUser, unratedGuest);
         }
     }
 }

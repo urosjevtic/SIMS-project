@@ -68,7 +68,7 @@
             <Button Command="{Binding BurgerBarClosedCommand}" Width="64" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#9394a5">
                 <Image Source="/Resources/Images/burgerBarWhite.png" Width="54"></Image>
             </Button>
-            <Button Grid.Row="1"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Command="{Binding MyAccommoadionsOpenCommand}" Grid.Row="1"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/myAccommodation.png" Width="20"/>
                     <TextBlock Padding="5">My accommodation</TextBlock>
@@ -80,7 +80,7 @@
                     <TextBlock Padding="5">Notifications</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="3"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Command="{Binding RatingsOpenCommand}" Grid.Row="3"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/ratings.png" Width="20"/>
                     <TextBlock Padding="5">Ratings</TextBlock>

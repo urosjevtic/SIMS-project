@@ -18,7 +18,7 @@ using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.ReservationsViewModels
 {
-    public class RescheduleRequestViewModel : INotifyPropertyChanged
+    public class RescheduleRequestViewModel : BaseViewModel
     {
         private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
@@ -69,23 +69,9 @@ namespace InitialProject.ViewModels.ReservationsViewModels
             reservationsMain.Show();
         }
 
-        private void CloseCurrentWindow()
-        {
-            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
-            if (currentWindow != null)
-            {
-                currentWindow.Close();
-            }
-        }
 
 
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
 
     }
