@@ -42,7 +42,7 @@ namespace InitialProject.Repository
             _vouchers.Add(voucher);
             _serializer.ToCSV(FilePath, _vouchers);
         }
-        public void ChangeToUsed(Voucher voucher)
+        public void ChangeUsed(Voucher voucher)
         {
             Voucher found = _vouchers.Find(c => c.Id == voucher.Id);
             _vouchers.Remove(found);

@@ -14,7 +14,6 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
         public DateTime CreationDate { get; set; }
         public VoucherStatus Status { get; set; }
-
         public String Text { get; set; }    
         public Voucher()
         {

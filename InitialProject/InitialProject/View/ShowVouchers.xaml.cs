@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
+using InitialProject.ViewModels;
 
 namespace InitialProject.View
 {
@@ -23,27 +24,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class ShowVouchers : Window
     {
-        public ObservableCollection<Voucher> vouchersObservable;
-
-        private readonly VoucherService _voucherService;
-        public List<Voucher> Vouchers { get; set; }
+        public ShowVouchersViewModel ShowVouchersViewModel;
         public ShowVouchers()
         {
             InitializeComponent();
-            this.DataContext = this;
-            _voucherService = new VoucherService();
-            Vouchers = _voucherService.GetAllCreated();
-            vouchersDataGrid.ItemsSource = new ObservableCollection<Voucher>(Vouchers);
-        }
-
-        private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
-        {
-
-        }
-
-        private void GoBackClick(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            ShowVouchersViewModel = new ShowVouchersViewModel();
+            this.DataContext = ShowVouchersViewModel;
         }
 
     }

@@ -17,6 +17,9 @@ using System.Data;
 using InitialProject.Service;
 
 using InitialProject.Domain.Model;
+using InitialProject.ViewModels;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace InitialProject.View
 {
@@ -25,23 +28,20 @@ namespace InitialProject.View
     /// </summary>
     public partial class TourSearch : Window
     {
-        private readonly TourService _tourService;
+        public TourSearchViewModel TourSearchViewModel { get; set; }
         public User LoggedUser { get; set; }
 
         public TourSearch(User user)
         {
             InitializeComponent();
-            this.DataContext = this;
-            _tourService = new TourService();
             LoggedUser = user;
+            TourSearchViewModel = new TourSearchViewModel(LoggedUser);
+            this.DataContext = TourSearchViewModel;
         }
-        public void SearchButtonClick(object sender, RoutedEventArgs e)
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
-            List<Tour> filteredTours = _tourService.Search(stateTextBox.Text, cityTextBox.Text, languageTextBox.Text, durationTextBox.Text, numberTextBox.Text);
-            SearchResult searchResult = new SearchResult(filteredTours, LoggedUser);
-            searchResult.Show();
-            this.Close();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-
     }
 }

@@ -204,7 +204,10 @@ namespace InitialProject.Service
         {
             string[] searchValues = { state, city, language };
             foreach (string value in searchValues)
-                searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+                if (value != null)
+                {
+                    searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+                }
             return searchResults;
         }
         public List<Tour> RemoveByNumbers(List<Tour> searchResults, string duration, string number)

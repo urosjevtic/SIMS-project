@@ -13,11 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public void Save(TourReservation reservation);
 
-        public int CountUnreservedSeats(Tour tour);
-
-        public void SaveReservation(Tour tour, int numberOfPeople, User LoggedUser);
-
-
         public List<TourReservation> GetAll();
 
         public List<User> GetReservationGuest(Tour tour);

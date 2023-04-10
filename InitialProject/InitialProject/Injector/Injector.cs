@@ -23,7 +23,7 @@ namespace InitialProject.Injector
             {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
             {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
             {typeof(IVoucherRepository), new VoucherRepository()},
-            {typeof(ITourRepository), new TourRepository()}
+            {typeof(ITourRepository), new TourRepository()},
             {typeof(ITourGuestRepository), new TourGuestsRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},

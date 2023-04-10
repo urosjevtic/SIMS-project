@@ -17,7 +17,7 @@ namespace InitialProject.Service
 
         public NotificationService()
         {
-            _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();  
+            _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();
 
         }
 
@@ -33,7 +33,7 @@ namespace InitialProject.Service
 
         public void Save(Notification notification)
         {
-           _notificationRepository.Save(notification);
+            _notificationRepository.Save(notification);
         }
 
         public int NextId()
@@ -72,13 +72,14 @@ namespace InitialProject.Service
         public bool IsNotificationSent(Notification n)
         {
             List<Notification> notificationList = _notificationRepository.GetAll();
-            foreach(Notification notification in notificationList)
+            foreach (Notification notification in notificationList)
             {
-                if(notification.TourId == n.TourId && notification.GuestId == n.GuestId)
+                if (notification.TourId == n.TourId && notification.GuestId == n.GuestId)
                 {
                     return true;
                 }
             }
             return false;
+        }
     }
 }

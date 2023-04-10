@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="ShowTour" Height="616" Width="916" WindowStartupLocation="CenterScreen" Loaded="WindowLoaded">
+        Title="Start" Height="616" Width="916" WindowStartupLocation="CenterScreen">
     <Grid>
-        <Button Content="Start Search" HorizontalAlignment="Center" Margin="0,122,0,0" Grid.Row="1" VerticalAlignment="Top" Click="OpenSearchButtonClick" FontSize="36" Height="70" Width="700"/>
-        <Button Content="My Tours" HorizontalAlignment="Center" Margin="0,212,0,0" VerticalAlignment="Top" Click="OpenMyToursButtonClick" FontSize="36" Height="70" Width="700"/>
-        <Button Content="Vouchers" HorizontalAlignment="Center" Margin="0,454,0,0" Grid.Row="1" VerticalAlignment="Top" Click="OpenVouchersButtonClick" FontSize="36" Height="70" Width="700"/>
+        <Button Content="Start Search" HorizontalAlignment="Center" Margin="0,122,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding SearchCommand}" FontSize="36" Height="70" Width="700"/>
+        <Button Content="My Tours" HorizontalAlignment="Center" Margin="0,212,0,0" VerticalAlignment="Top" Command="{Binding ShowMyToursCommand}" FontSize="36" Height="70" Width="700"/>
+        <Button Content="Vouchers" HorizontalAlignment="Center" Margin="0,454,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding ShowVouchersCommand}"  FontSize="36" Height="70" Width="700"/>
     </Grid>
 </Window>
