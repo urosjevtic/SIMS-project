@@ -23,12 +23,12 @@ namespace InitialProject.Domain.Model.Reservations
 
         public AccommodationReservation()
         {
-           // Accommodation = new Accommodation();
+            Accommodation = new Accommodation();
             ReservedDates = new List<DateTime>();
             User = new User();
         }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation, int guestNumber, List<DateTime> reservedDates)
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation, int guestNumber, List<DateTime> reservedDates, User user)
         {
             Id = id;
             StartDate = startDate;
@@ -37,13 +37,13 @@ namespace InitialProject.Domain.Model.Reservations
             AccommodationId = accommodationId;
             Accommodation = accommodation;
             GuestNumber = guestNumber;
-            //ReservedDates = reservedDates;
-
+            ReservedDates = reservedDates;
+            User= user;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), StartDate.ToString(), EndDate.ToString(), UserId.ToString(), AccommodationId.ToString(), Accommodation.Id.ToString(), GuestNumber.ToString() };
+            string[] csvValues = { Id.ToString(), StartDate.ToString(), EndDate.ToString(), UserId.ToString(),  Accommodation.Id.ToString(), GuestNumber.ToString() };
             return csvValues;
         }
 

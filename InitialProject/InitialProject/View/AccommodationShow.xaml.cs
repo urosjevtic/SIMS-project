@@ -100,9 +100,10 @@ namespace InitialProject.View
             accommodationSearch.Show();
         }
 
-        private void RatedButton_Click(object sender, RoutedEventArgs e)
+        private void MyReservation_Click(object sender, RoutedEventArgs e)
         {
-
+            MyReservations myReservation = new MyReservations();
+            myReservation.Show();
         }
     }
 }

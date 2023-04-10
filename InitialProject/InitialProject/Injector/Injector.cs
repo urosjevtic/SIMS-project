@@ -25,7 +25,9 @@ namespace InitialProject.Injector
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
             {typeof(ICheckPointRepository), new CheckPointRepository()},
-
+            {typeof(IAccommodationReservationRepository), new AccommodationReservationRepository()},
+            {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
+            {typeof(IUnratedOwnerRepository), new UnratedOwnerRepository()}
 
             // Add more implementations here
         };

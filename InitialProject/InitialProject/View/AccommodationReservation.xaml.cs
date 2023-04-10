@@ -28,15 +28,14 @@ namespace InitialProject.View
         public Accommodation SelectedAccommodation { get; set; }
 
         public List<Accommodation> Accommodations { get; set; }
-
+        public List<AccommodationReservation> reservations;
         public ObservableCollection<Accommodation> accommodations { get; set; }
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
 
         private readonly AccommodationRepository _accommodationRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
-
-        public List<Accommodation> accommodation { get; set; }
-        public List<AccommodationReservation> reservations;
+        
+        
         public User LoggedUser { get; set; }
         public List<DateTime> freeDates { get; set; }
 
@@ -48,7 +47,6 @@ namespace InitialProject.View
             Accommodations = new List<Accommodation>();
             Accommodations.Add(SelectedAccommodation);
             reservationDataGrid.ItemsSource = Accommodations;
-
 
             _accommodationRepository = new AccommodationRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();

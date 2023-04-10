@@ -26,6 +26,6 @@
             </DataGrid>
         </Grid>
         <Button x:Name="SearchButton" Content="Search" Click="SearchButton_Click" Margin="665,5,10,18" Grid.Row="2"/>
-        <Button x:Name="RatedButton" Content="Rated accommodation" Click="RatedButton_Click" Margin="450,10,180,18" Grid.Row="2"/>
+        <Button x:Name="MyReservation" Content="My reservation" Click="MyReservation_Click" Margin="450,10,180,18" Grid.Row="2"/>
     </Grid>
 </Window>
