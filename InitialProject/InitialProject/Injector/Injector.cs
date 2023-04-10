@@ -31,7 +31,8 @@ namespace InitialProject.Injector
             {typeof(ITourGuestRepository), new TourGuestsRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
-            {typeof(ICheckPointRepository), new CheckPointRepository()}
+            {typeof(ICheckPointRepository), new CheckPointRepository()},
+            {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()}
 
             // Add more implementations here
         };
