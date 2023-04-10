@@ -33,7 +33,6 @@ namespace InitialProject.Repository
         }
 
 
-
         public void Save(RatedGuest ratedGuest)
         {
             ratedGuest.Id = NextId();

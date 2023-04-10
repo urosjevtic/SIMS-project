@@ -23,5 +23,22 @@ namespace InitialProject.Service
             rate.Id = _ratedGuideTourRepository.NextId();
             _ratedGuideTourRepository.Save(rate);
         }
+        public List<RatedGuideTour> GetAll()
+        {
+            return _ratedGuideTourRepository.GetAll();
+        }
+
+        public List<RatedGuideTour> FindAllTourRatings(Tour tour)
+        {
+            List<RatedGuideTour> ratings = new List<RatedGuideTour>();
+            foreach(RatedGuideTour ratedTour in GetAll())
+            {
+                if(tour.Id == ratedTour.IdTour)
+                {
+                    ratings.Add(ratedTour);
+                }
+            }
+            return ratings;
+        }
     }
 }

@@ -20,6 +20,7 @@ using InitialProject.View;
 using InitialProject.Service;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Utilities;
 
 namespace InitialProject.ViewModel
 {
@@ -42,6 +43,7 @@ namespace InitialProject.ViewModel
         // DANAS TURE 
         public List<Tour> TodayTours { get; set; }
 
+
         public GuideMainViewModel(User user)
         {
             LoggedUser = user;
@@ -50,6 +52,7 @@ namespace InitialProject.ViewModel
             _locationService = new LocationService();
             _tourService = new TourService();
             _checkPointRepository = new CheckPointRepository();
+            
             LoadData();
         }
         public void LoadData()
@@ -140,6 +143,15 @@ namespace InitialProject.ViewModel
             TourStatistic tourStatistic = new TourStatistic();
             tourStatistic.Show();
         }
+
+        public ICommand ShowAllRatingsCommand => new RelayCommand(ShowRatings);
+
+        public void ShowRatings()
+        {
+            EndedTourRatings endedTourRatings = new EndedTourRatings();
+            endedTourRatings.Show();
+        }
+
 
     }
 }
