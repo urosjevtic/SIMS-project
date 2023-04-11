@@ -11,17 +11,21 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.ViewModels;
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class ToursCancellation : Window
+    public partial class EndedTourRatings : Window
     {
-        public ToursCancellation()
+        public EndedTourRatingsViewModel ShowTourRatings { get; set; }
+        public EndedTourRatings()
         {
             InitializeComponent();
+            ShowTourRatings = new EndedTourRatingsViewModel();
+            this.DataContext = ShowTourRatings;
         }
     }
 }

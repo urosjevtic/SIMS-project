@@ -13,28 +13,23 @@ using InitialProject.View;
 
 namespace InitialProject.ViewModels
 {
-    public class ShowTourRatingsViewModel
+    public class EndedTourRatingsViewModel 
     {
 
-        private RatedGuideTourService _ratedGuideTourService;
         private TourService _tourService;
         public List<Tour> EndedTours { get; set; }
         public Tour SelectedTour { get; set; }
         public List<RatedGuideTour> TourGuests { get; set; }
-        public RatedGuideTourService _ratedTourGuideService;
+        public RatedGuideTourService _ratedGuideTourService;
         public Tour Tour { get; set; }
 
-        public ShowTourRatingsViewModel()
+        public EndedTourRatingsViewModel()
         {
             _ratedGuideTourService = new RatedGuideTourService();
             _tourService = new TourService();
             EndedTours = _tourService.FindAllEndedTours();
             ShowRatingsCommand = new RelayCommand(Show);
 
-            Tour = SelectedTour;
-            //_commmentRepository = new CommentRepository();
-            _ratedTourGuideService = new RatedGuideTourService();
-            TourGuests = _ratedTourGuideService.FindAllTourRatings(Tour);
         }
 
         public ICommand ShowRatingsCommand { get; private set; }

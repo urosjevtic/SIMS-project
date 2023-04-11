@@ -20,19 +20,16 @@ namespace InitialProject.View
 
     public partial class StartedTour : Window
     {
-       
-       
-        
+               
         private readonly TourReservationRepository _tourReservationRepository;
         private readonly NotificationRepository _notificationRepository;
         private readonly CheckPointRepository _checkPointRepository;
-        private readonly TourGuestsRepository _tourGuestsRepository;
-        private readonly LocationRepository _locationRepository;
+        private readonly TourGuestRepository _tourGuestsRepository;
         private readonly TourRepository _tourRepository;
       
         
         public List<CheckPoint> CheckedCheckPoints { get; set; }
-        public List<TourReservation> TourReservations { get; set; }
+        public List<User> TourReservations { get; set; }
         public List<Notification> Notifications { get; set; }
         public List<CheckPoint> CheckPoints { get; set; }
         public List<TourGuest> TourGuests { get; set; }
@@ -45,21 +42,19 @@ namespace InitialProject.View
             InitializeComponent();
             this.DataContext = this;
             _tourRepository = new TourRepository();
-            _locationRepository = new LocationRepository();
             _notificationRepository = new NotificationRepository();
             _tourReservationRepository = new TourReservationRepository();
-            _tourGuestsRepository = new TourGuestsRepository(); 
+            _tourGuestsRepository = new TourGuestRepository(); 
             _checkPointRepository = new CheckPointRepository();
 
             CheckedCheckPoints = new List<CheckPoint>();
             Notifications = _notificationRepository.GetAll();
-            //TourReservations = _tourReservationRepository.GetReservationGuest(SelectedTour);
             User = new User();
             SelectedTour = selectedTour;
             TourGuests = new List<TourGuest>();
 
             CheckPoints = SelectedTour.CheckPoints;
-            Guests = _tourReservationRepository.GetReservationGuest(SelectedTour);
+            Guests = _tourReservationRepository.GetReservationGuest(SelectedTour);  // svi gosti na ovoj turi
             MakeGuestsFirst();
         }
 
@@ -99,11 +94,7 @@ namespace InitialProject.View
             }
         }
         
-      
-
-     
-        
-
+ 
         public void MakeGuestsFirst()
         {
             foreach (User user in Guests)

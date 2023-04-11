@@ -21,49 +21,55 @@ using InitialProject.Service;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Utilities;
+using InitialProject.ViewModels;
 
 namespace InitialProject.ViewModel
 {
-    public class GuideMainViewModel
+    public class GuideMainViewModel : BaseViewModel
     {
 
         public User LoggedUser { get; set; }
+        
+        private LocationService _locationService;
+        private TourService _tourService;
+        private CheckPointService _checkPointService;
+
+        public ObservableCollection<Tour> Tours { get; set; }
+        public ObservableCollection<Tour> TodayTours { get; set; }
         public List<Tour> ActiveTours { get; set; }
-        public LocationService _locationService { get; set; } 
-        public TourService _tourService { get; set; }
-        public ILocationRepository _locationRepository { get; set; }   
-        public ICheckPointRepository _checkPointRepository { get; set; }
-        public List<Tour> tours;
-        public List<Location> locations;
+        public List<Location> locations { get; set; }
 
         public Tour SelectedTour { get; set; }
         public Tour SelectedTodayTour { get; set; }
         public Tour ActiveTour { get; set; }
 
-        // DANAS TURE 
-        public List<Tour> TodayTours { get; set; }
+        public ICommand ShowAllRatingsCommand => new RelayCommand(ShowRatings);
+        public ICommand AddTourCommand => new RelayCommand(AddTour);
 
+        public ICommand StartTourCommand => new RelayCommand(StartTour);
+        public ICommand ShowTourCommand => new RelayCommand(ShowTour);
+        public ICommand CancelTourCommand => new RelayCommand(CancelTour);
+        public ICommand ShowStatisticCommand => new RelayCommand(ShowStatistic);
 
         public GuideMainViewModel(User user)
         {
             LoggedUser = user;
-            _locationRepository = new LocationRepository();
-           // _tourRepository = new TourRepository();
             _locationService = new LocationService();
             _tourService = new TourService();
-            _checkPointRepository = new CheckPointRepository();
+            _checkPointService = new CheckPointService();
+            LoggedUser = user;
+            Tours = UpdateToursDataGrid();
+            TodayTours = UpdateTodayToursDataGrid();
+            ActiveTours = _tourService.FindActiveTours(user);
             
-            LoadData();
         }
-        public void LoadData()
+     
+       public void LoadData()
         {
-            tours = _tourService.LoadGuideTours(LoggedUser);
-            locations = _locationService.GetLocations();
-            _tourService.AddTourLocation(tours, locations);
-            TodayTours = _tourService.GetTodayTours(LoggedUser);
+            Tours = UpdateToursDataGrid();
+            TodayTours = UpdateTodayToursDataGrid();
             ActiveTours = _tourService.FindActiveTours(LoggedUser);
         }
-       
         public void AddTour()
         {
             AddingTour addingTour = new AddingTour(LoggedUser);
@@ -89,21 +95,14 @@ namespace InitialProject.ViewModel
             return new ObservableCollection<Tour>(todayTours);
         }
 
-        public void StartTour()   // refaktorisatiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+        public void StartTour()   
         {
 
             if (SelectedTodayTour != null && _tourService.FindActiveTours(LoggedUser).Count == 0)
             {
                 SelectedTodayTour.IsActive = true;
                 List<CheckPoint> checkPoints = SelectedTodayTour.CheckPoints;
-                foreach(CheckPoint cp in checkPoints)
-                {
-                    if(cp.SerialNumber == 1)
-                    {
-                        cp.IsChecked = true;
-                        _checkPointRepository.Update(cp);
-                    }
-                }
+                _checkPointService.CheckFirstCheckPoint(checkPoints);
                 _tourService.Update(SelectedTodayTour);
                 StartedTour startedTour = new StartedTour(SelectedTodayTour);
                 startedTour.Show();
@@ -113,6 +112,8 @@ namespace InitialProject.ViewModel
                 MessageBox.Show("Vec postoji zapoceta tura!", "Greska!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+       
         public void ShowTour()
         {
             if (ActiveTour != null)
@@ -125,10 +126,11 @@ namespace InitialProject.ViewModel
         {
             if (SelectedTour != null)
             {
-                if (DateTime.Now.Hour <= SelectedTour.Start.Hour + 2 && DateTime.Now.DayOfYear<= SelectedTour.Start.DayOfYear)
+                if (DateTime.Now.DayOfYear +2 <= SelectedTour.Start.DayOfYear )
                 {
                     _tourService.SendVauchers(SelectedTour);
                     _tourService.Delete(SelectedTour);
+                    Tours.Remove(SelectedTour);
                     MessageBox.Show("Tura je uspjesno otkazana.","Information", MessageBoxButton.OK,MessageBoxImage.Information);
                 }
                 else
@@ -138,19 +140,22 @@ namespace InitialProject.ViewModel
             }
         }
 
-        public void ShowStatistic()
+        public void ShowStatistic()  
         {
             TourStatistic tourStatistic = new TourStatistic();
             tourStatistic.Show();
         }
 
-        public ICommand ShowAllRatingsCommand => new RelayCommand(ShowRatings);
+        
 
         public void ShowRatings()
         {
             EndedTourRatings endedTourRatings = new EndedTourRatings();
             endedTourRatings.Show();
         }
+      
+
+       
 
 
     }
