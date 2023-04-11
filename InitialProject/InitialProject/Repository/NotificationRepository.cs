@@ -5,10 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
 using InitialProject.Serializer;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class NotificationRepository
+    public class NotificationRepository : INotificationRepository
     {
         private const string FilePath = "../../../Resources/Data/notifications.csv";
 

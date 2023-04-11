@@ -23,28 +23,30 @@ namespace InitialProject.View
     public partial class ShowTour : Window
     {
         public User LoggedUser { get; set; }
+        private readonly NotificationRepository _notificationRepository;
+        private readonly UserRepository _userRepository;
+        private readonly TourGuestsRepository _tourGuestsRepository;
+        private readonly CheckPointRepository _checkPointRepository;
+        private readonly GuestsCheckPointRepository _guestsCheckPointRepository;
+
+        public List<Notification> Notifications { get; set; }
+        public Model.TourGuest Guest { get; set; }
+        
         public ShowTour(User user)
         {
             InitializeComponent();
             this.DataContext = this;
             LoggedUser = user;
+            
+            _notificationRepository = new NotificationRepository();
+            _tourGuestsRepository = new TourGuestsRepository();
+            _checkPointRepository = new CheckPointRepository();
+            _guestsCheckPointRepository = new GuestsCheckPointRepository(); 
+
+            _userRepository = new UserRepository();
+            Guest = _tourGuestsRepository.GetById(LoggedUser.Id);
+            Notifications = new List<Notification>(_notificationRepository.GetAll());
         }
-        /*private void loadData()
-        {
-            tours = _tourRepository.GetAll();
-            locations = _locationRepository.GetAll();
-            foreach (Tour tour in tours)
-            {
-                foreach (Location location in locations)
-                {
-                    if (location.Id == tour.Location.Id)
-                    {
-                        tour.Location = location;
-                        break;
-                    }
-                }
-            }
-        }*/
         private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
         {
             TourSearch tourSearch = new TourSearch(LoggedUser);
@@ -61,6 +63,60 @@ namespace InitialProject.View
         {
             MyTours myTours = new MyTours(LoggedUser);
             myTours.Show();
+        }
+        private void WindowLoaded(object sender, RoutedEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(() =>
+            {
+                GetNotification();
+            }));
+        }
+        private void GetNotification()
+        {
+            foreach (Notification notification in Notifications)
+            {
+                if (notification.GuestId == LoggedUser.Id)
+                {
+                    MessageBoxResult result = MessageBox.Show("Da li ste prisutni na turi?", "Potvrda prisustva", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        Guest.Presence = Model.UserPresence.Yes;
+                        _tourGuestsRepository.Update(Guest);
+                        notification.IsGoing = true;
+                        if (Guest.CheckPointName.Equals(""))
+                        {
+                            CheckPoint checkPoint = _checkPointRepository.GetById(notification.CheckPointId);
+                            Guest.CheckPointName = checkPoint.Name;
+                            _tourGuestsRepository.Update(Guest);
+                            AddGuestCheckPoint(Guest, checkPoint);
+                        }
+                        _notificationRepository.Update(notification);
+                    }
+                    else if (result == MessageBoxResult.No)
+                    {
+                        Guest.Presence = Model.UserPresence.No;
+                        _tourGuestsRepository.Update(Guest);
+                        notification.IsGoing = false;
+                        _notificationRepository.Update(notification);
+                    }
+                    else
+                    {
+                        Guest.Presence = Model.UserPresence.Unknown;
+                        _tourGuestsRepository.Update(Guest);
+                        notification.IsGoing = false;
+                        _notificationRepository.Update(notification);
+                    }
+
+                }
+            }
+        }
+
+        private void AddGuestCheckPoint(Model.TourGuest guest, CheckPoint checkPoint)
+        {
+            GuestsCheckPoint guestCheckPoint = new GuestsCheckPoint();
+            guestCheckPoint.CheckPointId = checkPoint.Id;
+            guestCheckPoint.GuestsId = guest.Id;
+            _guestsCheckPointRepository.Save(guestCheckPoint);
         }
     }
 }

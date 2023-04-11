@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,16 +18,23 @@ namespace InitialProject.Injector
     {
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
-            { typeof(IImageRepository), new ImageRepository() },
-            { typeof(IUserRepository), new UserRepository()}, 
+            {typeof(IImageRepository), new ImageRepository()},
+            {typeof(IUserRepository), new UserRepository()}, 
             {typeof(IAccommodationRepository), new AccommodationRepository()}, 
             {typeof(ILocationRepository), new LocationRepository()},
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
-            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
             {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
             {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
-            {typeof(IOwnerRepository), new OwnerRepository()}
+            {typeof(IOwnerRepository), new OwnerRepository()},
+            {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
+            {typeof(IVoucherRepository), new VoucherRepository()},
+            {typeof(ITourRepository), new TourRepository()},
+            {typeof(ITourGuestRepository), new TourGuestsRepository()},
+            {typeof(ITourReservationRepository), new TourReservationRepository()},
+            {typeof(INotificationRepository), new NotificationRepository()},
+            {typeof(ICheckPointRepository), new CheckPointRepository()},
+            {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()}
 
             // Add more implementations here
         };

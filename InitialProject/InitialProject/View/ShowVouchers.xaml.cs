@@ -12,8 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Service;
 
 namespace InitialProject.View
 {
@@ -24,16 +25,15 @@ namespace InitialProject.View
     {
         public ObservableCollection<Voucher> vouchersObservable;
 
-        private readonly VoucherRepository _voucherRepository;
-
-        public List<Voucher> vouchers;
+        private readonly VoucherService _voucherService;
+        public List<Voucher> Vouchers { get; set; }
         public ShowVouchers()
         {
             InitializeComponent();
             this.DataContext = this;
-            _voucherRepository = new VoucherRepository();
-            vouchers = _voucherRepository.GetAll();
-            vouchersDataGrid.ItemsSource = new ObservableCollection<Voucher>(vouchers);
+            _voucherService = new VoucherService();
+            Vouchers = _voucherService.GetAllCreated();
+            vouchersDataGrid.ItemsSource = new ObservableCollection<Voucher>(Vouchers);
         }
 
         private void DataGrid_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)

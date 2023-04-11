@@ -3,23 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Model;
 using InitialProject.Serializer;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class TourGuestsRepository : ITourGuestsRepository
+    public class TourGuestsRepository : ITourGuestRepository
     {
 
         private const string FilePath = "../../../Resources/Data/tourGuests.csv";
-        private readonly Serializer<Guest> _serializer;
+        private readonly Serializer<TourGuest> _serializer;
 
-        private List<Guest> _guests;
+        private readonly UserRepository _userRepository;    
+        private List<TourGuest> _guests;
 
         public TourGuestsRepository()
         {
-            _serializer = new Serializer<Guest>();
+            _serializer = new Serializer<TourGuest>();
             _guests = _serializer.FromCSV(FilePath);
+            _userRepository = new UserRepository(); 
         }
 
         public int NextId()
@@ -32,7 +36,7 @@ namespace InitialProject.Repository
             return _guests.Max(c => c.Id) + 1;
         }
 
-        public void Save(Guest guest)
+        public void Save(TourGuest guest)
         {
             guest.Id = NextId();
             _guests = _serializer.FromCSV(FilePath);
@@ -40,32 +44,34 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _guests);
         }
 
-        public List<Guest> GetAll()
+        public List<TourGuest> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Guest GetById(int id)
+        public TourGuest GetById(int id)
         {
-            throw new NotImplementedException();
+                _guests = _serializer.FromCSV(FilePath);
+                return _guests.FirstOrDefault(u => u.Id == id);
+            
         }
 
-        public void Delete(Guest entity)
+        public void Delete(TourGuest entity)
         {
             _guests = _serializer.FromCSV(FilePath);
-            Guest founded = _guests.Find(c => c.Id == entity.Id);
+            TourGuest founded = _guests.Find(c => c.Id == entity.Id);
             _guests.Remove(founded);
             _serializer.ToCSV(FilePath, _guests);
         }
 
-        public void SaveAll(List<Guest> entities)
+        public void SaveAll(List<TourGuest> entities)
         {
             _serializer.ToCSV(FilePath, _guests);
         }
 
-        public void Update(Guest entity)
+        public void Update(TourGuest entity)
         {
-            Guest newGuest = _guests.Find(p=> p.Id == entity.Id);
+            TourGuest newGuest = _guests.Find(p=> p.Id == entity.Id);
             newGuest.Id = entity.Id;
             newGuest.Username = entity.Username;
             newGuest.Role = entity.Role;
@@ -73,10 +79,25 @@ namespace InitialProject.Repository
             newGuest.Name = entity.Name;
             newGuest.Surname = entity.Surname;
             newGuest.Presence = entity.Presence;
-
+            newGuest.CheckPointName = entity.CheckPointName;
             SaveAll(_guests);
         }
        
-       
+        public TourGuest GetGuest(User user)
+        {
+            foreach(User u in _userRepository.GetAll())
+            {
+                foreach(TourGuest guest in GetAll())
+                {
+                    if(guest.Id == u.Id)
+                    {
+                        return guest;
+                    }
+                }
+            }
+            return null;
+        }
+
+
     }
 }
