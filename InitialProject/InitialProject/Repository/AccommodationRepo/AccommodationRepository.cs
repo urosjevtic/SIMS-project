@@ -1,14 +1,14 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.Serializer;
+﻿using InitialProject.Serializer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.Model;
 
-namespace InitialProject.Repository
+namespace InitialProject.Repository.AccommodationRepo
 {
     public class AccommodationRepository : IAccommodationRepository
     {

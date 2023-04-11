@@ -1,12 +1,12 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.Repository;
+﻿using InitialProject.Repository;
 using InitialProject.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.Service
 {

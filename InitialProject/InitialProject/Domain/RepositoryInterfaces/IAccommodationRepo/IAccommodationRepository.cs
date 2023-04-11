@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace InitialProject.Domain.RepositoryInterfaces
+namespace InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo
 {
     public interface IAccommodationRepository
     {

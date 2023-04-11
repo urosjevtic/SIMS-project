@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Repository.UserRepo;
 
