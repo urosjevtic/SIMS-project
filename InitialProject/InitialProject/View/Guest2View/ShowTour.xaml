@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest2View"
         mc:Ignorable="d"
-        Title="Start" Height="616" Width="916" WindowStartupLocation="CenterScreen">
+        Title="Start" Height="616" Width="916" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
     <Grid>
         <Button Content="Start Search" HorizontalAlignment="Center" Margin="0,122,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding SearchCommand}" FontSize="36" Height="70" Width="700"/>
         <Button Content="My Tours" HorizontalAlignment="Center" Margin="0,212,0,0" VerticalAlignment="Top" Command="{Binding ShowMyToursCommand}" FontSize="36" Height="70" Width="700"/>
