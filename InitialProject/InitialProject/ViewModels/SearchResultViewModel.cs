@@ -85,8 +85,11 @@ namespace InitialProject.ViewModels
             get { return _tours; }
             set
             {
-                _tours = value;
-                RaisePropertyChanged("Tours");
+                if (value != _tours)
+                {
+                    _tours = value;
+                    OnPropertyChanged();
+                }
             }
         }
         private ObservableCollection<Voucher> _vouchers;
@@ -95,8 +98,11 @@ namespace InitialProject.ViewModels
             get { return _vouchers; }
             set
             {
-                _vouchers = value;
-                RaisePropertyChanged("Vouchers");
+                if (value != _vouchers)
+                {
+                    _vouchers = value;
+                    OnPropertyChanged();
+                }
             }
         }
         public SearchResultViewModel(User user, List<Tour> filteredTours)
@@ -116,13 +122,6 @@ namespace InitialProject.ViewModels
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
         }
         private void Cancel()
         {
@@ -177,9 +176,12 @@ namespace InitialProject.ViewModels
         }
         public void FindAlternatives(Tour tour)
         {
-            List<Tour> tours = _tourService.FindAllAlternatives(tour);
-            Tours = new ObservableCollection<Tour>(tours);
-            RaisePropertyChanged("Tours");
+            tours = _tourService.FindAllAlternatives(tour);
+            Tours.Clear();
+            foreach(var t in tours)
+            {
+                Tours.Add(t);
+            }
         }
     }
 }

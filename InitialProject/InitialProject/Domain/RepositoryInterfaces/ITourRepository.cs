@@ -12,10 +12,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public int NextId();
 
-        public List<Tour> FindAllAlternatives(Tour tour);
-
-        public void AddTourLocation(List<Tour> tours, List<Location> locations);
-
         public void Save(Tour tour);
 
         public List<Tour> GetAll();

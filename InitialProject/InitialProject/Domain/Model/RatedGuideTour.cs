@@ -23,7 +23,7 @@ namespace InitialProject.Domain.Model
 
         public RatedGuideTour(User user,int idTour, int knowledge, int language, int interestingTour)
         {
-            Id = user.Id;
+            IdUser = user.Id;
             IdTour = idTour;
             GuideKnowledge = knowledge;
             GuideLanguage = language;

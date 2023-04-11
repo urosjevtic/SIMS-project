@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -13,24 +15,27 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 
-namespace InitialProject.View
+namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowVouchers.xaml
+    /// Interaction logic for SearchResult.xaml
     /// </summary>
-    public partial class ShowVouchers : Window
+    public partial class SearchResult : Window
     {
-        public ShowVouchersViewModel ShowVouchersViewModel;
-        public ShowVouchers()
+        public SearchResultViewModel SearchResultViewModel { get; set; }
+        public User LoggedUser { get; set; }
+        public SearchResult(List<Tour> filteredTours, User user)
         {
             InitializeComponent();
-            ShowVouchersViewModel = new ShowVouchersViewModel();
-            this.DataContext = ShowVouchersViewModel;
+            LoggedUser = user;
+            SearchResultViewModel = new SearchResultViewModel(LoggedUser, filteredTours);
+            this.DataContext = SearchResultViewModel;
         }
-
     }
 }
+

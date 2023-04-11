@@ -18,7 +18,7 @@ namespace InitialProject.Service
         private readonly ITourGuestRepository _tourGuestsRepository;
         private readonly ITourReservationRepository _tourReservationRepository;
 
-        private readonly VoucherRepository _voucherRepository;
+        private readonly IVoucherRepository _voucherRepository;
 
         public LocationService _locationService { get; set; }
 
@@ -29,7 +29,7 @@ namespace InitialProject.Service
             _locationService = new LocationService(); 
             _tourGuestsRepository = Injector.Injector.CreateInstance<ITourGuestRepository>(); 
             _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();   
-            _voucherRepository = new VoucherRepository();   
+            _voucherRepository = Injector.Injector.CreateInstance<IVoucherRepository>();
         }
 
         public List<Tour> GetTodayTours(User user)
@@ -78,6 +78,23 @@ namespace InitialProject.Service
                 }
             }
         }
+        public List<Tour> FindAllAlternatives(Tour tour)
+        {
+            List<Tour> alternative = new List<Tour>();
+            List<Tour> tours = GetAll();
+            var locations = _locationService.GetLocations();
+
+            AddTourLocation(tours, locations);
+
+            foreach (Tour t in tours)
+            {
+                if (t.Location.City.Equals(tour.Location.City))
+                {
+                    alternative.Add(t);
+                }
+            }
+            return alternative;
+        }
         public void Delete(Tour tour)
         {
             _tourRepository.Delete(tour);
@@ -105,10 +122,6 @@ namespace InitialProject.Service
         public int NextId()
         {
             return _tourRepository.NextId();
-        }
-        public List<Tour> FindAllAlternatives(Tour tour)
-        {
-            return _tourRepository.FindAllAlternatives(tour);
         }
         
         public void Save(Tour tour)
@@ -219,17 +232,21 @@ namespace InitialProject.Service
 
             return searchResults;
         }
-        public List<Tour> FindAllActiveTours()
+        public List<Tour> FindAllMyActiveTours(User LoggedUser)
         {
             List<Tour> tours = _tourRepository.GetAll();
             List<Location> locations = _locationService.GetLocations();
             List<Tour> active = new List<Tour>();
+            List<TourReservation> reservations = _tourReservationRepository.GetAll();
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
             {
-                if (tour.IsActive)
+                foreach(TourReservation t in reservations)
                 {
-                    active.Add(tour);
+                    if (tour.IsActive == true && t.IdGuest == LoggedUser.Id && !active.Contains(tour) && t.IdTour == tour.Id)
+                    {
+                        active.Add(tour);
+                    }
                 }
             }
             return active;

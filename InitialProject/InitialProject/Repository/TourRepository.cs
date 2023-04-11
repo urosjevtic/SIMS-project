@@ -36,37 +36,6 @@ namespace InitialProject.Repository
             }
             return _tours.Max(c => c.Id) + 1;
         }
-        public List<Tour> FindAllAlternatives(Tour tour) 
-        {
-            List<Tour> alternative = new List<Tour>();
-            List<Tour> tours = GetAll();
-            var locations = _locationRepository.GetAll();
-
-            AddTourLocation(tours, locations);
-
-            foreach (Tour t in tours)
-            {
-                if(t.Location.City.Equals(tour.Location.City))
-                {
-                    alternative.Add(t);
-                }
-            }
-            return alternative;
-        }
-        public void AddTourLocation(List<Tour> tours, List<Location> locations)
-        {
-            foreach (Tour t in tours)
-            {
-                foreach (Location location in locations)
-                {
-                    if (location.Id == t.Location.Id)
-                    {
-                        t.Location = location;
-                        break;
-                    }
-                }
-            }
-        }
         public void Save(Tour tour)
         {
             tour.Id = NextId();

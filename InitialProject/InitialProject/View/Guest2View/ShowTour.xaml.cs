@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,31 +14,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Repository;
-using System.Data;
-using InitialProject.Service;
-
 using InitialProject.Domain.Model;
+using InitialProject.Repository;
 using InitialProject.ViewModels;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
-namespace InitialProject.View
+namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for TourSearch.xaml
+    /// Interaction logic for ShowTour.xaml
     /// </summary>
-    public partial class TourSearch : Window
+    public partial class ShowTour : Window
     {
-        public TourSearchViewModel TourSearchViewModel { get; set; }
+        public ShowTourViewModel ShowTourViewModel { get; set; }
         public User LoggedUser { get; set; }
-
-        public TourSearch(User user)
+        
+        public ShowTour(User user)
         {
             InitializeComponent();
+            ShowTourViewModel = new ShowTourViewModel(user);
+            this.DataContext = ShowTourViewModel;
             LoggedUser = user;
-            TourSearchViewModel = new TourSearchViewModel(LoggedUser);
-            this.DataContext = TourSearchViewModel;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)

@@ -14,27 +14,28 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
-using InitialProject.Model;
+using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.ViewModels;
 
-namespace InitialProject.View
+namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for SearchResult.xaml
+    /// Interaction logic for MyTours.xaml
     /// </summary>
-    public partial class SearchResult : Window
+    public partial class MyTours : Window
     {
-        public SearchResultViewModel SearchResultViewModel { get; set; }
+        public MyToursViewModel MyToursViewModel { get; set; }
         public User LoggedUser { get; set; }
-        public SearchResult(List<Tour> filteredTours, User user)
+        public MyTours(User user)
         {
             InitializeComponent();
             LoggedUser = user;
-            SearchResultViewModel = new SearchResultViewModel(LoggedUser, filteredTours);
-            this.DataContext = SearchResultViewModel;
+            MyToursViewModel = new MyToursViewModel(LoggedUser);
+            this.DataContext = MyToursViewModel;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -43,4 +44,3 @@ namespace InitialProject.View
         }
     }
 }
-
