@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SearchResultViewModel}"
+        xmlns:local="clr-namespace:InitialProject.View.Guest2View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SearchResultViewModel}"
         mc:Ignorable="d"
         Title="SearchResult" Height="616" Width="916" WindowStartupLocation="CenterScreen">
     <Grid>

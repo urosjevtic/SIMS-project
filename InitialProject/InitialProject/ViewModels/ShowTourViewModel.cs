@@ -9,7 +9,7 @@ using System.Windows.Threading;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
-using InitialProject.View;
+using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {

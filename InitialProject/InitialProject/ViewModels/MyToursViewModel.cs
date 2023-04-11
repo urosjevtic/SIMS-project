@@ -14,6 +14,7 @@ using InitialProject.Domain.Model;
 using InitialProject.Forms;
 using InitialProject.Service;
 using InitialProject.View;
+using InitialProject.View.Guest2View;
 using NuGet.Protocol.Plugins;
 
 namespace InitialProject.ViewModels

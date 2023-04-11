@@ -13,6 +13,7 @@ using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
+using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
