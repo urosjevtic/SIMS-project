@@ -51,8 +51,6 @@ namespace InitialProject.View
 
         public UnratedOwner UnratedOwner { get; set; }
 
-
-
         public MyReservations()
         {
             InitializeComponent();
@@ -68,6 +66,7 @@ namespace InitialProject.View
         {
             Reservations = new ObservableCollection<Domain.Model.Reservations.AccommodationReservation>(_accommodationReservationService.GetFutureReservations());
         }
+
         private void RatedButton_Click(object sender, RoutedEventArgs e)
         {
             //   AccommodationRatingForm accommodationRating = new AccommodationRatingForm(LoggedUser);
@@ -83,6 +82,7 @@ namespace InitialProject.View
                     _canceledResrvationsRepository.SaveCanceledReservation(SelectedReservation);
                     _accommodationReservationRepository.Delete(SelectedReservation);
                     LoadAllReservations();
+                    MessageBox.Show("You have successfully canceled your reservation");
                 }
                 else
                 {

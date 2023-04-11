@@ -32,12 +32,12 @@
                 <TextBlock Text="Number of guests" HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
             </StackPanel>
             <StackPanel Orientation="Vertical">
-                <DatePicker Name="dpStart" SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged}" Margin="0, 15, 0, 0"/>
-                <DatePicker Name="dpEnd" SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged}" Margin="0, 20, 0, 0"/>
+                <DatePicker Name="dpStart" SelectedDateChanged="dpStart_SelectedDateChanged" SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0, 15, 0, 0"/>
+                <DatePicker Name="dpEnd" SelectedDateChanged="dpEnd_SelectedDateChanged"  SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="0, 20, 0, 0"/>
                 <TextBox Name="tbReservationDays" Text="{Binding Path=ReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="0,25,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                 <TextBox Name="tbGuestNumber" Text="{Binding Path=GuestsNumber, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
             </StackPanel>
-            <DataGrid Name="resultDataGrid" Width="235" Height="200" Margin="190, 10">
+            <DataGrid Name="resultDataGrid"  ItemsSource="{Binding Path=ReservationDates}" SelectedItem="{Binding Path=SelectedDate}" Width="235" Height="200" Margin="190, 10">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Start date" Binding="{Binding Path=StarDate}" Width="*" />
                     <DataGridTextColumn Header="End date" Binding="{Binding Path=EndDate}" Width="*"/>
@@ -47,6 +47,6 @@
         <Button Content="Search" Grid.Row="3"  Height="40" Width="120" Margin="159,12,521,168" Click="SearchClick"/>
         <Button Content="Reserve" Grid.Row="3" Height="40" Width="120" Margin="618,12,62,168" Click="ReserveClick" />
         <Button Content="Cancel" Grid.Row="3" Height="40" Width="100" Margin="495,12,205,168" Click="Button_Click"/>
-
+        <TextBlock Foreground="Red" Name="tbNotFound" Width="274" HorizontalAlignment="Left" Margin="46,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Grid.Row="3"/>
     </Grid>
 </Window>
