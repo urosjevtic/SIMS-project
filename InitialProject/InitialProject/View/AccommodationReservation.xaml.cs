@@ -1,5 +1,5 @@
 ﻿using InitialProject.Domain.Model;
-using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
 using System;
 using System.Collections.Generic;

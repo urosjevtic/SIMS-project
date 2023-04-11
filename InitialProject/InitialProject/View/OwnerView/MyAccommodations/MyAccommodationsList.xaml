@@ -84,9 +84,11 @@
 
                             <TextBlock Text="{Binding Name}" 
                                    FontWeight="Bold"
-                                   FontSize="24"
+                                   FontSize="20"
+                                   VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Margin="60,0,0,10"
+                                   TextWrapping="Wrap"
                                    Grid.Row="0"/>
 
                             <StackPanel Orientation="Horizontal" Grid.Row="1">
