@@ -122,8 +122,8 @@
 
 
                             <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Delete reservation" Style="{StaticResource LogInButtonStyle}" 
-                                        Command="{Binding DataContext.ApproveRescheduleCommand, ElementName=reschedulingListBox}"
+                                <Button Content="Cancel reservation" Style="{StaticResource LogInButtonStyle}" 
+                                        Command="{Binding DataContext.CancelReservationCommand, ElementName=reschedulingListBox}"
                                         CommandParameter="{Binding}"/>
 
                             </StackPanel>
