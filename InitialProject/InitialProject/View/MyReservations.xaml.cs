@@ -67,11 +67,6 @@ namespace InitialProject.View
             Reservations = new ObservableCollection<Domain.Model.Reservations.AccommodationReservation>(_accommodationReservationService.GetFutureReservations());
         }
 
-        private void RatedButton_Click(object sender, RoutedEventArgs e)
-        {
-            //   AccommodationRatingForm accommodationRating = new AccommodationRatingForm(LoggedUser);
-            //  accommodationRating.Show();
-        }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -93,6 +88,11 @@ namespace InitialProject.View
             {
                 MessageBox.Show("You must select the reservation you want to delete");
             }
+        }
+
+        private void MoveReservationButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

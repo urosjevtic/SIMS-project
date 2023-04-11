@@ -12,7 +12,7 @@
                 <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Text="Accommodation Search" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" RenderTransformOrigin="0,0"/>
+            <TextBlock Text="My reservations" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" RenderTransformOrigin="0,0"/>
             <DataGrid Name="AccommodationDataGrid" Grid.Row="1" ItemsSource="{Binding Reservations}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedReservation}" IsReadOnly="True" SelectionMode="Single">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="*" />
@@ -23,7 +23,7 @@
                     <DataGridTextColumn Header="Guest number" Binding="{Binding GuestNumber}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button x:Name="RatedButton" Content="Rated accommodation" Click="RatedButton_Click" Margin="562,331,95,10" Grid.Row="1" RenderTransformOrigin="0.501,0.65"/>
+            <Button x:Name="MoveReservationButton" Content="Move reservation" Click="MoveReservationButton_Click" Margin="562,331,95,10" Grid.Row="1" RenderTransformOrigin="0.501,0.65"/>
             <Button x:Name="CancelButton" Content="Cancel" Click="CancelButton_Click" Margin="400,331,278,10" Grid.Row="1" RenderTransformOrigin="0.501,0.65"/>
         </Grid>
     </Grid>
