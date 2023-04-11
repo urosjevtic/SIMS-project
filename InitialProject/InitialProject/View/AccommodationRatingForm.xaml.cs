@@ -5,9 +5,11 @@ using InitialProject.Repository;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,6 +19,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Image = InitialProject.Domain.Model.Image;
 
 namespace InitialProject.View
 {
@@ -27,7 +30,7 @@ namespace InitialProject.View
     {
         private readonly RatedOwnerRepository _ratedOwnerRepository;
         private readonly UnratedOwnerRepository _unratedOwnerRepository;
-
+        private readonly ImageRepository _imageRepository;
         public UnratedOwner UnratedOwner { get; set; }
       //  private OwnerMainWindow _ownerMainWindow;
         public AccommodationRatingForm(UnratedOwner unratedOwner)
@@ -37,7 +40,8 @@ namespace InitialProject.View
             UnratedOwner = unratedOwner;
             _ratedOwnerRepository = new RatedOwnerRepository();
             _unratedOwnerRepository = new UnratedOwnerRepository();
-           // _ownerMainWindow = ownerMainWindow;
+            _imageRepository = new ImageRepository();
+            // _ownerMainWindow = ownerMainWindow;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
@@ -105,6 +109,7 @@ namespace InitialProject.View
 
         private void ButtonClick_Submit(object sender, RoutedEventArgs e)
         {
+            
             RatedOwner ratedOwner = new RatedOwner();
             CreateNewRatedOwner(ratedOwner);
 
@@ -121,9 +126,123 @@ namespace InitialProject.View
             ratedOwner.OwnerCorrectness = _ownerCorrectnessRating;
             ratedOwner.CleanlinessRating = _cleanlinessRating;
             ratedOwner.AdditionalComment = _additionalComment;
-            ratedOwner.ImageUrl = new Domain.Model.Image();
+            // ratedOwner.ImageUrl = new Domain.Model.Image();
+            SaveImages(_imageUrl, 0);
+            ratedOwner.ImageUrl.Id = GetImagesId(_imageUrl);
             ratedOwner.Reservation = UnratedOwner.Reservation;
         }
-       
+        private void SaveImages(string urls, int entityId)
+        {
+            Image images = new Image();
+            images.EntityLd = entityId;
+            string[] imagesUrls = SplitStringByComma(urls);
+            foreach (string imageUrl in imagesUrls)
+            {
+                images.Url.Add(imageUrl);
+            }
+
+            _imageRepository.ReturnSaved(images);
+
+        }
+        private int GetImagesId(string urls)
+        {
+            List<Image> allImages = _imageRepository.GetAll();
+            string[] imageUrls = SplitStringByComma(urls);
+            foreach (Image image in allImages)
+            {
+                if (image.Url.SequenceEqual(imageUrls))
+                {
+                    return image.Id;
+                }
+            }
+            throw new Exception("Error has occured");
+        }
+        private string[] SplitStringByComma(string str)
+        {
+            return str.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
+        }
+
+
+
+
+        //Input validation
+        private readonly Regex _positiveNumbersPattern = new Regex("^[1-9][0-9]*$");
+        private readonly Regex _imagesUrlPattern = new Regex("\\bhttps?://\\S+\\b(?:,\\s*\\bhttps?://\\S+\\b)*");
+        public string Error => null;
+
+       /* public string this[string columnName]
+        {
+            get
+            {
+                if (columnName == "")
+                {
+                    if (string.IsNullOrEmpty(Country))
+                        return "Select a country";
+                }
+                else if (columnName == "City")
+                {
+                    if (string.IsNullOrEmpty(City))
+                        return "Select a city";
+                }
+                else if (columnName == "AccommodationName")
+                {
+                    if (string.IsNullOrEmpty(AccommodationName))
+                        return "Accommodation name is required";
+                }
+                else if (columnName == "AccommodationTypes")
+                {
+                    if (string.IsNullOrEmpty(AccommodationTypes))
+                        return "Accommodation type is required";
+                }
+                else if (columnName == "MaxGuests")
+                {
+                    if (string.IsNullOrEmpty(MaxGuests))
+                        return "Maximum number of guests is required";
+                    Match match = _positiveNumbersPattern.Match(MaxGuests);
+                    if (!match.Success)
+                        return "Maximum guests format should be: positive number";
+                }
+                else if (columnName == "MinReservationDays")
+                {
+                    if (string.IsNullOrEmpty(MinReservationDays))
+                        return "Minimum reservation days is required";
+                    Match match = _positiveNumbersPattern.Match(MinReservationDays);
+                    if (!match.Success)
+                        return "Minimum reservation days format should be: positive number";
+                }
+                else if (columnName == "CancelationPeriod")
+                {
+                    if (string.IsNullOrEmpty(CancelationPeriod))
+                        return "Cancelation period is required";
+                    Match match = _positiveNumbersPattern.Match(CancelationPeriod);
+                    if (!match.Success)
+                        return "Cancelation period format should be: positive number (number of days for cancelation)";
+                }
+                else if (columnName == "ImagesUrl")
+                {
+                    if (string.IsNullOrEmpty(ImageUrl))
+                        return "Images are required";
+                    Match match = _imagesUrlPattern.Match(ImageUrl);
+                    if (!match.Success)
+                        return "Images input format should be: url1, url2, ...";
+                }
+                return null;
+            }
+        }*/
+        private readonly string[] _validatedProperties = { "Location", "AccommodationName", "AccommodationTypes", "MaxGuests", "MinReservationDays", "CancelationPeriod", "ImagesUrl", "Country", "City" };
+
+       /* public bool IsValid
+        {
+            get
+            {
+                foreach (var property in _validatedProperties)
+                {
+                    if (this[property] != null)
+                        return false;
+                }
+
+                return true;
+            }
+        }*/
     }
 }
