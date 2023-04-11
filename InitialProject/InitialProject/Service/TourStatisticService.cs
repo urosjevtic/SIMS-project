@@ -82,7 +82,7 @@ namespace InitialProject.Service
                     guestsNumber += reservation.NumberOfPeople;
                     if(reservation.IsUsingVoucher == true)
                     {
-                        withVoucher++;
+                        withVoucher+=reservation.NumberOfPeople;
                     }
                     
                 }
@@ -98,7 +98,6 @@ namespace InitialProject.Service
         }
         public double FindPeopleWithoutVoucher(Tour tour)
         {
-
             double guestsNumber = 0;
             double withoutVoucher = 0;
             foreach (TourReservation reservation in _tourReservationRepository.GetAll())
@@ -108,7 +107,7 @@ namespace InitialProject.Service
                     guestsNumber += reservation.NumberOfPeople;
                     if (reservation.IsUsingVoucher == false)
                     {
-                        withoutVoucher++;
+                        withoutVoucher+=reservation.NumberOfPeople;
                     }
 
                 }

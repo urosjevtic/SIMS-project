@@ -30,7 +30,7 @@ namespace InitialProject.Injector
             {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
             {typeof(IVoucherRepository), new VoucherRepository()},
             {typeof(ITourRepository), new TourRepository()},
-            {typeof(ITourGuestRepository), new TourGuestsRepository()},
+            {typeof(ITourGuestRepository), new TourGuestRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
             {typeof(ICheckPointRepository), new CheckPointRepository()},

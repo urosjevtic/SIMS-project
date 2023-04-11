@@ -24,13 +24,11 @@ namespace InitialProject.View
         
     {
         public TourStatisticService _tourStatisticService;
-        public TourStatisticViewModel TourStatisticViewModel;
         public Tour SelectedTour { get; set; }
         public OneTourStatistic(Tour tour)
         {
-            InitializeComponent();
-            TourStatisticViewModel = new TourStatisticViewModel();
-            this.DataContext = TourStatisticViewModel;
+            InitializeComponent();         
+            this.DataContext = new TourStatisticViewModel();
             _tourStatisticService = new TourStatisticService();
             SelectedTour = tour;
             until18TextBlock.Text = _tourStatisticService.FindPeopleUntil18(SelectedTour).ToString();

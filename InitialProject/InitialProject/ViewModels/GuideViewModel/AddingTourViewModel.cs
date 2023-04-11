@@ -16,15 +16,16 @@ using System.Windows.Input;
 using InitialProject.Utilities;
 using System.Windows;
 
+
 namespace InitialProject.ViewModels
 {
-    public class AddingTourViewModel : INotifyPropertyChanged
+    public class AddingTourViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        private readonly ITourRepository _tourRepository;
-        private readonly ILocationRepository _locationRepository;
         private readonly IImageRepository _imageRepository;
-        private readonly ICheckPointRepository _checkPointRepository;
+        
         public LocationService _locationService;
+        private CheckPointService _checkPointService;   
+        private TourService _tourService;
         public Dictionary<string, List<string>> Locations { get; set; }
 
         private GuideMainViewModel _guideMainWindow;
@@ -35,10 +36,11 @@ namespace InitialProject.ViewModels
 
         public AddingTourViewModel(User user)
         {
-            _tourRepository = new TourRepository();
-            _locationRepository = new LocationRepository();
+           
             _imageRepository = new ImageRepository();
-            _checkPointRepository = new CheckPointRepository();
+            
+            _checkPointService = new CheckPointService();
+            _tourService = new TourService();   
             _guideMainWindow = new GuideMainViewModel(user);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
@@ -48,7 +50,7 @@ namespace InitialProject.ViewModels
             Locations = _locationService.GetCountriesAndCities();
             _guideMainWindow.UpdateToursDataGrid();
             _guideMainWindow.UpdateTodayToursDataGrid();
-            _guideMainWindow.LoadData();
+           
         }
 
 
@@ -217,6 +219,7 @@ namespace InitialProject.ViewModels
             return _imageRepository.ReturnSaved(images).Id;
         }
 
+
         private string[] SplitString(string s)
         {
             return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
@@ -242,22 +245,20 @@ namespace InitialProject.ViewModels
             checkPoint.SerialNumber = i;
             checkPoint.IsChecked = false;
             checkPoint.CurrentGuests = new List<User>();
-            return _checkPointRepository.Save(checkPoint);
+            return _checkPointService.Save(checkPoint);
 
         }
         private void Save()
         {
             ConfirmAddingTour();
-            Window currentWindow = System.Windows.Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
-            currentWindow?.Close();
+            _guideMainWindow.LoadData();
+            CloseCurrentWindow();
         }
 
        
         private void Cancel()
         {
-            Window currentWindow = System.Windows.Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
-
-            currentWindow?.Close();
+            CloseCurrentWindow();
         }
 
         public ICommand SaveTourCommand => new RelayCommand(Save);
@@ -268,8 +269,7 @@ namespace InitialProject.ViewModels
             Tour tour = new Tour();
             tour.Guide.Id = LoggedUser.Id;
             tour.Name = _tourName;
-            tour.Location.City = _city;
-            tour.Location.Country = _country;
+            tour.Location.Id = _locationService.GetLocationId(_country, _city);
             tour.Description = _description;
             tour.Language = _language;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
@@ -279,19 +279,9 @@ namespace InitialProject.ViewModels
             tour.CoverImageUrl.Id = imagesId;
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             tour.IsActive = false;
-            _tourRepository.Save(tour);
-            _guideMainWindow.UpdateTodayToursDataGrid();
-            _guideMainWindow.UpdateToursDataGrid();
-
+            _tourService.Save(tour);
             _guideMainWindow.LoadData();
-            Window currentWindow = Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
-
-            currentWindow?.Close();
-           
-            
-            
         }
-
        
 
 

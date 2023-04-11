@@ -10,7 +10,7 @@ using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class TourGuestsRepository : ITourGuestRepository
+    public class TourGuestRepository : ITourGuestRepository
     {
 
         private const string FilePath = "../../../Resources/Data/tourGuests.csv";
@@ -19,7 +19,7 @@ namespace InitialProject.Repository
         private readonly UserRepository _userRepository;    
         private List<TourGuest> _guests;
 
-        public TourGuestsRepository()
+        public TourGuestRepository()
         {
             _serializer = new Serializer<TourGuest>();
             _guests = _serializer.FromCSV(FilePath);

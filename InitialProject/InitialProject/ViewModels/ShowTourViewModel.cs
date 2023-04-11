@@ -22,7 +22,7 @@ namespace InitialProject.ViewModels
         public User LoggedUser { get; set; }
         private readonly NotificationRepository _notificationRepository;
         private readonly UserRepository _userRepository;
-        private readonly TourGuestsRepository _tourGuestsRepository;
+        private readonly TourGuestRepository _tourGuestsRepository;
         private readonly CheckPointRepository _checkPointRepository;
         private readonly GuestsCheckPointRepository _guestsCheckPointRepository;
 
@@ -37,7 +37,7 @@ namespace InitialProject.ViewModels
             LoggedUser = user;
             Guest = _tourGuestsRepository.GetById(LoggedUser.Id);
             _notificationRepository = new NotificationRepository();
-            _tourGuestsRepository = new TourGuestsRepository();
+            _tourGuestsRepository = new TourGuestRepository();
             _checkPointRepository = new CheckPointRepository();
             _guestsCheckPointRepository = new GuestsCheckPointRepository(); 
 
@@ -90,6 +90,7 @@ namespace InitialProject.ViewModels
                             AddGuestCheckPoint(Guest, checkPoint);
                         }
                         _notificationRepository.Update(notification);
+                        _notificationRepository.Delete(notification);
                     }
                     else if (result == MessageBoxResult.No)
                     {
@@ -97,6 +98,8 @@ namespace InitialProject.ViewModels
                         _tourGuestsRepository.Update(Guest);
                         notification.IsGoing = false;
                         _notificationRepository.Update(notification);
+                        _notificationRepository.Delete(notification);
+
                     }
                     else
                     {
@@ -104,6 +107,8 @@ namespace InitialProject.ViewModels
                         _tourGuestsRepository.Update(Guest);
                         notification.IsGoing = false;
                         _notificationRepository.Update(notification);
+                        _notificationRepository.Delete(notification);
+
                     }
 
                 }
@@ -113,8 +118,8 @@ namespace InitialProject.ViewModels
         private void AddGuestCheckPoint(Model.TourGuest guest, CheckPoint checkPoint)
         {
             GuestsCheckPoint guestCheckPoint = new GuestsCheckPoint();
-            guestCheckPoint.CheckPointId = checkPoint.Id;
-            guestCheckPoint.GuestsId = guest.Id;
+            guestCheckPoint.CheckPoint = checkPoint;
+            guestCheckPoint.Guest = guest;
             _guestsCheckPointRepository.Save(guestCheckPoint);
         }
     }

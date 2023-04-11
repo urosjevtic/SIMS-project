@@ -55,7 +55,7 @@ namespace InitialProject.Service
             List<Tour> tours = new List<Tour>();
             foreach (Tour tour in allTours)
             {
-                if (tour.Guide.Id == user.Id && tour.Start.DayOfYear >= DateTime.Today.DayOfYear)
+                if (tour.Guide.Id == user.Id && tour.Start.DayOfYear >= DateTime.Now.DayOfYear)
                 {
                     tours.Add(tour);
                 }
@@ -101,9 +101,9 @@ namespace InitialProject.Service
         }
         public void SendVauchers(Tour tour)
         {
-            foreach (User guste in _tourReservationRepository.GetReservationGuest(tour))
+            foreach (User user in _tourReservationRepository.GetReservationGuest(tour))
             {
-                TourGuest guest = _tourGuestsRepository.GetGuest(guste);
+                TourGuest guest = _tourGuestsRepository.GetGuest(user);
                 MakeVaucher(guest);
             }
         }
@@ -117,8 +117,7 @@ namespace InitialProject.Service
             voucher.Text = "Ovaj vaucer mozete koristiti 2 godine od datuma kreiranja";
             _voucherRepository.Save(voucher);
         }
-        ///
-
+       
         public int NextId()
         {
             return _tourRepository.NextId();
@@ -265,13 +264,14 @@ namespace InitialProject.Service
             foreach (Tour tour in tours)
             {
                 TimeSpan ts = new(tour.Duration, 0, 0);
-                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
+                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false )
                 {
                     ended.Add(tour);
                 }
             }
             return ended;
         }
+      
         public void RateTour(Tour SelectedTour)
         {
             SelectedTour.IsRated = true;

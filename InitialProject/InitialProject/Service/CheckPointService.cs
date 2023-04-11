@@ -74,5 +74,17 @@ namespace InitialProject.Service
         {
             return _checkPointRepository.GetAll();
         }
+
+        public void CheckFirstCheckPoint(List<CheckPoint> checkPoints)
+        {
+            foreach (CheckPoint cp in checkPoints)
+            {
+                if (cp.SerialNumber == 1)
+                {
+                    cp.IsChecked = true;
+                    Update(cp);
+                }
+            }
+        }
     }
 }

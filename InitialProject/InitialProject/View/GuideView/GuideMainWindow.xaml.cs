@@ -11,28 +11,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Domain.Model;
+using InitialProject.Serializer;
 using InitialProject.Repository;
-using InitialProject.Service;
-using InitialProject.ViewModels;
+using System.Collections.ObjectModel;
+using InitialProject.ViewModel;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class TourGuestRating : Window
+    public partial class GuideMainWindow : Window
     {
 
-        ShowTourRatingsViewModel ShowTourRatingsViewModel { get; set; } 
-        public TourGuestRating(Tour tour)
+        public GuideMainWindow(User user)
         {
             InitializeComponent();
-            ShowTourRatingsViewModel = new ShowTourRatingsViewModel();
-            this.DataContext = ShowTourRatingsViewModel;
-            
+            this.DataContext =  new GuideMainViewModel(user);
+           
         }
 
-        
+      
     }
 }
+    
+
