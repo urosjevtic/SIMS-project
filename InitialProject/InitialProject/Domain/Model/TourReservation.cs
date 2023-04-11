@@ -13,7 +13,6 @@ namespace InitialProject.Domain.Model
         public int IdTour { get; set; }
         public int IdGuest { get; set; }
         public int NumberOfPeople { get; set; }
-
         public bool IsUsingVoucher { get; set; }
         public double AverageAge { get; set; }
         public TourReservation() { }

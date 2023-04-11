@@ -2,6 +2,7 @@
 using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.View;
+using InitialProject.View.Guest2View;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;

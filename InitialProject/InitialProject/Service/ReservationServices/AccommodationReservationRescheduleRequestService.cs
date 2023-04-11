@@ -14,15 +14,12 @@ namespace InitialProject.Service.ReservationServices
     {
         private readonly IAccommodationReservationRescheduleRequestRepository _accommodationReservationRescheduleRequestRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
-        private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
 
 
         public AccommodationReservationRescheduleRequestService()
         {
             _accommodationReservationRescheduleRequestRepository = Injector.Injector.CreateInstance<IAccommodationReservationRescheduleRequestRepository>();
             _accommodationReservationService = new AccommodationReservationService();
-            _declinedReservationRescheduleRequestService =
-                new DeclinedAccommodationReservationRescheduleRequestService();
         }
 
         public List<AccommodationReservationRescheduleRequest> GetAll()
@@ -32,53 +29,40 @@ namespace InitialProject.Service.ReservationServices
             BindReservationToRequest(rescheduleRequests);
             foreach (var rescheduleRequest in rescheduleRequests)
             {
-                IsAlreadyOccupied(rescheduleRequest);
+                CheckIfAlreadyReserved(rescheduleRequest);
             }
             return rescheduleRequests;
         }
 
-        public List<AccommodationReservationRescheduleRequest> GetAllByOwnerId(int id)
-        {
-            List<AccommodationReservationRescheduleRequest> rescheduleRequestsByOwnerId = new List<AccommodationReservationRescheduleRequest>();
-            List<AccommodationReservationRescheduleRequest> rescheduleRequests = GetAll();
-            foreach (var rescheduleRequest in rescheduleRequests)
-            {
-                if (id == rescheduleRequest.Reservation.Accommodation.Owner.Id && rescheduleRequest.Status == RescheduleStatus.pending)
-                    rescheduleRequestsByOwnerId.Add(rescheduleRequest);
-            }
-            return rescheduleRequestsByOwnerId;
-        }
-
         private void BindReservationToRequest(List<AccommodationReservationRescheduleRequest> rescheduleRequests)
         {
-            List<AccommodationReservation> accommodations = _accommodationReservationService.GetAll();
+            Dictionary<int, AccommodationReservation> reservationsById = _accommodationReservationService.GetAll()
+                .ToDictionary(reservation => reservation.Id);
+
             foreach (AccommodationReservationRescheduleRequest rescheduleRequest in rescheduleRequests)
             {
-                foreach (AccommodationReservation accommodationReservation in accommodations)
+                if (reservationsById.TryGetValue(rescheduleRequest.Reservation.Id, out AccommodationReservation accommodationReservation))
                 {
-                    if (accommodationReservation.Id == rescheduleRequest.Reservation.Id)
-                    {
-                        rescheduleRequest.Reservation = accommodationReservation;
-                        break;
-                    }
+                    rescheduleRequest.Reservation = accommodationReservation;
                 }
             }
 
         }
 
-        private void IsAlreadyOccupied(AccommodationReservationRescheduleRequest request)
+
+        private void CheckIfAlreadyReserved(AccommodationReservationRescheduleRequest request)
         {
             List<AccommodationReservation> accommodationReservations = _accommodationReservationService.GetReservationsByAccommodationId(request.Reservation.AccommodationId);
-            foreach (AccommodationReservation accommodationReservation in accommodationReservations)
-            {
-                if (accommodationReservation.ReservedDates.Contains(request.RescheduleStartDate) ||
-                    accommodationReservation.ReservedDates.Contains(request.RescheduleEndDate))
-                {
-                    request.IsAlreadyReserved = true;
-                    break;
-                }
-            }
-            request.IsAlreadyReserved = false;
+            request.IsAlreadyReserved = accommodationReservations.Any(accommodationReservation =>
+                accommodationReservation.ReservedDates.Contains(request.RescheduleStartDate) ||
+                accommodationReservation.ReservedDates.Contains(request.RescheduleEndDate));
+        }
+
+        public List<AccommodationReservationRescheduleRequest> GetAllByOwnerId(int id)
+        {
+            return GetAll()
+                .Where(r => r.Reservation.Accommodation.Owner.Id == id && r.Status == RescheduleStatus.pending)
+                .ToList();
         }
 
         public void Delete(AccommodationReservationRescheduleRequest request)
@@ -88,18 +72,23 @@ namespace InitialProject.Service.ReservationServices
 
         public void ApproveReschedule(AccommodationReservationRescheduleRequest rescheduleRequest)
         {
+            AccommodationReservation newReservation = CreateNewReservation(rescheduleRequest);
+
+            _accommodationReservationService.Update(newReservation);
+
+            ChangeStatus(rescheduleRequest, RescheduleStatus.approved);
+        }
+
+        private AccommodationReservation CreateNewReservation(AccommodationReservationRescheduleRequest rescheduleRequest)
+        {
             int reservationId = rescheduleRequest.Reservation.Id;
-            DateTime newStarDate = rescheduleRequest.RescheduleStartDate;
+            DateTime newStartDate = rescheduleRequest.RescheduleStartDate;
             DateTime newEndDate = rescheduleRequest.RescheduleEndDate;
             int userId = rescheduleRequest.Reservation.UserId;
             int accommodationId = rescheduleRequest.Reservation.AccommodationId;
             int guestNumber = rescheduleRequest.Reservation.GuestNumber;
 
-            AccommodationReservation reservation = _accommodationReservationService.Create(reservationId, newStarDate,
-                newEndDate, userId, accommodationId, guestNumber);
-            _accommodationReservationService.Update(reservation);
-
-            ChangeStatus(rescheduleRequest, RescheduleStatus.approved);
+            return _accommodationReservationService.Create(reservationId, newStartDate, newEndDate, userId, accommodationId, guestNumber);
         }
 
         public void DeclineReschedule(AccommodationReservationRescheduleRequest rescheduleRequest)

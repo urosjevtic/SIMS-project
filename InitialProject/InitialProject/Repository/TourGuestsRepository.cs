@@ -51,9 +51,8 @@ namespace InitialProject.Repository
 
         public TourGuest GetById(int id)
         {
-                _guests = _serializer.FromCSV(FilePath);
-                return _guests.FirstOrDefault(u => u.Id == id);
-            
+            _guests = _serializer.FromCSV(FilePath);
+            return _guests.FirstOrDefault(g => g.Id == id);
         }
 
         public void Delete(TourGuest entity)

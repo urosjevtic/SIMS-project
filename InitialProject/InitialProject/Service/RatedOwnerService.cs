@@ -33,20 +33,50 @@ namespace InitialProject.Service
             return ratedOwners.FirstOrDefault(r => r.Id == id);
         }
 
-        public List<RatedOwner> GetByAccommodationId(int id)
+        public List<RatedOwner> GetFilteredRatingsByAccommodationId(int accommodationId)
+        {
+            return FilterRatedGuestRatings(accommodationId);
+        }
+
+        private List<RatedOwner> FilterRatedGuestRatings(int accommodationId)
+        {
+            List<RatedOwner> filteredRatings = new List<RatedOwner>();
+            List<RatedOwner> allRatings = _ratedOwnerRepository.GetAll();
+            BindReservationToRating(allRatings);
+            foreach (var rating in allRatings)
+            {
+                if (rating.Reservation.Accommodation.Id == accommodationId && CheckIfGuestRated(rating))
+                    filteredRatings.Add(rating);
+            }
+
+            return filteredRatings;
+        }
+
+
+        private bool CheckIfGuestRated(RatedOwner rating)
+        {
+            foreach (var ratedGuest in _ratedGuestService.GetAll())
+            {
+                if (ratedGuest.Reservation.Id == rating.Reservation.Id)
+                    return true;
+            }
+            return false;
+        }
+
+
+        public List<RatedOwner> GetByOwnersId(int id)
         {
             List<RatedOwner> allRatings = _ratedOwnerRepository.GetAll();
             List<RatedOwner> ratings = new List<RatedOwner>();
             BindReservationToRating(allRatings);
             foreach (var rating in allRatings)
             {
-                if(rating.Reservation.Accommodation.Id == id && CheckIfGuestRated(rating))
+                if (rating.Reservation.Accommodation.Owner.Id == id)
                     ratings.Add(rating);
             }
 
             return ratings;
         }
-
 
         private void BindReservationToRating(List<RatedOwner> ratings)
         {
@@ -63,15 +93,6 @@ namespace InitialProject.Service
             }
         }
 
-        private bool CheckIfGuestRated(RatedOwner rating)
-        {
-            foreach (var ratedGuest in _ratedGuestService.GetAll())
-            {
-                if (ratedGuest.Reservation.Id == rating.Reservation.Id)
-                    return true;
-            }
-            return false;
-        }
 
         public void Save(RatedOwner owner)
         {

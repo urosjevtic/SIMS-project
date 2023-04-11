@@ -68,31 +68,28 @@ namespace InitialProject.Service.ReservationServices
         {
             List<AccommodationReservation> reservations = new List<AccommodationReservation>();
             List<AccommodationReservation> allReservations = _accommodationReservationRepository.GetAll();
+
             BindAccommodationToReservations(allReservations);
             BindUserToReservations(allReservations);
-            foreach (AccommodationReservation accommodationReservation in allReservations)
-            {
-                if (accommodationReservation.Accommodation.Owner.Id == id)
-                    reservations.Add(accommodationReservation);
-            }
+
+            reservations = allReservations.Where(r => r.Accommodation.Owner.Id == id).ToList();
 
             return reservations;
         }
 
         private void BindAccommodationToReservations(List<AccommodationReservation> reservations)
         {
+            var accommodationsById = _accommodationService.GetAll().ToDictionary(a => a.Id);
+
             foreach (var reservation in reservations)
             {
-                foreach (var accommodation in _accommodationService.GetAll())
+                if (accommodationsById.TryGetValue(reservation.AccommodationId, out var accommodation))
                 {
-                    if (accommodation.Id == reservation.AccommodationId)
-                    {
-                        reservation.Accommodation = accommodation;
-                        break;
-                    }
+                    reservation.Accommodation = accommodation;
                 }
             }
         }
+
 
 
         private void BindUserToReservations(List<AccommodationReservation> reservations)

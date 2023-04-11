@@ -40,33 +40,6 @@ namespace InitialProject.Repository
             _reservations.Add(reservation);
             _serializer.ToCSV(FilePath, _reservations);
         }
-        public int CountUnreservedSeats(Tour tour)
-        {
-            int sum = 0;
-            List<TourReservation> reservations = new List<TourReservation>();
-            TourReservationRepository reservationsRepository = new TourReservationRepository(); 
-            reservations = reservationsRepository.GetAll();
-            foreach (TourReservation reservation in reservations)
-            {
-                if(reservation.IdTour == tour.Id)
-                {
-                    sum += reservation.NumberOfPeople;
-                }
-            }
-            return sum;
-        }
-        public void SaveReservation(Tour tour, int numberOfPeople, User LoggedUser, bool IsUsingVoucher, double age)
-        {
-            TourReservation reservation = new TourReservation();
-            reservation.IdTour = tour.Id;
-            reservation.IdGuest = LoggedUser.Id;
-            reservation.NumberOfPeople = numberOfPeople;
-            reservation.IsUsingVoucher = IsUsingVoucher;
-            reservation.AverageAge = age;
-            Save(reservation);
-        }
-
-
         public List<TourReservation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
@@ -84,10 +57,6 @@ namespace InitialProject.Repository
                 }
             }
             return guests;
-        }
-        public void SaveReservation(Tour tour,int m , User n)
-        {
-
         }
     }
 }

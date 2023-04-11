@@ -9,18 +9,15 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using System.Windows.Threading;
+using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.View.Guest2View;
 
-namespace InitialProject.View
+namespace InitialProject.ViewModels
 {
-    /// <summary>
-    /// Interaction logic for ShowTour.xaml
-    /// </summary>
-    public partial class ShowTour : Window
+    public class ShowTourViewModel
     {
         public User LoggedUser { get; set; }
         private readonly NotificationRepository _notificationRepository;
@@ -31,38 +28,40 @@ namespace InitialProject.View
 
         public List<Notification> Notifications { get; set; }
         public Model.TourGuest Guest { get; set; }
-        
-        public ShowTour(User user)
+        public ICommand SearchCommand { get; set; }
+        public ICommand ShowMyToursCommand { get; set; }
+        public ICommand ShowVouchersCommand { get; set; }
+
+        public ShowTourViewModel(User user)
         {
-            InitializeComponent();
-            this.DataContext = this;
             LoggedUser = user;
-            
+            Guest = _tourGuestsRepository.GetById(LoggedUser.Id);
             _notificationRepository = new NotificationRepository();
             _tourGuestsRepository = new TourGuestsRepository();
             _checkPointRepository = new CheckPointRepository();
             _guestsCheckPointRepository = new GuestsCheckPointRepository(); 
 
             _userRepository = new UserRepository();
+            SearchCommand = new RelayCommand(Search);
+            ShowMyToursCommand = new RelayCommand(ShowMyTours);
+            ShowVouchersCommand = new RelayCommand(ShowVouchers);
             Guest = _tourGuestsRepository.GetById(LoggedUser.Id);
             Notifications = new List<Notification>(_notificationRepository.GetAll());
         }
-        private void OpenSearchButtonClick(object sender, RoutedEventArgs e)
+        private void Search()
         {
             TourSearch tourSearch = new TourSearch(LoggedUser);
             tourSearch.Show();
         }
-
-        private void OpenVouchersButtonClick(object sender, RoutedEventArgs e)
-        {
-            ShowVouchers showVouchers = new ShowVouchers();
-            showVouchers.Show();
-        }
-
-        private void OpenMyToursButtonClick(object sender, RoutedEventArgs e)
+        private void ShowMyTours()
         {
             MyTours myTours = new MyTours(LoggedUser);
             myTours.Show();
+        }
+        private void ShowVouchers()
+        {
+            ShowVouchers showVouchers = new ShowVouchers();
+            showVouchers.Show();
         }
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {

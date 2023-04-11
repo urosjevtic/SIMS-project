@@ -142,7 +142,9 @@ namespace InitialProject.ViewModels
             _accommodationService.CreateAccommodation
                 (_accommodationName, _country, _city, _accommodationTypes, _maxGuests, _minReservationDays, Convert.ToInt32(_cancelationPeriod), _imagesUrl, _logedInUser.Id);
 
+            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
             CloseCurrentWindow();
+            myAccommodationsMain.Show();
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);

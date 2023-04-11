@@ -19,11 +19,13 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public ObservableCollection<RatedOwner> Ratings { get; set; }
         private readonly RatedOwnerService _ratedOwnerService;
         private readonly User _logedInUser;
+        public Accommodation Accommodation { get; }
 
-        public AccommodationRatingsViewModel(User logedInUser, int accommodationId)
+        public AccommodationRatingsViewModel(User logedInUser, Accommodation accommodation)
         {
             _ratedOwnerService = new RatedOwnerService();
-            Ratings = new ObservableCollection<RatedOwner>(_ratedOwnerService.GetByAccommodationId(accommodationId));
+            Accommodation = accommodation;
+            Ratings = new ObservableCollection<RatedOwner>(_ratedOwnerService.GetFilteredRatingsByAccommodationId(Accommodation.Id));
             _logedInUser = logedInUser;
         }
 
