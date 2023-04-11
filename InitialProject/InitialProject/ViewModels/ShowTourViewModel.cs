@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Threading;
 using GalaSoft.MvvmLight.Command;
@@ -19,6 +23,9 @@ namespace InitialProject.ViewModels
         private readonly NotificationRepository _notificationRepository;
         private readonly UserRepository _userRepository;
         private readonly TourGuestsRepository _tourGuestsRepository;
+        private readonly CheckPointRepository _checkPointRepository;
+        private readonly GuestsCheckPointRepository _guestsCheckPointRepository;
+
         public List<Notification> Notifications { get; set; }
         public Model.TourGuest Guest { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -28,8 +35,12 @@ namespace InitialProject.ViewModels
         public ShowTourViewModel(User user)
         {
             LoggedUser = user;
+            Guest = _tourGuestsRepository.GetById(LoggedUser.Id);
             _notificationRepository = new NotificationRepository();
             _tourGuestsRepository = new TourGuestsRepository();
+            _checkPointRepository = new CheckPointRepository();
+            _guestsCheckPointRepository = new GuestsCheckPointRepository(); 
+
             _userRepository = new UserRepository();
             SearchCommand = new RelayCommand(Search);
             ShowMyToursCommand = new RelayCommand(ShowMyTours);
@@ -51,7 +62,7 @@ namespace InitialProject.ViewModels
         {
             ShowVouchers showVouchers = new ShowVouchers();
             showVouchers.Show();
-        }/*
+        }
         private void WindowLoaded(object sender, RoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
@@ -71,6 +82,13 @@ namespace InitialProject.ViewModels
                         Guest.Presence = Model.UserPresence.Yes;
                         _tourGuestsRepository.Update(Guest);
                         notification.IsGoing = true;
+                        if (Guest.CheckPointName.Equals(""))
+                        {
+                            CheckPoint checkPoint = _checkPointRepository.GetById(notification.CheckPointId);
+                            Guest.CheckPointName = checkPoint.Name;
+                            _tourGuestsRepository.Update(Guest);
+                            AddGuestCheckPoint(Guest, checkPoint);
+                        }
                         _notificationRepository.Update(notification);
                     }
                     else if (result == MessageBoxResult.No)
@@ -90,6 +108,14 @@ namespace InitialProject.ViewModels
 
                 }
             }
-        }*/
+        }
+
+        private void AddGuestCheckPoint(Model.TourGuest guest, CheckPoint checkPoint)
+        {
+            GuestsCheckPoint guestCheckPoint = new GuestsCheckPoint();
+            guestCheckPoint.CheckPointId = checkPoint.Id;
+            guestCheckPoint.GuestsId = guest.Id;
+            _guestsCheckPointRepository.Save(guestCheckPoint);
+        }
     }
 }

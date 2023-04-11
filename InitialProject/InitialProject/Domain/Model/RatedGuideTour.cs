@@ -34,6 +34,7 @@ namespace InitialProject.Domain.Model
         {
             string[] csvValues = {
                Id.ToString(),
+               IdTour.ToString(),
                IdUser.ToString(),
                GuideKnowledge.ToString(),
                GuideLanguage.ToString(),
@@ -47,10 +48,11 @@ namespace InitialProject.Domain.Model
         public void FromCSV(string[] values)
         {
             Id = Convert.ToInt32(values[0]);
-            IdUser = Convert.ToInt32(values[1]);
-            GuideKnowledge = Convert.ToInt32(values[2]);
-            GuideLanguage = Convert.ToInt32(values[3]);
-            InterestingTour = Convert.ToInt32(values[4]);
+            IdTour = Convert.ToInt32(values[1]);
+            IdUser = Convert.ToInt32(values[2]);
+            GuideKnowledge = Convert.ToInt32(values[3]);
+            GuideLanguage = Convert.ToInt32(values[4]);
+            InterestingTour = Convert.ToInt32(values[5]);
         }
     }
 }

@@ -78,7 +78,7 @@ namespace InitialProject.Repository
             newGuest.Name = entity.Name;
             newGuest.Surname = entity.Surname;
             newGuest.Presence = entity.Presence;
-
+            newGuest.CheckPointName = entity.CheckPointName;
             SaveAll(_guests);
         }
        

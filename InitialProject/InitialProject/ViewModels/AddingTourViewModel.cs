@@ -249,18 +249,14 @@ namespace InitialProject.ViewModels
         {
             ConfirmAddingTour();
             Window currentWindow = System.Windows.Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
-
-            // zatvaramo prozor ako postoji
             currentWindow?.Close();
         }
 
        
         private void Cancel()
         {
-            // uzimamo referencu na aktivni prozor
             Window currentWindow = System.Windows.Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
 
-            // zatvaramo prozor ako postoji
             currentWindow?.Close();
         }
 
@@ -284,13 +280,14 @@ namespace InitialProject.ViewModels
             tour.CheckPoints = AddCheckPoint(_checkPoints);
             tour.IsActive = false;
             _tourRepository.Save(tour);
-            Window currentWindow = Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
-
-            currentWindow?.Close();
             _guideMainWindow.UpdateTodayToursDataGrid();
             _guideMainWindow.UpdateToursDataGrid();
 
             _guideMainWindow.LoadData();
+            Window currentWindow = Application.Current.Windows.OfType<AddingTour>().SingleOrDefault(w => w.IsActive);
+
+            currentWindow?.Close();
+           
             
             
         }
