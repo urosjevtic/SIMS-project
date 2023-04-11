@@ -17,7 +17,7 @@ using InitialProject.ViewModels;
 
 namespace InitialProject.ViewModels
 {
-    public class TourGuestRatingsViewModel :BaseViewModel
+    public class TourGuestRatingsViewModel : BaseViewModel
     {
 
         public List<Comment> Comments { get; set; }

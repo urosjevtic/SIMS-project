@@ -29,35 +29,12 @@ namespace InitialProject.View
     /// </summary>
     public partial class AddingTour : Window
     {   
-        public AddingTourViewModel AddingTourViewModel { get; set; }
-
-        public User LoggedUser { get; set; }
-        
-
         public AddingTour(User user)
-
         {
-            
-            InitializeComponent();
-            AddingTourViewModel = new AddingTourViewModel(user);
-            this.DataContext = AddingTourViewModel;
-            LoggedUser = user;
-            
-
+            InitializeComponent();        
+            this.DataContext = new AddingTourViewModel(user);
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-
-       
-
-        
-
-       
-
+     
     }
 }

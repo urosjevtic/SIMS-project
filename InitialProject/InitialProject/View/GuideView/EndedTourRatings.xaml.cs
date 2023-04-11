@@ -20,12 +20,11 @@ namespace InitialProject.View
     /// </summary>
     public partial class EndedTourRatings : Window
     {
-        public EndedTourRatingsViewModel ShowTourRatings { get; set; }
         public EndedTourRatings()
         {
             InitializeComponent();
-            ShowTourRatings = new EndedTourRatingsViewModel();
-            this.DataContext = ShowTourRatings;
+            
+            this.DataContext = new EndedTourRatingsViewModel();
         }
     }
 }
