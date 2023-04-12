@@ -1,5 +1,6 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRepo;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -72,8 +73,32 @@ namespace InitialProject.View
 
         private void MyReservation_Click(object sender, RoutedEventArgs e)
         {
-            MyReservations myReservation = new MyReservations();
+            MyReservations myReservation = new MyReservations(LoggedUser);
             myReservation.Show();
+        }
+
+        private void PreviousTripButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousTrips trip = new PreviousTrips();
+            trip.Show();
+        }
+
+        private void DeclinedButton_Click(object sender, RoutedEventArgs e)
+        {
+            RejectedRequests req = new RejectedRequests();
+            req.Show();
+        }
+
+        private void ApprovedButton_Click(object sender, RoutedEventArgs e)
+        {
+            ApprovedReservations approved=new ApprovedReservations();
+            approved.Show();
+        }
+
+        private void PendingAccommodation_Click(object sender, RoutedEventArgs e)
+        {
+            PendingReservations pending=new PendingReservations();
+            pending.Show();
         }
     }
 }

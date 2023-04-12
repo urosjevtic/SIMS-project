@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 
 namespace InitialProject.Domain.Model.Reservations
+
 {
     public class RatedOwner : ISerializable
     {
@@ -16,15 +17,17 @@ namespace InitialProject.Domain.Model.Reservations
         public int OwnerCorrectness { get; set; }
         public int CleanlinessRating { get; set; }
         public string AdditionalComment { get; set; }
-        public Image ImageUrl { get; set; }
+
+        //public Image ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
         public RatedOwner()
         {
             Reservation = new AccommodationReservation();
-            ImageUrl = new Image();
+            //ImageUrl = new Image();
         }
 
-        public RatedOwner(int id, AccommodationReservation reservation, int ownerCorrectness, int cleanlinessRating, string additionalComment, Image imageUrl)
+        public RatedOwner(int id, AccommodationReservation reservation, int ownerCorrectness, int cleanlinessRating, string additionalComment, string imageUrl)
         {
             Id = id;
             Reservation = reservation;
@@ -36,7 +39,7 @@ namespace InitialProject.Domain.Model.Reservations
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), OwnerCorrectness.ToString(), CleanlinessRating.ToString(), AdditionalComment, ImageUrl.Id.ToString() };
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), OwnerCorrectness.ToString(), CleanlinessRating.ToString(), AdditionalComment, ImageUrl };
             return csvValues;
         }
 
@@ -47,8 +50,9 @@ namespace InitialProject.Domain.Model.Reservations
             OwnerCorrectness = Convert.ToInt32(values[2]);
             CleanlinessRating = Convert.ToInt32(values[3]);
             AdditionalComment = values[4];
-            ImageUrl.Id = Convert.ToInt32(values[8]);
+            ImageUrl = values[5];
         }
     }
 }
+
 

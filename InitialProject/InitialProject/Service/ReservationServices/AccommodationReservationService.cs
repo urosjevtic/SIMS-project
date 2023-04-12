@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model.Reservations;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Repository.ReservationRepo;
+
 
 namespace InitialProject.Service.ReservationServices
 {
@@ -16,6 +19,7 @@ namespace InitialProject.Service.ReservationServices
 
         public AccommodationReservationService()
         {
+           // _accommodationReservationRepository = (AccommodationReservationRepository?)Injector.Injector.CreateInstance<IAccommodationReservationRepository>();
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _accommodationService = new AccommodationService();
             _userService = new UserService();
@@ -64,20 +68,34 @@ namespace InitialProject.Service.ReservationServices
             return reservations;
         }
 
+        public List<AccommodationReservation>GetReservationByOwnerId(int id)
+        {
+            List<AccommodationReservation>reservations = new List<AccommodationReservation>();
+            List<AccommodationReservation> allreservations = _accommodationReservationRepository.GetAll();
+
+            BindAccommodationToReservations(allreservations);
+            BindUserToReservations(allreservations);
+
+            reservations = allreservations.Where(r => r.Accommodation.Owner.Id == id).ToList();
+
+            return reservations;
+        }
+
         private void BindAccommodationToReservations(List<AccommodationReservation> reservations)
         {
+            var accommodationsById = _accommodationService.GetAll().ToDictionary(a => a.Id);
+
             foreach (var reservation in reservations)
             {
-                foreach (var accommodation in _accommodationService.GetAll())
+                if (accommodationsById.TryGetValue(reservation.AccommodationId, out var accommodation))
                 {
-                    if (accommodation.Id == reservation.AccommodationId)
-                    {
-                        reservation.Accommodation = accommodation;
-                        break;
-                    }
+                    reservation.Accommodation = accommodation;
+                    break;
                 }
             }
         }
+
+
 
         private void BindUserToReservations(List<AccommodationReservation> reservations)
         {
@@ -98,6 +116,7 @@ namespace InitialProject.Service.ReservationServices
         {
             _accommodationReservationRepository.Delete(reservation);
         }
+
         public List<AccommodationReservation> GetPastReservations()
         {
             List<AccommodationReservation> pastReservations = new List<AccommodationReservation>();
@@ -113,6 +132,7 @@ namespace InitialProject.Service.ReservationServices
 
             return pastReservations;
         }
+        
         public List<AccommodationReservation> GetFutureReservations()
         {
             List<AccommodationReservation> futureReservations = new List<AccommodationReservation>();

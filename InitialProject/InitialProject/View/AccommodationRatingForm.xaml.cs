@@ -126,9 +126,9 @@ namespace InitialProject.View
             ratedOwner.OwnerCorrectness = _ownerCorrectnessRating;
             ratedOwner.CleanlinessRating = _cleanlinessRating;
             ratedOwner.AdditionalComment = _additionalComment;
-            // ratedOwner.ImageUrl = new Domain.Model.Image();
             SaveImages(_imageUrl, 0);
-            ratedOwner.ImageUrl.Id = GetImagesId(_imageUrl);
+           // ratedOwner.ImageUrl.Id = GetImagesId(_imageUrl);
+            ratedOwner.ImageUrl= _imageUrl;
             ratedOwner.Reservation = UnratedOwner.Reservation;
         }
         private void SaveImages(string urls, int entityId)

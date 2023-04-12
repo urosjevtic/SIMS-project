@@ -17,10 +17,10 @@ namespace InitialProject.Domain.Model.Reservations
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
         public int GuestNumber { get; set; }
-        public List<DateTime> ReservedDates { get; set; }
-
         public User User { get; set; }
-
+        public List<DateTime> ReservedDates { get; set; }
+        public bool IsRated { get; set; }
+        public int broj;
         public AccommodationReservation()
         {
             Accommodation = new Accommodation();
@@ -28,7 +28,7 @@ namespace InitialProject.Domain.Model.Reservations
             User = new User();
         }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation, int guestNumber, List<DateTime> reservedDates, User user)
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation, int guestNumber, List<DateTime> reservedDates, User user, bool isRated=false)
         {
             Id = id;
             StartDate = startDate;
@@ -37,8 +37,9 @@ namespace InitialProject.Domain.Model.Reservations
             AccommodationId = accommodationId;
             Accommodation = accommodation;
             GuestNumber = guestNumber;
+            User = user;
+            IsRated = isRated;
             ReservedDates = reservedDates;
-            User= user;
         }
 
         public string[] ToCSV()
@@ -55,7 +56,6 @@ namespace InitialProject.Domain.Model.Reservations
             UserId = Convert.ToInt32(values[3]);
             AccommodationId = Convert.ToInt32(values[4]);
             GuestNumber = Convert.ToInt32(values[5]);
-            //ReservedDates = DateTime.Parse(values[6]);
         }
 
     }

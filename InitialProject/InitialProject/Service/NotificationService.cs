@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.Model;
 
-
 namespace InitialProject.Service
 {
 
@@ -18,7 +17,7 @@ namespace InitialProject.Service
 
         public NotificationService()
         {
-            _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();  
+            _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();
 
         }
 
@@ -34,7 +33,7 @@ namespace InitialProject.Service
 
         public void Save(Notification notification)
         {
-           _notificationRepository.Save(notification);
+            _notificationRepository.Save(notification);
         }
 
         public int NextId()
@@ -59,7 +58,28 @@ namespace InitialProject.Service
         {
             _notificationRepository.DeleteAll();
         }
-
-
+        public bool Create(Tour tour, User user)
+        {
+            Notification notification = new Notification(tour, user);
+            notification.Id = _notificationRepository.NextId();
+            if (!IsNotificationSent(notification))
+            {
+                _notificationRepository.Save(notification);
+                return true;
+            }
+            return false;
+        }
+        public bool IsNotificationSent(Notification n)
+        {
+            List<Notification> notificationList = _notificationRepository.GetAll();
+            foreach (Notification notification in notificationList)
+            {
+                if (notification.TourId == n.TourId && notification.GuestId == n.GuestId)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

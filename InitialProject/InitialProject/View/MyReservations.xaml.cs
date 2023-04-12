@@ -13,7 +13,7 @@ namespace InitialProject.View
 {
     /// <summary>
     /// Interaction logic for MyReservations.xaml
-    /// </summary>
+    /// </summary>1
     public partial class MyReservations : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -30,6 +30,7 @@ namespace InitialProject.View
         private readonly AccommodationReservationService _accommodationReservationService;
         private ObservableCollection<Domain.Model.Reservations.AccommodationReservation> _reservations;
 
+        public AccommodationReservation SelectedAccommodation { get; set; }
         public Domain.Model.Reservations.AccommodationReservation SelectedReservation { get; set; }
 
         public ObservableCollection<Domain.Model.Reservations.AccommodationReservation> Reservations
@@ -48,14 +49,14 @@ namespace InitialProject.View
                 }
             }
         }
-
+        public User User { get; set; }  
         public UnratedOwner UnratedOwner { get; set; }
 
-        public MyReservations()
+        public MyReservations(User LoggedUser)
         {
             InitializeComponent();
             this.DataContext = this;
-
+            User = LoggedUser;
             _accommodationReservationService = new AccommodationReservationService();
             _accommodationReservationRepository= new AccommodationReservationRepository();
             _canceledResrvationsRepository=new CanceledResrvationsRepository();
@@ -90,9 +91,13 @@ namespace InitialProject.View
             }
         }
 
-        private void MoveReservationButton_Click(object sender, RoutedEventArgs e)
+        private void MoveReservationButton_Click1(object sender, RoutedEventArgs e)
         {
-
+            if (SelectedReservation != null)
+            {
+                ReservationMoveRequest request = new ReservationMoveRequest(SelectedAccommodation);
+                request.Show();
+            }
         }
     }
 }

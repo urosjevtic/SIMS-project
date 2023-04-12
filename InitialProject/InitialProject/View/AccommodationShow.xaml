@@ -26,6 +26,10 @@
             </DataGrid>
         </Grid>
         <Button x:Name="SearchButton" Content="Search" Click="SearchButton_Click" Margin="665,5,10,18" Grid.Row="2"/>
-        <Button x:Name="MyReservation" Content="My reservation" Click="MyReservation_Click" Margin="450,10,180,18" Grid.Row="2"/>
+        <Button x:Name="MyReservation" Content="My reservation" Click="MyReservation_Click" Margin="27,18,603,10" Grid.Row="2"/>
+        <Button Name="PreviousTripButton" Content="Previous trip" Click="PreviousTripButton_Click" Margin="27,250,603,0" Grid.Row="1"/>
+        <Button Name="DeclinedButton" Content="Decline reservations" Click="DeclinedButton_Click" Margin="225,18,421,10" Grid.Row="2"/>
+        <Button Name="ApprovedButton" Content="Approved reservations" Click="ApprovedButton_Click"  Grid.Row="1" Margin="225,255,421,78" Grid.RowSpan="2"/>
+        <Button x:Name="PendingAccommodation" Content="Reservation pending" Click="PendingAccommodation_Click" Margin="400,20,246,13" Grid.Row="2" />
     </Grid>
 </Window>

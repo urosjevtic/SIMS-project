@@ -19,9 +19,15 @@ namespace InitialProject.View
     /// </summary>
     public partial class ReservationMoveRequest : Window
     {
-        public ReservationMoveRequest()
+
+        public ReservationMoveRequest(AccommodationReservation selectedAccommodation)
         {
             InitializeComponent();
+        }
+
+        private void MoveButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

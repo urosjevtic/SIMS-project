@@ -4,9 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
+using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
+using InitialProject.Repository.UserRepo;
 
 namespace InitialProject.Injector
 {
@@ -14,21 +18,27 @@ namespace InitialProject.Injector
     {
         private static Dictionary<Type, object> _implementations = new Dictionary<Type, object>
         {
-            { typeof(IImageRepository), new ImageRepository() },
-            { typeof(IUserRepository), new UserRepository()}, 
+            {typeof(IImageRepository), new ImageRepository()},
+            {typeof(IUserRepository), new UserRepository()}, 
             {typeof(IAccommodationRepository), new AccommodationRepository()}, 
             {typeof(ILocationRepository), new LocationRepository()},
             {typeof(IRatedGuestRepository), new RatedGuestRepository()},
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
-            {typeof(ITourGuestRepository), new TourGuestsRepository()},
+            {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
+            {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
+            {typeof(IOwnerRepository), new OwnerRepository()},
+            {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
+            {typeof(IVoucherRepository), new VoucherRepository()},
             {typeof(ITourRepository), new TourRepository()},
+            {typeof(ITourGuestRepository), new TourGuestsRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
             {typeof(ICheckPointRepository), new CheckPointRepository()},
             {typeof(IAccommodationReservationRepository), new AccommodationReservationRepository()},
-            {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
             {typeof(IUnratedOwnerRepository), new UnratedOwnerRepository()},
-            {typeof(ICanceledReservationsRepository), new CanceledResrvationsRepository()}
+            {typeof(ICanceledReservationsRepository), new CanceledResrvationsRepository()},
+            {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()}
+
             // Add more implementations here
         };
 

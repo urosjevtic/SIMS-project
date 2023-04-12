@@ -21,12 +21,12 @@
                     <TextBlock Text="New end date"  HorizontalAlignment="Left" Margin="30,0,0,10" Padding="10"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical">
-                    <TextBox Name="tbAccommodationName" Text="{Binding AccommodationName, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
-                    <TextBox Name="tbNewStartDate" Text="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
-                    <TextBox Name="tbNewEndDate" Text="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <TextBlock Name="tbName" Text="{Binding User.Username}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <TextBox Name="tbNewStartDate" Text="{Binding Path=RescheduleStartDate, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,20" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
+                    <TextBox Name="tbNewEndDate" Text="{Binding Path=RescheduleStartDate, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,15" Height="30" Width="150" HorizontalAlignment="Left" TextAlignment="Left" FontSize="15"/>
                 </StackPanel>
             </StackPanel>
-            <Button x:Name="MoveReservationButton" Content="Move reservation" Click="MoveReservationButton_Click" Margin="255,-50,25,25" Grid.Row="2" RenderTransformOrigin="0.501,0.65"/>
+            <Button x:Name="MoveButton" Click="MoveButton_Click" Content="Move reservations" Margin="247,150,34,10" Grid.Row="1"/>
         </Grid>
     </Grid>
 </Window>

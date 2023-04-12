@@ -18,19 +18,14 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public void Save(Tour tour);
 
-
-
         public List<Tour> GetAll();
-
-
 
         public CheckPoint GetTourFirstCheckPoint(Tour tour);
 
         public void Delete(Tour tour);
 
-
-
         public void SaveAll(List<Tour> tours);
+        
         public void Update(Tour tour);
 
 

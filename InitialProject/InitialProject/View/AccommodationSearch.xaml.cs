@@ -1,6 +1,7 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Forms;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRepo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

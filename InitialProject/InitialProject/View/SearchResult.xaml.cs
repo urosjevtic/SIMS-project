@@ -32,9 +32,8 @@ namespace InitialProject.View
         private readonly VoucherService _voucherService;
         public List<Tour> tours { get; set; }
         private List<Voucher> vouchers { get; set; }
-
-        public Tour SelectedTour;
-        public Voucher SelectedVoucher;
+        public Tour SelectedTour { get;set; }
+        public Voucher SelectedVoucher { get; set; }
         public User LoggedUser { get; set; }
         public SearchResult(List<Tour> filteredTours, User user)
         {
@@ -45,7 +44,7 @@ namespace InitialProject.View
             _voucherRepository = new VoucherRepository();
             _voucherService = new VoucherService();
             tours = filteredTours;
-            vouchers = _voucherRepository.GetAllCreated();
+            vouchers = _voucherService.GetAllCreated();
             LoggedUser = user;
             resultDataGrid.ItemsSource = new ObservableCollection<Tour>(tours);
             vouchersComboBox.ItemsSource = new ObservableCollection<Voucher>(vouchers);

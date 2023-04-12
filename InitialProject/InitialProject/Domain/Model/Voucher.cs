@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
 
-namespace InitialProject.Model
+namespace InitialProject.Domain.Model
 {
     public enum VoucherStatus{ Created, Expired, Used };
     public class Voucher : ISerializable

@@ -20,7 +20,7 @@ namespace InitialProject.Service
             _ratedOwnerService = new RatedOwnerService();
         }
 
-        public void SubmitRating(UnratedOwner unratedOwner, int ownerCorrectness, int cleanlinessRating, string additionalComment, Image imageUrl)
+        public void SubmitRating(UnratedOwner unratedOwner, int ownerCorrectness, int cleanlinessRating, string additionalComment, string imageUrl)
         {
             RatedOwner ratedOwner = new RatedOwner
             {
