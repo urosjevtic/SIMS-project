@@ -19,10 +19,10 @@
         </ControlTemplate>
 
         <!--LogIn button style-->
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#484b6a"/>
+        <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fafafa"/>
+            <Setter Property="Foreground" Value="#fff"/>
             <!-- set the text color of the button -->
             <Setter Property="FontSize" Value="20"/>
             <!-- set the font size of the button -->
@@ -30,15 +30,28 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <!-- set the background color when the mouse is over the button -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#004F8E"/>
+                                <!-- set the background color when the button is pressed -->
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -48,65 +61,52 @@
             <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Grid.Row="0" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold"></Button>
-        <TextBlock Grid.Row="1" Text="Rate a guest" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15"/>
+        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="1" Text="Rate a Guest" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        <Grid Grid.Row="2">
-
-
-            <StackPanel HorizontalAlignment="Center">
-
-                <StackPanel Orientation="Horizontal" Grid.Row="3">
-                    <TextBlock Text="Guest username: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding User.Username}" />
+        <Grid Grid.Row="2" HorizontalAlignment="Center" Margin="0,20,0,71">
+            <StackPanel Margin="0,42,0,0">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                    <TextBlock Text="Guest username: " FontWeight="Bold" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding UnratedGuest.Reservation.User.Username}" />
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="3">
-                    <TextBlock Text="Stayed at: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding ReservedAccommodation.Name}" />
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                    <TextBlock Text="Stayed at: " FontWeight="Bold" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding UnratedGuest.Reservation.Accommodation.Name}" />
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Grid.Row="3">
-                    <TextBlock Text="From: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding ReservationStartDate}" />
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="From: " FontWeight="Bold" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding UnratedGuest.Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
+                        <TextBlock Text="To: " FontWeight="Bold" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding UnratedGuest.Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                    </StackPanel>
                 </StackPanel>
 
-
-                <StackPanel Orientation="Horizontal" Grid.Row="3">
-                    <TextBlock Text="To: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding ReservationEndDate}" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="Cleanliness"  VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5,0"/>
-                    <Slider x:Name="CleanlinessSlider" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}"  Margin="27,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                    <TextBlock Text="{Binding ElementName=CleanlinessSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Cleanliness: " VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <Slider x:Name="CleanlinessSlider" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Width="150" Margin="26.5 0 0 0" />
+                    <TextBlock Text="{Binding ElementName=CleanlinessSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                    <TextBlock Text="Rule following" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5,0"/>
-                    <Slider x:Name="RuleFollowingSlider" Value="{Binding RuleFollowingRating, UpdateSourceTrigger=PropertyChanged}" Margin="10,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
-                    <TextBlock Text="{Binding ElementName=RuleFollowingSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Rule following: " VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <Slider x:Name="RuleFollowingSlider" Value="{Binding RuleFollowingRating, UpdateSourceTrigger=PropertyChanged}" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Width="150" Margin="10 0 0 0" />
+                    <TextBlock Text="{Binding ElementName=RuleFollowingSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
-                <StackPanel Orientation="Vertical" Margin="0,0,0,10">
-                    <TextBlock Text="Additional comment" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5,0"/>
-                    <TextBox x:Name="AdditionalCommentTextBox" Text="{Binding Path=AdditionalComment, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Height="50" Width="200" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Text="Additional comment: " VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                 </StackPanel>
-
+                <TextBox x:Name="AdditionalCommentTextBox" Text="{Binding AdditionalComment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="90" Width="239"/>
             </StackPanel>
-
-
         </Grid>
 
-        <Button Grid.Row="3" Command="{Binding RateAGuestCommand}" Content="Confirm" Margin="50, 0, 50, 40" Style="{StaticResource LogInButtonStyle}"></Button>
+        <Button Grid.Row="3" Command="{Binding RateAGuestCommand}" Content="Confirm" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmButtonStyle}"/>
 
     </Grid>
 </Window>

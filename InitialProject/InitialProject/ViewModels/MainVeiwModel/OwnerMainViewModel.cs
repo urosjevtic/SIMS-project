@@ -9,6 +9,7 @@ using System.Linq;
 using InitialProject.View.OwnerView.Ratings;
 using InitialProject.View.OwnerView.Reservations;
 using InitialProject.ViewModels;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace InitialProject.ViewModel
 {
@@ -26,7 +27,7 @@ namespace InitialProject.ViewModel
             }
         }
 
-        public string WelcomeMessage => "Welcome";
+        public string WelcomeMessage => LogedInUser.Username;
 
         private Visibility _sideScreenVisibility = Visibility.Collapsed;
 

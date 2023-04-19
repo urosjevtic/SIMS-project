@@ -16,13 +16,13 @@ namespace InitialProject.ViewModels.RatingsViewModel
     public class GuestRatingFormViewModel : BaseViewModel
     {
 
-        private readonly UnratedGuest _unratedGuest;
+        public UnratedGuest UnratedGuest { get; }
         private readonly GuestRatingService _guestRatingService;
         private readonly User _logedInUser;
 
         public GuestRatingFormViewModel(User logedInUser, UnratedGuest unratedGuest)
         {
-            _unratedGuest = unratedGuest;
+            UnratedGuest = unratedGuest;
             _guestRatingService = new GuestRatingService();
             _logedInUser = logedInUser;
         }
@@ -75,7 +75,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void RateAGuest()
         {
-            _guestRatingService.SubmitRating(_unratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
+            _guestRatingService.SubmitRating(UnratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
             UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
             CloseCurrentWindow();
             unratedGuestsList.Show();
