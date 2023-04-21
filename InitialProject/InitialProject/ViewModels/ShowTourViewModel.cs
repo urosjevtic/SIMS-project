@@ -23,6 +23,8 @@ namespace InitialProject.ViewModels
         
         public ICommand SearchCommand { get; set; }
         public ICommand ShowMyToursCommand { get; set; }
+        public ICommand MakingTourRequestsCommand { get; set; }
+        public ICommand ShowRequestsCommand { get; set; }
         public ICommand ShowVouchersCommand { get; set; }
 
         public ShowTourViewModel(User user)
@@ -30,6 +32,8 @@ namespace InitialProject.ViewModels
             LoggedUser = user;
             SearchCommand = new RelayCommand(Search);
             ShowMyToursCommand = new RelayCommand(ShowMyTours);
+            MakingTourRequestsCommand = new RelayCommand(OpenMakingRequests);
+            ShowRequestsCommand = new RelayCommand(ShowRequests);
             ShowVouchersCommand = new RelayCommand(ShowVouchers);
            
         }
@@ -42,6 +46,16 @@ namespace InitialProject.ViewModels
         {
             MyTours myTours = new MyTours(LoggedUser);
             myTours.Show();
+        }
+        private void OpenMakingRequests()
+        {
+            MakeRequests makeRequests = new MakeRequests();
+            makeRequests.Show();
+        }
+        private void ShowRequests()
+        {
+            ShowRequests showRequests = new ShowRequests();
+            showRequests.Show();
         }
         private void ShowVouchers()
         {

@@ -181,7 +181,10 @@ namespace InitialProject.ViewModels
             Tours.Clear();
             foreach(var t in tours)
             {
-                Tours.Add(t);
+                if(t != tour)
+                {
+                    Tours.Add(t);
+                }
             }
         }
     }
