@@ -73,7 +73,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Command="{Binding BurgerBarClosedCommand}" Width="64" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#9394a5">
+            <Button Command="{Binding BurgerBarClosedCommand}" Width="64" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#9394a5" >
                 <Image Source="/Resources/Images/burgerBarWhite.png" Width="54"></Image>
             </Button>
             <Button Grid.Row="1" Command="{Binding MyAccommoadionsOpenCommand}"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
@@ -136,11 +136,19 @@
                 <RowDefinition Height="1.5*"></RowDefinition>
             </Grid.RowDefinitions>
 
-
+            <!--Navbar-->
             <DockPanel Grid.Row="0" Background="#9394a5">
                 <Button Width="64" Height="50" Background="#9394a5" Command="{Binding BurgerBarOpenCommand}" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Image Source="/Resources/Images/burgerBarWhite.png"></Image>
                 </Button>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Width="64" Height="50" Background="Transparent" Command="{Binding NotesOpenCommand}"   VerticalAlignment="Top">
+                    <Image Source="/Resources/Images/notes.png"></Image>
+                </Button>
+                <Button Width="64" Height="50" Background="Transparent"   VerticalAlignment="Top">
+                    <Image Source="/Resources/Images/notification.png"></Image>
+                </Button>
+                </StackPanel>
             </DockPanel>
 
 

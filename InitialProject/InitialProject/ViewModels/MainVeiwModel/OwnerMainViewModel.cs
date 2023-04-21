@@ -6,6 +6,7 @@ using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.MyAccommodations;
 using System.Linq;
+using InitialProject.View.OwnerView.Notes;
 using InitialProject.View.OwnerView.Ratings;
 using InitialProject.View.OwnerView.Reservations;
 using InitialProject.ViewModels;
@@ -99,7 +100,13 @@ namespace InitialProject.ViewModel
             reservationsMain.Show();
         }
 
+        public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
 
+        private void NotesOpen()
+        {
+            NotesView notesView = new NotesView(_loggedInUser);
+            notesView.Show();
+        }
 
 
     }

@@ -18,7 +18,7 @@
 
         </ControlTemplate>
 
-        <!--LogIn button style-->
+        <!--Confirm button style-->
         <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
             <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
