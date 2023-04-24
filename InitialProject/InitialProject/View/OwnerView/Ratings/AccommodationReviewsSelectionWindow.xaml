@@ -44,6 +44,18 @@
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
 
+        <Style x:Key="SuperOwnerStatusImage"  TargetType="Image">
+            <Setter Property="Visibility" Value="Collapsed"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsSuperOwner}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding IsSuperOwner}" Value="False">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Source" Value="/Resources/Images/no.png"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
 
     </Window.Resources>
     <Grid>
@@ -62,14 +74,39 @@
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Accommodation reviews" Foreground="#3A3D55"></TextBlock>
 
 
-        <StackPanel Orientation="Horizontal" Grid.Row="2">
-            <TextBlock Text="Is super owner: " 
+        <StackPanel Grid.Row="2" Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Avrage rating: " 
+                           FontWeight="Bold"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           FontSize="15"
+                           Foreground="#3A3D55"/>
+                <TextBlock Text="{Binding AvrageRating}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2">
+                <TextBlock Text="Is super owner: " 
                        FontWeight="Bold"
                        VerticalAlignment="Center"
                        FontSize="15"
                        Foreground="#3A3D55"
                        Margin="0,0,5,0"/>
-            <TextBlock Text="{Binding SuperOwner}" />
+                <Image Height="18">
+                    <Image.Style>
+                        <Style TargetType="{x:Type Image}">
+                            <Setter Property="Source" Value="/Resources/Images/yes.png" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsSuperOwner}" Value="True">
+                                    <Setter Property="Source" Value="/Resources/Images/yes.png" />
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding IsSuperOwner}" Value="False">
+                                    <Setter Property="Source" Value="/Resources/Images/no.png" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </StackPanel>
         </StackPanel>
 
 

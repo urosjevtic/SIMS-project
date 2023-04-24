@@ -17,6 +17,7 @@
     <None Remove="Resources\Images\forums.png" />
     <None Remove="Resources\Images\logo.png" />
     <None Remove="Resources\Images\myAccommodation.png" />
+    <None Remove="Resources\Images\no.png" />
     <None Remove="Resources\Images\notes.png" />
     <None Remove="Resources\Images\notification.png" />
     <None Remove="Resources\Images\paper-32.png" />
@@ -25,6 +26,7 @@
     <None Remove="Resources\Images\reservations.png" />
     <None Remove="Resources\Images\settings.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\yes.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +63,9 @@
     <Content Include="Resources\Images\myAccommodation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\no.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\notes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -83,6 +88,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\view.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\yes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
