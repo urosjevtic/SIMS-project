@@ -9,12 +9,12 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <SolidColorBrush Color="#fafafa" />
+        <SolidColorBrush Color="lightgray" />
     </Window.Background>
     <Window.Resources>
         <!--LogIn button style-->
         <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#484b6a"/>
+            <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
             <Setter Property="Foreground" Value="#fafafa"/>
             <!-- set the text color of the button -->
@@ -39,12 +39,15 @@
         <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#484b6a"/>
+            <Setter Property="Foreground" Value="#3A3D55"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
 
-
+        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
+            <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -53,24 +56,36 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="My Accommodations"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="My Accommodations" Foreground="#3A3D55"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
                  ItemsSource="{Binding Accommodations}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 Background="White"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 Background="LightGray"
                  BorderThickness="0"
-                 HorizontalContentAlignment="Stretch">
+                 HorizontalContentAlignment="Stretch"
+                 >
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderThickness="1" BorderBrush="Blue">
-                        <Grid Margin="10,10,10,0">
+                    <Border BorderThickness="2"
+                            BorderBrush="#007acc"
+                            Margin="5"
+                            CornerRadius="5"
+                            Padding="10"
+                            Background="#fafafa">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5"
+                                              BlurRadius="10"
+                                              Opacity="0.5"
+                                              Color="Black"/>
+                        </Border.Effect>
+                        <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
@@ -83,57 +98,53 @@
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="{Binding Name}" 
-                                   FontWeight="Bold"
-                                   FontSize="20"
-                                   VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Margin="60,0,0,10"
-                                   TextWrapping="Wrap"
-                                   Grid.Row="0"/>
+                           FontWeight="Bold"
+                           FontSize="20"
+                           TextWrapping="Wrap"
+                           Margin="10,10,10,0"/>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="Country: " 
-                                       FontWeight="Bold"
-                                       Margin="0,0,5,0"/>
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Location.Country}" />
-                                <TextBlock HorizontalAlignment="Right" Text="City: " 
-                                       FontWeight="Bold"
-                                       Margin="60,0,5,0"/>
+                                <TextBlock Margin="10,0" Text="City: " 
+                               FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Location.City}" />
                             </StackPanel>
 
-
-                            <StackPanel Orientation="Horizontal" Grid.Row="3">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
                                 <TextBlock Text="Accommodation type: " 
-                                       FontWeight="Bold"
-                                       Margin="0,0,5,0"/>
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Type}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
                                 <TextBlock Text="Max number of guests: " 
-                                       FontWeight="Bold"
-                                       Margin="0,0,5,0"/>
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding MaxGuests}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="5">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
                                 <TextBlock Text="Minimum reservation days: " 
-                                       FontWeight="Bold"
-                                       Margin="0,0,5,0"/>
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding MinReservationDays}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Grid.Row="6">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
                                 <TextBlock Text="Cancellation period: " 
-                                       FontWeight="Bold"
-                                       Margin="0,0,5,0"/>
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding CancelationPeriod}" />
                             </StackPanel>
 
                             <Button Content="See images"
-                                Margin="0,10,0,0"
-                                Grid.Row="7" Style="{StaticResource LogInButtonStyle}"/>
+                        Margin="10,15"
+                        Grid.Row="6"
+                        Style="{StaticResource LogInButtonStyle}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

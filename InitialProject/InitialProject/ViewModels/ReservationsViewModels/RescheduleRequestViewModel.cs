@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -33,6 +34,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
             RescheduleRequests = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetAllByOwnerId(_loggedInUser.Id));
         }
+
 
 
         public ICommand ApproveRescheduleCommand => new RelayCommandWithParams(ApproveReschedule);

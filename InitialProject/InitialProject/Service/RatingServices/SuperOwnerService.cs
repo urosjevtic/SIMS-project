@@ -19,7 +19,7 @@ namespace InitialProject.Service.RatingServices
 
         public bool IsSuperOwner(int ownerId)
         {
-            if (GetAvrageRating(ownerId) > 4.5 && ReviewsCount(ownerId) > 3)
+            if (GetAvrageRating(ownerId) > 2 && ReviewsCount(ownerId) > 2)
                 return true;
             return false;
         }
@@ -30,7 +30,7 @@ namespace InitialProject.Service.RatingServices
             return ratedOwners.Count();
         }
 
-        private double GetAvrageRating(int ownerId)
+        public double GetAvrageRating(int ownerId)
         {
             List<RatedOwner> ratedOwners = _ratedOwnerService.GetByOwnersId(ownerId);
             if (ratedOwners.Count == 0)
