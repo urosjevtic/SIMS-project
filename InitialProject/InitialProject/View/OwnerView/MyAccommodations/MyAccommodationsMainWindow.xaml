@@ -172,7 +172,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Accommodation statistic" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="See all statistic for your accommodations" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Content="See statistics" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenAccommodationStatisticsCommand}" Content="See statistics" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
 
                 </Grid>
             </Border>
