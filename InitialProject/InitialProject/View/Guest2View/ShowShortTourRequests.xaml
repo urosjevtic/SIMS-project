@@ -22,7 +22,7 @@
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="0" Grid.Column="1">
             <Underline>All requests for short tours</Underline>
         </Label>
-        <DataGrid Grid.Row="1" Grid.Column="1" FontSize="18">
+        <DataGrid Grid.Row="1" Grid.Column="1" FontSize="18" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Country" Width="90"></DataGridTextColumn>
                 <DataGridTextColumn Header="City" Width="110"></DataGridTextColumn>
@@ -36,7 +36,7 @@
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="2" Grid.Column="1">
             <Underline>Accepted short tours</Underline>
         </Label>
-        <DataGrid Grid.Row="3" Grid.Column="1" FontSize="18">
+        <DataGrid Grid.Row="3" Grid.Column="1" FontSize="18" CanUserReorderColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Country" Width="90"></DataGridTextColumn>
                 <DataGridTextColumn Header="City" Width="110"></DataGridTextColumn>

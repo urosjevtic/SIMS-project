@@ -12,5 +12,6 @@
         <Button Content="Making tour request" HorizontalAlignment="Center" Margin="0,287,0,0" VerticalAlignment="Top" Command="{Binding MakingTourRequestsCommand}" FontSize="36" Height="70" Width="700"/>
         <Button Content="Showing requests and statistics" HorizontalAlignment="Center" Margin="0,371,0,0" VerticalAlignment="Top" Command="{Binding ShowRequestsCommand}" FontSize="36" Height="70" Width="700"/>
         <Button Content="Vouchers" HorizontalAlignment="Center" Margin="0,454,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding ShowVouchersCommand}"  FontSize="36" Height="70" Width="700"/>
+        <Button Content="Notifications" HorizontalAlignment="Left" Margin="681,28,0,0" VerticalAlignment="Top" FontSize="22" Command="{Binding ShowNotificationsCommand}"/>
     </Grid>
 </Window>
