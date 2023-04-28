@@ -7,6 +7,40 @@
         mc:Ignorable="d"
         Title="Show Short Tour Statistics" Height="616" Width="916" WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="10"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="10"></RowDefinition>
+        </Grid.RowDefinitions>
+        <GroupBox Header="Statistics" FontSize="28" Grid.Row="0" Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="10"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="230"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Content="Choose period of time: " FontSize="26" Grid.Row="0" Grid.Column="0"/>
+                <ComboBox Grid.Row="0" ItemsSource="{Binding Years}" SelectedItem="{Binding SelectedYear}" FontSize="22" Width="120" Height="40" Margin="289,2,456,3"/>
+                <Label Content="Percentage of accepted tours: " FontSize="26" Grid.Row="1"/>
+                <TextBlock Grid.Row="1" Width="50" Height="40" FontSize="26" Margin="367,5,463,0" VerticalAlignment="Top"/>
+                <Label Content="Percentage of unaccepted tours: " FontSize="26" Grid.Row="2"/>
+                <TextBlock Grid.Row="2" Width="50" Height="40" FontSize="26" Margin="391,2,443,2"/>
+                <Label Content="Average number of people in accepted tours: " FontSize="26" Grid.Row="3"/>
+                <TextBlock Width="50" Height="40" FontSize="26" Grid.Row="3" Margin="542,2,288,3"/>
+                <Separator Grid.Row="4" Width="880" Margin="2,2,2,-20"/>
+                <Label Grid.Row="5" Content="Accepted tours by language: " HorizontalAlignment="Left" FontSize="26" Margin="42,4,0,226" Grid.RowSpan="2"/>
+                <Label Grid.Row="5" Content="Accepted tours by location: " HorizontalAlignment="Left" FontSize="26" Margin="508,6,0,226" Grid.RowSpan="2"/>
+                <Button Content="Go Back" Grid.Row="7" HorizontalAlignment="Left" FontSize="26" Width="160" Command="{Binding GoBackCommand}" Height="50"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>
