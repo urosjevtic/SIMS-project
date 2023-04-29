@@ -9,7 +9,7 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class ShowTourRequestsViewModel
+    public class ShowTourRequestsViewModel : BaseViewModel
     {
         public ICommand ShowShortTourRequestsCommand { get; private set; }
         public ICommand ShowShortTourStatisticsCommand { get; private set; }
@@ -24,11 +24,13 @@ namespace InitialProject.ViewModels
         public void ShowShortRequests()
         {
             ShowShortTourRequests showShort = new();
+            CloseCurrentWindow();
             showShort.Show();
         }
         public void ShowShortStatistics()
         {
             ShowShortTourStatistics showShortStatistics = new();
+            CloseCurrentWindow();
             showShortStatistics.Show();
         }
     }
