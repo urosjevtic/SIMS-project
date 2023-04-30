@@ -50,7 +50,7 @@ namespace InitialProject.ViewModels
         }
         private void OpenMakingRequests()
         {
-            MakeRequests makeRequests = new MakeRequests();
+            MakeRequests makeRequests = new MakeRequests(LoggedUser);
             makeRequests.Show();
         }
         private void ShowRequests()

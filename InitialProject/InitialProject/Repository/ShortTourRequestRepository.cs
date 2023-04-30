@@ -1,0 +1,48 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Serializer;
+
+namespace InitialProject.Repository
+{
+    public class ShortTourRequestRepository : IShortTourRequestRepository
+    {
+        private const string FilePath = "../../../Resources/Data/shortTourRequests.csv";
+
+        private readonly Serializer<ShortTourRequest> _serializer;
+
+        private List<ShortTourRequest> _shortRequests;
+        public ShortTourRequestRepository()
+        {
+            _serializer = new Serializer<ShortTourRequest>();
+            _shortRequests = _serializer.FromCSV(FilePath);
+        }
+
+        public List<ShortTourRequest> GetAll()
+        {
+            return _serializer.FromCSV(FilePath);
+        }
+
+        public int NextId()
+        {
+            _shortRequests = _serializer.FromCSV(FilePath);
+            if (_shortRequests.Count < 1)
+            {
+                return 1;
+            }
+            return _shortRequests.Max(c => c.IdRequest) + 1;
+        }
+
+        public void Save(ShortTourRequest shortTourRequest)
+        {
+            shortTourRequest.IdRequest = NextId();
+            _shortRequests = _serializer.FromCSV(FilePath);
+            _shortRequests.Add(shortTourRequest);
+            _serializer.ToCSV(FilePath, _shortRequests);
+        }
+    }
+}
