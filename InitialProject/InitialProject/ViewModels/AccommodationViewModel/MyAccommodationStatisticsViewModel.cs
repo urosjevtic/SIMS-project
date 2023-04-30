@@ -42,7 +42,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             {
                 // Navigate to the other window passing the selected guest as a parameter
                 MyAccommodationYearlyStatisticView myAccommodationYearlyStatistic =
-                    new MyAccommodationYearlyStatisticView(selectedAccommodation.Id);
+                    new MyAccommodationYearlyStatisticView(selectedAccommodation.Id, _logedInUser);
                 CloseCurrentWindow();
                 myAccommodationYearlyStatistic.Show();
 

@@ -21,6 +21,7 @@ namespace InitialProject.Service
         private readonly ImageService _imageService;
         private readonly UserService _userService;
         private readonly YearlyAccommodationService _yearlyAccommodationStatisticService;
+        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
 
         public AccommodationService()
         {
@@ -29,6 +30,7 @@ namespace InitialProject.Service
             _imageService = new ImageService();
             _userService = new UserService();
             _yearlyAccommodationStatisticService = new YearlyAccommodationService();
+            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
         }
 
         public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
@@ -37,6 +39,7 @@ namespace InitialProject.Service
             CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
             int accommodationId = _accommodationRepository.Save(accommodation).Id;
             _yearlyAccommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
+            _monthlyAccommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
             
         }
 
@@ -116,6 +119,13 @@ namespace InitialProject.Service
                     accommodation.Location = location;
                 }
             }
+        }
+
+        public Accommodation GetById(int accommodationId)
+        {
+          Accommodation accommodation =  _accommodationRepository.GetById(accommodationId);
+          BindLocationToAccommodation(accommodation);
+          return accommodation;
         }
 
     }

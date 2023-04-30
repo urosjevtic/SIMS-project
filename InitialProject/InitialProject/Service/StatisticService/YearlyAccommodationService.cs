@@ -33,5 +33,49 @@ namespace InitialProject.Service.StatisticService
             _yearlyAccommodationStatisticsRepository.Save(statistic);
         }
 
+        public void IncreasCancelationCount(int accommodationId)
+        {
+            YearlyAccommodationStatistic yearlyStatistic = _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId);
+            foreach (var statistic in yearlyStatistic.Statistics)
+            {
+                if (statistic.Year.Year == DateTime.Now.Year)
+                {
+                    statistic.CancelationsCount++;
+                    _yearlyAccommodationStatisticsRepository.Update(yearlyStatistic);
+                    break;
+                }
+            }
+
+        }
+
+        public void IncreaseRescheduleCount(int accommodationId)
+        {
+            YearlyAccommodationStatistic yearlyStatistic = _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId);
+            foreach (var statistic in yearlyStatistic.Statistics)
+            {
+                if (statistic.Year.Year == DateTime.Now.Year)
+                {
+                    statistic.ReschedulesCount++;
+                    _yearlyAccommodationStatisticsRepository.Update(yearlyStatistic);
+                    break;
+                }
+            }
+        }
+
+        public DateTime GetYearWithMostReservations(int accommodationId)
+        {
+            YearlyAccommodationStatistic yearlyStatistic = _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId);
+            AccommodationStatistic yearWithMostReservations = yearlyStatistic.Statistics[0];
+            foreach (var statistic in yearlyStatistic.Statistics)
+            {
+                if (statistic.ReservationsCount > yearWithMostReservations.ReservationsCount)
+                {
+                    yearWithMostReservations = statistic;
+                }
+            }
+
+            return yearWithMostReservations.Year;
+        }
+
     }
 }

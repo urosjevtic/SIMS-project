@@ -32,6 +32,22 @@ namespace InitialProject.Repository.StatisticRepo
             return _serializer.FromCSV(FilePath);
         }
 
+        public void Update(YearlyAccommodationStatistic yearlyAccommodationStatistic)
+        {
+            _statistics = _serializer.FromCSV(FilePath);
+            foreach (var statistic in _statistics)
+            {
+                if (statistic.AccommodationId == yearlyAccommodationStatistic.AccommodationId)
+                {
+                    _statistics.Remove(statistic);
+                    _statistics.Add(yearlyAccommodationStatistic);
+                    break;
+                }
+            }
+
+            _serializer.ToCSV(FilePath, _statistics);
+        }
+
         public YearlyAccommodationStatistic GetByAccommodationId(int accommodationId)
         {
             _statistics = _serializer.FromCSV(FilePath);

@@ -11,5 +11,7 @@ namespace InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo
     {
         Accommodation Save(Accommodation accommodation);
         List<Accommodation> GetAll();
+
+        Accommodation GetById(int accommodationId);
     }
 }

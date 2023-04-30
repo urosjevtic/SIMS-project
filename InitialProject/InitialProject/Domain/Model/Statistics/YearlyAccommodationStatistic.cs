@@ -37,7 +37,11 @@ namespace InitialProject.Domain.Model.Statistics
                 foreach (AccommodationStatistic statistic in Statistics)
                 {
                     Array.Resize(ref csvValues, csvValues.Length + 1);
-                    csvValues[csvValues.Length - 1] = statistic.Year.ToString() + "(" + statistic.ReservationsCount.ToString() + "," + statistic.ReschedulesCount.ToString() + "," + statistic.CancelationsCount.ToString() + "," + statistic.RenovationsCount.ToString() + ")";
+                    csvValues[csvValues.Length - 1] = statistic.Year.ToString() +
+                                                      "(" + statistic.ReservationsCount.ToString() + 
+                                                      "," + statistic.ReschedulesCount.ToString() + 
+                                                      "," + statistic.CancelationsCount.ToString() + 
+                                                      "," + statistic.RenovationsCount.ToString() + ")";
                 }
             }
 

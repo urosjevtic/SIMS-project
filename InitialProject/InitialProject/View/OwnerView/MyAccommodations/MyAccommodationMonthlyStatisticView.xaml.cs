@@ -17,14 +17,14 @@ using InitialProject.ViewModels.AccommodationViewModel;
 namespace InitialProject.View.OwnerView.MyAccommodations
 {
     /// <summary>
-    /// Interaction logic for MyAccommodationYearlyStatisticView.xaml
+    /// Interaction logic for MyAccommodationMonthlyStatisticView.xaml
     /// </summary>
-    public partial class MyAccommodationYearlyStatisticView : Window
+    public partial class MyAccommodationMonthlyStatisticView : Window
     {
-        public MyAccommodationYearlyStatisticView(int accommodationId, User logedInUser)
+        public MyAccommodationMonthlyStatisticView(int accommodationId, DateTime year, User logedInUser)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationYearlyStatisticViewModel(accommodationId, logedInUser);
+            DataContext = new MyAccommodationMonthlyStatisticsViewModel(year, accommodationId, logedInUser);
         }
     }
 }

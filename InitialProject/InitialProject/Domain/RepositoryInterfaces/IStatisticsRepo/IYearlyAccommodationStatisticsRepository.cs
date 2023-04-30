@@ -13,6 +13,8 @@ namespace InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo
 
         public void Save(YearlyAccommodationStatistic yearlyAccommodationStatistic);
 
+        public void Update(YearlyAccommodationStatistic yearlyAccommodationStatistic);
+
         public YearlyAccommodationStatistic GetByAccommodationId(int accommodationId);
     }
 }
