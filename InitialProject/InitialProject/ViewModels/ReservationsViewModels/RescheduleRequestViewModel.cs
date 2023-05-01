@@ -12,6 +12,7 @@ using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
+using InitialProject.Service.StatisticService;
 using InitialProject.Utilities;
 using InitialProject.View;
 using InitialProject.View.OwnerView;
@@ -23,6 +24,8 @@ namespace InitialProject.ViewModels.ReservationsViewModels
     {
         private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
+        private readonly YearlyAccommodationService _yearlyAcoommodationStatisticService;
+        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
         private readonly User _loggedInUser;
 
         public ObservableCollection<AccommodationReservationRescheduleRequest> RescheduleRequests { get; }
@@ -30,6 +33,8 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         public RescheduleRequestViewModel(User loggedInUser)
         {
             _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
+            _yearlyAcoommodationStatisticService = new YearlyAccommodationService();
+            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
             _loggedInUser = loggedInUser;
 
             RescheduleRequests = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetAllByOwnerId(_loggedInUser.Id));
@@ -44,7 +49,11 @@ namespace InitialProject.ViewModels.ReservationsViewModels
             if (parameter is AccommodationReservationRescheduleRequest selectedRescheduleRequest)
             {
                 _accommodationReservationRescheduleRequestService.ApproveReschedule(selectedRescheduleRequest);
+                _yearlyAcoommodationStatisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
+                _monthlyAccommodationStatisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
+                
                 RescheduleRequests.Remove(selectedRescheduleRequest);
+
 
             }
         }
