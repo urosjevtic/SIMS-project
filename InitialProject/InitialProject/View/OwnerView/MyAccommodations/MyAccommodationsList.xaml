@@ -144,7 +144,9 @@
                             <Button Content="See images"
                         Margin="10,15"
                         Grid.Row="6"
-                        Style="{StaticResource LogInButtonStyle}"/>
+                        Style="{StaticResource LogInButtonStyle}"
+                        Command="{Binding DataContext.SeeImagesCommand, ElementName=accommodationListBox}"
+                        CommandParameter="{Binding}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>
