@@ -102,7 +102,6 @@
                         </Grid>
                     </GroupBox>
                     <Button x:Name="GoBack" Content="Go Back" FontSize="24" HorizontalAlignment="Left" Margin="21,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Command="{Binding GoBackCommand}" Grid.RowSpan="2"/>
-                    <Button x:Name="JoinTour" Grid.Column="2" Content="Join Tour" FontSize="24" HorizontalAlignment="Left" Margin="265,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Command="{Binding JoinTourCommand}" Grid.RowSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Ended Tours  " FontSize="28">

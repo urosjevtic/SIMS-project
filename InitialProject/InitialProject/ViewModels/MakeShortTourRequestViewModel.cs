@@ -141,8 +141,18 @@ namespace InitialProject.ViewModels
         }
         private void Submit()
         {
-            _shortTourService.SaveShortRequest(LoggedUser, Country, City, Language, NrOfPeople, Description, Convert.ToDateTime(From), Convert.ToDateTime(To));
-            MessageBox.Show("Request successfully created!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            if(int.Parse(NrOfPeople) <= 0)
+            {
+                MessageBox.Show("Number of people must be greater than zero!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            if(Country == null || City == null || Language == null || From == null || To == null)
+            {
+                MessageBox.Show("You did not enter all parameters!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            } else
+            {
+                _shortTourService.SaveShortRequest(LoggedUser, Country, City, Language, NrOfPeople, Description, Convert.ToDateTime(From), Convert.ToDateTime(To));
+                MessageBox.Show("Request successfully created!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
     }
 }

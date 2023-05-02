@@ -22,27 +22,27 @@
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="0" Grid.Column="1">
             <Underline>All requests for short tours</Underline>
         </Label>
-        <DataGrid Grid.Row="1" Grid.Column="1" FontSize="18" CanUserReorderColumns="False">
+        <DataGrid ItemsSource="{Binding AllRequests}" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" FontSize="18" IsReadOnly="True" CanUserResizeColumns="False" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Country" Width="90"></DataGridTextColumn>
-                <DataGridTextColumn Header="City" Width="110"></DataGridTextColumn>
-                <DataGridTextColumn Header="Description" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Nr. of people" Width="115"></DataGridTextColumn>
-                <DataGridTextColumn Header="From" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="To" Width="100"></DataGridTextColumn>
-                <DataGridTextColumn Header="Status" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Country" Width="90" Binding="{Binding Country}"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Width="110" Binding="{Binding City}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Width="260" Binding="{Binding Description}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nr. of people" Binding="{Binding NumberOfPeople}" Width="115"></DataGridTextColumn>
+                <DataGridTextColumn Header="From" Binding="{Binding From}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="To" Binding="{Binding To}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="2" Grid.Column="1">
-            <Underline>Accepted short tours</Underline>
+            <Underline>Accepted short tours requests</Underline>
         </Label>
-        <DataGrid Grid.Row="3" Grid.Column="1" FontSize="18" CanUserReorderColumns="False">
+        <DataGrid ItemsSource="{Binding AcceptedRequests}" AutoGenerateColumns="False" Grid.Row="3" IsReadOnly="True" CanUserResizeColumns="False" Grid.Column="1" FontSize="18" CanUserReorderColumns="False">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Country" Width="90"></DataGridTextColumn>
-                <DataGridTextColumn Header="City" Width="110"></DataGridTextColumn>
-                <DataGridTextColumn Header="Description" Width="250"></DataGridTextColumn>
-                <DataGridTextColumn Header="Nr. of people" Width="130"></DataGridTextColumn>
-                <DataGridTextColumn Header="Date" Width="*"></DataGridTextColumn>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="110"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nr. of people" Binding="{Binding NumberOfPeople}" Width="130"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding From}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Go Back" Command="{Binding GoBackCommand}" Grid.Column="1" Grid.Row="4" Height="60" Width="160" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center"/>

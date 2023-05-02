@@ -32,5 +32,29 @@ namespace InitialProject.Service
 
             _shortRequestRepository.Save(shortRequest);
         }
+        public List<ShortTourRequest> GetAll()
+        {
+            List<ShortTourRequest> all = new();
+            foreach (ShortTourRequest shortRequest in _shortRequestRepository.GetAll())
+            {
+                if (shortRequest.Status != RequestStatus.Accepted)
+                {
+                    all.Add(shortRequest);
+                }
+            }
+            return all;
+        }
+        public List<ShortTourRequest> GetAcceptedRequests()
+        {
+            List<ShortTourRequest> accepted = new();
+            foreach (ShortTourRequest shortRequest in _shortRequestRepository.GetAll())
+            {
+                if(shortRequest.Status == RequestStatus.Accepted)
+                {
+                    accepted.Add(shortRequest);
+                }
+            }
+            return accepted;
+        }
     }
 }
