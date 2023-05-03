@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -133,7 +134,6 @@ namespace InitialProject.ViewModels
             int currentNumber = int.Parse(NrOfPeople);
             NrOfPeople = (currentNumber + 1).ToString();
         }
-
         private void DownButton()
         {
             int currentNumber = int.Parse(NrOfPeople);
@@ -150,7 +150,7 @@ namespace InitialProject.ViewModels
                 MessageBox.Show("You did not enter all parameters!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
             } else
             {
-                _shortTourService.SaveShortRequest(LoggedUser, Country, City, Language, NrOfPeople, Description, Convert.ToDateTime(From), Convert.ToDateTime(To));
+                _shortTourService.SaveShortRequest(LoggedUser, Country, City, Language, NrOfPeople, Description, Convert.ToDateTime(From, CultureInfo.InvariantCulture), Convert.ToDateTime(To, CultureInfo.InvariantCulture));
                 MessageBox.Show("Request successfully created!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

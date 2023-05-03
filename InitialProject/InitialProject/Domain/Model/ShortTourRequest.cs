@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,8 +37,8 @@ namespace InitialProject.Domain.Model
                 Language,
                 NumberOfPeople.ToString(),
                 Description,
-                From.ToString(),
-                To.ToString(),
+                From.ToString("dd'/'MM'/'yyyy hh':'mm':'ss"),
+                To.ToString("dd'/'MM'/'yyyy hh':'mm':'ss"),
                 Status.ToString()
             };
 
@@ -52,8 +53,8 @@ namespace InitialProject.Domain.Model
             Language = values[4];
             NumberOfPeople = Convert.ToInt32(values[5]);
             Description = values[6];
-            From = DateTime.Parse(values[7]);
-            To = DateTime.Parse(values[8]);
+            From = DateTime.ParseExact(values[7], "dd'/'MM'/'yyyy hh':'mm':'ss", CultureInfo.InvariantCulture);
+            To = DateTime.ParseExact(values[8], "dd'/'MM'/'yyyy hh':'mm':'ss", CultureInfo.InvariantCulture);
             Status = (RequestStatus)Enum.Parse(typeof(RequestStatus), values[9]);
         }
     }

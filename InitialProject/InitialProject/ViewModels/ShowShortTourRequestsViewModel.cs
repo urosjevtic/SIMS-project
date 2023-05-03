@@ -36,7 +36,6 @@ namespace InitialProject.ViewModels
                     OnPropertyChanged(nameof(AcceptedRequests));
             }
         }
-
         public List<ShortTourRequest> allRequests { get; set; }
         public List<ShortTourRequest> acceptedRequests { get; set; }
         public ShowShortTourRequestsViewModel()
@@ -48,7 +47,6 @@ namespace InitialProject.ViewModels
             AllRequests = new ObservableCollection<ShortTourRequest>(allRequests);
             AcceptedRequests = new ObservableCollection<ShortTourRequest>(acceptedRequests);
         }
-
         public void GoBack()
         {
             CloseCurrentWindow();
