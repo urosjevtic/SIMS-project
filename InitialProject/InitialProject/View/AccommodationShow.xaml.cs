@@ -1,10 +1,13 @@
 ﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using InitialProject.Repository.AccommodationRepo;
+using InitialProject.Utilities;
+using InitialProject.View.OwnerView.Ratings;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
+using System.Windows.Input;
 
 namespace InitialProject.View
 {
@@ -65,22 +68,11 @@ namespace InitialProject.View
             Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationSearch accommodationSearch = new AccommodationSearch(LoggedUser);
-            accommodationSearch.Show();
-        }
 
         private void MyReservation_Click(object sender, RoutedEventArgs e)
         {
             MyReservations myReservation = new MyReservations(LoggedUser);
             myReservation.Show();
-        }
-
-        private void PreviousTripButton_Click(object sender, RoutedEventArgs e)
-        {
-            PreviousTrips trip = new PreviousTrips();
-            trip.Show();
         }
 
         private void DeclinedButton_Click(object sender, RoutedEventArgs e)
@@ -99,6 +91,62 @@ namespace InitialProject.View
         {
             PendingReservations pending=new PendingReservations();
             pending.Show();
+        }
+        //////////////////////////////////////
+        //////////////////////////////////////
+        //////////////////////////////////////
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            SignInForm signInForm = new SignInForm();
+            signInForm.Show();
+            this.Close();
+        }
+
+        private void HomePageClick(object sender, RoutedEventArgs e)
+        {
+            //AccommodationShow accommodationShow= new AccommodationShow(LoggedUser);
+            //accommodationShow.Show();
+            //this.Close();
+            
+        }
+
+        private void SearchClick(object sender, RoutedEventArgs e)
+        {
+            AccommodationSearch accommodationSearch = new AccommodationSearch(LoggedUser);
+            accommodationSearch.Show();
+        }
+
+        private void PreviousTripButton_Click(object sender, RoutedEventArgs e)
+        {
+            PreviousTrips trip = new PreviousTrips();
+            trip.Show();
+        }
+
+        private void MyResrvationsButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyReservations myReservation = new MyReservations(LoggedUser);
+            myReservation.Show();
+        }
+
+        private void SearchButton1_Click(object sender, RoutedEventArgs e)
+        {
+            AccommodationSearch accommodationSearch = new AccommodationSearch(LoggedUser);
+            accommodationSearch.Show();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Properties.Settings.Default.ShowWizard)
+            {
+                WizardWindow wizardWindow = new WizardWindow();
+                wizardWindow.Owner = this;
+                wizardWindow.ShowDialog();
+            }
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
     }
 }

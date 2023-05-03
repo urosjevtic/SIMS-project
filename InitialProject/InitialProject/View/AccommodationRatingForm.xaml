@@ -30,9 +30,6 @@
                         <TextBlock Text="Post a picture url" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
                         <TextBox x:Name="tbImageUrl" Text="{Binding ImageUrl, UpdateSourceTrigger=PropertyChanged}" Height="50" Width="160" Margin="-80, 0, 0, 0"/>
                     </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Button Content="Submit" Click="ButtonClick_Submit" Width="117" Margin="320" Height="40"/>
-                    </StackPanel>
                 </StackPanel>
             </Grid>
         </Grid>

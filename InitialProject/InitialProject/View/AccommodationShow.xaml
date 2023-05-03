@@ -1,35 +1,267 @@
-﻿<Window x:Class="InitialProject.View.AccommodationShow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View"
-        mc:Ignorable="d"
-        Title="AccommodationShow" Height="450" Width="800">
+﻿<Window
+    x:Class="InitialProject.View.AccommodationShow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:InitialProject.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:InitialProject.Properties"
+    xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
+    Title="AccommodationShow"
+    Width="1200"
+    Height="850"
+    Closing="Window_Closing"
+    Loaded="Window_Loaded"
+    mc:Ignorable="d">
+    <!--<Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ShowWizardCommand}" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding SaveSettingsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>-->
+
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="300"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <TextBlock Text="Accommodation" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" RenderTransformOrigin="0,0"/>
-        <Grid Grid.Row="1">
-            <DataGrid Name="AccommodationDataGrid" Grid.Row="2" ItemsSource="{Binding Accommodations}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedAccommodation}" IsReadOnly="True" SelectionMode="Single">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="*" />
-                    <DataGridTextColumn Header="City" Binding="{Binding Location.City}" Width="*"/>
-                    <DataGridTextColumn Header="Country" Binding="{Binding Location.Country}" Width="*"/>
-                    <DataGridTextColumn Header="Type" Binding="{Binding Type}" Width="*"/>
-                    <DataGridTextColumn Header="Max guests" Binding="{Binding MaxGuests}" Width="*"/>
-                    <DataGridTextColumn Header="Min reservation days" Binding="{Binding MinReservationDays}" Width="*"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
-        <Button x:Name="SearchButton" Content="Search" Click="SearchButton_Click" Margin="665,5,10,18" Grid.Row="2"/>
-        <Button x:Name="MyReservation" Content="My reservation" Click="MyReservation_Click" Margin="27,18,603,10" Grid.Row="2"/>
-        <Button Name="PreviousTripButton" Content="Previous trip" Click="PreviousTripButton_Click" Margin="27,250,603,0" Grid.Row="1"/>
-        <Button Name="DeclinedButton" Content="Decline reservations" Click="DeclinedButton_Click" Margin="225,18,421,10" Grid.Row="2"/>
-        <Button Name="ApprovedButton" Content="Approved reservations" Click="ApprovedButton_Click"  Grid.Row="1" Margin="225,255,421,78" Grid.RowSpan="2"/>
-        <Button x:Name="PendingAccommodation" Content="Reservation pending" Click="PendingAccommodation_Click" Margin="400,20,246,13" Grid.Row="2" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Margin="0,10,0,10"
+            BorderBrush="Black"
+            BorderThickness="3"
+            CornerRadius="20">
+            <Grid Margin="0,4,0,-3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <ToggleButton
+                    x:Name="TooltipsToggleButton"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Show tooltips"
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowTooltips}"
+                    Style="{StaticResource ResourceKey=ToggleSwitch}"
+                    ToolTip="Turn tooltips on or off" />
+                <ToggleButton
+                    x:Name="WizardToggleButton"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Show wizard  "
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowWizard}"
+                    Style="{StaticResource ResourceKey=ToggleSwitch}"
+                    ToolTip="Show wizard on next application startup" />
+                <Image
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="100"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="/Resources/Images/user.png" />
+
+                <Button
+                    Name="HomePageButton"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Click="HomePageClick"
+                    Content="Home page" />
+                <Button
+                    Name="SearchButton"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Click="SearchClick"
+                    Content="Search" />
+                <Button
+                    Name="AnywhereButton"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Content="Anywhere/Whenever" />
+                <Button
+                    Name="PreviousTripButton"
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Click="PreviousTripButton_Click"
+                    Content="Previous trip" />
+                <Button
+                    Name="MyResrvationsButton"
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Click="MyResrvationsButton_Click"
+                    Content="My reservations" />
+                <Button
+                    Name="ForumButton"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Content="Forum" />
+                <Label
+                    x:Name="AccountInfoTitleLabel"
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,20,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Account Information"
+                    FontWeight="Bold" />
+                <Label
+                    Name="UserNameLabel"
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Username" />
+                <Label
+                    Name="SuperGuestLabel"
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Super guest" />
+                <CheckBox
+                    Grid.Row="11"
+                    Grid.Column="1"
+                    Grid.ColumnSpan="1"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center" />
+                <Label
+                    Name="PointsLabel"
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Number of points" />
+                <Button
+                    Name="SignOutButton"
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Click="Button_Click"
+                    Content="Sign out"
+                    ToolTip="Sign out and return to LogIn page" />
+            </Grid>
+        </Border>
+
+        <Border
+            Grid.Column="1"
+            Background="LightCyan"
+            BorderBrush="Black"
+            BorderThickness="3">
+            <DockPanel>
+                <Grid
+                    Height="Auto"
+                    Background="AliceBlue"
+                    DockPanel.Dock="Top">
+                    <Button
+                        x:Name="BackButton"
+                        Width="100"
+                        Height="40"
+                        Margin="10,10,0,10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Content="Back" />
+                    <Button
+                        Name="NotificationButton"
+                        Grid.Column="0"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,10,10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Content="Notifications" />
+
+                    <Button
+                        Name="SearchButton1"
+                        Grid.Column="1"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,0,10"
+                        Click="SearchButton1_Click"
+                        Content="Search" />
+                </Grid>
+
+                <Frame
+                    x:Name="MainFrame"
+                    DockPanel.Dock="Bottom"
+                    NavigationUIVisibility="Hidden"
+                    Source="AccommodationListPage.xaml" />
+            </DockPanel>
+        </Border>
     </Grid>
 </Window>

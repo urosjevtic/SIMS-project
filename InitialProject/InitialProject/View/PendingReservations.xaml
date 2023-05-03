@@ -15,8 +15,8 @@
 
             <DataGrid Name="PendingDataGrid" Grid.Row="1" ItemsSource="{Binding Pending}" AutoGenerateColumns="False" Margin="20, 0, 20, 60" SelectedItem="{Binding SelectedReservation}" IsReadOnly="True" SelectionMode="Single">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="40" />
-                    <DataGridTextColumn Header="Reservation id" Binding="{Binding AccommodationReservation.Id}" Width="*"/>
+                    <!--<DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="40" />
+                    <DataGridTextColumn Header="Reservation id" Binding="{Binding AccommodationReservation.Id}" Width="*"/>-->
                     <DataGridTextColumn Header="Reschedule start date" Binding="{Binding RescheduleStartDate}" Width="*"/>
                     <DataGridTextColumn Header="Reschedule end date" Binding="{Binding RescheduleEndDate}" Width="*"/>
                     <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"/>

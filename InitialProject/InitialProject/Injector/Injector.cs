@@ -37,7 +37,9 @@ namespace InitialProject.Injector
             {typeof(IAccommodationReservationRepository), new AccommodationReservationRepository()},
             {typeof(IUnratedOwnerRepository), new UnratedOwnerRepository()},
             {typeof(ICanceledReservationsRepository), new CanceledResrvationsRepository()},
-            {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()}
+            {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()},
+            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository() }
+
 
             // Add more implementations here
         };

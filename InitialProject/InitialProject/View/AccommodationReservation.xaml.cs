@@ -29,6 +29,7 @@ namespace InitialProject.View
 
         public Accommodation SelectedAccommodation { get; set; }
         
+        
         public List<Accommodation> Accommodations { get; set; }
         public List<AccommodationReservation> reservations;
         public ObservableCollection<Accommodation> accommodations { get; set; }
