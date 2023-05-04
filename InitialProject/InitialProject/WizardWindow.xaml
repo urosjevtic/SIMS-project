@@ -31,33 +31,64 @@
                 Title="Welcome to Booking Application!"
                 Description="This Wizard will guide you through the user interface and the main functionalities of the application." />
             <xctk:WizardPage
-                x:Name="WizardPage1"
-                Title="Booking Appartments"
-                Description="On this page bla bla..."
-                NextPage="{Binding ElementName=WizardPage2}"
+                x:Name="WizardPage2"
+                Title="Home Page"
+                Description="This page shows all the accommodations that you can search for. You can also view new notifications."
+                NextPage="{Binding ElementName=WizardPage3}"
                 PageType="Interior"
                 PreviousPage="{Binding ElementName=IntroWizardPage}">
                 <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="WizardPage3"
-                Title="Bookin Appartments"
-                Description="On this page bla bla..."
-                PageType="Interior">
+                Title="Search Accommodation"
+                Description="Here you can search for accommodation according to certain parameters and choose the one you want to look at in more detail."
+                NextPage="{Binding ElementName=WizardPage4}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage2}">
                 <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="WizardPage4"
-                Title="Bookin Appartments"
-                Description="On this page bla bla..."
-                PageType="Interior">
+                Title="Reservation"
+                Description="Here you are shown the accommodation you have selected and you can select a date range. In the table you will get the dates when the accommodation is available. Choose one of these dates and book your accommodation."
+                NextPage="{Binding ElementName=WizardPage5}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage3}">
+                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage5"
+                Title="Previous Trip"
+                Description="On these pages you can see your previous reservations and rate the accommodation you stayed in as well as its owner. You can also see reviews left by the owner."
+                NextPage="{Binding ElementName=WizardPage6}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage4}">
+                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage6"
+                Title="My Reservations"
+                Description="On this page you can see the accommodations you have booked for the next period. You can cancel the reservation or change the appointment. You can also see move requests that have been accepted, rejected, or pending."
+                NextPage="{Binding ElementName=WizardPage7}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage5}">
+                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+            </xctk:WizardPage>
+            <xctk:WizardPage
+                x:Name="WizardPage7"
+                Title="Anywhere/Anytime"
+                Description="Here you can search for any accommodation for a given range of dates and number of guests, and the table will list all accommodation that is available and that you can book."
+                NextPage="{Binding ElementName=WizardPage8}"
+                PageType="Interior"
+                PreviousPage="{Binding ElementName=WizardPage6}">
                 <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="LastWizardPage"
-                Title="Last Page"
+                Title="Forum"
                 CanFinish="True"
-                Description="Last Page..."
+                Description="On these pages you have a form where you can create a new forum and add comments and see an old one and its comments."
                 PageType="Interior">
                 <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
             </xctk:WizardPage>

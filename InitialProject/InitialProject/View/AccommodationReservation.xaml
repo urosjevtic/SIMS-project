@@ -44,9 +44,9 @@
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
-        <Button Content="Search" Grid.Row="3"  Height="40" Width="120" Margin="159,12,521,168" Click="SearchClick"/>
-        <Button Content="Reserve" Grid.Row="3" Height="40" Width="120" Margin="618,12,62,168" Click="ReserveClick" />
-        <Button Content="Cancel" Grid.Row="3" Height="40" Width="100" Margin="495,12,205,168" Click="Button_Click"/>
+        <Button Content="Search" Grid.Row="3"  Height="40" Width="120" ToolTip="Search on which dates the accommodation is available" Margin="159,12,500,168" Click="SearchClick"/>
+        <Button Content="Reserve" Grid.Row="3" Height="40" Width="120" ToolTip="Choose the desired dates and make a reservation" Margin="618,12,50,168" Click="ReserveClick" />
+        <Button Content="Cancel" Grid.Row="3" Height="40" Width="100" Margin="495,12,180,168" Click="Button_Click"/>
         <TextBlock Foreground="Red" Name="tbNotFound" Width="274" HorizontalAlignment="Left" Margin="46,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="43" Grid.Row="3"/>
     </Grid>
 </Window>

@@ -38,8 +38,8 @@
             Margin="0,10,0,10"
             BorderBrush="Black"
             BorderThickness="3"
-            CornerRadius="20">
-            <Grid Margin="0,4,0,-3">
+            CornerRadius="15">
+            <Grid Margin="0,-3,0,-3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -54,11 +54,11 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="26*" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="57*" />
                 </Grid.RowDefinitions>
 
                 <ToggleButton
@@ -116,7 +116,8 @@
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
                     Click="SearchClick"
-                    Content="Search" />
+                    Content="Search"
+                    ToolTip="Search for available accommodation" />
                 <Button
                     Name="AnywhereButton"
                     Grid.Row="5"
@@ -126,7 +127,8 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
-                    Content="Anywhere/Whenever" />
+                    Content="Anywhere/Whenever"
+                    ToolTip="Search for available accommodation anywhere and on any date" />
                 <Button
                     Name="PreviousTripButton"
                     Grid.Row="6"
@@ -137,7 +139,8 @@
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
                     Click="PreviousTripButton_Click"
-                    Content="Previous trip" />
+                    Content="Previous trip"
+                    ToolTip="View your previous booking" />
                 <Button
                     Name="MyResrvationsButton"
                     Grid.Row="7"
@@ -148,7 +151,8 @@
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
                     Click="MyResrvationsButton_Click"
-                    Content="My reservations" />
+                    Content="My reservations"
+                    ToolTip="Display upcoming bookings" />
                 <Button
                     Name="ForumButton"
                     Grid.Row="8"
@@ -158,14 +162,15 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
-                    Content="Forum" />
+                    Content="Forum"
+                    ToolTip="Open and start the forum" />
                 <Label
                     x:Name="AccountInfoTitleLabel"
                     Grid.Row="9"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Width="200"
-                    Margin="0,20,0,5"
+                    Margin="0,15,0,5"
                     HorizontalAlignment="Center"
                     Content="Account Information"
                     FontWeight="Bold" />
@@ -226,7 +231,7 @@
             <DockPanel>
                 <Grid
                     Height="Auto"
-                    Background="AliceBlue"
+                    Background="#87D0E1"
                     DockPanel.Dock="Top">
                     <Button
                         x:Name="BackButton"
@@ -235,7 +240,9 @@
                         Margin="10,10,0,10"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Content="Back" />
+                        Background="#58B6CC"
+                        Content="Back"
+                        FontStyle="Italic" />
                     <Button
                         Name="NotificationButton"
                         Grid.Column="0"
@@ -244,7 +251,10 @@
                         Margin="0,10,10,10"
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
-                        Content="Notifications" />
+                        Background="#58B6CC"
+                        Content="Notifications"
+                        FontStyle="Italic"
+                        ToolTip="Display the latest notifications" />
 
                     <Button
                         Name="SearchButton1"

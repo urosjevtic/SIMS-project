@@ -22,9 +22,9 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="Rating" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
                         <TextBlock Text="Cleanness" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
-                        <Slider x:Name="sCleanliness" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}"  Margin="40,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <Slider x:Name="sCleanliness" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" ToolTip="Rate the cleanliness of the accommodation" Margin="40,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
                         <TextBlock Text="Correctness the owner" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
-                        <Slider x:Name="sOwnerCorrectness" Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}"  Margin="40,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
+                        <Slider x:Name="sOwnerCorrectness" Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}" ToolTip="Rate the correctness of the owner"  Margin="40,0,0,0" Height="30" Width="150" HorizontalAlignment="Left" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True"/>
                         <TextBlock Text="Additional comment" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
                         <TextBox x:Name="tbAdditionalComment" Text="{Binding Path=AdditionalComment, UpdateSourceTrigger=PropertyChanged}" Margin="40,0,0,0" Height="60" Width="290" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                         <TextBlock Text="Post a picture url" HorizontalAlignment="Left" Margin="30,0,0,0" Padding="10"/>
