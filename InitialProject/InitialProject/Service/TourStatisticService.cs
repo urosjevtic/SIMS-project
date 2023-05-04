@@ -133,6 +133,40 @@ namespace InitialProject.Service
 
             return list;
         }
+        public List<DataPoint> FindToursByLocation(int year)
+        {
+            List<DataPoint> list = new();
+            AddLocations(list);
+            int i;
+            foreach (DataPoint dp in list)
+            {
+                i = 0;
+                foreach (ShortTourRequest shortRequest in _shortTourRequestRepository.GetAll())
+                {
+                    if ((dp.Key == shortRequest.City) && Convert.ToInt32(year) == shortRequest.From.Year)
+                    {
+                        i++;
+                    }
+                }
+                dp.Value = i;
+            }
+            return list;
+        }
+        public List<DataPoint> AddLocations(List<DataPoint> list)
+        {
+            List<ShortTourRequest> allRequests = _shortTourRequestRepository.GetAll();
+            IEnumerable<string> uniqueLocations = allRequests.Select(r => r.City).Distinct();
+
+            foreach (string location in uniqueLocations)
+            {
+                if (!list.Any(dp => dp.Key == location))
+                {
+                    list.Add(new DataPoint() { Key = location, Value = 0 });
+                }
+            }
+
+            return list;
+        }
         public double FindAcceptedToursPercentage(int Year)
         {
             double percentage = 0;

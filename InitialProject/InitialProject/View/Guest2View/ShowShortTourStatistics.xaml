@@ -50,13 +50,13 @@
                 <Label Grid.Row="5" Content="Accepted tours by language: " HorizontalAlignment="Left" FontSize="26" Margin="42,4,0,226" Grid.RowSpan="2"/>
                 <Label Grid.Row="5" Content="Accepted tours by location: " HorizontalAlignment="Left" FontSize="26" Margin="508,6,0,226" Grid.RowSpan="2"/>
                 <Button Content="Go Back" Grid.Row="7" HorizontalAlignment="Left" FontSize="26" Width="160" Command="{Binding GoBackCommand}" Height="50" Margin="12,5,0,15"/>
-                <chart1:Chart Width="300" Height="230" FontSize="12" Grid.Row="6" Margin="58,46,511,0">
+                <chart1:Chart Height="230" FontSize="12" Grid.Row="6" Margin="20,46,472,0">
                     <chart1:ColumnSeries Title="" ItemsSource="{Binding ToursByLanguage}"
                      DependentValueBinding="{Binding Value}" 
                      IndependentValueBinding="{Binding Key}"/>
                 </chart1:Chart>
 
-                <chart1:Chart Width="300" Height="230" FontSize="12" Grid.Row="6" Margin="523,46,46,0">
+                <chart1:Chart Height="230" FontSize="12" Grid.Row="6" Margin="483,46,20,0">
                     <chart1:ColumnSeries Title="" ItemsSource="{Binding ToursByLocation}" 
                      DependentValueBinding="{Binding Value}" 
                      IndependentValueBinding="{Binding Key}" />

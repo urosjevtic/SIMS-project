@@ -114,12 +114,12 @@ namespace InitialProject.ViewModels
             {
                 ToursByLanguage.Add(point);
             }
-            foreach(DataPoint point in _tourStatisticService.FindToursByLanguage(Year))
+            foreach(DataPoint point in _tourStatisticService.FindToursByLocation(Year))
             {
                 ToursByLocation.Add(point);
             }
             AcceptedToursPercentage = _tourStatisticService.FindAcceptedToursPercentage(Year);
-            UnacceptedToursPercentage = (100 - _tourStatisticService.FindAcceptedToursPercentage(Year));
+            UnacceptedToursPercentage = 100 - _tourStatisticService.FindAcceptedToursPercentage(Year);
             AverageInAccepted = _tourStatisticService.FindAverageInAccepted(Year);
         }
     }
