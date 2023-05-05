@@ -38,7 +38,7 @@ namespace InitialProject.Injector
             {typeof(ICheckPointRepository), new CheckPointRepository()},
             {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()},
             {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
-            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()}
+            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()},
             {typeof(INotesRepository), new NotesRepository()},
             {typeof(IYearlyAccommodationStatisticsRepository), new YearlyAccommodationStatisticRepository()},
             {typeof(IMonthlyAccommodationStatisticRepository), new MonthlyAccommodationStatisticRepository()}
