@@ -60,6 +60,9 @@ namespace InitialProject.Service
 
         private List<UnratedGuest> FilterUnratedGuestByOwner(int id, List<UnratedGuest> allUnratedGuests)
         {
+            if(allUnratedGuests == null)
+                return new List<UnratedGuest>();
+
             List<UnratedGuest> unratedGuestsByOwnerId = new List<UnratedGuest>();
             foreach (var unratedGuest in allUnratedGuests)
             {

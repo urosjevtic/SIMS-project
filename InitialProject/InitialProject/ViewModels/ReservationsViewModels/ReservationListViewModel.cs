@@ -3,6 +3,7 @@ using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
+using InitialProject.Service.StatisticService;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Reservations;
 
@@ -13,10 +14,14 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
         private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly YearlyAccommodationService _yearlyAccommodationStatisticService;
+        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
         private readonly User _logedInUser;
         public ReservationListViewModel(User logedInUser)
         {
             _accommodationReservationService = new AccommodationReservationService();
+            _yearlyAccommodationStatisticService = new YearlyAccommodationService();
+            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
             Reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetReservationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
         }
@@ -38,8 +43,15 @@ namespace InitialProject.ViewModels.ReservationsViewModels
             if (parameter is AccommodationReservation selecterdReservation)
             {
                 _accommodationReservationService.Delete(selecterdReservation);
+                IncreaseCancelReservationCount(selecterdReservation.AccommodationId);
                 Reservations.Remove(selecterdReservation);
             }
+        }
+
+        private void IncreaseCancelReservationCount(int accommodationId)
+        {
+            _yearlyAccommodationStatisticService.IncreasCancelationCount(accommodationId);
+            _monthlyAccommodationStatisticService.IncreaseCancelationCount(accommodationId);
         }
 
 

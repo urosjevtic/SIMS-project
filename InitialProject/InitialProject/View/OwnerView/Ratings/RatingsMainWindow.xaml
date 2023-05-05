@@ -14,7 +14,7 @@
     <Window.Resources>
         <!--LogIn button style-->
         <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#484b6a"/>
+            <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
             <Setter Property="Foreground" Value="#fafafa"/>
             <!-- set the text color of the button -->
@@ -39,7 +39,7 @@
         <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="30"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#484b6a"/>
+            <Setter Property="Foreground" Value="#3A3D55"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Center"/>
         </Style>
@@ -116,7 +116,7 @@
                     <TextBlock Padding="5">Notes</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Background="#cc0000" Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="9" Margin="0,87,0,29"/>
+            <Button  Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="9" Margin="0,87,0,29"/>
         </Grid>
         <!--MAIN SCREEN-->
         <Grid Name="MainScreen" Grid.Column="1" Visibility="{Binding MainScreenVisibility}">
@@ -129,13 +129,17 @@
                 <RowDefinition></RowDefinition>
 
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="1" Text="Ratings" HorizontalAlignment="Center" FontSize="30"></TextBlock>
+            
+            
             <DockPanel Grid.Row="0" Background="#9394a5">
                 <Button Width="64" Height="50" Background="#9394a5" Command="{Binding BurgerBarOpenCommand}" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Image Source="/Resources/Images/burgerBarWhite.png"></Image>
                 </Button>
             </DockPanel>
-            <Border Grid.Row="2" BorderBrush="#484b6a" BorderThickness="2">
+
+            <TextBlock Grid.Row="1" Text="Ratings" HorizontalAlignment="Center" FontSize="30" FontWeight="DemiBold" Foreground="#3A3D55"></TextBlock>
+
+            <Border Grid.Row="2" BorderBrush="#3A3D55" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -147,7 +151,7 @@
                     <Button Grid.Row="2" Command="{Binding OpenOwnerRatingsCommand}" Content="See accommodations"  Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
-            <Border Grid.Row="4" BorderBrush="#484b6a" BorderThickness="2">
+            <Border Grid.Row="4" BorderBrush="#3A3D55" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
