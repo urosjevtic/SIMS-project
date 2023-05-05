@@ -13,21 +13,32 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
         public int Id {get; set; }
         public Accommodation Accommodation {get; set; }
         public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public int LengthInDays { get; set; }
 
         public string Description { get; set; }
 
+        public bool IsFinished
+        {
+            get { return !(EndDate >= DateTime.Now); }
+        }
+
+        public bool IsAbleToCancel
+        {
+            get{ return IsFinished || (StartDate - DateTime.Now).TotalDays < 5;}
+        }
 
         public Renovation()
         {
             Accommodation = new Accommodation();
         }
 
-        public Renovation(int id, Accommodation accommodation, DateTime startDate, int lengthInDays, string description)
+        public Renovation(int id, Accommodation accommodation, DateTime startDate, DateTime endDate, int lengthInDays, string description)
         {
             Id = id;
             Accommodation = accommodation;
             StartDate = startDate;
+            EndDate = endDate;
             LengthInDays = lengthInDays;
             Description = description;
         }
@@ -35,7 +46,7 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), StartDate.ToString("dd'/'MM'/'yyyy"), LengthInDays.ToString(), Description };
+            string[] csvValues = { Id.ToString(), Accommodation.Id.ToString(), StartDate.ToString("dd'/'MM'/'yyyy"), EndDate.ToString("dd'/'MM'/'yyyy"), LengthInDays.ToString(), Description };
             return csvValues;
         }
 
@@ -44,8 +55,10 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
             Id = Convert.ToInt32(values[0]);
             Accommodation.Id = Convert.ToInt32(values[1]);
             StartDate = DateTime.ParseExact(values[2], "dd'/'MM'/'yyyy", CultureInfo.InvariantCulture);
-            LengthInDays = Convert.ToInt32(values[3]);
-            Description = values[4];
+            EndDate = DateTime.ParseExact(values[3], "dd'/'MM'/'yyyy", CultureInfo.InvariantCulture);
+            LengthInDays = Convert.ToInt32(values[4]);
+            Description = values[5];
         }
+
     }
 }

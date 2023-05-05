@@ -15,13 +15,13 @@ namespace InitialProject.Service.RenovationServices
     {
 
         private readonly IRenovationRepository _renovationRepository;
-        private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly AccommodationService _accommodationService;
 
 
         public RenovationService()
         {
             _renovationRepository = Injector.Injector.CreateInstance<IRenovationRepository>();
-            _accommodationReservationService = new AccommodationReservationService();
+            _accommodationService = new AccommodationService();
         }
 
 
@@ -35,6 +35,38 @@ namespace InitialProject.Service.RenovationServices
            return _renovationRepository.GetByAccommodationId(accommodationId);
         }
 
+        public List<Renovation> GetByOwnerId(int ownerId)
+        {
+           List<Renovation> allRenovations = _renovationRepository.GetAll();
+           List<Renovation> renovationByOwnerId = new List<Renovation>();
+           BindAccommodationToRenovation(allRenovations, ownerId);
+           foreach (var renovation in allRenovations)
+           {
+               if (renovation.Accommodation.Owner.Id == ownerId)
+               {
+                   renovationByOwnerId.Add(renovation);
+               }
+           }
+
+           return renovationByOwnerId;
+        }
+
+
+        private void BindAccommodationToRenovation(List<Renovation> renovations, int ownerId)
+        {
+            foreach (var renovation in renovations)
+            {
+                foreach (var accommodation in _accommodationService.GetAllAccommodationByOwnerId(ownerId))
+                {
+                    if (renovation.Accommodation.Id == accommodation.Id)
+                    {
+                        renovation.Accommodation = accommodation;
+                        break;
+                    }
+                }
+            }
+        }
+
         public void Save(Renovation renovation)
         {
             _renovationRepository.Save(renovation);
@@ -45,12 +77,17 @@ namespace InitialProject.Service.RenovationServices
             Renovation renovation = new Renovation();
             renovation.Accommodation = accommodation;
             renovation.StartDate = renovationStartDate;
+            renovation.EndDate = renovationStartDate.AddDays(renovationLength);
             renovation.LengthInDays = renovationLength;
             renovation.Description = desctiption;
 
             _renovationRepository.Save(renovation);
         }
 
+        public void Delete(Renovation renovation)
+        {
+            _renovationRepository.Delete(renovation);
+        }
 
         public List<DateTime> FindAvailableDates(List<AccommodationReservation> reservations, DateTime renovationStartDate, DateTime endDate, int renovationDays)
         {

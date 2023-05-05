@@ -34,6 +34,21 @@ namespace InitialProject.Repository.AccommodationRenovationRepo
             return _renovations.Max(c => c.Id) + 1;
         }
 
+
+        public void Delete(Renovation selectedRenovation)
+        {
+            _renovations = _serializer.FromCSV(FilePath);
+            foreach (var renovation in _renovations)
+            {
+                if (renovation.Id == selectedRenovation.Id)
+                {
+                    _renovations.Remove(renovation);
+                    break;
+                }
+            }
+            _serializer.ToCSV(FilePath, _renovations);
+        }
+
         public void Save(Renovation renovation)
         {
             renovation.Id = NextId();

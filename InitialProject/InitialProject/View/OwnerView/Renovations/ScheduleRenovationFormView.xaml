@@ -259,7 +259,9 @@
                            FontWeight="Bold"
                            Margin="0,0,10,0"
                            Foreground="#3A3D55"/>
-                <TextBox Height="108" Width="335"></TextBox>
+                <TextBox Height="108" Width="335" 
+                         TextWrapping="Wrap"
+                         Text="{Binding RenovationDescription}"></TextBox>
 
             </StackPanel>
 

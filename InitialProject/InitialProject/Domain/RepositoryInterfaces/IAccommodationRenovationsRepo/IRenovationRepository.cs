@@ -13,6 +13,7 @@ namespace InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRe
         List<Renovation> GetAll();
         List<Renovation> GetByAccommodationId(int id);
 
+        void Delete(Renovation renovation);
         void Save(Renovation renovation);
     }
 }

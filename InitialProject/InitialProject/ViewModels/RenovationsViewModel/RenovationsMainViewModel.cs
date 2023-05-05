@@ -63,5 +63,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             CloseCurrentWindow();
             scheduleRenovationList.Show();
         }
+
+        public ICommand OpenScheduledRenovationsCommand => new RelayCommand(OpenScheduledRenovations);
+
+        private void OpenScheduledRenovations()
+        {
+            ScheduledRenovationListView scheduleRenovationList = new ScheduledRenovationListView(_logedInUser);
+            CloseCurrentWindow();
+            scheduleRenovationList.Show();
+        }
     }
 }
