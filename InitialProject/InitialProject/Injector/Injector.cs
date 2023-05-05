@@ -4,11 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRenovationRepo;
 using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Repository.StatisticRepo;
@@ -40,7 +42,8 @@ namespace InitialProject.Injector
             {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
             {typeof(INotesRepository), new NotesRepository()},
             {typeof(IYearlyAccommodationStatisticsRepository), new YearlyAccommodationStatisticRepository()},
-            {typeof(IMonthlyAccommodationStatisticRepository), new MonthlyAccommodationStatisticRepository()}
+            {typeof(IMonthlyAccommodationStatisticRepository), new MonthlyAccommodationStatisticRepository()},
+            {typeof(IRenovationRepository), new RenovationRepository()}
 
             // Add more implementations here
         };
