@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
@@ -21,10 +22,10 @@ namespace InitialProject.View.Guest2View
     public partial class MakeShortTourRequest : Window
     {
         public MakeShortTourRequestViewModel MakeShortTourRequestViewModel;
-        public MakeShortTourRequest()
+        public MakeShortTourRequest(User LoggedUser)
         {
             InitializeComponent();
-            MakeShortTourRequestViewModel = new MakeShortTourRequestViewModel();
+            MakeShortTourRequestViewModel = new MakeShortTourRequestViewModel(LoggedUser);
             this.DataContext = MakeShortTourRequestViewModel;
         }
     }

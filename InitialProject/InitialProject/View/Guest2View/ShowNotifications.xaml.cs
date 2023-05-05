@@ -11,21 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowRequests.xaml
+    /// Interaction logic for ShowNotifications.xaml
     /// </summary>
-    public partial class ShowRequests : Window
+    public partial class ShowNotifications : Window
     {
-        public ShowTourRequestsViewModel showTourRequestsViewModel { get; set; }
-        public ShowRequests()
+        public ShowNotifications()
         {
             InitializeComponent();
-            showTourRequestsViewModel = new ShowTourRequestsViewModel();
-            this.DataContext = showTourRequestsViewModel;
         }
     }
 }

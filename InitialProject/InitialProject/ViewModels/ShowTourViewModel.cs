@@ -17,7 +17,7 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class ShowTourViewModel
+    public class ShowTourViewModel : BaseViewModel
     {
         public User LoggedUser { get; set; }
         
@@ -26,6 +26,8 @@ namespace InitialProject.ViewModels
         public ICommand MakingTourRequestsCommand { get; set; }
         public ICommand ShowRequestsCommand { get; set; }
         public ICommand ShowVouchersCommand { get; set; }
+        public ICommand ShowNotificationsCommand { get; set; }
+        public ICommand ExitCommand { get; set; }
 
         public ShowTourViewModel(User user)
         {
@@ -35,7 +37,8 @@ namespace InitialProject.ViewModels
             MakingTourRequestsCommand = new RelayCommand(OpenMakingRequests);
             ShowRequestsCommand = new RelayCommand(ShowRequests);
             ShowVouchersCommand = new RelayCommand(ShowVouchers);
-           
+            ShowNotificationsCommand = new RelayCommand(ShowNotifications);
+            ExitCommand = new RelayCommand(Exit);
         }
         private void Search()
         {
@@ -49,7 +52,7 @@ namespace InitialProject.ViewModels
         }
         private void OpenMakingRequests()
         {
-            MakeRequests makeRequests = new MakeRequests();
+            MakeRequests makeRequests = new MakeRequests(LoggedUser);
             makeRequests.Show();
         }
         private void ShowRequests()
@@ -62,6 +65,14 @@ namespace InitialProject.ViewModels
             ShowVouchers showVouchers = new ShowVouchers();
             showVouchers.Show();
         }
-       
+        private void ShowNotifications()
+        {
+            ShowNotifications showNotifications = new ShowNotifications();
+            showNotifications.Show();
+        }
+        private void Exit()
+        {
+            CloseCurrentWindow();
+        } 
     }
 }
