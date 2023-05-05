@@ -44,5 +44,18 @@ namespace InitialProject.Repository
             _shortRequests.Add(shortTourRequest);
             _serializer.ToCSV(FilePath, _shortRequests);
         }
+        public void Invalidate(ShortTourRequest shortRequest)
+        {
+            List<ShortTourRequest> allRequests = GetAll();
+            ShortTourRequest s = allRequests.Find(r => r.IdRequest == shortRequest.IdRequest);
+            allRequests.Remove(s);
+            s.Status = RequestStatus.Invalid;
+            allRequests.Insert(s.IdRequest - 1, s);
+            SaveAll(allRequests);
+        }
+        public void SaveAll(List<ShortTourRequest> list)
+        {
+            _serializer.ToCSV(FilePath, list);
+        }
     }
 }

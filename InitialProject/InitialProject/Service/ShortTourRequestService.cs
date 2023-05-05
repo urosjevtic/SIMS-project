@@ -35,14 +35,28 @@ namespace InitialProject.Service
         public List<ShortTourRequest> GetAll()
         {
             List<ShortTourRequest> all = new();
+            CheckValidation();
             foreach (ShortTourRequest shortRequest in _shortRequestRepository.GetAll())
             {
-                if (shortRequest.Status != RequestStatus.Accepted)
+                if (shortRequest.Status != RequestStatus.Accepted )
                 {
                     all.Add(shortRequest);
                 }
             }
             return all;
+        }
+        public void CheckValidation()
+        {
+            List<ShortTourRequest> shortTourRequests = _shortRequestRepository.GetAll();
+            TimeSpan ts = new TimeSpan(48, 0, 0);
+
+            foreach (ShortTourRequest shortRequest in shortTourRequests)
+            {
+                if (shortRequest.From.Subtract(ts) <= DateTime.Now && shortRequest.Status == RequestStatus.Active)
+                {
+                    _shortRequestRepository.Invalidate(shortRequest);
+                }
+            }
         }
         public List<ShortTourRequest> GetAcceptedRequests()
         {

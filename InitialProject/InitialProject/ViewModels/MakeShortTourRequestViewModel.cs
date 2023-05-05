@@ -145,10 +145,15 @@ namespace InitialProject.ViewModels
             {
                 MessageBox.Show("Number of people must be greater than zero!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-            if(Country == null || City == null || Language == null || From == null || To == null)
+            else if(Country == null || Country == "" || City == "" || City == null || Language == "" || Language == null || From == "" || From == null || To == "" || To == null)
             {
                 MessageBox.Show("You did not enter all parameters!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-            } else
+            }
+            else if (Convert.ToDateTime(From, CultureInfo.InvariantCulture) >= Convert.ToDateTime(To, CultureInfo.InvariantCulture))
+            {
+                MessageBox.Show("From date is bigger than To date!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            else
             {
                 _shortTourService.SaveShortRequest(LoggedUser, Country, City, Language, NrOfPeople, Description, Convert.ToDateTime(From, CultureInfo.InvariantCulture), Convert.ToDateTime(To, CultureInfo.InvariantCulture));
                 MessageBox.Show("Request successfully created!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);

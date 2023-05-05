@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MyToursViewModel}"
         mc:Ignorable="d"
-        Title="My Tours" Height="616" Width="916" WindowStartupLocation="CenterScreen">
+        Title="My Tours" Height="616" Width="916" WindowStartupLocation="CenterScreen" Background="#F5F9FC">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -29,7 +29,7 @@
                         <ColumnDefinition Width="43*"/>
                         <ColumnDefinition Width="145*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <GroupBox Header="Active tours" Grid.Row="1" Grid.Column="0" Margin="3,3,3,65" Grid.ColumnSpan="2">
+                    <GroupBox Header="Active tours" Grid.Row="1" Grid.Column="0" Margin="3,3,3,65" Grid.ColumnSpan="2" BorderBrush="Black">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -101,7 +101,12 @@
                             <ContentPresenter Grid.Row="1" Margin="0,0,440,0"/>
                         </Grid>
                     </GroupBox>
-                    <Button x:Name="GoBack" Content="Go Back" FontSize="24" HorizontalAlignment="Left" Margin="21,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Command="{Binding GoBackCommand}" Grid.RowSpan="2"/>
+                    <Button x:Name="GoBack" FontSize="24" HorizontalAlignment="Left" Margin="21,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Background="LightSteelBlue" Command="{Binding GoBackCommand}" Grid.RowSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                            <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </TabItem>
             <TabItem Header="Ended Tours  " FontSize="28">
@@ -208,15 +213,30 @@
                                                 *pull the scrollbar to rate the tour (from 1 to 5), then click Submit
                                             </TextBlock>
                                         </Label>
-                                        <Button Content="Add comment" Grid.Row="9" FontSize="18" Command="{Binding OpenCommentFormCommand}" Width="120"/>
+                                        <Button Grid.Row="9" FontSize="18" Command="{Binding OpenCommentFormCommand}" Width="160" Background="LightSteelBlue">
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Source="/Resources/Images/comment.png" Height="30"></Image>
+                                                <TextBlock Text=" Add comment" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Button>
                                     </Grid>
                                 </StackPanel>
                             </Border>
                             <ContentPresenter Grid.Row="1" Margin="0,0,440,0"/>
                         </Grid>
                     </GroupBox>
-                    <Button Content="Go Back" FontSize="24" HorizontalAlignment="Left" Margin="21,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Command="{Binding GoBackCommand}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
-                    <Button x:Name="SubmitRate" Grid.Column="2" Content="Submit rate" FontSize="24" HorizontalAlignment="Left" Margin="265,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="150" Height="50" Command="{Binding SubmitRateCommand}" Grid.RowSpan="2"/>
+                    <Button FontSize="24" HorizontalAlignment="Left" Margin="21,449,0,0" Grid.Row="0" VerticalAlignment="Top" Background="LightSteelBlue" Width="150" Height="50" Command="{Binding GoBackCommand}" Grid.RowSpan="2" Grid.ColumnSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                            <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="SubmitRate" Grid.Column="2" FontSize="24" HorizontalAlignment="Left" Background="LightSteelBlue" Margin="249,449,0,0" Grid.Row="0" VerticalAlignment="Top" Width="165" Height="50" Command="{Binding SubmitRateCommand}" Grid.RowSpan="2">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/ratings.png" Height="30"></Image>
+                            <TextBlock Text=" Submit rate" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
                 </Grid>
             </TabItem>
         </TabControl>

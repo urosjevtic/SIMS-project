@@ -1,13 +1,13 @@
-1|4|Australia|Melbourne|English|20|I do not like too long tours.|05/05/2023 12:00:00|06/06/2023 12:00:00|Active
-2|4|Russia|Moscow|Serbian|10|neki opis|07/05/2023 12:00:00|06/06/2023 12:00:00|Accepted
+1|4|Australia|Melbourne|English|20|I do not like too long tours.|05/05/2023 12:00:00|06/06/2023 12:00:00|Invalid
+2|4|Russia|Moscow|Serbian|10|neki opis|09/05/2023 12:00:00|06/06/2023 12:00:00|Active
 3|4|Italy|Venice|English|15|description description|07/08/2023 12:00:00|09/10/2023 12:00:00|Accepted
-4|4|Russia|Moscow|Russian|15|opis ture|28/05/2023 12:00:00|03/06/2023 12:00:00|Accepted
+4|4|Russia|Moscow|Russian|15|opis ture|28/05/2023 12:00:00|03/06/2023 12:00:00|Active
 5|4|Russia|Moscow|Serbian|12|opis ture|17/06/2023 12:00:00|02/07/2023 12:00:00|Invalid
-6|4|Spain|Madrid|English|17|turicaaa|23/06/2023 12:00:00|01/07/2023 12:00:00|Invalid
+6|4|Spain|Madrid|English|17|turicaaa|23/06/2023 12:00:00|01/07/2023 12:00:00|Accepted
 7|4|Spain|Madrid|Spanish|14|tour description|05/08/2023 12:00:00|03/09/2023 12:00:00|Invalid
 8|4|Spain|Madrid|Serbian|14|tour description|11/08/2023 12:00:00|16/09/2023 12:00:00|Accepted
 9|4|Spain|Madrid|Russian|14|tour description|07/07/2023 12:00:00|18/08/2023 12:00:00|Accepted
-10|4|Russia|Moscow|Russian|15|opis ture|28/05/2021 12:00:00|03/06/2021 12:00:00|Invalid
-11|4|Russia|Moscow|Serbian|12|opis ture|17/06/2021 12:00:00|02/07/2021 12:00:00|Accepted
+10|4|Russia|Moscow|Russian|15|opis ture|28/05/2021 12:00:00|03/06/2021 12:00:00|Accepted
+11|4|Russia|Moscow|Serbian|12|opis ture|17/06/2021 12:00:00|02/07/2021 12:00:00|Invalid
 12|4|Spain|Madrid|English|17|turicaaa|23/06/2021 12:00:00|01/07/2021 12:00:00|Accepted
 13|4|Spain|Madrid|Spanish|14|tour description|05/08/2021 12:00:00|03/09/2021 12:00:00|Invalid

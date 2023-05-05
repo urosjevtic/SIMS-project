@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest2View" xmlns:chart1="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=DotNetProjects.DataVisualization.Toolkit" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ShowShortTourStatisticsViewModel}"
         mc:Ignorable="d"
-        Title="Show Short Tour Statistics" Height="616" Width="916" WindowStartupLocation="CenterScreen">
+        Title="Show Short Tour Statistics" Height="616" Width="916" WindowStartupLocation="CenterScreen" Background="#F5F9FC">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
@@ -16,7 +16,7 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10"></RowDefinition>
         </Grid.RowDefinitions>
-        <GroupBox Header="Statistics" FontSize="28" Grid.Row="0" Grid.Column="1">
+        <GroupBox Header="Statistics" FontSize="28" Grid.Row="0" Grid.Column="1" BorderBrush="Black">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"></RowDefinition>
@@ -49,7 +49,12 @@
                 <Separator Grid.Row="4" Width="880" Margin="2,2,2,-20"/>
                 <Label Grid.Row="5" Content="Accepted tours by language: " HorizontalAlignment="Left" FontSize="26" Margin="42,4,0,226" Grid.RowSpan="2"/>
                 <Label Grid.Row="5" Content="Accepted tours by location: " HorizontalAlignment="Left" FontSize="26" Margin="508,6,0,226" Grid.RowSpan="2"/>
-                <Button Content="Go Back" Grid.Row="7" HorizontalAlignment="Left" FontSize="26" Width="160" Command="{Binding GoBackCommand}" Height="50" Margin="12,5,0,15"/>
+                <Button Grid.Row="7" HorizontalAlignment="Left" FontSize="26" Width="160" Command="{Binding GoBackCommand}" Height="50" Margin="12,5,0,15" Background="LightSteelBlue">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                        <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
                 <chart1:Chart Height="230" FontSize="12" Grid.Row="6" Margin="20,46,472,0">
                     <chart1:ColumnSeries Title="" ItemsSource="{Binding ToursByLanguage}"
                      DependentValueBinding="{Binding Value}" 

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest2View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ShowShortTourRequestsViewModel}"
         mc:Ignorable="d"
-        Title="Show Short Tour Requests" Height="616" Width="916" WindowStartupLocation="CenterScreen">
+        Title="Show Short Tour Requests" Height="616" Width="916" WindowStartupLocation="CenterScreen" Background="#F5F9FC">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -45,6 +45,11 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding From}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Go Back" Command="{Binding GoBackCommand}" Grid.Column="1" Grid.Row="4" Height="60" Width="160" FontSize="28" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Button Command="{Binding GoBackCommand}" Grid.Column="1" Grid.Row="4" Height="60" Width="160" FontSize="28" HorizontalAlignment="Left" Background="LightSteelBlue" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>
