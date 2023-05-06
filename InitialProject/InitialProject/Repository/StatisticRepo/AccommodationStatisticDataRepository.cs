@@ -11,36 +11,36 @@ using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Repository.StatisticRepo
 {
-    public class YearlyAccommodationStatisticRepository : IYearlyAccommodationStatisticsRepository
+    public class AccommodationStatisticDataRepository : IAccommodationStatisticsDataRepository
     {
-        private const string FilePath = "../../../Resources/Data/YearlyAccommodationStatistics.csv";
+        private const string FilePath = "../../../Resources/Data/accommodationStatisticsData.csv";
 
-        private readonly Serializer<YearlyAccommodationStatistic> _serializer;
+        private readonly Serializer<AccommodationStatisticData> _serializer;
 
-        private List<YearlyAccommodationStatistic> _statistics;
+        private List<AccommodationStatisticData> _statistics;
 
 
-        public YearlyAccommodationStatisticRepository()
+        public AccommodationStatisticDataRepository()
         {
-            _serializer = new Serializer<YearlyAccommodationStatistic>();
+            _serializer = new Serializer<AccommodationStatisticData>();
             _statistics = _serializer.FromCSV(FilePath);
         }
 
 
-        public List<YearlyAccommodationStatistic> GetAll()
+        public List<AccommodationStatisticData> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public void Update(YearlyAccommodationStatistic yearlyAccommodationStatistic)
+        public void Update(AccommodationStatisticData accommodationStatisticData)
         {
             _statistics = _serializer.FromCSV(FilePath);
             foreach (var statistic in _statistics)
             {
-                if (statistic.AccommodationId == yearlyAccommodationStatistic.AccommodationId)
+                if (statistic.AccommodationId == accommodationStatisticData.AccommodationId)
                 {
                     _statistics.Remove(statistic);
-                    _statistics.Add(yearlyAccommodationStatistic);
+                    _statistics.Add(accommodationStatisticData);
                     break;
                 }
             }
@@ -48,16 +48,16 @@ namespace InitialProject.Repository.StatisticRepo
             _serializer.ToCSV(FilePath, _statistics);
         }
 
-        public YearlyAccommodationStatistic GetByAccommodationId(int accommodationId)
+        public AccommodationStatisticData GetByAccommodationId(int accommodationId)
         {
             _statistics = _serializer.FromCSV(FilePath);
             return _statistics.FirstOrDefault(a => a.AccommodationId == accommodationId);
         }
 
-        public void Save(YearlyAccommodationStatistic yearlyAccommodationStatistic)
+        public void Save(AccommodationStatisticData accommodationStatisticData)
         {
             _statistics = _serializer.FromCSV(FilePath);
-            _statistics.Add(yearlyAccommodationStatistic);
+            _statistics.Add(accommodationStatisticData);
             _serializer.ToCSV(FilePath, _statistics);
         }
     }

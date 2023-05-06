@@ -8,7 +8,7 @@ namespace InitialProject.Domain.Model.Statistics
 {
     public class AccommodationStatistic
     {
-        public DateTime Year { get; set; }
+        public DateTime MonthAndYear { get; set; }
 
         public int ReservationsCount { get; set; }
         public int ReschedulesCount { get; set; }
@@ -17,7 +17,6 @@ namespace InitialProject.Domain.Model.Statistics
 
         public AccommodationStatistic()
         {
-            Year = DateTime.Now;
             ReservationsCount = 0;
             ReschedulesCount = 0;
             CancelationsCount = 0;
@@ -25,9 +24,9 @@ namespace InitialProject.Domain.Model.Statistics
 
         }
 
-        public AccommodationStatistic(DateTime year, int reservationsCount, int reschedulesCount, int cancelationsCount, int renovationsCount)
+        public AccommodationStatistic(DateTime monthAndYear, int reservationsCount, int reschedulesCount, int cancelationsCount, int renovationsCount)
         {
-            Year = year;
+            MonthAndYear = monthAndYear;
             ReservationsCount = reservationsCount;
             ReschedulesCount = reschedulesCount;
             CancelationsCount = cancelationsCount;

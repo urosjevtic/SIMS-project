@@ -15,13 +15,13 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly YearlyAccommodationService _yearlyAccommodationStatisticService;
-        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
+        private readonly AccommodationStatisticService _statisticService;
         private readonly User _logedInUser;
         public ReservationListViewModel(User logedInUser)
         {
             _accommodationReservationService = new AccommodationReservationService();
             _yearlyAccommodationStatisticService = new YearlyAccommodationService();
-            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
+            _statisticService = new AccommodationStatisticService();
             Reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetReservationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
         }
@@ -50,8 +50,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void IncreaseCancelReservationCount(int accommodationId)
         {
-            _yearlyAccommodationStatisticService.IncreasCancelationCount(accommodationId);
-            _monthlyAccommodationStatisticService.IncreaseCancelationCount(accommodationId);
+            _statisticService.IncreasCancelationCount(accommodationId);
         }
 
 
