@@ -9,6 +9,7 @@ using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.RenovationServices;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Utilities;
+using InitialProject.Validation;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
 {
@@ -45,6 +46,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             set
             {
                 _fromDate = value;
+                AvailableDates = _renovationService.FindAvailableDates(_accommodationReservationService.GetReservationsByAccommodationId(_accommodation.Id), _fromDate, _toDate, _renovationLength);
                 OnPropertyChanged("FromDate");
             }
         }
@@ -57,11 +59,12 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             set
             {
                 _toDate = value;
+                AvailableDates = _renovationService.FindAvailableDates(_accommodationReservationService.GetReservationsByAccommodationId(_accommodation.Id), _fromDate, _toDate, _renovationLength);
                 OnPropertyChanged("ToDate");
             }
         }
 
-        private int _renovationLength;
+        private int _renovationLength = 0;
 
         public int RenovationLength
         {
@@ -74,8 +77,19 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             }
         }
 
+        public DateTime _selectedStartDate;
 
-        private string _renovationDescription;
+        public DateTime SelectedStartDate
+        {
+            get { return _selectedStartDate; }
+            set
+            {
+                _selectedStartDate = value;
+                OnPropertyChanged("SelectedStartDate");
+            }
+        }
+
+        private string _renovationDescription = "";
 
         public string RenovationDescription
         {
@@ -88,12 +102,16 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         }
 
 
-        public ICommand ScheduleRenovationCommand => new RelayCommand(ScheduleRenovation);
+        public ICommand ScheduleRenovationCommand => new RelayCommand(ScheduleRenovation, canExecuteCommand);
 
         private void ScheduleRenovation()
         {
-            _renovationService.ScheduleRenovation(_accommodation, _fromDate, _renovationLength, _renovationDescription);
+            _renovationService.ScheduleRenovation(_accommodation, _selectedStartDate, _renovationLength, _renovationDescription);
         }
 
+        private bool canExecuteCommand()
+        {
+            return RenovationDescription != "" && FromDate < ToDate && SelectedStartDate != DateTime.Parse("01/01/0001 00:00:00");
+        }
     }
 }

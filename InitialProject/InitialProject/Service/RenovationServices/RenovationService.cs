@@ -92,11 +92,18 @@ namespace InitialProject.Service.RenovationServices
         public List<DateTime> FindAvailableDates(List<AccommodationReservation> reservations, DateTime renovationStartDate, DateTime endDate, int renovationDays)
         {
             List<DateTime> availableDates = new List<DateTime>();
-
+            List<DateTime> datesInRange = new List<DateTime>();
             // Create a list of dates between the start and end date range
-            List<DateTime> datesInRange = Enumerable.Range(0, 1 + endDate.Subtract(renovationStartDate).Days)
-                .Select(offset => renovationStartDate.AddDays(offset))
-                .ToList();
+            if (renovationStartDate < endDate)
+            {
+                datesInRange = Enumerable.Range(0, 1 + endDate.Subtract(renovationStartDate).Days)
+                    .Select(offset => renovationStartDate.AddDays(offset))
+                    .ToList();
+            }
+            else
+            {
+                return null;
+            }
 
             // Loop through each date in the range and check if it's available for the entire renovation period
             foreach (DateTime date in datesInRange)
