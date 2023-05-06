@@ -20,6 +20,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         private readonly DateTime _selectedYear;
         private readonly int _accommodationId;
         private readonly User _logedInUser;
+        private readonly List<DateTime> _availableMonths;
         public Accommodation Accommodation { get; }
         public MyAccommodationMonthlyStatisticsViewModel(DateTime selectedYear, int accommodationId, User logedInUser)
         {
@@ -35,6 +36,59 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         public string SelectedYearText
         {
             get { return _selectedYear.ToString("yyyy"); }
+        }
+
+        public List<string> AvailableMonths
+        {
+            get
+            {
+                List<string> returnList = new List<string>();
+                foreach(var availableMonth in _monthlyAccommodationStatisticService.GetAvailableMonths(_accommodationId, _selectedYear.Year))
+                {
+                    switch (availableMonth.Month)
+                    {
+                        case 1:
+                            returnList.Add("January");
+                            break;
+                        case 2:
+                            returnList.Add("February");
+                            break;
+                        case 3:
+                            returnList.Add("March");
+                            break;
+                        case 4:
+                            returnList.Add("April");
+                            break;
+                        case 5:
+                            returnList.Add("May");
+                            break;
+                        case 6:
+                            returnList.Add("Jun");
+                            break;
+                        case 7:
+                            returnList.Add("July");
+                            break;
+                        case 8:
+                            returnList.Add("August");
+                            break;
+                        case 9:
+                            returnList.Add("September");
+                            break;
+                        case 10:
+                            returnList.Add("October");
+                            break;
+                        case 11:
+                            returnList.Add("November");
+                            break;
+                        case 12:
+                            returnList.Add("December");
+                            break;
+                    }
+
+
+                }
+                return returnList;
+            }
         }
 
         private int _reservationCount;
@@ -94,14 +148,15 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             set
             {
                 _month = value;
-                ReservationCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear, _accommodationId).ReservationsCount;
-                CancelationCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear, _accommodationId).CancelationsCount;
-                RenovationCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear, _accommodationId).RenovationsCount;
-                RescheduleCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear, _accommodationId).ReschedulesCount;
+                ReservationCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear.Year, _accommodationId).ReservationsCount;
+                CancelationCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear.Year, _accommodationId).CancelationsCount;
+                RenovationCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear.Year, _accommodationId).RenovationsCount;
+                RescheduleCount = _monthlyAccommodationStatisticService.GetMonthlyStatistics(_month, _selectedYear.Year, _accommodationId).ReschedulesCount;
 
                 OnPropertyChanged("Month");
             }
         }
+
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()

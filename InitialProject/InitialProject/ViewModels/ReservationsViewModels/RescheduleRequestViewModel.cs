@@ -25,7 +25,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
         private readonly YearlyAccommodationService _yearlyAcoommodationStatisticService;
-        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
+        private readonly AccommodationStatisticService _statisticService;
         private readonly User _loggedInUser;
 
         public ObservableCollection<AccommodationReservationRescheduleRequest> RescheduleRequests { get; }
@@ -34,7 +34,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         {
             _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
             _yearlyAcoommodationStatisticService = new YearlyAccommodationService();
-            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
+            _statisticService = new AccommodationStatisticService();
             _loggedInUser = loggedInUser;
 
             RescheduleRequests = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetAllByOwnerId(_loggedInUser.Id));
@@ -49,9 +49,8 @@ namespace InitialProject.ViewModels.ReservationsViewModels
             if (parameter is AccommodationReservationRescheduleRequest selectedRescheduleRequest)
             {
                 _accommodationReservationRescheduleRequestService.ApproveReschedule(selectedRescheduleRequest);
-                _yearlyAcoommodationStatisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
-                _monthlyAccommodationStatisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
-                
+                _statisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
+
                 RescheduleRequests.Remove(selectedRescheduleRequest);
 
 

@@ -175,7 +175,7 @@
                 <ComboBox Width="100" 
                           x:Name="selectedAvailableDate"
                           ItemsSource="{Binding AvailableDates, UpdateSourceTrigger=PropertyChanged}"
-                          ItemStringFormat="{}{0:dd/MM/yyyy}"
+                          ItemStringFormat="{}{0:MM}"
                           IsEditable="False">
                     <ComboBox.SelectedItem>
                         <Binding Path="SelectedStartDate">
