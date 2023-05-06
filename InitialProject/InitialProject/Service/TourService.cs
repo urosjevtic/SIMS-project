@@ -40,9 +40,12 @@ namespace InitialProject.Service
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
             {
-                if (tour.Start.Date == DateTime.Today.Date)
+                foreach (DateTime start in tour.StartDates)
                 {
-                    todayTours.Add(tour);
+                    if (start.Date == DateTime.Today.Date)
+                    {
+                        todayTours.Add(tour);
+                    }
                 }
             }
             return todayTours;
@@ -55,10 +58,15 @@ namespace InitialProject.Service
             List<Tour> tours = new List<Tour>();
             foreach (Tour tour in allTours)
             {
-                if (tour.Guide.Id == user.Id && tour.Start.DayOfYear >= DateTime.Now.DayOfYear)
+                foreach(DateTime start in tour.StartDates)
                 {
-                    tours.Add(tour);
+                    if(tour.Guide.Id == user.Id && start.DayOfYear >= DateTime.Now.DayOfYear && !tours.Contains(tour))
+                    {
+                        tours.Add(tour);
+
+                    }
                 }
+               
             }
             return tours;
         }
@@ -161,11 +169,14 @@ namespace InitialProject.Service
             Tour mostVisitedTour = new Tour();
                foreach(Tour tour in FindAllEndedTours())
                 {
-                    if(tour.Start.Year == Convert.ToInt32(year) &&  max < FindVisitCount(tour))
+                    foreach(DateTime start in tour.StartDates)
                     {
-                        max = FindVisitCount(tour);
-                        mostVisitedTour = tour;
-                    }
+                        if(start.Year == Convert.ToInt32(year) && max < FindVisitCount(tour))
+                        {
+                            max = FindVisitCount(tour);
+                            mostVisitedTour = tour;
+                        }
+                    }      
                 }
                 return mostVisitedTour;
         }
@@ -261,13 +272,19 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-            foreach (Tour tour in tours)
+            foreach (Tour tour in tours)  // mijenjala sam provjeritiiii
             {
-                TimeSpan ts = new(tour.Duration, 0, 0);
-                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false )
+                foreach(DateTime start in tour.StartDates)
                 {
-                    ended.Add(tour);
+                    TimeSpan ts = new(tour.Duration, 0, 0);
+                    if(start.Add(ts) < DateTime.Now && tour.IsActive == false)
+                    {
+                        ended.Add(tour);
+
+                    }
+
                 }
+                
             }
             return ended;
         }

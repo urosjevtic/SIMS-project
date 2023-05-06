@@ -1,0 +1,110 @@
+﻿<Page x:Class="InitialProject.View.GuideView.Pages.StatisticsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.GuideView.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Background="#D1EEEE"
+      Title="StatisticsPage">
+
+    <TabControl>
+        <TabItem Header="   Visitation   " Background="#D1EEEE" FontSize="20" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Image Source="/Resources/Images/pehar.png" Margin="6,0,347,0" Height="26" VerticalAlignment="Center" Grid.Row="1" />
+
+                <Label Grid.Row="1" FontSize="16" FontWeight="SemiBold" Foreground="#004040" Content="Most visited tour ever: " Margin="60 0 0 0" HorizontalAlignment="Left" Grid.Column="0" ></Label>
+                <Label Grid.Row="2" FontSize="16"  FontWeight="SemiBold" Foreground="#004040" Margin="60 0 0 0" Content="Most visited tour in year: " ></Label>
+                <ComboBox Grid.Row="2" Margin="274,3,49,4" x:Name="YearsComboBox" Grid.Column="0"  Height="30">
+                    <ComboBoxItem x:Name="Item2023" Content="2023" FontSize="10" ></ComboBoxItem>
+                    <ComboBoxItem x:Name="Item2022" Content="2022" FontSize="10" ></ComboBoxItem>
+                    <ComboBoxItem x:Name="Item2021" Content="2021" FontSize="10" ></ComboBoxItem>
+
+                </ComboBox>
+
+
+
+                <TextBlock x:Name="mostVisitedTourTextBlock" Grid.Column="0" Grid.ColumnSpan="2" Margin="300 0 0 0" Grid.Row="1" FontSize="16" Text="{Binding MostVisitedTour.Name}" FontWeight="SemiBold" Foreground="#004040"/>
+                <TextBlock x:Name="mostVisitedTourInYearTextBlock" Grid.Column="1" Grid.Row="2" FontSize="16" FontWeight="SemiBold" Foreground="#004040" Text="{Binding MostVisitedInYear ,UpdateSourceTrigger=PropertyChanged}"/>
+
+
+
+                <DataGrid Grid.Row="4" Grid.ColumnSpan="2" CanUserAddRows="False" CanUserReorderColumns="False" FontSize="14"
+                  CanUserSortColumns="True" ItemsSource="{Binding EndedTours}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False"
+                  CanUserResizeRows="False" Margin="36,0,139,0" Grid.RowSpan="4" VerticalScrollBarVisibility="Auto"  >
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*" />
+                        <DataGridTextColumn Header="Location" Binding="{Binding Location.City}"  Width="12*"/>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*" />
+                        <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
+                        <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <Button Style="{StaticResource MenuButtonTheme}" Grid.Row="9" Grid.Column="1"
+                        Content="Show Statistic"  Command="{Binding ShowVisitation}" FontSize="14"></Button>
+            </Grid>
+        </TabItem>
+
+        <TabItem Header="    Requests     " FontSize="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Request number" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"></Label>
+                <Label Content="Filter by: " Grid.Row="1" Grid.Column="1" FontWeight="Bold" FontSize="18"></Label>
+                <Label Content="To show at level of months choose one year: " Grid.Row="1" Grid.Column="3" FontSize="18" FontWeight="Bold"></Label>
+                <Label Content="Location: " Grid.Row="2" Grid.Column="1"  FontSize="18" FontWeight="SemiBold" ></Label>
+                <Label Content="Country: " Grid.Row="3" Grid.Column="1" Margin="50 0 0 0"  FontSize="16"></Label>
+                <ComboBox x:Name="CountryComboBox" Grid.Column="1" Grid.Row="3" Grid.ColumnSpan="2" Width="150" Height="40" Margin="150 0 0 0"  ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+                <Label Content="City: " Grid.Row="4" Grid.Column="1" Margin="50 0 0 0" FontSize="16" ></Label>
+                <ComboBox x:Name="CityComboBox" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" Width="150" Height="40" Margin="150 0 0 0" ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}" ></ComboBox>
+
+                <Label Content="Language: " Grid.Row="5" Grid.Column="1" FontWeight="SemiBold"  FontSize="18"></Label>
+                <TextBox Text="{Binding Language}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Width="150" Margin="150 0 0 0" Style="{StaticResource inputFIeld}"></TextBox>
+
+                <ComboBox x:Name="YearComboBox" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2" Width="150" Height="40" Margin="0 0 190 0"  ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"></ComboBox>
+
+
+            </Grid>
+        </TabItem>
+    </TabControl>
+
+
+
+
+</Page>

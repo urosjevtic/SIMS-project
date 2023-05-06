@@ -9,22 +9,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\activeTour.png" />
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\burgerBar.png" />
     <None Remove="Resources\Images\burgerBarWhite.png" />
+    <None Remove="Resources\Images\covjeculjakBijeli.png" />
     <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\earth.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\forums.png" />
+    <None Remove="Resources\Images\grafikBijeli.png" />
     <None Remove="Resources\Images\logo.png" />
     <None Remove="Resources\Images\myAccommodation.png" />
+    <None Remove="Resources\Images\myToursBijela.png" />
     <None Remove="Resources\Images\notes.png" />
     <None Remove="Resources\Images\notification.png" />
     <None Remove="Resources\Images\paper-32.png" />
+    <None Remove="Resources\Images\pausee.png" />
+    <None Remove="Resources\Images\pehar.png" />
     <None Remove="Resources\Images\ratings.png" />
     <None Remove="Resources\Images\renovations.png" />
     <None Remove="Resources\Images\reservations.png" />
+    <None Remove="Resources\Images\reviews.png" />
     <None Remove="Resources\Images\settings.png" />
+    <None Remove="Resources\Images\statistic.png" />
+    <None Remove="Resources\Images\todayTours.png" />
+    <None Remove="Resources\Images\todayToursBijela.png" />
+    <None Remove="Resources\Images\TourReport.png" />
+    <None Remove="Resources\Images\tourRequests.png" />
+    <None Remove="Resources\Images\user.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\zvijezdaBijela.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -92,6 +107,30 @@
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.6" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="NuGet.Protocol" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="DotNetProjects.DataVisualization.Toolkit">
+      <HintPath>bin\Debug\net6.0-windows\DotNetProjects.DataVisualization.Toolkit.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Images\activeTour.png" />
+    <Resource Include="Resources\Images\covjeculjakBijeli.png" />
+    <Resource Include="Resources\Images\earth.png" />
+    <Resource Include="Resources\Images\grafikBijeli.png" />
+    <Resource Include="Resources\Images\myToursBijela.png" />
+    <Resource Include="Resources\Images\pausee.png" />
+    <Resource Include="Resources\Images\pehar.png" />
+    <Resource Include="Resources\Images\reviews.png" />
+    <Resource Include="Resources\Images\statistic.png" />
+    <Resource Include="Resources\Images\todayTours.png" />
+    <Resource Include="Resources\Images\todayToursBijela.png" />
+    <Resource Include="Resources\Images\TourReport.png" />
+    <Resource Include="Resources\Images\tourRequests.png" />
+    <Resource Include="Resources\Images\user.png" />
+    <Resource Include="Resources\Images\zvijezdaBijela.png" />
   </ItemGroup>
 
 </Project>

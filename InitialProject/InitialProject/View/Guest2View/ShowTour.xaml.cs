@@ -42,7 +42,6 @@ namespace InitialProject.View.Guest2View
             ShowTourViewModel = new ShowTourViewModel(user);
             this.DataContext = ShowTourViewModel;
             LoggedUser = user;
-            Guest = _tourGuestsRepository.GetById(LoggedUser.Id);
             _notificationRepository = new NotificationRepository();
             _tourGuestsRepository = new TourGuestRepository();
             _checkPointRepository = new CheckPointRepository();

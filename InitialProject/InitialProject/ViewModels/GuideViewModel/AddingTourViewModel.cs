@@ -28,11 +28,12 @@ namespace InitialProject.ViewModels
         private TourService _tourService;
         public Dictionary<string, List<string>> Locations { get; set; }
 
-        private GuideMainViewModel _guideMainWindow;
+       // private GuideMainViewModel _guideMainWindow;
 
         public User LoggedUser { get; set; }
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
+        public List<DateTime> StartDates { get; set; }
 
         public AddingTourViewModel(User user)
         {
@@ -41,15 +42,14 @@ namespace InitialProject.ViewModels
             
             _checkPointService = new CheckPointService();
             _tourService = new TourService();   
-            _guideMainWindow = new GuideMainViewModel(user);
+            //_guideMainWindow = new GuideMainViewModel(user);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             LoggedUser = user;
             Start = DateTime.Now;
             _locationService = new LocationService();
             Locations = _locationService.GetCountriesAndCities();
-            _guideMainWindow.UpdateToursDataGrid();
-            _guideMainWindow.UpdateTodayToursDataGrid();
+            StartDates = new List<DateTime>();
            
         }
 
@@ -193,16 +193,42 @@ namespace InitialProject.ViewModels
         }
 
 
-        private string _checkPoints;
-        public string CheckPoints
+        private string _first;
+        public string First
         {
-            get => _checkPoints;
+            get => _first;
             set
             {
-                if (value != _checkPoints)
+                if (value != _first)
                 {
-                    _checkPoints = value;
-                    OnPropertyChanged(nameof(CheckPoints));
+                    _first = value;
+                    OnPropertyChanged(nameof(First));
+                }
+            }
+        }
+        private string _last;
+        public string Last
+        {
+            get => _last;
+            set
+            {
+                if (value != _last)
+                {
+                    _last = value;
+                    OnPropertyChanged(nameof(Last));
+                }
+            }
+        }
+        private string _other;
+        public string Other
+        {
+            get => _other;
+            set
+            {
+                if (value != _other)
+                {
+                    _other = value;
+                    OnPropertyChanged(nameof(Other));
                 }
             }
         }
@@ -219,24 +245,27 @@ namespace InitialProject.ViewModels
             return _imageRepository.ReturnSaved(images).Id;
         }
 
+        public List<CheckPoint> MakeCheckPointList()
+        {
+            List<CheckPoint> checkPoints = new List<CheckPoint>();
+            checkPoints.Add(MakeNewCheckPoint(First,1));
+            int i = 2;
+            string[] checkPoint = SplitString(Other);
+            foreach (string point in checkPoint)
+            {
+                checkPoints.Add(MakeNewCheckPoint(point, i));
+                i++;
+            }
+            checkPoints.Add(MakeNewCheckPoint(Last, i));
+            return checkPoints;
+        }
 
         private string[] SplitString(string s)
         {
             return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public List<CheckPoint> AddCheckPoint(string checkPoints)
-        {
-            string[] checkPoint = SplitString(checkPoints);
-            List<CheckPoint> checkPointsList = new List<CheckPoint>();
-            int i = 1;
-            foreach (string point in checkPoint)
-            {
-                checkPointsList.Add(MakeNewCheckPoint(point, i));
-                i++;
-            }
-            return checkPointsList;
-        }
+      
 
         public CheckPoint MakeNewCheckPoint(string point, int i)
         {
@@ -251,7 +280,7 @@ namespace InitialProject.ViewModels
         private void Save()
         {
             ConfirmAddingTour();
-            _guideMainWindow.LoadData();
+            //_guideMainWindow.LoadData();
             CloseCurrentWindow();
         }
 
@@ -263,7 +292,12 @@ namespace InitialProject.ViewModels
 
         public ICommand SaveTourCommand => new RelayCommand(Save);
 
+        public ICommand AddStartDateCommand => new RelayCommand(AddStartDate);
 
+        public void AddStartDate()
+        {
+            StartDates.Add(_start);
+        }
         public void ConfirmAddingTour()
         {
             Tour tour = new Tour();
@@ -272,15 +306,15 @@ namespace InitialProject.ViewModels
             tour.Location.Id = _locationService.GetLocationId(_country, _city);
             tour.Description = _description;
             tour.Language = _language;
+            tour.StartDates = StartDates;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
-            tour.Start = Convert.ToDateTime(_start);
             tour.Duration = Convert.ToInt32(_duration);
             int imagesId = saveImages(_imagesUrl, 0);
             tour.CoverImageUrl.Id = imagesId;
-            tour.CheckPoints = AddCheckPoint(_checkPoints);
+            tour.CheckPoints = MakeCheckPointList();
             tour.IsActive = false;
             _tourService.Save(tour);
-            _guideMainWindow.LoadData();
+            //_guideMainWindow.LoadData();
         }
        
 

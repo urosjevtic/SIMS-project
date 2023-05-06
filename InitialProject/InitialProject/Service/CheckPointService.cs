@@ -77,12 +77,12 @@ namespace InitialProject.Service
 
         public void CheckFirstCheckPoint(List<CheckPoint> checkPoints)
         {
-            foreach (CheckPoint cp in checkPoints)
+            foreach (CheckPoint checkPoint in checkPoints)
             {
-                if (cp.SerialNumber == 1)
+                if (checkPoint.SerialNumber == 1)
                 {
-                    cp.IsChecked = true;
-                    Update(cp);
+                    checkPoint.IsChecked = true;
+                    _checkPointRepository.Update(checkPoint);
                 }
             }
         }

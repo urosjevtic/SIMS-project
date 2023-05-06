@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="TourGuestRating" Height="600" Width="800">
+        Title="TourGuestRating" Height="600" Width="800" WindowStartupLocation="CenterScreen">
 
 
 

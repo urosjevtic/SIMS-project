@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using InitialProject.View.OwnerView;
+using InitialProject.View.GuideView;
 
 namespace InitialProject
 {
@@ -67,7 +68,7 @@ namespace InitialProject
                     }
                     if(user.Role == UserRole.Guide)
                     {
-                        GuideMainWindow guideMainWindow = new GuideMainWindow(user);  
+                        MainWindow guideMainWindow = new MainWindow(user);  
                         guideMainWindow.Show();
                     }
                     if (user.Role == UserRole.Guest2)
