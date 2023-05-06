@@ -23,12 +23,10 @@ namespace InitialProject.ViewModels
     {
             private readonly RatedGuideTourService _ratedGuideTourService;
             private readonly TourService _tourService;
-            private readonly NotificationService _notificationService;
             public Tour SelectedActiveTour { get; set; }
             public Tour SelectedEndedTour { get; set; }
             public User LoggedUser { get; set; }
             public ICommand GoBackCommand { get; private set; }
-            public ICommand JoinTourCommand { get; private set; }
             public ICommand SubmitRateCommand { get; private set; }
             public ICommand ViewCheckpointsCommand { get; private set; }
             public ICommand RatingCommand { get; private set; }
@@ -172,13 +170,11 @@ namespace InitialProject.ViewModels
                 LoggedUser = user;
                 _tourService = new TourService();
                 _ratedGuideTourService = new RatedGuideTourService();
-                _notificationService = new NotificationService();
                 ActiveTours = new ObservableCollection<Tour>(_tourService.FindAllMyActiveTours(LoggedUser));
                 EndedTours = new ObservableCollection<Tour>(_tourService.FindAllEndedTours());
                 GroupBoxHeader = "Rate tour";
                 GroupBoxCheckpointsHeader = "Checkpoints";
                 GoBackCommand = new RelayCommand(GoBack);
-                JoinTourCommand = new RelayCommand(JoinTour);
                 SubmitRateCommand = new RelayCommand(SubmitRate);
                 ViewCheckpointsCommand = new RelayCommand<Tour>(ViewCheckpoints);
                 RatingCommand = new RelayCommand<Tour>(Rating);
@@ -241,26 +237,6 @@ namespace InitialProject.ViewModels
             {
                 SelectedEndedTour = (Tour)tour;
                 GroupBoxHeader = "Rate tour: " + SelectedEndedTour.Name;
-            }
-
-            private void JoinTour()
-            {
-                if (SelectedActiveTour == null)
-                {
-                    MessageBox.Show("You didn't select any tour! Click on Button View to select tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                else
-                {
-                    if (!_notificationService.Create(SelectedActiveTour, LoggedUser))
-                    {
-                        MessageBox.Show("You have already sent request for this tour.", "Information", MessageBoxButton.OK);
-                    }
-                    else
-                    {
-                        _notificationService.Create(SelectedActiveTour, LoggedUser);
-                        MessageBox.Show("Join request is successfully sent", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
             }
         }
     }

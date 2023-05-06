@@ -18,6 +18,11 @@ namespace InitialProject.Service
             _imageRepository = Injector.Injector.CreateInstance<IImageRepository>();
         }
 
+        public Image GetById(int id)
+        {
+            return _imageRepository.GetById(id);
+        }
+
         public void SaveImages(int entityId, string urls)
         {
             Image images = new Image();

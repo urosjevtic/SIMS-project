@@ -5,10 +5,65 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest2View"
         mc:Ignorable="d"
-        Title="Start" Height="616" Width="916" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded">
+        Title="Start" Height="616" Width="916" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Background="#F5F9FC">
     <Grid>
-        <Button Content="Start Search" HorizontalAlignment="Center" Margin="0,122,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding SearchCommand}" FontSize="36" Height="70" Width="700"/>
-        <Button Content="My Tours" HorizontalAlignment="Center" Margin="0,212,0,0" VerticalAlignment="Top" Command="{Binding ShowMyToursCommand}" FontSize="36" Height="70" Width="700"/>
-        <Button Content="Vouchers" HorizontalAlignment="Center" Margin="0,454,0,0" Grid.Row="1" VerticalAlignment="Top" Command="{Binding ShowVouchersCommand}"  FontSize="36" Height="70" Width="700"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="100"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70"/>
+        </Grid.RowDefinitions>
+        <Image Grid.Column="1" Grid.Row="0" Source="/Resources/Images/logo.png"></Image>
+        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="6,6,-5,0" VerticalAlignment="Top" Command="{Binding SearchCommand}" FontSize="36" Height="70" Width="700" Background="LightSteelBlue">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/magnifying-glass.png" Height="40"></Image>
+                <TextBlock Text=" Start search" VerticalAlignment="Center"/>
+            </StackPanel>
+            
+        </Button>
+        <Button Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" Margin="6,6,-5,0" VerticalAlignment="Top" Background="LightSteelBlue" Command="{Binding ShowMyToursCommand}" FontSize="36" Height="70" Width="700">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/next1.png" Height="40"></Image>
+                <TextBlock Text=" My tours" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Margin="6,6,-5,0" Background="LightSteelBlue" VerticalAlignment="Top" Command="{Binding MakingTourRequestsCommand}" FontSize="36" Height="70" Width="700">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/quote-request1.png" Height="40"></Image>
+                <TextBlock Text=" Making tour request" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" Background="LightSteelBlue" Margin="6,6,-5,0" VerticalAlignment="Top" Command="{Binding ShowRequestsCommand}" FontSize="36" Height="70" Width="700">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/clipboard1.png" Height="40"></Image>
+                <TextBlock Text=" Showing requests and statistics" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Background="LightSteelBlue" VerticalAlignment="Top" Command="{Binding ShowVouchersCommand}"  FontSize="36" Height="70" Width="700" Margin="6,6,-5,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/gift-card1.png" Height="40"></Image>
+                <TextBlock Text=" Vouchers" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Top" Command="{Binding ExitCommand}" Background="LightSteelBlue" FontSize="28" Height="45" Width="160" Margin="281,10,-5,0">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/log-out1.png" Height="35"></Image>
+                <TextBlock Text=" Log Out" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+        <Button HorizontalAlignment="Left" Margin="546,0,-5,0" Width="160" Height="35" Background="LightSteelBlue" VerticalAlignment="Center" FontSize="22" Command="{Binding ShowNotificationsCommand}" Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/notification.png"></Image>
+                <TextBlock Text="Notifications" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
     </Grid>
 </Window>

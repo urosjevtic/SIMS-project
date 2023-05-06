@@ -34,5 +34,21 @@ namespace InitialProject.ViewModels
             CloseCurrentWindow();
             myAccommodationsMain.Show();
         }
+
+
+        public ICommand SeeImagesCommand => new RelayCommandWithParams(SeeImages);
+
+        private void SeeImages(object parameter)
+        {
+            if (parameter is Accommodation selectedAccommodation)
+            {
+                // Navigate to the other window passing the selected guest as a parameter
+                MyAccommodationImagesView myAccommodationImages =
+                    new MyAccommodationImagesView(selectedAccommodation, _logedInUser);
+                CloseCurrentWindow();
+                myAccommodationImages.Show();
+
+            }
+        }
     }
 }

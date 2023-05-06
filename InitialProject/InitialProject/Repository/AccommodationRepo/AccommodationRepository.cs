@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.Model;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Repository.AccommodationRepo
 {
@@ -46,6 +47,12 @@ namespace InitialProject.Repository.AccommodationRepo
         public List<Accommodation> GetAll()
         {
             return _serializer.FromCSV(FilePath);
+        }
+
+        public Accommodation GetById(int accommodationId)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            return _accommodations.FirstOrDefault(a => a.Id == accommodationId);
         }
     }
 }

@@ -81,6 +81,15 @@ namespace InitialProject.ViewModels
 
         }
 
+        public ICommand OpenAccommodationStatisticsCommand => new RelayCommand(OpenAccommodationStatistics);
+
+        private void OpenAccommodationStatistics()
+        {
+            MyAccommodationStatisticView statisticView = new MyAccommodationStatisticView(LogedInUser);
+            CloseCurrentWindow();
+            statisticView.Show();
+        }
+
 
 
         protected override void MyAccommoadionsOpen()
