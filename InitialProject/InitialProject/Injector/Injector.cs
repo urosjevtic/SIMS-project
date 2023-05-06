@@ -40,6 +40,7 @@ namespace InitialProject.Injector
             {typeof(ICheckPointRepository), new CheckPointRepository()},
             {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()},
             {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
+            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()}
             {typeof(INotesRepository), new NotesRepository()},
             {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
             {typeof(IRenovationRepository), new RenovationRepository()}

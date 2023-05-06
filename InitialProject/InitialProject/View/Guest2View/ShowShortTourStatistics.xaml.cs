@@ -16,16 +16,17 @@ using InitialProject.ViewModels;
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowRequests.xaml
+    /// Interaction logic for ShowShortTourStatistics.xaml
     /// </summary>
-    public partial class ShowRequests : Window
+    public partial class ShowShortTourStatistics : Window
     {
-        public ShowTourRequestsViewModel showTourRequestsViewModel { get; set; }
-        public ShowRequests()
+        public ShowShortTourStatisticsViewModel showShortTourStatisticsViewModel { get; set; }
+        public ShowShortTourStatistics()
         {
             InitializeComponent();
-            showTourRequestsViewModel = new ShowTourRequestsViewModel();
-            this.DataContext = showTourRequestsViewModel;
+            showShortTourStatisticsViewModel = new ShowShortTourStatisticsViewModel();
+            this.DataContext = showShortTourStatisticsViewModel;
         }
+
     }
 }

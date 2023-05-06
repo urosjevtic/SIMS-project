@@ -6,36 +6,34 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using InitialProject.Domain.Model;
 using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class MakeRequestsViewModel
+    public class MakeRequestsViewModel : BaseViewModel
     {
         public ICommand MakeShortTourRequestCommand { get; private set; }
         public ICommand MakeComplexTourRequestCommand { get; private set; }
+        public User LoggedUser { get; set; }
 
-        public MakeRequestsViewModel()
+        public MakeRequestsViewModel(User user)
         {
             MakeShortTourRequestCommand = new RelayCommand(MakeShortRequest);
             MakeComplexTourRequestCommand = new RelayCommand(MakeComplexRequest);
+            LoggedUser = user;
         }
         public void MakeShortRequest()
         {
-            MakeShortTourRequest makeShort = new();
-            Close();
+            MakeShortTourRequest makeShort = new(LoggedUser);
+            CloseCurrentWindow();
             makeShort.Show();
         }
         public void MakeComplexRequest()
         {
             MakeComplexTourRequest makeComplex = new();
-            Close();
+            CloseCurrentWindow();
             makeComplex.Show();
-        }
-        public void Close()
-        {
-            Window currentWindow = Application.Current.Windows.OfType<MakeRequests>().SingleOrDefault(w => w.IsActive);
-            currentWindow?.Close();
         }
     }
 }
