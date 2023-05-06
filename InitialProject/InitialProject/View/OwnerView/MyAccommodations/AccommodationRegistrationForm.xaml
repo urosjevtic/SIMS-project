@@ -3,23 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:InitialProject.Validation"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
         mc:Ignorable="d"
         Title="AccommodationRegistrationForm" Height="700" Width="356"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <ControlTemplate x:Key="ValidationTemplate">
-            <StackPanel>
-                <!-- Placeholder for the TextBox itself -->
-                <AdornedElementPlaceholder x:Name="textBox" />
-                <TextBlock Text="{Binding [0].ErrorContent}" Foreground="Red" />
-            </StackPanel>
 
-        </ControlTemplate>
 
         <!--LogIn button style-->
         <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
+
             <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
             <Setter Property="Foreground" Value="#fff"/>
@@ -45,6 +40,15 @@
                                 <Setter Property="Background" Value="#004F8E"/>
                                 <!-- set the background color when the button is pressed -->
                             </Trigger>
+
+                            <!--Button blocked, validation-->
+                            <DataTrigger Binding="{Binding ElementName=accommodationName, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=imagesUrlTextbox, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -168,8 +172,23 @@
         </Style>
         <!-- End of Flat ComboBox -->
 
+        <!--Validation error template-->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-
+                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+            </Grid>
+        </ControlTemplate>
+        <!--End of Validation error template-->
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -186,21 +205,33 @@
         <Grid Grid.Row="2">
             <StackPanel HorizontalAlignment="Center">
                 <Label Content="Name:"/>
-                <TextBox Text="{Binding Path=AccommodationName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                <TextBox x:Name="accommodationName" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
+                    <TextBox.Text>
+                        <Binding Path="AccommodationName" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <val:EmptyStringValidation/>
+                            </Binding.ValidationRules>
+
+                        </Binding>
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <StaticResource ResourceKey="ValidationErrorTemplate" />
+                    </Validation.ErrorTemplate>
+                </TextBox>
 
                 <StackPanel Margin="0,-10,0,15" Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
                         <Label Content="Country:"/>
-                        <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" ItemsSource="{Binding Path=Locations.Keys}" Height="30" Margin="0,0,10,0" Width="100"/>
+                        <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Locations.Keys}" Height="30" Margin="0,0,10,0" Width="100"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
                         <Label Content="City:"/>
-                        <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="CityComboBox" ItemsSource="{Binding Cities}" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Width="100" Height="30"/>
+                        <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="CityComboBox" ItemsSource="{Binding Cities}" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  Width="100" Height="30"/>
                     </StackPanel>
                 </StackPanel>
 
                 <Label Content="Accommodation type:"/>
-                <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" FontSize="15">
+                <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" FontSize="15">
                     <ComboBoxItem Content="house"/>
                     <ComboBoxItem Content="appartment"/>
                     <ComboBoxItem Content="cabin"/>
@@ -212,7 +243,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Maximum number of guests:"/>
-                    <TextBox Grid.Column="1" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Height="30" TextAlignment="Center" FontSize="15" Margin="4,0,0,0"/>
+                    <TextBox Grid.Column="1" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Height="30" TextAlignment="Center" FontSize="15" Margin="4,0,0,0"/>
                 </Grid>
                 <Grid Margin="0,0,0,15">
                     <Grid.ColumnDefinitions>
@@ -220,7 +251,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Minimum reservation days:"/>
-                    <TextBox Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                    <TextBox Text="{Binding Path=MinReservationDays, UpdateSourceTrigger=PropertyChanged}" Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
                 </Grid>
                 <Grid Margin="0,0,0,15">
                     <Grid.ColumnDefinitions>
@@ -228,17 +259,30 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Label Grid.Column="0" Content="Cancelation period:"/>
-                    <TextBox Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
+                    <TextBox Text="{Binding Path=CancelationPeriod, UpdateSourceTrigger=PropertyChanged}"  Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
                 </Grid>
                 <Label Content="Images url:"></Label>
-                <TextBox Text="{Binding Path=ImagesUrl, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}" Validation.ErrorTemplate="{StaticResource ValidationTemplate}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15"/>
-
+                <TextBox x:Name="imagesUrlTextbox"  Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
+                    <TextBox.Text>
+                        <Binding Path="ImagesUrl" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <val:ImagesUrlValidation/>
+                                <val:EmptyStringValidation/>
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <StaticResource ResourceKey="ValidationErrorTemplate" />
+                    </Validation.ErrorTemplate>
+                </TextBox>
             </StackPanel>
 
 
         </Grid>
 
-        <Button Grid.Row="3" Command="{Binding ConfirmRegistrationCommand}" Content="Confirm" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmButtonStyle}"></Button>
+        <Button Grid.Row="3" Command="{Binding ConfirmRegistrationCommand}" Content="Confirm" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmButtonStyle}">
+
+        </Button>
 
     </Grid>
 </Window>

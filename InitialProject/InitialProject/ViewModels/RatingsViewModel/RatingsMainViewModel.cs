@@ -13,6 +13,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using User = InitialProject.Domain.Model.User;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Reservations;
+using InitialProject.View.OwnerView.Renovations;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
@@ -24,44 +25,6 @@ namespace InitialProject.ViewModels.RatingsViewModel
             _logedInUser = logedInUser;
         }
 
-        private Visibility _sideScreenVisibility = Visibility.Collapsed;
-
-        public Visibility SideScreenVisibility
-        {
-            get { return _sideScreenVisibility; }
-            set
-            {
-                _sideScreenVisibility = value;
-                OnPropertyChanged(nameof(SideScreenVisibility));
-            }
-        }
-
-        private Visibility _mainScreenVisibility = Visibility.Visible;
-
-        public Visibility MainScreenVisibility
-        {
-            get { return _mainScreenVisibility; }
-            set
-            {
-                _mainScreenVisibility = value;
-                OnPropertyChanged(nameof(MainScreenVisibility));
-            }
-        }
-
-        public ICommand BurgerBarClosedCommand => new RelayCommand(BurgerBarClosed);
-        public ICommand BurgerBarOpenCommand => new RelayCommand(BurgerBarOpen);
-
-        private void BurgerBarOpen()
-        {
-            SideScreenVisibility = Visibility.Visible;
-            MainScreenVisibility = Visibility.Collapsed;
-        }
-
-        private void BurgerBarClosed()
-        {
-            SideScreenVisibility = Visibility.Collapsed;
-            MainScreenVisibility = Visibility.Visible;
-        }
 
         public ICommand OpenUnratedGuestsCommand => new RelayCommand(OpenUnratedGuests);
 
@@ -105,6 +68,13 @@ namespace InitialProject.ViewModels.RatingsViewModel
             ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
             CloseCurrentWindow();
             reservationsMain.Show();
+        }
+
+        protected override void RenovationsOpen()
+        {
+            RenovationsMainView renovationsMainView = new RenovationsMainView(_logedInUser);
+            CloseCurrentWindow();
+            renovationsMainView.Show();
         }
 
 
