@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
+using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
 using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
+using InitialProject.Repository.StatisticRepo;
 using InitialProject.Repository.UserRepo;
 
 namespace InitialProject.Injector
@@ -35,7 +37,11 @@ namespace InitialProject.Injector
             {typeof(INotificationRepository), new NotificationRepository()},
             {typeof(ICheckPointRepository), new CheckPointRepository()},
             {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()},
-            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()}
+            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
+            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()}
+            {typeof(INotesRepository), new NotesRepository()},
+            {typeof(IYearlyAccommodationStatisticsRepository), new YearlyAccommodationStatisticRepository()},
+            {typeof(IMonthlyAccommodationStatisticRepository), new MonthlyAccommodationStatisticRepository()}
 
             // Add more implementations here
         };

@@ -30,7 +30,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
 
         private bool _superOwner;
-        public bool SuperOwner
+        public bool IsSuperOwner
         {
             get { return _superOwnerService.IsSuperOwner(_logedInUser.Id); }
             set
@@ -38,7 +38,24 @@ namespace InitialProject.ViewModels.RatingsViewModel
                 if (value != _superOwner)
                 {
                     _superOwner = value;
-                    OnPropertyChanged(nameof(SuperOwner));
+                    OnPropertyChanged(nameof(IsSuperOwner));
+                }
+            }
+        }
+
+
+
+        private double _avrageRating;
+
+        public double AvrageRating
+        {
+            get { return _superOwnerService.GetAvrageRating(_logedInUser.Id); }
+            set
+            {
+                if (value != _avrageRating)
+                {
+                    _avrageRating = value;
+                    OnPropertyChanged(nameof(AvrageRating));
                 }
             }
         }
