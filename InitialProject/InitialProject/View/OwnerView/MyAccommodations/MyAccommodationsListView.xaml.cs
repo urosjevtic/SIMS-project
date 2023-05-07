@@ -12,20 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels;
-using InitialProject.ViewModels.RatingsViewModel;
 
-namespace InitialProject.View.OwnerView.Ratings
+namespace InitialProject.View.OwnerView.MyAccommodations
 {
     /// <summary>
-    /// Interaction logic for UnratedGuestsList.xaml
+    /// Interaction logic for MyAccommodationsListView.xaml
     /// </summary>
-    public partial class UnratedGuestsList : Window
+    public partial class MyAccommodationsListView : Page
     {
-        public UnratedGuestsList(User logedInUser)
+        public MyAccommodationsListView(User logedInUser, Navigator navigator)
         {
             InitializeComponent();
-            DataContext = new UnratedGuestsListViewModel(logedInUser);
+            DataContext = new MyAccommodationListViewModel(logedInUser, navigator);
         }
     }
 }

@@ -2,10 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Service;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.Utilities;
@@ -19,20 +15,20 @@ namespace InitialProject.ViewModels
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
-        public MyAccommodationListViewModel(User logedInUser)
+        public Navigator Navigator { get; set; }
+        public MyAccommodationListViewModel(User logedInUser, Navigator navigator)
         {
             _accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            Navigator = navigator;
         }
 
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMain.Show();
+            Navigator.NavigateTo(new MyAccommodationsMainView(_logedInUser, Navigator));
         }
 
 
@@ -42,12 +38,7 @@ namespace InitialProject.ViewModels
         {
             if (parameter is Accommodation selectedAccommodation)
             {
-                // Navigate to the other window passing the selected guest as a parameter
-                MyAccommodationImagesView myAccommodationImages =
-                    new MyAccommodationImagesView(selectedAccommodation, _logedInUser);
-                CloseCurrentWindow();
-                myAccommodationImages.Show();
-
+                Navigator.NavigateTo(new MyAccommodationImagesView(selectedAccommodation, _logedInUser, Navigator));
             }
         }
     }

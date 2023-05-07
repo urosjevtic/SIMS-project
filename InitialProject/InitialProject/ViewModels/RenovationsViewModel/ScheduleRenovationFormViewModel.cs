@@ -10,6 +10,7 @@ using InitialProject.Service.RenovationServices;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Utilities;
 using InitialProject.Validation;
+using InitialProject.View.OwnerView.Renovations;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
 {
@@ -18,13 +19,16 @@ namespace InitialProject.ViewModels.RenovationsViewModel
 
         private readonly RenovationService _renovationService;
         private readonly Accommodation _accommodation;
+        private readonly User _logedInUser;
         private readonly AccommodationReservationService _accommodationReservationService;
-
-        public ScheduleRenovationFormViewModel(User logedInUser, Accommodation accommodation)
+        public Navigator Navigator { get; set; }
+        public ScheduleRenovationFormViewModel(User logedInUser, Accommodation accommodation, Navigator navigator)
         {
             _renovationService = new RenovationService();
             _accommodationReservationService = new AccommodationReservationService();
             _accommodation = accommodation;
+            _logedInUser = logedInUser;
+            Navigator = navigator;
         }
 
         private List<DateTime> _availableDates;
@@ -107,11 +111,18 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private void ScheduleRenovation()
         {
             _renovationService.ScheduleRenovation(_accommodation, _selectedStartDate, _renovationLength, _renovationDescription);
+            Navigator.NavigateTo(new ScheduleRenovationListView(_logedInUser, Navigator));
         }
 
         private bool canExecuteCommand()
         {
             return RenovationDescription != "" && FromDate < ToDate && SelectedStartDate != DateTime.Parse("01/01/0001 00:00:00");
+        }
+
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+        private void GoBack()
+        {
+            Navigator.NavigateTo(new ScheduleRenovationListView(_logedInUser, Navigator));
         }
     }
 }

@@ -12,19 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
+using InitialProject.ViewModels;
 using InitialProject.ViewModels.RatingsViewModel;
 
 namespace InitialProject.View.OwnerView.Ratings
 {
     /// <summary>
-    /// Interaction logic for AccommodationRatings.xaml
+    /// Interaction logic for GuestRatingFormView.xaml
     /// </summary>
-    public partial class AccommodationRatings : Window
+    public partial class GuestRatingFormView : Page
     {
-        public AccommodationRatings(User logedInUser, Accommodation accommodation)
+        public GuestRatingFormView(User logedInUser, UnratedGuest unratedGuest, Navigator navigator)
         {
             InitializeComponent();
-            DataContext = new AccommodationRatingsViewModel(logedInUser, accommodation);
+            DataContext = new GuestRatingFormViewModel(logedInUser, unratedGuest, navigator);
         }
     }
 }

@@ -24,9 +24,10 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         private readonly int AccommodataionId;
         public  DateTime YearWithMostReservations { get; }
         public Accommodation Accommodation { get; }
+        public Navigator Navigator { get; set; }
 
 
-        public MyAccommodationYearlyStatisticViewModel(int accommodationId, User logedInUser)
+        public MyAccommodationYearlyStatisticViewModel(int accommodationId, User logedInUser, Navigator navigator)
         {
             _yearlyAccommodationService = new YearlyAccommodationService();
             _accommodationService = new AccommodationService();
@@ -35,14 +36,13 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             Statistics = new ObservableCollection<AccommodationStatistic>(_yearlyAccommodationService.GetStatisticByAccommodationId(accommodationId));
             YearWithMostReservations = _yearlyAccommodationService.GetYearWithMostReservations(AccommodataionId);
             Accommodation = _accommodationService.GetById(AccommodataionId);
+            Navigator = navigator;
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationStatisticView myAccommodationsStatistic = new MyAccommodationStatisticView(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsStatistic.Show();
+            Navigator.NavigateTo(new MyAccommodationStatisticView(_logedInUser, Navigator));
         }
 
 
@@ -53,10 +53,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             if (parameter is AccommodationStatistic selectedStatistic)
             {
                 // Navigate to the other window passing the selected guest as a parameter
-                MyAccommodationMonthlyStatisticView myAccommodationMonthlyStatistic =
-                    new MyAccommodationMonthlyStatisticView(AccommodataionId, selectedStatistic.MonthAndYear, _logedInUser);
-                CloseCurrentWindow();
-                myAccommodationMonthlyStatistic.Show();
+                Navigator.NavigateTo(new MyAccommodationMonthlyStatisticView(AccommodataionId, selectedStatistic.MonthAndYear, _logedInUser, Navigator));
 
             }
         }

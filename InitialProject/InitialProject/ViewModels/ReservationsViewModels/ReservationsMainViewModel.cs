@@ -16,7 +16,7 @@ using InitialProject.View.OwnerView.Renovations;
 
 namespace InitialProject.ViewModels.ReservationsViewModels
 {
-    public class ReservationsMainViewModel : SideScreenViewModel
+    public class ReservationsMainViewModel : BaseViewModel
     {
         private readonly User _logedInUser;
 
@@ -46,36 +46,6 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         }
 
 
-        protected override void MyAccommoadionsOpen()
-        {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
-        }
-
-
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
-
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
-        }
-
-        protected override void RenovationsOpen()
-        {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(_logedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
-        }
 
     }
 }

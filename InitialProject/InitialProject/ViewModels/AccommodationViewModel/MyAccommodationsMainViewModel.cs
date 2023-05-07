@@ -15,13 +15,15 @@ using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels
 {
-    public class MyAccommodationsMainViewModel :  SideScreenViewModel
+    public class MyAccommodationsMainViewModel :  BaseViewModel
     {
 
         public User LogedInUser;
-        public MyAccommodationsMainViewModel(User logedInUser)
+        public Navigator Navigator { get; set; }
+        public MyAccommodationsMainViewModel(User logedInUser, Navigator navigator)
         {
             LogedInUser = logedInUser;
+            Navigator = navigator;
         }
 
 
@@ -29,19 +31,14 @@ namespace InitialProject.ViewModels
 
         private void OpenRegistrationForm()
         {
-            AccommodationRegistrationForm accommodationRegistrationForm = new AccommodationRegistrationForm(LogedInUser);
-            CloseCurrentWindow();
-            accommodationRegistrationForm.Show();
-
+            Navigator.NavigateTo(new AccommodationRegistrationForm(LogedInUser, Navigator));
         }
 
         public ICommand OpenAccommodationListCommand => new RelayCommand(OpenAccommodationList);
 
         private void OpenAccommodationList()
         {
-            MyAccommodationsList myAccommodationsList = new MyAccommodationsList(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsList.Show();
+            Navigator.NavigateTo(new MyAccommodationsListView(LogedInUser, Navigator));
 
         }
 
@@ -49,42 +46,9 @@ namespace InitialProject.ViewModels
 
         private void OpenAccommodationStatistics()
         {
-            MyAccommodationStatisticView statisticView = new MyAccommodationStatisticView(LogedInUser);
-            CloseCurrentWindow();
-            statisticView.Show();
+            Navigator.NavigateTo(new MyAccommodationStatisticView(LogedInUser, Navigator));
         }
 
 
-
-        protected override void MyAccommoadionsOpen()
-        {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
-        }
-
-
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
-
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
-        }
-
-        protected override void RenovationsOpen()
-        {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(LogedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
-        }
     }
 }

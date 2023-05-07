@@ -18,20 +18,20 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         public ObservableCollection<Accommodation> Accommodations { get; }
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
+        public Navigator Navigator;
 
-        public MyAccommodationStatisticsViewModel(User logedInUser)
+        public MyAccommodationStatisticsViewModel(User logedInUser, Navigator navigator)
         {
             _accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            Navigator = navigator;
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMain.Show();
+            Navigator.NavigateTo(new MyAccommodationsMainView(_logedInUser, Navigator));
         }
 
         public ICommand SeeStatisticCommand => new RelayCommandWithParams(SeeStatistic);
@@ -41,10 +41,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             if (parameter is Accommodation selectedAccommodation)
             {
                 // Navigate to the other window passing the selected guest as a parameter
-                MyAccommodationYearlyStatisticView myAccommodationYearlyStatistic =
-                    new MyAccommodationYearlyStatisticView(selectedAccommodation.Id, _logedInUser);
-                CloseCurrentWindow();
-                myAccommodationYearlyStatistic.Show();
+                Navigator.NavigateTo(new MyAccommodationYearlyStatisticView(selectedAccommodation.Id, _logedInUser, Navigator));
 
             }
         }

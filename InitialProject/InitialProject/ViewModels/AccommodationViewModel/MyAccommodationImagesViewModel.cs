@@ -17,15 +17,17 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         private readonly Image _images;
         private readonly User _logedInUser;
         private int ImageCounter = 0;
+        public Navigator Navigator { get; set; }
 
         public Accommodation Accommodation { get; }
-        public MyAccommodationImagesViewModel(User logedInUser, Accommodation accommodation)
+        public MyAccommodationImagesViewModel(User logedInUser, Accommodation accommodation, Navigator navigator)
         {
             _imageService = new ImageService();
             _logedInUser = logedInUser;
             Accommodation = accommodation;
             _images = _imageService.GetById(Accommodation.Images.Id);
             _imageUrl = _images.Url[ImageCounter];
+            Navigator = navigator;
         }
 
 
@@ -64,9 +66,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationsList myAccommodationsList = new MyAccommodationsList(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsList.Show();
+            Navigator.NavigateTo(new MyAccommodationsListView(_logedInUser, Navigator));
         }
     }
 }

@@ -20,12 +20,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private readonly AccommodationService _accommodationService;
         private readonly SuperOwnerService _superOwnerService;
         private readonly User _logedInUser;
-        public AccommodationReviewsSelectionViewModel(User logedInUser)
+        public Navigator Navigator { get; set; }
+        public AccommodationReviewsSelectionViewModel(User logedInUser, Navigator navigator)
         {
             _accommodationService = new AccommodationService();
             _superOwnerService = new SuperOwnerService();
             _logedInUser = logedInUser;
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
+            Navigator = navigator;
         }
 
 
@@ -66,10 +68,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
             if (parameter is Accommodation selectedAccommodation)
             {
                 // Navigate to the other window passing the selected guest as a parameter
-                AccommodationRatings accommodationRatings =
-                    new AccommodationRatings(_logedInUser, selectedAccommodation);
-                CloseCurrentWindow();
-                accommodationRatings.Show();
+                Navigator.NavigateTo(new AccommodationRatingsView(_logedInUser, selectedAccommodation, Navigator));
 
             }
         }
@@ -77,9 +76,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
+            Navigator.NavigateTo(new RatingsMainView(_logedInUser, Navigator));
         }
 
     }

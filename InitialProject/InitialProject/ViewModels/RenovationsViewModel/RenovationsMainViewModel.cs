@@ -13,64 +13,34 @@ using InitialProject.Utilities;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
 {
-    public class RenovationsMainViewModel : SideScreenViewModel
+    public class RenovationsMainViewModel : BaseViewModel
     {
 
 
         private readonly User _logedInUser;
-        public RenovationsMainViewModel(User logedInUser)
+        public Navigator Navigator { get;  set; }
+        public RenovationsMainViewModel(User logedInUser, Navigator navigator)
         {
             _logedInUser = logedInUser;
-        }
-
-        protected override void MyAccommoadionsOpen()
-        {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
+            Navigator = navigator;
         }
 
 
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
 
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
-        }
-
-        protected override void RenovationsOpen()
-        {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(_logedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
-        }
 
 
         public ICommand OpenScheduleRenovationCommand => new RelayCommand(OpenScheduleRenovation);
 
         private void OpenScheduleRenovation()
         {
-            ScheduleRenovationListView scheduleRenovationList = new ScheduleRenovationListView(_logedInUser);
-            CloseCurrentWindow();
-            scheduleRenovationList.Show();
+            Navigator.NavigateTo(new ScheduleRenovationListView(_logedInUser, Navigator));
         }
 
         public ICommand OpenScheduledRenovationsCommand => new RelayCommand(OpenScheduledRenovations);
 
         private void OpenScheduledRenovations()
         {
-            ScheduledRenovationListView scheduleRenovationList = new ScheduledRenovationListView(_logedInUser);
-            CloseCurrentWindow();
-            scheduleRenovationList.Show();
+            Navigator.NavigateTo(new ScheduledRenovationListView(_logedInUser, Navigator));
         }
     }
 }

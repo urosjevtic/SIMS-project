@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels.RenovationsViewModel;
 
 namespace InitialProject.View.OwnerView.Renovations
@@ -19,12 +20,12 @@ namespace InitialProject.View.OwnerView.Renovations
     /// <summary>
     /// Interaction logic for ScheduledRenovationListView.xaml
     /// </summary>
-    public partial class ScheduledRenovationListView : Window
+    public partial class ScheduledRenovationListView : Page
     {
-        public ScheduledRenovationListView(User logedInUser)
+        public ScheduledRenovationListView(User logedInUser, Navigator navigator)
         {
             InitializeComponent();
-            DataContext = new ScheduledRenovationsListViewModel(logedInUser);
+            DataContext = new ScheduledRenovationsListViewModel(logedInUser, navigator);
         }
     }
 }

@@ -21,21 +21,22 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private readonly User _logedInUser;
         public Accommodation Accommodation { get; }
 
-        public AccommodationRatingsViewModel(User logedInUser, Accommodation accommodation)
+        public Navigator Navigator { get; set; }
+
+        public AccommodationRatingsViewModel(User logedInUser, Accommodation accommodation, Navigator navigator)
         {
             _ratedOwnerService = new RatedOwnerService();
             Accommodation = accommodation;
             Ratings = new ObservableCollection<RatedOwner>(_ratedOwnerService.GetFilteredRatingsByAccommodationId(Accommodation.Id));
             _logedInUser = logedInUser;
+            Navigator = navigator;
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 
         private void GoBack()
         {
-            AccommodationReviewsSelectionWindow reviewsSelection = new AccommodationReviewsSelectionWindow(_logedInUser);
-            CloseCurrentWindow();
-            reviewsSelection.Show();
+            Navigator.NavigateTo(new AccommodationReviewsSelectionView(_logedInUser, Navigator));
         }
 
     }

@@ -22,7 +22,8 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         private readonly User _logedInUser;
         private readonly List<DateTime> _availableMonths;
         public Accommodation Accommodation { get; }
-        public MyAccommodationMonthlyStatisticsViewModel(DateTime selectedYear, int accommodationId, User logedInUser)
+        public Navigator Navigator { get; set; }
+        public MyAccommodationMonthlyStatisticsViewModel(DateTime selectedYear, int accommodationId, User logedInUser, Navigator navigator)
         {
             _selectedYear = selectedYear;
             _accommodationId = accommodationId;
@@ -30,6 +31,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
             _accommodationService = new AccommodationService();
             Accommodation = _accommodationService.GetById(_accommodationId);
+            Navigator = navigator;
         }
 
 
@@ -161,9 +163,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationYearlyStatisticView myAccommodationsStatistic = new MyAccommodationYearlyStatisticView(_accommodationId, _logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsStatistic.Show();
+            Navigator.NavigateTo(new MyAccommodationYearlyStatisticView(_accommodationId, _logedInUser, Navigator));
         }
 
     }

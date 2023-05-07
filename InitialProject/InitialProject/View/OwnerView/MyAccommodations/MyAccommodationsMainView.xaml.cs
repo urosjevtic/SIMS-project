@@ -12,19 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.OwnerView.MyAccommodations
 {
     /// <summary>
-    /// Interaction logic for MyAccommodationsMainWindow.xaml
+    /// Interaction logic for MyAccommodationsMainView.xaml
     /// </summary>
-    public partial class MyAccommodationsMainWindow : Window
+    public partial class MyAccommodationsMainView : Page
     {
-        public MyAccommodationsMainWindow(User logedInUser)
+        public MyAccommodationsMainView(User logedInUser, Navigator navigator)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationsMainViewModel(logedInUser);
+            DataContext = new MyAccommodationsMainViewModel(logedInUser, navigator);
         }
     }
 }

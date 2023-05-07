@@ -74,9 +74,8 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void GoBack()
         {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_loggedInUser);
+            ReservationsMainView reservationsMain = new ReservationsMainView(_loggedInUser);
             CloseCurrentWindow();
-            reservationsMain.Show();
         }
 
 

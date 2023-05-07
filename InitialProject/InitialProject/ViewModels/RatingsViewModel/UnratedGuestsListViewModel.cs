@@ -21,11 +21,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public ObservableCollection<UnratedGuest> UnratedGuests { get; set; }
         private readonly UnratedGuestService _unratedGuestService;
         private readonly User _logedInUser;
-        public UnratedGuestsListViewModel(User logedInUser)
+
+        public Navigator Navigator { get; set; }
+        public UnratedGuestsListViewModel(User logedInUser, Navigator navigator)
         {
             _unratedGuestService = new UnratedGuestService();
             UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuestService.GetUnratedGuestsByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            Navigator = navigator;
         }
 
         public ICommand OpenRatingWindowCommand => new RelayCommandWithParams(OpenRatingWindow);
@@ -33,10 +36,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
         {
             if (parameter is UnratedGuest selectedGuest)
             {
-                // Navigate to the other window passing the selected guest as a parameter
-                GuestRatingForm guestRatingForm = new GuestRatingForm(_logedInUser, selectedGuest);
-                CloseCurrentWindow();
-                guestRatingForm.Show();
+                Navigator.NavigateTo(new GuestRatingFormView(_logedInUser, selectedGuest, Navigator));
             }
         }
 
@@ -45,9 +45,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void GoBack()
         {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
+            Navigator.NavigateTo(new RatingsMainView(_logedInUser, Navigator));
         }
 
 

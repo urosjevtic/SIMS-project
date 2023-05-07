@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels.AccommodationViewModel;
 
 namespace InitialProject.View.OwnerView.MyAccommodations
@@ -19,12 +20,12 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// <summary>
     /// Interaction logic for MyAccommodationMonthlyStatisticView.xaml
     /// </summary>
-    public partial class MyAccommodationMonthlyStatisticView : Window
+    public partial class MyAccommodationMonthlyStatisticView : Page
     {
-        public MyAccommodationMonthlyStatisticView(int accommodationId, DateTime year, User logedInUser)
+        public MyAccommodationMonthlyStatisticView(int accommodationId, DateTime year, User logedInUser, Navigator navigator)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationMonthlyStatisticsViewModel(year, accommodationId, logedInUser);
+            DataContext = new MyAccommodationMonthlyStatisticsViewModel(year, accommodationId, logedInUser, navigator);
         }
     }
 }

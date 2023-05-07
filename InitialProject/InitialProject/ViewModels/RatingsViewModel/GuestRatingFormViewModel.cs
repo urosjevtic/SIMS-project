@@ -19,12 +19,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public UnratedGuest UnratedGuest { get; }
         private readonly GuestRatingService _guestRatingService;
         private readonly User _logedInUser;
+        public Navigator Navigator { get; set; }
 
-        public GuestRatingFormViewModel(User logedInUser, UnratedGuest unratedGuest)
+        public GuestRatingFormViewModel(User logedInUser, UnratedGuest unratedGuest, Navigator navigator)
         {
             UnratedGuest = unratedGuest;
             _guestRatingService = new GuestRatingService();
             _logedInUser = logedInUser;
+            Navigator = navigator;
         }
 
 
@@ -76,18 +78,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private void RateAGuest()
         {
             _guestRatingService.SubmitRating(UnratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
-            UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
-            CloseCurrentWindow();
-            unratedGuestsList.Show();
+            Navigator.NavigateTo(new UnratedGuestsListView(_logedInUser, Navigator));
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 
         private void GoBack()
         {
-            UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
-            CloseCurrentWindow();
-            unratedGuestsList.Show();
+            Navigator.NavigateTo(new UnratedGuestsListView(_logedInUser, Navigator));
         }
 
     }

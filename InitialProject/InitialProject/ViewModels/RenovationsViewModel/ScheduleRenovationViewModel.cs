@@ -18,13 +18,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
+        public Navigator Navigator { get; set; }
 
-
-        public ScheduleRenovationViewModel(User logedInUser)
+        public ScheduleRenovationViewModel(User logedInUser, Navigator navigator)
         {
             _accommodationService = new AccommodationService();
             _logedInUser = logedInUser;
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
+            Navigator = navigator;
         }
 
 
@@ -35,13 +36,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         {
             if (parameter is Accommodation selectedAccommodation)
             {
-                // Navigate to the other window passing the selected guest as a parameter
-                ScheduleRenovationFormView scheduleRenovationForm =
-                    new ScheduleRenovationFormView(_logedInUser, selectedAccommodation);
-                CloseCurrentWindow();
-                scheduleRenovationForm.Show();
+                Navigator.NavigateTo(new ScheduleRenovationFormView(_logedInUser, selectedAccommodation, Navigator));
 
             }
+        }
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+        private void GoBack()
+        {
+            Navigator.NavigateTo(new RenovationsMainView(_logedInUser, Navigator));
         }
     }
 }

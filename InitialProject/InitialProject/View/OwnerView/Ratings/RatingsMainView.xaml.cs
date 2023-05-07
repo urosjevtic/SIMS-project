@@ -13,19 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
-using InitialProject.ViewModels.RenovationsViewModel;
+using InitialProject.ViewModels;
+using InitialProject.ViewModels.RatingsViewModel;
 
-namespace InitialProject.View.OwnerView.Renovations
+namespace InitialProject.View.OwnerView.Ratings
 {
     /// <summary>
-    /// Interaction logic for RenovationsMain.xaml
+    /// Interaction logic for RatingsMainView.xaml
     /// </summary>
-    public partial class RenovationsMainView : Page
+    public partial class RatingsMainView : Page
     {
-        public RenovationsMainView(User logedInUser, Navigator navigator)
+        public RatingsMainView(User logedInUser, Navigator navigator)
         {
             InitializeComponent();
-            DataContext = new RenovationsMainViewModel(logedInUser, navigator);
+            DataContext = new RatingsMainViewModel(logedInUser, navigator);
         }
     }
 }

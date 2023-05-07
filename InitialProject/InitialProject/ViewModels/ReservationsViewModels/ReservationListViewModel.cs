@@ -31,9 +31,8 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void GoBack()
         {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
+            ReservationsMainView reservationsMain = new ReservationsMainView(_logedInUser);
             CloseCurrentWindow();
-            reservationsMain.Show();
         }
 
         public ICommand CancelReservationCommand => new RelayCommandWithParams(CancelReservation);
