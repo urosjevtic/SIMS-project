@@ -264,14 +264,13 @@ namespace InitialProject.Service
             foreach (Tour tour in tours)
             {
                 TimeSpan ts = new(tour.Duration, 0, 0);
-                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false )
+                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
                 {
                     ended.Add(tour);
                 }
             }
             return ended;
         }
-      
         public void RateTour(Tour SelectedTour)
         {
             SelectedTour.IsRated = true;

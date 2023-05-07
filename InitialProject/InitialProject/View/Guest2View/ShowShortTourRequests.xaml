@@ -45,7 +45,7 @@
                 <DataGridTextColumn Header="Date" Binding="{Binding From}" Width="*"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Command="{Binding GoBackCommand}" Grid.Column="1" Grid.Row="4" Height="60" Width="160" FontSize="28" HorizontalAlignment="Left" Background="LightSteelBlue" VerticalAlignment="Center">
+        <Button Command="{Binding GoBackCommand}" Grid.Column="1" Grid.Row="4" Height="60" Width="160" BorderThickness="2" FontSize="28" HorizontalAlignment="Left" Background="LightSteelBlue" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
                 <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
