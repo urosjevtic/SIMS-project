@@ -12,16 +12,19 @@ using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Ratings;
 using InitialProject.View.OwnerView.Renovations;
 using InitialProject.View.OwnerView.Reservations;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
-    public class MyAccommodationsMainViewModel :  SideScreenViewModel
+    public class MyAccommodationsMainViewModel :  BaseViewModel
     {
 
         public User LogedInUser;
-        public MyAccommodationsMainViewModel(User logedInUser)
+        public NavigationService NavigationService { get; set; }
+        public MyAccommodationsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             LogedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
 
@@ -29,19 +32,14 @@ namespace InitialProject.ViewModels
 
         private void OpenRegistrationForm()
         {
-            AccommodationRegistrationForm accommodationRegistrationForm = new AccommodationRegistrationForm(LogedInUser);
-            CloseCurrentWindow();
-            accommodationRegistrationForm.Show();
-
+            NavigationService.Navigate(new AccommodationRegistrationForm(LogedInUser, NavigationService));
         }
 
         public ICommand OpenAccommodationListCommand => new RelayCommand(OpenAccommodationList);
 
         private void OpenAccommodationList()
         {
-            MyAccommodationsList myAccommodationsList = new MyAccommodationsList(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsList.Show();
+            NavigationService.Navigate(new MyAccommodationsListView(LogedInUser, NavigationService));
 
         }
 
@@ -49,42 +47,9 @@ namespace InitialProject.ViewModels
 
         private void OpenAccommodationStatistics()
         {
-            MyAccommodationStatisticView statisticView = new MyAccommodationStatisticView(LogedInUser);
-            CloseCurrentWindow();
-            statisticView.Show();
+            NavigationService.Navigate(new MyAccommodationStatisticView(LogedInUser, NavigationService));
         }
 
 
-
-        protected override void MyAccommoadionsOpen()
-        {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
-        }
-
-
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
-
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
-        }
-
-        protected override void RenovationsOpen()
-        {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(LogedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
-        }
     }
 }

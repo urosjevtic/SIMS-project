@@ -15,11 +15,37 @@ using InitialProject.View.OwnerView.Reservations;
 using InitialProject.ViewModels;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using InitialProject.View.OwnerView.Renovations;
+using System.Windows.Controls;
+using System.Windows.Navigation;
+using InitialProject.View.OwnerView.MainWindow;
 
 namespace InitialProject.ViewModel
 {
     public class OwnerMainViewModel : SideScreenViewModel
     {
+
+
+        public NavigationService NavigationService { get; set; }
+
+        public OwnerMainViewModel(User user)
+        {
+            LogedInUser = user;
+            NavigationService = SelectedPage.NavigationService;
+            SelectedPage.Content = new MainPageView(user, NavigationService);
+        }
+
+        private Frame _selectedPage = new Frame();
+        public Frame SelectedPage
+        {
+            get => _selectedPage;
+            set
+            {
+                _selectedPage = value;
+                OnPropertyChanged("SelectedPage");
+            }
+        }
+
+
         private User _loggedInUser;
 
         public User LogedInUser
@@ -36,11 +62,6 @@ namespace InitialProject.ViewModel
 
 
 
-        public OwnerMainViewModel(User user)
-        {
-            LogedInUser = user;
-        }
-
         private void BurgerBarOpen()
         {
             SideScreenVisibility = Visibility.Visible;
@@ -56,33 +77,28 @@ namespace InitialProject.ViewModel
 
         protected override void MyAccommoadionsOpen()
         {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-           
+            NavigationService.Navigate(new MyAccommodationsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
 
         protected override void RatingsOpen()
         {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
+            NavigationService.Navigate(new RatingsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
 
         protected override void ReservationsOpen()
         {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
+            NavigationService.Navigate(new ReservationsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
         protected override void RenovationsOpen()
         {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(LogedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
+            NavigationService.Navigate(new RenovationsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
         public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
@@ -90,7 +106,7 @@ namespace InitialProject.ViewModel
         private void NotesOpen()
         {
             NotesView notesView = new NotesView(_loggedInUser);
-            notesView.Show();
+            notesView.ShowDialog();
         }
 
 

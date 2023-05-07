@@ -10,21 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
-using InitialProject.ViewModels.ReservationsViewModels;
+using InitialProject.Utilities;
+using InitialProject.ViewModels;
+using InitialProject.ViewModels.RatingsViewModel;
 
-namespace InitialProject.View.OwnerView.Reservations
+namespace InitialProject.View.OwnerView.Ratings
 {
     /// <summary>
-    /// Interaction logic for ReservationsMainWindow.xaml
+    /// Interaction logic for UnratedGuestsListView.xaml
     /// </summary>
-    public partial class ReservationsMainWindow : Window
+    public partial class UnratedGuestsListView : Page
     {
-        public ReservationsMainWindow(User logedInUser)
+        public UnratedGuestsListView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new ReservationsMainViewModel(logedInUser);
+            DataContext = new UnratedGuestsListViewModel(logedInUser, navigationService);
         }
     }
 }

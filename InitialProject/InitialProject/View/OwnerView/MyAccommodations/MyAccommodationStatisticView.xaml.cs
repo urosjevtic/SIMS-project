@@ -10,8 +10,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels.AccommodationViewModel;
 
 namespace InitialProject.View.OwnerView.MyAccommodations
@@ -19,12 +21,12 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// <summary>
     /// Interaction logic for MyAccommodationStatisticView.xaml
     /// </summary>
-    public partial class MyAccommodationStatisticView : Window
+    public partial class MyAccommodationStatisticView : Page
     {
-        public MyAccommodationStatisticView(User logedInUser)
+        public MyAccommodationStatisticView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationStatisticsViewModel(logedInUser);
+            DataContext = new MyAccommodationStatisticsViewModel(logedInUser, navigationService);
         }
     }
 }

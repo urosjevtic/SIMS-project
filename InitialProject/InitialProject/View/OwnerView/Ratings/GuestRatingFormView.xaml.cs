@@ -10,22 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels;
 using InitialProject.ViewModels.RatingsViewModel;
 
 namespace InitialProject.View.OwnerView.Ratings
 {
     /// <summary>
-    /// Interaction logic for UnratedGuestsList.xaml
+    /// Interaction logic for GuestRatingFormView.xaml
     /// </summary>
-    public partial class UnratedGuestsList : Window
+    public partial class GuestRatingFormView : Page
     {
-        public UnratedGuestsList(User logedInUser)
+        public GuestRatingFormView(User logedInUser, UnratedGuest unratedGuest, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new UnratedGuestsListViewModel(logedInUser);
+            DataContext = new GuestRatingFormViewModel(logedInUser, unratedGuest, navigationService);
         }
     }
 }

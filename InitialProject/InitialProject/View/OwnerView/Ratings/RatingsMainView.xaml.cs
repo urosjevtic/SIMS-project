@@ -10,21 +10,24 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels;
+using InitialProject.ViewModels.RatingsViewModel;
 
-namespace InitialProject.View.OwnerView.MyAccommodations
+namespace InitialProject.View.OwnerView.Ratings
 {
     /// <summary>
-    /// Interaction logic for MyAccommodationsMainWindow.xaml
+    /// Interaction logic for RatingsMainView.xaml
     /// </summary>
-    public partial class MyAccommodationsMainWindow : Window
+    public partial class RatingsMainView : Page
     {
-        public MyAccommodationsMainWindow(User logedInUser)
+        public RatingsMainView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationsMainViewModel(logedInUser);
+            DataContext = new RatingsMainViewModel(logedInUser, navigationService);
         }
     }
 }

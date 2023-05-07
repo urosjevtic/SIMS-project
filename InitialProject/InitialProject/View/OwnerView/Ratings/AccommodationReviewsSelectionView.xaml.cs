@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InitialProject.ViewModels.RatingsViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,22 +13,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GalaSoft.MvvmLight.Views;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
-using InitialProject.ViewModels.AccommodationViewModel;
 
-namespace InitialProject.View.OwnerView.MyAccommodations
+namespace InitialProject.View.OwnerView.Ratings
 {
     /// <summary>
-    /// Interaction logic for MyAccommodationImagesView.xaml
+    /// Interaction logic for AccommodationReviewsSelectionView.xaml
     /// </summary>
-    public partial class MyAccommodationImagesView : Page
+    public partial class AccommodationReviewsSelectionView : Page
     {
-        public MyAccommodationImagesView(Accommodation accomodation, User logedInUser, NavigationService navigationService)
+        public AccommodationReviewsSelectionView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationImagesViewModel(logedInUser, accomodation, navigationService);
+            DataContext = new AccommodationReviewsSelectionViewModel(logedInUser, navigationService);
         }
     }
 }

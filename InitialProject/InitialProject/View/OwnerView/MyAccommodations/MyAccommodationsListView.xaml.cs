@@ -10,21 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.OwnerView.MyAccommodations
 {
     /// <summary>
-    /// Interaction logic for MyAccommodationsList.xaml
+    /// Interaction logic for MyAccommodationsListView.xaml
     /// </summary>
-    public partial class MyAccommodationsList : Window
+    public partial class MyAccommodationsListView : Page
     {
-        public MyAccommodationsList(User logedInUser)
+        public MyAccommodationsListView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationListViewModel(logedInUser);
+            DataContext = new MyAccommodationListViewModel(logedInUser, navigationService);
         }
     }
 }

@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
+using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Service.RatingServices;
 using InitialProject.Service.RenovationServices;
 using InitialProject.Utilities;
-using InitialProject.View.OwnerView.Ratings;
+using InitialProject.View.OwnerView.Renovations;
+using RelayCommand = InitialProject.Utilities.RelayCommand;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
 {
@@ -19,13 +18,18 @@ namespace InitialProject.ViewModels.RenovationsViewModel
     {
 
         private readonly RenovationService _renovationService;
+        private readonly User _logedInUser;
 
 
         public ObservableCollection<Renovation> Renovations {get; set; }
-        public ScheduledRenovationsListViewModel(User logedInUser)
+        public NavigationService NavigationService { get; set; }
+
+        public ScheduledRenovationsListViewModel(User logedInUser, NavigationService navigationService)
         {
             _renovationService = new RenovationService();
+            _logedInUser = logedInUser;
             Renovations = new ObservableCollection<Renovation>(_renovationService.GetByOwnerId(logedInUser.Id));
+            NavigationService = navigationService;
         }
 
 
@@ -38,6 +42,13 @@ namespace InitialProject.ViewModels.RenovationsViewModel
                 Renovations.Remove(selectedRenovation);
                 _renovationService.Delete(selectedRenovation);
             }
+        }
+
+
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+        private void GoBack()
+        {
+            NavigationService.Navigate(new RenovationsMainView(_logedInUser, NavigationService));
         }
     }
 }

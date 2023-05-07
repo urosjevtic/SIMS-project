@@ -130,10 +130,8 @@
         <!--MAIN SCREEN-->
         <Grid Name="MainScreen" Grid.Column="1" Visibility="{Binding MainScreenVisibility}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.7*"></RowDefinition>
-                <RowDefinition Height="5*"></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="1.5*"></RowDefinition>
+                <RowDefinition Height="0.08*"></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
             <!--Navbar-->
@@ -152,60 +150,7 @@
             </DockPanel>
 
 
-            <Image Source="/Resources/Images/logo.png" Margin="2,48,-2,24" Grid.RowSpan="2" />
-            <TextBlock Text="{Binding WelcomeMessage, StringFormat='Welcome {0}!'}" HorizontalAlignment="Center" Grid.Row="1" Margin="0,302,0,14" FontWeight="Medium" Foreground="#3A3D55" FontSize="24" FontFamily="Sen Bold"></TextBlock>
-
-
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Command="{Binding MyAccommoadionsOpenCommand}" Grid.Row="0"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/myAccommodation.png" Width="20"/>
-                        <TextBlock Padding="5">My accommodation</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1" Command="{Binding RatingsOpenCommand}" Grid.Row="0"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/ratings.png" Width="20"/>
-                        <TextBlock Padding="5">Ratings</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="0" Grid.Row="1" Command="{Binding RenovationsOpenCommand}"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/renovations.png" Width="20"/>
-                        <TextBlock Padding="5">Renovations</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1" Command="{Binding ReservationsOpenCommand}" Grid.Row="1"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/reservations.png" Width="20"/>
-                        <TextBlock Padding="5">Reservations</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="0" Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/forums.png" Width="20"/>
-                        <TextBlock Padding="5">Forums</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1" Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/settings.png" Width="20"/>
-                        <TextBlock Padding="5">Settings</TextBlock>
-                    </StackPanel>
-                </Button>
-            </Grid>
-
-
-            <Button Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="3" Margin="50, 30, 50, 30"></Button>
+            <Frame Grid.Row="1" x:Name="MainFrame" Content="{Binding SelectedPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"></Frame>
         </Grid>
 
 

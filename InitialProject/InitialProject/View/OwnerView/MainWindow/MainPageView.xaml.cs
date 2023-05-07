@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,25 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
-using InitialProject.Domain.Model.Reservations;
-using InitialProject.Service.ReservationServices;
-using InitialProject.ViewModels.ReservationsViewModels;
+using InitialProject.Utilities;
+using InitialProject.ViewModels.MainVeiwModel;
 
-namespace InitialProject.View
+namespace InitialProject.View.OwnerView.MainWindow
 {
     /// <summary>
-    /// Interaction logic for RescheduleRequestWindow.xaml
+    /// Interaction logic for MainPageView.xaml
     /// </summary>
-    public partial class RescheduleRequestWindow : Window
+    public partial class MainPageView : Page
     {
-
-        public RescheduleRequestWindow(User loggedInUser)
+        public MainPageView(User logedInUser, NavigationService navigatorService)
         {
             InitializeComponent();
-            DataContext = new RescheduleRequestViewModel(loggedInUser);
+            DataContext = new MainPageViewModel(logedInUser, navigatorService);
         }
-
     }
 }
