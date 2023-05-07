@@ -143,7 +143,7 @@
                     <Button Width="64" Height="50" Background="Transparent" Command="{Binding NotesOpenCommand}"   VerticalAlignment="Top">
                     <Image Source="/Resources/Images/notes.png"></Image>
                 </Button>
-                <Button Width="64" Height="50" Background="Transparent"   VerticalAlignment="Top">
+                    <Button Width="64" Height="50" Background="Transparent" Command="{Binding NotificationOpenCommand}"   VerticalAlignment="Top">
                     <Image Source="/Resources/Images/notification.png"></Image>
                 </Button>
                 </StackPanel>

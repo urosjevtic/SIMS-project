@@ -18,6 +18,7 @@ using InitialProject.View.OwnerView.Renovations;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using InitialProject.View.OwnerView.MainWindow;
+using InitialProject.View.OwnerView.Notifications;
 
 namespace InitialProject.ViewModel
 {
@@ -107,6 +108,13 @@ namespace InitialProject.ViewModel
         {
             NotesView notesView = new NotesView(_loggedInUser);
             notesView.ShowDialog();
+        }
+
+        public ICommand NotificationOpenCommand => new RelayCommand(NotificationOpen);
+
+        private void NotificationOpen()
+        {
+            NavigationService.Navigate(new NotificationsView());
         }
 
 
