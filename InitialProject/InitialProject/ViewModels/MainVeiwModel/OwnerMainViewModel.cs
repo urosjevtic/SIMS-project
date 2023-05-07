@@ -16,6 +16,7 @@ using InitialProject.ViewModels;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using InitialProject.View.OwnerView.Renovations;
 using System.Windows.Controls;
+using System.Windows.Navigation;
 using InitialProject.View.OwnerView.MainWindow;
 
 namespace InitialProject.ViewModel
@@ -23,13 +24,14 @@ namespace InitialProject.ViewModel
     public class OwnerMainViewModel : SideScreenViewModel
     {
 
-        public Navigator Navigator { get; set; }
+
+        public NavigationService NavigationService { get; set; }
 
         public OwnerMainViewModel(User user)
         {
             LogedInUser = user;
-            Navigator = new Navigator(SelectedPage);
-            SelectedPage.Content = new MainPageView(user, Navigator);
+            NavigationService = SelectedPage.NavigationService;
+            SelectedPage.Content = new MainPageView(user, NavigationService);
         }
 
         private Frame _selectedPage = new Frame();
@@ -75,27 +77,27 @@ namespace InitialProject.ViewModel
 
         protected override void MyAccommoadionsOpen()
         {
-            Navigator.NavigateTo(new MyAccommodationsMainView(_loggedInUser, Navigator));
+            NavigationService.Navigate(new MyAccommodationsMainView(_loggedInUser, NavigationService));
             BurgerBarClosed();
         }
 
 
         protected override void RatingsOpen()
         {
-            Navigator.NavigateTo(new RatingsMainView(_loggedInUser, Navigator));
+            NavigationService.Navigate(new RatingsMainView(_loggedInUser, NavigationService));
             BurgerBarClosed();
         }
 
 
         protected override void ReservationsOpen()
         {
-            Navigator.NavigateTo(new ReservationsMainView(_loggedInUser));
+            NavigationService.Navigate(new ReservationsMainView(_loggedInUser, NavigationService));
             BurgerBarClosed();
         }
 
         protected override void RenovationsOpen()
         {
-            Navigator.NavigateTo(new RenovationsMainView(_loggedInUser, Navigator));
+            NavigationService.Navigate(new RenovationsMainView(_loggedInUser, NavigationService));
             BurgerBarClosed();
         }
 
@@ -104,7 +106,7 @@ namespace InitialProject.ViewModel
         private void NotesOpen()
         {
             NotesView notesView = new NotesView(_loggedInUser);
-            notesView.Show();
+            notesView.ShowDialog();
         }
 
 

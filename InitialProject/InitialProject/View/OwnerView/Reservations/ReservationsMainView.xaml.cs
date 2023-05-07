@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.ViewModels.ReservationsViewModels;
@@ -21,10 +22,10 @@ namespace InitialProject.View.OwnerView.Reservations
     /// </summary>
     public partial class ReservationsMainView : Page
     {
-        public ReservationsMainView(User logedInUser)
+        public ReservationsMainView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new ReservationsMainViewModel(logedInUser);
+            DataContext = new ReservationsMainViewModel(logedInUser, navigationService);
         }
     }
 }

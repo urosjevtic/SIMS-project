@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
@@ -22,10 +23,10 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// </summary>
     public partial class MyAccommodationMonthlyStatisticView : Page
     {
-        public MyAccommodationMonthlyStatisticView(int accommodationId, DateTime year, User logedInUser, Navigator navigator)
+        public MyAccommodationMonthlyStatisticView(int accommodationId, DateTime year, User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationMonthlyStatisticsViewModel(year, accommodationId, logedInUser, navigator);
+            DataContext = new MyAccommodationMonthlyStatisticsViewModel(year, accommodationId, logedInUser, navigationService);
         }
     }
 }

@@ -6,6 +6,7 @@ using InitialProject.Service;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.Utilities;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
@@ -15,20 +16,20 @@ namespace InitialProject.ViewModels
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
-        public Navigator Navigator { get; set; }
-        public MyAccommodationListViewModel(User logedInUser, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public MyAccommodationListViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            Navigator.NavigateTo(new MyAccommodationsMainView(_logedInUser, Navigator));
+            NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
         }
 
 
@@ -38,7 +39,7 @@ namespace InitialProject.ViewModels
         {
             if (parameter is Accommodation selectedAccommodation)
             {
-                Navigator.NavigateTo(new MyAccommodationImagesView(selectedAccommodation, _logedInUser, Navigator));
+                NavigationService.Navigate(new MyAccommodationImagesView(selectedAccommodation, _logedInUser, NavigationService));
             }
         }
     }

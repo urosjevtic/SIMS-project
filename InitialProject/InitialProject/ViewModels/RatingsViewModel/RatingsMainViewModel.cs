@@ -14,17 +14,18 @@ using User = InitialProject.Domain.Model.User;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Reservations;
 using InitialProject.View.OwnerView.Renovations;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
     public class RatingsMainViewModel : BaseViewModel
     {
         private readonly User _logedInUser;
-        public Navigator Navigator { get; set; }
-        public RatingsMainViewModel(User logedInUser, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public RatingsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             _logedInUser = logedInUser;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
@@ -32,7 +33,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void OpenUnratedGuests()
         {
-            Navigator.NavigateTo(new UnratedGuestsListView(_logedInUser, Navigator));
+            NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
 
 
@@ -40,7 +41,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void OpenOwnerRatings()
         {
-            Navigator.NavigateTo(new AccommodationReviewsSelectionView(_logedInUser, Navigator));
+            NavigationService.Navigate(new AccommodationReviewsSelectionView(_logedInUser, NavigationService));
         }
 
 

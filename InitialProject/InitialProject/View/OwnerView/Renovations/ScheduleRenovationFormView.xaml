@@ -6,7 +6,7 @@
         xmlns:val="clr-namespace:InitialProject.Validation"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
         mc:Ignorable="d"
-        Title="ScheduleRenovationFormView" Height="700" Width="356">
+        Title="ScheduleRenovationFormView" Height="637" Width="356">
     <Page.Background>
         <SolidColorBrush Color="lightgray" />
     </Page.Background>

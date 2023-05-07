@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
@@ -22,10 +23,10 @@ namespace InitialProject.View.OwnerView.Ratings
     /// </summary>
     public partial class AccommodationRatingsView : Page
     {
-        public AccommodationRatingsView(User logedInUser, Accommodation accommodation, Navigator navigator)
+        public AccommodationRatingsView(User logedInUser, Accommodation accommodation, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new AccommodationRatingsViewModel(logedInUser, accommodation, navigator);
+            DataContext = new AccommodationRatingsViewModel(logedInUser, accommodation, navigationService);
         }
     }
 }

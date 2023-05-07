@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
 using InitialProject.Service.StatisticService;
@@ -22,8 +23,8 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         private readonly User _logedInUser;
         private readonly List<DateTime> _availableMonths;
         public Accommodation Accommodation { get; }
-        public Navigator Navigator { get; set; }
-        public MyAccommodationMonthlyStatisticsViewModel(DateTime selectedYear, int accommodationId, User logedInUser, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public MyAccommodationMonthlyStatisticsViewModel(DateTime selectedYear, int accommodationId, User logedInUser, NavigationService navigationService)
         {
             _selectedYear = selectedYear;
             _accommodationId = accommodationId;
@@ -31,7 +32,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
             _accommodationService = new AccommodationService();
             Accommodation = _accommodationService.GetById(_accommodationId);
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
@@ -163,7 +164,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            Navigator.NavigateTo(new MyAccommodationYearlyStatisticView(_accommodationId, _logedInUser, Navigator));
+            NavigationService.Navigate(new MyAccommodationYearlyStatisticView(_accommodationId, _logedInUser, NavigationService));
         }
 
     }

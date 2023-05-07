@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
 using InitialProject.Utilities;
@@ -18,14 +19,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
         public ObservableCollection<Accommodation> Accommodations { get; set; }
-        public Navigator Navigator { get; set; }
+        public NavigationService NavigationService { get; set; }
 
-        public ScheduleRenovationViewModel(User logedInUser, Navigator navigator)
+        public ScheduleRenovationViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationService = new AccommodationService();
             _logedInUser = logedInUser;
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
@@ -36,14 +37,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         {
             if (parameter is Accommodation selectedAccommodation)
             {
-                Navigator.NavigateTo(new ScheduleRenovationFormView(_logedInUser, selectedAccommodation, Navigator));
+                NavigationService.Navigate(new ScheduleRenovationFormView(_logedInUser, selectedAccommodation, NavigationService));
 
             }
         }
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            Navigator.NavigateTo(new RenovationsMainView(_logedInUser, Navigator));
+            NavigationService.Navigate(new RenovationsMainView(_logedInUser, NavigationService));
         }
     }
 }

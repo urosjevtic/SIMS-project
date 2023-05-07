@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.RenovationServices;
@@ -21,14 +22,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private readonly Accommodation _accommodation;
         private readonly User _logedInUser;
         private readonly AccommodationReservationService _accommodationReservationService;
-        public Navigator Navigator { get; set; }
-        public ScheduleRenovationFormViewModel(User logedInUser, Accommodation accommodation, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public ScheduleRenovationFormViewModel(User logedInUser, Accommodation accommodation, NavigationService navigationService)
         {
             _renovationService = new RenovationService();
             _accommodationReservationService = new AccommodationReservationService();
             _accommodation = accommodation;
             _logedInUser = logedInUser;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
         private List<DateTime> _availableDates;
@@ -111,7 +112,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private void ScheduleRenovation()
         {
             _renovationService.ScheduleRenovation(_accommodation, _selectedStartDate, _renovationLength, _renovationDescription);
-            Navigator.NavigateTo(new ScheduleRenovationListView(_logedInUser, Navigator));
+            NavigationService.Navigate(new ScheduleRenovationListView(_logedInUser, NavigationService));
         }
 
         private bool canExecuteCommand()
@@ -122,7 +123,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            Navigator.NavigateTo(new ScheduleRenovationListView(_logedInUser, Navigator));
+            NavigationService.Navigate(new ScheduleRenovationListView(_logedInUser, NavigationService));
         }
     }
 }

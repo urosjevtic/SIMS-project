@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
@@ -29,14 +30,14 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         private readonly User _loggedInUser;
 
         public ObservableCollection<AccommodationReservationRescheduleRequest> RescheduleRequests { get; }
-
-        public RescheduleRequestViewModel(User loggedInUser)
+        public NavigationService NavigationService {get; set; }
+        public RescheduleRequestViewModel(User loggedInUser, NavigationService navigationService)
         {
             _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
             _yearlyAcoommodationStatisticService = new YearlyAccommodationService();
             _statisticService = new AccommodationStatisticService();
             _loggedInUser = loggedInUser;
-
+            NavigationService = navigationService;
             RescheduleRequests = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetAllByOwnerId(_loggedInUser.Id));
         }
 
@@ -74,8 +75,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void GoBack()
         {
-            ReservationsMainView reservationsMain = new ReservationsMainView(_loggedInUser);
-            CloseCurrentWindow();
+            NavigationService.Navigate(new ReservationsMainView(_loggedInUser, NavigationService));
         }
 
 

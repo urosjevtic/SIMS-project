@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
 using InitialProject.Utilities;
@@ -21,22 +22,22 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private readonly User _logedInUser;
         public Accommodation Accommodation { get; }
 
-        public Navigator Navigator { get; set; }
+        public NavigationService NavigationService { get; set; }
 
-        public AccommodationRatingsViewModel(User logedInUser, Accommodation accommodation, Navigator navigator)
+        public AccommodationRatingsViewModel(User logedInUser, Accommodation accommodation, NavigationService navigationService)
         {
             _ratedOwnerService = new RatedOwnerService();
             Accommodation = accommodation;
             Ratings = new ObservableCollection<RatedOwner>(_ratedOwnerService.GetFilteredRatingsByAccommodationId(Accommodation.Id));
             _logedInUser = logedInUser;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 
         private void GoBack()
         {
-            Navigator.NavigateTo(new AccommodationReviewsSelectionView(_logedInUser, Navigator));
+            NavigationService.Navigate(new AccommodationReviewsSelectionView(_logedInUser, NavigationService));
         }
 
     }

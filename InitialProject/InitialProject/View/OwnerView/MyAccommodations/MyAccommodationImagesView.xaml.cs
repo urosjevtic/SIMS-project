@@ -10,7 +10,9 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GalaSoft.MvvmLight.Views;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
 using InitialProject.ViewModels.AccommodationViewModel;
@@ -22,10 +24,10 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// </summary>
     public partial class MyAccommodationImagesView : Page
     {
-        public MyAccommodationImagesView(Accommodation accomodation, User logedInUser, Navigator navigator)
+        public MyAccommodationImagesView(Accommodation accomodation, User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new MyAccommodationImagesViewModel(logedInUser, accomodation, navigator);
+            DataContext = new MyAccommodationImagesViewModel(logedInUser, accomodation, navigationService);
         }
     }
 }

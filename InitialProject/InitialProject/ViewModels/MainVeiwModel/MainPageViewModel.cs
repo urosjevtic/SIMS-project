@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels.MainVeiwModel
 {
@@ -32,25 +33,25 @@ namespace InitialProject.ViewModels.MainVeiwModel
         public string WelcomeMessage => LogedInUser.Username;
 
 
-        public Navigator Navigator { get; set; }
-        public MainPageViewModel(User user, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public MainPageViewModel(User user, NavigationService navigationService)
         {
             LogedInUser = user;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
         public ICommand MyAccommoadionsOpenCommand => new RelayCommand(MyAccommoadionsOpen);
         private void MyAccommoadionsOpen()
         {
-            Navigator.NavigateTo(new MyAccommodationsMainView(_loggedInUser, Navigator));
+            NavigationService.Navigate(new MyAccommodationsMainView(_loggedInUser, NavigationService));
         }
 
 
         public ICommand RatingsOpenCommand => new RelayCommand(RatingsOpen);
         private void RatingsOpen()
         {
-            Navigator.NavigateTo(new RatingsMainView(_loggedInUser, Navigator));
+            NavigationService.Navigate(new RatingsMainView(_loggedInUser, NavigationService));
         }
 
 
@@ -58,14 +59,14 @@ namespace InitialProject.ViewModels.MainVeiwModel
         public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
         public void ReservationsOpen()
         {
-            Navigator.NavigateTo(new ReservationsMainView(_loggedInUser));
+            NavigationService.Navigate(new ReservationsMainView(_loggedInUser, NavigationService));
         }
 
 
         public ICommand RenovationsOpenCommand => new RelayCommand(RenovationsOpen);
         public void RenovationsOpen()
         {
-            Navigator.NavigateTo(new RenovationsMainView(_loggedInUser, Navigator));
+            NavigationService.Navigate(new RenovationsMainView(_loggedInUser, NavigationService));
         }
 
         public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);

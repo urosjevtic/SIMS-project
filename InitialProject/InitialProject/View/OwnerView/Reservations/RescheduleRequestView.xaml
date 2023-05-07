@@ -1,17 +1,15 @@
-﻿<Window x:Class="InitialProject.View.RescheduleRequestWindow"
+﻿<Page x:Class="InitialProject.View.RescheduleRequestView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
         mc:Ignorable="d"
-        Title="RescheduleRequestWindow" Height="700" Width="356"
-        WindowStyle="None"
-        WindowStartupLocation="CenterScreen">
-    <Window.Background>
+        Title="RescheduleRequestView" Height="700" Width="356">
+    <Page.Background>
         <SolidColorBrush Color="LightGray" />
-    </Window.Background>
-    <Window.Resources>
+    </Page.Background>
+    <Page.Resources>
         <!--LogIn button style-->
         <!--Confirm button style-->
         <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
@@ -57,7 +55,7 @@
         </Style>
 
 
-    </Window.Resources>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
@@ -176,4 +174,4 @@
         </ListBox>
 
     </Grid>
-</Window>
+</Page>

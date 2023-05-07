@@ -23,10 +23,10 @@ namespace InitialProject.View.OwnerView.MainWindow
     /// </summary>
     public partial class MainPageView : Page
     {
-        public MainPageView(User logedInUser, Navigator navigator)
+        public MainPageView(User logedInUser, NavigationService navigatorService)
         {
             InitializeComponent();
-            DataContext = new MainPageViewModel(logedInUser, navigator);
+            DataContext = new MainPageViewModel(logedInUser, navigatorService);
         }
     }
 }

@@ -12,6 +12,7 @@ using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Ratings;
 using InitialProject.View.OwnerView.Renovations;
 using InitialProject.View.OwnerView.Reservations;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
@@ -19,11 +20,11 @@ namespace InitialProject.ViewModels
     {
 
         public User LogedInUser;
-        public Navigator Navigator { get; set; }
-        public MyAccommodationsMainViewModel(User logedInUser, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public MyAccommodationsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             LogedInUser = logedInUser;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
@@ -31,14 +32,14 @@ namespace InitialProject.ViewModels
 
         private void OpenRegistrationForm()
         {
-            Navigator.NavigateTo(new AccommodationRegistrationForm(LogedInUser, Navigator));
+            NavigationService.Navigate(new AccommodationRegistrationForm(LogedInUser, NavigationService));
         }
 
         public ICommand OpenAccommodationListCommand => new RelayCommand(OpenAccommodationList);
 
         private void OpenAccommodationList()
         {
-            Navigator.NavigateTo(new MyAccommodationsListView(LogedInUser, Navigator));
+            NavigationService.Navigate(new MyAccommodationsListView(LogedInUser, NavigationService));
 
         }
 
@@ -46,7 +47,7 @@ namespace InitialProject.ViewModels
 
         private void OpenAccommodationStatistics()
         {
-            Navigator.NavigateTo(new MyAccommodationStatisticView(LogedInUser, Navigator));
+            NavigationService.Navigate(new MyAccommodationStatisticView(LogedInUser, NavigationService));
         }
 
 

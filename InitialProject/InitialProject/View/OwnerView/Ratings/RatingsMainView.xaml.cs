@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
@@ -23,10 +24,10 @@ namespace InitialProject.View.OwnerView.Ratings
     /// </summary>
     public partial class RatingsMainView : Page
     {
-        public RatingsMainView(User logedInUser, Navigator navigator)
+        public RatingsMainView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new RatingsMainViewModel(logedInUser, navigator);
+            DataContext = new RatingsMainViewModel(logedInUser, navigationService);
         }
     }
 }

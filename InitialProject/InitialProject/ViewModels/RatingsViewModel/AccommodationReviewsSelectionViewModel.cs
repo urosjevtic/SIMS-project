@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Service.RatingServices;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Ratings;
@@ -20,14 +21,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private readonly AccommodationService _accommodationService;
         private readonly SuperOwnerService _superOwnerService;
         private readonly User _logedInUser;
-        public Navigator Navigator { get; set; }
-        public AccommodationReviewsSelectionViewModel(User logedInUser, Navigator navigator)
+        public NavigationService NavigationService { get; set; }
+        public AccommodationReviewsSelectionViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationService = new AccommodationService();
             _superOwnerService = new SuperOwnerService();
             _logedInUser = logedInUser;
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
@@ -68,7 +69,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
             if (parameter is Accommodation selectedAccommodation)
             {
                 // Navigate to the other window passing the selected guest as a parameter
-                Navigator.NavigateTo(new AccommodationRatingsView(_logedInUser, selectedAccommodation, Navigator));
+                NavigationService.Navigate(new AccommodationRatingsView(_logedInUser, selectedAccommodation, NavigationService));
 
             }
         }
@@ -76,7 +77,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            Navigator.NavigateTo(new RatingsMainView(_logedInUser, Navigator));
+            NavigationService.Navigate(new RatingsMainView(_logedInUser, NavigationService));
         }
 
     }

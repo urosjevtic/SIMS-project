@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
 
@@ -18,11 +19,11 @@ namespace InitialProject.ViewModels.RenovationsViewModel
 
 
         private readonly User _logedInUser;
-        public Navigator Navigator { get;  set; }
-        public RenovationsMainViewModel(User logedInUser, Navigator navigator)
+        public NavigationService NavigationService { get;  set; }
+        public RenovationsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             _logedInUser = logedInUser;
-            Navigator = navigator;
+            NavigationService = navigationService;
         }
 
 
@@ -33,14 +34,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
 
         private void OpenScheduleRenovation()
         {
-            Navigator.NavigateTo(new ScheduleRenovationListView(_logedInUser, Navigator));
+            NavigationService.Navigate(new ScheduleRenovationListView(_logedInUser, NavigationService));
         }
 
         public ICommand OpenScheduledRenovationsCommand => new RelayCommand(OpenScheduledRenovations);
 
         private void OpenScheduledRenovations()
         {
-            Navigator.NavigateTo(new ScheduledRenovationListView(_logedInUser, Navigator));
+            NavigationService.Navigate(new ScheduledRenovationListView(_logedInUser, NavigationService));
         }
     }
 }
