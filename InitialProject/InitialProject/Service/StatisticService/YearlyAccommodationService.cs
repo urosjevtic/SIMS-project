@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Statistics;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 
@@ -10,63 +11,46 @@ namespace InitialProject.Service.StatisticService
 {
     public class YearlyAccommodationService
     {
-        private readonly IYearlyAccommodationStatisticsRepository _yearlyAccommodationStatisticsRepository;
+        private readonly IAccommodationStatisticsDataRepository _accommodationStatisticsDataRepository;
 
         public YearlyAccommodationService()
         {
-            _yearlyAccommodationStatisticsRepository = Injector.Injector.CreateInstance<IYearlyAccommodationStatisticsRepository>();
+            _accommodationStatisticsDataRepository = Injector.Injector.CreateInstance<IAccommodationStatisticsDataRepository>();
         }
 
 
         public List<AccommodationStatistic> GetStatisticByAccommodationId(int accommodationId)
         {
-           return _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId).Statistics;
-        }
+            Dictionary<int, AccommodationStatistic> yearlyStatistics = new Dictionary<int, AccommodationStatistic>();
 
-        public void CreateStatisticForNewAccommodation(int accommodationId)
-        {
-            List<AccommodationStatistic> list = new List<AccommodationStatistic>();
-            AccommodationStatistic accommodationStatistic = new AccommodationStatistic();
-            list.Add(accommodationStatistic);
-            YearlyAccommodationStatistic statistic =
-                new YearlyAccommodationStatistic(accommodationId, list);
-            _yearlyAccommodationStatisticsRepository.Save(statistic);
-        }
-
-        public void IncreasCancelationCount(int accommodationId)
-        {
-            YearlyAccommodationStatistic yearlyStatistic = _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId);
-            foreach (var statistic in yearlyStatistic.Statistics)
+            foreach (var statistic in _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId).Statistics)
             {
-                if (statistic.Year.Year == DateTime.Now.Year)
+                int year = statistic.MonthAndYear.Year;
+
+                if (!yearlyStatistics.ContainsKey(year))
                 {
-                    statistic.CancelationsCount++;
-                    _yearlyAccommodationStatisticsRepository.Update(yearlyStatistic);
-                    break;
+                    AccommodationStatistic newStatistic = new AccommodationStatistic();
+                    newStatistic.MonthAndYear = new DateTime(year, 1, 1);
+                    yearlyStatistics.Add(year, newStatistic);
                 }
+
+                yearlyStatistics[year].RenovationsCount += statistic.RenovationsCount;
+                yearlyStatistics[year].CancelationsCount += statistic.CancelationsCount;
+                yearlyStatistics[year].ReservationsCount += statistic.ReservationsCount;
+                yearlyStatistics[year].ReschedulesCount += statistic.ReschedulesCount;
             }
 
+            return yearlyStatistics.Values.ToList();
         }
 
-        public void IncreaseRescheduleCount(int accommodationId)
-        {
-            YearlyAccommodationStatistic yearlyStatistic = _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId);
-            foreach (var statistic in yearlyStatistic.Statistics)
-            {
-                if (statistic.Year.Year == DateTime.Now.Year)
-                {
-                    statistic.ReschedulesCount++;
-                    _yearlyAccommodationStatisticsRepository.Update(yearlyStatistic);
-                    break;
-                }
-            }
-        }
+
+
 
         public DateTime GetYearWithMostReservations(int accommodationId)
         {
-            YearlyAccommodationStatistic yearlyStatistic = _yearlyAccommodationStatisticsRepository.GetByAccommodationId(accommodationId);
-            AccommodationStatistic yearWithMostReservations = yearlyStatistic.Statistics[0];
-            foreach (var statistic in yearlyStatistic.Statistics)
+            AccommodationStatisticData statisticData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
+            AccommodationStatistic yearWithMostReservations = statisticData.Statistics[0];
+            foreach (var statistic in statisticData.Statistics)
             {
                 if (statistic.ReservationsCount > yearWithMostReservations.ReservationsCount)
                 {
@@ -74,7 +58,7 @@ namespace InitialProject.Service.StatisticService
                 }
             }
 
-            return yearWithMostReservations.Year;
+            return yearWithMostReservations.MonthAndYear;
         }
 
     }

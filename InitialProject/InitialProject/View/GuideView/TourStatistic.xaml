@@ -28,7 +28,7 @@
 
         <Label Content="Tour statistic: " Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="45" Grid.Row="0" ></Label>
         <Label Grid.Row="2" FontSize="32" Content="Most visited tour ever: " HorizontalAlignment="Left" Grid.Column="0" ></Label>
-        <Label Grid.Row="3" FontSize="32" Content="Most visited tour in year: " ></Label>
+        <Label Grid.Row="3" FontSize="32" Content="Most visited tour in monthAndYear: " ></Label>
         <ComboBox Grid.Row="3" Height="50" Width="300" Margin="410,10,40,27" x:Name="YearsComboBox"
           SelectionChanged="GodineComboBoxSelectionChanged">
             <ComboBoxItem Content="2023"></ComboBoxItem>

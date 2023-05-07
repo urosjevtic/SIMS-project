@@ -54,7 +54,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             {
                 // Navigate to the other window passing the selected guest as a parameter
                 MyAccommodationMonthlyStatisticView myAccommodationMonthlyStatistic =
-                    new MyAccommodationMonthlyStatisticView(AccommodataionId, selectedStatistic.Year, _logedInUser);
+                    new MyAccommodationMonthlyStatisticView(AccommodataionId, selectedStatistic.MonthAndYear, _logedInUser);
                 CloseCurrentWindow();
                 myAccommodationMonthlyStatistic.Show();
 

@@ -105,7 +105,7 @@
                     <TextBlock Padding="5">Ratings</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="4"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Grid.Row="4" Command="{Binding RenovationsOpenCommand}"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/renovations.png" Width="20"/>
                     <TextBlock Padding="5">Renovations</TextBlock>

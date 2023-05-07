@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Statistics;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Repository.StatisticRepo;
@@ -12,684 +13,93 @@ namespace InitialProject.Service.StatisticService
     public class MonthlyAccommodationStatisticService
     {
 
-        private readonly IMonthlyAccommodationStatisticRepository _monthlyAccommodationStatisticRepository;
+        private readonly IAccommodationStatisticsDataRepository _accommodationStatisticsDataRepository;
 
         public MonthlyAccommodationStatisticService()
         {
-            _monthlyAccommodationStatisticRepository =
-                Injector.Injector.CreateInstance<IMonthlyAccommodationStatisticRepository>();
+            _accommodationStatisticsDataRepository =
+                Injector.Injector.CreateInstance<IAccommodationStatisticsDataRepository>();
 
         }
 
 
-        public AccommodationStatistic GetMonthlyStatistics(string month, DateTime year, int accommodationId)
+        public AccommodationStatistic GetMonthlyStatistics(string month, int year, int accommodationId)
         {
-            MonthlyAccommodationStatistics monthlyAccommodationStatistics = _monthlyAccommodationStatisticRepository.GetByAccommodationId(accommodationId);
+            AccommodationStatisticData monthlyAccommodationStatisticsData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
+            Dictionary<int, AccommodationStatistic> monthlyStatistics =
+                GetStatisticForYear(year, monthlyAccommodationStatisticsData.Statistics);
+
+
             switch (month)
             {
                 case "January":
-                    foreach (var stat in monthlyAccommodationStatistics.JanuaryStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[1];
                 case "February":
-                    foreach (var stat in monthlyAccommodationStatistics.FebruaryStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[2];
                 case "March":
-                    foreach (var stat in monthlyAccommodationStatistics.MarchStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[3];
                 case "April":
-                    foreach (var stat in monthlyAccommodationStatistics.AprilStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[4];
                 case "May":
-                    foreach (var stat in monthlyAccommodationStatistics.MayStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[5];
                 case "Jun":
-                    foreach (var stat in monthlyAccommodationStatistics.JunStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[6];
                 case "July":
-                    foreach (var stat in monthlyAccommodationStatistics.JulyStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[7];
                 case "August":
-                    foreach (var stat in monthlyAccommodationStatistics.AugustStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[8];
                 case "September":
-                    foreach (var stat in monthlyAccommodationStatistics.SeptemberStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[9];
                 case "October":
-                    foreach (var stat in monthlyAccommodationStatistics.OctoberStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[10];
                 case "November":
-                    foreach (var stat in monthlyAccommodationStatistics.NovemberStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[11];
                 case "December":
-                    foreach (var stat in monthlyAccommodationStatistics.DecemberStatistics)
-                    {
-                        if (stat.Year.Year == year.Year)
-                            return stat;
-                    }
-                    break;
+                    return monthlyStatistics[12];
             }
 
             return new AccommodationStatistic();
         }
 
-
-        public void CreateStatisticForNewAccommodation(int accommodationId)
+        public List<DateTime> GetAvailableMonths(int accommodationId, int year)
         {
-            List<AccommodationStatistic> list = new List<AccommodationStatistic>();
-            AccommodationStatistic accommodationStatistic = new AccommodationStatistic();
-            list.Add(accommodationStatistic);
-            MonthlyAccommodationStatistics monthlyAccommodationStatistics =
-                new MonthlyAccommodationStatistics(accommodationId, list, list, list, list, list, list, list, list,
-                    list, list, list, list);
-            _monthlyAccommodationStatisticRepository.Save(monthlyAccommodationStatistics);
-        }
-        public void IncreaseCancelationCount(int accommodationId)
-        {
-            MonthlyAccommodationStatistics statistics =
-                _monthlyAccommodationStatisticRepository.GetByAccommodationId(accommodationId);
-
-            switch (DateTime.Today.Month)
+            AccommodationStatisticData monthlyAccommodationStatisticsData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
+            Dictionary<int, AccommodationStatistic> monthlyStatisticForYear = GetStatisticForYear(year, monthlyAccommodationStatisticsData.Statistics);
+            List<DateTime> availableMonths = new List<DateTime>();
+            foreach (var statistic in monthlyStatisticForYear)
             {
-                case 1:
-                    foreach (var stat in statistics.JanuaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 2:
-                    foreach (var stat in statistics.FebruaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    foreach (var stat in statistics.MarchStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 4:
-                    foreach (var stat in statistics.AprilStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 5:
-                    foreach (var stat in statistics.MayStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 6:
-                    foreach (var stat in statistics.JunStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 7:
-                    foreach (var stat in statistics.JulyStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 8:
-                    foreach (var stat in statistics.AugustStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 9:
-                    foreach (var stat in statistics.SeptemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 10:
-                    foreach (var stat in statistics.OctoberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 11:
-                    foreach (var stat in statistics.NovemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 12:
-                    foreach (var stat in statistics.DecemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.CancelationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
+                availableMonths.Add(statistic.Value.MonthAndYear);
             }
-        }
-        public void IncreaseReservationCount(int accommodationId)
-        {
-            MonthlyAccommodationStatistics statistics =
-                _monthlyAccommodationStatisticRepository.GetByAccommodationId(accommodationId);
 
-            switch (DateTime.Today.Month)
-            {
-                case 1:
-                    foreach (var stat in statistics.JanuaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 2:
-                    foreach (var stat in statistics.FebruaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    foreach (var stat in statistics.MarchStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 4:
-                    foreach (var stat in statistics.AprilStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 5:
-                    foreach (var stat in statistics.MayStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 6:
-                    foreach (var stat in statistics.JunStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 7:
-                    foreach (var stat in statistics.JulyStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 8:
-                    foreach (var stat in statistics.AugustStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 9:
-                    foreach (var stat in statistics.SeptemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 10:
-                    foreach (var stat in statistics.OctoberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 11:
-                    foreach (var stat in statistics.NovemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 12:
-                    foreach (var stat in statistics.DecemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReservationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-            }
+            return availableMonths;
         }
-        public void IncreaseRescheduleCount(int accommodationId)
-        {
-            MonthlyAccommodationStatistics statistics =
-                _monthlyAccommodationStatisticRepository.GetByAccommodationId(accommodationId);
 
-            switch (DateTime.Today.Month)
-            {
-                case 1:
-                    foreach (var stat in statistics.JanuaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 2:
-                    foreach (var stat in statistics.FebruaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    foreach (var stat in statistics.MarchStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 4:
-                    foreach (var stat in statistics.AprilStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 5:
-                    foreach (var stat in statistics.MayStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 6:
-                    foreach (var stat in statistics.JunStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 7:
-                    foreach (var stat in statistics.JulyStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 8:
-                    foreach (var stat in statistics.AugustStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 9:
-                    foreach (var stat in statistics.SeptemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 10:
-                    foreach (var stat in statistics.OctoberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 11:
-                    foreach (var stat in statistics.NovemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 12:
-                    foreach (var stat in statistics.DecemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.ReschedulesCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-            }
-        }
-        public void IncreaseRenovationCount(int accommodationId)
+        private Dictionary<int, AccommodationStatistic> GetStatisticForYear(int year, List<AccommodationStatistic> statistics)
         {
-            MonthlyAccommodationStatistics statistics =
-                _monthlyAccommodationStatisticRepository.GetByAccommodationId(accommodationId);
-
-            switch (DateTime.Today.Month)
+            Dictionary<int, AccommodationStatistic> monthlyStatistic = new Dictionary<int, AccommodationStatistic>();
+            List<AccommodationStatistic> statisticForYear = new List<AccommodationStatistic>();
+            foreach (var statistic in statistics)
             {
-                case 1:
-                    foreach (var stat in statistics.JanuaryStatistics)
+                if (statistic.MonthAndYear.Year == year)
+                {
+                    if (!monthlyStatistic.ContainsKey(statistic.MonthAndYear.Month))
                     {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
+                        AccommodationStatistic newStatistic = new AccommodationStatistic();
+                        newStatistic.MonthAndYear = new DateTime(1, statistic.MonthAndYear.Month, 1);
+                        monthlyStatistic.Add(statistic.MonthAndYear.Month, newStatistic);
                     }
-                    break;
-                case 2:
-                    foreach (var stat in statistics.FebruaryStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 3:
-                    foreach (var stat in statistics.MarchStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 4:
-                    foreach (var stat in statistics.AprilStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 5:
-                    foreach (var stat in statistics.MayStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 6:
-                    foreach (var stat in statistics.JunStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 7:
-                    foreach (var stat in statistics.JulyStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 8:
-                    foreach (var stat in statistics.AugustStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 9:
-                    foreach (var stat in statistics.SeptemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 10:
-                    foreach (var stat in statistics.OctoberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 11:
-                    foreach (var stat in statistics.NovemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
-                case 12:
-                    foreach (var stat in statistics.DecemberStatistics)
-                    {
-                        if (stat.Year.Year == DateTime.Now.Year)
-                        {
-                            stat.RenovationsCount++;
-                            _monthlyAccommodationStatisticRepository.Update(statistics);
-                            break;
-                        }
-                    }
-                    break;
+                    monthlyStatistic[statistic.MonthAndYear.Month].RenovationsCount = statistic.RenovationsCount;
+                    monthlyStatistic[statistic.MonthAndYear.Month].CancelationsCount = statistic.CancelationsCount;
+                    monthlyStatistic[statistic.MonthAndYear.Month].ReservationsCount = statistic.ReservationsCount;
+                    monthlyStatistic[statistic.MonthAndYear.Month].ReschedulesCount = statistic.ReschedulesCount;
+
+                }
             }
+
+
+            return monthlyStatistic;
         }
+
+       
     }
 }

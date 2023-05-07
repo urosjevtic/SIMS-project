@@ -10,6 +10,7 @@ using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Ratings;
+using InitialProject.View.OwnerView.Renovations;
 using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels
@@ -23,43 +24,6 @@ namespace InitialProject.ViewModels
             LogedInUser = logedInUser;
         }
 
-
-        private Visibility _sideScreenVisibility = Visibility.Collapsed;
-
-        public Visibility SideScreenVisibility
-        {
-            get { return _sideScreenVisibility; }
-            set
-            {
-                _sideScreenVisibility = value;
-                OnPropertyChanged(nameof(SideScreenVisibility));
-            }
-        }
-
-        private Visibility _mainScreenVisibility = Visibility.Visible;
-
-        public Visibility MainScreenVisibility
-        {
-            get { return _mainScreenVisibility; }
-            set
-            {
-                _mainScreenVisibility = value;
-                OnPropertyChanged(nameof(MainScreenVisibility));
-            }
-        }
-        public ICommand BurgerBarClosedCommand => new RelayCommand(BurgerBarClosed);
-        public ICommand BurgerBarOpenCommand => new RelayCommand(BurgerBarOpen);
-        private void BurgerBarOpen()
-        {
-            SideScreenVisibility = Visibility.Visible;
-            MainScreenVisibility = Visibility.Collapsed;
-        }
-
-        private void BurgerBarClosed()
-        {
-            SideScreenVisibility = Visibility.Collapsed;
-            MainScreenVisibility = Visibility.Visible;
-        }
 
         public ICommand OpenRegistrationFormCommand => new RelayCommand(OpenRegistrationForm);
 
@@ -116,6 +80,11 @@ namespace InitialProject.ViewModels
             reservationsMain.Show();
         }
 
-
+        protected override void RenovationsOpen()
+        {
+            RenovationsMainView renovationsMainView = new RenovationsMainView(LogedInUser);
+            CloseCurrentWindow();
+            renovationsMainView.Show();
+        }
     }
 }

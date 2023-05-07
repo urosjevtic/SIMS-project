@@ -10,19 +10,19 @@ using Microsoft.VisualBasic.ApplicationServices;
 
 namespace InitialProject.Domain.Model.Statistics
 {
-    public class YearlyAccommodationStatistic : ISerializable
+    public class AccommodationStatisticData : ISerializable
     {
         public int AccommodationId { get; set; }
 
         public List<AccommodationStatistic> Statistics { get; set; }
 
 
-        public YearlyAccommodationStatistic()
+        public AccommodationStatisticData()
         {
             Statistics = new List<AccommodationStatistic>();
         }
 
-        public YearlyAccommodationStatistic(int accommodationId, List<AccommodationStatistic> statistics)
+        public AccommodationStatisticData(int accommodationId, List<AccommodationStatistic> statistics)
         {
             AccommodationId = accommodationId;
             Statistics = statistics;
@@ -37,7 +37,7 @@ namespace InitialProject.Domain.Model.Statistics
                 foreach (AccommodationStatistic statistic in Statistics)
                 {
                     Array.Resize(ref csvValues, csvValues.Length + 1);
-                    csvValues[csvValues.Length - 1] = statistic.Year.ToString() +
+                    csvValues[csvValues.Length - 1] = statistic.MonthAndYear.ToString() +
                                                       "(" + statistic.ReservationsCount.ToString() + 
                                                       "," + statistic.ReschedulesCount.ToString() + 
                                                       "," + statistic.CancelationsCount.ToString() + 
@@ -65,7 +65,7 @@ namespace InitialProject.Domain.Model.Statistics
                 string[] statovi = stats.Split(',');
 
                 AccommodationStatistic statistic = new AccommodationStatistic();
-                statistic.Year = DateTime.Parse(year);
+                statistic.MonthAndYear = DateTime.Parse(year);
                 statistic.ReservationsCount = Convert.ToInt32(statovi[0]);
                 statistic.ReschedulesCount = Convert.ToInt32(statovi[1]);
                 statistic.CancelationsCount = Convert.ToInt32(statovi[2]);
