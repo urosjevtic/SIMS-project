@@ -22,6 +22,10 @@ namespace InitialProject.Service
         {
             return _imageRepository.GetById(id);
         }
+        public List<Image> GetAllById(Tour t)
+        {
+            return _imageRepository.GetAllImagesById(t.Id);
+        }
 
         public void SaveImages(int entityId, string urls)
         {

@@ -147,8 +147,8 @@ namespace InitialProject.ViewModels
         }
         public void ShowSelectedTour(Tour tour)
         {
-            SearchResult searchResult = new SearchResult(LoggedUser, tour);
-            searchResult.Show();
+            SelectedTour selectedTour = new SelectedTour(tour, LoggedUser);
+            selectedTour.Show();
         }
     }
 }

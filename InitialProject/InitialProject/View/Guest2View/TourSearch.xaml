@@ -92,7 +92,7 @@
                 <TextBlock Text=" Search" VerticalAlignment="Center"/>
             </StackPanel>
         </Button>
-        <Button x:Name="GoBack" FontSize="30" HorizontalAlignment="Left" Margin="145,0,0,0" Grid.Row="4" BorderThickness="2" VerticalAlignment="Center" Width="160" Height="60" Background="LightSteelBlue" Command="{Binding GoBackCommand}" Grid.Column="1" Grid.ColumnSpan="2">
+        <Button x:Name="GoBack" FontSize="30" HorizontalAlignment="Left" Margin="145,-2,0,0" Grid.Row="4" BorderThickness="2" VerticalAlignment="Center" Width="160" Height="60" Background="LightSteelBlue" Command="{Binding GoBackCommand}" Grid.Column="1" Grid.ColumnSpan="2">
             <StackPanel Orientation="Horizontal">
                 <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
                 <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
