@@ -144,8 +144,22 @@
                     <Image Source="/Resources/Images/notes.png"></Image>
                 </Button>
                     <Button Width="64" Height="50" Background="Transparent" Command="{Binding NotificationOpenCommand}"   VerticalAlignment="Top">
-                    <Image Source="/Resources/Images/notification.png"></Image>
-                </Button>
+                        <Image>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="/Resources/Images/notification.png" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasNewNotifications}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/Images/notification.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding HasNewNotifications}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/Images/notificationNew.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
                 </StackPanel>
             </DockPanel>
 

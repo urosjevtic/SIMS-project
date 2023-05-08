@@ -12,17 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
+using InitialProject.ViewModels.NotificationsViewModel;
 
 namespace InitialProject.View.OwnerView.Notifications
 {
     /// <summary>
-    /// Interaction logic for NotificationsView.xaml
+    /// Interaction logic for OwnerNotificationsView.xaml
     /// </summary>
-    public partial class NotificationsView : Page
+    public partial class OwnerNotificationsView : Page
     {
-        public NotificationsView()
+        public OwnerNotificationsView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
+            DataContext = new OwnerNotificationsViewModel(logedInUser, navigationService);
         }
     }
 }
