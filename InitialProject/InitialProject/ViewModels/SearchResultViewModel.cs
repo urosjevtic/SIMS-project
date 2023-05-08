@@ -106,17 +106,15 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-        public SearchResultViewModel(User user, List<Tour> filteredTours)
+        public SearchResultViewModel(User user, Tour tour)
         {
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
             _voucherService = new VoucherService();
             ReserveCommand = new RelayCommand(Reserve);
             CancelCommand = new RelayCommand(Cancel);
-            tours = filteredTours;
             vouchers = _voucherService.GetAllCreated();
             LoggedUser = user;
-            Tours = new ObservableCollection<Tour>(tours);
             Vouchers = new ObservableCollection<Voucher>(vouchers);
         }
         public event PropertyChangedEventHandler PropertyChanged;

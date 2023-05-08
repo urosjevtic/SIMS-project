@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -15,23 +16,65 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class TourSearchViewModel : INotifyPropertyChanged
+    public class TourSearchViewModel : BaseViewModel
     {
         private readonly TourService _tourService;
         public User LoggedUser { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand GoBackCommand { get; set; }
+        public ICommand ShowTourCommand { get; set; }
+        public ICommand UpButtonCommand { get; private set; }
+        public ICommand DownButtonCommand { get; private set; }
+        public ICommand upButtonCommand { get; private set; }
+        public ICommand downButtonCommand { get; private set; }
 
+        private ObservableCollection<Tour> _filteredTours;
+        public ObservableCollection<Tour> filteredTours
+        {
+            get => _filteredTours;
+            set
+            {
+                if (value != _filteredTours)
+                {
+                    _filteredTours = value;
+                    OnPropertyChanged(nameof(filteredTours));
+                }
+            }
+        }
         public TourSearchViewModel(User user)
         {
             _tourService = new TourService();
             LoggedUser = user;
             SearchCommand = new RelayCommand(Search);
+            GoBackCommand = new RelayCommand(CloseCurrentWindow);
+            ShowTourCommand = new RelayCommand<Tour>(ShowSelectedTour);
+            UpButtonCommand = new RelayCommand(UpButton);
+            DownButtonCommand = new RelayCommand(DownButton);
+            upButtonCommand = new RelayCommand(upButton);
+            downButtonCommand = new RelayCommand(downButton);
+            filteredTours = new ObservableCollection<Tour>();
+            NumberOfPeople = "0";
+            Duration = "0";
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        private void UpButton()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            int currentNumber = int.Parse(NumberOfPeople);
+            NumberOfPeople = (currentNumber + 1).ToString();
+        }
+        private void DownButton()
+        {
+            int currentNumber = int.Parse(NumberOfPeople);
+            NumberOfPeople = (currentNumber - 1).ToString();
+        }
+        private void upButton()
+        {
+            int currentNumber = int.Parse(Duration);
+            Duration = (currentNumber + 1).ToString();
+        }
+        private void downButton()
+        {
+            int currentNumber = int.Parse(Duration);
+            Duration = (currentNumber - 1).ToString();
         }
         private string _state;
         public string State
@@ -100,12 +143,12 @@ namespace InitialProject.ViewModels
         }
         public void Search()
         {
-            List<Tour> filteredTours = _tourService.Search(_state, _city, _language, _duration, _numberOfPeople);
-            Window currentWindow = System.Windows.Application.Current.Windows.OfType<TourSearch>().SingleOrDefault(w => w.IsActive);
-            currentWindow?.Close();
-            SearchResult searchResult = new SearchResult(filteredTours, LoggedUser);
+            filteredTours = new ObservableCollection<Tour>(_tourService.Search(_state, _city, _language, _duration, _numberOfPeople));
+        }
+        public void ShowSelectedTour(Tour tour)
+        {
+            SearchResult searchResult = new SearchResult(LoggedUser, tour);
             searchResult.Show();
-            
         }
     }
 }

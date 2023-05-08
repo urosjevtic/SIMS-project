@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.Guest2View"
         mc:Ignorable="d"
-        Title="ShowNotifications" Height="616" Width="916">
+        Title="ShowNotifications" Height="616" Width="916" WindowStartupLocation="CenterScreen" Background="#F5F9FC">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10"></ColumnDefinition>
@@ -65,7 +65,7 @@
                 </Border>
                 <TextBlock Text="Check all notifications to continue!" HorizontalAlignment="Center" Grid.Row="0" FontSize="24"/>
                 <ContentPresenter Grid.Row="1" Margin="242,8,242,0"/>
-                <Button Content="Ok" Grid.Row="2" Width="160" Height="60" Command="{Binding OkCommand}" FontSize="26"/>
+                <Button Content="Ok" Grid.Row="2" Width="160" Height="60" Command="{Binding OkCommand}" FontSize="26" Background="LightSteelBlue" BorderThickness="2"/>
             </Grid>
         </GroupBox>
     </Grid>
