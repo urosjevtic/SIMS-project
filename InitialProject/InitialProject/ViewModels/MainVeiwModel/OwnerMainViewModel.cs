@@ -17,7 +17,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using InitialProject.View.OwnerView.Renovations;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using FluentScheduler;
+using InitialProject.Service;
+using InitialProject.Service.NotificationServices;
 using InitialProject.View.OwnerView.MainWindow;
+using InitialProject.View.OwnerView.Notifications;
 
 namespace InitialProject.ViewModel
 {
@@ -27,12 +31,40 @@ namespace InitialProject.ViewModel
 
         public NavigationService NavigationService { get; set; }
 
+        private readonly OwnerNotificationService _notificationService;
+
         public OwnerMainViewModel(User user)
         {
             LogedInUser = user;
             NavigationService = SelectedPage.NavigationService;
             SelectedPage.Content = new MainPageView(user, NavigationService);
+            _notificationService = new OwnerNotificationService();
+            CheckNotifications();
+            JobManager.Initialize();
+            JobManager.AddJob(
+                () => CheckNotifications(),
+                s=>s.ToRunEvery(3).Seconds());
         }
+
+
+        private bool _hasNewNotifications;
+
+        public bool HasNewNotifications
+        {
+            get { return _hasNewNotifications;}
+            set
+            {
+                _hasNewNotifications = value;
+                OnPropertyChanged("HasNewNotifications");
+            }
+        }
+
+        private void CheckNotifications()
+        {
+            _hasNewNotifications = !_notificationService.HasNewNotifications(_loggedInUser.Id);
+            OnPropertyChanged("HasNewNotifications");
+        }
+
 
         private Frame _selectedPage = new Frame();
         public Frame SelectedPage
@@ -107,6 +139,15 @@ namespace InitialProject.ViewModel
         {
             NotesView notesView = new NotesView(_loggedInUser);
             notesView.ShowDialog();
+        }
+
+        public ICommand NotificationOpenCommand => new RelayCommand(NotificationOpen);
+
+        private void NotificationOpen()
+        {
+            _notificationService.UpdateNewNotifications(_loggedInUser.Id);
+            OnPropertyChanged("HasNewNotifications");
+            NavigationService.Navigate(new OwnerNotificationsView(_loggedInUser, NavigationService));
         }
 
 
