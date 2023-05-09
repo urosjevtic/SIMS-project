@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.Model.Statistics;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Repository.StatisticRepo;
+using InitialProject.Service.ReservationServices;
 
 namespace InitialProject.Service.StatisticService
 {
@@ -14,11 +16,14 @@ namespace InitialProject.Service.StatisticService
     {
 
         private readonly IAccommodationStatisticsDataRepository _accommodationStatisticsDataRepository;
+        private readonly AccommodationReservationService _accommodationReservationService;
 
         public MonthlyAccommodationStatisticService()
         {
             _accommodationStatisticsDataRepository =
                 Injector.Injector.CreateInstance<IAccommodationStatisticsDataRepository>();
+
+            _accommodationReservationService = new AccommodationReservationService();
 
         }
 
@@ -27,9 +32,15 @@ namespace InitialProject.Service.StatisticService
         {
             AccommodationStatisticData monthlyAccommodationStatisticsData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
             Dictionary<int, AccommodationStatistic> monthlyStatistics =
-                GetStatisticForYear(year, monthlyAccommodationStatisticsData.Statistics);
+                GetMonthlyStatisticsForYear(year, monthlyAccommodationStatisticsData.Statistics);
 
 
+            return GetStatisticsForChoosenMonth(monthlyStatistics, month);
+        }
+
+        private AccommodationStatistic GetStatisticsForChoosenMonth(
+            Dictionary<int, AccommodationStatistic> monthlyStatistics, string month)
+        {
             switch (month)
             {
                 case "January":
@@ -63,43 +74,85 @@ namespace InitialProject.Service.StatisticService
 
         public List<DateTime> GetAvailableMonths(int accommodationId, int year)
         {
-            AccommodationStatisticData monthlyAccommodationStatisticsData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
-            Dictionary<int, AccommodationStatistic> monthlyStatisticForYear = GetStatisticForYear(year, monthlyAccommodationStatisticsData.Statistics);
-            List<DateTime> availableMonths = new List<DateTime>();
-            foreach (var statistic in monthlyStatisticForYear)
-            {
-                availableMonths.Add(statistic.Value.MonthAndYear);
-            }
+            AccommodationStatisticData accommodationStatisticData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
+            Dictionary<int, AccommodationStatistic> monthlyStatistics = GetMonthlyStatisticsForYear(year, accommodationStatisticData.Statistics);
+            List<DateTime> availableMonths = monthlyStatistics.Values.Select(s => s.MonthAndYear).ToList();
 
             return availableMonths;
         }
 
-        private Dictionary<int, AccommodationStatistic> GetStatisticForYear(int year, List<AccommodationStatistic> statistics)
+        private Dictionary<int, AccommodationStatistic> GetMonthlyStatisticsForYear(int year, List<AccommodationStatistic> statistics)
         {
-            Dictionary<int, AccommodationStatistic> monthlyStatistic = new Dictionary<int, AccommodationStatistic>();
-            List<AccommodationStatistic> statisticForYear = new List<AccommodationStatistic>();
-            foreach (var statistic in statistics)
-            {
-                if (statistic.MonthAndYear.Year == year)
-                {
-                    if (!monthlyStatistic.ContainsKey(statistic.MonthAndYear.Month))
-                    {
-                        AccommodationStatistic newStatistic = new AccommodationStatistic();
-                        newStatistic.MonthAndYear = new DateTime(1, statistic.MonthAndYear.Month, 1);
-                        monthlyStatistic.Add(statistic.MonthAndYear.Month, newStatistic);
-                    }
-                    monthlyStatistic[statistic.MonthAndYear.Month].RenovationsCount = statistic.RenovationsCount;
-                    monthlyStatistic[statistic.MonthAndYear.Month].CancelationsCount = statistic.CancelationsCount;
-                    monthlyStatistic[statistic.MonthAndYear.Month].ReservationsCount = statistic.ReservationsCount;
-                    monthlyStatistic[statistic.MonthAndYear.Month].ReschedulesCount = statistic.ReschedulesCount;
+            Dictionary<int, AccommodationStatistic> monthlyStatistics = new Dictionary<int, AccommodationStatistic>();
 
+            foreach (var statistic in statistics.Where(s => s.MonthAndYear.Year == year))
+            {
+                if (!monthlyStatistics.ContainsKey(statistic.MonthAndYear.Month))
+                {
+                    monthlyStatistics[statistic.MonthAndYear.Month] = new AccommodationStatistic
+                    {
+                        MonthAndYear = new DateTime(year, statistic.MonthAndYear.Month, 1)
+                    };
+                }
+
+                var monthlyStatistic = monthlyStatistics[statistic.MonthAndYear.Month];
+                monthlyStatistic.RenovationsCount = statistic.RenovationsCount;
+                monthlyStatistic.CancelationsCount = statistic.CancelationsCount;
+                monthlyStatistic.ReservationsCount = statistic.ReservationsCount;
+                monthlyStatistic.ReschedulesCount = statistic.ReschedulesCount;
+            }
+
+            return monthlyStatistics;
+        }
+
+        public int GetMostOccupiedMonth(int accommodationId, int selectedYear)
+        {
+            List<AccommodationReservation> accommodationReservations = _accommodationReservationService.GetReservationsByAccommodationId(accommodationId);
+            Dictionary<int, int> occupiedDaysPerMonth = GetNumberOfOccupiedDaysPerMonth(accommodationReservations, selectedYear);
+
+            return FindMostOccupiedMonth(occupiedDaysPerMonth);
+        }
+
+
+        private Dictionary<int, int> GetNumberOfOccupiedDaysPerMonth(List<AccommodationReservation> accommodationReservations, int selectedYear)
+        {
+            Dictionary<int, int> reservationsPerMonth = new Dictionary<int, int>();
+
+            foreach (var reservation in accommodationReservations.Where(a => a.StartDate.Year == selectedYear))
+            {
+                if (!reservationsPerMonth.ContainsKey(reservation.StartDate.Month))
+                {
+                    reservationsPerMonth[reservation.StartDate.Month] = 0;
+                }
+
+                reservationsPerMonth[reservation.StartDate.Month] += (reservation.EndDate - reservation.StartDate).Days;
+            }
+
+            return reservationsPerMonth;
+        }
+
+        private int FindMostOccupiedMonth(Dictionary<int, int> reservationsPerYear)
+        {
+            int mostOccupiedMonth = 0;
+            double occupiance = 0;
+
+            foreach (var month in reservationsPerYear.Keys)
+            {
+                if (occupiance < CalculateOccupationPeriod(reservationsPerYear[month]))
+                {
+                    occupiance = CalculateOccupationPeriod((reservationsPerYear[month]));
+                    mostOccupiedMonth = month;
                 }
             }
 
-
-            return monthlyStatistic;
+            return mostOccupiedMonth;
         }
 
-       
+        private double CalculateOccupationPeriod(int numberOfDays)
+        {
+            double daysInMonth = 30.437;
+            return numberOfDays / daysInMonth;
+        }
+
     }
 }

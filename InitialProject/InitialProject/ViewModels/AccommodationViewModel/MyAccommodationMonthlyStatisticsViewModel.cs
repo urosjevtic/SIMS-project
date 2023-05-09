@@ -94,6 +94,22 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             }
         }
 
+        public string MostOccupiedMonth
+        {
+            get
+            {
+                int mostOccupiedMonth = _monthlyAccommodationStatisticService.GetMostOccupiedMonth(_accommodationId, _selectedYear.Year);
+
+                if (mostOccupiedMonth >= 1 && mostOccupiedMonth <= 12)
+                {
+                    return new DateTime(_selectedYear.Year, mostOccupiedMonth, 1).ToString("MMMM");
+                }
+
+                return "No reservations";
+            }
+        }
+
+
         private int _reservationCount;
 
         public int ReservationCount
@@ -143,7 +159,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
                 OnPropertyChanged("CancelationCount");
             }
         }
-        private string _month = "January";
+        private string _month;
 
         public string Month
         {

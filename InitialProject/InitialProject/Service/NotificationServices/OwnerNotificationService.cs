@@ -59,16 +59,16 @@ namespace InitialProject.Service.NotificationServices
 
         public void UpdateNewNotifications(int ownerId)
         {
-            OwnerNotification notification = _notificationRepository.GetByOwnerId(ownerId);
             int currentRescheduleCount = _reservationRescheduleService.GetAllByOwnerId(ownerId).Count;
             int currentUnratedGuestsCount = _unratedGuestService.GetUnratedGuestsByOwnerId(ownerId).Count;
 
-            notification.ReservationReschedulingCount = currentRescheduleCount;
-            notification.UnradtedGuestsCount = currentUnratedGuestsCount;
+            OwnerNotification notification = new OwnerNotification
+            {
+                ReservationReschedulingCount = currentRescheduleCount,
+                UnradtedGuestsCount = currentUnratedGuestsCount
+            };
 
             _notificationRepository.Update(notification);
-
-
         }
     }
 }

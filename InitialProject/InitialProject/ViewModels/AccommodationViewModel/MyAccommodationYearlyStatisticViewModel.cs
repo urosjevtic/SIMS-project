@@ -23,7 +23,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
         private readonly int AccommodataionId;
-        public  DateTime YearWithMostReservations { get; }
+        public  int YearWithMostReservations { get; }
         public Accommodation Accommodation { get; }
         public NavigationService NavigationService { get; set; }
 
@@ -35,7 +35,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             _logedInUser = logedInUser;
             AccommodataionId = accommodationId;
             Statistics = new ObservableCollection<AccommodationStatistic>(_yearlyAccommodationService.GetStatisticByAccommodationId(accommodationId));
-            YearWithMostReservations = _yearlyAccommodationService.GetYearWithMostReservations(AccommodataionId);
+            YearWithMostReservations = _yearlyAccommodationService.GetMostOccupiedYear(AccommodataionId);
             Accommodation = _accommodationService.GetById(AccommodataionId);
             NavigationService = navigationService;
         }

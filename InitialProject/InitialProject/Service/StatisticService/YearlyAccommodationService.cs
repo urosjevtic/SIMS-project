@@ -4,18 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.Model.Statistics;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
+using InitialProject.Service.ReservationServices;
 
 namespace InitialProject.Service.StatisticService
 {
     public class YearlyAccommodationService
     {
         private readonly IAccommodationStatisticsDataRepository _accommodationStatisticsDataRepository;
+        private readonly AccommodationReservationService _accommodationReservationService;
 
         public YearlyAccommodationService()
         {
             _accommodationStatisticsDataRepository = Injector.Injector.CreateInstance<IAccommodationStatisticsDataRepository>();
+            _accommodationReservationService = new AccommodationReservationService();
         }
 
 
@@ -29,9 +33,7 @@ namespace InitialProject.Service.StatisticService
 
                 if (!yearlyStatistics.ContainsKey(year))
                 {
-                    AccommodationStatistic newStatistic = new AccommodationStatistic();
-                    newStatistic.MonthAndYear = new DateTime(year, 1, 1);
-                    yearlyStatistics.Add(year, newStatistic);
+                    yearlyStatistics[year] = new AccommodationStatistic { MonthAndYear = new DateTime(year, 1, 1) };
                 }
 
                 yearlyStatistics[year].RenovationsCount += statistic.RenovationsCount;
@@ -46,20 +48,52 @@ namespace InitialProject.Service.StatisticService
 
 
 
-        public DateTime GetYearWithMostReservations(int accommodationId)
+        public int GetMostOccupiedYear(int accommodationId)
         {
-            AccommodationStatisticData statisticData = _accommodationStatisticsDataRepository.GetByAccommodationId(accommodationId);
-            AccommodationStatistic yearWithMostReservations = statisticData.Statistics[0];
-            foreach (var statistic in statisticData.Statistics)
+           List<AccommodationReservation> accommodationReservations = _accommodationReservationService.GetReservationsByAccommodationId(accommodationId);
+           Dictionary<int, int> occupiedDaysPerYear = GetNumberOfOccupiedDaysPerYear(accommodationReservations);
+
+           return FindMostOccupiedYear(occupiedDaysPerYear);
+        }
+
+        private Dictionary<int, int> GetNumberOfOccupiedDaysPerYear(List<AccommodationReservation> accommodationReservations)
+        {
+            Dictionary<int, int> reservationsPerYear = new Dictionary<int, int>();
+
+            foreach (var reservation in accommodationReservations)
             {
-                if (statistic.ReservationsCount > yearWithMostReservations.ReservationsCount)
+                if (!reservationsPerYear.ContainsKey(reservation.StartDate.Year))
                 {
-                    yearWithMostReservations = statistic;
+                    reservationsPerYear[reservation.StartDate.Year] = 0;
+                }
+
+                reservationsPerYear[reservation.StartDate.Year] += (reservation.EndDate - reservation.StartDate).Days;
+            }
+
+            return reservationsPerYear;
+        }
+
+        private int FindMostOccupiedYear(Dictionary<int, int> reservationsPerYear)
+        {
+            int mostOccupiedYear = 0;
+            double occupiance = 0;
+
+            foreach (var year in reservationsPerYear.Keys)
+            {
+                if (occupiance < CalculateOccupationPeriod(reservationsPerYear[year]))
+                {
+                    occupiance = CalculateOccupationPeriod((reservationsPerYear[year]));
+                    mostOccupiedYear = year;
                 }
             }
 
-            return yearWithMostReservations.MonthAndYear;
+            return mostOccupiedYear;
         }
 
+        private double CalculateOccupationPeriod(int numberOfDays)
+        {
+            double daysInYear = 365.25;
+            return numberOfDays / daysInYear;
+        }
     }
 }

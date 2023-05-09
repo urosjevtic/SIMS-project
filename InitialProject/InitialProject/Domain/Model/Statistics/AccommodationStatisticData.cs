@@ -51,31 +51,34 @@ namespace InitialProject.Domain.Model.Statistics
             return csvValues;
         }
 
-        public void FromCSV(string[] values)
+        public void FromCSV(string[] csvValues)
         {
-            AccommodationId = Convert.ToInt32(values[0]);
-            int i = 1;
+            AccommodationId = Convert.ToInt32(csvValues[0]);
 
-            while (values[i] != "[END]")
+            for (int i = 1; i < csvValues.Length; i++)
             {
-                string statisticNotParesed = values[i];
-                string[] splitedWord = statisticNotParesed.Split("(");
-                string year = splitedWord[0];
-                string stats = splitedWord[1].Remove(splitedWord[1].Length - 1);
-                string[] statovi = stats.Split(',');
+                if (csvValues[i] == "[END]")
+                {
+                    break;
+                }
 
-                AccommodationStatistic statistic = new AccommodationStatistic();
-                statistic.MonthAndYear = DateTime.Parse(year);
-                statistic.ReservationsCount = Convert.ToInt32(statovi[0]);
-                statistic.ReschedulesCount = Convert.ToInt32(statovi[1]);
-                statistic.CancelationsCount = Convert.ToInt32(statovi[2]);
-                statistic.RenovationsCount = Convert.ToInt32(statovi[3]);
+                string statisticString = csvValues[i];
+                string[] statisticParts = statisticString.Split("(");
+                string year = statisticParts[0];
+                string statsString = statisticParts[1].Remove(statisticParts[1].Length - 1);
+                string[] statValues = statsString.Split(',');
+
+                AccommodationStatistic statistic = new AccommodationStatistic
+                {
+                    MonthAndYear = DateTime.Parse(year),
+                    ReservationsCount = Convert.ToInt32(statValues[0]),
+                    ReschedulesCount = Convert.ToInt32(statValues[1]),
+                    CancelationsCount = Convert.ToInt32(statValues[2]),
+                    RenovationsCount = Convert.ToInt32(statValues[3])
+                };
 
                 Statistics.Add(statistic);
-
-                i++;
             }
-
         }
     }
 }
