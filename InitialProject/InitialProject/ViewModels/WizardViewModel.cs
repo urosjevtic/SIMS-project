@@ -10,9 +10,9 @@ namespace InitialProject.ViewModels
 {
     public class WizardViewModel
     {
-        public ICommand SaveWizardSettingsCommand => new RelayCommand(SaveWizardSettings);
+        public ICommand SaveWizardSettingsCommand => new RelayCommand(OnSaveWizardSettings);
 
-        private void SaveWizardSettings()
+        private void OnSaveWizardSettings()
         {
             Properties.Settings.Default.ShowWizard = false;
             Properties.Settings.Default.Save();

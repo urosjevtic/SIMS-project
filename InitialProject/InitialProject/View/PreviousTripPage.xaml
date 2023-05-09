@@ -1,50 +1,35 @@
 ﻿<Page
-    x:Class="InitialProject.View.AccommodationListPage"
+    x:Class="InitialProject.View.PreviousTripPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
-    x:Name="AccommodationsPage"
-    Title="AccommodationListPage"
+    Title="PreviousTripPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    Loaded="AccommodationsPage_Loaded"
     mc:Ignorable="d">
-
-    <!--<Page.DataContext>
-        <viewModels:AccommodationListViewModel />
-    </Page.DataContext>-->
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0" Background="AliceBlue">
-            <Button
-                Width="200"
-                Height="40"
-                HorizontalAlignment="Right"
-                Margin="0,0,55,0"
-                Background="LightGray"
-                Command="{Binding SearchAccommodationCommand}"
-                CommandParameter="AccommodationSearchPage"
-                Content="Search" />
-        </Grid>
+        <Label
+            Margin="50,10,0,0"
+            Content="Previous trips"
+            FontSize="20" />
         <ListBox
-            x:Name="accommodationListBox"
+            x:Name="previousTrips"
             Grid.Row="1"
             Width="800"
             HorizontalContentAlignment="Stretch"
             Background="White"
             BorderThickness="0"
-            ItemsSource="{Binding Accommodations}"
+            ItemsSource="{Binding Trips}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectedItem="{Binding SelectedAccommodation}">
-
+            SelectedItem="{Binding SelectedReservation}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
@@ -67,8 +52,6 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
-                            <Image Source="{Binding Images}" />
-
                             <TextBlock
                                 Grid.Row="0"
                                 Margin="0,0,0,10"
@@ -76,43 +59,53 @@
                                 VerticalAlignment="Center"
                                 FontSize="20"
                                 FontWeight="Bold"
-                                Text="{Binding Name}"
+                                Text="{Binding Accommodation.Name}"
                                 TextWrapping="Wrap" />
 
                             <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock
                                     Margin="0,0,5,0"
                                     FontWeight="Bold"
-                                    Text="City: " />
-                                <TextBlock Text="{Binding Location.City}" />
+                                    Text="Start date: " />
+                                <TextBlock Text="{Binding StartDate}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="2" Orientation="Horizontal">
                                 <TextBlock
                                     Margin="0,0,5,0"
                                     FontWeight="Bold"
-                                    Text="Country: " />
-                                <TextBlock Text="{Binding Location.Country}" />
+                                    Text="End date: " />
+                                <TextBlock Text="{Binding EndDate}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
                                 <TextBlock
                                     Margin="0,0,5,0"
                                     FontWeight="Bold"
-                                    Text="Accommodation type: " />
-                                <TextBlock Text="{Binding Type}" />
+                                    Text="City: " />
+                                <TextBlock Text="{Binding Accommodation.Location.City}" />
                             </StackPanel>
-
-                            <Button
-                                Name="ViewButton"
-                                Grid.Row="4"
-                                Width="100"
-                                Height="40"
-                                Margin="0,0,0,10"
-                                Background="LightGray"
-                                HorizontalAlignment="Right"
-                                Command="{Binding ElementName=AccommodationsPage, Path=DataContext.ShowAccommodationInfoCommand}"
-                                Content="Show" />
+                            <StackPanel HorizontalAlignment="Right" Grid.Row="4" Orientation="Horizontal">
+                                <Button
+                                    Name="ViewButton"
+                                    Width="100"
+                                    Height="40"
+                                    Margin="0,10,0,10"
+                                    HorizontalAlignment="Right"
+                                    Background="LightGray"
+                                    BorderBrush="LightGray"
+                                    Command="{Binding ElementName=AccommodationsPage, Path=DataContext.ShowAccommodationInfoCommand}"
+                                    Content="View recension" />
+                                <Button
+                                    Width="100"
+                                    Height="40"
+                                    Margin="20,0,0,0"
+                                    Background="LightGray"
+                                    BorderBrush="LightGray"
+                                    HorizontalAlignment="Right"
+                                    Content="Rate"
+                                    Click="RateButton_Click"/>
+                            </StackPanel>
                         </Grid>
                     </Border>
                 </DataTemplate>

@@ -10,9 +10,6 @@
     Height="550"
     mc:Ignorable="d">
 
-
-
-
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />

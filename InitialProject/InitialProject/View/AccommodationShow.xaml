@@ -11,12 +11,10 @@
     Title="AccommodationShow"
     Width="1200"
     Height="850"
-    Closing="Window_Closing"
-    Loaded="Window_Loaded"
     mc:Ignorable="d">
     <!--<Window.DataContext>
         <viewModels:MainWindowViewModel />
-    </Window.DataContext>
+    </Window.DataContext>-->
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -26,7 +24,7 @@
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding SaveSettingsCommand}" />
         </i:EventTrigger>
-    </i:Interaction.Triggers>-->
+    </i:Interaction.Triggers>
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -35,11 +33,12 @@
         </Grid.ColumnDefinitions>
 
         <Border
-            Margin="0,10,0,10"
+            Margin="0,0,0,0"
+            Background="CadetBlue"
             BorderBrush="Black"
             BorderThickness="3"
             CornerRadius="15">
-            <Grid Margin="0,-3,0,-3">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition />
@@ -54,11 +53,11 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="26*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <!--<RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="57*" />
+                    <RowDefinition Height="57*" />-->
                 </Grid.RowDefinitions>
 
                 <ToggleButton
@@ -104,7 +103,10 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
-                    Click="HomePageClick"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationListPage"
                     Content="Home page" />
                 <Button
                     Name="SearchButton"
@@ -115,7 +117,10 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
-                    Click="SearchClick"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationSearchPage"
                     Content="Search"
                     ToolTip="Search for available accommodation" />
                 <Button
@@ -127,6 +132,10 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationReservationPage"
                     Content="Anywhere/Whenever"
                     ToolTip="Search for available accommodation anywhere and on any date" />
                 <Button
@@ -138,19 +147,24 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
-                    Click="PreviousTripButton_Click"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="PreviousTripPage"
                     Content="Previous trip"
                     ToolTip="View your previous booking" />
                 <Button
                     Name="MyResrvationsButton"
                     Grid.Row="7"
-                    Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Width="200"
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
-                    Click="MyResrvationsButton_Click"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="MyReservationsPage"
                     Content="My reservations"
                     ToolTip="Display upcoming bookings" />
                 <Button
@@ -162,52 +176,81 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightSlateGray"
                     Content="Forum"
                     ToolTip="Open and start the forum" />
-                <Label
-                    x:Name="AccountInfoTitleLabel"
+                <Grid
                     Grid.Row="9"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Width="200"
-                    Margin="0,15,0,5"
-                    HorizontalAlignment="Center"
-                    Content="Account Information"
-                    FontWeight="Bold" />
-                <Label
-                    Name="UserNameLabel"
-                    Grid.Row="10"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Margin="0,5,0,5"
-                    HorizontalAlignment="Center"
-                    Content="Username" />
-                <Label
-                    Name="SuperGuestLabel"
-                    Grid.Row="11"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Margin="0,5,0,5"
-                    HorizontalAlignment="Center"
-                    Content="Super guest" />
-                <CheckBox
-                    Grid.Row="11"
-                    Grid.Column="1"
-                    Grid.ColumnSpan="1"
-                    Margin="0,5,0,5"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Center" />
-                <Label
-                    Name="PointsLabel"
-                    Grid.Row="12"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Margin="0,5,0,5"
-                    HorizontalAlignment="Center"
-                    Content="Number of points" />
+                    Margin="0,10,0,0"
+                    Background="DarkCyan">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        x:Name="AccountInfoTitleLabel"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,15,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Account Information"
+                        FontWeight="Bold" />
+                    <Label
+                        Name="UserNameLb"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Username" />
+                    <Label
+                        Name="UserNameLabel"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="{Binding LoggedUser.Username}" />
+
+                    <Label
+                        Name="SuperGuestLabel"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Super guest" />
+                    <CheckBox
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" />
+                    <Label
+                        Name="PointsLabel"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Number of points" />
+                </Grid>
                 <Button
                     Name="SignOutButton"
                     Grid.Row="13"
@@ -217,6 +260,8 @@
                     Height="40"
                     Margin="0,10,0,10"
                     HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
                     Click="Button_Click"
                     Content="Sign out"
                     ToolTip="Sign out and return to LogIn page" />
@@ -241,8 +286,9 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         Background="#58B6CC"
-                        Content="Back"
-                        FontStyle="Italic" />
+                        BorderBrush="#58B6CC"
+                        Command="{Binding NavigateBackCommand}"
+                        Content="Back" />
                     <Button
                         Name="NotificationButton"
                         Grid.Column="0"
@@ -252,22 +298,16 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Center"
                         Background="#58B6CC"
+                        BorderBrush="#58B6CC"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="NotificationsPage"
                         Content="Notifications"
-                        FontStyle="Italic"
                         ToolTip="Display the latest notifications" />
 
-                    <Button
-                        Name="SearchButton1"
-                        Grid.Column="1"
-                        Width="200"
-                        Height="40"
-                        Margin="0,10,0,10"
-                        Click="SearchButton1_Click"
-                        Content="Search" />
                 </Grid>
 
                 <Frame
-                    x:Name="MainFrame"
+                    x:Name="NavigationFrame"
                     DockPanel.Dock="Bottom"
                     NavigationUIVisibility="Hidden"
                     Source="AccommodationListPage.xaml" />
