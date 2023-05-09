@@ -119,6 +119,7 @@ namespace InitialProject.ViewModels
             CancelCommand = new RelayCommand(Cancel);
             vouchers = _voucherService.GetAllCreated();
             LoggedUser = user;
+            Tours = new ObservableCollection<Tour>();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
             NumberOfPeople = "0";
             SelectedTour = tour;
@@ -195,6 +196,9 @@ namespace InitialProject.ViewModels
                     Tours.Add(t);
                 }
             }
+            TourSearch ts = new(LoggedUser, Tours);
+            Cancel();
+            ts.Show();
         }
     }
 }

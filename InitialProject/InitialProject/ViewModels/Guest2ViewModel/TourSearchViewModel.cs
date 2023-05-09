@@ -56,6 +56,21 @@ namespace InitialProject.ViewModels
             NumberOfPeople = "0";
             Duration = "0";
         }
+        public TourSearchViewModel(User user, ObservableCollection<Tour> Tours)
+        {
+            _tourService = new TourService();
+            LoggedUser = user;
+            SearchCommand = new RelayCommand(Search);
+            GoBackCommand = new RelayCommand(CloseCurrentWindow);
+            ShowTourCommand = new RelayCommand<Tour>(ShowSelectedTour);
+            UpButtonCommand = new RelayCommand(UpButton);
+            DownButtonCommand = new RelayCommand(DownButton);
+            upButtonCommand = new RelayCommand(upButton);
+            downButtonCommand = new RelayCommand(downButton);
+            filteredTours = Tours;
+            NumberOfPeople = "0";
+            Duration = "0";
+        }
         private void UpButton()
         {
             int currentNumber = int.Parse(NumberOfPeople);

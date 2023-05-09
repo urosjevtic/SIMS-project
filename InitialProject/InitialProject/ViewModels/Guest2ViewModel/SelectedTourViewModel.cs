@@ -17,7 +17,26 @@ namespace InitialProject.ViewModels.Guest2ViewModel
         public User LoggedUser { get; set; }
         public ICommand ReserveCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
-        public List<Image> Images { get; set; }
+        public List<string> Images
+        {
+            get => selectedTour.CoverImageUrl.Url;
+            set
+            {
+                if (selectedTour.CoverImageUrl.Url == value) return;
+                selectedTour.CoverImageUrl.Url = value;
+                OnPropertyChanged(nameof(Images));
+            }
+        }
+        public List<string> Image
+        {
+            get => Image;
+            set
+            {
+                if (Image == value) return;
+                Image = value;
+                OnPropertyChanged(nameof(Image));
+            }
+        }
         public List<string> Checkpoints { get; set; }
         public ImageService _imageService;
         public CheckPointService _checkPointService;

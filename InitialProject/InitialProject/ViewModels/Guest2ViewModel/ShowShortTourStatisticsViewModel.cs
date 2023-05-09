@@ -41,8 +41,8 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-        public List<DataPoint> toursByLanguage { get; set; }
-        public List<DataPoint> toursByLocation { get; set; }
+        //public List<DataPoint> toursByLanguage { get; set; }
+        //public List<DataPoint> toursByLocation { get; set; }
 
         public TourStatisticService _tourStatisticService;
 

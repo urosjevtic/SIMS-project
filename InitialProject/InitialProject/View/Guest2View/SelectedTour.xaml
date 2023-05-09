@@ -52,38 +52,13 @@
                     <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" BorderBrush="Black" Width="375" BorderThickness="1" Padding="5" Height="350">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" >
                             <StackPanel>
-                                <ItemsControl ItemsSource="{Binding Images}">
-                                    <ItemsControl.ItemTemplate>
+                                <ListBox ItemsSource="{Binding Images}" Width="330">
+                                    <ListBox.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderBrush="Black" BorderThickness="1" Margin="5">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                                                        <ColumnDefinition Width="*"></ColumnDefinition>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition></RowDefinition>
-                                                        <RowDefinition></RowDefinition>
-                                                        <RowDefinition></RowDefinition>
-                                                        <RowDefinition></RowDefinition>
-                                                        <RowDefinition></RowDefinition>
-                                                    </Grid.RowDefinitions>
-                                                    <Label Content="Name of tour:" FontSize="15" Grid.Row="0" Grid.Column="0"/>
-                                                    <TextBlock Text="{Binding Name}" FontSize="15" Grid.Row="0" Grid.Column="1" Padding="5"/>
-                                                    <Label Content="Country:" FontSize="15" Grid.Row="1" Grid.Column="0"/>
-                                                    <TextBlock Text="{Binding Path = Location.Country}" FontSize="15" Grid.Row="1" Grid.Column="1" Padding="5"/>
-                                                    <Label Content="City:" FontSize="15" Grid.Row="2" Grid.Column="0"/>
-                                                    <TextBlock Text="{Binding Path = Location.City}" FontSize="15" Grid.Row="2" Grid.Column="1" Padding="5"/>
-                                                    <Label Content="Language:" FontSize="15" Grid.Row="3" Grid.Column="0"/>
-                                                    <TextBlock Text="{Binding Language}" FontSize="15" Grid.Row="3" Grid.Column="1" Padding="5"/>
-                                                    <Label Content="Number of people:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
-                                                    <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
-                                                </Grid>
-                                            </Border>
+                                            <Image Source="{Binding}" Width="310" Height="200"/>
                                         </DataTemplate>
-                                    </ItemsControl.ItemTemplate>
-                                </ItemsControl>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
                             </StackPanel>
                         </ScrollViewer>
                     </Border>

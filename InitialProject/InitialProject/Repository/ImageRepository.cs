@@ -28,18 +28,17 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
-        public List<Image> GetAllImagesById(int id)
+        public List<string> GetAllImagesById(int id)
         {
             _images = _serializer.FromCSV(FilePath);
-            List<Image> result = new List<Image>();
             foreach(Image image in _images)
             {
                 if(image.Id == id)
                 {
-                    result.Add(image);
+                    return image.Url;
                 }
             }
-            return result;
+            return null;
         }
         public Image ReturnSaved(Image image)
         {
