@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Notifications"
       mc:Ignorable="d" 
-      Title="OwnerNotificationsView" Height="637" Width="356">
+      Title="OwnerNotificationsView" Height="637" Width="345">
     <Page.Background>
         <SolidColorBrush Color="#fafafa" />
     </Page.Background>

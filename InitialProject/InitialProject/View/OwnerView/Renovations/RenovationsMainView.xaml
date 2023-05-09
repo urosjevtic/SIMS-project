@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
         mc:Ignorable="d"
-        Title="RenovationsMain" Height="637" Width="356">
+        Title="RenovationsMain" Height="637" Width="345">
     <Page.Background>
         <SolidColorBrush Color="#fafafa" />
     </Page.Background>

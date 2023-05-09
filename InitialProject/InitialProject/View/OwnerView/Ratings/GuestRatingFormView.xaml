@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
         mc:Ignorable="d"
-        Title="GuestRatingFormView" Height="700" Width="356">
+        Title="GuestRatingFormView" Height="700" Width="345">
+    <Page.Background>
+        LightGray
+    </Page.Background>
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>

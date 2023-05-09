@@ -10,6 +10,7 @@
         WindowStartupLocation="CenterScreen">
     <Window.Background>
         <SolidColorBrush Color="#fafafa" />
+        
     </Window.Background>
     <Window.Resources>
         <!--LogIn button style-->
