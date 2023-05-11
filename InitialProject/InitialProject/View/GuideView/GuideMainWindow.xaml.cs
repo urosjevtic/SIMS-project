@@ -28,7 +28,7 @@ namespace InitialProject.View
         public GuideMainWindow(User user)
         {
             InitializeComponent();
-            this.DataContext =  new GuideMainViewModel(user);
+           // this.DataContext =  new GuideMainViewModel(user);
            
         }
 

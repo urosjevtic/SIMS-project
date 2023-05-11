@@ -70,5 +70,40 @@ namespace InitialProject.Service
             }
             return accepted;
         }
+
+
+        public List<ShortTourRequest> FindrequestsByCity(string city)
+        {
+            List<ShortTourRequest> requests = new List<ShortTourRequest>();
+            foreach (ShortTourRequest request in GetAll())
+            {
+                if (request.City.ToLower().Contains(city.ToLower()))
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+        public List<ShortTourRequest> FindrequestsByCountry(string country)
+        {
+            List<ShortTourRequest> requests = new List<ShortTourRequest>();
+            foreach (ShortTourRequest request in GetAll())
+            {
+                if (request.Country.ToLower().Contains(country.ToLower()))
+                {
+                    requests.Add(request);
+                }
+            }
+            return requests;
+        }
+        public List<ShortTourRequest> FindRequestsByLanguage(string language)
+        {
+            List<ShortTourRequest> requests = new List<ShortTourRequest>();
+            foreach (ShortTourRequest request in GetAll())
+            {
+                
+            }
+            return requests;
+        }
     }
 }

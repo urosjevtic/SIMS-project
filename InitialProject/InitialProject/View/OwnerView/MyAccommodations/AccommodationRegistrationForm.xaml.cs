@@ -10,8 +10,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.OwnerView.MyAccommodations
@@ -19,12 +21,12 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// <summary>
     /// Interaction logic for AccommodationRegistrationForm.xaml
     /// </summary>
-    public partial class AccommodationRegistrationForm : Window
+    public partial class AccommodationRegistrationForm : Page
     {
-        public AccommodationRegistrationForm(User logedInUser)
+        public AccommodationRegistrationForm(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new AccommodationRegistrationViewModel(logedInUser);
+            DataContext = new AccommodationRegistrationViewModel(logedInUser, navigationService);
         }
     }
 }

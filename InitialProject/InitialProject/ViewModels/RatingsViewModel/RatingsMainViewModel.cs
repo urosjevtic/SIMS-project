@@ -14,15 +14,18 @@ using User = InitialProject.Domain.Model.User;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Reservations;
 using InitialProject.View.OwnerView.Renovations;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
-    public class RatingsMainViewModel : SideScreenViewModel
+    public class RatingsMainViewModel : BaseViewModel
     {
         private readonly User _logedInUser;
-        public RatingsMainViewModel(User logedInUser)
+        public NavigationService NavigationService { get; set; }
+        public RatingsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
 
@@ -30,9 +33,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void OpenUnratedGuests()
         {
-            UnratedGuestsList unratedGuests = new UnratedGuestsList(_logedInUser);
-            CloseCurrentWindow();
-            unratedGuests.Show();
+            NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
 
 
@@ -40,42 +41,10 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void OpenOwnerRatings()
         {
-            AccommodationReviewsSelectionWindow unratedGuests = new AccommodationReviewsSelectionWindow(_logedInUser);
-            CloseCurrentWindow();
-            unratedGuests.Show();
+            NavigationService.Navigate(new AccommodationReviewsSelectionView(_logedInUser, NavigationService));
         }
 
 
-        protected override void MyAccommoadionsOpen()
-        {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
-        }
-
-
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
-
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
-        }
-
-        protected override void RenovationsOpen()
-        {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(_logedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
-        }
 
 
     }

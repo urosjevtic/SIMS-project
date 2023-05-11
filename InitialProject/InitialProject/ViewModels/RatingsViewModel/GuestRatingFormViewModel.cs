@@ -10,6 +10,7 @@ using System.Windows.Input;
 using InitialProject.Service;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Ratings;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
@@ -19,12 +20,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public UnratedGuest UnratedGuest { get; }
         private readonly GuestRatingService _guestRatingService;
         private readonly User _logedInUser;
+        public NavigationService NavigationService { get; set; }
 
-        public GuestRatingFormViewModel(User logedInUser, UnratedGuest unratedGuest)
+        public GuestRatingFormViewModel(User logedInUser, UnratedGuest unratedGuest, NavigationService navigationService)
         {
             UnratedGuest = unratedGuest;
             _guestRatingService = new GuestRatingService();
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
 
@@ -76,18 +79,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private void RateAGuest()
         {
             _guestRatingService.SubmitRating(UnratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
-            UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
-            CloseCurrentWindow();
-            unratedGuestsList.Show();
+            NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 
         private void GoBack()
         {
-            UnratedGuestsList unratedGuestsList = new UnratedGuestsList(_logedInUser);
-            CloseCurrentWindow();
-            unratedGuestsList.Show();
+            NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
 
     }
