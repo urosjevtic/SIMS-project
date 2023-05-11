@@ -48,6 +48,10 @@ namespace InitialProject.ViewModels
             _tourService = new TourService();  
             _notificationService = new NotificationService();
             _guideMainWindow = new GuideMainViewModel(user);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             AddImageCommand = new RelayCommand(AddImage);
@@ -359,12 +363,5 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-       
-        
-
-
-
-
-
     }
 }

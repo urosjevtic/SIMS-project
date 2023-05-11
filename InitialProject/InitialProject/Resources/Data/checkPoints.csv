@@ -83,11 +83,18 @@
 83|Center|1|False|[END]
 84|Bridge|2|False|[END]
 85|Church|3|False|[END]
+<<<<<<< HEAD
 86|cekk|3|False|[END]
 70|ppp|3|False|[END]
+=======
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
 87|prvi|1|False|[END]
 88|treci|2|False|[END]
 89|drugi|3|False|[END]
 90|Petrovaradin|1|True|[END]
 91|Centar|2|True|[END]
+<<<<<<< HEAD
 92|Klisa|3|False|[END]
+=======
+92|Klisa|3|False|[END]
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd

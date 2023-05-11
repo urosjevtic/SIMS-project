@@ -8,4 +8,8 @@
 8|3|Tour8|17|City with history longer than 2500 years. Meet the capital of Roman Empire!|English|17|12/04/2023 9:00:00 am|3|56|False|True|69|70|0|[END]
 9|3|Tour9|6|n|mm|3|13/04/2023 12:00:00 am|4|63|False|True|31|[END]
 10|3|Tour10|15|The most beautiful town in Spain.|Spanish|25|02/06/2023 12:00:00 am|4|66|False|False|71|72|73|[END]
+<<<<<<< HEAD
 11|3|Tour11|45|Best tour of Australia.|English|30|10/06/2023 12:00:00 am|4|70|False|False|83|84|85|[END]
+=======
+11|3|Tour11|45|Best tour of Australia.|English|30|10/06/2023 12:00:00 am|4|70|False|False|83|84|85|[END]
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd

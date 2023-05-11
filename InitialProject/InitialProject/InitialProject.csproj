@@ -44,15 +44,24 @@
     <None Remove="Resources\Images\reservations.png" />
     <None Remove="Resources\Images\reviews.png" />
     <None Remove="Resources\Images\settings.png" />
+<<<<<<< HEAD
+=======
+    <None Remove="Resources\Images\tick.png" />
+    <None Remove="Resources\Images\trend.png" />
+    <None Remove="Resources\Images\upload.png" />
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
     <None Remove="Resources\Images\statistic.png" />
     <None Remove="Resources\Images\todayTours.png" />
     <None Remove="Resources\Images\todayToursBijela.png" />
     <None Remove="Resources\Images\TourReport.png" />
     <None Remove="Resources\Images\tourRequests.png" />
     <None Remove="Resources\Images\user.png" />
+<<<<<<< HEAD
     <None Remove="Resources\Images\tick.png" />
     <None Remove="Resources\Images\trend.png" />
     <None Remove="Resources\Images\upload.png" />
+=======
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\zvijezdaBijela.png" />
   </ItemGroup>
@@ -97,12 +106,25 @@
     <Content Include="Resources\Images\no.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+<<<<<<< HEAD
+=======
+    <Content Include="Resources\Images\notification.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\open-book.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\paper-32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
     <Content Include="Resources\Images\notes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\notification.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+<<<<<<< HEAD
     <Content Include="Resources\Images\open-book.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -113,6 +135,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\play-button.png">
+=======
+    <Content Include="Resources\Images\notificationNew.png">
+>>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\paper-32.png">
