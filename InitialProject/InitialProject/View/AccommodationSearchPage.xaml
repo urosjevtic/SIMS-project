@@ -59,7 +59,7 @@
                     Margin="25,0,0,0"
                     HorizontalAlignment="Left"
                     FontSize="15"
-                    Text="{Binding Path=CityNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding CityNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Left" />
                 <TextBlock
                     Margin="25,0,0,0"
@@ -72,7 +72,7 @@
                     Margin="25,0,0,0"
                     HorizontalAlignment="Left"
                     FontSize="15"
-                    Text="{Binding Path=CountryNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding CountryNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Left" />
             </StackPanel>
             <StackPanel Grid.Column="1">

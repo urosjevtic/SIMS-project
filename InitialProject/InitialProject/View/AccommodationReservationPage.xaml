@@ -17,8 +17,9 @@
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
+            Margin="20,10,0,0"
             Content="Display and reservation of accommodation"
-            FontSize="20" Margin="20,10,0,0"/>
+            FontSize="20" />
         <Border
             Grid.Row="1"
             Margin="20,20,20,30"
@@ -39,29 +40,50 @@
                     <Label
                         Margin="20,0,0,0"
                         Content="Name:"
-                        FontSize="15" />
-                    <TextBlock FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Accommodation.Name}" />
+                        FontSize="15"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{Binding Accommodation.Name}" />
                 </StackPanel>
                 <StackPanel Grid.Row="1" Orientation="Horizontal">
                     <Label
                         Margin="20,0,0,0"
                         Content="City:"
-                        FontSize="15" />
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"   FontSize="15" Text="{Binding Accommodation.Location.City}" />
+                        FontSize="15"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{Binding Accommodation.Location.City}" />
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                     <Label
                         Margin="20,0,0,0"
                         Content="Country:"
-                        FontSize="15" />
-                    <TextBlock   FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Accommodation.Location.Country}" />
+                        FontSize="15"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{Binding Accommodation.Location.Country}" />
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Horizontal">
                     <Label
                         Margin="20,0,0,0"
                         Content="Type:"
-                        FontSize="15" />
-                    <TextBlock Margin="0,0,0,0" FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Accommodation.Type}" />
+                        FontSize="15"
+                        FontWeight="Bold" />
+                    <TextBlock
+                        Margin="0,0,0,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="15"
+                        Text="{Binding Accommodation.Type}" />
                 </StackPanel>
                 <Grid Grid.Row="4">
                     <Grid.ColumnDefinitions>
@@ -107,20 +129,28 @@
                             Margin="40,0,0,0"
                             HorizontalAlignment="Left"
                             SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedDateChanged="dpStart_SelectedDateChanged"  />
+                            SelectedDateChanged="dpStart_SelectedDateChanged" />
                         <Label
                             Margin="37,5,0,0"
                             Content="End date"
                             FontSize="15" />
                         <StackPanel Orientation="Horizontal">
                             <DatePicker
-                            Name="dpEnd"
-                            Width="150"
-                            Margin="40,0,0,0"
-                            HorizontalAlignment="Left"
-                            SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                        SelectedDateChanged="dpEnd_SelectedDateChanged" /> 
-                            <TextBlock Foreground="Red" Name="tbNotFound" Width="270" HorizontalAlignment="Left" Margin="20,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="30"/>
+                                Name="dpEnd"
+                                Width="150"
+                                Margin="40,0,0,0"
+                                HorizontalAlignment="Left"
+                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                SelectedDateChanged="dpEnd_SelectedDateChanged" />
+                            <TextBlock
+                                Name="tbNotFound"
+                                Width="270"
+                                Height="30"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                Foreground="Red"
+                                TextWrapping="Wrap" />
                         </StackPanel>
                     </StackPanel>
                 </Grid>
@@ -168,8 +198,8 @@
                         VerticalAlignment="Bottom"
                         Background="LightGray"
                         BorderBrush="LightGray"
-                        Content="Reserve"
                         Click="ReserveClick"
+                        Content="Reserve"
                         ToolTip="Choose the desired dates and make a reservation" />
                 </Grid>
             </Grid>

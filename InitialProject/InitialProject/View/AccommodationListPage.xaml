@@ -26,12 +26,13 @@
             <Button
                 Width="200"
                 Height="40"
-                HorizontalAlignment="Right"
                 Margin="0,0,55,0"
+                HorizontalAlignment="Right"
                 Background="LightGray"
                 Command="{Binding SearchAccommodationCommand}"
                 CommandParameter="AccommodationSearchPage"
-                Content="Search" />
+                Content="Search"
+                ToolTip="Search accommodation by parameters" />
         </Grid>
         <ListBox
             x:Name="accommodationListBox"
@@ -109,10 +110,11 @@
                                 Width="100"
                                 Height="40"
                                 Margin="0,0,0,10"
-                                Background="LightGray"
                                 HorizontalAlignment="Right"
+                                Background="LightGray"
                                 Command="{Binding ElementName=AccommodationsPage, Path=DataContext.ShowAccommodationInfoCommand}"
-                                Content="Show" />
+                                Content="Show"
+                                ToolTip="View and reserve accommodation" />
                         </Grid>
                     </Border>
                 </DataTemplate>

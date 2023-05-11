@@ -8,10 +8,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-    Title="Wizard za upoznavanje sa aplikacijom"
+    Title="Wizard for getting to know the applicatio"
     Width="800"
     Height="450"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewModels:WizardViewModel />
     </Window.DataContext>
@@ -22,10 +23,14 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="137*"/>
+            <ColumnDefinition Width="663*"/>
+        </Grid.ColumnDefinitions>
         <xctk:Wizard
             CanHelp="False"
             CancelButtonVisibility="Collapsed"
-            HelpButtonVisibility="Collapsed">
+            HelpButtonVisibility="Collapsed" Grid.ColumnSpan="2">
             <xctk:WizardPage
                 x:Name="IntroWizardPage"
                 Title="Welcome to Booking Application!"
