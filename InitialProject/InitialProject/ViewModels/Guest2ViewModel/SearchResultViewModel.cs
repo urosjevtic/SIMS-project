@@ -17,7 +17,7 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class SearchResultViewModel
+    public class SearchResultViewModel : BaseViewModel
     {
         private readonly TourService _tourService;
         private readonly TourReservationService _tourReservationService;
@@ -27,6 +27,8 @@ namespace InitialProject.ViewModels
         public User LoggedUser { get; set; }
         public ICommand ReserveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
+        public ICommand UpButtonCommand { get; set; }
+        public ICommand DownButtonCommand { get; set; }
 
         private string _numberOfPeople;
         public string NumberOfPeople
@@ -89,7 +91,7 @@ namespace InitialProject.ViewModels
                 if (value != _tours)
                 {
                     _tours = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Tours));
                 }
             }
         }
@@ -102,27 +104,35 @@ namespace InitialProject.ViewModels
                 if (value != _vouchers)
                 {
                     _vouchers = value;
-                    OnPropertyChanged();
+                    OnPropertyChanged(nameof(Vouchers));
                 }
             }
         }
-        public SearchResultViewModel(User user, List<Tour> filteredTours)
+        public SearchResultViewModel(User user, Tour tour)
         {
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
             _voucherService = new VoucherService();
+            UpButtonCommand = new RelayCommand(UpButton);
+            DownButtonCommand = new RelayCommand(DownButton);
             ReserveCommand = new RelayCommand(Reserve);
             CancelCommand = new RelayCommand(Cancel);
-            tours = filteredTours;
             vouchers = _voucherService.GetAllCreated();
             LoggedUser = user;
-            Tours = new ObservableCollection<Tour>(tours);
+            Tours = new ObservableCollection<Tour>();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
+            NumberOfPeople = "0";
+            SelectedTour = tour;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        private void UpButton()
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            int currentNumber = int.Parse(NumberOfPeople);
+            NumberOfPeople = (currentNumber + 1).ToString();
+        }
+        private void DownButton()
+        {
+            int currentNumber = int.Parse(NumberOfPeople);
+            NumberOfPeople = (currentNumber - 1).ToString();
         }
         private void Cancel()
         {
@@ -138,9 +148,9 @@ namespace InitialProject.ViewModels
                 {
                     MessageBox.Show("You did not select any tour!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
-                if (_numberOfPeople == null)
+                if (0 >= int.Parse(NumberOfPeople))
                 {
-                    MessageBox.Show("You did not type number of people!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBox.Show("Number of people must be greater than zero!", "Mistake", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
                 if (_averageAge == null)
                 {
@@ -186,6 +196,9 @@ namespace InitialProject.ViewModels
                     Tours.Add(t);
                 }
             }
+            TourSearch ts = new(LoggedUser, Tours);
+            Cancel();
+            ts.Show();
         }
     }
 }

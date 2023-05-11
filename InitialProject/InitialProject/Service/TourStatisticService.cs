@@ -109,7 +109,7 @@ namespace InitialProject.Service
                 i = 0;
                 foreach(ShortTourRequest shortRequest in _shortTourRequestRepository.GetAll())
                 {
-                    if((dp.Key == shortRequest.Language) && Convert.ToInt32(year) == shortRequest.From.Year)
+                    if((dp.Key == shortRequest.Language) && Convert.ToInt32(year) == shortRequest.From.Year && shortRequest.Status == RequestStatus.Accepted)
                     {
                         i++;
                     }
@@ -143,7 +143,7 @@ namespace InitialProject.Service
                 i = 0;
                 foreach (ShortTourRequest shortRequest in _shortTourRequestRepository.GetAll())
                 {
-                    if ((dp.Key == shortRequest.City) && Convert.ToInt32(year) == shortRequest.From.Year)
+                    if ((dp.Key == shortRequest.City) && Convert.ToInt32(year) == shortRequest.From.Year && shortRequest.Status == RequestStatus.Accepted)
                     {
                         i++;
                     }

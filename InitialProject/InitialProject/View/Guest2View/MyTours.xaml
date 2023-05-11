@@ -57,15 +57,25 @@
                                                                 <RowDefinition></RowDefinition>
                                                                 <RowDefinition></RowDefinition>
                                                             </Grid.RowDefinitions>
-                                                            <Label Content="Name of tour:" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0">
+                                                                <Bold>Name of tour:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Name}" FontSize="15" Grid.Row="0" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="Country:" FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0">
+                                                                <Bold>Country:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Path = Location.Country}" FontSize="15" Grid.Row="1" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="City:" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0">
+                                                                <Bold>City:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Path = Location.City}" FontSize="15" Grid.Row="2" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="Language:" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0">
+                                                                <Bold>Language:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Language}" FontSize="15" Grid.Row="3" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="Number of people:" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0">
+                                                                <Bold>Number of people:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
                                                             <Button Content="View" FontSize="18" Width="100" Grid.Column="2" Grid.Row="4" Background="LightSteelBlue" BorderThickness="2" HorizontalAlignment="Right" Command="{Binding DataContext.ViewCheckpointsCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
         CommandParameter="{Binding}" Padding="5" Margin="8"/>
@@ -80,7 +90,7 @@
                             <ContentPresenter Grid.Row="1" Margin="0,0,440,0"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox Header="{Binding GroupBoxCheckpointsHeader}" Grid.Row="1" Grid.Column="2" Margin="3,3,3,65">
+                    <GroupBox Header="{Binding GroupBoxCheckpointsHeader}" BorderBrush="Black" Grid.Row="1" Grid.Column="2" Margin="3,3,3,65">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>
@@ -149,15 +159,25 @@
                                                                 <RowDefinition></RowDefinition>
                                                                 <RowDefinition></RowDefinition>
                                                             </Grid.RowDefinitions>
-                                                            <Label Content="Name of tour:" FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0">
+                                                                <Bold>Name of tour:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Name}" FontSize="15" Grid.Row="0" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="Country:" FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="1" Grid.Column="0">
+                                                                <Bold>Country:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Path = Location.Country}" FontSize="15" Grid.Row="1" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="City:" FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="2" Grid.Column="0">
+                                                                <Bold>City:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Path = Location.City}" FontSize="15" Grid.Row="2" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="Language:" FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="3" Grid.Column="0">
+                                                                <Bold>Language:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding Language}" FontSize="15" Grid.Row="3" Grid.Column="1" Padding="5"/>
-                                                            <Label Content="Number of people:" FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0"/>
+                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="4" Grid.Column="0">
+                                                                <Bold>Number of people:</Bold>
+                                                            </Label>
                                                             <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
                                                             <Button Content="Rate" FontSize="18" BorderThickness="2" Grid.Column="2" Background="LightSteelBlue" Width="100" Grid.Row="4" HorizontalAlignment="Right" Command="{Binding DataContext.RatingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
         CommandParameter="{Binding}" Padding="5" Margin="8"/>
@@ -172,7 +192,7 @@
                             <ContentPresenter Grid.Row="1" Margin="0,0,440,0"/>
                         </Grid>
                     </GroupBox>
-                    <GroupBox x:Name="groupBoxRate" Header="{Binding GroupBoxHeader}" Grid.Row="1" Grid.Column="2" Margin="3,3,3,65">
+                    <GroupBox x:Name="groupBoxRate" Header="{Binding GroupBoxHeader}" BorderBrush="Black" Grid.Row="1" Grid.Column="2" Margin="3,3,3,65">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto"/>

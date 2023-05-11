@@ -5,15 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.Model;
+using InitialProject.Model;
 
 namespace InitialProject.Service
 {
     public class GuestsCheckPointService
     {
         private IGuestsCheckPointRepository _guestCheckPointrepository;
+        private ITourGuestRepository _tourGuestRepository;
         public GuestsCheckPointService()
         {
             _guestCheckPointrepository = Injector.Injector.CreateInstance<IGuestsCheckPointRepository>();
+            _tourGuestRepository = Injector.Injector.CreateInstance<ITourGuestRepository>();
         }
 
         public List<GuestsCheckPoint> GetAll()

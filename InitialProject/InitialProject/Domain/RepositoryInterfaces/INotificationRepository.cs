@@ -17,7 +17,7 @@ namespace InitialProject.Domain.RepositoryInterfaces
 
         public void Save(Notification notification);
 
-
+        public List<Notification> GetAllById(int id);
         public int NextId();
 
         public void Delete(Notification notification);

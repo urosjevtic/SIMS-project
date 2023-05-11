@@ -17,16 +17,16 @@ using InitialProject.ViewModels.Guest2ViewModel;
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowNotifications.xaml
+    /// Interaction logic for SelectedTour.xaml
     /// </summary>
-    public partial class ShowNotifications : Window
+    public partial class SelectedTour : Window
     {
-        public ShowNotificationsViewModel showNotificationsViewModel { get; set; }
-        public ShowNotifications(User user)
+        public SelectedTourViewModel selectedTourViewModel;
+        public SelectedTour(Tour tour,User LoggedUser)
         {
             InitializeComponent();
-            showNotificationsViewModel = new ShowNotificationsViewModel(user);
-            this.DataContext = showNotificationsViewModel;
+            selectedTourViewModel = new SelectedTourViewModel(tour,LoggedUser);
+            this.DataContext = selectedTourViewModel;
         }
     }
 }
