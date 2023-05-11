@@ -20,8 +20,7 @@ namespace InitialProject.Service
         private readonly LocationService _locationService;
         private readonly ImageService _imageService;
         private readonly UserService _userService;
-        private readonly YearlyAccommodationService _yearlyAccommodationStatisticService;
-        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
+        private readonly AccommodationStatisticService _accommodationStatisticService;
 
         public AccommodationService()
         {
@@ -29,8 +28,7 @@ namespace InitialProject.Service
             _locationService = new LocationService();
             _imageService = new ImageService();
             _userService = new UserService();
-            _yearlyAccommodationStatisticService = new YearlyAccommodationService();
-            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
+            _accommodationStatisticService = new AccommodationStatisticService();
         }
 
         public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
@@ -38,9 +36,8 @@ namespace InitialProject.Service
             Accommodation accommodation = new Accommodation();
             CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
             int accommodationId = _accommodationRepository.Save(accommodation).Id;
-            _yearlyAccommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
-            _monthlyAccommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
-            
+            _accommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
+
         }
 
 

@@ -272,23 +272,23 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
+
             foreach (Tour tour in tours)  // mijenjala sam provjeritiiii
             {
-                foreach(DateTime start in tour.StartDates)
+                TimeSpan ts = new(tour.Duration, 0, 0);
+                foreach (DateTime start in tour.StartDates)
                 {
-                    TimeSpan ts = new(tour.Duration, 0, 0);
-                    if(start.Add(ts) < DateTime.Now && tour.IsActive == false)
+                    if(start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
                     {
                         ended.Add(tour);
-
                     }
-
                 }
+                
+               
                 
             }
             return ended;
         }
-      
         public void RateTour(Tour SelectedTour)
         {
             SelectedTour.IsRated = true;

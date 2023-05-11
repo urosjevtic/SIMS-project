@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
@@ -25,18 +26,18 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
         private readonly YearlyAccommodationService _yearlyAcoommodationStatisticService;
-        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
+        private readonly AccommodationStatisticService _statisticService;
         private readonly User _loggedInUser;
 
         public ObservableCollection<AccommodationReservationRescheduleRequest> RescheduleRequests { get; }
-
-        public RescheduleRequestViewModel(User loggedInUser)
+        public NavigationService NavigationService {get; set; }
+        public RescheduleRequestViewModel(User loggedInUser, NavigationService navigationService)
         {
             _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
             _yearlyAcoommodationStatisticService = new YearlyAccommodationService();
-            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
+            _statisticService = new AccommodationStatisticService();
             _loggedInUser = loggedInUser;
-
+            NavigationService = navigationService;
             RescheduleRequests = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetAllByOwnerId(_loggedInUser.Id));
         }
 
@@ -49,9 +50,8 @@ namespace InitialProject.ViewModels.ReservationsViewModels
             if (parameter is AccommodationReservationRescheduleRequest selectedRescheduleRequest)
             {
                 _accommodationReservationRescheduleRequestService.ApproveReschedule(selectedRescheduleRequest);
-                _yearlyAcoommodationStatisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
-                _monthlyAccommodationStatisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
-                
+                _statisticService.IncreaseRescheduleCount(selectedRescheduleRequest.Reservation.AccommodationId);
+
                 RescheduleRequests.Remove(selectedRescheduleRequest);
 
 
@@ -75,9 +75,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void GoBack()
         {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_loggedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
+            NavigationService.Navigate(new ReservationsMainView(_loggedInUser, NavigationService));
         }
 
 

@@ -58,7 +58,6 @@ namespace InitialProject
                     if(user.Role == UserRole.Owner)
                     {
                         MainWindowOwner mainWindowOwner = new MainWindowOwner(user);
-                        //OwnerMainWindow ownerMainWindow = new OwnerMainWindow(user);
                         mainWindowOwner.Show();
                     }
                     if(user.Role == UserRole.Guest)

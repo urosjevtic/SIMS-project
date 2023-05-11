@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.RepositoryInterfaces.INotificationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRenovationRepo;
 using InitialProject.Repository.AccommodationRepo;
+using InitialProject.Repository.NotificationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Repository.StatisticRepo;
 using InitialProject.Repository.UserRepo;
@@ -38,10 +42,11 @@ namespace InitialProject.Injector
             {typeof(ICheckPointRepository), new CheckPointRepository()},
             {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()},
             {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
-            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()}
+            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()},
             {typeof(INotesRepository), new NotesRepository()},
-            {typeof(IYearlyAccommodationStatisticsRepository), new YearlyAccommodationStatisticRepository()},
-            {typeof(IMonthlyAccommodationStatisticRepository), new MonthlyAccommodationStatisticRepository()}
+            {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
+            {typeof(IRenovationRepository), new RenovationRepository()},
+            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()}
 
             // Add more implementations here
         };

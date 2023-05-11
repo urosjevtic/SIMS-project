@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
@@ -14,16 +15,17 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         public ObservableCollection<AccommodationReservation> Reservations { get; set; }
         private readonly AccommodationReservationService _accommodationReservationService;
-        private readonly YearlyAccommodationService _yearlyAccommodationStatisticService;
-        private readonly MonthlyAccommodationStatisticService _monthlyAccommodationStatisticService;
+        private readonly AccommodationStatisticService _statisticService;
         private readonly User _logedInUser;
-        public ReservationListViewModel(User logedInUser)
+        public NavigationService NavigationService { get; set; }
+
+        public ReservationListViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationReservationService = new AccommodationReservationService();
-            _yearlyAccommodationStatisticService = new YearlyAccommodationService();
-            _monthlyAccommodationStatisticService = new MonthlyAccommodationStatisticService();
+            _statisticService = new AccommodationStatisticService();
             Reservations = new ObservableCollection<AccommodationReservation>(_accommodationReservationService.GetReservationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
 
@@ -31,9 +33,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void GoBack()
         {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
+            NavigationService.Navigate(new ReservationsMainView(_logedInUser, NavigationService));
         }
 
         public ICommand CancelReservationCommand => new RelayCommandWithParams(CancelReservation);
@@ -50,8 +50,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         private void IncreaseCancelReservationCount(int accommodationId)
         {
-            _yearlyAccommodationStatisticService.IncreasCancelationCount(accommodationId);
-            _monthlyAccommodationStatisticService.IncreaseCancelationCount(accommodationId);
+            _statisticService.IncreaseCancelationCount(accommodationId);
         }
 
 

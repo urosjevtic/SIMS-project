@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Ratings;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
@@ -19,13 +20,15 @@ namespace InitialProject.ViewModels
         private readonly AccommodationService _accommodationService;
         private readonly LocationService _locationService;
         private readonly User _logedInUser;
-        public AccommodationRegistrationViewModel(User logedInUser)
+        NavigationService NavigationService { get; set; }
+        public AccommodationRegistrationViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationService = new AccommodationService();
             _locationService = new LocationService();
 
             Locations = _locationService.GetCountriesAndCities();
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
         public Dictionary<string, List<string>> Locations { get; set; }
 
@@ -142,18 +145,14 @@ namespace InitialProject.ViewModels
             _accommodationService.CreateAccommodation
                 (_accommodationName, _country, _city, _accommodationTypes, _maxGuests, _minReservationDays, Convert.ToInt32(_cancelationPeriod), _imagesUrl, _logedInUser.Id);
 
-            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMain.Show();
+            NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 
         private void GoBack()
         {
-            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMain.Show();
+            NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
         }
 
     }
