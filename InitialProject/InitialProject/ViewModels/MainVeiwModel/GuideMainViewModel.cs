@@ -39,7 +39,7 @@ namespace InitialProject.ViewModels.MainVeiwModel
                     navigationService.Navigate(new MyTours(LoggedInUser));
                     break;
                 case "TodayTours":
-                    navigationService.Navigate(new TodayToursPage(LoggedInUser));
+                    navigationService.Navigate(new TodayToursPage(LoggedInUser,_guideMainWindow));
                     break;
                 case "ActiveTour":
                     if (ActiveTours.Count == 0 || _tourService.FindActiveTours(LoggedInUser).Count == 0)

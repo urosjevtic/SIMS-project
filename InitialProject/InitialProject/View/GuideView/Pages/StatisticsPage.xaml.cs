@@ -28,7 +28,7 @@ namespace InitialProject.View.GuideView.Pages
         public StatisticsPage(User user)
         {
             InitializeComponent();
-            DataContext = new TourStatisticViewModel(YearsComboBox,mostVisitedTourInYearTextBlock);
+            DataContext = new TourStatisticViewModel();
         }
 
     }

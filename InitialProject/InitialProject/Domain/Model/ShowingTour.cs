@@ -17,15 +17,15 @@ namespace InitialProject.Domain.Model
         public int MaxGuests { get; set; }
         public DateTime Start { get; set; }
         public int Duration { get; set; }
-        public Image CoverImageUrl { get; set; }
+        public string CoverImageUrl { get; set; }
 
         public ShowingTour()
         {
             CheckPoints = new List<CheckPoint>();
-            CoverImageUrl = new Image();    
+            //CoverImageUrl = new Image();    
         }
 
-        public ShowingTour(int id,string name, string location, string description, string language, List<CheckPoint> checkPoints, int max, DateTime start, int duration, Image image)
+        public ShowingTour(int id,string name, string location, string description, string language, List<CheckPoint> checkPoints, int max, DateTime start, int duration, string image)
         {
             Id = id;
             Name = name;    

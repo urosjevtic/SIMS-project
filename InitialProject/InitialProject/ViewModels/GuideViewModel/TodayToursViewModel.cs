@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using InitialProject.View.GuideView.Pages;
+using InitialProject.Repository;
 
 namespace InitialProject.ViewModels.GuideViewModel
 {
@@ -22,6 +23,7 @@ namespace InitialProject.ViewModels.GuideViewModel
         private LocationService _locationService;
         private TourService _tourService;
         private CheckPointService _checkPointService;
+        private readonly ImageRepository _imageRepository;
 
         public ObservableCollection<Tour> Tours { get; set; }
         public ObservableCollection<ShowingTour> TodayTours { get; set; }
@@ -33,16 +35,17 @@ namespace InitialProject.ViewModels.GuideViewModel
 
         public MainWindow _guideMain { get; set; }
 
-        public TodayToursViewModel(User user)
+        public TodayToursViewModel(User user,MainWindow guideMainWindow)
         {
 
             LoggedUser = user;
             _locationService = new LocationService();
+            _imageRepository = new ImageRepository();
             _tourService = new TourService();
             _checkPointService = new CheckPointService();
             LoggedUser = user;
             Tours = UpdateTodayToursDataGrid();
-            _guideMain = new MainWindow(LoggedUser);
+            _guideMain = guideMainWindow;
             TodayTours = new ObservableCollection<ShowingTour>();
             GetAllShowingTours();
         }
@@ -80,7 +83,7 @@ namespace InitialProject.ViewModels.GuideViewModel
             showingTour.Location = _locationService.GetById(tour.Location.Id).ToString();
             showingTour.Duration = tour.Duration;
             showingTour.CheckPoints = tour.CheckPoints;
-            showingTour.CoverImageUrl = tour.CoverImageUrl;
+            showingTour.CoverImageUrl = MakeCoverImage(tour);
             showingTour.Language = tour.Language;
         }
 
@@ -95,8 +98,7 @@ namespace InitialProject.ViewModels.GuideViewModel
                 List<CheckPoint> checkPoints = SelectedTour.CheckPoints;
                 _checkPointService.CheckFirstCheckPoint(checkPoints);
                 _tourService.Update(tour);
-                ActiveTourPage startedTour = new ActiveTourPage(LoggedUser);
-                navigationService.Navigate(startedTour);    
+                navigationService.Navigate(new ActiveTourPage(LoggedUser));    
             }
             else
             {
@@ -115,6 +117,15 @@ namespace InitialProject.ViewModels.GuideViewModel
                 }
             }
             return Tour;
+        }
+
+        private string MakeCoverImage(Tour tour)
+        {
+            Image tourImage = _imageRepository.GetById(tour.CoverImageUrl.Id);
+
+            string url = tourImage.Url[0];
+
+            return url;
         }
     }
 }

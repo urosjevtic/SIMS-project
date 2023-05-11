@@ -7,6 +7,7 @@
         <Setter Property="BorderThickness" Value="0"></Setter>
         <Setter Property="RowStyle" Value="{DynamicResource row}"></Setter>
         <Setter Property="CellStyle" Value="{DynamicResource cell }"></Setter>
+        <Setter Property="Background" Value="#D1EEEE"></Setter>
     </Style>
     
     

@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.Utilities;
 using InitialProject.View;
@@ -17,6 +18,7 @@ namespace InitialProject.ViewModels.GuideViewModel
     {
         public User LoggedUser { get; set; }
 
+        private readonly ImageRepository imageRepository;
         private LocationService _locationService;
         private TourService _tourService;
 
@@ -35,6 +37,7 @@ namespace InitialProject.ViewModels.GuideViewModel
             LoggedUser = user;
             _locationService = new LocationService();
             _tourService = new TourService();
+            imageRepository = new ImageRepository();
             Locations = _locationService.GetCountriesAndCities();
 
             Tours = UpdateToursDataGrid();
@@ -48,7 +51,7 @@ namespace InitialProject.ViewModels.GuideViewModel
             {
                foreach(DateTime start in tour.StartDates)
                 {
-                    if(start.DayOfYear >= DateTime.Now.DayOfYear && start.Hour >= DateTime.Now.Hour)
+                    if(start.DayOfYear >= DateTime.Now.DayOfYear)
                     {
                         ShowingTour showingTour = new ShowingTour();
                         showingTour.Start = start;
@@ -65,10 +68,20 @@ namespace InitialProject.ViewModels.GuideViewModel
             showingTour.Location = _locationService.GetById(tour.Location.Id).ToString();
             showingTour.Duration = tour.Duration;
             showingTour.CheckPoints = tour.CheckPoints;
-            showingTour.CoverImageUrl = tour.CoverImageUrl;
+            showingTour.CoverImageUrl = MakeCoverImage(tour);
             showingTour.Language = tour.Language;
         }
 
+       
+
+        private string MakeCoverImage(Tour tour)
+        {
+            Image tourImage = imageRepository.GetById(tour.CoverImageUrl.Id);
+
+            string url = tourImage.Url[0];
+           
+            return url;
+        }
         public ObservableCollection<Tour> UpdateToursDataGrid()
         {
             var tours = _tourService.LoadGuideTours(LoggedUser);

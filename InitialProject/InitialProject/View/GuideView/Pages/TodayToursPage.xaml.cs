@@ -22,10 +22,10 @@ namespace InitialProject.View.GuideView.Pages
     /// </summary>
     public partial class TodayToursPage : Page
     {
-        public TodayToursPage(User user)
+        public TodayToursPage(User user,MainWindow mainWindow)
         {
             InitializeComponent();
-            DataContext = new TodayToursViewModel(user);
+            DataContext = new TodayToursViewModel(user,mainWindow);
         }
     }
 }
