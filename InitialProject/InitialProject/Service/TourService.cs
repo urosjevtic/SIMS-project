@@ -163,7 +163,7 @@ namespace InitialProject.Service
             return _tourRepository.GetById(id);
         }
 
-        public Tour GetMostVisitedInYear(string year)
+        public Tour GetMostVisitedInYear(int year)
         {
             int max = 0;
             Tour mostVisitedTour = new Tour();
@@ -171,10 +171,13 @@ namespace InitialProject.Service
                 {
                     foreach(DateTime start in tour.StartDates)
                     {
-                        if(start.Year == Convert.ToInt32(year) && max < FindVisitCount(tour))
+                        if(start.Year == year)
                         {
-                            max = FindVisitCount(tour);
-                            mostVisitedTour = tour;
+                            if(max < FindVisitCount(tour))
+                            {
+                                max = FindVisitCount(tour);
+                                mostVisitedTour = tour;
+                            }
                         }
                     }      
                 }
@@ -314,5 +317,6 @@ namespace InitialProject.Service
             }
             return active;
         }
+
     }
 }

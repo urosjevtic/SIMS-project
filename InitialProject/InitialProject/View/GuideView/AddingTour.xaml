@@ -53,25 +53,29 @@
 
         <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged }"  Grid.Row="5" Grid.Column="5"  Height="30" Width="150"  Margin="0,0,50,0"/>
 
-        <Button Content="Add" Width="50" Height="40" Grid.Row="5" Grid.Column="5" Margin="150,0,10,0" Style="{StaticResource MenuButtonTheme}" Command="{Binding AddStartDateCommand}"></Button>
+        <Button Content="Add" Width="50" Height="40" Grid.Row="5" Grid.Column="5" Margin="150,0,10,0" Style="{StaticResource MenuButtonTheme}" Command="{Binding AddDateTimeCommand}"></Button>
 
         <Border Grid.Column="5" Grid.Row="6" Grid.RowSpan="4" CornerRadius="10" BorderBrush="#008080" BorderThickness="2" Background="#D1EEEE">
-            <ListBox Grid.Column="5" Grid.Row="6" Grid.RowSpan="4" Background="#D1EEEE"  FontSize="15">
+            <ListBox Grid.Column="5" Grid.Row="6" Grid.RowSpan="4" Background="#D1EEEE"  FontSize="15" ItemsSource="{Binding StartDates}">
+                
             </ListBox>
         </Border>
        
 
 
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" TextAlignment="Center" />
-        <ComboBox x:Name="CountryComboBox" Grid.Column="2" Grid.Row="3" Width="300" Height="40"   ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  >
+        <ComboBox x:Name="CountryComboBox" Grid.Column="2" Grid.Row="3" Width="180" Height="40"   ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  >
         </ComboBox>
-        <ComboBox  x:Name="CityComboBox" Grid.Column="2" Grid.Row="4" Width="300" Height="40"  ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  FontSize="15"></ComboBox>
+        <ComboBox  x:Name="CityComboBox" Grid.Column="2" Grid.Row="4" Width="180" Height="40"  ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  FontSize="15"></ComboBox>
         <TextBox Style="{StaticResource inputFIeld}" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Languagee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="2"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
 
+
+
+
+        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=ImagesUrl, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=ImagesUrl, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="2"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=First, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="5"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Last, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="5"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
         <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Other, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="5"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>

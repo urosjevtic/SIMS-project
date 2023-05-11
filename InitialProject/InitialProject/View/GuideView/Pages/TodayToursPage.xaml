@@ -27,7 +27,13 @@
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
                 <DataGridTextColumn Header="MaxGuests " Binding="{Binding MaxGuests }"  Width="10*"/>
                 <DataGridTextColumn Header="Start " Binding="{Binding Start }" Width="10*" />
-                <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
+                <DataGridTemplateColumn Header="Image"   Width="12*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding CoverImageUrl}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -25,17 +25,22 @@
         <DataGrid  x:Name="ToursDataGrid" Grid.ColumnSpan="2"
                    ItemsSource="{Binding MyTours}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}" 
                    AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" 
-                   Margin="64,16,32,175" Grid.Row="1">
+                   Margin="64,16,32,64" Grid.Row="1">
             <DataGrid.Columns >
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*"/>
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}"  Width="12*"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*" />
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*"/>
                 <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
                 <DataGridTextColumn Header="StartDates " Binding="{Binding Start }"  Width="10*"/>
-                <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
+                <DataGridTemplateColumn Header="Image"   Width="12*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding CoverImageUrl}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-
 
         <Button Content="Add tour" Command="{Binding AddTourCommand}" RenderTransformOrigin="0.85,2.358" Grid.Row="0" Width="120" Height="50" Style="{StaticResource MenuButtonTheme}"/>
         <Button Content="Cancel tour" Width="120" Height="50" Grid.Column="1" Command="{Binding CancelTourCommand}" Style="{StaticResource MenuButtonTheme}"></Button>
