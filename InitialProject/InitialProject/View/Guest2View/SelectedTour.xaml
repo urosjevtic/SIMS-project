@@ -34,14 +34,28 @@
                     <RowDefinition Height="90"></RowDefinition>
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Label Grid.Column="1" Content="Language:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" FontSize="26" Width="126" Height="50"/>
-                <Label Grid.Column="1" Content="Tour duration:" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="204" Height="50" />
-                <Label Grid.Column="1" Content="Number of people:" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" FontSize="26" Width="227" Height="64" />
-                <Label Grid.Column="1" Content="Country:" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="110"/>
-                <Label Grid.Column="1" Content="City:" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="26" Width="73"/>
-                <Label Grid.Column="1" Content="Date and time:" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="180" Height="50"/>
-                <Label Grid.Column="1" Content="Checkpoints:" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" FontSize="26" Width="227" Height="50"/>
-                <ListBox Grid.Row="6" Grid.Column="1" Grid.RowSpan="3" FontSize="28" ItemsSource="{Binding Checkpoints}" Width="250" Margin="10,58,224,10"/>
+                <Label Grid.Column="1" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" FontSize="26" Width="135" Height="50">
+                    <Bold>Language:</Bold>
+                </Label>
+                <Label Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="204" Height="50">
+                    <Bold>Tour duration:</Bold>
+                </Label>
+                <Label Grid.Column="1" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" FontSize="26" Width="240" Height="64">
+                    <Bold>Number of people:</Bold>
+                </Label>
+                <Label Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="116">
+                    <Bold>Country:</Bold>
+                </Label>
+                <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="26" Width="73">
+                    <Bold>City:</Bold>
+                </Label>
+                <Label Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="180" Height="50">
+                    <Bold>Date and time:</Bold>
+                </Label>
+                <Label Grid.Column="1" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" FontSize="26" Width="227" Height="50">
+                    <Bold>Checkpoints:</Bold>
+                </Label>
+                <ListBox Grid.Row="6" Grid.Column="1" Grid.RowSpan="3" FontSize="28" ItemsSource="{Binding Checkpoints}" Width="250" Margin="10,58,210,10"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="40" Grid.Row="1" Text="{Binding selectedTour.Location.City}" Margin="68,6,236,5"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="40" Grid.Row="2" Text="{Binding selectedTour.Language}" Margin="140,4,164,5"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="40" Grid.Row="0"  Text="{Binding selectedTour.Location.Country}" Margin="112,7,192,5"/>
@@ -52,13 +66,15 @@
                     <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" BorderBrush="Black" Width="375" BorderThickness="1" Padding="5" Height="350">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" >
                             <StackPanel>
-                                <ListBox ItemsSource="{Binding Images}" Width="330">
-                                    <ListBox.ItemTemplate>
+                                <ItemsControl ItemsSource="{Binding Images}" Width="330">
+                                    <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Image Source="{Binding}" Width="310" Height="200"/>
+                                            <Border BorderBrush="Black" BorderThickness="1" Margin="5">
+                                                <Image Source="{Binding}" Stretch="Fill"/>
+                                            </Border>
                                         </DataTemplate>
-                                    </ListBox.ItemTemplate>
-                                </ListBox>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
                             </StackPanel>
                         </ScrollViewer>
                     </Border>

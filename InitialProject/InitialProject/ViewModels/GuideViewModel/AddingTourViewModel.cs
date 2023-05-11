@@ -26,6 +26,7 @@ namespace InitialProject.ViewModels
         public LocationService _locationService;
         private CheckPointService _checkPointService;   
         private TourService _tourService;
+        private NotificationService _notificationService;
         public Dictionary<string, List<string>> Locations { get; set; }
 
         private GuideMainViewModel _guideMainWindow;
@@ -40,7 +41,8 @@ namespace InitialProject.ViewModels
             _imageRepository = new ImageRepository();
             
             _checkPointService = new CheckPointService();
-            _tourService = new TourService();   
+            _tourService = new TourService();  
+            _notificationService = new NotificationService();
             _guideMainWindow = new GuideMainViewModel(user);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
@@ -281,6 +283,8 @@ namespace InitialProject.ViewModels
             tour.IsActive = false;
             _tourService.Save(tour);
             _guideMainWindow.LoadData();
+
+            _notificationService.SendNotifications(tour);
         }
        
 

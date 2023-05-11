@@ -43,6 +43,18 @@ namespace InitialProject.Repository
             }
             return notification;
         }
+        public List<Notification> GetAllById(int id)
+        {
+            List<Notification> notifications = new List<Notification>();
+            foreach (Notification not in GetAll())
+            {
+                if (not.GuestId == id && not.IsChecked == false)
+                {
+                    notifications.Add(not);
+                }
+            }
+            return notifications;
+        }
 
         public void Save(Notification notification)
         {
@@ -81,7 +93,6 @@ namespace InitialProject.Repository
             newNotifcation.TourId = notification.TourId;
             newNotifcation.IsGoing = notification.IsGoing;
             newNotifcation.IsChecked = notification.IsChecked;
-           
             SaveAll(_notifications);
 
         }

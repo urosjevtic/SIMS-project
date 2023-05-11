@@ -58,7 +58,7 @@ namespace InitialProject.View.Guest2View
         }
 
 
-        private void Window_Loaded(object sender, RoutedEventArgs e)
+       /* private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Dispatcher.BeginInvoke(new Action(() =>
             {
@@ -85,7 +85,7 @@ namespace InitialProject.View.Guest2View
                             AddGuestCheckPoint(Guest, checkPoint);
                         }
                         _notificationRepository.Update(notification);
-                        _notificationRepository.Delete(notification);
+                        //_notificationRepository.Delete(notification);
                     }
                     else if (result == MessageBoxResult.No)
                     {
@@ -93,7 +93,7 @@ namespace InitialProject.View.Guest2View
                         _tourGuestsRepository.Update(Guest);
                         notification.IsGoing = false;
                         _notificationRepository.Update(notification);
-                        _notificationRepository.Delete(notification);
+                        //_notificationRepository.Delete(notification);
 
                     }
                     else
@@ -102,7 +102,7 @@ namespace InitialProject.View.Guest2View
                         _tourGuestsRepository.Update(Guest);
                         notification.IsGoing = false;
                         _notificationRepository.Update(notification);
-                        _notificationRepository.Delete(notification);
+                        //_notificationRepository.Delete(notification);
 
                     }
 
@@ -116,6 +116,6 @@ namespace InitialProject.View.Guest2View
             guestCheckPoint.CheckPoint = checkPoint;
             guestCheckPoint.Guest = guest;
             _guestsCheckPointRepository.Save(guestCheckPoint);
-        }
+        }*/
     }
 }

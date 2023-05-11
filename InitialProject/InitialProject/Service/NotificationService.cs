@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.Model;
+using InitialProject.ViewModels.Guest2ViewModel;
 
 namespace InitialProject.Service
 {
@@ -13,19 +14,25 @@ namespace InitialProject.Service
     {
 
         public INotificationRepository _notificationRepository;
-
-
+        public IShortTourRequestRepository _shortTourRequestRepository;
+        public ITourRepository _tourRepository;
+        public ILocationRepository _locationRepository;
         public NotificationService()
         {
             _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();
-
+            _shortTourRequestRepository = Injector.Injector.CreateInstance<IShortTourRequestRepository>();
+            _tourRepository = Injector.Injector.CreateInstance<ITourRepository>();
+            _locationRepository = Injector.Injector.CreateInstance<ILocationRepository>();
         }
 
         public List<Notification> GetAll()
         {
             return _notificationRepository.GetAll();
         }
-
+        public List<Notification> GetAllById(int id)
+        {
+            return _notificationRepository.GetAllById(id);
+        }
         public Notification FindById(int id)
         {
             return _notificationRepository.FindById(id);
@@ -58,28 +65,54 @@ namespace InitialProject.Service
         {
             _notificationRepository.DeleteAll();
         }
-        public bool Create(Tour tour, User user)
+        public void SendNotifications(Tour tour)
         {
-            Notification notification = new Notification(tour, user);
-            notification.Id = _notificationRepository.NextId();
-            if (!IsNotificationSent(notification))
+            int i = 0;
+            foreach(ShortTourRequest shortTour in _shortTourRequestRepository.GetAll())
             {
-                _notificationRepository.Save(notification);
-                return true;
-            }
-            return false;
-        }
-        public bool IsNotificationSent(Notification n)
-        {
-            List<Notification> notificationList = _notificationRepository.GetAll();
-            foreach (Notification notification in notificationList)
-            {
-                if (notification.TourId == n.TourId && notification.GuestId == n.GuestId)
+                if(((shortTour.Country == tour.Location.Country && shortTour.City == tour.Location.City) || shortTour.Language == tour.Language) && shortTour.Status != RequestStatus.Accepted)
                 {
-                    return true;
+                    if(i == 0)
+                    {
+                        MakeNotification(tour.Id, shortTour.IdUser);
+                        i++;
+                    }
                 }
             }
-            return false;
+        }
+        public void MakeNotification(int tourId, int IdUser)
+        {
+            Notification notification = new Notification();
+            notification.GuestId = IdUser;
+            notification.TourId = tourId;
+            notification.CheckPointId = -1;
+            notification.IsGoing = false;
+            Save(notification);
+        }
+        public List<TourNotification> GetToursForNotifications(int id)
+        {
+            List<TourNotification> list = new List<TourNotification>();
+            foreach(Notification notification in _notificationRepository.GetAllById(id))
+            {
+                foreach(Tour tour in _tourRepository.GetAll())
+                {
+                    foreach(Location location in _locationRepository.GetAll())
+                    {
+                        if(location.Id == tour.Location.Id)
+                        {
+                            tour.Location.Country = location.Country;
+                            tour.Location.City = location.City;
+                            break;
+                        }
+                    }
+                    if(notification.TourId == tour.Id)
+                    {
+                        TourNotification tourNotification = new TourNotification(tour, notification);
+                        list.Add(tourNotification);
+                    }
+                }
+            }
+            return list;
         }
     }
 }
