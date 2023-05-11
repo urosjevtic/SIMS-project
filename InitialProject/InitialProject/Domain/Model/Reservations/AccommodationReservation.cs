@@ -20,6 +20,11 @@ namespace InitialProject.Domain.Model.Reservations
         public int GuestNumber { get; set; }
         public List<DateTime> ReservedDates { get; set; }
 
+        public bool IsAbleToCancel
+        {
+            get { return !(Accommodation.CancelationPeriod < (StartDate - DateTime.Now).Days); }
+        }
+
         public User User { get; set; }
 
         public AccommodationReservation()

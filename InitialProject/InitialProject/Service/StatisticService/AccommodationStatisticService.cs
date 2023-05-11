@@ -21,82 +21,54 @@ namespace InitialProject.Service.StatisticService
         }
         public void CreateStatisticForNewAccommodation(int accommodationId)
         {
-            List<AccommodationStatistic> list = new List<AccommodationStatistic>();
-            AccommodationStatistic accommodationStatistic = new AccommodationStatistic(DateTime.Now, 0, 0, 0, 0);
-            list.Add(accommodationStatistic);
-            AccommodationStatisticData statisticData =
-                new AccommodationStatisticData(accommodationId, list);
+            AccommodationStatistic newStatistic = CreateAccommodationStatistic();
+            AccommodationStatisticData statisticData = new AccommodationStatisticData(accommodationId, new List<AccommodationStatistic> { newStatistic });
             _statisticsRepository.Save(statisticData);
         }
 
-
-        public void IncreasCancelationCount(int accommodationId)
+        private static AccommodationStatistic CreateAccommodationStatistic()
         {
-            AccommodationStatisticData statisticData = _statisticsRepository.GetByAccommodationId(accommodationId);
-            foreach (var statistic in statisticData.Statistics)
+            return new AccommodationStatistic
             {
-                if (statistic.MonthAndYear.Month == DateTime.Now.Month && statistic.MonthAndYear.Year == DateTime.Now.Year)
-                {
-                    statistic.CancelationsCount++;
-                    _statisticsRepository.Update(statisticData);
-                    return;
-                }
-            }
-
-            statisticData.Statistics.Add(new AccommodationStatistic(DateTime.Today, 0, 0, 1, 0));
-            _statisticsRepository.Update(statisticData);
-
+                MonthAndYear = DateTime.Now,
+                CancelationsCount = 0,
+                ReschedulesCount = 0,
+                RenovationsCount = 0,
+                ReservationsCount = 0
+            };
         }
 
 
+        public void IncreaseCancelationCount(int accommodationId)
+        {
+            UpdateStatistic(accommodationId, s => s.CancelationsCount++);
+        }
+
         public void IncreaseRescheduleCount(int accommodationId)
         {
-            AccommodationStatisticData statisticData = _statisticsRepository.GetByAccommodationId(accommodationId);
-            foreach (var statistic in statisticData.Statistics)
-            {
-                if (statistic.MonthAndYear.Month == DateTime.Now.Month && statistic.MonthAndYear.Year == DateTime.Now.Year)
-                {
-                    statistic.ReschedulesCount++;
-                    _statisticsRepository.Update(statisticData);
-                    return;
-                }
-            }
-
-            statisticData.Statistics.Add(new AccommodationStatistic(DateTime.Today, 0, 1, 0, 0));
-            _statisticsRepository.Update(statisticData);
+            UpdateStatistic(accommodationId, s => s.ReschedulesCount++);
         }
 
         public void IncreaseRenovationCount(int accommodationId)
         {
-            AccommodationStatisticData statisticData = _statisticsRepository.GetByAccommodationId(accommodationId);
-            foreach (var statistic in statisticData.Statistics)
-            {
-                if (statistic.MonthAndYear.Month == DateTime.Now.Month && statistic.MonthAndYear.Year == DateTime.Now.Year)
-                {
-                    statistic.RenovationsCount++;
-                    _statisticsRepository.Update(statisticData);
-                    return;
-                }
-            }
-
-            statisticData.Statistics.Add(new AccommodationStatistic(DateTime.Today, 0, 0, 1, 1));
-            _statisticsRepository.Update(statisticData);
+            UpdateStatistic(accommodationId, s => s.RenovationsCount++);
         }
 
         public void IncreaseReservationCount(int accommodationId)
         {
-            AccommodationStatisticData statisticData = _statisticsRepository.GetByAccommodationId(accommodationId);
-            foreach (var statistic in statisticData.Statistics)
-            {
-                if (statistic.MonthAndYear.Month == DateTime.Now.Month && statistic.MonthAndYear.Year == DateTime.Now.Year)
-                {
-                    statistic.ReservationsCount++;
-                    _statisticsRepository.Update(statisticData);
-                    return;
-                }
-            }
+            UpdateStatistic(accommodationId, s => s.ReservationsCount++);
+        }
 
-            statisticData.Statistics.Add(new AccommodationStatistic(DateTime.Today, 1, 0, 1, 0));
+        private void UpdateStatistic(int accommodationId, Action<AccommodationStatistic> updateAction)
+        {
+            var statisticData = _statisticsRepository.GetByAccommodationId(accommodationId);
+            var statistic = statisticData.Statistics.FirstOrDefault(s => s.MonthAndYear.Year == DateTime.Now.Year && s.MonthAndYear.Month == DateTime.Now.Month);
+            if (statistic == null)
+            {
+                statistic = new AccommodationStatistic(DateTime.Today, 0, 0, 0, 0);
+                statisticData.Statistics.Add(statistic);
+            }
+            updateAction(statistic);
             _statisticsRepository.Update(statisticData);
         }
     }

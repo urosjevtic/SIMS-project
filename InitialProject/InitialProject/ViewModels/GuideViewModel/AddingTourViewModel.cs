@@ -15,7 +15,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using InitialProject.Utilities;
 using System.Windows;
-
+using System.Collections.ObjectModel;
+using Microsoft.Win32;
+using System.Windows.Media.Imaging;
 
 namespace InitialProject.ViewModels
 {
@@ -29,12 +31,14 @@ namespace InitialProject.ViewModels
         private NotificationService _notificationService;
         public Dictionary<string, List<string>> Locations { get; set; }
 
-        private GuideMainViewModel _guideMainWindow;
 
         public User LoggedUser { get; set; }
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
-
+        public ICommand AddImageCommand { get; private set; }   
+        public ICommand AddDateTimeCommand { get; private set; }    
+        public ObservableCollection<DateTime> StartDates { get; set; }
+        public string AllUrls { get; set; }
         public AddingTourViewModel(User user)
         {
            
@@ -46,13 +50,14 @@ namespace InitialProject.ViewModels
             _guideMainWindow = new GuideMainViewModel(user);
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
+            AddImageCommand = new RelayCommand(AddImage);
+            AddDateTimeCommand = new RelayCommand(AddStartDate);
             LoggedUser = user;
             Start = DateTime.Now;
             _locationService = new LocationService();
             Locations = _locationService.GetCountriesAndCities();
-            _guideMainWindow.UpdateToursDataGrid();
-            _guideMainWindow.UpdateTodayToursDataGrid();
-           
+            StartDates = new ObservableCollection<DateTime>();
+
         }
 
 
@@ -195,50 +200,69 @@ namespace InitialProject.ViewModels
         }
 
 
-        private string _checkPoints;
-        public string CheckPoints
+        private string _first;
+        public string First
         {
-            get => _checkPoints;
+            get => _first;
             set
             {
-                if (value != _checkPoints)
+                if (value != _first)
                 {
-                    _checkPoints = value;
-                    OnPropertyChanged(nameof(CheckPoints));
+                    _first = value;
+                    OnPropertyChanged(nameof(First));
+                }
+            }
+        }
+        private string _last;
+        public string Last
+        {
+            get => _last;
+            set
+            {
+                if (value != _last)
+                {
+                    _last = value;
+                    OnPropertyChanged(nameof(Last));
+                }
+            }
+        }
+        private string _other;
+        public string Other
+        {
+            get => _other;
+            set
+            {
+                if (value != _other)
+                {
+                    _other = value;
+                    OnPropertyChanged(nameof(Other));
                 }
             }
         }
 
-        public int saveImages(string urls, int entityId)
-        {
-            Domain.Model.Image images = new Domain.Model.Image();
-            images.EntityLd = entityId;
-            string[] imagesUrls = SplitString(urls);
-            foreach (string imageUrl in imagesUrls)
-            {
-                images.Url.Add(imageUrl);
-            }
-            return _imageRepository.ReturnSaved(images).Id;
-        }
+        
 
+        public List<CheckPoint> MakeCheckPointList()
+        {
+            List<CheckPoint> checkPoints = new List<CheckPoint>();
+            checkPoints.Add(MakeNewCheckPoint(First,1));
+            int i = 2;
+            string[] checkPoint = SplitString(Other);
+            foreach (string point in checkPoint)
+            {
+                checkPoints.Add(MakeNewCheckPoint(point, i));
+                i++;
+            }
+            checkPoints.Add(MakeNewCheckPoint(Last, i));
+            return checkPoints;
+        }
 
         private string[] SplitString(string s)
         {
             return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-        public List<CheckPoint> AddCheckPoint(string checkPoints)
-        {
-            string[] checkPoint = SplitString(checkPoints);
-            List<CheckPoint> checkPointsList = new List<CheckPoint>();
-            int i = 1;
-            foreach (string point in checkPoint)
-            {
-                checkPointsList.Add(MakeNewCheckPoint(point, i));
-                i++;
-            }
-            return checkPointsList;
-        }
+      
 
         public CheckPoint MakeNewCheckPoint(string point, int i)
         {
@@ -253,40 +277,93 @@ namespace InitialProject.ViewModels
         private void Save()
         {
             ConfirmAddingTour();
-            _guideMainWindow.LoadData();
+            //_guideMainWindow.LoadData();
             CloseCurrentWindow();
         }
+        private Domain.Model.Image MakeNewImage(Tour tour)
+        {
+            string[] urls = SplitString(ImagesUrl);
+            Domain.Model.Image image = new Domain.Model.Image();
+            image.Url = new List<string>();
+            image.EntityLd = tour.Id;
 
-       
+            foreach (string url in urls)
+            {
+                image.Url.Add(url);
+            }
+            _imageRepository.Save(image);
+            return image;   
+        }
+
+
         private void Cancel()
         {
             CloseCurrentWindow();
         }
 
-        public ICommand SaveTourCommand => new RelayCommand(Save);
-
-
+        public void AddStartDate()
+        {
+            StartDates.Add(_start);
+        }
         public void ConfirmAddingTour()
         {
+            List<DateTime> dates = new List<DateTime>();
+            foreach(DateTime date in StartDates)
+            {
+                dates.Add(date);
+            }
             Tour tour = new Tour();
             tour.Guide.Id = LoggedUser.Id;
             tour.Name = _tourName;
             tour.Location.Id = _locationService.GetLocationId(_country, _city);
             tour.Description = _description;
             tour.Language = _language;
+            tour.StartDates = dates;
             tour.MaxGuests = Convert.ToInt32(_maxGuests);
-            tour.Start = Convert.ToDateTime(_start);
             tour.Duration = Convert.ToInt32(_duration);
-            int imagesId = saveImages(_imagesUrl, 0);
-            tour.CoverImageUrl.Id = imagesId;
-            tour.CheckPoints = AddCheckPoint(_checkPoints);
+            tour.CoverImageUrl = MakeNewImage(tour);
+            tour.CheckPoints = MakeCheckPointList();
             tour.IsActive = false;
             _tourService.Save(tour);
             _guideMainWindow.LoadData();
 
             _notificationService.SendNotifications(tour);
+
+        }
+
+      
+
+        private void AddImage()
+        {
+            OpenFileDialog op = new OpenFileDialog();
+            op.Title = "Select a picture";
+            op.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+          
+            op.Multiselect = true;  
+            if(op.ShowDialog() == true)
+            {
+                int i = 0;
+                foreach (var imageUrl in op.FileNames)
+                {
+                    if (i == 1)
+                    {
+                        AllUrls += imageUrl;
+                    }
+                    else
+                    {
+                        AllUrls += "," + imageUrl;
+                    }
+                    System.Windows.Controls.Image image = new System.Windows.Controls.Image();
+                    image.Source = new BitmapImage(new Uri(imageUrl));
+                    i++;
+                }
+            }
         }
        
+        
+
+
+
 
 
     }

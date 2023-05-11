@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Ratings;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels.AccommodationViewModel
 {
@@ -18,20 +19,20 @@ namespace InitialProject.ViewModels.AccommodationViewModel
         public ObservableCollection<Accommodation> Accommodations { get; }
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
+        public NavigationService NavigationService;
 
-        public MyAccommodationStatisticsViewModel(User logedInUser)
+        public MyAccommodationStatisticsViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMain.Show();
+            NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
         }
 
         public ICommand SeeStatisticCommand => new RelayCommandWithParams(SeeStatistic);
@@ -41,10 +42,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
             if (parameter is Accommodation selectedAccommodation)
             {
                 // Navigate to the other window passing the selected guest as a parameter
-                MyAccommodationYearlyStatisticView myAccommodationYearlyStatistic =
-                    new MyAccommodationYearlyStatisticView(selectedAccommodation.Id, _logedInUser);
-                CloseCurrentWindow();
-                myAccommodationYearlyStatistic.Show();
+                NavigationService.Navigate(new MyAccommodationYearlyStatisticView(selectedAccommodation.Id, _logedInUser, NavigationService));
 
             }
         }

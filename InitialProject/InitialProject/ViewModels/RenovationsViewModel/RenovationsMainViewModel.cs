@@ -8,69 +8,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
 {
-    public class RenovationsMainViewModel : SideScreenViewModel
+    public class RenovationsMainViewModel : BaseViewModel
     {
 
 
         private readonly User _logedInUser;
-        public RenovationsMainViewModel(User logedInUser)
+        public NavigationService NavigationService { get;  set; }
+        public RenovationsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             _logedInUser = logedInUser;
-        }
-
-        protected override void MyAccommoadionsOpen()
-        {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
+            NavigationService = navigationService;
         }
 
 
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
 
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
-        }
-
-        protected override void RenovationsOpen()
-        {
-            RenovationsMainView renovationsMainView = new RenovationsMainView(_logedInUser);
-            CloseCurrentWindow();
-            renovationsMainView.Show();
-        }
 
 
         public ICommand OpenScheduleRenovationCommand => new RelayCommand(OpenScheduleRenovation);
 
         private void OpenScheduleRenovation()
         {
-            ScheduleRenovationListView scheduleRenovationList = new ScheduleRenovationListView(_logedInUser);
-            CloseCurrentWindow();
-            scheduleRenovationList.Show();
+            NavigationService.Navigate(new ScheduleRenovationListView(_logedInUser, NavigationService));
         }
 
         public ICommand OpenScheduledRenovationsCommand => new RelayCommand(OpenScheduledRenovations);
 
         private void OpenScheduledRenovations()
         {
-            ScheduledRenovationListView scheduleRenovationList = new ScheduledRenovationListView(_logedInUser);
-            CloseCurrentWindow();
-            scheduleRenovationList.Show();
+            NavigationService.Navigate(new ScheduledRenovationListView(_logedInUser, NavigationService));
         }
     }
 }

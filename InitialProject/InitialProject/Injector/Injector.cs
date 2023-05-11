@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.RepositoryInterfaces.INotificationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
 using InitialProject.Repository.AccommodationRenovationRepo;
 using InitialProject.Repository.AccommodationRepo;
+using InitialProject.Repository.NotificationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Repository.StatisticRepo;
 using InitialProject.Repository.UserRepo;
@@ -43,7 +45,8 @@ namespace InitialProject.Injector
             {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()},
             {typeof(INotesRepository), new NotesRepository()},
             {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
-            {typeof(IRenovationRepository), new RenovationRepository()}
+            {typeof(IRenovationRepository), new RenovationRepository()},
+            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()}
 
             // Add more implementations here
         };

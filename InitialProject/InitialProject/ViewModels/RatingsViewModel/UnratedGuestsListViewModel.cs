@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
 using InitialProject.Utilities;
@@ -21,11 +22,14 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public ObservableCollection<UnratedGuest> UnratedGuests { get; set; }
         private readonly UnratedGuestService _unratedGuestService;
         private readonly User _logedInUser;
-        public UnratedGuestsListViewModel(User logedInUser)
+
+        public NavigationService NavigationService { get; set; }
+        public UnratedGuestsListViewModel(User logedInUser, NavigationService navigationService)
         {
             _unratedGuestService = new UnratedGuestService();
             UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuestService.GetUnratedGuestsByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
         public ICommand OpenRatingWindowCommand => new RelayCommandWithParams(OpenRatingWindow);
@@ -33,10 +37,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
         {
             if (parameter is UnratedGuest selectedGuest)
             {
-                // Navigate to the other window passing the selected guest as a parameter
-                GuestRatingForm guestRatingForm = new GuestRatingForm(_logedInUser, selectedGuest);
-                CloseCurrentWindow();
-                guestRatingForm.Show();
+                NavigationService.Navigate(new GuestRatingFormView(_logedInUser, selectedGuest, NavigationService));
             }
         }
 
@@ -45,9 +46,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
 
         private void GoBack()
         {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
+            NavigationService.Navigate(new RatingsMainView(_logedInUser, NavigationService));
         }
 
 

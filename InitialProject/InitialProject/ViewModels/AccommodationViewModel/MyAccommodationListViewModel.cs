@@ -2,14 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using InitialProject.Service;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.Utilities;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
@@ -19,20 +16,20 @@ namespace InitialProject.ViewModels
         public ObservableCollection<Accommodation> Accommodations { get; set; }
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
-        public MyAccommodationListViewModel(User logedInUser)
+        public NavigationService NavigationService { get; set; }
+        public MyAccommodationListViewModel(User logedInUser, NavigationService navigationService)
         {
             _accommodationService = new AccommodationService();
             Accommodations = new ObservableCollection<Accommodation>(_accommodationService.GetAllAccommodationByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
 
         public ICommand GoBackCommand => new RelayCommand(GoBack);
         private void GoBack()
         {
-            MyAccommodationsMainWindow myAccommodationsMain = new MyAccommodationsMainWindow(_logedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMain.Show();
+            NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
         }
 
 
@@ -42,12 +39,7 @@ namespace InitialProject.ViewModels
         {
             if (parameter is Accommodation selectedAccommodation)
             {
-                // Navigate to the other window passing the selected guest as a parameter
-                MyAccommodationImagesView myAccommodationImages =
-                    new MyAccommodationImagesView(selectedAccommodation, _logedInUser);
-                CloseCurrentWindow();
-                myAccommodationImages.Show();
-
+                NavigationService.Navigate(new MyAccommodationImagesView(selectedAccommodation, _logedInUser, NavigationService));
             }
         }
     }

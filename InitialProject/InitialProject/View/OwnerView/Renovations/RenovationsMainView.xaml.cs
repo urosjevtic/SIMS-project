@@ -10,8 +10,10 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
+using InitialProject.Utilities;
 using InitialProject.ViewModels.RenovationsViewModel;
 
 namespace InitialProject.View.OwnerView.Renovations
@@ -19,12 +21,12 @@ namespace InitialProject.View.OwnerView.Renovations
     /// <summary>
     /// Interaction logic for RenovationsMain.xaml
     /// </summary>
-    public partial class RenovationsMainView : Window
+    public partial class RenovationsMainView : Page
     {
-        public RenovationsMainView(User logedInUser)
+        public RenovationsMainView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new RenovationsMainViewModel(logedInUser);
+            DataContext = new RenovationsMainViewModel(logedInUser, navigationService);
         }
     }
 }
