@@ -13,13 +13,18 @@
     <None Remove="Resources\Images\add.png" />
     <None Remove="Resources\Images\burgerBar.png" />
     <None Remove="Resources\Images\burgerBarWhite.png" />
+    <None Remove="Resources\Images\clipboard1.png" />
     <None Remove="Resources\Images\covjeculjakBijeli.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\earth.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\forums.png" />
+    <None Remove="Resources\Images\gift-card1.png" />
+    <None Remove="Resources\Images\go-back-arrow.png" />
     <None Remove="Resources\Images\grafikBijeli.png" />
+    <None Remove="Resources\Images\log-out1.png" />
     <None Remove="Resources\Images\logo.png" />
+    <None Remove="Resources\Images\magnifying-glass.png" />
     <None Remove="Resources\Images\myAccommodation.png" />
     <None Remove="Resources\Images\myToursBijela.png" />
     <None Remove="Resources\Images\notes.png" />
@@ -37,6 +42,7 @@
     <None Remove="Resources\Images\paper-32.png" />
     <None Remove="Resources\Images\pencil.png" />
     <None Remove="Resources\Images\play-button.png" />
+    <None Remove="Resources\Images\quote-request - Copy.png" />
     <None Remove="Resources\Images\quote-request.png" />
     <None Remove="Resources\Images\quote-request1.png" />
     <None Remove="Resources\Images\ratings.png" />
@@ -79,6 +85,9 @@
     <Content Include="Resources\Images\burgerBarWhite.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\clipboard1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\delete.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -88,7 +97,19 @@
     <Content Include="Resources\Images\forums.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\gift-card1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\go-back-arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\log-out1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\magnifying-glass.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\myAccommodation.png">
@@ -131,6 +152,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\paper-32.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\quote-request - Copy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\ratings.png">

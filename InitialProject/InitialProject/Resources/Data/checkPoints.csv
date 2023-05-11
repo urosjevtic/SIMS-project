@@ -83,18 +83,29 @@
 83|Center|1|False|[END]
 84|Bridge|2|False|[END]
 85|Church|3|False|[END]
-<<<<<<< HEAD
 86|cekk|3|False|[END]
 70|ppp|3|False|[END]
-=======
->>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
 87|prvi|1|False|[END]
 88|treci|2|False|[END]
 89|drugi|3|False|[END]
 90|Petrovaradin|1|True|[END]
 91|Centar|2|True|[END]
-<<<<<<< HEAD
 92|Klisa|3|False|[END]
-=======
-92|Klisa|3|False|[END]
->>>>>>> 47b6c928b8ee1f2fb5d55be92067e3832bf4abbd
+93|Golden Gate|1|False|[END]
+94|Museum|2|False|[END]
+95|Church|3|False|[END]
+96|Center|4|False|[END]
+97|Manhattan|1|False|[END]
+98|Central Park|2|False|[END]
+99|Statue of Liberty|3|False|[END]
+100|Saint Sava Church|1|False|[END]
+101|Knez Mihailova|2|False|[END]
+102|Kalemegdan|3|False|[END]
+103|Alexander Platz|1|False|[END]
+104|Branderburger Gate|2|False|[END]
+105|German Parlament|3|False|[END]
+106|Potsdamer Platz|4|False|[END]
+107|Fisherman fortress|1|False|[END]
+108|Hungarian Parliament|2|False|[END]
+109|Zoo|3|False|[END]
+110|Vazi utca|4|False|[END]
