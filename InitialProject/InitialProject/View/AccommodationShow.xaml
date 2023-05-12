@@ -11,7 +11,8 @@
     Title="AccommodationShow"
     Width="1200"
     Height="850"
-    mc:Ignorable="d" WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <!--<Window.DataContext>
         <viewModels:MainWindowViewModel />
     </Window.DataContext>-->
@@ -263,6 +264,8 @@
                     Background="LightGray"
                     BorderBrush="LightGray"
                     Click="Button_Click"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="SignInForm"
                     Content="Sign out"
                     ToolTip="Sign out and return to LogIn page" />
             </Grid>

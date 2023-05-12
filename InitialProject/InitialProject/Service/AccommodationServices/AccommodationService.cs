@@ -7,6 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Statistics;
+using InitialProject.Service.StatisticService;
 
 namespace InitialProject.Service
 {
@@ -18,6 +20,7 @@ namespace InitialProject.Service
         private readonly LocationService _locationService;
         private readonly ImageService _imageService;
         private readonly UserService _userService;
+        private readonly AccommodationStatisticService _accommodationStatisticService;
 
         public AccommodationService()
         {
@@ -25,14 +28,19 @@ namespace InitialProject.Service
             _locationService = new LocationService();
             _imageService = new ImageService();
             _userService = new UserService();
+            _accommodationStatisticService = new AccommodationStatisticService();
         }
 
         public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
         {
             Accommodation accommodation = new Accommodation();
             CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
-            _accommodationRepository.Save(accommodation);
+            int accommodationId = _accommodationRepository.Save(accommodation).Id;
+            _accommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
+
         }
+
+
 
         private void CreateNewAccommodation(Accommodation accommodation, string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
         {
@@ -108,6 +116,13 @@ namespace InitialProject.Service
                     accommodation.Location = location;
                 }
             }
+        }
+
+        public Accommodation GetById(int accommodationId)
+        {
+          Accommodation accommodation =  _accommodationRepository.GetById(accommodationId);
+          BindLocationToAccommodation(accommodation);
+          return accommodation;
         }
 
     }

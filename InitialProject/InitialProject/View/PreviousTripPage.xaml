@@ -24,7 +24,7 @@
             Grid.Row="1"
             Width="800"
             HorizontalContentAlignment="Stretch"
-            Background="White"
+            Background="AliceBlue"
             BorderThickness="0"
             ItemsSource="{Binding Trips}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"

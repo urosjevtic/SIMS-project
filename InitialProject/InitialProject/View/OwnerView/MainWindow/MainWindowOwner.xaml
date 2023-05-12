@@ -15,7 +15,7 @@
     <Window.Resources>
         <!--LogIn button style-->
         <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#484b6a"/>
+            <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
             <Setter Property="Foreground" Value="#fafafa"/>
             <!-- set the text color of the button -->
@@ -25,11 +25,30 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                            <Grid>
+                                <Rectangle x:Name="PART_ClickEffect" Opacity="0" Fill="#80FFFFFF" />
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Grid>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="PART_ClickEffect" Property="Opacity" Value="1" />
+                            </Trigger>
+                            <Trigger Property="IsMouseCaptured" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Storyboard.TargetName="PART_ClickEffect"
+                                                             Storyboard.TargetProperty="Opacity"
+                                                             From="1.0" To="0.0" Duration="0:0:0.5" />
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -54,7 +73,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition Height="3*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Command="{Binding BurgerBarClosedCommand}" Width="64" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#9394a5">
+            <Button Command="{Binding BurgerBarClosedCommand}" Width="64" Height="50" VerticalAlignment="Top" HorizontalAlignment="Right" Background="#9394a5" >
                 <Image Source="/Resources/Images/burgerBarWhite.png" Width="54"></Image>
             </Button>
             <Button Grid.Row="1" Command="{Binding MyAccommoadionsOpenCommand}"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
@@ -75,7 +94,7 @@
                     <TextBlock Padding="5">Ratings</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="4"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Grid.Row="4" Command="{Binding RenovationsOpenCommand}"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/renovations.png" Width="20"/>
                     <TextBlock Padding="5">Renovations</TextBlock>
@@ -105,80 +124,47 @@
                     <TextBlock Padding="5">Notes</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Background="#cc0000" Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="9" Margin="0,87,0,29"/>
+            <Button  Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="9" Margin="0,87,0,29"/>
         </Grid>
 
         <!--MAIN SCREEN-->
         <Grid Name="MainScreen" Grid.Column="1" Visibility="{Binding MainScreenVisibility}">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.7*"></RowDefinition>
-                <RowDefinition Height="5*"></RowDefinition>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="1.5*"></RowDefinition>
+                <RowDefinition Height="0.08*"></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-
+            <!--Navbar-->
             <DockPanel Grid.Row="0" Background="#9394a5">
                 <Button Width="64" Height="50" Background="#9394a5" Command="{Binding BurgerBarOpenCommand}" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <Image Source="/Resources/Images/burgerBarWhite.png"></Image>
                 </Button>
+                <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                    <Button Width="64" Height="50" Background="Transparent" Command="{Binding NotesOpenCommand}"   VerticalAlignment="Top">
+                    <Image Source="/Resources/Images/notes.png"></Image>
+                </Button>
+                    <Button Width="64" Height="50" Background="Transparent" Command="{Binding NotificationOpenCommand}"   VerticalAlignment="Top">
+                        <Image>
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="/Resources/Images/notification.png" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasNewNotifications}" Value="True">
+                                            <Setter Property="Source" Value="/Resources/Images/notification.png" />
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding HasNewNotifications}" Value="False">
+                                            <Setter Property="Source" Value="/Resources/Images/notificationNew.png" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                    </Button>
+                </StackPanel>
             </DockPanel>
 
 
-            <Image Source="/Resources/Images/logo.png" Margin="2,48,-2,24" Grid.RowSpan="2" />
-            <TextBlock Text="{Binding WelcomeMessage}"  Grid.Row="1" Margin="126,302,119,14" FontWeight="Medium" Foreground="#484b6a" FontSize="24" FontFamily="Sen Bold"></TextBlock>
-
-
-            <Grid Grid.Row="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Command="{Binding MyAccommoadionsOpenCommand}" Grid.Row="0"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/myAccommodation.png" Width="20"/>
-                        <TextBlock Padding="5">My accommodation</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1" Command="{Binding RatingsOpenCommand}" Grid.Row="0"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/ratings.png" Width="20"/>
-                        <TextBlock Padding="5">Ratings</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="0" Grid.Row="1"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/renovations.png" Width="20"/>
-                        <TextBlock Padding="5">Renovations</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1" Command="{Binding ReservationsOpenCommand}" Grid.Row="1"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/reservations.png" Width="20"/>
-                        <TextBlock Padding="5">Reservations</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="0" Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/forums.png" Width="20"/>
-                        <TextBlock Padding="5">Forums</TextBlock>
-                    </StackPanel>
-                </Button>
-                <Button Grid.Column="1" Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" >
-                    <StackPanel Orientation="Horizontal">
-                        <Image Source="/Resources/Images/settings.png" Width="20"/>
-                        <TextBlock Padding="5">Settings</TextBlock>
-                    </StackPanel>
-                </Button>
-            </Grid>
-
-
-            <Button Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="3" Margin="50, 30, 50, 30"></Button>
+            <Frame Grid.Row="1" x:Name="MainFrame" Content="{Binding SelectedPage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"></Frame>
         </Grid>
 
 

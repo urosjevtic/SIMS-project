@@ -71,11 +71,11 @@ namespace InitialProject.View
         //}
 
 
-        private void MyReservation_Click(object sender, RoutedEventArgs e)
-        {
-            MyReservations myReservation = new MyReservations(LoggedUser);
-            myReservation.Show();
-        }
+        //private void MyReservation_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MyReservations myReservation = new MyReservations(LoggedUser);
+        //    myReservation.Show();
+        //}
 
         //private void DeclinedButton_Click(object sender, RoutedEventArgs e)
         //{
@@ -105,42 +105,16 @@ namespace InitialProject.View
             this.Close();
         }
 
-        //private void HomePageClick(object sender, RoutedEventArgs e)
-        //{
-        //    AccommodationShow accommodationShow = new AccommodationShow(LoggedUser);
-        //    accommodationShow.Show();
-        //    this.Close();
-
-        //}
-
-        //private void SearchClick(object sender, RoutedEventArgs e)
+        //private void SearchButton1_Click(object sender, RoutedEventArgs e)
         //{
         //    AccommodationSearch accommodationSearch = new AccommodationSearch(LoggedUser);
         //    accommodationSearch.Show();
         //}
 
-        //private void PreviousTripButton_Click(object sender, RoutedEventArgs e)
+        //private void BackButton_Click(object sender, RoutedEventArgs e)
         //{
-        //    PreviousTrips trip = new PreviousTrips();
-        //    trip.Show();
+
         //}
-
-        //private void MyResrvationsButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MyReservations myReservation = new MyReservations(LoggedUser);
-        //    myReservation.Show();
-        //}
-
-        private void SearchButton1_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationSearch accommodationSearch = new AccommodationSearch(LoggedUser);
-            accommodationSearch.Show();
-        }
-
-        private void BackButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         //private void Window_Loaded(object sender, RoutedEventArgs e)
         //{

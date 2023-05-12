@@ -147,7 +147,7 @@
             Grid.Row="2"
             Width="800"
             HorizontalContentAlignment="Stretch"
-            Background="White"
+            Background="AliceBlue"
             BorderThickness="0"
             ItemsSource="{Binding Accommodations}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"

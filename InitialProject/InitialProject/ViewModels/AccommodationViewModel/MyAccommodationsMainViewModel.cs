@@ -10,101 +10,44 @@ using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Ratings;
+using InitialProject.View.OwnerView.Renovations;
 using InitialProject.View.OwnerView.Reservations;
+using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
-    public class MyAccommodationsMainViewModel :  SideScreenViewModel
+    public class MyAccommodationsMainViewModel :  BaseViewModel
     {
 
         public User LogedInUser;
-        public MyAccommodationsMainViewModel(User logedInUser)
+        public NavigationService NavigationService { get; set; }
+        public MyAccommodationsMainViewModel(User logedInUser, NavigationService navigationService)
         {
             LogedInUser = logedInUser;
+            NavigationService = navigationService;
         }
 
-
-        private Visibility _sideScreenVisibility = Visibility.Collapsed;
-
-        public Visibility SideScreenVisibility
-        {
-            get { return _sideScreenVisibility; }
-            set
-            {
-                _sideScreenVisibility = value;
-                OnPropertyChanged(nameof(SideScreenVisibility));
-            }
-        }
-
-        private Visibility _mainScreenVisibility = Visibility.Visible;
-
-        public Visibility MainScreenVisibility
-        {
-            get { return _mainScreenVisibility; }
-            set
-            {
-                _mainScreenVisibility = value;
-                OnPropertyChanged(nameof(MainScreenVisibility));
-            }
-        }
-        public ICommand BurgerBarClosedCommand => new RelayCommand(BurgerBarClosed);
-        public ICommand BurgerBarOpenCommand => new RelayCommand(BurgerBarOpen);
-        private void BurgerBarOpen()
-        {
-            SideScreenVisibility = Visibility.Visible;
-            MainScreenVisibility = Visibility.Collapsed;
-        }
-
-        private void BurgerBarClosed()
-        {
-            SideScreenVisibility = Visibility.Collapsed;
-            MainScreenVisibility = Visibility.Visible;
-        }
 
         public ICommand OpenRegistrationFormCommand => new RelayCommand(OpenRegistrationForm);
 
         private void OpenRegistrationForm()
         {
-            AccommodationRegistrationForm accommodationRegistrationForm = new AccommodationRegistrationForm(LogedInUser);
-            CloseCurrentWindow();
-            accommodationRegistrationForm.Show();
-
+            NavigationService.Navigate(new AccommodationRegistrationForm(LogedInUser, NavigationService));
         }
 
         public ICommand OpenAccommodationListCommand => new RelayCommand(OpenAccommodationList);
 
         private void OpenAccommodationList()
         {
-            MyAccommodationsList myAccommodationsList = new MyAccommodationsList(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsList.Show();
+            NavigationService.Navigate(new MyAccommodationsListView(LogedInUser, NavigationService));
 
         }
 
+        public ICommand OpenAccommodationStatisticsCommand => new RelayCommand(OpenAccommodationStatistics);
 
-
-        protected override void MyAccommoadionsOpen()
+        private void OpenAccommodationStatistics()
         {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-
-        }
-
-
-        protected override void RatingsOpen()
-        {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
-        }
-
-
-        protected override void ReservationsOpen()
-        {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
+            NavigationService.Navigate(new MyAccommodationStatisticView(LogedInUser, NavigationService));
         }
 
 

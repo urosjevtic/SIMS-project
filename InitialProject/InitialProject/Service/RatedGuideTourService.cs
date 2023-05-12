@@ -31,7 +31,7 @@ namespace InitialProject.Service
         public List<RatedGuideTour> FindAllTourRatings(Tour tour)
         {
             List<RatedGuideTour> ratings = new List<RatedGuideTour>();
-            foreach(RatedGuideTour ratedTour in GetAll())
+            foreach(RatedGuideTour ratedTour in _ratedGuideTourRepository.GetAll())
             {
                 if(tour.Id == ratedTour.IdTour)
                 {

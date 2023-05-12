@@ -19,7 +19,7 @@ namespace InitialProject.Domain.Model
         public string Language { get; set; }
         public List<CheckPoint> CheckPoints { get; set; }
         public int MaxGuests { get; set; }
-        public DateTime Start { get; set; }
+        public List<DateTime> StartDates { get; set; }
         public int Duration { get; set; }
         public Image CoverImageUrl { get; set; }
         public bool IsActive { get; set; }
@@ -33,8 +33,9 @@ namespace InitialProject.Domain.Model
             CheckPoints = new List<CheckPoint>();
             CoverImageUrl = new Image();
             _checkPointRepository = new CheckPointRepository();
+            StartDates = new List<DateTime>();
         }
-        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, DateTime start, int duration, Image coverImageUrl, bool isActve, bool rated)
+        public Tour(int id, User giude, string name, Location location, string description, string language, List<CheckPoint> checkPoints, int maxGuests, List<DateTime> start, int duration, Image coverImageUrl, bool isActve, bool rated)
         {
             Id = id;
             Guide = giude;
@@ -44,7 +45,7 @@ namespace InitialProject.Domain.Model
             Language = language;
             CheckPoints = checkPoints;
             MaxGuests = maxGuests;
-            Start = start;
+            StartDates = start;
             Duration = duration;
             CoverImageUrl = coverImageUrl;
             IsActive = isActve;
@@ -64,7 +65,6 @@ namespace InitialProject.Domain.Model
                Description,
                Language,
                MaxGuests.ToString(),
-               Start.ToString(),
                Duration.ToString(),
                CoverImageUrl.Id.ToString(),
                IsActive.ToString(),
@@ -83,6 +83,18 @@ namespace InitialProject.Domain.Model
             Array.Resize(ref csvValues, csvValues.Length + 1);
             csvValues[csvValues.Length - 1] = "[END]";
 
+
+            if (StartDates.Count() > 0)
+            {
+                foreach (DateTime start in StartDates)
+                {
+                    Array.Resize(ref csvValues, csvValues.Length + 1);
+                    csvValues[csvValues.Length -1] = start.ToString();
+                }
+            }
+
+            Array.Resize(ref csvValues, csvValues.Length + 1);
+            csvValues[csvValues.Length - 1] = "[END]";
             return csvValues;
         }
 
@@ -96,13 +108,12 @@ namespace InitialProject.Domain.Model
             Description = values[4];
             Language = values[5];
             MaxGuests = Convert.ToInt32(values[6]);
-            Start = DateTime.Parse(values[7]);
-            Duration = Convert.ToInt32(values[8]);
-            CoverImageUrl.Id = Convert.ToInt32(values[9]);
-            IsActive = Convert.ToBoolean(values[10]);
-            IsRated = Convert.ToBoolean(values[11]);
+            Duration = Convert.ToInt32(values[7]);
+            CoverImageUrl.Id = Convert.ToInt32(values[8]);
+            IsActive = Convert.ToBoolean(values[9]);
+            IsRated = Convert.ToBoolean(values[10]);
 
-            int i = 12;
+            int i = 11;
             CheckPoints.Clear();
 
 
@@ -111,6 +122,15 @@ namespace InitialProject.Domain.Model
             {
                 int ids = Convert.ToInt32(values[i]);
                 CheckPoints.Add(_checkPointRepository.GetById(ids));
+                i++;
+            }
+            i = 12 + CheckPoints.Count();
+
+            StartDates.Clear();
+            while (values[i] != "[END]")
+            {
+                DateTime start = Convert.ToDateTime(values[i]);
+                StartDates.Add(start);
                 i++;
             }
         }

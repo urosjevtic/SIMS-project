@@ -52,5 +52,10 @@ namespace InitialProject.Service
 
             return locations;
         }
+
+        public Location GetById(int id)
+        {
+           return _locationRepository.GetById(id);
+        }
     }
 }

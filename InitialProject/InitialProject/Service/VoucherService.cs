@@ -39,5 +39,9 @@ namespace InitialProject.Service
             }
             return result;
         }
+        public void ChangeToUsed(Voucher voucher)
+        {
+            _voucherRepository.ChangeUsed(voucher);
+        }
     }
 }

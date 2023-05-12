@@ -28,7 +28,6 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = this;
-            //User = LoggedUser;
             _accommodationReservationService = new AccommodationReservationService();
             //  _accommodationReservationRepository = new AccommodationReservationRepository();
             LoadAllReservations();

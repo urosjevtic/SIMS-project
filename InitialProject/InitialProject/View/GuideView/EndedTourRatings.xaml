@@ -1,0 +1,52 @@
+﻿<Window x:Class="InitialProject.View.EndedTourRatings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="EndedTourRatings" Height="777" Width="850" WindowStartupLocation="CenterScreen">
+    <Grid Margin="0,0,-24,-55">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Tour ratings: " Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="45" Grid.Row="0" ></Label>
+
+        <Label Content="Select tour to show ratings: " Grid.Row="1" FontSize="16"  ></Label>
+
+
+
+        <DataGrid Grid.Row="3" Grid.ColumnSpan="2" CanUserAddRows="False" CanUserReorderColumns="False" FontSize="22"
+                  CanUserSortColumns="True" ItemsSource="{Binding EndedTours}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False"
+                  CanUserResizeRows="False" Margin="36,0,139,87" Grid.RowSpan="5" VerticalScrollBarVisibility="Auto"  >
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*" />
+                <DataGridTextColumn Header="Location" Binding="{Binding Location.City}"  Width="12*"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*" />
+                <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
+                <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="9" Grid.Column="1" Width="150" Height="50" Content="Show ratings" Command="{Binding ShowRatingsCommand}" ></Button>
+
+    </Grid>
+</Window>

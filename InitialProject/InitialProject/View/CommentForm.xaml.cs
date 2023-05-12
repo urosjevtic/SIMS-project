@@ -92,7 +92,7 @@ namespace InitialProject.Forms
             } 
             else
             {
-                Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser, IdTour);
+                Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser, IdTour,true);
                 Comment savedComment = _repository.Save(newComment);
                 CommentsOverview.Comments.Add(savedComment);
             }

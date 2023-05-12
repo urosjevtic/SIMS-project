@@ -17,8 +17,14 @@ namespace InitialProject.Domain.Model.Reservations
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
         public int GuestNumber { get; set; }
-        public User User { get; set; }
+
         public List<DateTime> ReservedDates { get; set; }
+
+        public bool IsAbleToCancel
+        {
+            get { return !(Accommodation.CancelationPeriod < (StartDate - DateTime.Now).Days); }
+        }
+        public User User { get; set; }
         public bool IsRated { get; set; }
         public int broj;
         public AccommodationReservation()
@@ -55,6 +61,7 @@ namespace InitialProject.Domain.Model.Reservations
             EndDate = DateTime.Parse(values[2]);
             UserId = Convert.ToInt32(values[3]);
             AccommodationId = Convert.ToInt32(values[4]);
+            //Accommodation.Id = Convert.ToInt32(values[4]);
             GuestNumber = Convert.ToInt32(values[5]);
         }
 

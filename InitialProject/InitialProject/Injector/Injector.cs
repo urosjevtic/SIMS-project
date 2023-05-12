@@ -4,12 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.RepositoryInterfaces.INotificationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
+using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRenovationRepo;
 using InitialProject.Repository.AccommodationRepo;
+using InitialProject.Repository.NotificationRepo;
 using InitialProject.Repository.ReservationRepo;
+using InitialProject.Repository.StatisticRepo;
 using InitialProject.Repository.UserRepo;
 
 namespace InitialProject.Injector
@@ -30,16 +36,17 @@ namespace InitialProject.Injector
             {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
             {typeof(IVoucherRepository), new VoucherRepository()},
             {typeof(ITourRepository), new TourRepository()},
-            {typeof(ITourGuestRepository), new TourGuestsRepository()},
+            {typeof(ITourGuestRepository), new TourGuestRepository()},
             {typeof(ITourReservationRepository), new TourReservationRepository()},
             {typeof(INotificationRepository), new NotificationRepository()},
             {typeof(ICheckPointRepository), new CheckPointRepository()},
-            {typeof(IAccommodationReservationRepository), new AccommodationReservationRepository()},
-            {typeof(IUnratedOwnerRepository), new UnratedOwnerRepository()},
-            {typeof(ICanceledReservationsRepository), new CanceledResrvationsRepository()},
             {typeof(IGuestsCheckPointRepository), new GuestsCheckPointRepository()},
-            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository() }
-
+            {typeof(IAccommodationReservationRescheduleRequestRepository), new AccommodationReservationRescheduleRequestRepository()},
+            {typeof(IShortTourRequestRepository), new ShortTourRequestRepository()},
+            {typeof(INotesRepository), new NotesRepository()},
+            {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
+            {typeof(IRenovationRepository), new RenovationRepository()},
+            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()}
 
             // Add more implementations here
         };

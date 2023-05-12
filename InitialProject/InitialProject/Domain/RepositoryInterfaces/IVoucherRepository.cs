@@ -12,5 +12,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         List<Voucher> GetAll();
         void Save(Voucher voucher);
         int NextId();
+        void ChangeUsed(Voucher voucher);
     }
 }

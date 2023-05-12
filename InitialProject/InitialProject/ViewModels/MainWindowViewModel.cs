@@ -19,6 +19,12 @@ namespace InitialProject.ViewModels
         public ICommand NavigateBackCommand => new RelayCommand(OnNavigateBack);
         public ICommand ShowWizardCommand => new RelayCommand(OnShowWizard);
         public ICommand SaveSettingsCommand => new RelayCommand(OnSaveSettings);
+       // public ICommand SIgnOutCommand => new RelayCommand(OnSignOut);
+
+        //private void OnSignOut()
+        ////{
+        ////    throw new NotImplementedException();
+        ////}
 
         public User LoggedUser { get; set; } = App.LoggedUser;      
 

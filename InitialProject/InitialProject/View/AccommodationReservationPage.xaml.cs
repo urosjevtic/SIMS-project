@@ -43,9 +43,9 @@ namespace InitialProject.View
         {
             InitializeComponent();
             this.DataContext = new AccommodationReservationViewModel(accommodation);
-            Accommodations = new List<Accommodation>();
+          //  Accommodations = new List<Accommodation>();
             SelectedAccommodation = accommodation;
-            Accommodations.Add(SelectedAccommodation);
+           // Accommodations.Add(SelectedAccommodation);
 
             _accommodationRepository = new AccommodationRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();

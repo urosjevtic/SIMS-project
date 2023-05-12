@@ -6,14 +6,78 @@ using System.Windows.Input;
 using InitialProject.Domain.Model;
 using InitialProject.View.OwnerView.MyAccommodations;
 using System.Linq;
+using InitialProject.Domain.Model.Statistics;
+using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
+using InitialProject.Repository.StatisticRepo;
+using InitialProject.View.OwnerView.Notes;
 using InitialProject.View.OwnerView.Ratings;
 using InitialProject.View.OwnerView.Reservations;
 using InitialProject.ViewModels;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using InitialProject.View.OwnerView.Renovations;
+using System.Windows.Controls;
+using System.Windows.Navigation;
+using FluentScheduler;
+using InitialProject.Service;
+using InitialProject.Service.NotificationServices;
+using InitialProject.View.OwnerView.MainWindow;
+using InitialProject.View.OwnerView.Notifications;
 
 namespace InitialProject.ViewModel
 {
     public class OwnerMainViewModel : SideScreenViewModel
     {
+
+
+        public NavigationService NavigationService { get; set; }
+
+        private readonly OwnerNotificationService _notificationService;
+
+        public OwnerMainViewModel(User user)
+        {
+            LogedInUser = user;
+            NavigationService = SelectedPage.NavigationService;
+            SelectedPage.Content = new MainPageView(user, NavigationService);
+            _notificationService = new OwnerNotificationService();
+            CheckNotifications();
+            JobManager.Initialize();
+            JobManager.AddJob(
+                () => CheckNotifications(),
+                s=>s.ToRunEvery(3).Seconds());
+        }
+
+
+        private bool _hasNewNotifications;
+
+        public bool HasNewNotifications
+        {
+            get { return _hasNewNotifications;}
+            set
+            {
+                _hasNewNotifications = value;
+                OnPropertyChanged("HasNewNotifications");
+            }
+        }
+
+        private void CheckNotifications()
+        {
+            _hasNewNotifications = !_notificationService.HasNewNotifications(_loggedInUser.Id);
+            OnPropertyChanged("HasNewNotifications");
+        }
+
+
+        private Frame _selectedPage = new Frame();
+        public Frame SelectedPage
+        {
+            get => _selectedPage;
+            set
+            {
+                _selectedPage = value;
+                OnPropertyChanged("SelectedPage");
+            }
+        }
+
+
         private User _loggedInUser;
 
         public User LogedInUser
@@ -26,40 +90,9 @@ namespace InitialProject.ViewModel
             }
         }
 
-        public string WelcomeMessage => "Welcome";
-
-        private Visibility _sideScreenVisibility = Visibility.Collapsed;
-
-        public Visibility SideScreenVisibility
-        {
-            get { return _sideScreenVisibility; }
-            set
-            {
-                _sideScreenVisibility = value;
-                OnPropertyChanged(nameof(SideScreenVisibility));
-            }
-        }
-
-        private Visibility _mainScreenVisibility = Visibility.Visible;
-
-        public Visibility MainScreenVisibility
-        {
-            get { return _mainScreenVisibility; }
-            set
-            {
-                _mainScreenVisibility = value;
-                OnPropertyChanged(nameof(MainScreenVisibility));
-            }
-        }
-
-        public ICommand BurgerBarClosedCommand => new RelayCommand(BurgerBarClosed);
-        public ICommand BurgerBarOpenCommand => new RelayCommand(BurgerBarOpen);
+        public string WelcomeMessage => LogedInUser.Username;
 
 
-        public OwnerMainViewModel(User user)
-        {
-            LogedInUser = user;
-        }
 
         private void BurgerBarOpen()
         {
@@ -76,29 +109,46 @@ namespace InitialProject.ViewModel
 
         protected override void MyAccommoadionsOpen()
         {
-            MyAccommodationsMainWindow myAccommodationsMainWindow = new MyAccommodationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            myAccommodationsMainWindow.Show();
-           
+            NavigationService.Navigate(new MyAccommodationsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
 
         protected override void RatingsOpen()
         {
-            RatingsMainWindow ratingsMain = new RatingsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            ratingsMain.Show();
+            NavigationService.Navigate(new RatingsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
 
         protected override void ReservationsOpen()
         {
-            ReservationsMainWindow reservationsMain = new ReservationsMainWindow(LogedInUser);
-            CloseCurrentWindow();
-            reservationsMain.Show();
+            NavigationService.Navigate(new ReservationsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
+        protected override void RenovationsOpen()
+        {
+            NavigationService.Navigate(new RenovationsMainView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
+        }
 
+        public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
+
+        private void NotesOpen()
+        {
+            NotesView notesView = new NotesView(_loggedInUser);
+            notesView.ShowDialog();
+        }
+
+        public ICommand NotificationOpenCommand => new RelayCommand(NotificationOpen);
+
+        private void NotificationOpen()
+        {
+            _notificationService.UpdateNewNotifications(_loggedInUser.Id);
+            OnPropertyChanged("HasNewNotifications");
+            NavigationService.Navigate(new OwnerNotificationsView(_loggedInUser, NavigationService));
+        }
 
 
     }

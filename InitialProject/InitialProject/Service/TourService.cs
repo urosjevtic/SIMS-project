@@ -18,7 +18,7 @@ namespace InitialProject.Service
         private readonly ITourGuestRepository _tourGuestsRepository;
         private readonly ITourReservationRepository _tourReservationRepository;
 
-        private readonly VoucherRepository _voucherRepository;
+        private readonly IVoucherRepository _voucherRepository;
 
         public LocationService _locationService { get; set; }
 
@@ -29,7 +29,7 @@ namespace InitialProject.Service
             _locationService = new LocationService(); 
             _tourGuestsRepository = Injector.Injector.CreateInstance<ITourGuestRepository>(); 
             _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();   
-            _voucherRepository = new VoucherRepository();   
+            _voucherRepository = Injector.Injector.CreateInstance<IVoucherRepository>();
         }
 
         public List<Tour> GetTodayTours(User user)
@@ -40,9 +40,12 @@ namespace InitialProject.Service
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
             {
-                if (tour.Start.Date == DateTime.Today.Date)
+                foreach (DateTime start in tour.StartDates)
                 {
-                    todayTours.Add(tour);
+                    if (start.Date == DateTime.Today.Date)
+                    {
+                        todayTours.Add(tour);
+                    }
                 }
             }
             return todayTours;
@@ -55,10 +58,15 @@ namespace InitialProject.Service
             List<Tour> tours = new List<Tour>();
             foreach (Tour tour in allTours)
             {
-                if (tour.Guide.Id == user.Id && tour.Start.DayOfYear >= DateTime.Today.DayOfYear)
+                foreach(DateTime start in tour.StartDates)
                 {
-                    tours.Add(tour);
+                    if(tour.Guide.Id == user.Id && start.DayOfYear >= DateTime.Now.DayOfYear && !tours.Contains(tour))
+                    {
+                        tours.Add(tour);
+
+                    }
                 }
+               
             }
             return tours;
         }
@@ -78,15 +86,32 @@ namespace InitialProject.Service
                 }
             }
         }
+        public List<Tour> FindAllAlternatives(Tour tour)
+        {
+            List<Tour> alternative = new List<Tour>();
+            List<Tour> tours = GetAll();
+            var locations = _locationService.GetLocations();
+
+            AddTourLocation(tours, locations);
+
+            foreach (Tour t in tours)
+            {
+                if (t.Location.City.Equals(tour.Location.City))
+                {
+                    alternative.Add(t);
+                }
+            }
+            return alternative;
+        }
         public void Delete(Tour tour)
         {
             _tourRepository.Delete(tour);
         }
         public void SendVauchers(Tour tour)
         {
-            foreach (User guste in _tourReservationRepository.GetReservationGuest(tour))
+            foreach (User user in _tourReservationRepository.GetReservationGuest(tour))
             {
-                TourGuest guest = _tourGuestsRepository.GetGuest(guste);
+                TourGuest guest = _tourGuestsRepository.GetGuest(user);
                 MakeVaucher(guest);
             }
         }
@@ -100,15 +125,10 @@ namespace InitialProject.Service
             voucher.Text = "Ovaj vaucer mozete koristiti 2 godine od datuma kreiranja";
             _voucherRepository.Save(voucher);
         }
-        ///
-
+       
         public int NextId()
         {
             return _tourRepository.NextId();
-        }
-        public List<Tour> FindAllAlternatives(Tour tour)
-        {
-            return _tourRepository.FindAllAlternatives(tour);
         }
         
         public void Save(Tour tour)
@@ -143,17 +163,23 @@ namespace InitialProject.Service
             return _tourRepository.GetById(id);
         }
 
-        public Tour GetMostVisitedInYear(string year)
+        public Tour GetMostVisitedInYear(int year)
         {
             int max = 0;
             Tour mostVisitedTour = new Tour();
                foreach(Tour tour in FindAllEndedTours())
                 {
-                    if(tour.Start.Year == Convert.ToInt32(year) &&  max < FindVisitCount(tour))
+                    foreach(DateTime start in tour.StartDates)
                     {
-                        max = FindVisitCount(tour);
-                        mostVisitedTour = tour;
-                    }
+                        if(start.Year == year)
+                        {
+                            if(max < FindVisitCount(tour))
+                            {
+                                max = FindVisitCount(tour);
+                                mostVisitedTour = tour;
+                            }
+                        }
+                    }      
                 }
                 return mostVisitedTour;
         }
@@ -204,7 +230,10 @@ namespace InitialProject.Service
         {
             string[] searchValues = { state, city, language };
             foreach (string value in searchValues)
-                searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+                if (value != null)
+                {
+                    searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+                }
             return searchResults;
         }
         public List<Tour> RemoveByNumbers(List<Tour> searchResults, string duration, string number)
@@ -216,17 +245,21 @@ namespace InitialProject.Service
 
             return searchResults;
         }
-        public List<Tour> FindAllActiveTours()
+        public List<Tour> FindAllMyActiveTours(User LoggedUser)
         {
             List<Tour> tours = _tourRepository.GetAll();
             List<Location> locations = _locationService.GetLocations();
             List<Tour> active = new List<Tour>();
+            List<TourReservation> reservations = _tourReservationRepository.GetAll();
             AddTourLocation(tours, locations);
             foreach (Tour tour in tours)
             {
-                if (tour.IsActive)
+                foreach(TourReservation t in reservations)
                 {
-                    active.Add(tour);
+                    if (tour.IsActive == true && t.IdGuest == LoggedUser.Id && !active.Contains(tour) && t.IdTour == tour.Id)
+                    {
+                        active.Add(tour);
+                    }
                 }
             }
             return active;
@@ -242,13 +275,20 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-            foreach (Tour tour in tours)
+
+            foreach (Tour tour in tours)  // mijenjala sam provjeritiiii
             {
                 TimeSpan ts = new(tour.Duration, 0, 0);
-                if(tour.Start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
+                foreach (DateTime start in tour.StartDates)
                 {
-                    ended.Add(tour);
+                    if(start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false)
+                    {
+                        ended.Add(tour);
+                    }
                 }
+                
+               
+                
             }
             return ended;
         }
@@ -277,5 +317,6 @@ namespace InitialProject.Service
             }
             return active;
         }
+
     }
 }
