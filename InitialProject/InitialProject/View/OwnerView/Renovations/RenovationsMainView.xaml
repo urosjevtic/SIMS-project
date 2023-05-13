@@ -107,7 +107,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="Renovation sugestions" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="See sugestions for renovations that guests have left" TextWrapping="Wrap"  FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenRegistrationFormCommand}" Content="See sugestions" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenSugestedRenovationsCommand}" Content="See sugestions" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
             <Border Grid.Row="3" BorderBrush="#3A3D55" BorderThickness="2">

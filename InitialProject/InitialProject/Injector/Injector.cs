@@ -46,7 +46,8 @@ namespace InitialProject.Injector
             {typeof(INotesRepository), new NotesRepository()},
             {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
             {typeof(IRenovationRepository), new RenovationRepository()},
-            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()}
+            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()},
+            {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()}
 
             // Add more implementations here
         };

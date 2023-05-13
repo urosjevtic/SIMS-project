@@ -77,6 +77,23 @@ namespace InitialProject.Service.ReservationServices
             return reservations;
         }
 
+
+
+
+        public List<Domain.Model.Reservations.AccommodationReservation> GetAllReservationByGuestId(int guestId)
+        {
+            List<Domain.Model.Reservations.AccommodationReservation> allReservation = GetAll();
+            List<Domain.Model.Reservations.AccommodationReservation> reservations = new List<Domain.Model.Reservations.AccommodationReservation>();
+            foreach (Domain.Model.Reservations.AccommodationReservation reservation in allReservation)
+            {
+                if (reservation.User.Id == guestId)
+                {
+                    reservations.Add(reservation);
+                }
+            }
+
+            return reservations;
+        }
         private void BindAccommodationToReservations(List<AccommodationReservation> reservations)
         {
             var accommodationsById = _accommodationService.GetAll().ToDictionary(a => a.Id);

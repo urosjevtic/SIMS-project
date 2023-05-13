@@ -54,6 +54,7 @@
     <None Remove="Resources\Images\tourRequests.png" />
     <None Remove="Resources\Images\user.png" />
     <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\yes.png" />
     <None Remove="Resources\Images\zvijezdaBijela.png" />
   </ItemGroup>
 
@@ -140,6 +141,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\view.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\yes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
