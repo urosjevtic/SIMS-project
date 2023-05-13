@@ -16,12 +16,14 @@ namespace InitialProject.Service.RenovationServices
 
         private readonly IRenovationRepository _renovationRepository;
         private readonly AccommodationService _accommodationService;
+        private readonly AccommodationReservationService _accommodationReservationService;
 
 
         public RenovationService()
         {
             _renovationRepository = Injector.Injector.CreateInstance<IRenovationRepository>();
             _accommodationService = new AccommodationService();
+            _accommodationReservationService = new AccommodationReservationService();
         }
 
 
@@ -97,16 +99,19 @@ namespace InitialProject.Service.RenovationServices
         }
 
 
-        public List<DateTime> FindAvailableDates(List<AccommodationReservation> reservations, DateTime renovationStartDate, DateTime endDate, int renovationDays)
+        public List<DateTime> FindAvailableDates(int accommodationId, DateTime renovationStartDate, DateTime endDate, int renovationDays)
         {
+
             if (renovationStartDate >= endDate)
             {
                 return new List<DateTime>();
             }
+            List<AccommodationReservation> reservations = _accommodationReservationService.GetReservationsByAccommodationId(accommodationId);
+
 
             List<DateTime> datesInRange = CreateDateRange(renovationStartDate, endDate);
 
-            List<DateTime> availableDates = CheckAvailableDates(reservations, datesInRange, renovationDays);
+            List<DateTime> availableDates = FindAvailableDates(reservations, datesInRange, renovationDays);
 
             return availableDates;
         }
@@ -118,15 +123,14 @@ namespace InitialProject.Service.RenovationServices
                 .ToList();
         }
 
-        private List<DateTime> CheckAvailableDates(List<AccommodationReservation> reservations, List<DateTime> datesInRange, int renovationDays)
+        private List<DateTime> FindAvailableDates(List<AccommodationReservation> reservations, List<DateTime> datesInRange, int renovationDays)
         {
             List<DateTime> availableDates = new List<DateTime>();
 
             foreach (DateTime date in datesInRange)
             {
-                bool isAvailable = IsDateAvailable(reservations, date, renovationDays);
 
-                if (isAvailable)
+                if (IsDateAvailable(reservations, date, renovationDays))
                 {
                     availableDates.Add(date);
                 }

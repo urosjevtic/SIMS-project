@@ -62,11 +62,11 @@ namespace InitialProject.Service.NotificationServices
             int currentRescheduleCount = _reservationRescheduleService.GetAllByOwnerId(ownerId).Count;
             int currentUnratedGuestsCount = _unratedGuestService.GetUnratedGuestsByOwnerId(ownerId).Count;
 
-            OwnerNotification notification = new OwnerNotification
-            {
-                ReservationReschedulingCount = currentRescheduleCount,
-                UnradtedGuestsCount = currentUnratedGuestsCount
-            };
+            OwnerNotification notification = new OwnerNotification();
+            notification.Owner.Id = ownerId;
+            notification.ReservationReschedulingCount = currentRescheduleCount;
+            notification.UnradtedGuestsCount = currentUnratedGuestsCount;
+
 
             _notificationRepository.Update(notification);
         }

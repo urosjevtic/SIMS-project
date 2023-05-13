@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Automation;
 
 namespace InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo
 {
@@ -13,5 +14,7 @@ namespace InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo
         List<Accommodation> GetAll();
 
         Accommodation GetById(int accommodationId);
+
+        void Update(Accommodation accommodation);
     }
 }
