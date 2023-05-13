@@ -108,7 +108,6 @@ namespace InitialProject.Service.ReservationServices
                 if (accommodationsById.TryGetValue(reservation.AccommodationId, out var accommodation))
                 {
                     reservation.Accommodation = accommodation;
-                    break;
                 }
             }
         }
