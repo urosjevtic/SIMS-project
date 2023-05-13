@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
@@ -71,7 +72,7 @@ namespace InitialProject.Service.ReservationServices
 
         public List<Domain.Model.Reservations.AccommodationReservation>GetReservationByOwnerId(int id)
         {
-            List<Domain.Model.Reservations.AccommodationReservation>reservations = new List<Domain.Model.Reservations.AccommodationReservation>();
+            List<Domain.Model.Reservations.AccommodationReservation> reservations = new List<Domain.Model.Reservations.AccommodationReservation>();
             List<Domain.Model.Reservations.AccommodationReservation> allreservations = _accommodationReservationRepository.GetAll();
 
             BindAccommodationToReservations(allreservations);
@@ -81,6 +82,22 @@ namespace InitialProject.Service.ReservationServices
 
             return reservations;
         }
+
+        public List<Domain.Model.Reservations.AccommodationReservation> GetAllReservationByGuestId(int guestId)
+        {
+            List<Domain.Model.Reservations.AccommodationReservation> allReservation = GetAll();
+            List<Domain.Model.Reservations.AccommodationReservation> reservations = new List<Domain.Model.Reservations.AccommodationReservation>();
+            foreach (Domain.Model.Reservations.AccommodationReservation reservation in allReservation)
+            {
+                if (reservation.User.Id == guestId)
+                {
+                    reservations.Add(reservation);
+                }
+            }
+
+            return reservations;
+        }
+
 
         private void BindAccommodationToReservations(List<Domain.Model.Reservations.AccommodationReservation> reservations)
         {

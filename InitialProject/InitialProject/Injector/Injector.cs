@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
@@ -46,8 +47,8 @@ namespace InitialProject.Injector
             {typeof(INotesRepository), new NotesRepository()},
             {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
             {typeof(IRenovationRepository), new RenovationRepository()},
-            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()}
-
+            {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()},
+            {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()}
             // Add more implementations here
         };
 
