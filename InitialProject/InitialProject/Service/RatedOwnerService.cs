@@ -1,13 +1,8 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.Repository;
-using System;
+﻿using InitialProject.Domain.Model.Reservations;
+using InitialProject.Domain.RepositoryInterfaces;
+using InitialProject.Service.ReservationServices;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using InitialProject.Domain.RepositoryInterfaces;
-using InitialProject.Domain.Model.Reservations;
-using InitialProject.Service.ReservationServices;
 
 
 namespace InitialProject.Service
@@ -90,13 +85,11 @@ namespace InitialProject.Service
                     if (rating.Reservation.Id == reservation.Id)
                     {
                         rating.Reservation = reservation;
-                        break;
+                        break; //mozda ovo treba izbrisati
                     }
                 }
             }
         }
-
-
 
         public void Save(RatedOwner owner)
         {
