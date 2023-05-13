@@ -14,6 +14,7 @@
     <None Remove="Resources\Images\burgerBar.png" />
     <None Remove="Resources\Images\burgerBarWhite.png" />
     <None Remove="Resources\Images\clipboard1.png" />
+    <None Remove="Resources\Images\comment.png" />
     <None Remove="Resources\Images\covjeculjakBijeli.png" />
     <None Remove="Resources\Images\delete.png" />
     <None Remove="Resources\Images\earth.png" />
@@ -86,6 +87,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\clipboard1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\comment.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\delete.png">

@@ -82,6 +82,19 @@ namespace InitialProject.ViewModels
                 }
             }
         }
+        private DateTime _selectedDateTime;
+        public DateTime SelectedDateTime
+        {
+            get => _selectedDateTime;
+            set
+            {
+                if (value != _selectedDateTime)
+                {
+                    _selectedDateTime = value;
+                    OnPropertyChanged(nameof(SelectedDateTime));
+                }
+            }
+        }
         private ObservableCollection<Tour> _tours;
         public ObservableCollection<Tour> Tours
         {
@@ -108,6 +121,19 @@ namespace InitialProject.ViewModels
                 }
             }
         }
+        private ObservableCollection<DateTime> _dateTimes;
+        public ObservableCollection<DateTime> DateTimes
+        {
+            get { return _dateTimes; }
+            set
+            {
+                if (value != _dateTimes)
+                {
+                    _dateTimes = value;
+                    OnPropertyChanged(nameof(DateTimes));
+                }
+            }
+        }
         public SearchResultViewModel(User user, Tour tour)
         {
             _tourService = new TourService();
@@ -121,8 +147,10 @@ namespace InitialProject.ViewModels
             LoggedUser = user;
             Tours = new ObservableCollection<Tour>();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
+            DateTimes = new ObservableCollection<DateTime>(_tourService.GetById(tour.Id).StartDates);
             NumberOfPeople = "0";
             SelectedTour = tour;
+            SelectedDateTime = DateTimes[0];
         }
         private void UpButton()
         {
@@ -142,7 +170,7 @@ namespace InitialProject.ViewModels
         private void Reserve()
         {
 
-            if (SelectedTour == null || _numberOfPeople == null || _averageAge == null)
+            if (SelectedTour == null || 0 >= int.Parse(NumberOfPeople) || _averageAge == null)
             {
                 if (SelectedTour == null)
                 {
@@ -165,7 +193,7 @@ namespace InitialProject.ViewModels
 
                 if (numberOfPeople <= freeSeats)
                 {
-                    _tourReservationService.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age);
+                    _tourReservationService.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     if (SelectedVoucher != null)
                     {

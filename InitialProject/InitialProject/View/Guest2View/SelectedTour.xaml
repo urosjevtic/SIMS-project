@@ -30,7 +30,6 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
                     <RowDefinition Height="90"></RowDefinition>
                     <RowDefinition Height="100"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -49,20 +48,17 @@
                 <Label Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Top" FontSize="26" Width="73" Margin="0,2,0,0">
                     <Bold>City:</Bold>
                 </Label>
-                <Label Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="26" Width="190" Height="50">
-                    <Bold>Date and time:</Bold>
-                </Label>
-                <Label Grid.Column="1" HorizontalAlignment="Left" Grid.Row="6" VerticalAlignment="Top" FontSize="26" Width="227" Height="50">
+                <Label Grid.Column="1" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" FontSize="26" Width="227" Height="50">
                     <Bold>Checkpoints:</Bold>
                 </Label>
-                <ListBox Grid.Row="6" Grid.Column="1" Grid.RowSpan="3" FontSize="28" ItemsSource="{Binding Checkpoints}" Width="250" Margin="10,58,210,10"/>
+                <ListBox Grid.Row="5" Grid.Column="1" Grid.RowSpan="3" FontSize="26" ItemsSource="{Binding Checkpoints}" Width="250" Margin="10,58,210,10"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="45" Grid.Row="1" Text="{Binding selectedTour.Location.City}" Margin="72,8,232,3"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="40" Grid.Row="2" Text="{Binding selectedTour.Language}" Margin="142,6,162,10"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="45" Grid.Row="0"  Text="{Binding selectedTour.Location.Country}" Margin="118,7,186,9"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="40" Grid.Row="3" Text="{Binding selectedTour.Duration}" Margin="190,5,114,12"/>
                 <TextBlock Grid.Column="1" FontSize="26" Width="180" Height="40" Grid.Row="4" Text="{Binding selectedTour.MaxGuests}" Margin="246,5,58,11"/>
-                <TextBlock Grid.Column="1" FontSize="26" Width="270" Height="40" Grid.Row="5" Text="{Binding selectedTour.Start}" Margin="197,7,17,9"/>
-                <GroupBox Header="Images" FontSize="28" Grid.Column="2" Grid.RowSpan="8" BorderBrush="Black">
+
+                <GroupBox Header="Images" FontSize="28" Grid.Column="2" Grid.RowSpan="7" BorderBrush="Black">
                     <Border Grid.Column="2" Grid.Row="0" Grid.RowSpan="7" BorderBrush="Black" Width="375" BorderThickness="1" Padding="5" Height="350">
                         <ScrollViewer VerticalScrollBarVisibility="Auto" >
                             <StackPanel>
