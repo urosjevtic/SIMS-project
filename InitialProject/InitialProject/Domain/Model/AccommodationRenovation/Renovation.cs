@@ -33,9 +33,8 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
             Accommodation = new Accommodation();
         }
 
-        public Renovation(int id, Accommodation accommodation, DateTime startDate, DateTime endDate, int lengthInDays, string description)
+        public Renovation(Accommodation accommodation, DateTime startDate, DateTime endDate, int lengthInDays, string description)
         {
-            Id = id;
             Accommodation = accommodation;
             StartDate = startDate;
             EndDate = endDate;

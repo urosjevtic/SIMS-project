@@ -20,6 +20,7 @@ using System.Windows.Navigation;
 using FluentScheduler;
 using InitialProject.Service;
 using InitialProject.Service.NotificationServices;
+using InitialProject.Service.RenovationServices;
 using InitialProject.View.OwnerView.MainWindow;
 using InitialProject.View.OwnerView.Notifications;
 
@@ -32,6 +33,7 @@ namespace InitialProject.ViewModel
         public NavigationService NavigationService { get; set; }
 
         private readonly OwnerNotificationService _notificationService;
+        private readonly OwnerEventsService _eventsService;
 
         public OwnerMainViewModel(User user)
         {
@@ -39,11 +41,10 @@ namespace InitialProject.ViewModel
             NavigationService = SelectedPage.NavigationService;
             SelectedPage.Content = new MainPageView(user, NavigationService);
             _notificationService = new OwnerNotificationService();
+            _eventsService = new OwnerEventsService();
             CheckNotifications();
-            JobManager.Initialize();
-            JobManager.AddJob(
-                () => CheckNotifications(),
-                s=>s.ToRunEvery(3).Seconds());
+            CheckForEvents();
+
         }
 
 
@@ -57,6 +58,20 @@ namespace InitialProject.ViewModel
                 _hasNewNotifications = value;
                 OnPropertyChanged("HasNewNotifications");
             }
+        }
+
+        private void CheckForEvents()
+        {
+            JobManager.Initialize();
+            //Check for notifications
+            JobManager.AddJob(
+                () => CheckNotifications(),
+                s => s.ToRunEvery(3).Seconds());
+            //Check accommodation renovation status
+            JobManager.AddJob(
+                ()=> _eventsService.CheckAccommodationRenovationStatus(_loggedInUser.Id),
+                s=>s.ToRunEvery(1).Days()
+                );
         }
 
         private void CheckNotifications()

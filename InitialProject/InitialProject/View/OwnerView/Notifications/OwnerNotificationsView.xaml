@@ -5,16 +5,18 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Notifications"
       mc:Ignorable="d" 
-      Title="OwnerNotificationsView" Height="637" Width="356">
+      Title="OwnerNotificationsView" Height="637" Width="345">
     <Page.Background>
         <SolidColorBrush Color="#fafafa" />
     </Page.Background>
     <Page.Resources>
         <!--LogIn button style-->
+
         <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
+
             <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fafafa"/>
+            <Setter Property="Foreground" Value="#fff"/>
             <!-- set the text color of the button -->
             <Setter Property="FontSize" Value="20"/>
             <!-- set the font size of the button -->
@@ -23,33 +25,28 @@
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <Grid>
-                                <Rectangle x:Name="PART_ClickEffect" Opacity="0" Fill="#80FFFFFF" />
-                                <ContentPresenter HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Grid>
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <!-- set the background color when the mouse is over the button -->
+                            </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="PART_ClickEffect" Property="Opacity" Value="1" />
+                                <Setter Property="Background" Value="#004F8E"/>
+                                <!-- set the background color when the button is pressed -->
                             </Trigger>
-                            <Trigger Property="IsMouseCaptured" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Storyboard.TargetName="PART_ClickEffect"
-                                                             Storyboard.TargetProperty="Opacity"
-                                                             From="1.0" To="0.0" Duration="0:0:0.5" />
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                            </Trigger>
+
+
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
 
 
         <!--Naslovi-->

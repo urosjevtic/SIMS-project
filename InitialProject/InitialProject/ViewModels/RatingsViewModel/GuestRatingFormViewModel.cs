@@ -46,7 +46,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
         }
 
 
-        private int _ruleFollowingRating;
+        private int _ruleFollowingRating = 1;
         public int RuleFollowingRating
         {
             get { return _ruleFollowingRating; }
@@ -60,7 +60,7 @@ namespace InitialProject.ViewModels.RatingsViewModel
             }
         }
 
-        private int _cleanlinessRating;
+        private int _cleanlinessRating = 1;
         public int CleanlinessRating
         {
             get { return _cleanlinessRating; }
