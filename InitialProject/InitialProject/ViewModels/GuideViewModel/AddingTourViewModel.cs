@@ -47,7 +47,7 @@ namespace InitialProject.ViewModels
             _checkPointService = new CheckPointService();
             _tourService = new TourService();  
             _notificationService = new NotificationService();
-            _guideMainWindow = new GuideMainViewModel(user);
+            //_guideMainWindow = new GuideMainViewModel(user);
 
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
@@ -326,7 +326,7 @@ namespace InitialProject.ViewModels
             tour.CheckPoints = MakeCheckPointList();
             tour.IsActive = false;
             _tourService.Save(tour);
-            _guideMainWindow.LoadData();
+            //_guideMainWindow.LoadData();
 
             _notificationService.SendNotifications(tour);
 

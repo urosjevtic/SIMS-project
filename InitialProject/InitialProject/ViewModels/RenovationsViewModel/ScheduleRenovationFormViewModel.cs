@@ -23,13 +23,14 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private readonly User _logedInUser;
         private readonly AccommodationReservationService _accommodationReservationService;
         public NavigationService NavigationService { get; set; }
-        public ScheduleRenovationFormViewModel(User logedInUser, Accommodation accommodation, NavigationService navigationService)
+        public ScheduleRenovationFormViewModel(User logedInUser, Accommodation accommodation, NavigationService navigationService, string renovationDescription)
         {
             _renovationService = new RenovationService();
             _accommodationReservationService = new AccommodationReservationService();
             _accommodation = accommodation;
             _logedInUser = logedInUser;
             NavigationService = navigationService;
+            _renovationDescription = renovationDescription;
         }
 
         private List<DateTime> _availableDates;

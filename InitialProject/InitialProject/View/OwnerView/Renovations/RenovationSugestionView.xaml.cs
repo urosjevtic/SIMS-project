@@ -13,20 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
-using InitialProject.Utilities;
 using InitialProject.ViewModels.RenovationsViewModel;
 
 namespace InitialProject.View.OwnerView.Renovations
 {
     /// <summary>
-    /// Interaction logic for ScheduleRenovationFormView.xaml
+    /// Interaction logic for RenovationSugestionView.xaml
     /// </summary>
-    public partial class ScheduleRenovationFormView : Page
+    public partial class RenovationSugestionView : Page
     {
-        public ScheduleRenovationFormView(User logedInUser, Accommodation accommodation, NavigationService navigationService, string renovationDescription="")
+        public RenovationSugestionView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new ScheduleRenovationFormViewModel(logedInUser, accommodation, navigationService, renovationDescription);
+            DataContext = new RenovationSugestionViewModel(logedInUser, navigationService);
         }
     }
 }

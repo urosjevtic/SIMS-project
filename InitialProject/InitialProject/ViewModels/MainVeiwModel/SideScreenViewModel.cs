@@ -55,6 +55,8 @@ namespace InitialProject.ViewModels
         public ICommand ReservationsOpenCommand => new RelayCommand(ReservationsOpen);
 
         public ICommand RenovationsOpenCommand => new RelayCommand(RenovationsOpen);
+        public ICommand NotificationOpenCommand => new RelayCommand(NotificationOpen);
+        public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
 
 
         protected abstract void MyAccommoadionsOpen();
@@ -62,5 +64,7 @@ namespace InitialProject.ViewModels
 
         protected abstract void ReservationsOpen();
         protected abstract void RenovationsOpen();
+        protected abstract void NotificationOpen();
+        protected abstract void NotesOpen();
     }
 }

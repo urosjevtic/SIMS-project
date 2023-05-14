@@ -150,7 +150,7 @@ namespace InitialProject.ViewModel
 
         public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
 
-        private void NotesOpen()
+        protected override void NotesOpen()
         {
             NotesView notesView = new NotesView(_loggedInUser);
             notesView.ShowDialog();
@@ -158,12 +158,14 @@ namespace InitialProject.ViewModel
 
         public ICommand NotificationOpenCommand => new RelayCommand(NotificationOpen);
 
-        private void NotificationOpen()
+        protected override void NotificationOpen()
         {
             _notificationService.UpdateNewNotifications(_loggedInUser.Id);
             OnPropertyChanged("HasNewNotifications");
             NavigationService.Navigate(new OwnerNotificationsView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
+
 
 
     }
