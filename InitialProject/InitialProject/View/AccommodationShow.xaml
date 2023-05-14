@@ -179,6 +179,8 @@
                     HorizontalAlignment="Center"
                     Background="LightGray"
                     BorderBrush="LightSlateGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationRatingFormPage"
                     Content="Forum"
                     ToolTip="Open and start the forum" />
                 <Grid
