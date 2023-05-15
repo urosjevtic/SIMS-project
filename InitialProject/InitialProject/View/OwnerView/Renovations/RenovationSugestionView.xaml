@@ -1,17 +1,18 @@
-﻿<Page x:Class="InitialProject.View.OwnerView.MyAccommodations.MyAccommodationsListView"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
-        mc:Ignorable="d"
-        Title="MyAccommodationsListView" Height="637" Width="345">
+﻿<Page x:Class="InitialProject.View.OwnerView.Renovations.RenovationSugestionView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
+      mc:Ignorable="d" 
+      Title="RenovationSugestionView" Height="637" Width="345">
     <Page.Background>
         <SolidColorBrush Color="lightgray" />
     </Page.Background>
     <Page.Resources>
+        <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
+        <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
 
             <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
@@ -47,6 +48,7 @@
         </Style>
 
 
+
         <!--Naslovi-->
         <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="30"/>
@@ -66,6 +68,7 @@
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
+
         </Grid.RowDefinitions>
 
         <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
@@ -73,10 +76,11 @@
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="My Accommodations" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Renovation sugestions" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" Text="Suggestion for renovations" VerticalAlignment="Bottom"></TextBlock>
 
-        <ListBox Grid.Row="2" x:Name="accommodationListBox"
-                 ItemsSource="{Binding Accommodations}"
+        <ListBox Grid.Row="2" x:Name="sugestionsListBox"
+                 ItemsSource="{Binding Recommendations}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
                  Background="LightGray"
@@ -108,57 +112,45 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
-                            <TextBlock Text="{Binding Name}" 
+                            <!--Accommodation name-->
+                            <TextBlock Text="{Binding Reservation.Accommodation.Name}" 
                            FontWeight="Bold"
                            FontSize="20"
                            TextWrapping="Wrap"
                            Margin="10,10,10,0"/>
-
+                            <!--Location-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="Country: " 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Location.Country}" />
+                                <TextBlock Text="{Binding Reservation.Accommodation.Country}" />
                                 <TextBlock Margin="10,0" Text="City: " 
                                FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Location.City}" />
                             </StackPanel>
-
+                            <!--Sugestion-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Accommodation type: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Type}" />
+                                <TextBlock Text="{Binding Recommendation}" 
+                                           Margin="0,0,5,0"/>
                             </StackPanel>
-
+                            <!--Renovation urgency-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Max number of guests: " 
+                                <TextBlock Text="Renovation urgency: " 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding MaxGuests}" />
+                                <TextBlock Text="{Binding UrgencyLevel}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
-                                <TextBlock Text="Minimum reservation days: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding MinReservationDays}" />
+                            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="Proceed" Style="{StaticResource ConfirmButtonStyle}" 
+                                        Margin="10, 5"
+                                        Command="{Binding DataContext.ScheduleRenovationCommand, ElementName=sugestionsListBox}"
+                                        CommandParameter="{Binding}" Width="120"/>
+                                <Button Content="Delete" Style="{StaticResource ConfirmButtonStyle}" 
+                                        Margin="10, 5"
+                                        Command="{Binding DataContext.DeleteSugestionCommand, ElementName=sugestionsListBox}"
+                                        CommandParameter="{Binding}" Width="120"/>
                             </StackPanel>
-
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
-                                <TextBlock Text="Cancellation period: " 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding CancelationPeriod}" />
-                            </StackPanel>
-
-                            <Button Content="See images"
-                        Margin="10,15"
-                        Grid.Row="6"
-                        Style="{StaticResource LogInButtonStyle}"
-                        Command="{Binding DataContext.SeeImagesCommand, ElementName=accommodationListBox}"
-                        CommandParameter="{Binding}"/>
                         </Grid>
                     </Border>
                 </DataTemplate>

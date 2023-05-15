@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Reservations"
         mc:Ignorable="d"
-        Title="ReservationsMainView" Height="637" Width="356">
+        Title="ReservationsMainView" Height="637" Width="345">
     <Page.Background>
         <SolidColorBrush Color="#fafafa" />
     </Page.Background>
     <Page.Resources>
         <!--LogIn button style-->
+
         <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
+
             <Setter Property="Background" Value="#3A3D55"/>
             <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fafafa"/>
+            <Setter Property="Foreground" Value="#fff"/>
             <!-- set the text color of the button -->
             <Setter Property="FontSize" Value="20"/>
             <!-- set the font size of the button -->
@@ -22,15 +24,29 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}">
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
+                                              VerticalAlignment="Center"/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <!-- set the background color when the mouse is over the button -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#004F8E"/>
+                                <!-- set the background color when the button is pressed -->
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
+
 
 
         <!--Naslovi-->

@@ -47,6 +47,8 @@ namespace InitialProject.ViewModels
             _checkPointService = new CheckPointService();
             _tourService = new TourService();  
             _notificationService = new NotificationService();
+            //_guideMainWindow = new GuideMainViewModel(user);
+
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             AddImageCommand = new RelayCommand(AddImage);
