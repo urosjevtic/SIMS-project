@@ -19,21 +19,19 @@ namespace InitialProject.Domain.Model.Notifications
 
         public int UnradtedGuestsCount { get; set; }
 
-        public bool NewNotification { get; set; }
 
         public OwnerNotification()
         {
             Owner = new Owner();
         }
 
-        public OwnerNotification(Owner owner, int reservationReschedulingCount, int renovationRecommendationCount, int forumNotificationCount, int unradtedGuestsCount, bool newNotification)
+        public OwnerNotification(Owner owner, int reservationReschedulingCount, int renovationRecommendationCount, int forumNotificationCount, int unradtedGuestsCount)
         {
             Owner = owner;
             ReservationReschedulingCount = reservationReschedulingCount;
             RenovationRecommendationCount = renovationRecommendationCount;
             ForumNotificationCount = forumNotificationCount;
             UnradtedGuestsCount = unradtedGuestsCount;
-            NewNotification = newNotification;
         }
 
         public string[] ToCSV()
@@ -41,7 +39,7 @@ namespace InitialProject.Domain.Model.Notifications
             string[] csvValues =
             {
                 Owner.Id.ToString(), ReservationReschedulingCount.ToString(), RenovationRecommendationCount.ToString(),
-                ForumNotificationCount.ToString(), UnradtedGuestsCount.ToString(), NewNotification.ToString()
+                ForumNotificationCount.ToString(), UnradtedGuestsCount.ToString()
             };
 
             return csvValues;
@@ -54,7 +52,6 @@ namespace InitialProject.Domain.Model.Notifications
             RenovationRecommendationCount = Convert.ToInt32(values[2]);
             ForumNotificationCount = Convert.ToInt32(values[3]);
             UnradtedGuestsCount = Convert.ToInt32(values[4]);
-            NewNotification = Convert.ToBoolean(values[5]);
 
         }
     }

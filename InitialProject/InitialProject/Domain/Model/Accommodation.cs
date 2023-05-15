@@ -20,6 +20,8 @@ namespace InitialProject.Domain.Model
         public int CancelationPeriod { get; set; }
         public Image Images { get; set; }
 
+        public bool IsRecentlyRenovated {get; set; }
+
 
         public Accommodation()
         {
@@ -28,7 +30,7 @@ namespace InitialProject.Domain.Model
             Images = new Image();
         }
 
-        public Accommodation(int id, User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, Image images)
+        public Accommodation(int id, User owner, string name, Location location, AccommodationType type, int maxGuests, int minReservationDays, int cancelationPeriod, Image images, bool isRecentlyRenovated)
         {
             Id = id;
             Owner = owner;
@@ -39,11 +41,12 @@ namespace InitialProject.Domain.Model
             MinReservationDays = minReservationDays;
             CancelationPeriod = cancelationPeriod;
             Images = images;
+            IsRecentlyRenovated = isRecentlyRenovated;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString(), Images.Id.ToString() };
+            string[] csvValues = { Id.ToString(), Owner.Id.ToString(), Name, Location.Id.ToString(), Type.ToString(), MaxGuests.ToString(), MinReservationDays.ToString(), CancelationPeriod.ToString(), Images.Id.ToString(), IsRecentlyRenovated.ToString() };
             return csvValues;
         }
 
@@ -69,6 +72,7 @@ namespace InitialProject.Domain.Model
             MinReservationDays = Convert.ToInt32(values[6]);
             CancelationPeriod = Convert.ToInt32(values[7]);
             Images.Id = Convert.ToInt32(values[8]);
+            IsRecentlyRenovated = Convert.ToBoolean(values[9]);
 
         }
         public string Concatenate()

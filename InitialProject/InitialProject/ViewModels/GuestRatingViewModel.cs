@@ -21,8 +21,8 @@ namespace InitialProject.ViewModels
         
         public GuestRatingViewModel(NavigationService navigationService)
         {
-            _ratedGuestService = new RatedGuestService();
-            Ratings = new ObservableCollection<RatedGuest>(_ratedGuestService.GetFilteredRatingsByAccommodationId());
+           _ratedGuestService = new RatedGuestService();
+            Ratings = new ObservableCollection<RatedGuest>(_ratedGuestService.GetAll());
             NavigationService = navigationService;
         } 
     }

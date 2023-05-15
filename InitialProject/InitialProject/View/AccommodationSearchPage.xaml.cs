@@ -37,49 +37,49 @@ namespace InitialProject.View
         {
             this.DataContext = new AccommodationSearchViewModel(this.NavigationService); 
         }
-        private bool IsDaysDigit()
-        {
-            if (!IsDigitsOnly(tbReservationDays.Text))
-            {
-                string sMessageBoxText = $"Number of days field must contain only digits!";
+        //private bool IsDaysDigit()
+        //{
+        //    if (!IsDigitsOnly(tbReservationDays.Text))
+        //    {
+        //        string sMessageBoxText = $"Number of days field must contain only digits!";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
-                string sCaption = "Input error: Number of days";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return false;
-            }
+        //        string sCaption = "Input error: Number of days";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return false;
+        //    }
 
-            return true;
-        }
-        private bool IsGuestDigit()
-        {
-            if (!IsDigitsOnly(tbGuestNumber.Text))
-            {
-                string sMessageBoxText = $"Number of guest field must contain only digits!";
+        //    return true;
+        //}
+        //private bool IsGuestDigit()
+        //{
+        //    if (!IsDigitsOnly(tbGuestNumber.Text))
+        //    {
+        //        string sMessageBoxText = $"Number of guest field must contain only digits!";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
-                string sCaption = "Input error: Number of guest";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return false;
-            }
+        //        string sCaption = "Input error: Number of guest";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return false;
+        //    }
 
-            return true;
-        }
-        private bool IsDigitsOnly(string str)
-        {
-            return str.All(c => c >= '0' && c <= '9');
-        }
-        private bool CheckConditions()
-        {
-            if (!IsGuestDigit()) return false;
+        //    return true;
+        //}
+        //private bool IsDigitsOnly(string str)
+        //{
+        //    return str.All(c => c >= '0' && c <= '9');
+        //}
+        //private bool CheckConditions()
+        //{
+        //    if (!IsGuestDigit()) return false;
 
-            if (!IsDaysDigit()) return false;
+        //    if (!IsDaysDigit()) return false;
 
-            return true;
-        }
+        //    return true;
+        //}
     }
 }

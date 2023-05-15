@@ -63,5 +63,21 @@ namespace InitialProject.Repository.AccommodationRepo
             _accommodations = _serializer.FromCSV(FilePath);
             return _accommodations.FirstOrDefault(a => a.Id == accommodationId);
         }
+
+        public void Update(Accommodation newAccommodation)
+        {
+            _accommodations = _serializer.FromCSV(FilePath);
+            foreach (var accommodation in _accommodations)
+            {
+                if (accommodation.Id == newAccommodation.Id)
+                {
+                    _accommodations.Remove(accommodation);
+                    _accommodations.Add(newAccommodation);
+                    break;
+                }
+            }
+
+            _serializer.ToCSV(FilePath, _accommodations);
+        }
     }
 }

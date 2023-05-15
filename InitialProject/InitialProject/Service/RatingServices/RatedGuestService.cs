@@ -16,18 +16,19 @@ namespace InitialProject.Service
         private readonly IRatedGuestRepository _ratedGuestRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
         private readonly RatedOwnerService _ratedOwnerService;
+        private readonly RatedGuestService _ratedGuestService;
 
-        public RatedGuestService() 
+        public RatedGuestService()
         {
             _ratedGuestRepository = Injector.Injector.CreateInstance<IRatedGuestRepository>();
             _accommodationReservationService = new AccommodationReservationService();
-            _ratedOwnerService = new RatedOwnerService();
+           //_ratedOwnerService = new RatedOwnerService();
         }
 
         public List<RatedGuest> GetAll()
         {
             return _ratedGuestRepository.GetAll();
-        } 
+        }
 
         public RatedGuest Get(int id)
         {
@@ -35,10 +36,10 @@ namespace InitialProject.Service
             return ratedGuests.FirstOrDefault(r => r.Id == id);
         }
 
-        public List<RatedGuest> GetFilteredRatingsByAccommodationId()
-        {
-            return FilterRatedOwnerRatings();
-        }
+        //public List<RatedGuest> GetFilteredRatingsByAccommodationId()
+        //{
+        //    return FilterRatedOwnerRatings();
+        //}
 
         //private List<RatedGuest> FilterRatedOwnerRatings(int accommodationId)
         //{
@@ -53,29 +54,58 @@ namespace InitialProject.Service
 
         //    return filteredRatings;
         //}
-        private List<RatedGuest> FilterRatedOwnerRatings()
-        {
-            List<RatedGuest> filteredRatings = new List<RatedGuest>();
-            List<RatedGuest> allRatings = _ratedGuestRepository.GetAll();
-            BindReservationToRating(allRatings);
-            foreach (var rating in allRatings)
-            {
-                if(CheckIfOwnerRated(rating))
-                    filteredRatings.Add(rating);
-            }
+        //private List<RatedGuest> FilterRatedOwnerRatings()
+        //{
+        //    List<RatedGuest> filteredRatings = new List<RatedGuest>();
+        //    List<RatedGuest> allRatings = _ratedGuestRepository.GetAll();
+        //    BindReservationToRating(allRatings);
+        //    foreach (var rating in allRatings)
+        //    {
+        //        if(CheckIfOwnerRated(rating))
+        //            filteredRatings.Add(rating);
+        //    }
 
-            return filteredRatings;
+        //    return filteredRatings;
+        //}
+
+        //private bool CheckIfOwnerRated(RatedGuest rating)
+        //{
+        //    foreach (var ratedOwner in _ratedOwnerService.GetAll())
+        //    {
+        //        if (ratedOwner.Reservation.Id == rating.Reservation.Id)
+        //            return true;
+        //    }
+        //    return false;
+        //}
+        //private bool CheckIfOwnerRated(List<RatedGuest> rating)
+        //{
+        //    foreach (var ratedOwner in _ratedOwnerService.GetAll())
+        //    {
+        //        foreach ()
+        //        {
+        //        if (ratedOwner.Reservation.Id == rating.Reservation.Id)
+        //            return true;
+
+        //        }
+        //    }
+        //    return false;
+        //}
+
+        public List<RatedGuest> Rating()
+        {
+            foreach (var owner in _ratedOwnerService.GetAll())
+            {
+                foreach (var guest in _ratedGuestService.GetAll())
+                {
+                    if (owner.Reservation.Id == guest.Reservation.Id)
+                    {
+                        Rating().Add(guest);
+                    }
+                }
+            }
+            return Rating();
         }
 
-        private bool CheckIfOwnerRated(RatedGuest rating)
-        {
-            foreach (var ratedOwner in _ratedOwnerService.GetAll())
-            {
-                if (ratedOwner.Reservation.Id == rating.Reservation.Id)
-                    return true;
-            }
-            return false;
-        }
 
         private void BindReservationToRating(List<RatedGuest> ratings)
         {

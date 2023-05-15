@@ -7,6 +7,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Users;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Utilities;
 
 namespace InitialProject.ViewModels
@@ -14,7 +16,7 @@ namespace InitialProject.ViewModels
     public class MainWindowViewModel
     {
         private NavigationService _navigationService;
-
+        public SuperGuestService _superGuestService;
         public ICommand NavigateCommand => new RelayCommand<string>(OnNavigateTo);
         public ICommand NavigateBackCommand => new RelayCommand(OnNavigateBack);
         public ICommand ShowWizardCommand => new RelayCommand(OnShowWizard);
@@ -26,8 +28,9 @@ namespace InitialProject.ViewModels
         ////    throw new NotImplementedException();
         ////}
 
-        public User LoggedUser { get; set; } = App.LoggedUser;      
-
+        public User LoggedUser { get; set; } = App.LoggedUser;
+        //public Guest Bonus { get; set; } //= _superGuestService.GetNumberOfPoints(LoggedUser.Id);
+        int bonus;
         public MainWindowViewModel()
         {
             
@@ -36,7 +39,8 @@ namespace InitialProject.ViewModels
         public MainWindowViewModel(NavigationService navigationService)
         {
             _navigationService = navigationService;
-        }
+            //bonus = _superGuestService.GetNumberOfPoints(App.LoggedUser.Id);
+         }
 
         private void OnNavigateTo(string destinationPage)
         {

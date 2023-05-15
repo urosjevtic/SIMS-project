@@ -6,7 +6,7 @@
         xmlns:val="clr-namespace:InitialProject.Validation"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
         mc:Ignorable="d"
-        Title="ScheduleRenovationFormView" Height="637" Width="356">
+        Title="ScheduleRenovationFormView" Height="637" Width="345">
     <Page.Background>
         <SolidColorBrush Color="lightgray" />
     </Page.Background>
@@ -173,7 +173,7 @@
                 <ComboBox Width="100" 
                           x:Name="selectedAvailableDate"
                           ItemsSource="{Binding AvailableDates, UpdateSourceTrigger=PropertyChanged}"
-                          ItemStringFormat="{}{0:MM}"
+                          ItemStringFormat="{}{0:dd/MM/yyyy}"
                           IsEditable="False">
                     <ComboBox.SelectedItem>
                         <Binding Path="SelectedStartDate">

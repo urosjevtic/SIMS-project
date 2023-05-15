@@ -81,7 +81,7 @@ namespace InitialProject.View
         {
             if (SelectedReservation != null)
             {
-                if (SelectedReservation.StartDate.AddDays(-SelectedReservation.Accommodation.CancelationPeriod) >= DateTime.Now)
+                if (SelectedReservation.StartDate.AddDays(SelectedReservation.Accommodation.CancelationPeriod) >= DateTime.Now)
                 {
                     _canceledResrvationsRepository.SaveCanceledReservation(SelectedReservation);
                     _accommodationReservationRepository.Delete(SelectedReservation);

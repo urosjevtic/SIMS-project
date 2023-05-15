@@ -238,7 +238,9 @@
                         HorizontalAlignment="Center"
                         Content="Super guest" />
                     <CheckBox
+                        x:Name="cbSuperGuest"
                         Grid.Row="2"
+                        IsChecked="True"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Margin="0,5,0,5"
@@ -253,6 +255,14 @@
                         Margin="0,5,0,5"
                         HorizontalAlignment="Center"
                         Content="Number of points" />
+                    <Label
+                        Name="NumberPointsLabel"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Width="100"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="{Binding bonus}" />
                 </Grid>
                 <Button
                     Name="SignOutButton"

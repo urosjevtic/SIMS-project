@@ -82,7 +82,7 @@
                     <TextBlock Padding="5">My accommodation</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Grid.Row="2" Command="{Binding NotificationOpenCommand}" Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/notification.png" Width="20"/>
                     <TextBlock Padding="5">Notifications</TextBlock>
@@ -118,7 +118,7 @@
                     <TextBlock Padding="5">Settings</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="8"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
+            <Button Grid.Row="8" Command="{Binding NotesOpenCommand}" Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/notes.png" Width="20"/>
                     <TextBlock Padding="5">Notes</TextBlock>

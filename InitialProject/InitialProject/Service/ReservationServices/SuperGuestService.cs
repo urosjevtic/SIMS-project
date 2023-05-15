@@ -21,11 +21,20 @@ namespace InitialProject.Domain.Model.Reservations
                 return true;
             return false;
         }
-        private int ReservationsCount(int guestId)
+        public int ReservationsCount(int guestId)
         {
             List<AccommodationReservation> reservation = _accommodationReservationService.GetAllReservationByGuestId(guestId);
             return reservation.Count();
         }
-
+        public int GetNumberOfPoints(int guestId)
+        {
+            int point;
+            if(ReservationsCount(guestId) > 5)
+            {
+                point = 5;
+            }
+            point = 0;
+            return point;
+        }
     }
 }

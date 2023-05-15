@@ -39,7 +39,9 @@ namespace InitialProject.Service.RenovationServices
         {
             List<RenovationRecommendation> allRecommendations = _renovationRecommendationRepository.GetAll();
             List<RenovationRecommendation> recommendationByGuestId = new List<RenovationRecommendation>();
-            BindReservationToRecommendation(allRecommendations, guestId);
+
+            BindReservationToRecommendation(allRecommendations);
+
             foreach (var recommendation in allRecommendations)
             {
                 if (recommendation.Reservation.User.Id == guestId)
@@ -51,10 +53,32 @@ namespace InitialProject.Service.RenovationServices
             return recommendationByGuestId;
         }
 
+//<<<<<<< HEAD
 
-        private void BindReservationToRecommendation(List<RenovationRecommendation> recommendations, int guestId)
+//        private void BindReservationToRecommendation(List<RenovationRecommendation> recommendations, int guestId)
+//        {
+//            List<AccommodationReservation> reservations = _accommodationReservationService.GetAllReservationByGuestId(guestId);
+//=======
+        public List<RenovationRecommendation> GetByOwnerId(int ownerId)
         {
-            List<AccommodationReservation> reservations = _accommodationReservationService.GetAllReservationByGuestId(guestId);
+            List<RenovationRecommendation> allRecommendations = _renovationRecommendationRepository.GetAll();
+            List<RenovationRecommendation> recommendationByOwnerId = new List<RenovationRecommendation>();
+            BindReservationToRecommendation(allRecommendations);
+            foreach (var recommendation in allRecommendations)
+            {
+                if (recommendation.Reservation.Accommodation.Owner.Id == ownerId)
+                {
+                    recommendationByOwnerId.Add(recommendation);
+                }
+            }
+
+            return recommendationByOwnerId;
+        }
+
+        private void BindReservationToRecommendation(List<RenovationRecommendation> recommendations)
+        {
+            List<AccommodationReservation> reservations = _accommodationReservationService.GetAll();
+
 
             foreach (var recommendation in recommendations)
             {
@@ -89,4 +113,6 @@ namespace InitialProject.Service.RenovationServices
         }
 
     }
+
 }
+

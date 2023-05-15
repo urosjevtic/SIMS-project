@@ -15,9 +15,11 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
         public AccommodationReservation Reservation { get; set; }
         public string Recommendation { get; set; }
         public int UrgencyLevel { get; set; }
+
         public RenovationRecommendation() 
         {
             Reservation = new AccommodationReservation();    
+
         }
         public RenovationRecommendation(int id, AccommodationReservation reservation, string recommendation, int urgencyLevel)
         {

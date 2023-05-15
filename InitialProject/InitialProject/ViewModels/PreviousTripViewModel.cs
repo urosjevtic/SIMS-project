@@ -1,23 +1,14 @@
-﻿using InitialProject.Domain.Model;
-using InitialProject.Domain.Model.Reservations;
+﻿using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service;
-using InitialProject.Service.ReservationServices;
 using InitialProject.Utilities;
 using InitialProject.View;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
-    class PreviousTripViewModel
+    class PreviousTripViewModel : BaseViewModel
     {
         public ObservableCollection<UnratedOwner> UnratedOwners { get; set; }
         private readonly UnratedOwnerService _unratedOwnerService;

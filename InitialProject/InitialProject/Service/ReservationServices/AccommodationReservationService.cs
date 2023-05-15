@@ -100,6 +100,7 @@ namespace InitialProject.Service.ReservationServices
 
 
         private void BindAccommodationToReservations(List<Domain.Model.Reservations.AccommodationReservation> reservations)
+
         {
             var accommodationsById = _accommodationService.GetAll().ToDictionary(a => a.Id);
 

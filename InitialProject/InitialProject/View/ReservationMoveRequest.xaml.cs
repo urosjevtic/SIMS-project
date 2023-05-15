@@ -1,4 +1,6 @@
 ﻿using InitialProject.Domain.Model.Reservations;
+using InitialProject.Repository.ReservationRepo;
+using InitialProject.Service.ReservationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,15 +22,22 @@ namespace InitialProject.View
     /// </summary>
     public partial class ReservationMoveRequest : Window
     {
-
-        public ReservationMoveRequest(AccommodationReservation selectedAccommodation)
+        private readonly AccommodationReservationRepository _accommodationReservationRepository;
+        private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
+        public AccommodationReservation SelectedReservation;
+        public ReservationMoveRequest(AccommodationReservation selectedReservation)
         {
             InitializeComponent();
+            SelectedReservation = selectedReservation;
+            _accommodationReservationRepository = new AccommodationReservationRepository();
         }
-
+        
         private void MoveButton_Click(object sender, RoutedEventArgs e)
         {
-
+           // _accommodationReservationRescheduleRequestService.Create(SelectedReservation, dpNewStartDate.SelectedDate.Value, dpNewEndDate.SelectedDate.Value, "pending");
+            MessageBox.Show("You have sent a move request");
+           // _accommodationReservationRescheduleRequestService.Delete(SelectedReservation);
+            this.Close();
         }
     }
 }

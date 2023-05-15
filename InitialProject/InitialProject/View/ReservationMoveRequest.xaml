@@ -6,7 +6,7 @@
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     Width="400"
-    Height="270"
+    Height="330"
     mc:Ignorable="d">
     <Grid>
         <Grid>
@@ -46,28 +46,11 @@
                         Width="150"
                         Height="30"
                         Margin="0,0,0,20"
-                        HorizontalAlignment="Left"
                         FontSize="15"
-                        Text="{Binding User.Username}"
+                        Text="{Binding Accommodation.Name}"
                         TextAlignment="Left" />
-                    <TextBox
-                        Name="tbNewStartDate"
-                        Width="150"
-                        Height="30"
-                        Margin="0,0,0,20"
-                        HorizontalAlignment="Left"
-                        FontSize="15"
-                        Text="{Binding Path=RescheduleStartDate, UpdateSourceTrigger=PropertyChanged}"
-                        TextAlignment="Left" />
-                    <TextBox
-                        Name="tbNewEndDate"
-                        Width="150"
-                        Height="30"
-                        Margin="0,0,0,15"
-                        HorizontalAlignment="Left"
-                        FontSize="15"
-                        Text="{Binding Path=RescheduleStartDate, UpdateSourceTrigger=PropertyChanged}"
-                        TextAlignment="Left" />
+                    <DatePicker Name="dpNewStartDate"/>
+                    <DatePicker Name="dpNewEndDate" Margin="0,30,0,0"/>
                 </StackPanel>
             </StackPanel>
             <Button

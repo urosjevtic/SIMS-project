@@ -5,7 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
         mc:Ignorable="d"
-        Title="GuestRatingFormView" Height="700" Width="356">
+        Title="GuestRatingFormView" Height="637" Width="345">
+    <Page.Background>
+        LightGray
+    </Page.Background>
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
             <StackPanel>
@@ -49,6 +52,14 @@
             </Setter>
         </Style>
 
+        <!--Naslovi-->
+        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#3A3D55"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
 
     </Page.Resources>
     <Grid>
@@ -59,46 +70,46 @@
             <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="Black" FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Left" />
-        <TextBlock Grid.Row="1" Text="Rate a Guest" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" Foreground="#3A3D55" BorderThickness="0"  FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Left" />
+        <TextBlock Grid.Row="1" Text="Rate a Guest" Style="{StaticResource TitleStyle}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <Grid Grid.Row="2" HorizontalAlignment="Center" Margin="0,20,0,71">
             <StackPanel Margin="0,42,0,0">
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
-                    <TextBlock Text="Guest username: " FontWeight="Bold" Margin="0 0 5 0" />
-                    <TextBlock Text="{Binding UnratedGuest.Reservation.User.Username}" />
+                    <TextBlock Text="Guest username: " Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding UnratedGuest.Reservation.User.Username}" Foreground="#3A3D55" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
-                    <TextBlock Text="Stayed at: " FontWeight="Bold" Margin="0 0 5 0" />
-                    <TextBlock Text="{Binding UnratedGuest.Reservation.Accommodation.Name}" />
+                    <TextBlock Text="Stayed at: " Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding UnratedGuest.Reservation.Accommodation.Name}" Foreground="#3A3D55" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="From: " FontWeight="Bold" Margin="0 0 5 0" />
-                        <TextBlock Text="{Binding UnratedGuest.Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                        <TextBlock Text="From: " Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding UnratedGuest.Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" Foreground="#3A3D55" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                        <TextBlock Text="To: " FontWeight="Bold" Margin="0 0 5 0" />
-                        <TextBlock Text="{Binding UnratedGuest.Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                        <TextBlock Text="To: " Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding UnratedGuest.Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" Foreground="#3A3D55"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <TextBlock Text="Cleanliness: " VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <TextBlock Text="Cleanliness: " Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                     <Slider x:Name="CleanlinessSlider" Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Width="150" Margin="26.5 0 0 0" />
                     <TextBlock Text="{Binding ElementName=CleanlinessSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <TextBlock Text="Rule following: " VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <TextBlock Text="Rule following: " Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                     <Slider x:Name="RuleFollowingSlider" Value="{Binding RuleFollowingRating, UpdateSourceTrigger=PropertyChanged}" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Width="150" Margin="10 0 0 0" />
                     <TextBlock Text="{Binding ElementName=RuleFollowingSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <TextBlock Text="Additional comment: " VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <TextBlock Text="Additional comment: " Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                 </StackPanel>
                 <TextBox x:Name="AdditionalCommentTextBox" Text="{Binding AdditionalComment, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Auto" Height="90" Width="239"/>
             </StackPanel>

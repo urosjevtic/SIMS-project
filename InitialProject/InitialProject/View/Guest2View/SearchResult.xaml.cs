@@ -29,11 +29,11 @@ namespace InitialProject.View.Guest2View
     {
         public SearchResultViewModel SearchResultViewModel { get; set; }
         public User LoggedUser { get; set; }
-        public SearchResult(List<Tour> filteredTours, User user)
+        public SearchResult(User user, Tour tour)
         {
             InitializeComponent();
             LoggedUser = user;
-            SearchResultViewModel = new SearchResultViewModel(LoggedUser, filteredTours);
+            SearchResultViewModel = new SearchResultViewModel(LoggedUser, tour);
             this.DataContext = SearchResultViewModel;
         }
     }

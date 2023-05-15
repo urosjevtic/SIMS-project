@@ -37,6 +37,7 @@
                             <sys:Int32>2021</sys:Int32>
                             <sys:Int32>2020</sys:Int32>
                             <sys:Int32>2019</sys:Int32>
+                            <sys:Int32>20192023</sys:Int32>
                         </x:Array>
                     </ComboBox.ItemsSource>
                 </ComboBox>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Automation;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Repository;
@@ -15,6 +16,7 @@ namespace InitialProject.Service.ReservationServices
     {
         private readonly IAccommodationReservationRescheduleRequestRepository _accommodationReservationRescheduleRequestRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
+       // private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
 
 
         public AccommodationReservationRescheduleRequestService()
@@ -94,6 +96,21 @@ namespace InitialProject.Service.ReservationServices
             return _accommodationReservationService.Create(reservationId, newStartDate, newEndDate, userId, accommodationId, guestNumber);
         }
 
+        public AccommodationReservationRescheduleRequest Create(AccommodationReservation Id, DateTime startDate, DateTime endDate, string status)
+        {
+            AccommodationReservationRescheduleRequest newRequest = new AccommodationReservationRescheduleRequest();
+            newRequest.Reservation = Id;
+            newRequest.RescheduleStartDate = startDate;
+            newRequest.RescheduleEndDate = endDate;
+            newRequest.Status = GetType(status);
+
+            return newRequest;
+        }
+    
+        private RescheduleStatus GetType(string status)
+        {
+                    return RescheduleStatus.pending;
+        }
         public void DeclineReschedule(AccommodationReservationRescheduleRequest rescheduleRequest)
         {
 

@@ -25,7 +25,12 @@ namespace InitialProject.View
         public GuestRatingView(NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new GuestRatingViewModel(navigationService);
+            //DataContext = new GuestRatingViewModel(navigationService);
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.DataContext = new GuestRatingViewModel(this.NavigationService);
         }
     }
 }

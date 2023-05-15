@@ -26,7 +26,7 @@ namespace InitialProject.Domain.Model.Reservations
         }
         public User User { get; set; }
         public bool IsRated { get; set; }
-        public int broj;
+        //public int broj;
         public AccommodationReservation()
         {
             Accommodation = new Accommodation();

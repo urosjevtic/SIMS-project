@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
+using InitialProject.ViewModels.Guest2ViewModel;
 
 namespace InitialProject.View.Guest2View
 {
@@ -19,9 +21,12 @@ namespace InitialProject.View.Guest2View
     /// </summary>
     public partial class ShowNotifications : Window
     {
-        public ShowNotifications()
+        public ShowNotificationsViewModel showNotificationsViewModel { get; set; }
+        public ShowNotifications(User user)
         {
             InitializeComponent();
+            showNotificationsViewModel = new ShowNotificationsViewModel(user);
+            this.DataContext = showNotificationsViewModel;
         }
     }
 }
