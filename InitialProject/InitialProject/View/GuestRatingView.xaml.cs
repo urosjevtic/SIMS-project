@@ -1,4 +1,5 @@
-﻿using InitialProject.Domain.Model.Reservations;
+﻿using InitialProject.ViewModels;
+using InitialProject.ViewModels.RatingsViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,24 +12,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for ReservationMoveRequest.xaml
+    /// Interaction logic for GuestRatingView.xaml
     /// </summary>
-    public partial class ReservationMoveRequest : Window
+    public partial class GuestRatingView : Page
     {
-
-        public ReservationMoveRequest(AccommodationReservation selectedAccommodation)
+        public GuestRatingView(NavigationService navigationService)
         {
             InitializeComponent();
-        }
-
-        private void MoveButton_Click(object sender, RoutedEventArgs e)
-        {
-
+            DataContext = new GuestRatingViewModel(navigationService);
         }
     }
 }

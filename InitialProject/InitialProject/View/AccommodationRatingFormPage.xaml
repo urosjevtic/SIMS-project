@@ -145,10 +145,19 @@
                     ToolTip="Rate the correctness of the owner"
                     Value="{Binding UrgencyLevel, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock
-                    Margin="20,0,20,0"
+                    Width="300"
+                    Margin="20,0,0,0"
+                    HorizontalAlignment="Left"
                     Background="AliceBlue"
-                    Text="1 - It would be nice to renovate some small things, but everything          works as it should without it                                                                           2 - Small gripes with the accommodation that if removed would make             it perfect                                                                                                       3 - A few things that really bothered me should be renovated                     4 - There are a lot of bad things and renovation is really necessary                                                                                    5 - The accommodation is in a very bad condition and is not worth renting at all if you don't is renovating"
+                    Text="1 - It would be nice to renovate some small things, but everything works as it should without it                                                                           2 - Small gripes with the accommodation that if removed would make it perfect                                                                                                       3 - A few things that really bothered me should be renovated                                                                       4 - There are a lot of bad things and renovation is really necessary                                                                                    5 - The accommodation is in a very bad condition and is not worth renting at all if you don't is renovating"
                     TextWrapping="Wrap" />
+                <Button
+                    x:Name="btRecommendation"
+                    Width="180"
+                    Height="40"
+                    Margin="10,30,20,0"
+                    HorizontalAlignment="Center"
+                    Content="Leave a recommendation" />
             </StackPanel>
         </Grid>
     </Grid>

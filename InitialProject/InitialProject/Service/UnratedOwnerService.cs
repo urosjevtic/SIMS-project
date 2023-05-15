@@ -64,6 +64,19 @@ namespace InitialProject.Service
             return unratedOwnersByGuestId;
         }
 
+        private void BindResrvationToUnratedOwner(List<UnratedOwner> owners)
+        {
+            var reservationsById = _reservationService.GetAll().ToDictionary(a => a.Id);
+
+            foreach (var owner in owners)
+            {
+                if (reservationsById.TryGetValue(owner.Reservation.Id, out var reservation))
+                {
+                    owner.Reservation = reservation;
+                }
+            }
+        }
+
         private void ConnectReservationToUnratedOwner(UnratedOwner unratedOwner)
         {
             foreach (AccommodationReservation reservation in _reservationService.GetAll())
@@ -71,7 +84,7 @@ namespace InitialProject.Service
                 if (reservation.Id == unratedOwner.Reservation.Id)
                 {
                     unratedOwner.Reservation = reservation;
-                    break;
+                    //break;
                 }
             }
         }

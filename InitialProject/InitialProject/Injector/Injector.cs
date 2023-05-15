@@ -33,6 +33,7 @@ namespace InitialProject.Injector
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
             {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
             {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
+            {typeof(IUnratedOwnerRepository), new UnratedOwnerRepository()},
             {typeof(IOwnerRepository), new OwnerRepository()},
             {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
             {typeof(IVoucherRepository), new VoucherRepository()},

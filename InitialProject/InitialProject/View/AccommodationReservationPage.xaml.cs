@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.ViewModels;
@@ -49,7 +50,7 @@ namespace InitialProject.View
 
             _accommodationRepository = new AccommodationRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
-            _accommodationReservationRepository = new AccommodationReservationRepository();
+            //_accommodationReservationRepository = new AccommodationReservationRepository();
             ReservationDates = new ObservableCollection<AccommodationReservation>();
         }
 
@@ -74,377 +75,377 @@ namespace InitialProject.View
 
         int recursion = 0;
 
-        private void dpEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (dpEnd.SelectedDate < DateTime.Now.Date)
-            {
-                string sMessageBoxText = $"You have not chosen valid end date!";
-                string sCaption = "Input error: End date";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
-
-
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                dpEnd.SelectedDate = DateTime.Now.Date;
-            }
-
-        }
-
-        private void dpStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (dpStart.SelectedDate < DateTime.Now.Date)
-            {
-                string sMessageBoxText = $"You have not chosen valid start date!";
-                string sCaption = "Input error: Start date";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
-
-
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                dpStart.SelectedDate = DateTime.Now.Date;
-            }
-
-        }
-
-        private bool IsGuestsEmpty()
-        {
-            if (string.IsNullOrWhiteSpace(tbGuestNumber.Text))
-            {
-                string sMessageBoxText = $"Please enter number of guests.";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-                string sCaption = "Missing input";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return true;
-            }
-            return false;
-        }
-        private bool IsDaysEmpty()
-        {
-            if (string.IsNullOrWhiteSpace(tbReservationDays.Text))
-            {
-                string sMessageBoxText = $"Please enter number of days.";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-                string sCaption = "Missing input";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return true;
-            }
-            return false;
-        }
-        private bool IsDigitsOnly(string str)
-        {
-            return str.All(c => c >= '0' && c <= '9');
-        }
-
-        private bool IsGuestsDigit()
-        {
-            if (!IsDigitsOnly(tbGuestNumber.Text))
-            {
-                string sMessageBoxText = $"Number of guests field must contain only digits!";
-
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
-
-                string sCaption = "Input error: Number of guests";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool IsDaysDigit()
-        {
-            if (!IsDigitsOnly(tbReservationDays.Text))
-            {
-                string sMessageBoxText = $"Number of days field must contain only digits!";
+        //private void dpEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (dpEnd.SelectedDate < DateTime.Now.Date)
+        //    {
+        //        string sMessageBoxText = $"You have not chosen valid end date!";
+        //        string sCaption = "Input error: End date";
+
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+
+
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        dpEnd.SelectedDate = DateTime.Now.Date;
+        //    }
+
+        //}
+
+        //private void dpStart_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    if (dpStart.SelectedDate < DateTime.Now.Date)
+        //    {
+        //        string sMessageBoxText = $"You have not chosen valid start date!";
+        //        string sCaption = "Input error: Start date";
+
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+
+
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        dpStart.SelectedDate = DateTime.Now.Date;
+        //    }
+
+        //}
+
+        //private bool IsGuestsEmpty()
+        //{
+        //    if (string.IsNullOrWhiteSpace(tbGuestNumber.Text))
+        //    {
+        //        string sMessageBoxText = $"Please enter number of guests.";
+
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+        //        string sCaption = "Missing input";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+        //private bool IsDaysEmpty()
+        //{
+        //    if (string.IsNullOrWhiteSpace(tbReservationDays.Text))
+        //    {
+        //        string sMessageBoxText = $"Please enter number of days.";
+
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+        //        string sCaption = "Missing input";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return true;
+        //    }
+        //    return false;
+        //}
+        //private bool IsDigitsOnly(string str)
+        //{
+        //    return str.All(c => c >= '0' && c <= '9');
+        //}
+
+        //private bool IsGuestsDigit()
+        //{
+        //    if (!IsDigitsOnly(tbGuestNumber.Text))
+        //    {
+        //        string sMessageBoxText = $"Number of guests field must contain only digits!";
+
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+
+        //        string sCaption = "Input error: Number of guests";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
+
+        //private bool IsDaysDigit()
+        //{
+        //    if (!IsDigitsOnly(tbReservationDays.Text))
+        //    {
+        //        string sMessageBoxText = $"Number of days field must contain only digits!";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
-                string sCaption = "Input error: Number of days";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return false;
-            }
+        //        string sCaption = "Input error: Number of days";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool CheckMaxGuestsLimit(int numOfGuests)
-        {
-            if (numOfGuests > SelectedAccommodation.MaxGuests)
-            {
-                string sMessageBoxText = $"Maximum number of guests for this accommodation is {SelectedAccommodation.MaxGuests}!";
+        //private bool CheckMaxGuestsLimit(int numOfGuests)
+        //{
+        //    if (numOfGuests > SelectedAccommodation.MaxGuests)
+        //    {
+        //        string sMessageBoxText = $"Maximum number of guests for this accommodation is {SelectedAccommodation.MaxGuests}!";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
-                string sCaption = "Exceeded number of guests";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return false;
-            }
+        //        string sCaption = "Exceeded number of guests";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool CheckMinReservationLimit(int numOfDays)
-        {
-            if (numOfDays < SelectedAccommodation.MinReservationDays)
-            {
-                string sMessageBoxText = $"Minimal reservation for this accommodation is {SelectedAccommodation.MinReservationDays} days!";
+        //private bool CheckMinReservationLimit(int numOfDays)
+        //{
+        //    if (numOfDays < SelectedAccommodation.MinReservationDays)
+        //    {
+        //        string sMessageBoxText = $"Minimal reservation for this accommodation is {SelectedAccommodation.MinReservationDays} days!";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
-                string sCaption = "Minimal reservation limit";
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return false;
-            }
+        //        string sCaption = "Minimal reservation limit";
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool IsEndBeforeStart()
-        {
-            if (dpStart.SelectedDate > dpEnd.SelectedDate)
-            {
-                string sMessageBoxText = $"Start date cannot be before end date!";
-                string sCaption = "Date not valid";
+        //private bool IsEndBeforeStart()
+        //{
+        //    if (dpStart.SelectedDate > dpEnd.SelectedDate)
+        //    {
+        //        string sMessageBoxText = $"Start date cannot be before end date!";
+        //        string sCaption = "Date not valid";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
 
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                dpStart.SelectedDate = EndDate;
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        dpStart.SelectedDate = EndDate;
 
-                return true;
-            }
+        //        return true;
+        //    }
 
-            return false;
-        }
+        //    return false;
+        //}
 
-        private bool IsEndDateValid(double numOfDays)
-        {
-            if (StartDate.Date.AddDays(numOfDays) > EndDate.Date)
-            {
-                string sMessageBoxText = $"Chosen start and end date does not match entered numer of days!";
-                string sCaption = "Date not valid";
+        //private bool IsEndDateValid(double numOfDays)
+        //{
+        //    if (StartDate.Date.AddDays(numOfDays) > EndDate.Date)
+        //    {
+        //        string sMessageBoxText = $"Chosen start and end date does not match entered numer of days!";
+        //        string sCaption = "Date not valid";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
 
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                dpStart.SelectedDate = EndDate;
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        dpStart.SelectedDate = EndDate;
 
-                return false;
-            }
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
-        private bool CheckConditions()
-        {
-            if (IsGuestsEmpty()) return false;
+        //private bool CheckConditions()
+        //{
+        //    if (IsGuestsEmpty()) return false;
 
-            if (IsDaysEmpty()) return false;
+        //    if (IsDaysEmpty()) return false;
 
-            if (!IsGuestsDigit()) return false;
+        //    if (!IsGuestsDigit()) return false;
 
-            if (!IsDaysDigit()) return false;
+        //    if (!IsDaysDigit()) return false;
 
-            int numOfGuests = Convert.ToInt32(tbGuestNumber.Text);
+        //    int numOfGuests = Convert.ToInt32(tbGuestNumber.Text);
 
-            if (!CheckMaxGuestsLimit(numOfGuests)) return false;
+        //    if (!CheckMaxGuestsLimit(numOfGuests)) return false;
 
-            double numOfDays = Convert.ToDouble(tbReservationDays.Text);
+        //    double numOfDays = Convert.ToDouble(tbReservationDays.Text);
 
-            if (!CheckMinReservationLimit((int)numOfDays)) return false;
+        //    if (!CheckMinReservationLimit((int)numOfDays)) return false;
 
-            // Date check
-            if (IsEndBeforeStart()) return false;
+        //    // Date check
+        //    if (IsEndBeforeStart()) return false;
 
-            if (!IsEndDateValid(numOfDays)) return false;
+        //    if (!IsEndDateValid(numOfDays)) return false;
 
-            return true;
-        }
+        //    return true;
+        //}
 
 
 
 
 
 
-        private List<Domain.Model.Reservations.AccommodationReservation> GetReservationsInDateRange()
-        {
-            List<Domain.Model.Reservations.AccommodationReservation> reservations = new List<Domain.Model.Reservations.AccommodationReservation>(_accommodationReservationRepository.GetAll());
-            List<Domain.Model.Reservations.AccommodationReservation> reservationsInRange = new List<Domain.Model.Reservations.AccommodationReservation>();
+        //private List<Domain.Model.Reservations.AccommodationReservation> GetReservationsInDateRange()
+        //{
+        //    List<Domain.Model.Reservations.AccommodationReservation> reservations = new List<Domain.Model.Reservations.AccommodationReservation>(_accommodationReservationRepository.GetAll());
+        //    List<Domain.Model.Reservations.AccommodationReservation> reservationsInRange = new List<Domain.Model.Reservations.AccommodationReservation>();
 
-            foreach (var reservation in reservations)
-            {
-                if (reservation.AccommodationId == SelectedAccommodation.Id)
-                {
-                    if ((reservation.StartDate > EndDate) || (reservation.EndDate < StartDate))
-                        continue;
+        //    foreach (var reservation in reservations)
+        //    {
+        //        if (reservation.AccommodationId == SelectedAccommodation.Id)
+        //        {
+        //            if ((reservation.StartDate > EndDate) || (reservation.EndDate < StartDate))
+        //                continue;
 
-                    reservationsInRange.Add(reservation);
-                }
+        //            reservationsInRange.Add(reservation);
+        //        }
 
 
-            }
+        //    }
 
-            return reservationsInRange;
-        }
+        //    return reservationsInRange;
+        //}
 
 
 
 
-        private void SearchClick(object sender, RoutedEventArgs e)
-        {
-            StartDate = dpStart.SelectedDate.Value;
-            EndDate = dpEnd.SelectedDate.Value;
+        //private void SearchClick(object sender, RoutedEventArgs e)
+        //{
+        //    StartDate = dpStart.SelectedDate.Value;
+        //    EndDate = dpEnd.SelectedDate.Value;
 
-            if (!CheckConditions()) return;
+        //    if (!CheckConditions()) return;
 
-            double numOfDays = Convert.ToDouble(tbReservationDays.Text);
+        //    double numOfDays = Convert.ToDouble(tbReservationDays.Text);
 
-            double daysBetween = (dpEnd.SelectedDate.Value - dpStart.SelectedDate.Value).TotalDays;
+        //    double daysBetween = (dpEnd.SelectedDate.Value - dpStart.SelectedDate.Value).TotalDays;
 
 
-            ReservationDates.Clear();
+        //    ReservationDates.Clear();
 
-            while (true)
-            {
+        //    while (true)
+        //    {
 
-                List<Domain.Model.Reservations.AccommodationReservation> reservationsInRange = new List<Domain.Model.Reservations.AccommodationReservation>(GetReservationsInDateRange());
+        //        List<Domain.Model.Reservations.AccommodationReservation> reservationsInRange = new List<Domain.Model.Reservations.AccommodationReservation>(GetReservationsInDateRange());
 
-                var selectedDates = Enumerable
-                    .Range(0, int.MaxValue)
-                    .Select(index => new DateTime?(StartDate.AddDays(index)))
-                    .TakeWhile(date => date <= EndDate)
-                    .ToDictionary(date => date.Value.Date, date => true);
+        //        var selectedDates = Enumerable
+        //            .Range(0, int.MaxValue)
+        //            .Select(index => new DateTime?(StartDate.AddDays(index)))
+        //            .TakeWhile(date => date <= EndDate)
+        //            .ToDictionary(date => date.Value.Date, date => true);
 
 
-                foreach (var reservation in reservationsInRange)
-                {
-                    var reservationDates = Enumerable
-                        .Range(0, int.MaxValue)
-                        .Select(index => new DateTime?(reservation.StartDate.AddDays(index)))
-                        .TakeWhile(date => date <= reservation.EndDate)
-                        .ToList();
+        //        foreach (var reservation in reservationsInRange)
+        //        {
+        //            var reservationDates = Enumerable
+        //                .Range(0, int.MaxValue)
+        //                .Select(index => new DateTime?(reservation.StartDate.AddDays(index)))
+        //                .TakeWhile(date => date <= reservation.EndDate)
+        //                .ToList();
 
-                    foreach (var date in reservationDates)
-                    {
-                        if (selectedDates.ContainsKey(date.Value.Date))
-                        {
-                            selectedDates[date.Value.Date] = false;
-                        }
-                    }
+        //            foreach (var date in reservationDates)
+        //            {
+        //                if (selectedDates.ContainsKey(date.Value.Date))
+        //                {
+        //                    selectedDates[date.Value.Date] = false;
+        //                }
+        //            }
 
-                }
+        //        }
 
-                foreach (var date in selectedDates)
-                {
-                    if (date.Value == false)
-                    {
-                        continue;
-                    }
+        //        foreach (var date in selectedDates)
+        //        {
+        //            if (date.Value == false)
+        //            {
+        //                continue;
+        //            }
 
-                    if (date.Key.AddDays(numOfDays) > EndDate)
-                    {
-                        break;
-                    }
+        //            if (date.Key.AddDays(numOfDays) > EndDate)
+        //            {
+        //                break;
+        //            }
 
-                    if (selectedDates[date.Key.AddDays(numOfDays)] == false)
-                    {
-                        continue;
-                    }
+        //            if (selectedDates[date.Key.AddDays(numOfDays)] == false)
+        //            {
+        //                continue;
+        //            }
 
-                    AccommodationReservation reservation =
-                       new(SelectedAccommodation, LoggedUser);
+        //            //AccommodationReservation reservation =
+        //            //   new(SelectedAccommodation, LoggedUser);
 
-                    ReservationDates.Add(reservation);
-                }
+        //           // ReservationDates.Add(reservation);
+        //        }
 
-                if (ReservationDates.Count == 0)
-                {
-                    StartDate = EndDate.AddDays(1);
-                    EndDate = StartDate.AddDays(daysBetween);
-                    recursion++;
+        //        if (ReservationDates.Count == 0)
+        //        {
+        //            StartDate = EndDate.AddDays(1);
+        //            EndDate = StartDate.AddDays(daysBetween);
+        //            recursion++;
 
-                }
-                else if (ReservationDates.Count > 0 && recursion > 0)
-                {
-                    tbNotFound.Text = $"We have not been able to find free dates. Here are some alternatives in the next {(recursion + 1) * (int)daysBetween} days:";
-                    recursion = 0;
-                    break;
-                }
-                else
-                {
-                    tbNotFound.Text = string.Empty;
-                    break;
-                }
-            }
+        //        }
+        //        else if (ReservationDates.Count > 0 && recursion > 0)
+        //        {
+        //            tbNotFound.Text = $"We have not been able to find free dates. Here are some alternatives in the next {(recursion + 1) * (int)daysBetween} days:";
+        //            recursion = 0;
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            tbNotFound.Text = string.Empty;
+        //            break;
+        //        }
+        //    }
 
-        }
+        //}
 
 
 
 
 
 
-        private void ReserveClick(object sender, RoutedEventArgs e)
-        {
-            if (SelectedDate == null)
-            {
-                string sMessageBoxText = $"Choose a reservation first!";
-                string sCaption = "Reservation not chosen";
+        //private void ReserveClick(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectedDate == null)
+        //    {
+        //        string sMessageBoxText = $"Choose a reservation first!";
+        //        string sCaption = "Reservation not chosen";
 
-                MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //        MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
 
-                MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                return;
-            }
+        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //        return;
+        //    }
 
-            /* var reservation = _accommodationReservationRepository.GetAll().Where(r => (r.AccommodationId == SelectedDate.) &&
-                                                     (r.StartDate == SelectedDate.StartDate) &&
-                                                     (r.EndDate == SelectedDate.EndDate));
-             if (reservation != null)
-             {
-                 string sMessageBoxText = $"You have already made this reservation!";
-                 string sCaption = "Reservation already exists";
+        //    /* var reservation = _accommodationReservationRepository.GetAll().Where(r => (r.AccommodationId == SelectedDate.) &&
+        //                                             (r.StartDate == SelectedDate.StartDate) &&
+        //                                             (r.EndDate == SelectedDate.EndDate));
+        //     if (reservation != null)
+        //     {
+        //         string sMessageBoxText = $"You have already made this reservation!";
+        //         string sCaption = "Reservation already exists";
 
-                 MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-                 MessageBoxImage icnMessageBox = MessageBoxImage.Error;
+        //         MessageBoxButton btnMessageBox = MessageBoxButton.OK;
+        //         MessageBoxImage icnMessageBox = MessageBoxImage.Error;
 
 
-                 MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-                 return;
-             }
+        //         MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
+        //         return;
+        //     }
 
-             MessageBoxResult result = MessageBox.Show("Are you sure you want to reserve this accommodation at chosen date?", "Confirm reservation",
-                     MessageBoxButton.YesNo, MessageBoxImage.Question);
+        //     MessageBoxResult result = MessageBox.Show("Are you sure you want to reserve this accommodation at chosen date?", "Confirm reservation",
+        //             MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-             if (result == MessageBoxResult.Yes)
-             {
-                 //SelectedDate.Guest = Controller.Guest;
-                 //SelectedDate.Accommodation = Accommodation;
-                 //Controller.AddReservation(SelectedDate);
-                 int guestNumber = int.Parse(tbGuestNumber.Text);
-                 _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
-             }*/
-            int guestNumber = int.Parse(tbGuestNumber.Text);
-            _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
-            MessageBox.Show("Reservation successful!");
-        }
+        //     if (result == MessageBoxResult.Yes)
+        //     {
+        //         //SelectedDate.Guest = Controller.Guest;
+        //         //SelectedDate.Accommodation = Accommodation;
+        //         //Controller.AddReservation(SelectedDate);
+        //         int guestNumber = int.Parse(tbGuestNumber.Text);
+        //         _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
+        //     }*/
+        //    int guestNumber = int.Parse(tbGuestNumber.Text);
+        //    _accommodationReservationRepository.SaveReservation(dpStart.SelectedDate.Value, dpEnd.SelectedDate.Value, LoggedUser, SelectedAccommodation, guestNumber);
+        //    MessageBox.Show("Reservation successful!");
+        //}
     }
 }

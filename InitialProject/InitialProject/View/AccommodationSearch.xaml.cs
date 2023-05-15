@@ -1,4 +1,5 @@
 ﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Forms;
 using InitialProject.Repository;
 using InitialProject.Repository.AccommodationRepo;
@@ -108,8 +109,8 @@ namespace InitialProject.View
         {
             if (SelectedAccommodation != null)
             {
-                AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation, LoggedUser);
-                accommodationReservation.Show();
+               // AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation, LoggedUser);
+               // accommodationReservation.Show();
             }
         }
     }

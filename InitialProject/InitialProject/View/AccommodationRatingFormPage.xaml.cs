@@ -1,4 +1,7 @@
-﻿using System;
+﻿using InitialProject.Domain.Model.Reservations;
+using InitialProject.Repository.AccommodationRepo;
+using InitialProject.Repository.ReservationRepo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +23,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationRatingFormPage : Page
     {
-        public AccommodationRatingFormPage()
+        public Domain.Model.Reservations.AccommodationReservation SelectedReservation { get; set; }
+        public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
+        private readonly AccommodationReservationRepository _accommodationReservationRepository;
+        private readonly AccommodationRepository _accommodationRepository;
+        public AccommodationRatingFormPage(AccommodationReservation reservation)
         {
             InitializeComponent();
+            
+            SelectedReservation = reservation;
+            _accommodationRepository = new AccommodationRepository();
+            _accommodationReservationRepository = new AccommodationReservationRepository();
         }
     }
 }

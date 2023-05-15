@@ -1,5 +1,7 @@
-﻿using InitialProject.Domain.Model.Reservations;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,62 +26,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class PreviousTripPage : Page
     {
+        public User loggedUser { get; set; } = App.LoggedUser;
         public PreviousTripPage()
         {
             InitializeComponent();
             this.DataContext = this;
-            _accommodationReservationService = new AccommodationReservationService();
-            //  _accommodationReservationRepository = new AccommodationReservationRepository();
-            LoadAllReservations();
         }
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string name)
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(name));
-            }
+            this.DataContext = new PreviousTripViewModel(this.NavigationService);
         }
 
-        // private readonly AccommodationReservationRepository _accommodationReservationRepository;
-        private readonly AccommodationReservationService _accommodationReservationService;
-        private ObservableCollection<Domain.Model.Reservations.AccommodationReservation> _trip;
-
-        public AccommodationReservation SelectedAccommodation { get; set; }
-        public Domain.Model.Reservations.AccommodationReservation SelectedReservation { get; set; }
-
-        public ObservableCollection<Domain.Model.Reservations.AccommodationReservation> Trips
-        {
-            get
-            {
-                return _trip;
-            }
-
-            set
-            {
-                if (value != _trip)
-                {
-                    _trip = value;
-                    OnPropertyChanged("Reservations");
-                }
-            }
-        }
-        public UnratedOwner UnratedOwner { get; set; }
-
-        private void LoadAllReservations()
-        {
-            Trips = new ObservableCollection<Domain.Model.Reservations.AccommodationReservation>(_accommodationReservationService.GetPastReservations());
-        }
-
-        //private void BackButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    this.Close();
-        //}
-
-        private void RateButton_Click(object sender, RoutedEventArgs e)
-        {
-            AccommodationRatingForm rating = new AccommodationRatingForm(UnratedOwner);
-            rating.Show();
-        }
     }
 }

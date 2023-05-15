@@ -128,8 +128,8 @@
                             Width="150"
                             Margin="40,0,0,0"
                             HorizontalAlignment="Left"
-                            SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                            SelectedDateChanged="dpStart_SelectedDateChanged" />
+                            SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                            <!--SelectedDateChanged="dpStart_SelectedDateChanged"--> 
                         <Label
                             Margin="37,5,0,0"
                             Content="End date"
@@ -140,8 +140,8 @@
                                 Width="150"
                                 Margin="40,0,0,0"
                                 HorizontalAlignment="Left"
-                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                SelectedDateChanged="dpEnd_SelectedDateChanged" />
+                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                                <!--SelectedDateChanged="dpEnd_SelectedDateChanged" />-->
                             <TextBlock
                                 Name="tbNotFound"
                                 Width="270"
@@ -162,7 +162,7 @@
                     HorizontalAlignment="Left"
                     Background="LightGray"
                     BorderBrush="LightGray"
-                    Click="SearchClick"
+                   
                     Content="Search"
                     ToolTip="Search on which dates the accommodation is available" />
                 <Grid Grid.Row="6">
@@ -198,7 +198,7 @@
                         VerticalAlignment="Bottom"
                         Background="LightGray"
                         BorderBrush="LightGray"
-                        Click="ReserveClick"
+                       
                         Content="Reserve"
                         ToolTip="Choose the desired dates and make a reservation" />
                 </Grid>
