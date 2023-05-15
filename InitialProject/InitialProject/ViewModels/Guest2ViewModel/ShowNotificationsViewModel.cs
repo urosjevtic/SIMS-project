@@ -38,6 +38,19 @@ namespace InitialProject.ViewModels.Guest2ViewModel
                 }
             }
         }
+        private ObservableCollection<TourNotification> _starts;
+        public ObservableCollection<TourNotification> Starts
+        {
+            get { return _starts; }
+            set
+            {
+                if (_starts != value)
+                {
+                    _starts = value;
+                    OnPropertyChanged(nameof(Starts));
+                }
+            }
+        }
 
         public NotificationService _notificationService;
         public GuestsCheckPointService _guestsCheckPointService;

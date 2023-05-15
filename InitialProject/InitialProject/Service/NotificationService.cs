@@ -13,10 +13,10 @@ namespace InitialProject.Service
     public class NotificationService
     {
 
-        public INotificationRepository _notificationRepository;
-        public IShortTourRequestRepository _shortTourRequestRepository;
-        public ITourRepository _tourRepository;
-        public ILocationRepository _locationRepository;
+        private readonly INotificationRepository _notificationRepository;
+        private readonly IShortTourRequestRepository _shortTourRequestRepository;
+        private readonly ITourRepository _tourRepository;
+        private readonly ILocationRepository _locationRepository;
         public NotificationService()
         {
             _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();
@@ -59,7 +59,6 @@ namespace InitialProject.Service
         public void Update(Notification notification)
         {
             _notificationRepository.Update(notification);
-
         }
         public void DeleteAll()
         {

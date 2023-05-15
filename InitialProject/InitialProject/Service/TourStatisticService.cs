@@ -10,17 +10,13 @@ using System.Text.RegularExpressions;
 
 namespace InitialProject.Service
 {
-
     public class TourStatisticService
     {
-        private ITourRepository _tourRepository;
-
         public TourService _tourService;
         public ITourReservationRepository _tourReservationRepository;
         public IShortTourRequestRepository _shortTourRequestRepository;
         public TourStatisticService()
         {
-            _tourRepository = Injector.Injector.CreateInstance<ITourRepository>();
             _tourService = new TourService();
             _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();
             _shortTourRequestRepository = Injector.Injector.CreateInstance<IShortTourRequestRepository>();
