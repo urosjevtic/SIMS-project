@@ -33,7 +33,7 @@ namespace InitialProject.Service
             };
 
             _ratedOwnerService.Save(ratedOwner);
-            _unratedOwnerService.Remove(unratedOwner);
+            //_unratedOwnerService.Remove(unratedOwner);
         }
 
 
