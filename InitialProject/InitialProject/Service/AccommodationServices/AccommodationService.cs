@@ -125,5 +125,11 @@ namespace InitialProject.Service
           return accommodation;
         }
 
+        public void ChangeRecentlyRenovatedStatus(Accommodation accommodation)
+        {
+            accommodation.IsRecentlyRenovated = !accommodation.IsRecentlyRenovated;
+            _accommodationRepository.Update(accommodation);
+        }
+
     }
 }

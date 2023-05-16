@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
@@ -41,13 +42,11 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-        public List<DataPoint> toursByLanguage { get; set; }
-        public List<DataPoint> toursByLocation { get; set; }
 
         public TourStatisticService _tourStatisticService;
 
-        private int _comboBoxSelection;
-        public int ComboBoxSelection
+        private string _comboBoxSelection;
+        public string ComboBoxSelection
         {
             get { return _comboBoxSelection; }
             set
@@ -60,6 +59,7 @@ namespace InitialProject.ViewModels
                 }
             }
         }
+        //"System.Windows.Controls.ComboBoxItem: 2023"
         private double _acceptedToursPercentage;
         public double AcceptedToursPercentage
         {
@@ -106,21 +106,65 @@ namespace InitialProject.ViewModels
             ToursByLanguage = new ObservableCollection<DataPoint>();
             ToursByLocation = new ObservableCollection<DataPoint>();
         }
-        public void Refresh(int Year)
+        public void Refresh(string Year)
         {
             ToursByLanguage.Clear();
-            ToursByLocation.Clear(); 
-            foreach(DataPoint point in _tourStatisticService.FindToursByLanguage(Year))
+            ToursByLocation.Clear();
+            int year;
+            switch (Year)
+            {
+                case "System.Windows.Controls.ComboBoxItem: 2023":
+                    year = 2023;
+                    FindStatistics(year);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: 2022":
+                    year = 2022;
+                    FindStatistics(year);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: 2021":
+                    year = 2021;
+                    FindStatistics(year);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: 2020":
+                    year = 2020;
+                    FindStatistics(year);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: 2019":
+                    year = 2019;
+                    FindStatistics(year);
+                    break;
+                case "System.Windows.Controls.ComboBoxItem: Sva vremena":
+                    FindStatisticsAllTimes();
+                    break;
+            }
+        }
+        public void FindStatistics(int Year)
+        {
+            foreach (DataPoint point in _tourStatisticService.FindToursByLanguage(Year))
             {
                 ToursByLanguage.Add(point);
             }
-            foreach(DataPoint point in _tourStatisticService.FindToursByLocation(Year))
+            foreach (DataPoint point in _tourStatisticService.FindToursByLocation(Year))
             {
                 ToursByLocation.Add(point);
             }
             AcceptedToursPercentage = _tourStatisticService.FindAcceptedToursPercentage(Year);
             UnacceptedToursPercentage = 100 - _tourStatisticService.FindAcceptedToursPercentage(Year);
             AverageInAccepted = _tourStatisticService.FindAverageInAccepted(Year);
+        }
+        public void FindStatisticsAllTimes()
+        {
+            foreach (DataPoint point in _tourStatisticService.FindToursByLanguageAllTimes())
+            {
+                ToursByLanguage.Add(point);
+            }
+            foreach (DataPoint point in _tourStatisticService.FindToursByLocationAllTimes())
+            {
+                ToursByLocation.Add(point);
+            }
+            AcceptedToursPercentage = _tourStatisticService.FindAcceptedToursPercentageAllTimes();
+            UnacceptedToursPercentage = 100 - _tourStatisticService.FindAcceptedToursPercentageAllTimes();
+            AverageInAccepted = _tourStatisticService.FindAverageInAcceptedAllTimes();
         }
     }
 }

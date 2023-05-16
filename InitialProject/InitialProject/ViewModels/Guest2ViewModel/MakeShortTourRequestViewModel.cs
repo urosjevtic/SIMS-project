@@ -157,6 +157,13 @@ namespace InitialProject.ViewModels
             {
                 _shortTourService.SaveShortRequest(LoggedUser, Country, City, Language, NrOfPeople, Description, Convert.ToDateTime(From, CultureInfo.InvariantCulture), Convert.ToDateTime(To, CultureInfo.InvariantCulture));
                 MessageBox.Show("Request successfully created!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                Country = "";
+                City = "";
+                Language = "";
+                Description = "";
+                NrOfPeople = "0";
+                From = "";
+                To = "";
             }
         }
     }

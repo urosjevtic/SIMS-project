@@ -20,7 +20,6 @@ namespace InitialProject.ViewModels
     public class ShowTourViewModel : BaseViewModel
     {
         public User LoggedUser { get; set; }
-        
         public ICommand SearchCommand { get; set; }
         public ICommand ShowMyToursCommand { get; set; }
         public ICommand MakingTourRequestsCommand { get; set; }
@@ -67,7 +66,7 @@ namespace InitialProject.ViewModels
         }
         private void ShowNotifications()
         {
-            ShowNotifications showNotifications = new ShowNotifications();
+            ShowNotifications showNotifications = new ShowNotifications(LoggedUser);
             showNotifications.Show();
         }
         private void Exit()

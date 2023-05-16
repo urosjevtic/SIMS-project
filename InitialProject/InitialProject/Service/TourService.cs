@@ -275,12 +275,11 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-
-            foreach (Tour tour in tours)  // mijenjala sam provjeritiiii
+             foreach (Tour tour in tours)  
             {
                 foreach (DateTime start in tour.StartDates)
                 {
-                    if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
+                  if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
                     {
                         ended.Add(tour);
                     }
@@ -288,10 +287,7 @@ namespace InitialProject.Service
                     {
                         ended.Add(tour);
                     }
-                }
-                
-               
-                
+                }     
             }
             return ended;
         }
@@ -306,7 +302,6 @@ namespace InitialProject.Service
         }
         public List<Tour> FindActiveTours(User user)
         {
-
             var tours = LoadGuideTours(user);
             var locations = _locationService.GetLocations();
             List<Tour> active = new List<Tour>();

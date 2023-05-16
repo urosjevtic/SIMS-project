@@ -18,6 +18,7 @@ using System.Windows;
 using System.Collections.ObjectModel;
 using Microsoft.Win32;
 using System.Windows.Media.Imaging;
+using InitialProject.ViewModels.MainVeiwModel;
 
 namespace InitialProject.ViewModels
 {
@@ -29,8 +30,8 @@ namespace InitialProject.ViewModels
         private CheckPointService _checkPointService;
         private readonly ShortTourRequestService _shortTourRequestService;
         private TourService _tourService;
+        private NotificationService _notificationService;
         public Dictionary<string, List<string>> Locations { get; set; }
-
 
         public User LoggedUser { get; set; }
         public ICommand SaveCommand { get; private set; }
@@ -48,7 +49,10 @@ namespace InitialProject.ViewModels
             _imageRepository = new ImageRepository();
             _shortTourRequestService = new ShortTourRequestService();
             _checkPointService = new CheckPointService();
-            _tourService = new TourService();   
+            _tourService = new TourService();  
+            _notificationService = new NotificationService();
+            //_guideMainWindow = new GuideMainViewModel(user);
+
             SaveCommand = new RelayCommand(Save);
             CancelCommand = new RelayCommand(Cancel);
             AddImageCommand = new RelayCommand(AddImage);
@@ -368,6 +372,7 @@ namespace InitialProject.ViewModels
             tour.IsActive = false;
         
             _tourService.Save(tour);
+            _notificationService.SendNotifications(tour);
 
         }
 
@@ -399,12 +404,5 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-       
-        
-
-
-
-
-
     }
 }

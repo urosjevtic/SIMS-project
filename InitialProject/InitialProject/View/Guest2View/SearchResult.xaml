@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:InitialProject.View.Guest2View" xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SearchResultViewModel}"
+        xmlns:viewmodels="clr-namespace:InitialProject.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:SearchResultViewModel}"
         mc:Ignorable="d"
-        Title="SearchResult" Height="616" Width="916" WindowStartupLocation="CenterScreen">
+        Title="SearchResult" Height="616" Width="916" WindowStartupLocation="CenterScreen" Background="#F5F9FC">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"></ColumnDefinition>
@@ -13,27 +13,48 @@
             <ColumnDefinition Width="20"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="300"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="20"></RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid x:Name="resultDataGrid" AutoGenerateColumns="False" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}" CanUserReorderColumns="False" IsReadOnly="True" CanUserResizeColumns="False" Grid.Column="1" ItemsSource="{Binding Tours, UpdateSourceTrigger=PropertyChanged}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="90"/>
-                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="110"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="220"/>
-                <DataGridTextColumn Header="Language" Binding="{Binding Language}" Width="100"/>
-                <DataGridTextColumn Header="MaxGuests " Binding="{Binding MaxGuests }" Width="80" />
-                <DataGridTextColumn Header="Start" Binding="{Binding Start }" Width="130"/>
-                <DataGridTextColumn Header="Duration" Binding="{Binding Duration }" Width="*"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <Button Grid.Column="1" Content="Reserve" HorizontalAlignment="Left" Margin="693,30,0,0" Grid.Row="1" Command="{Binding ReserveCommand}" CommandParameter="{Binding}" VerticalAlignment="Top" FontSize="30" Width="140" Height="50"/>
-        <Button Grid.Column="1" Content="Cancel" HorizontalAlignment="Left" Margin="524,30,0,0" Grid.Row="1" Command="{Binding CancelCommand}" VerticalAlignment="Top" FontSize="30" Height="50" Width="140"/>
-        <Label Content="Number of people:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top"  FontSize="30" Width="262" Grid.Column="1" Margin="0,13,0,0"/>
-        <TextBox x:Name="nrOfPeopleTextBox" HorizontalAlignment="Left" Margin="268,17,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=NumberOfPeople, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="70" Height="42" FontSize="30" RenderTransformOrigin="0.507,0.551" Grid.Column="1"/>
-        <Label Content="All vouchers:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="30" Width="179" Grid.Column="1" Margin="0,62,0,0"/>
-        <ComboBox x:Name="vouchersComboBox" Grid.Column="1" HorizontalAlignment="Left" ItemsSource="{Binding Vouchers}" SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="CreationDate" Margin="197,72,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="150"/>
-        <Label Content="Average age of people you reserved for:" HorizontalAlignment="Left" Grid.Row="1" VerticalAlignment="Top" FontSize="30" Width="544" Grid.Column="1" Margin="0,107,0,0"/>
-        <TextBox x:Name="averageAge" HorizontalAlignment="Left" Margin="559,111,0,0" Grid.Row="1" TextWrapping="Wrap" Text="{Binding Path=AverageAge, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="70" Height="42" FontSize="30" RenderTransformOrigin="0.507,0.551" Grid.Column="1"/>
+        <GroupBox Header="Reservation" FontSize="32" Grid.Row="0" Grid.Column="1" BorderBrush="Black">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Content="Type number of people you want to reserve for:" FontSize="28" VerticalAlignment="Center" Width="Auto" Margin="0,0,250,0"/>
+                <TextBox x:Name="NumberTextBox" VerticalContentAlignment="Center" BorderThickness="2" Height="40" Grid.Row="0" Text="{Binding NumberOfPeople, UpdateSourceTrigger=PropertyChanged}" FontSize="26" Width="45" Margin="601,14,203,10"/>
+                <StackPanel Orientation="Vertical" Grid.Row="0" Width="20" Margin="646,19,183,45" Grid.RowSpan="2">
+                    <Button Content="▲" FontSize="13" Command="{Binding UpButtonCommand}" Height="20"/>
+                    <Button Content="▼" FontSize="13" Command="{Binding DownButtonCommand}" Height="20"/>
+                </StackPanel>
+                <Button FontSize="30" Grid.Row="5" BorderThickness="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="160" Height="60" Background="LightSteelBlue" Command="{Binding ReserveCommand}" Grid.Column="2">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/open-book.png" Height="30"></Image>
+                        <TextBlock Text=" Reserve" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button x:Name="GoBack" FontSize="30" HorizontalAlignment="Center" Grid.Row="6" BorderThickness="2" VerticalAlignment="Center" Width="160" Height="60" Background="LightSteelBlue" Command="{Binding CancelCommand}" Grid.Column="1">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                        <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Label Grid.Row="1" FontSize="22">
+                    <TextBlock TextWrapping="Wrap">*Click on ComboBox and pull the scrollbar down to see all vouchers (if they exist), then click on one voucher, then click on button Reserve to book tour using voucher.</TextBlock>
+                </Label>
+                <Label Content="All vouchers:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" FontSize="30" Width="179" Grid.Column="1"/>
+                <ComboBox x:Name="vouchersComboBox" HorizontalAlignment="Left" FontSize="20" ItemsSource="{Binding Vouchers}" SelectedItem="{Binding SelectedVoucher, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="CreationDate" Grid.Row="2" VerticalAlignment="Top" Height="30" Width="220" Margin="184,14,0,0"/>
+                <Label Content="Date and time:" HorizontalAlignment="Left" Grid.Row="3" VerticalAlignment="Top" FontSize="30" Width="205" Grid.Column="1"/>
+                <ComboBox x:Name="datesComboBox" HorizontalAlignment="Left" FontSize="20" ItemsSource="{Binding DateTimes}" SelectedItem="{Binding SelectedDateTime, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" VerticalAlignment="Top" Height="30" Width="220" Margin="210,14,0,0"/>
+                <Label Content="Average age of people you reserved for:" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" FontSize="30" Width="544" Grid.Column="1"/>
+                <TextBox HorizontalAlignment="Left" Grid.Row="4" TextWrapping="Wrap" Text="{Binding Path=AverageAge, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="70" Height="42" FontSize="30" RenderTransformOrigin="0.507,0.551" Margin="544,4,0,0"/>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

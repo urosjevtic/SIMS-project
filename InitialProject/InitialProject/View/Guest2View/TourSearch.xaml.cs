@@ -38,6 +38,13 @@ namespace InitialProject.View.Guest2View
             TourSearchViewModel = new TourSearchViewModel(LoggedUser);
             this.DataContext = TourSearchViewModel;
         }
+        public TourSearch(User user, ObservableCollection<Tour> Tours)
+        {
+            InitializeComponent();
+            LoggedUser = user;
+            TourSearchViewModel = new TourSearchViewModel(LoggedUser, Tours);
+            this.DataContext = TourSearchViewModel;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)
         {

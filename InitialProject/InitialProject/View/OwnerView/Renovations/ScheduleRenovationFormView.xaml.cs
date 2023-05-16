@@ -23,10 +23,10 @@ namespace InitialProject.View.OwnerView.Renovations
     /// </summary>
     public partial class ScheduleRenovationFormView : Page
     {
-        public ScheduleRenovationFormView(User logedInUser, Accommodation accommodation, NavigationService navigationService)
+        public ScheduleRenovationFormView(User logedInUser, Accommodation accommodation, NavigationService navigationService, string renovationDescription="")
         {
             InitializeComponent();
-            DataContext = new ScheduleRenovationFormViewModel(logedInUser, accommodation, navigationService);
+            DataContext = new ScheduleRenovationFormViewModel(logedInUser, accommodation, navigationService, renovationDescription);
         }
     }
 }

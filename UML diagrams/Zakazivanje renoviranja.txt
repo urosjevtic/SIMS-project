@@ -1,0 +1,81 @@
+@startuml
+skinparam monochrome true
+
+actor User as U
+participant ScheduleRenovationListView as SRLV
+participant AccommodationService as AS
+participant AccommodationRepository as AR
+participant ScheduleRenovationForm as SRF
+participant RenovationService as RS
+participant AccommdoationReservationService as ARS
+participant AccommdaotionReservationRepositroty as ARR
+participant RenovationRepository as RR
+
+U -> SRLV ++: OpenScheduleRenovationCommand
+SRLV -> AS++: GetAccommodationsByOwnerId(ownedId)
+AS -> AR++: GetAll()
+AR --> AS--: allAccommodations
+
+loop foreach accommodation in allAccommodations
+  opt accommodation.Owner.Id == ownerId
+    AS -> AS++: accommodations.Add(accommodation)
+    deactivate AS
+  end
+end
+
+AS --> SRLV--: accommodations
+SRLV --> U: Display Accommodation List
+deactivate SRLV
+deactivate SRLV
+
+
+U->SRLV++: ScheduleRenovationCommand(selectedAccommdoation)
+SRLV-->U--:Display ScheduleRenovationForm
+
+activate SRF
+U->SRF: Scheduling info
+
+SRF->RS:FindAvailableDates(accommodationId, renovationStartDate, renovationEndDate, renovationLength)
+
+opt renovationStartDate >= renovationEndDate
+  activate RS
+  RS-->SRF: Empty DateTime list
+end
+
+RS->ARS++:GetReservationByAccommodationId(id)
+ARS->ARR++: GetAll()
+ARR-->ARS--:allReservations
+loop foreach reservation in allReservations
+  opt reservation.AccommodationId == id
+    ARS -> ARS++: reservations.Add(reservation)
+    deactivate ARS
+    end
+end
+ARS-->RS--:reservations
+RS->RS++: CreateDateRange(startDate, endDate)
+RS-->RS--: datesInRange
+
+RS->RS++: FindAvailableDates(reservations, datesInRange, renovationLength)
+
+loop foreach date in datesInRange
+  opt IsDateAvailable(reservations, date, renovationLength)
+    RS->RS:availableDates.Add(date)
+  end
+
+end
+
+RS-->RS--:availableDates
+RS-->SRF--:availableDates
+SRF-->U:availableDates
+
+U->SRF:ScheduleRenovationCommand
+
+SRF->RS++:ScheduleRenovation(accommdoation, selectedStartDate, renovationLength, renovationDescription)
+RS->RS++:CreateNewRenovation(accommdoation, renovationStartDate, renovationLength, renovationDescription)
+RS-->RS--:renovation
+
+RS->RR++:Save(renovation)
+deactivate RR
+deactivate RS
+deactivate SRF
+@enduml

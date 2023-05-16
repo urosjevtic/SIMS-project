@@ -138,7 +138,7 @@ namespace InitialProject.ViewModels
             }
         }
 
-        public ICommand ConfirmRegistrationCommand => new RelayCommand(ConfirmRegistration);
+        public ICommand ConfirmRegistrationCommand => new RelayCommand(ConfirmRegistration, CanRegistrate);
 
         private void ConfirmRegistration()
         {
@@ -148,6 +148,11 @@ namespace InitialProject.ViewModels
             NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
         }
 
+
+        private bool CanRegistrate()
+        {
+            return !(_accommodationName == null || _country == null || _city == null || _accommodationTypes == null || _maxGuests <= 0 || _minReservationDays <= 0 || _imagesUrl == null);
+        }
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 
         private void GoBack()

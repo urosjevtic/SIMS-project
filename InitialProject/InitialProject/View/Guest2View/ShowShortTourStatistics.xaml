@@ -29,16 +29,13 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Label Content="Choose period of time:" FontSize="26" Grid.Row="0" Grid.Column="0"/>
-                <ComboBox Grid.Row="0" xmlns:sys="clr-namespace:System;assembly=mscorlib" SelectedItem="{Binding ComboBoxSelection}" FontSize="22" Width="120" Height="40" Margin="289,2,456,3">
-                    <ComboBox.ItemsSource>
-                        <x:Array xmlns:sys="clr-namespace:System;assembly=mscorlib" Type="sys:Int32">
-                            <sys:Int32>2023</sys:Int32>
-                            <sys:Int32>2022</sys:Int32>
-                            <sys:Int32>2021</sys:Int32>
-                            <sys:Int32>2020</sys:Int32>
-                            <sys:Int32>2019</sys:Int32>
-                        </x:Array>
-                    </ComboBox.ItemsSource>
+                <ComboBox Grid.Row="0" xmlns:sys="clr-namespace:System;assembly=mscorlib" SelectedValue="{Binding ComboBoxSelection}" FontSize="22" Width="150" Height="40" Margin="289,2,430,3">
+                    <ComboBoxItem>2023</ComboBoxItem>
+                    <ComboBoxItem>2022</ComboBoxItem>
+                    <ComboBoxItem>2021</ComboBoxItem>
+                    <ComboBoxItem>2020</ComboBoxItem>
+                    <ComboBoxItem>2019</ComboBoxItem>
+                    <ComboBoxItem>Sva vremena</ComboBoxItem>
                 </ComboBox>
                 <Label Content="Percentage of accepted tours: " FontSize="26" Grid.Row="1"/>
                 <TextBlock Grid.Row="1" Width="70" Height="40" FontSize="26" Margin="367,5,443,0" VerticalAlignment="Top" Text="{Binding AcceptedToursPercentage}"/>
