@@ -73,6 +73,12 @@
                         </StackPanel>
                     </Button>
 
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Requests"  Style="{StaticResource MenuButtonTheme}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/requests.png" Width="44"></Image>
+                            <TextBlock Text="   Requests     " Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
                 </UniformGrid>
 
             </Grid>

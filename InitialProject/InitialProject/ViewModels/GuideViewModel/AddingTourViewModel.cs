@@ -26,7 +26,8 @@ namespace InitialProject.ViewModels
         private readonly IImageRepository _imageRepository;
         
         public LocationService _locationService;
-        private CheckPointService _checkPointService;   
+        private CheckPointService _checkPointService;
+        private readonly ShortTourRequestService _shortTourRequestService;
         private TourService _tourService;
         public Dictionary<string, List<string>> Locations { get; set; }
 
@@ -38,11 +39,14 @@ namespace InitialProject.ViewModels
         public ICommand AddDateTimeCommand { get; private set; }    
         public ObservableCollection<DateTime> StartDates { get; set; }
         public string AllUrls { get; set; }
-        public AddingTourViewModel(User user)
+        public ShortTourRequest Request { get; set;}
+  
+      
+        public AddingTourViewModel(User user,ShortTourRequest request, bool enter)
         {
            
             _imageRepository = new ImageRepository();
-            
+            _shortTourRequestService = new ShortTourRequestService();
             _checkPointService = new CheckPointService();
             _tourService = new TourService();   
             SaveCommand = new RelayCommand(Save);
@@ -54,11 +58,39 @@ namespace InitialProject.ViewModels
             _locationService = new LocationService();
             Locations = _locationService.GetCountriesAndCities();
             StartDates = new ObservableCollection<DateTime>();
+            Languagee = _shortTourRequestService.GetMostWantedLanguage();   
+            Country = _shortTourRequestService.GetMostWantedLocation().Country;
+            City = _shortTourRequestService.GetMostWantedLocation().City;
+            Request = request;
+            MakeTourFromRequest(Request);
 
+            if (enter)
+            {
+                MessageBox.Show("Dati su prrijedlozi za najtrazeniju lokaciju i jezik!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
 
-        
+
+        private void MakeTourFromRequest(ShortTourRequest request)
+        {
+            if(request.Language == null)
+            {
+                return;
+            }
+            else
+            {
+                Country = request.Country;
+                City = request.City;
+                Languagee = request.Language;
+                MaxGuests = request.NumberOfPeople;
+                Description = request.Description;
+                Start = request.From;
+                request.Status = RequestStatus.Accepted;
+                _shortTourRequestService.Update(request);
+            }
+            
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -300,8 +332,21 @@ namespace InitialProject.ViewModels
 
         public void AddStartDate()
         {
+            DateTime newTourEnd = _start.AddHours(_duration);
+            foreach (Tour tour in _tourService.GetAll())
+            {
+                foreach(DateTime start in tour.StartDates)
+                {
+                    DateTime end = start.AddHours(tour.Duration);
+                    if ((_start >= start && _start < end) || (newTourEnd > start && newTourEnd <= end))
+                    {
+                        MessageBox.Show("Vodic ima zakazanu turu u tom periodu!");
+                        return;
+                    }
+                }
+            }
             StartDates.Add(_start);
-        }
+        } 
         public void ConfirmAddingTour()
         {
             List<DateTime> dates = new List<DateTime>();
@@ -321,6 +366,7 @@ namespace InitialProject.ViewModels
             tour.CoverImageUrl = MakeNewImage(tour);
             tour.CheckPoints = MakeCheckPointList();
             tour.IsActive = false;
+        
             _tourService.Save(tour);
 
         }

@@ -55,7 +55,10 @@ namespace InitialProject.ViewModels.MainVeiwModel
                 case "Statistic":
                     navigationService.Navigate(new StatisticsPage(LoggedInUser));
                     break;
-                    
+
+                case "Requests":
+                    navigationService.Navigate(new Requests(LoggedInUser));
+                    break;
 
             }
         }

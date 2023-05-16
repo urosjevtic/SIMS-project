@@ -12,6 +12,7 @@ using System.Windows.Input;
 using InitialProject.Utilities;
 using System.Windows;
 using System.Windows.Controls;
+using System.Collections.ObjectModel;
 
 namespace InitialProject.ViewModels.GuideViewModel
 {
@@ -28,8 +29,8 @@ namespace InitialProject.ViewModels.GuideViewModel
         public List<CheckPoint> CheckedCheckPoints { get; set; }
         public List<User> TourReservations { get; set; }
         public List<Notification> Notifications { get; set; }
-        public List<CheckPoint> CheckPoints { get; set; }
-        public List<TourGuest> TourGuests { get; set; }
+        public ObservableCollection<CheckPoint> CheckPoints { get; set; }
+        public ObservableCollection<TourGuest> TourGuests { get; set; }
         public string TourName { get; set; }    
         public string TourLocation { get; set; }    
         public List<User> Guests { get; set; }
@@ -46,11 +47,11 @@ namespace InitialProject.ViewModels.GuideViewModel
             CheckedCheckPoints = new List<CheckPoint>();
             Notifications = _notificationService.GetAll();
             User = user;
-            TourGuests = new List<TourGuest>();
+            TourGuests = new ObservableCollection<TourGuest>();
             ActiveTour = new Tour();
             ActiveTour = FindActiveTour();
             
-            CheckPoints = ActiveTour.CheckPoints;
+            CheckPoints = new ObservableCollection<CheckPoint>(ActiveTour.CheckPoints);
             TourName = ActiveTour.Name;
             TourLocation = ActiveTour.Location.ToString();
             Guests = _tourReservationRepository.GetReservationGuest(ActiveTour);  // svi gosti na ovoj turi

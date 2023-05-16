@@ -57,5 +57,9 @@ namespace InitialProject.Service
         {
            return _locationRepository.GetById(id);
         }
+        public void Save(Location location)
+        {
+            _locationRepository.Save(location);
+        }
     }
 }

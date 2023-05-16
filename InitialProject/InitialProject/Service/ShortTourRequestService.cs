@@ -12,9 +12,11 @@ namespace InitialProject.Service
     public class ShortTourRequestService
     {
         private readonly IShortTourRequestRepository _shortRequestRepository;
+        private readonly LocationService _locationService;  
         public ShortTourRequestService()
         {
             _shortRequestRepository = Injector.Injector.CreateInstance<IShortTourRequestRepository>();
+            _locationService = new LocationService();
         }
         public void SaveShortRequest(User LoggedUser, string country, string city, string language, string number, string description, DateTime from, DateTime to)
         {
@@ -34,16 +36,11 @@ namespace InitialProject.Service
         }
         public List<ShortTourRequest> GetAll()
         {
-            List<ShortTourRequest> all = new();
-            CheckValidation();
-            foreach (ShortTourRequest shortRequest in _shortRequestRepository.GetAll())
-            {
-                if (shortRequest.Status != RequestStatus.Accepted )
-                {
-                    all.Add(shortRequest);
-                }
-            }
-            return all;
+            return _shortRequestRepository.GetAll();    
+        }
+        public void Update(ShortTourRequest request)
+        {
+            _shortRequestRepository.Update(request);
         }
         public void CheckValidation()
         {
@@ -72,38 +69,76 @@ namespace InitialProject.Service
         }
 
 
-        public List<ShortTourRequest> FindrequestsByCity(string city)
+
+        public int FindSearchMonthRequestNumber(int month, int year, List<ShortTourRequest> requests)
         {
-            List<ShortTourRequest> requests = new List<ShortTourRequest>();
-            foreach (ShortTourRequest request in GetAll())
+            int number = 0;
+            foreach (ShortTourRequest request in requests)
             {
-                if (request.City.ToLower().Contains(city.ToLower()))
+                if (request.From.Year == year && request.From.Month <= month && request.To.Month >= month)
                 {
-                    requests.Add(request);
+                    ++number;
                 }
             }
-            return requests;
+            return number;
         }
-        public List<ShortTourRequest> FindrequestsByCountry(string country)
+
+        public int FindMonthRequestNumber(int month, int year)
         {
-            List<ShortTourRequest> requests = new List<ShortTourRequest>();
+            int number = 0;
             foreach (ShortTourRequest request in GetAll())
             {
-                if (request.Country.ToLower().Contains(country.ToLower()))
+                if (request.From.Year == year && request.From.Month <= month && request.To.Month >= month)
                 {
-                    requests.Add(request);
+                    ++number;
                 }
             }
-            return requests;
+            return number;
         }
-        public List<ShortTourRequest> FindRequestsByLanguage(string language)
+
+
+        public Location GetMostWantedLocation()
         {
-            List<ShortTourRequest> requests = new List<ShortTourRequest>();
-            foreach (ShortTourRequest request in GetAll())
+            Dictionary<Location, int> locationCounts = new Dictionary<Location, int>();
+            foreach (ShortTourRequest request in _shortRequestRepository.GetAll())
             {
+                foreach(Location location in _locationService.GetLocations())
+                {
+                    if(location.Country == request.Country && location.City == request.City)
+                    {
+                        if (locationCounts.ContainsKey(location))
+                        {
+                            locationCounts[location]++;
+                        }
+                        else
+                        {
+                            locationCounts[location] = 1;
+                        }
+                    }
+                   
+                }
                 
             }
-            return requests;
+            return locationCounts.OrderByDescending(x => x.Value).First().Key;
+          
         }
+
+        public string GetMostWantedLanguage()
+        {
+            Dictionary<string, int> languageCounts = new Dictionary<string, int>();
+            foreach (ShortTourRequest request in _shortRequestRepository.GetAll())
+            {
+                if (languageCounts.ContainsKey(request.Language))
+                {
+                    languageCounts[request.Language]++;
+                }
+                else
+                {
+                    languageCounts[request.Language] = 1;
+                }
+            }
+            return languageCounts.OrderByDescending(x=> x.Value).First().Key;
+        }
+
     }
 }
