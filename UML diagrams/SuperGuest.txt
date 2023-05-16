@@ -1,0 +1,56 @@
+@startuml
+skinparam monochrome true
+
+actor Guest as G
+participant SignInView as SIV
+participant UserRepository as UR
+participant SuperGuestService as SGS
+participant AccommdoationReservationService as ARS
+participant AccommdaotionReservationRepositroty as ARR
+
+G->SIV++: SignIn(username, password)
+SIV->UR++: GetByUserName(username)
+UR-->SIV--: guest
+
+opt guest==null
+  SIV-->G++: Ivalid username
+end
+
+opt guest.Password==null
+activate SIV
+  SIV-->G--: Ivalid Password
+end
+
+activate SIV
+
+
+SIV->SGS++:UpdateGuestStatus(guest)
+activate SIV
+
+
+opt [guest.SuperUserDate.Date.AddYears(1)>=DateTime.Now.Date] 
+  SGS-->SIV--: return (still Super Guest)
+end
+
+
+SGS->ARS++: GetLastYearReservation(guest.Id, DateTime.Now.AddYears(-1)
+
+ARS->ARS++:GetReservations(guestId)
+
+ARS->ARR++: GetAllReservatios()
+ARR-->ARS--:allReservations
+deactivate ARS
+ARS->ARS++:allGuestReservations
+
+ARS->ARS--:formerReservations
+
+ARS-->SGS--: reservations
+
+alt reservations.Count()>=10
+SGS-->UR--:Update(guest)
+  opt guest.Points!=0
+   SGS-->UR--: Update(guest)
+  end
+end
+
+@enduml
