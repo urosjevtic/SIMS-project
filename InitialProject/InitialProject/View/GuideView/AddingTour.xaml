@@ -51,7 +51,7 @@
         <Label Grid.Column="4" Grid.Row="4" Content="Other:" FontSize="16" HorizontalAlignment="Center"></Label>
         <Label Content="Start: " Grid.Row="5" Grid.Column="4"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-        <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged }"  Grid.Row="5" Grid.Column="5"  Height="30" Width="150"  Margin="0,0,50,0"/>
+        <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="5" Grid.Column="5"  Height="30" Width="150"  Margin="0,0,50,0"/>
 
         <Button Content="Add" Width="50" Height="40" Grid.Row="5" Grid.Column="5" Margin="150,0,10,0" Style="{StaticResource MenuButtonTheme}" Command="{Binding AddDateTimeCommand}"></Button>
 

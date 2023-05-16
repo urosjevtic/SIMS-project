@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.ViewModels.GuideViewModel;
+using System.Collections.ObjectModel;
 
 namespace InitialProject.View.GuideView.Pages
 {
@@ -33,12 +34,10 @@ namespace InitialProject.View.GuideView.Pages
 
         private void CheckBoxChecked(object sender, RoutedEventArgs e)
         {
-            _activeTourViewModel. CheckPoints = _activeTourViewModel.ActiveTour.CheckPoints;
+            _activeTourViewModel. CheckPoints = new ObservableCollection<CheckPoint>(_activeTourViewModel.ActiveTour.CheckPoints);
             CheckPoint checkedCheckPoint = ((CheckBox)sender).DataContext as CheckPoint;
             _activeTourViewModel.CheckCheckPoint(checkedCheckPoint);
             _activeTourViewModel.SendNotification(checkedCheckPoint);
-            // sada treba da azuriram tabelu za prikaz podataka
-            //MakeGuests(checkedCheckPoint);
             if (_activeTourViewModel.CheckPoints.Last().Id == checkedCheckPoint.Id)
             {
                 _activeTourViewModel.EndTour();
