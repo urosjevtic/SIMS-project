@@ -1,6 +1,9 @@
 ﻿using InitialProject.Domain.Model.Reservations;
 using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
+using InitialProject.Service;
+using InitialProject.Service.RenovationServices;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,17 +26,23 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationRatingFormPage : Page
     {
-        public Domain.Model.Reservations.AccommodationReservation SelectedReservation { get; set; }
-        public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
-        private readonly AccommodationReservationRepository _accommodationReservationRepository;
-        private readonly AccommodationRepository _accommodationRepository;
-        public AccommodationRatingFormPage(AccommodationReservation reservation)
+        //public UnratedOwner UnratedOwner{ get; set; }
+        //public AccommodationReservation Reservation { get; set; }
+        //public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
+        //private readonly AccommodationReservationRepository _accommodationReservationRepository;
+        //private readonly AccommodationRepository _accommodationRepository;
+        //public readonly OwnerRatingService _ownerRatingService;
+        //public readonly RenovationRecommendationService _renovationRecommendationService;
+    
+        public AccommodationRatingFormPage(UnratedOwner unratedOwner, NavigationService navigationService)
         {
             InitializeComponent();
-            
-            SelectedReservation = reservation;
-            _accommodationRepository = new AccommodationRepository();
-            _accommodationReservationRepository = new AccommodationReservationRepository();
+            //UnratedOwner=unratedOwner;
+            // _accommodationRepository = new AccommodationRepository();
+            // _accommodationReservationRepository = new AccommodationReservationRepository();
+            //   Reservation=unratedOwner.Reservation;
+            DataContext = new AccommodationRatingFormViewModel(unratedOwner, navigationService);
         }
+       
     }
 }

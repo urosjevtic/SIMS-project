@@ -27,19 +27,7 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationReservationPage : Page
     {
-        //public AccommodationReservationPage()
-        //{
-        //    InitializeComponent();
-        //    this.DataContext = new AccommodationReservationViewModel();
-        //    Accommodations = new List<Accommodation>();
-        //    Accommodations.Add(SelectedAccommodation);
-
-        //    _accommodationRepository = new AccommodationRepository();
-        //    _accommodationReservationRepository = new AccommodationReservationRepository();
-        //    _accommodationReservationRepository = new AccommodationReservationRepository();
-        //    ReservationDates = new ObservableCollection<AccommodationReservation>();
-        //}
-
+       
         public AccommodationReservationPage(Accommodation accommodation)
         {
             InitializeComponent();
@@ -53,10 +41,6 @@ namespace InitialProject.View
             //_accommodationReservationRepository = new AccommodationReservationRepository();
             ReservationDates = new ObservableCollection<AccommodationReservation>();
         }
-
-
-
-
 
         private readonly AccommodationRepository _accommodationRepository;
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
@@ -107,75 +91,6 @@ namespace InitialProject.View
         //        dpStart.SelectedDate = DateTime.Now.Date;
         //    }
 
-        //}
-
-        //private bool IsGuestsEmpty()
-        //{
-        //    if (string.IsNullOrWhiteSpace(tbGuestNumber.Text))
-        //    {
-        //        string sMessageBoxText = $"Please enter number of guests.";
-
-        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-        //        MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-        //        string sCaption = "Missing input";
-        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //private bool IsDaysEmpty()
-        //{
-        //    if (string.IsNullOrWhiteSpace(tbReservationDays.Text))
-        //    {
-        //        string sMessageBoxText = $"Please enter number of days.";
-
-        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-        //        MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
-
-        //        string sCaption = "Missing input";
-        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-        //        return true;
-        //    }
-        //    return false;
-        //}
-        //private bool IsDigitsOnly(string str)
-        //{
-        //    return str.All(c => c >= '0' && c <= '9');
-        //}
-
-        //private bool IsGuestsDigit()
-        //{
-        //    if (!IsDigitsOnly(tbGuestNumber.Text))
-        //    {
-        //        string sMessageBoxText = $"Number of guests field must contain only digits!";
-
-        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
-
-        //        string sCaption = "Input error: Number of guests";
-        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
-
-        //private bool IsDaysDigit()
-        //{
-        //    if (!IsDigitsOnly(tbReservationDays.Text))
-        //    {
-        //        string sMessageBoxText = $"Number of days field must contain only digits!";
-
-        //        MessageBoxButton btnMessageBox = MessageBoxButton.OK;
-        //        MessageBoxImage icnMessageBox = MessageBoxImage.Error;
-
-        //        string sCaption = "Input error: Number of days";
-        //        MessageBox.Show(sMessageBoxText, sCaption, btnMessageBox, icnMessageBox);
-        //        return false;
-        //    }
-
-        //    return true;
         //}
 
         //private bool CheckMaxGuestsLimit(int numOfGuests)
@@ -254,13 +169,6 @@ namespace InitialProject.View
 
         //private bool CheckConditions()
         //{
-        //    if (IsGuestsEmpty()) return false;
-
-        //    if (IsDaysEmpty()) return false;
-
-        //    if (!IsGuestsDigit()) return false;
-
-        //    if (!IsDaysDigit()) return false;
 
         //    int numOfGuests = Convert.ToInt32(tbGuestNumber.Text);
 
@@ -277,11 +185,6 @@ namespace InitialProject.View
 
         //    return true;
         //}
-
-
-
-
-
 
         //private List<Domain.Model.Reservations.AccommodationReservation> GetReservationsInDateRange()
         //{
@@ -303,8 +206,6 @@ namespace InitialProject.View
 
         //    return reservationsInRange;
         //}
-
-
 
 
         //private void SearchClick(object sender, RoutedEventArgs e)
@@ -395,10 +296,6 @@ namespace InitialProject.View
         //    }
 
         //}
-
-
-
-
 
 
         //private void ReserveClick(object sender, RoutedEventArgs e)

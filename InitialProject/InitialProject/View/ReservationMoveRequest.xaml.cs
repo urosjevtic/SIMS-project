@@ -34,9 +34,10 @@ namespace InitialProject.View
         
         private void MoveButton_Click(object sender, RoutedEventArgs e)
         {
-           // _accommodationReservationRescheduleRequestService.Create(SelectedReservation, dpNewStartDate.SelectedDate.Value, dpNewEndDate.SelectedDate.Value, "pending");
+            string status = "pending";
+         //   _accommodationReservationRescheduleRequestService.Create(SelectedReservation, dpNewStartDate.SelectedDate.Value, dpNewEndDate.SelectedDate.Value, status);
             MessageBox.Show("You have sent a move request");
-           // _accommodationReservationRescheduleRequestService.Delete(SelectedReservation);
+          //_accommodationReservationRescheduleRequestService.Delete(SelectedReservation);
             this.Close();
         }
     }

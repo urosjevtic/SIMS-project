@@ -1,8 +1,10 @@
-﻿using InitialProject.Domain.Model.Reservations;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service;
 using InitialProject.Utilities;
 using InitialProject.View;
 using System.Collections.ObjectModel;
+using System.Reflection.Metadata;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -10,13 +12,17 @@ namespace InitialProject.ViewModels
 {
     class PreviousTripViewModel : BaseViewModel
     {
+        public UnratedOwner SelectedUnratedOwner; /// { get; set; }
         public ObservableCollection<UnratedOwner> UnratedOwners { get; set; }
         private readonly UnratedOwnerService _unratedOwnerService;
         public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
         private NavigationService _navigationService { get; set; }
 
-        public AccommodationReservation SelectedReservation { get; set; }
-
+        //public PreviousTripViewModel()
+        //{
+        //    _unratedOwnerService = new UnratedOwnerService();
+        //    UnratedOwners = new ObservableCollection<UnratedOwner>(_unratedOwnerService.GetAllUnratedOwners();
+        //}
 
         public PreviousTripViewModel(NavigationService navigationService)
         {
@@ -25,13 +31,15 @@ namespace InitialProject.ViewModels
             // LoadAllReservations();
             //LoggedUser = logedInUser;
             _unratedOwnerService = new UnratedOwnerService();
-            UnratedOwners = new ObservableCollection<UnratedOwner>(_unratedOwnerService.GetUnratedOwnerByGuestId(LoggedUser.Id));
+           // UnratedOwners = new ObservableCollection<UnratedOwner>(_unratedOwnerService.GetUnratedOwnerByGuestId(LoggedUser.Id));
+        UnratedOwners = new ObservableCollection<UnratedOwner>(_unratedOwnerService.GetAllUnratedOwners());
         }
 
-        public ICommand RateAccommodationInfoCommand => new RelayCommand(OnRateAccommodation);
-        public void OnRateAccommodation()
+        public ICommand RateAccommodationInfoCommand => new RelayCommandWithParams(OnRateAccommodation);
+        public void OnRateAccommodation(object parameter)
         {
-            _navigationService.Navigate(new AccommodationRatingFormPage(SelectedReservation));
+            if(parameter is UnratedOwner selectedOwner)
+            _navigationService.Navigate(new AccommodationRatingFormPage(selectedOwner, _navigationService));
         }
 
         public ICommand ReviewsFromOwnersInfoCommand => new RelayCommand(OnShowRatings);

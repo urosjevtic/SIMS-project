@@ -22,7 +22,7 @@ namespace InitialProject.ViewModels
         public GuestRatingViewModel(NavigationService navigationService)
         {
            _ratedGuestService = new RatedGuestService();
-            Ratings = new ObservableCollection<RatedGuest>(_ratedGuestService.GetAll());
+            Ratings = new ObservableCollection<RatedGuest>(_ratedGuestService.GetRatedGuests());
             NavigationService = navigationService;
         } 
     }

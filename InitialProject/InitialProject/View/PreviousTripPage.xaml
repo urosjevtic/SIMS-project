@@ -10,8 +10,8 @@
     Title="PreviousTripPage"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    mc:Ignorable="d"
-    Loaded="Page_Loaded">
+    Loaded="Page_Loaded"
+    mc:Ignorable="d">
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
@@ -42,10 +42,10 @@
             HorizontalContentAlignment="Stretch"
             Background="AliceBlue"
             BorderThickness="0"
-            ItemsSource="{Binding  UnratedOwners}"
+            ItemsSource="{Binding UnratedOwners}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectedItem="{Binding SelectedReservation}">
+            SelectedItem="{Binding SelectedUnratedOwner}">
             <ListBox.ItemContainerStyle>
                 <Style TargetType="ListBoxItem">
                     <Style.Triggers>
@@ -91,7 +91,7 @@
                                     Margin="0,0,5,0"
                                     FontWeight="Bold"
                                     Text="End date: " />
-                                <TextBlock Text="{Binding AccommodationReservation.EndDate}" />
+                                <TextBlock Text="{Binding Reservation.EndDate}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="3" Orientation="Horizontal">
@@ -99,7 +99,7 @@
                                     Margin="0,0,5,0"
                                     FontWeight="Bold"
                                     Text="City: " />
-                                <TextBlock Text="{Binding AccommodationReservation.Accommodation.Location.City}" />
+                                <TextBlock Text="{Binding Reservation.Accommodation.Location.City}" />
                             </StackPanel>
                             <StackPanel
                                 Grid.Row="4"
@@ -113,9 +113,10 @@
                                     HorizontalAlignment="Right"
                                     Background="LightGray"
                                     BorderBrush="LightGray"
-                                    Content="Rate" 
-                                    Command="{Binding  ElementName=PreviousTrip, Path=DataContext.RateAccommodationInfoCommand}"
-                                    ToolTip="Rate the accommodation and make a recommendation for renovation"/>
+                                    Command="{Binding  DataContext.RateAccommodationInfoCommand, ElementName=PreviousTrip}"
+                                    CommandParameter="{Binding}"
+                                    Content="Rate"
+                                    ToolTip="Rate the accommodation and make a recommendation for renovation" />
                             </StackPanel>
                         </Grid>
                     </Border>

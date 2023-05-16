@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Repository.AccommodationRenovationRepo;
+using InitialProject.Serializer;
+using InitialProject.View;
 
 namespace InitialProject.Service.RenovationServices
 {
@@ -96,7 +98,7 @@ namespace InitialProject.Service.RenovationServices
             _renovationRecommendationRepository.Save(recommendation);
         }
 
-        private RenovationRecommendation CreateRenovation(AccommodationReservation reservation, int urgencyLevel, string recommendation)
+        public RenovationRecommendation CreateRenovation(AccommodationReservation reservation, int urgencyLevel, string recommendation)
         {
             return new RenovationRecommendation
             {

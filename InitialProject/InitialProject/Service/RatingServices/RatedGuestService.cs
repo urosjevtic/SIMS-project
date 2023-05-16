@@ -29,6 +29,30 @@ namespace InitialProject.Service
         {
             return _ratedGuestRepository.GetAll();
         }
+       public List<RatedGuest> GetRatedGuests()
+        {
+            List<RatedGuest> ratedGuests = new List<RatedGuest>();
+            List<RatedGuest>allRatedGuest=_ratedGuestRepository.GetAll();
+           foreach(RatedGuest ratedGuest in allRatedGuest)
+            {
+                //BindReservationToRating(ratedGuests);
+                ConnectReservationToRating(ratedGuest);
+                ratedGuests.Add(ratedGuest);
+            }
+            return ratedGuests;
+        }
+
+        public void ConnectReservationToRating(RatedGuest ratedGuest)
+        {
+            foreach (AccommodationReservation reservation in _accommodationReservationService.GetAll())
+            {
+                if (reservation.Id == ratedGuest.Reservation.Id)
+                {
+                    ratedGuest.Reservation = reservation;
+                    //break;
+                }
+            }
+        }
 
         public RatedGuest Get(int id)
         {

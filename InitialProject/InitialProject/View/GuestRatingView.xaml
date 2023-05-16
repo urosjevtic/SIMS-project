@@ -80,7 +80,7 @@
                                     Margin="0,5,0,5"
                                     FontWeight="Bold"
                                     Text="Name: " />
-                                <TextBlock Text="{Binding Reservations.Accommodation.Name}" />
+                                <TextBlock Text="{Binding Reservation.Accommodation.Name}" />
                             </StackPanel>
 
                               <!--Start and end date-->  

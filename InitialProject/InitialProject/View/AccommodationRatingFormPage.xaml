@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
     Title="AccommodationRatingFormPage"
     d:DesignHeight="750"
     d:DesignWidth="800"
@@ -36,10 +37,10 @@
                 FontSize="18"
                 FontWeight="Bold" />
             <TextBlock
-                HorizontalAlignment="Center"
+                Width="100"
                 VerticalAlignment="Center"
                 FontSize="15"
-                Text="{Binding Accommodation.Name}" />
+                Text="{Binding Reservation.Accommodation.Name}" />
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -52,35 +53,41 @@
                     Padding="10"
                     HorizontalAlignment="Left"
                     Text="Cleanness" />
-                <Slider
-                    x:Name="sCleanliness"
-                    Width="150"
-                    Height="30"
-                    Margin="20,10,0,0"
-                    HorizontalAlignment="Left"
-                    IsSnapToTickEnabled="True"
-                    Maximum="5"
-                    Minimum="1"
-                    TickFrequency="1"
-                    ToolTip="Rate the cleanliness of the accommodation"
-                    Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" />
+                <StackPanel Orientation="Horizontal">
+                    <Slider
+                        x:Name="sCleanliness"
+                        Width="150"
+                        Height="30"
+                        Margin="20,10,0,0"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        Maximum="5"
+                        Minimum="1"
+                        TickFrequency="1"
+                        ToolTip="Rate the cleanliness of the accommodation"
+                        Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sCleanliness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
                 <TextBlock
                     Margin="10,10,0,10"
                     Padding="10"
                     HorizontalAlignment="Left"
                     Text="Correctness the owner" />
-                <Slider
-                    x:Name="sOwnerCorrectness"
-                    Width="150"
-                    Height="30"
-                    Margin="20,10,0,0"
-                    HorizontalAlignment="Left"
-                    IsSnapToTickEnabled="True"
-                    Maximum="5"
-                    Minimum="1"
-                    TickFrequency="1"
-                    ToolTip="Rate the correctness of the owner"
-                    Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}" />
+                <StackPanel Orientation="Horizontal">
+                    <Slider
+                        x:Name="sOwnerCorrectness"
+                        Width="150"
+                        Height="30"
+                        Margin="20,10,0,0"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        Maximum="5"
+                        Minimum="1"
+                        TickFrequency="1"
+                        ToolTip="Rate the correctness of the owner"
+                        Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sOwnerCorrectness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
                 <TextBlock
                     Margin="10,10,0,10"
                     Padding="10"
@@ -94,7 +101,7 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     AcceptsReturn="True"
-                    Text="{Binding Path=AdditionalComment, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding AdditionalComment, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto" />
                 <TextBlock
@@ -117,6 +124,7 @@
                     Height="40"
                     Margin="0,20,130,0"
                     HorizontalAlignment="Right"
+                    Command="{Binding RateAOwnerCommand}"
                     Content="Rate" />
             </StackPanel>
             <StackPanel Grid.Column="1">
@@ -128,22 +136,25 @@
                     Margin="15,10,0,0"
                     HorizontalAlignment="Left"
                     AcceptsReturn="True"
-                    Text="{Binding Path=Recommendation, UpdateSourceTrigger=PropertyChanged}"
+                    Text="{Binding Recommendation, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto" />
                 <Label Margin="10,10,0,10" Content="Renovation urgency" />
-                <Slider
-                    x:Name="sRenovationUrgency"
-                    Width="150"
-                    Height="30"
-                    Margin="20,10,0,10"
-                    HorizontalAlignment="Left"
-                    IsSnapToTickEnabled="True"
-                    Maximum="5"
-                    Minimum="1"
-                    TickFrequency="1"
-                    ToolTip="Rate the correctness of the owner"
-                    Value="{Binding UrgencyLevel, UpdateSourceTrigger=PropertyChanged}" />
+                <StackPanel Orientation="Horizontal">
+                    <Slider
+                        x:Name="sRenovationUrgency"
+                        Width="150"
+                        Height="30"
+                        Margin="20,10,0,10"
+                        HorizontalAlignment="Left"
+                        IsSnapToTickEnabled="True"
+                        Maximum="5"
+                        Minimum="1"
+                        TickFrequency="1"
+                        ToolTip="Rate the correctness of the owner"
+                        Value="{Binding UrgencyLevel, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sRenovationUrgency, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                </StackPanel>
                 <TextBlock
                     Width="300"
                     Margin="20,0,0,0"
@@ -157,6 +168,7 @@
                     Height="40"
                     Margin="10,30,20,0"
                     HorizontalAlignment="Center"
+                    Command="{Binding LeaveARecommendation}"
                     Content="Leave a recommendation" />
             </StackPanel>
         </Grid>
