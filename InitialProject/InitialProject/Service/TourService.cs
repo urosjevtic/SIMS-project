@@ -268,7 +268,7 @@ namespace InitialProject.Service
         {
             return str.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
-        public List<Tour> FindAllEndedTours()
+        public List<Tour> FindAllEndedTours() 
         {
             List<Tour> tours = _tourRepository.GetAll();
             List<Location> locations = _locationService.GetLocations();
@@ -277,10 +277,13 @@ namespace InitialProject.Service
 
             foreach (Tour tour in tours)  // mijenjala sam provjeritiiii
             {
-                TimeSpan ts = new(tour.Duration, 0, 0);
                 foreach (DateTime start in tour.StartDates)
                 {
-                    if(start.Add(ts) < DateTime.Now && tour.IsActive == false && tour.IsRated == false && !ended.Contains(tour))
+                  if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
+                    {
+                        ended.Add(tour);
+                    }
+                    if(start.Year < DateTime.Now.Year)
                     {
                         ended.Add(tour);
                     }

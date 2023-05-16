@@ -3,6 +3,7 @@ using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.Utilities;
 using InitialProject.View;
+using InitialProject.View.GuideView;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -126,8 +127,11 @@ namespace InitialProject.ViewModels.GuideViewModel
         }
         public void AddTour()
         {
-            AddingTour addingTour = new AddingTour(LoggedUser);
+            ShortTourRequest request = new ShortTourRequest();
+            AddingTour addingTour = new AddingTour(LoggedUser,request, true);
             addingTour.Show();
+            //CreatingTourByStatistics creatingTourByStatistic = new CreatingTourByStatistics(LoggedUser);
+            //creatingTourByStatistic.ShowDialog();
         }
     }
 }

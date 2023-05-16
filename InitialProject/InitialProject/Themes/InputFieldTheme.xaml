@@ -9,27 +9,32 @@
         <Setter Property="Height" Value="35"></Setter>
         <Setter Property="Width" Value="180"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="CaretBrush" Value="Black"></Setter>
 
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="HeaderBorder"
+                        <Border x:Name="HeaderBorder"
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}"
                                 SnapsToDevicePixels="True"
                                 CornerRadius="10,10,10,10">
-                        <ContentPresenter Content="{TemplateBinding Text}" 
+                            <ContentPresenter Content="{TemplateBinding Text}" 
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                           SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
-                    </Border>
+                        </Border>
+                   
                     <ControlTemplate.Triggers>
-
+                        <Trigger Property="CaretBrush" Value="Black">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
+           
         </Setter>
     </Style>
 </ResourceDictionary>

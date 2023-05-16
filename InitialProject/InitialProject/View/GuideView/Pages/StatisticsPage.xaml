@@ -91,7 +91,7 @@ xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
                 <Label Content="City: " Grid.Row="4" Grid.Column="1" Margin="50 0 0 0" FontSize="14" ></Label>
                 <ComboBox x:Name="CountryComboBox" Grid.Column="1"  Grid.ColumnSpan="2" Margin="150 0 0 0" Grid.Row="3" Width="150" Height="30"   ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" FontSize="14"  >
                 </ComboBox>
-                <ComboBox  x:Name="CityComboBox" Grid.Column="1" Grid.Row="4" Width="150" Height="30"  Grid.ColumnSpan="2" Margin="150 0 0 0"  ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  FontSize="15"></ComboBox>
+                <ComboBox  x:Name="CityComboBox" Grid.Column="1" Grid.Row="4" Width="150" Height="30"  Grid.ColumnSpan="2" Margin="150 0 0 0"  ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  FontSize="14"></ComboBox>
                 <Label Content="Language: " Grid.Row="5" Grid.Column="1" FontWeight="SemiBold"  FontSize="16"></Label>
                 <TextBox Text="{Binding Languagee}" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2" Width="150" Margin="150 0 0 0" Style="{StaticResource inputFIeld}"></TextBox>
 
