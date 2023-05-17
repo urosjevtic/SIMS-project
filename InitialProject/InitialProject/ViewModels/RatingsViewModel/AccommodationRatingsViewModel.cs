@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Ratings;

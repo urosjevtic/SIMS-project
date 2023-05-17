@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Automation;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
 
 namespace InitialProject.Service.RatingServices
 {

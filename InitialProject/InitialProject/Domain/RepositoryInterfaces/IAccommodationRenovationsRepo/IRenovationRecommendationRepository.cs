@@ -17,3 +17,4 @@ namespace InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRe
         void Save(RenovationRecommendation renovationRecommendation);
     }
 }
+
