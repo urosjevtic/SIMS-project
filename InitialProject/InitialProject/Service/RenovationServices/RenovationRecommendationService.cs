@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Repository.AccommodationRenovationRepo;
+using InitialProject.Serializer;
+using InitialProject.View;
 
 namespace InitialProject.Service.RenovationServices
 {
@@ -39,7 +41,9 @@ namespace InitialProject.Service.RenovationServices
         {
             List<RenovationRecommendation> allRecommendations = _renovationRecommendationRepository.GetAll();
             List<RenovationRecommendation> recommendationByGuestId = new List<RenovationRecommendation>();
+
             BindReservationToRecommendation(allRecommendations);
+
             foreach (var recommendation in allRecommendations)
             {
                 if (recommendation.Reservation.User.Id == guestId)
@@ -51,6 +55,12 @@ namespace InitialProject.Service.RenovationServices
             return recommendationByGuestId;
         }
 
+//<<<<<<< HEAD
+
+//        private void BindReservationToRecommendation(List<RenovationRecommendation> recommendations, int guestId)
+//        {
+//            List<AccommodationReservation> reservations = _accommodationReservationService.GetAllReservationByGuestId(guestId);
+//=======
         public List<RenovationRecommendation> GetByOwnerId(int ownerId)
         {
             List<RenovationRecommendation> allRecommendations = _renovationRecommendationRepository.GetAll();
@@ -71,6 +81,7 @@ namespace InitialProject.Service.RenovationServices
         {
             List<AccommodationReservation> reservations = _accommodationReservationService.GetAll();
 
+
             foreach (var recommendation in recommendations)
             {
                 AccommodationReservation reservation = reservations.FirstOrDefault(a => a.Id == recommendation.Reservation.Id);
@@ -87,7 +98,7 @@ namespace InitialProject.Service.RenovationServices
             _renovationRecommendationRepository.Save(recommendation);
         }
 
-        private RenovationRecommendation CreateRenovation(AccommodationReservation reservation, int urgencyLevel, string recommendation)
+        public RenovationRecommendation CreateRenovation(AccommodationReservation reservation, int urgencyLevel, string recommendation)
         {
             return new RenovationRecommendation
             {
@@ -104,4 +115,6 @@ namespace InitialProject.Service.RenovationServices
         }
 
     }
+
 }
+

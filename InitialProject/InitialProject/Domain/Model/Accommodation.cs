@@ -75,6 +75,9 @@ namespace InitialProject.Domain.Model
             IsRecentlyRenovated = Convert.ToBoolean(values[9]);
 
         }
-
+        public string Concatenate()
+        {
+            return Name + " " + Location.Country + " " + Location.City + " " + Type;
+        }
     }
 }
