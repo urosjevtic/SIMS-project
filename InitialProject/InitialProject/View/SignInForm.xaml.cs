@@ -72,7 +72,7 @@ namespace InitialProject
                     }
                     if (user.Role == UserRole.Guest2)
                     {
-                        ShowTour showTour = new ShowTour(user);
+                        StartWindow showTour = new StartWindow(user);
                         showTour.Show();
                     }
                     Close();

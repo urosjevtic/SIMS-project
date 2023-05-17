@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -17,7 +18,7 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class ShowTourViewModel : BaseViewModel
+    public class ShowTourViewModel : Page
     {
         public User LoggedUser { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -27,10 +28,11 @@ namespace InitialProject.ViewModels
         public ICommand ShowVouchersCommand { get; set; }
         public ICommand ShowNotificationsCommand { get; set; }
         public ICommand ExitCommand { get; set; }
-
-        public ShowTourViewModel(User user)
+        public NavigationService navigationService { get; set; }
+        public ShowTourViewModel(NavigationService nav)
         {
-            LoggedUser = user;
+            //LoggedUser = user;
+            this.navigationService = nav;
             SearchCommand = new RelayCommand(Search);
             ShowMyToursCommand = new RelayCommand(ShowMyTours);
             MakingTourRequestsCommand = new RelayCommand(OpenMakingRequests);
@@ -56,13 +58,18 @@ namespace InitialProject.ViewModels
         }
         private void ShowRequests()
         {
-            ShowRequests showRequests = new ShowRequests();
-            showRequests.Show();
+            /*ShowRequests showRequests = new ShowRequests();
+            showRequests.Show();*/
+            /*this.navigationService.Navigate(
+                new Uri("View/Guest2View/ShowAllRequests.xaml", UriKind.Relative));*/
+            NavigationService.Navigate(new ShowAllRequests(navigationService));
         }
         private void ShowVouchers()
         {
-            ShowVouchers showVouchers = new ShowVouchers();
-            showVouchers.Show();
+            /*ShowVouchers showVouchers = new ShowVouchers();
+            showVouchers.Show();*/
+            this.navigationService.Navigate(
+                new Uri("View/Guest2View/ShowVouchersPage.xaml", UriKind.Relative));
         }
         private void ShowNotifications()
         {
@@ -71,7 +78,7 @@ namespace InitialProject.ViewModels
         }
         private void Exit()
         {
-            CloseCurrentWindow();
+            //CloseCurrentWindow();
         } 
     }
 }

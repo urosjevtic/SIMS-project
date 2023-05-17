@@ -1,0 +1,35 @@
+﻿<Page x:Class="InitialProject.View.Guest2View.ShowVouchersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.Guest2View"
+      mc:Ignorable="d" 
+      d:DesignHeight="616" d:DesignWidth="916"
+      Title="ShowVouchersPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="90"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="1" Text="All vouchers" FontSize="36" TextAlignment="Center"  HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" TextDecorations="Underline"/>
+        <DataGrid x:Name="vouchersDataGrid" FontSize="24" VerticalScrollBarVisibility="Auto" Grid.Column="1" ItemsSource="{Binding Vouchers}" AutoGenerateColumns="False" IsReadOnly="True" Margin="0,53,0,36">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Creation date" Binding="{Binding CreationDate}" FontSize="16" Width="Auto"/>
+                <DataGridTextColumn Header="Description" Binding="{Binding Text}" FontSize="16" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Column="1" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="2" Command="{Binding GoBackCommand}" Width="160" Height="50" FontSize="28" Background="LightSteelBlue">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

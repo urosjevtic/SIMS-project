@@ -28,8 +28,8 @@ namespace InitialProject.View.Guest2View
         public ShowVouchers()
         {
             InitializeComponent();
-            ShowVouchersViewModel = new ShowVouchersViewModel();
-            this.DataContext = ShowVouchersViewModel;
+            /*ShowVouchersViewModel = new ShowVouchersViewModel();
+            this.DataContext = ShowVouchersViewModel;*/
         }
 
     }

@@ -13,18 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.ViewModels;
+using InitialProject.ViewModels.Guest2ViewModel;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowAllRequests.xaml
+    /// Interaction logic for ShowVouchersPage.xaml
     /// </summary>
-    public partial class ShowAllRequests : Page
+    public partial class ShowVouchersPage : Page
     {
-        public ShowAllRequests(NavigationService nav)
+        public ShowVouchersPage(ShowVouchersViewModel sv)
         {
             InitializeComponent();
-            this.DataContext = new ShowVouchersViewModel(nav);
+            this.DataContext = sv;
         }
     }
 }
