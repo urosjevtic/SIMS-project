@@ -13,16 +13,16 @@ namespace InitialProject.Service
     public class NotificationService
     {
 
-        public INotificationRepository _notificationRepository;
-        public IShortTourRequestRepository _shortTourRequestRepository;
-        public ITourRepository _tourRepository;
-        public ILocationRepository _locationRepository;
+        private readonly INotificationRepository _notificationRepository;
+        private ShortTourRequestService _shortTourRequestService;
+        private TourService _tourService;
+        private readonly LocationService _locationService;
         public NotificationService()
         {
             _notificationRepository = Injector.Injector.CreateInstance<INotificationRepository>();
-            _shortTourRequestRepository = Injector.Injector.CreateInstance<IShortTourRequestRepository>();
-            _tourRepository = Injector.Injector.CreateInstance<ITourRepository>();
-            _locationRepository = Injector.Injector.CreateInstance<ILocationRepository>();
+            _shortTourRequestService = new ShortTourRequestService();
+            _tourService = new TourService();
+            _locationService = new LocationService();
         }
 
         public List<Notification> GetAll()
@@ -59,7 +59,6 @@ namespace InitialProject.Service
         public void Update(Notification notification)
         {
             _notificationRepository.Update(notification);
-
         }
         public void DeleteAll()
         {
@@ -68,7 +67,7 @@ namespace InitialProject.Service
         public void SendNotifications(Tour tour)
         {
             int i = 0;
-            foreach(ShortTourRequest shortTour in _shortTourRequestRepository.GetAll())
+            foreach(ShortTourRequest shortTour in _shortTourRequestService.GetAll())
             {
                 if(((shortTour.Country == tour.Location.Country && shortTour.City == tour.Location.City) || shortTour.Language == tour.Language) && shortTour.Status != RequestStatus.Accepted)
                 {
@@ -94,9 +93,9 @@ namespace InitialProject.Service
             List<TourNotification> list = new List<TourNotification>();
             foreach(Notification notification in _notificationRepository.GetAllById(id))
             {
-                foreach(Tour tour in _tourRepository.GetAll())
+                foreach(Tour tour in _tourService.GetAll())
                 {
-                    foreach(Location location in _locationRepository.GetAll())
+                    foreach(Location location in _locationService.GetLocations())
                     {
                         if(location.Id == tour.Location.Id)
                         {

@@ -10,17 +10,13 @@ using System.Text.RegularExpressions;
 
 namespace InitialProject.Service
 {
-
     public class TourStatisticService
     {
-        private ITourRepository _tourRepository;
-
         public TourService _tourService;
         public ITourReservationRepository _tourReservationRepository;
         public IShortTourRequestRepository _shortTourRequestRepository;
         public TourStatisticService()
         {
-            _tourRepository = Injector.Injector.CreateInstance<ITourRepository>();
             _tourService = new TourService();
             _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();
             _shortTourRequestRepository = Injector.Injector.CreateInstance<IShortTourRequestRepository>();
@@ -118,6 +114,25 @@ namespace InitialProject.Service
             }
             return list;
         }
+        public List<DataPoint> FindToursByLanguageAllTimes()
+        {
+            List<DataPoint> list = new();
+            AddLanguages(list);
+            int i;
+            foreach (DataPoint dp in list)
+            {
+                i = 0;
+                foreach (ShortTourRequest shortRequest in _shortTourRequestRepository.GetAll())
+                {
+                    if ((dp.Key == shortRequest.Language) && shortRequest.Status == RequestStatus.Accepted)
+                    {
+                        i++;
+                    }
+                }
+                dp.Value = i;
+            }
+            return list;
+        }
         public List<DataPoint> AddLanguages(List<DataPoint> list)
         {
             List<ShortTourRequest> allRequests = _shortTourRequestRepository.GetAll();
@@ -144,6 +159,25 @@ namespace InitialProject.Service
                 foreach (ShortTourRequest shortRequest in _shortTourRequestRepository.GetAll())
                 {
                     if ((dp.Key == shortRequest.City) && Convert.ToInt32(year) == shortRequest.From.Year && shortRequest.Status == RequestStatus.Accepted)
+                    {
+                        i++;
+                    }
+                }
+                dp.Value = i;
+            }
+            return list;
+        }
+        public List<DataPoint> FindToursByLocationAllTimes()
+        {
+            List<DataPoint> list = new();
+            AddLocations(list);
+            int i;
+            foreach (DataPoint dp in list)
+            {
+                i = 0;
+                foreach (ShortTourRequest shortRequest in _shortTourRequestRepository.GetAll())
+                {
+                    if ((dp.Key == shortRequest.City) && shortRequest.Status == RequestStatus.Accepted)
                     {
                         i++;
                     }
@@ -186,6 +220,22 @@ namespace InitialProject.Service
             percentage = 100*(double)accepted/sum;
             return Math.Round(percentage, 1);
         }
+        public double FindAcceptedToursPercentageAllTimes()
+        {
+            double percentage = 0;
+            int accepted = 0;
+            int sum = 0;
+            foreach (ShortTourRequest s in _shortTourRequestRepository.GetAll())
+            {
+                    if (s.Status == RequestStatus.Accepted)
+                    {
+                        accepted++;
+                    }
+                    sum++;
+            }
+            percentage = 100 * (double)accepted / sum;
+            return Math.Round(percentage, 1);
+        }
         public double FindAverageInAccepted(int Year)
         {
             int counter = 0;
@@ -203,6 +253,21 @@ namespace InitialProject.Service
             }
             double percentage = (double)sumPeople / counter;
             return Math.Round(percentage,1);
+        }
+        public double FindAverageInAcceptedAllTimes()
+        {
+            int counter = 0;
+            int sumPeople = 0;
+            foreach (ShortTourRequest s in _shortTourRequestRepository.GetAll())
+            {
+                    if (s.Status == RequestStatus.Accepted)
+                    {
+                        sumPeople += s.NumberOfPeople;
+                        counter++;
+                    }
+            }
+            double percentage = (double)sumPeople / counter;
+            return Math.Round(percentage, 1);
         }
         public double FindPeopleWithoutVoucher(Tour tour)
         {

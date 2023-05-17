@@ -13,5 +13,6 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public void Save(ShortTourRequest shortTourRequest);
         public List<ShortTourRequest> GetAll();
         public void Invalidate(ShortTourRequest shortTourRequest);
+        public void Update(ShortTourRequest shortTourRequest);  
     }
 }

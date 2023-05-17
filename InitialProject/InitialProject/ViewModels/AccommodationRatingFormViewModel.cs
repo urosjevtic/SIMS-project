@@ -102,6 +102,7 @@ namespace InitialProject.ViewModels
         private void RateAOwner()
         {
             _ownerRatingService.SubmitRating(UnratedOwner, _ownerCorrectness, _cleanlinessRating, _additionalComment, _imageUrl);
+            MessageBox.Show("Assessment passed successfully!");
             //NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
 
@@ -137,7 +138,7 @@ namespace InitialProject.ViewModels
         private void LeaveRecommendation()
         {
             _recommendationService.SubmitRating(UnratedOwner, _urgencyLevel, _recommendation);
-            MessageBox.Show("Uspesno je");
+            MessageBox.Show("You have successfuly submitted a renovaation recommendation!");
             //NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
     }

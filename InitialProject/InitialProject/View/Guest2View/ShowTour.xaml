@@ -37,7 +37,7 @@
         </Button>
         <Button Grid.Column="1" Grid.Row="3" BorderThickness="2" HorizontalAlignment="Left" Margin="6,6,-5,0" Background="LightSteelBlue" VerticalAlignment="Top" Command="{Binding MakingTourRequestsCommand}" FontSize="36" Height="70" Width="700">
             <StackPanel Orientation="Horizontal">
-                <Image Source="/Resources/Images/quote-request1.png" Height="40"></Image>
+                <Image Source="/Resources/Images/quote-request - Copy.png" Height="40"></Image>
                 <TextBlock Text=" Making tour request" VerticalAlignment="Center"/>
             </StackPanel>
         </Button>

@@ -53,6 +53,23 @@ namespace InitialProject.Repository
             allRequests.Insert(s.IdRequest - 1, s);
             SaveAll(allRequests);
         }
+        public void Update(ShortTourRequest request)
+        {
+
+            ShortTourRequest newRequest = _shortRequests.Find(p => p.IdRequest == request.IdRequest);
+            newRequest.IdRequest = request.IdRequest;
+            newRequest.IdUser = request.IdUser;
+            newRequest.Country = request.Country;
+            newRequest.City = request.City;
+            newRequest.Language = request.Language;
+            newRequest.NumberOfPeople = request.NumberOfPeople;
+            newRequest.Status = request.Status;
+            newRequest.Description = request.Description;
+            newRequest.From = request.From;
+            newRequest.To = request.To; 
+            SaveAll(_shortRequests);
+            
+        }
         public void SaveAll(List<ShortTourRequest> list)
         {
             _serializer.ToCSV(FilePath, list);

@@ -32,6 +32,15 @@ namespace InitialProject.Domain.Model
             City = city;    
             Language = language;    
         }
+        public ShortTourRequest(string country,string city,string language, int numberOfPeople, DateTime from,DateTime to)
+        {
+            Country = country;
+            City = city;
+            Language = language;
+            NumberOfPeople = numberOfPeople;
+            From = from;
+            To = to;
+        }
         public string[] ToCSV()
         {
             string[] csvValues =

@@ -14,6 +14,7 @@ namespace InitialProject.Domain.Model
         public int Id { get; set; } 
         public TourGuest Guest { get; set; }
         public CheckPoint CheckPoint{ get; set; }
+
         private readonly CheckPointRepository _checkPointrepository;
         private readonly TourGuestRepository _tourGuestsRepository;
 
