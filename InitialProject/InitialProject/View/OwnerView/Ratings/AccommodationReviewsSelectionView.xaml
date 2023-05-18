@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="AccommodationReviewsSelectionView" Height="637" Width="345">
     <Page.Background>
@@ -80,17 +81,17 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Accommodation reviews" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Accommodation_reviews}" Foreground="#3A3D55"></TextBlock>
 
 
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Avrage rating: " 
+                <TextBlock Text="{ns:Loc Avrage_rating}" 
                            FontWeight="Bold"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
@@ -99,7 +100,7 @@
                 <TextBlock Text="{Binding AvrageRating}" />
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
-                <TextBlock Text="Is super owner: " 
+                <TextBlock Text="{ns:Loc Is_super_owner}" 
                        FontWeight="Bold"
                        VerticalAlignment="Center"
                        FontSize="15"
@@ -165,31 +166,31 @@
                            Margin="10,10,10,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Country: " 
+                                <TextBlock Text="{ns:Loc Country}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Location.Country}" />
-                                <TextBlock Margin="10,0" Text="City: " 
+                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                                FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Location.City}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Accommodation type: " 
+                                <TextBlock Text="{ns:Loc Accommodation_type}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Type}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Max number of guests: " 
+                                <TextBlock Text="{ns:Loc Maximum_number_of_guests}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding MaxGuests}" />
                             </StackPanel>
 
 
-                            <Button Content="See reviews"
+                            <Button Content="{ns:Loc See_reviews}"
                                     Margin="10,15"
                                     Grid.Row="4"
                                     Style="{StaticResource LogInButtonStyle}"

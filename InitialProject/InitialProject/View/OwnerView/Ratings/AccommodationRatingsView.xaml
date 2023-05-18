@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="AccommodationRatingsView" Height="637" Width="345">
     <Page.Background>
@@ -67,7 +68,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
@@ -81,12 +82,12 @@
 
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,5" Grid.Row="1">
-                <TextBlock Text="Country: " 
+                <TextBlock Text="{ns:Loc Country}" 
                            FontWeight="Bold"
                            Foreground="#3A3D55"
                            Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding Accommodation.Location.Country}" Foreground="#3A3D55" />
-                <TextBlock Margin="10,0" Text="City: " 
+                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                            FontWeight="Bold"
                            Foreground="#3A3D55"/>
                 <TextBlock Text="{Binding Accommodation.Location.City}" Foreground="#3A3D55" />
@@ -142,36 +143,36 @@
 
                             <!--Start and end date-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Start date: " 
+                                <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="End date: " 
+                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
                             <!--Review date-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Review date: " 
+                                <TextBlock Text="{ns:Loc Review_date}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding ReservedAccommodation.Name}" />
                             </StackPanel>
                             <!--Ratings-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Cleanlines: " 
+                                <TextBlock Text="{ns:Loc Cleanlines}" 
                                            FontWeight="Bold"
                                            Margin="0,0,0,0"/>
                                 <TextBlock Text="{Binding CleanlinessRating}" />
-                                <TextBlock Margin="15, 0,0 ,0" Text="Owner fairnes: " 
+                                <TextBlock Margin="15, 0,0 ,0" Text="{ns:Loc Owner_fairnes}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding OwnerCorrectness}" />
                             </StackPanel>
 
                             <!--Additional comment-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
-                                <TextBlock Text="Additional comment: " 
+                                <TextBlock Text="{ns:Loc Additional_comment}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                             </StackPanel>

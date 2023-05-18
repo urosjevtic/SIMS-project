@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="UnratedGuestsListView" Height="637" Width="345">
     <Page.Background>
@@ -67,12 +68,12 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Unrated Guests" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Unrated_guests}" Foreground="#3A3D55"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
                  ItemsSource="{Binding UnratedGuests}"
@@ -111,7 +112,7 @@
 
                             <!--Guest username-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
-                                <TextBlock Text="Guest username: " 
+                                <TextBlock Text="{ns:Loc Guest_username}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.User.Username}" />
@@ -121,7 +122,7 @@
 
                             <!--Accommodation-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Accommodation: " 
+                                <TextBlock Text="{ns:Loc Accommodation}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.Accommodation.Name}" />
@@ -130,11 +131,11 @@
 
                             <!--Start and end date-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Start date: " 
+                                <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="End date: " 
+                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
@@ -143,7 +144,7 @@
 
                             <!--Days left to rate guest-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Days left to rate guest: " 
+                                <TextBlock Text="{ns:Loc Days_left_to_rate_guest}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding }" />
@@ -151,7 +152,7 @@
 
 
 
-                            <Button Content="Rate a guest"
+                            <Button Content="{ns:Loc Rate_a_guest}"
                                     Margin="10,15"
                                     Grid.Row="6"
                                     Style="{StaticResource LogInButtonStyle}"

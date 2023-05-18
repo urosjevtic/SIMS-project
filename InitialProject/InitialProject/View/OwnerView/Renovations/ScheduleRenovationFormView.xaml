@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:InitialProject.Validation"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="ScheduleRenovationFormView" Height="637" Width="345">
     <Page.Background>
@@ -97,7 +98,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
@@ -114,21 +115,21 @@
                 <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
             <!--Accommodation name-->
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Renovation" Foreground="#3A3D55"></TextBlock>
+                <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation}" Foreground="#3A3D55"></TextBlock>
             <!--Accommodation location-->
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,5" >
-                <TextBlock Text="Selected accommodation: " 
+                    <TextBlock Text="{ns:Loc Selected_accommodation}" 
                            FontWeight="Bold"
                            Foreground="#3A3D55"
                            Margin="0,0,5,0"/>
                 <TextBlock Text="" />
             </StackPanel>
 
-            <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold" Text="Select date range for renovations" Foreground="#3A3D55"></TextBlock>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold" Text="{ns:Loc Select_date_range_for_renovations}" Foreground="#3A3D55"></TextBlock>
 
             <!--From and to dates-->
             <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
-                <TextBlock Text="From:" 
+                <TextBlock Text="{ns:Loc From}" 
                            FontWeight="Bold"
                            Margin="0,0,39,0"
                            Foreground="#3A3D55"/>
@@ -138,7 +139,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
-                <TextBlock Text="To:        " 
+                <TextBlock Text="{ns:Loc To}" 
                            FontWeight="Bold"
                            Margin="10,0,20,0"
                            Foreground="#3A3D55"/>
@@ -146,7 +147,7 @@
 
                 </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
-                <TextBlock Text="Renovation length:        " 
+                    <TextBlock Text="{ns:Loc Renovation_length}" 
                            FontWeight="Bold"
                            Margin="10,0,0,0"
                            Foreground="#3A3D55"/>
@@ -166,7 +167,7 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center"  Margin="10,20">
-                <TextBlock Text="Select available date:" 
+                <TextBlock Text="{ns:Loc Select_available_date}" 
                            FontWeight="Bold"
                            Margin="0,0,10,0"
                            Foreground="#3A3D55"/>
@@ -187,7 +188,7 @@
             </StackPanel>
 
             <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Left"  Margin="10,20">
-                <TextBlock Text="Renovation description:" 
+                <TextBlock Text="{ns:Loc Renovation_description}" 
                            FontWeight="Bold"
                            Margin="0,0,10,0"
                            Foreground="#3A3D55"/>
@@ -210,7 +211,7 @@
 
 
             <Button Grid.Row="2" 
-                    Margin="20 100 20 100" Content="Submit" 
+                    Margin="20 100 20 100" Content="{ns:Loc Submit}" 
                     Style="{StaticResource ConfirmButtonStyle}"
                     Command="{Binding ScheduleRenovationCommand}">
             </Button>

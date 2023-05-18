@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="MyAccommodationImagesView" Height="637" Width="345">
     <Page.Background>
@@ -70,7 +71,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
@@ -83,12 +84,12 @@
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding Accommodation.Name}" Foreground="#3A3D55"></TextBlock>
             <!--Accommodation location-->
             <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,5" >
-                <TextBlock Text="Country: " 
+                <TextBlock Text="{ns:Loc Country}" 
                            FontWeight="Bold"
                            Foreground="#3A3D55"
                            Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding Accommodation.Location.Country}" />
-                <TextBlock Margin="10,0" Text="City: " 
+                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                            FontWeight="Bold"
                            Foreground="#3A3D55"/>
                 <TextBlock Text="{Binding Accommodation.Location.City}" />

@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:val="clr-namespace:InitialProject.Validation"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="AccommodationRegistrationForm" Height="637" Width="345">
 
@@ -208,13 +209,13 @@
             <RowDefinition Height="0.2*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold"></Button>
+        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold"></Button>
 
-        <TextBlock Grid.Row="1" Text="Accommodation Registration" Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="DemiBold"/>
+        <TextBlock Grid.Row="1" Text="{ns:Loc Accommodation_registration}" Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="25" FontWeight="DemiBold"/>
 
         <Grid Grid.Row="2">
             <StackPanel HorizontalAlignment="Center">
-                <Label Content="Name:"/>
+                <Label Content="{ns:Loc Name}"/>
                 <TextBox x:Name="accommodationName" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                     <TextBox.Text>
                         <Binding Path="AccommodationName" UpdateSourceTrigger="PropertyChanged">
@@ -231,16 +232,16 @@
 
                 <StackPanel Margin="0,-10,0,15" Orientation="Horizontal">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="Country:"/>
+                        <Label Content="{ns:Loc Country}"/>
                         <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Locations.Keys}" Height="30" Margin="0,0,10,0" Width="100"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="City:"/>
+                        <Label Content="{ns:Loc City}"/>
                         <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="CityComboBox" ItemsSource="{Binding Cities}" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  Width="100" Height="30"/>
                     </StackPanel>
                 </StackPanel>
 
-                <Label Content="Accommodation type:"/>
+                <Label Content="{ns:Loc Accommodation_type}"/>
                 <ComboBox Style="{StaticResource ComboBoxFlatStyle}" x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" FontSize="15">
                     <ComboBoxItem Content="house"/>
                     <ComboBoxItem Content="appartment"/>
@@ -252,7 +253,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Maximum number of guests:"/>
+                    <Label Grid.Column="0" Content="{ns:Loc Maximum_number_of_guests}"/>
                     <TextBox Grid.Column="1" x:Name="MaxNumberOfGuests" Height="30" TextAlignment="Center" FontSize="15" Margin="4,0,0,0">
                         <TextBox.Text>
                             <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged">
@@ -272,7 +273,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Minimum reservation days:"/>
+                    <Label Grid.Column="0" Content="{ns:Loc Minimum_renovation_days}"/>
                     <TextBox x:Name="MinimumReservationDays" Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                         <TextBox.Text>
                             <Binding Path="MinReservationDays" UpdateSourceTrigger="PropertyChanged">
@@ -292,7 +293,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="Cancelation period:"/>
+                    <Label Grid.Column="0" Content="{ns:Loc Cancelation_period}"/>
                     <TextBox x:Name="CancelationPeriod"  Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                         <TextBox.Text>
                             <Binding Path="CancelationPeriod" UpdateSourceTrigger="PropertyChanged">
@@ -308,7 +309,7 @@
                     </TextBox>
 
                 </Grid>
-                <Label Content="Images url:"></Label>
+                <Label Content="{ns:Loc Images_url}"></Label>
                 <TextBox x:Name="imagesUrlTextbox"  Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                     <TextBox.Text>
                         <Binding Path="ImagesUrl" UpdateSourceTrigger="PropertyChanged">
@@ -327,7 +328,7 @@
 
         </Grid>
 
-        <Button Grid.Row="3" Command="{Binding ConfirmRegistrationCommand}" Content="Confirm" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmButtonStyle}">
+        <Button Grid.Row="3" Command="{Binding ConfirmRegistrationCommand}" Content="{ns:Loc Confirm}" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmButtonStyle}">
 
         </Button>
 

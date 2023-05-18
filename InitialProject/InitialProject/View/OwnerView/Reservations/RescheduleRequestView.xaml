@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="RescheduleRequestView" Height="700" Width="345">
     <Page.Background>
@@ -63,12 +64,12 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Reservation rescheduling" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation_rescheduling}" Foreground="#3A3D55"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="reschedulingListBox"
                  ItemsSource="{Binding RescheduleRequests}"
@@ -105,7 +106,7 @@
 
                             <!--Guest username-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
-                                <TextBlock Text="Guest username: " 
+                                <TextBlock Text="{ns:Loc Guest_username}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.User.Username}" />
@@ -114,36 +115,36 @@
 
                             <!--Accommodation-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Accommodation: " 
+                                <TextBlock Text="{ns:Loc Accommodation}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.Accommodation.Name}" />
                             </StackPanel>
                             <!--Initial start and end date-->
-                            <TextBlock Text="Initial Dates" Grid.Row="2"></TextBlock>
+                            <TextBlock Text="{ns:Loc Initial_date}" Grid.Row="2"></TextBlock>
 
 
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Start date: " 
+                                <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="End date: " 
+                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
                             <!--New start and end date-->
-                            <TextBlock Text="New Date" Grid.Row="4"></TextBlock>
+                            <TextBlock Text="{ns:Loc New_date}" Grid.Row="4"></TextBlock>
 
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
-                                <TextBlock Text="Start date: " 
+                                <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding RescheduleStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="End date: " 
+                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding RescheduleEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
@@ -151,18 +152,18 @@
                             <!--Is already reserved-->
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="6">
-                                <TextBlock Text="Is already occupied: " 
+                                <TextBlock Text="{ns:Loc Is_already_ocupied}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding IsAlreadyReserved}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Reschedule" Style="{StaticResource ConfirmButtonStyle}" 
+                                <Button Content="{ns:Loc Reschedule}" Style="{StaticResource ConfirmButtonStyle}" 
                                         Margin="10, 5"
                                         Command="{Binding DataContext.ApproveRescheduleCommand, ElementName=reschedulingListBox}"
                                         CommandParameter="{Binding}" Width="120"/>
-                                <Button Content="Decline" Style="{StaticResource ConfirmButtonStyle}" 
+                                <Button Content="{ns:Loc Decline}" Style="{StaticResource ConfirmButtonStyle}" 
                                         Margin="10, 5"
                                         Command="{Binding DataContext.DeclineRescheduleCommand, ElementName=reschedulingListBox}"
                                         CommandParameter="{Binding}" Width="120"/>
