@@ -29,17 +29,5 @@ namespace InitialProject.View.Guest2View
             showTourViewModel = new ShowTourViewModel(ns);
             this.DataContext = showTourViewModel;
         }
-        private void AddStudentBtn_Click(object sender, RoutedEventArgs e)
-        {
-            /*ShowTourRequestsViewModel vm = new ShowTourRequestsViewModel(this.NavigationService);
-            ShowAllRequests addStudentPage = new ShowAllRequests(vm);
-            this.NavigationService.Navigate(addStudentPage);*/
-        }
-        private void OpenVouchersBtn_Click(object sender, RoutedEventArgs e)
-        {
-            ShowVouchersViewModel vm = new ShowVouchersViewModel(this.NavigationService);
-            ShowVouchersPage openVouchers = new ShowVouchersPage(vm);
-            this.NavigationService.Navigate(openVouchers);
-        }
     }
 }

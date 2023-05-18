@@ -24,7 +24,7 @@ namespace InitialProject.View.Guest2View
         public ShowAllRequests(NavigationService nav)
         {
             InitializeComponent();
-            this.DataContext = new ShowVouchersViewModel(nav);
+            this.DataContext = new ShowTourRequestsViewModel(nav);
         }
     }
 }

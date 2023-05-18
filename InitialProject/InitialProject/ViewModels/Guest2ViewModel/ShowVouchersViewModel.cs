@@ -46,12 +46,14 @@ namespace InitialProject.ViewModels
             }
         }
         public NavigationService navService;
+        public User LoggedUser { get; set; }
 
         private readonly VoucherService _voucherService;
-        public ShowVouchersViewModel(NavigationService nav)
+        public ShowVouchersViewModel(User user, NavigationService nav)
         {
             _voucherService = new VoucherService();
             this.navService = nav;
+            LoggedUser = user;
             vouchers = _voucherService.GetAllCreated();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
             GoBackCommand = new RelayCommand(GoBack);
@@ -59,8 +61,7 @@ namespace InitialProject.ViewModels
 
         private void GoBack()
         {
-            this.navService.Navigate(
-            new Uri("View/Guest2View/ShowTourPage.xaml", UriKind.Relative));
+            navService.Navigate(new ShowTourPage(LoggedUser, navService));
         }
     }
 }

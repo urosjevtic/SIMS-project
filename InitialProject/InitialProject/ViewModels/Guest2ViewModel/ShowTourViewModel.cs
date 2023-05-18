@@ -58,18 +58,11 @@ namespace InitialProject.ViewModels
         }
         private void ShowRequests()
         {
-            /*ShowRequests showRequests = new ShowRequests();
-            showRequests.Show();*/
-            /*this.navigationService.Navigate(
-                new Uri("View/Guest2View/ShowAllRequests.xaml", UriKind.Relative));*/
-            NavigationService.Navigate(new ShowAllRequests(navigationService));
+            navigationService.Navigate(new ShowAllRequests(navigationService));
         }
         private void ShowVouchers()
         {
-            /*ShowVouchers showVouchers = new ShowVouchers();
-            showVouchers.Show();*/
-            this.navigationService.Navigate(
-                new Uri("View/Guest2View/ShowVouchersPage.xaml", UriKind.Relative));
+            navigationService.Navigate(new ShowVouchersPage(LoggedUser, navigationService));
         }
         private void ShowNotifications()
         {
