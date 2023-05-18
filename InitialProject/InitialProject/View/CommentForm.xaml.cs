@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System;
 using System.ComponentModel;
@@ -18,6 +18,7 @@ namespace InitialProject.Forms
         public Comment SelectedComment { get; set; }
 
         private readonly CommentRepository _repository;
+        public int IdTour { get; set; }
 
         private string _text;
         public string Text
@@ -40,12 +41,13 @@ namespace InitialProject.Forms
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }        
 
-        public CommentForm(User user)
+        public CommentForm(User user, Tour tour)
         {
             InitializeComponent();
             Title = "Create new comment";
             DataContext = this;
             LoggedInUser = user;
+            IdTour = tour.Id;
             _repository = new CommentRepository();
         }
 
@@ -90,7 +92,7 @@ namespace InitialProject.Forms
             } 
             else
             {
-                Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser);
+                Comment newComment = new Comment(DateTime.Now, Text, LoggedInUser, IdTour,true);
                 Comment savedComment = _repository.Save(newComment);
                 CommentsOverview.Comments.Add(savedComment);
             }

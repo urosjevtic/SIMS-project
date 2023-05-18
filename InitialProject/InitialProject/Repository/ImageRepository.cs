@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 using Microsoft.VisualBasic.ApplicationServices;
 
@@ -27,7 +28,18 @@ namespace InitialProject.Repository
         {
             return _serializer.FromCSV(FilePath);
         }
-
+        public List<string> GetAllImagesById(int id)
+        {
+            _images = _serializer.FromCSV(FilePath);
+            foreach(Image image in _images)
+            {
+                if(image.Id == id)
+                {
+                    return image.Url;
+                }
+            }
+            return null;
+        }
         public Image ReturnSaved(Image image)
         {
             image.Id = NextId();
@@ -61,7 +73,7 @@ namespace InitialProject.Repository
             _serializer.ToCSV(FilePath, _images);
         }
 
-        void Save(Image image)
+        public void Save(Image image)
         {
             image.Id = NextId();
             _images = _serializer.FromCSV(FilePath);
@@ -73,13 +85,17 @@ namespace InitialProject.Repository
         {
             throw new NotImplementedException();
         }
-
-        public void Update(Image entity)
+        public void Update(Tour tour, string[] text)
         {
-            throw new NotImplementedException();
+            _images = _serializer.FromCSV(FilePath);
+            Image found = _images.Find(c => c.Id == tour.CoverImageUrl.Id);
+            foreach(string s in text)
+            {
+                found.Url.Add(s);
+            }
+            _serializer.ToCSV(FilePath, _images);
         }
-
-        void IRepository<Image>.Save(Image entity)
+        public void Update(Image entity)
         {
             throw new NotImplementedException();
         }

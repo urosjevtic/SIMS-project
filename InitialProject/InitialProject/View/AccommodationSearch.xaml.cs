@@ -1,6 +1,8 @@
-﻿using InitialProject.Forms;
-using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
+using InitialProject.Forms;
 using InitialProject.Repository;
+using InitialProject.Repository.AccommodationRepo;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,61 +27,32 @@ namespace InitialProject.View
     public partial class AccommodationSearch : Window
     {
 
-        public ObservableCollection<Accommodation> Accommodations { get; set; }  
-        private readonly AccommodationRepository _accommodationRepository;     
-        private readonly LocationRepository _locationRepository;               
+        public ObservableCollection<Accommodation> Accommodations { get; set; }
+        private readonly AccommodationRepository _accommodationRepository;
+        private readonly LocationRepository _locationRepository;
 
-        public List<Accommodation> accommodations;
-        public List<Location> locations;
+        public List<Accommodation> accommodations { get; set; }
+        public List<Location> locations { get; set; }
 
         public User LoggedUser { get; set; }
         public Accommodation SelectedAccommodation { get; set; }
-        public AccommodationType SelectedType;
+        
 
         public AccommodationSearch(User user)
         {
             InitializeComponent();
             this.DataContext = this;
-            _accommodationRepository= new AccommodationRepository();
+            _accommodationRepository = new AccommodationRepository();
             _locationRepository = new LocationRepository();
             LoggedUser = user;
-            loadData();
-            AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
-        }
-
-       
-        private List<Location> LoadLocations()
-        {
-            return _locationRepository.GetAll();
-        }
-
-
-       public void UpdateDataGrid()
-        {
-            var accommodations = _accommodationRepository.GetAll();
-            var locations = LoadLocations();
-            AddAccommodationLocation(accommodations, locations);
-            AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
-        }
-        
-        public void AddAccommodationLocation(List<Accommodation>accommodations, List<Location> locations)   //veza smestaja i lokacije
-        {
-            foreach(var accommodation in accommodations)
-            {
-                foreach(var location in locations)
-                {
-                    if (location.Id == accommodation.Location.Id)
-                    {
-                        accommodation.Location = location;
-                        break;
-                    }
-                }
-            }
-        }
-        private void loadData()
-        {
             accommodations = _accommodationRepository.GetAll();
-            locations = LoadLocations();
+            locations = _locationRepository.GetAll();
+            AddAccommodationLocation(accommodations, locations);
+
+            // AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
+        }
+        private void AddAccommodationLocation(List<Accommodation> accommodations, List<Location> locations)
+        {
             foreach (Accommodation accommodation in accommodations)
             {
                 foreach (Location location in locations)
@@ -93,73 +66,51 @@ namespace InitialProject.View
             }
         }
 
+        public List<Accommodation> Search()
+        {
+            AddAccommodationLocation(accommodations, locations);
+
+            List<Accommodation> searchResults = accommodations.ToList();
+
+            RemoveByLocation(searchResults);
+            RemoveByNumbers(searchResults);
+
+            return searchResults;
+        }
+        public List<Accommodation> RemoveByLocation(List<Accommodation> searchResults)
+        {
+            string[] searchValues = { tbAccommodationName.Text, tbCityName.Text, tbCountryName.Text, cbAccommodationType.Text };
+            foreach (string value in searchValues)
+                searchResults.RemoveAll(x => !x.Concatenate().ToLower().Contains(value.ToLower()));
+            return searchResults;
+        }
+
+        public List<Accommodation> RemoveByNumbers(List<Accommodation> searchResults)
+        {
+            int searchGuestNumber = tbGuestNumber.Text == "" ? -1 : Convert.ToInt32(tbGuestNumber.Text);
+            int searchDayNumber = tbReservationDays.Text == "" ? -1 : Convert.ToInt32(tbReservationDays.Text);
+            if (searchGuestNumber > 0) searchResults.RemoveAll(x => x.MaxGuests < searchGuestNumber);
+            if (searchDayNumber > 0) searchResults.RemoveAll(x => x.MinReservationDays > searchDayNumber);
+
+            return searchResults;
+        }
 
         private void SerchButton_Click(object sender, RoutedEventArgs e)
         {
-            loadData();
-
-            var filteredList = new ObservableCollection<Accommodation>();
-
-
-            foreach (Accommodation accommodation in accommodations)
-            {
-                if (tbAccommodationName.Text != "")
-                {
-                    if (accommodation.Name.ToLower().Contains((tbAccommodationName.Text).ToLower()))
-
-                        filteredList.Add(accommodation);
-
-                }
-                if (tbCityName.Text != "")
-                { 
-                    if (accommodation.Location.City.ToLower().Contains(tbCityName.Text.ToLower()))
-                    {
-                        if (!filteredList.Contains(accommodation))
-                            filteredList.Add(accommodation);
-                    }
-                }
-                if (tbCountryName.Text != "")
-                {
-                    if (accommodation.Location.Country.ToLower().Contains(tbCountryName.Text))
-                    {
-                        if (!filteredList.Contains(accommodation))
-                            filteredList.Add(accommodation);
-                    }
-                }
-                if(cbAccommodationType.Text != "")
-                {
-                    if (accommodation.Type.ToString() ==cbAccommodationType.Text)
-                    {
-                        if (!filteredList.Contains(accommodation))
-                            filteredList.Add(accommodation);
-                    }
-                }
-                if (tbGuestNumber.Text != "")
-                {
-                    if(accommodation.MaxGuests >= int.Parse(tbGuestNumber.Text))
-                    {
-                        if (!filteredList.Contains(accommodation))
-                            filteredList.Add(accommodation);
-                    }
-                }
-                if (tbReservationDays.Text != "")
-                {
-                    if (accommodation.MinReservationDays >= int.Parse(tbReservationDays.Text))
-                    {
-                        if (!filteredList.Contains(accommodation))
-                            filteredList.Add(accommodation);
-                    }
-                }
-            }
-            AccommodationDataGrid.ItemsSource = filteredList;       
+            //accommodations = _accommodationRepository.GetAll();
+            List<Accommodation> filteredAccommodation = Search();
+            accommodations = filteredAccommodation;
+            AccommodationDataGrid.ItemsSource = new ObservableCollection<Accommodation>(accommodations);
+            accommodations = _accommodationRepository.GetAll();
         }
+
 
         private void ViewButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedAccommodation != null)
             {
-                AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation, LoggedUser);
-                accommodationReservation.Show();
+               // AccommodationReservation accommodationReservation = new AccommodationReservation(SelectedAccommodation, LoggedUser);
+               // accommodationReservation.Show();
             }
         }
     }

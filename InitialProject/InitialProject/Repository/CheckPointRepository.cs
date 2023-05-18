@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Serializer;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
@@ -118,9 +119,5 @@ namespace InitialProject.Repository
             
         }
 
-        void IRepository<CheckPoint>.Save(CheckPoint entity)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Serializer;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,5 +68,17 @@ namespace InitialProject.Repository
             _comments = _serializer.FromCSV(FilePath);
             return _comments.FindAll(c => c.User.Id == user.Id);
         }
+        public List<Comment> GetByTour(Tour tour)
+        {
+            _comments = _serializer.FromCSV(FilePath);
+            return _comments.FindAll(c => c.IdTour == tour.Id);
+        }
+        public Comment GetByText(string text)
+        {
+            _comments = _serializer.FromCSV(FilePath);
+            return _comments.Find(c => c.Text==text);
+        }
+
+
     }
 }

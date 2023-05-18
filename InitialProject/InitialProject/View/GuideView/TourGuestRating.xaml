@@ -1,0 +1,83 @@
+﻿<Window x:Class="InitialProject.View.TourGuestRating"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View"
+        mc:Ignorable="d"
+        Title="TourGuestRating" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+
+
+
+
+    <Grid Margin="0,0,-54,19">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="12*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="13*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="Guests ratings:" FontWeight="Bold" FontSize="16"></Label>
+
+        <ListView 
+          HorizontalAlignment="Left" 
+          Name="listView2" 
+          Grid.Row="2"
+          VerticalAlignment="Top" 
+          
+          ItemsSource="{Binding TourGuests}"
+          IsSynchronizedWithCurrentItem="True" Height="119">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id usera" Width="70" />
+                        <GridViewColumn DisplayMemberBinding="{Binding GuideKnowledge}" Header="Guide knowledge"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding GuideLanguage}" Header="Language"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding InterestingTour}" Header="Interesting tour"  Width="90"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+
+
+        <ListView 
+          HorizontalAlignment="Left" 
+          Name="listView" 
+          Grid.Row="6"
+          VerticalAlignment="Top" 
+          ItemsSource="{Binding GuideCommentsOverview}"
+          SelectedItem="{Binding SelectedComment}"
+          IsSynchronizedWithCurrentItem="True" Height="119" Margin="31,0,0,0" Width="743" Grid.ColumnSpan="2">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsReported}" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding User.Username}"  Header="Username" Width="100" />
+                        <GridViewColumn DisplayMemberBinding="{Binding CheckPoint.Name}"  Header="CheckPoint" Width="200" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Comment}"  Header="Comment" Width="400" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Report" Width="150" Height="40" Grid.Row="7" Grid.Column="1" Command="{Binding ReportCommand}" Margin="139,0,138,-17"></Button>
+
+    </Grid>
+</Window>

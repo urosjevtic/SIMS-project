@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 
-namespace InitialProject.Repository 
+namespace InitialProject.Repository
 {
     public class TourRepository : ITourRepository 
     {
@@ -15,7 +16,7 @@ namespace InitialProject.Repository
         private readonly Serializer<Tour> _serializer;
 
         private List<Tour> _tours;
-
+        
         private readonly LocationRepository _locationRepository;
         public TourRepository()
         {
@@ -24,9 +25,6 @@ namespace InitialProject.Repository
             _tours = _serializer.FromCSV(FilePath);
 
             _locationRepository = new LocationRepository();
-
-
-
         }
 
         public int NextId()
@@ -37,37 +35,6 @@ namespace InitialProject.Repository
                 return 1;
             }
             return _tours.Max(c => c.Id) + 1;
-        }
-        public List<Tour> FindAllAlternatives(Tour tour) 
-        {
-            List<Tour> alternative = new List<Tour>();
-            List<Tour> tours = GetAll();
-            var locations = _locationRepository.GetAll();
-
-            AddTourLocation(tours, locations);
-
-            foreach (Tour t in tours)
-            {
-                if(t.Location.City.Equals(tour.Location.City))
-                {
-                    alternative.Add(t);
-                }
-            }
-            return alternative;
-        }
-        public void AddTourLocation(List<Tour> tours, List<Location> locations)
-        {
-            foreach (Tour t in tours)
-            {
-                foreach (Location location in locations)
-                {
-                    if (location.Id == t.Location.Id)
-                    {
-                        t.Location = location;
-                        break;
-                    }
-                }
-            }
         }
         public void Save(Tour tour)
         {
@@ -117,10 +84,11 @@ namespace InitialProject.Repository
             newTour.Description = tour.Description;
             newTour.Language = tour.Language;
             newTour.MaxGuests = tour.MaxGuests;
-            newTour.Start = tour.Start;
+            newTour.StartDates = tour.StartDates;
             newTour.Duration = tour.Duration;
             newTour.CoverImageUrl.Id = tour.CoverImageUrl.Id;
             newTour.IsActive = tour.IsActive;
+            newTour.IsRated = tour.IsRated;
 
             SaveAll(_tours);
             

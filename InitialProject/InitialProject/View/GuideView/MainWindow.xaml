@@ -1,0 +1,94 @@
+﻿<Window x:Class="InitialProject.View.GuideView.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.GuideView"
+        mc:Ignorable="d"
+        Background="#D1EEEE"
+        Title="MainWindow" Height="800" Width="1350" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Image Source="/Resources/Images/earth.png" Width="80" Margin="0,0,120,0"></Image>
+        <TextBlock Text="Tour app" FontSize="26" FontWeight="Bold" Foreground="#004040" VerticalAlignment="Center" Margin="140,0,0,0"></TextBlock>
+
+        <Button Grid.Column="1" Height="50" Width="170" HorizontalAlignment="Right" Margin="0,0,50,0" BorderThickness="0" Background="#D1EEEE" >
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/TourReport.png" Width="80" Height="36" ></Image>
+                <TextBlock Text="Report" Margin="0,10,80,0" FontWeight="Bold"  Foreground="#004040" ></TextBlock>
+            </StackPanel>
+        </Button>
+        <TextBox  Grid.Column="1" Margin="50,0,0,0"  HorizontalAlignment="Left" Style="{StaticResource SearchButton}"></TextBox>
+        <Border Grid.Row="1" Background="#008080" CornerRadius="0 70 0 0">
+
+
+            <Grid Grid.Row="1" Margin="0,20,0,0" >
+
+                <UniformGrid Rows="9">
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="MyAccount"  Style="{StaticResource MenuButtonTheme}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/covjeculjakBijeli.png" Width="32" Margin="30,0,0,0"></Image>
+                            <TextBlock Text="    My account" Margin="10,10,10,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="MyTours"  Style="{StaticResource MenuButtonTheme}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/myToursBijela.png" Width="39"></Image>
+                            <TextBlock Text="     My tours" Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="TodayTours"  Style="{StaticResource MenuButtonTheme}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/todayTours.png" Width="34"></Image>
+                            <TextBlock Text="Today tours" Margin="20,10,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="ActiveTour"  Style="{StaticResource MenuButtonTheme}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/activeTour.png" Width="54"></Image>
+                            <TextBlock Text="Active tour" Margin="10,20,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Statistic"  Style="{StaticResource MenuButtonTheme}" >
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/grafikBijeli.png" Width="44"></Image>
+                            <TextBlock Text="Statistics     " Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Reviews"  Style="{StaticResource MenuButtonTheme}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/zvijezdaBijela.png" Width="44"></Image>
+                            <TextBlock Text="Reviews     " Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Requests"  Style="{StaticResource MenuButtonTheme}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Resources/Images/requests.png" Width="44"></Image>
+                            <TextBlock Text="   Requests     " Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </UniformGrid>
+
+            </Grid>
+        </Border>
+        <Grid Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="916" Margin="50,118,0,76">
+
+            <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden" Margin="40,-26,0,0"></Frame>
+
+        </Grid>
+
+
+    </Grid>
+</Window>

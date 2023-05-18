@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Serializer;
 
 namespace InitialProject.Repository
@@ -99,11 +100,6 @@ namespace InitialProject.Repository
         }
 
         public void SaveAll(List<Location> entities)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IRepository<Location>.Update(Location entity)
         {
             throw new NotImplementedException();
         }

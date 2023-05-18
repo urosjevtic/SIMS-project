@@ -1,0 +1,129 @@
+﻿<Page x:Class="InitialProject.View.OwnerView.Notifications.OwnerNotificationsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.OwnerView.Notifications"
+      xmlns:ns="clr-namespace:InitialProject.Utilities"
+      mc:Ignorable="d" 
+      Title="OwnerNotificationsView" Height="637" Width="345">
+    <Page.Background>
+        <SolidColorBrush Color="#fafafa" />
+    </Page.Background>
+    <Page.Resources>
+        <!--LogIn button style-->
+
+        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
+
+            <Setter Property="Background" Value="#3A3D55"/>
+            <!-- set the button background color -->
+            <Setter Property="Foreground" Value="#fff"/>
+            <!-- set the text color of the button -->
+            <Setter Property="FontSize" Value="20"/>
+            <!-- set the font size of the button -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#005A9E"/>
+                                <!-- set the background color when the mouse is over the button -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#004F8E"/>
+                                <!-- set the background color when the button is pressed -->
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+        <!--Naslovi-->
+        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Foreground" Value="#3A3D55"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+
+
+    </Page.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <!--MAIN SCREEN-->
+        <Grid Name="MainScreen" Grid.Column="1" Visibility="{Binding MainScreenVisibility}">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderBrush="#3A3D55" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Reservation_rescheduling}" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding RescheduleRequestCount, StringFormat='You have {0} rescheduling requests'}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenRescheduleRequestsCommand}" Content="{ns:Loc See_requests}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                </Grid>
+            </Border>
+            <Border Grid.Row="1" BorderBrush="#3A3D55" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Renovation_recomendations}" FontSize="26" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding RenovationRecommendationCount, StringFormat='You have {0} renovation recommendations'}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenRenovationSugestionsCommand}" Content="{ns:Loc See_reccommendations}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+
+                </Grid>
+            </Border>
+            <Border Grid.Row="2" BorderBrush="#3A3D55" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc New_forum_notification}" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding ForumNotificationCount, StringFormat='You have {0} forum notifications'}" TextWrapping="Wrap"  FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenRegistrationFormCommand}" Content="{ns:Loc See_forums}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                </Grid>
+            </Border>
+            <Border Grid.Row="3" BorderBrush="#3A3D55" BorderThickness="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Unrated_guests}" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{Binding UnratedGuestsCount, StringFormat='You have {0} unrated guests'}" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenUnratedGuestsCommand}" Content="{ns:Loc Rate_guests}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
+

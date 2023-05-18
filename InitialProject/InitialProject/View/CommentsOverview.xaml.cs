@@ -1,4 +1,4 @@
-﻿using InitialProject.Model;
+﻿using InitialProject.Domain.Model;
 using InitialProject.Repository;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -16,21 +16,23 @@ namespace InitialProject.Forms
         public Comment SelectedComment { get; set; }
 
         public User LoggedInUser { get; set; }
+        public Tour SelectedTour { get; set; }
 
         private readonly CommentRepository _repository;
 
-        public CommentsOverview(User user)
+        public CommentsOverview(User user, Tour tour)
         {
             InitializeComponent();
             DataContext = this;
             LoggedInUser = user;
+            SelectedTour = tour;
             _repository = new CommentRepository();
             Comments = new ObservableCollection<Comment>(_repository.GetByUser(user));
         }
 
         private void ShowCreateCommentForm(object sender, RoutedEventArgs e)
         {
-            CommentForm createCommentForm = new CommentForm(LoggedInUser);
+            CommentForm createCommentForm = new CommentForm(LoggedInUser, SelectedTour);
             createCommentForm.Show();
         }
 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using InitialProject.Model;
+using InitialProject.Domain.Model;
 using InitialProject.Serializer;
+using InitialProject.Domain.RepositoryInterfaces;
 
 namespace InitialProject.Repository
 {
-    public class NotificationRepository
+    public class NotificationRepository : INotificationRepository
     {
         private const string FilePath = "../../../Resources/Data/notifications.csv";
 
@@ -41,6 +42,18 @@ namespace InitialProject.Repository
                 }
             }
             return notification;
+        }
+        public List<Notification> GetAllById(int id)
+        {
+            List<Notification> notifications = new List<Notification>();
+            foreach (Notification not in GetAll())
+            {
+                if (not.GuestId == id && not.IsChecked == false)
+                {
+                    notifications.Add(not);
+                }
+            }
+            return notifications;
         }
 
         public void Save(Notification notification)
@@ -80,7 +93,6 @@ namespace InitialProject.Repository
             newNotifcation.TourId = notification.TourId;
             newNotifcation.IsGoing = notification.IsGoing;
             newNotifcation.IsChecked = notification.IsChecked;
-           
             SaveAll(_notifications);
 
         }
