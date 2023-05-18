@@ -27,5 +27,7 @@ namespace InitialProject
             }
         }
 
+        public static User? LoggedUser { get; set; } = null;
+
     }
 }

@@ -17,6 +17,7 @@
     <None Remove="Resources\Images\comment.png" />
     <None Remove="Resources\Images\covjeculjakBijeli.png" />
     <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\earth.jpg" />
     <None Remove="Resources\Images\earth.png" />
     <None Remove="Resources\Images\edit.png" />
     <None Remove="Resources\Images\forums.png" />
@@ -42,17 +43,21 @@
     <None Remove="Resources\Images\notificationNew.png" />
     <None Remove="Resources\Images\paper-32.png" />
     <None Remove="Resources\Images\pencil.png" />
+    <None Remove="Resources\Images\personBlue.png" />
     <None Remove="Resources\Images\play-button.png" />
     <None Remove="Resources\Images\quote-request - Copy.png" />
     <None Remove="Resources\Images\quote-request.png" />
     <None Remove="Resources\Images\quote-request1.png" />
 
     <None Remove="Resources\Images\ratings.png" />
+
+    <None Remove="Resources\Images\remove.png" />
     <None Remove="Resources\Images\renovations.png" />
     <None Remove="Resources\Images\requests.png" />
     <None Remove="Resources\Images\reservations.png" />
     <None Remove="Resources\Images\reviews.png" />
     <None Remove="Resources\Images\settings.png" />
+    <None Remove="Resources\Images\statistics.png" />
 
 
     <None Remove="Resources\Images\user.png" />
@@ -106,6 +111,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\delete.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\earth.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\edit.png">
@@ -165,6 +173,9 @@
     <Content Include="Resources\Images\pencil.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\personBlue.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\play-button.png">
 		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	</Content>
@@ -180,6 +191,9 @@
     <Content Include="Resources\Images\ratings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\remove.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\renovations.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -189,8 +203,13 @@
     <Content Include="Resources\Images\settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\statistics.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
-    <Content Include="Resources\Images\user.png"/>
+    <Content Include="Resources\Images\user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
     <Content Include="Resources\Images\tick.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -252,22 +271,52 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Resources\Images\activeTour.png" />
-    <Resource Include="Resources\Images\covjeculjakBijeli.png" />
-    <Resource Include="Resources\Images\earth.png" />
-    <Resource Include="Resources\Images\grafikBijeli.png" />
-    <Resource Include="Resources\Images\myToursBijela.png" />
-    <Resource Include="Resources\Images\pausee.png" />
-    <Resource Include="Resources\Images\pehar.png" />
-    <Resource Include="Resources\Images\requests.png" />
-    <Resource Include="Resources\Images\reviews.png" />
-    <Resource Include="Resources\Images\statistic.png" />
-    <Resource Include="Resources\Images\todayTours.png" />
-    <Resource Include="Resources\Images\todayToursBijela.png" />
-    <Resource Include="Resources\Images\TourReport.png" />
-    <Resource Include="Resources\Images\tourRequests.png" />
+    <Content Include="Resources\Images\activeTour.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\covjeculjakBijeli.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\earth.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\grafikBijeli.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\myToursBijela.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\pausee.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\pehar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\requests.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\reviews.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\statistic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\todayTours.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\todayToursBijela.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\TourReport.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\tourRequests.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Resource Include="Resources\Images\user.png" />
-    <Resource Include="Resources\Images\zvijezdaBijela.png" />
+    <Content Include="Resources\Images\zvijezdaBijela.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
 
   </ItemGroup>
 
