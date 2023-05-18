@@ -7,7 +7,9 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
@@ -16,7 +18,7 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class ShowVouchersViewModel
+    public class ShowVouchersViewModel : Page
     {
         public List<Voucher> vouchers { get; set; }
         public ICommand GoBackCommand { get; private set; }
@@ -43,11 +45,13 @@ namespace InitialProject.ViewModels
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        public NavigationService navService;
 
         private readonly VoucherService _voucherService;
-        public ShowVouchersViewModel()
+        public ShowVouchersViewModel(NavigationService nav)
         {
             _voucherService = new VoucherService();
+            this.navService = nav;
             vouchers = _voucherService.GetAllCreated();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
             GoBackCommand = new RelayCommand(GoBack);
@@ -55,8 +59,8 @@ namespace InitialProject.ViewModels
 
         private void GoBack()
         {
-            Window currentWindow = System.Windows.Application.Current.Windows.OfType<ShowVouchers>().SingleOrDefault(w => w.IsActive);
-            currentWindow?.Close();
+            this.navService.Navigate(
+            new Uri("View/Guest2View/ShowTourPage.xaml", UriKind.Relative));
         }
     }
 }

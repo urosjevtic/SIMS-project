@@ -1,0 +1,332 @@
+﻿<Window
+    x:Class="InitialProject.View.AccommodationShow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:InitialProject.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:properties="clr-namespace:InitialProject.Properties"
+    xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
+    Title="AccommodationShow"
+    Width="1200"
+    Height="850"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <!--<Window.DataContext>
+        <viewModels:MainWindowViewModel />
+    </Window.DataContext>-->
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding ShowWizardCommand}" />
+        </i:EventTrigger>
+
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding SaveSettingsCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="280" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border
+            Margin="0,0,0,0"
+            Background="CadetBlue"
+            BorderBrush="Black"
+            BorderThickness="3"
+            CornerRadius="15">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <!--<RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="57*" />-->
+                </Grid.RowDefinitions>
+
+                <ToggleButton
+                    x:Name="TooltipsToggleButton"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Show tooltips"
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowTooltips}"
+                    Style="{StaticResource ResourceKey=ToggleSwitch}"
+                    ToolTip="Turn tooltips on or off" />
+                <ToggleButton
+                    x:Name="WizardToggleButton"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Margin="0,5,0,5"
+                    HorizontalAlignment="Center"
+                    Content="Show wizard  "
+                    IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowWizard}"
+                    Style="{StaticResource ResourceKey=ToggleSwitch}"
+                    ToolTip="Show wizard on next application startup" />
+                <Image
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="100"
+                    Margin="0,5,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Source="/Resources/Images/user.png" />
+
+                <Button
+                    Name="HomePageButton"
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationListPage"
+                    Content="Home page" />
+                <Button
+                    Name="SearchButton"
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationSearchPage"
+                    Content="Search"
+                    ToolTip="Search for available accommodation" />
+                <Button
+                    Name="AnywhereButton"
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command=""
+                    CommandParameter=""
+                    Content="Anywhere/Whenever"
+                    ToolTip="Search for available accommodation anywhere and on any date" />
+                <Button
+                    Name="PreviousTripButton"
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="PreviousTripPage"
+                    Content="Previous trip"
+                    ToolTip="View your previous booking" />
+                <Button
+                    Name="MyResrvationsButton"
+                    Grid.Row="7"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="MyReservationsPage"
+                    Content="My reservations"
+                    ToolTip="Display upcoming bookings" />
+                <Button
+                    Name="ForumButton"
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightSlateGray"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AccommodationRatingFormPage"
+                    Content="Forum"
+                    ToolTip="Open and start the forum" />
+                <Grid
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,10,0,0"
+                    Background="DarkCyan">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label
+                        x:Name="AccountInfoTitleLabel"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,15,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Account Information"
+                        FontWeight="Bold" />
+                    <Label
+                        Name="UserNameLb"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Username" />
+                    <Label
+                        Name="UserNameLabel"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="{Binding LoggedUser.Username}" />
+
+                    <Label
+                        Name="SuperGuestLabel"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Super guest" />
+                    <CheckBox
+                        x:Name="cbSuperGuest"
+                        Grid.Row="2"
+                        IsChecked="True"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center" />
+                    <Label
+                        Name="PointsLabel"
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Center"
+                        Content="Number of points" />
+                    <Label
+                        Name="NumberPointsLabel"
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Width="100"
+                        Margin="0,5,0,5"
+                        HorizontalAlignment="Left"
+                        Content="{Binding bonus}" />
+                </Grid>
+                <Button
+                    Name="SignOutButton"
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="0,10,0,10"
+                    HorizontalAlignment="Center"
+                    Background="LightGray"
+                    BorderBrush="LightGray"
+                    Click="Button_Click"
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="SignInForm"
+                    Content="Sign out"
+                    ToolTip="Sign out and return to LogIn page" />
+            </Grid>
+        </Border>
+
+        <Border
+            Grid.Column="1"
+            Background="LightCyan"
+            BorderBrush="Black"
+            BorderThickness="3">
+            <DockPanel>
+                <Grid
+                    Height="Auto"
+                    Background="#87D0E1"
+                    DockPanel.Dock="Top">
+                    <Button
+                        x:Name="BackButton"
+                        Width="100"
+                        Height="40"
+                        Margin="10,10,0,10"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Background="#58B6CC"
+                        BorderBrush="#58B6CC"
+                        Command="{Binding NavigateBackCommand}"
+                        Content="Back" />
+                    <Button
+                        Name="NotificationButton"
+                        Grid.Column="0"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,10,10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#58B6CC"
+                        BorderBrush="#58B6CC"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="NotificationsPage"
+                        Content="Notifications"
+                        ToolTip="Display the latest notifications" />
+
+                </Grid>
+
+                <Frame
+                    x:Name="NavigationFrame"
+                    DockPanel.Dock="Bottom"
+                    NavigationUIVisibility="Hidden"
+                    Source="AccommodationListPage.xaml" />
+            </DockPanel>
+        </Border>
+    </Grid>
+</Window>

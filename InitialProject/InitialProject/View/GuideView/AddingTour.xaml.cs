@@ -29,10 +29,10 @@ namespace InitialProject.View
     /// </summary>
     public partial class AddingTour : Window
     {   
-        public AddingTour(User user)
+        public AddingTour(User user,ShortTourRequest request, bool enter)
         {
             InitializeComponent();        
-            this.DataContext = new AddingTourViewModel(user);
+            this.DataContext = new AddingTourViewModel(user,request, enter);
         }
 
      

@@ -1,0 +1,77 @@
+@startuml
+actor User as U
+participant RequestsViewModel as RVM
+participant ShortTourRequest as STR
+participant ShortTourRequestService as STRS
+participant LocationService as LS
+participant AddingTourWindow as ADW
+participant AddingTourViewModel as ATVM
+participant TourService as TS
+participant Tour as T
+participant TourRepository as TR
+
+RVM -> STRS ++: GetAll()
+STRS --> RVM --: BindingRequests
+RVM -> LS ++: GetCountriesAndCities()
+LS --> RVM --: Locations
+
+RVM-->RVM--:SearchResult.Clear()
+
+RVM->RVM++: IsCountryValid(ShortTourRequest request, ShortTourRequest shortTourRequest)
+RVM-->RVM--: bool
+
+RVM->RVM++: IsCityValid(ShortTourRequest request, ShortTourRequest shortTourRequest)
+RVM-->RVM--: bool
+
+RVM->RVM++: IsLanguageValid(ShortTourRequest request, ShortTourRequest shortTourRequest)
+RVM-->RVM--: bool
+
+RVM->RVM++: IsGuestsNumberValid(ShortTourRequest request, ShortTourRequest shortTourRequest)
+RVM-->RVM--: bool
+
+RVM->RVM++: IsAppropriateDateRange(ShortTourRequest request, ShortTourRequest shortTourRequest)
+RVM-->RVM--: bool
+
+
+U -> RVM++: SearchCommand(Search)
+activate STR
+RVM -> STR ++: <<create>>
+STR --> RVM --: shortTourRequest
+deactivate STR
+RVM -> STRS ++: GetAll()
+STRS --> RVM --: FileRequests
+loop foreach request in FileRequests
+  opt IsValidCountry(request.Country) && IsValidCity(request.City) && IsValidLanguage(request.Language) && IsValidGuestsNumber(request.NumberOfpeople)
+    alt FirstDay.DayOfYear >= LastDay.DayOfYear
+      opt IsAppropriatedDateRange(request,shortTourRequest)
+        RVM-->RVM--:SearchResult.Add(shortTourRequest)
+      end
+    end
+  end
+end
+
+RVM-->RVM--: BindingRequests = SearchResult
+
+U->RVM++: AcceptRequestCommand(Accept)
+RVM->RVM++: AcceptRequest()
+RVM --> U--: Display AddingTourWindow
+
+RVM -> ATVM++:MakeTourFromRequest(SelectedRequest)
+deactivate RVM
+ATVM-> STRS: Update(SelectedRequest)
+
+U-> ADW++: AddTourCommand()
+ADW->ATVM ++: ConfirmAddingTour()
+deactivate ADW
+
+activate T
+ATVM-> T ++: <<create>>
+T-->ATVM--: tour
+deactivate T
+ATVM -> TS++: Save(tour)
+deactivate TS
+deactivate ATVM
+TS->TR++:Save(tour)
+deactivate TR
+
+@enduml

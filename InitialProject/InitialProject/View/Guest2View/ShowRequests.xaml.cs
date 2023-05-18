@@ -24,8 +24,8 @@ namespace InitialProject.View.Guest2View
         public ShowRequests()
         {
             InitializeComponent();
-            showTourRequestsViewModel = new ShowTourRequestsViewModel();
-            this.DataContext = showTourRequestsViewModel;
+            /*showTourRequestsViewModel = new ShowTourRequestsViewModel();
+            this.DataContext = showTourRequestsViewModel;*/
         }
     }
 }

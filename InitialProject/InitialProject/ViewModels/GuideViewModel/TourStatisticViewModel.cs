@@ -57,7 +57,7 @@ namespace InitialProject.ViewModels
             VisitationYears = new List<int>() { 2023, 2022, 2021, 2020 };
 
             SetLineSeriesForYears();
-
+            Year = 0;
             MostVisitedInYear = _tourService.GetMostVisitedInYear(2023);
             SearchResult = new List<ShortTourRequest>();
         }
@@ -138,18 +138,18 @@ namespace InitialProject.ViewModels
                     Values =new ChartValues<ObservablePoint>
                     {
                         
-                       new ObservablePoint(1,FindMonthRequestNumber(1,year)),
-                       new ObservablePoint(2,FindMonthRequestNumber(2,year)),
-                       new ObservablePoint(3,FindMonthRequestNumber(3,year)),
-                       new ObservablePoint(4,FindMonthRequestNumber(4,year)),
-                       new ObservablePoint(5,FindMonthRequestNumber(5,year)),
-                       new ObservablePoint(6,FindMonthRequestNumber(6,year)),
-                       new ObservablePoint(7,FindMonthRequestNumber(7,year)),
-                       new ObservablePoint(8,FindMonthRequestNumber(8,year)),
-                       new ObservablePoint(9,FindMonthRequestNumber(9,year)),
-                       new ObservablePoint(10,FindMonthRequestNumber(10,year)),
-                       new ObservablePoint(11,FindMonthRequestNumber(11,year)),
-                       new ObservablePoint(12,FindMonthRequestNumber(12,year)),
+                       new ObservablePoint(1,_shortTourRequestService.FindMonthRequestNumber(1,year)),
+                       new ObservablePoint(2,_shortTourRequestService.FindMonthRequestNumber(2,year)),
+                       new ObservablePoint(3,_shortTourRequestService.FindMonthRequestNumber(3,year)),
+                       new ObservablePoint(4,_shortTourRequestService.FindMonthRequestNumber(4,year)),
+                       new ObservablePoint(5,_shortTourRequestService.FindMonthRequestNumber(5,year)),
+                       new ObservablePoint(6,_shortTourRequestService.FindMonthRequestNumber(6,year)),
+                       new ObservablePoint(7,_shortTourRequestService.FindMonthRequestNumber(7,year)),
+                       new ObservablePoint(8,_shortTourRequestService.FindMonthRequestNumber(8,year)),
+                       new ObservablePoint(9,_shortTourRequestService.FindMonthRequestNumber(9,year)),
+                       new ObservablePoint(10,_shortTourRequestService.FindMonthRequestNumber(10,year)),
+                       new ObservablePoint(11,_shortTourRequestService.FindMonthRequestNumber(11,year)),
+                       new ObservablePoint(12,_shortTourRequestService.FindMonthRequestNumber(12,year)),
 
                     }
                 }
@@ -167,18 +167,18 @@ namespace InitialProject.ViewModels
                     Values =new ChartValues<ObservablePoint>
                     {
 
-                       new ObservablePoint(1,FindSearchMonthRequestNumber(1,year,requests)),
-                       new ObservablePoint(2,FindSearchMonthRequestNumber(2,year,requests)),
-                       new ObservablePoint(3,FindSearchMonthRequestNumber(3,year,requests)),
-                       new ObservablePoint(4,FindSearchMonthRequestNumber(4,year,requests)),
-                       new ObservablePoint(5,FindSearchMonthRequestNumber(5,year,requests)),
-                       new ObservablePoint(6,FindSearchMonthRequestNumber(6,year,requests)),
-                       new ObservablePoint(7,FindSearchMonthRequestNumber(7,year,requests)),
-                       new ObservablePoint(8,FindSearchMonthRequestNumber(8,year,requests)),
-                       new ObservablePoint(9,FindSearchMonthRequestNumber(9,year,requests)),
-                       new ObservablePoint(10,FindSearchMonthRequestNumber(10,year,requests)),
-                       new ObservablePoint(11,FindSearchMonthRequestNumber(11,year,requests)),
-                       new ObservablePoint(12,FindSearchMonthRequestNumber(12,year,requests)),
+                       new ObservablePoint(1,_shortTourRequestService.FindSearchMonthRequestNumber(1,year,requests)),
+                       new ObservablePoint(2,_shortTourRequestService.FindSearchMonthRequestNumber(2,year,requests)),
+                       new ObservablePoint(3,_shortTourRequestService.FindSearchMonthRequestNumber(3,year,requests)),
+                       new ObservablePoint(4,_shortTourRequestService.FindSearchMonthRequestNumber(4,year,requests)),
+                       new ObservablePoint(5,_shortTourRequestService.FindSearchMonthRequestNumber(5,year,requests)),
+                       new ObservablePoint(6,_shortTourRequestService.FindSearchMonthRequestNumber(6,year,requests)),
+                       new ObservablePoint(7,_shortTourRequestService.FindSearchMonthRequestNumber(7,year,requests)),
+                       new ObservablePoint(8,_shortTourRequestService.FindSearchMonthRequestNumber(8,year,requests)),
+                       new ObservablePoint(9,_shortTourRequestService.FindSearchMonthRequestNumber(9,year,requests)),
+                       new ObservablePoint(10,_shortTourRequestService.FindSearchMonthRequestNumber(10,year,requests)),
+                       new ObservablePoint(11,_shortTourRequestService.FindSearchMonthRequestNumber(11,year,requests)),
+                       new ObservablePoint(12,_shortTourRequestService.FindSearchMonthRequestNumber(12,year,requests)),
 
                     }
                 }
@@ -186,31 +186,7 @@ namespace InitialProject.ViewModels
             };
         }
 
-        public int FindSearchMonthRequestNumber(int month, int year, List<ShortTourRequest> requests)
-        {
-            int number = 0;
-            foreach (ShortTourRequest request in requests)
-            {
-                if (request.From.Year == year && request.From.Month <= month && request.To.Month >= month)
-                {
-                    ++number;
-                }
-            }
-            return number;
-        }
-
-        private int FindMonthRequestNumber(int month,int year)
-        {
-            int number = 0;
-            foreach(ShortTourRequest request in _shortTourRequestService.GetAll())
-            {
-                if(request.From.Year==year && request.From.Month <= month && request.To.Month >= month)
-                {
-                    ++number;
-                }
-            }
-            return number;
-        }
+        
         private void UpdateGraph()
         {
             if(Year != 0)
@@ -302,14 +278,15 @@ namespace InitialProject.ViewModels
 
         private void Search()
         {
+            SearchResult.Clear();
             ShortTourRequest shortTourRequest = new ShortTourRequest(Country,City,Languagee);
             foreach (ShortTourRequest request in _shortTourRequestService.GetAll())
             {
-                if(request.Country == shortTourRequest.Country || shortTourRequest.Country.Equals(""))
+                if(request.Country.Equals(shortTourRequest.Country) || /*shortTourRequest.Country.Equals("")*/ shortTourRequest.Country == null)
                 {
-                    if(request.City == shortTourRequest.City || shortTourRequest.City.Equals(""))
+                    if(request.City.Equals(shortTourRequest.City) || /*shortTourRequest.City.Equals("")*/ shortTourRequest.City == null)
                     {
-                        if(request.Language.ToLower().Contains(shortTourRequest.Language) || shortTourRequest.Language.Equals(""))
+                        if(request.Language.ToLower().Contains(shortTourRequest.Language.ToLower()) || shortTourRequest.Language.Equals(""))
                         {
                             SearchResult.Add(request);
 
@@ -317,7 +294,7 @@ namespace InitialProject.ViewModels
                     }
                 }
             }
-            UpdateLineSeries(2023, SearchResult);
+            UpdateLineSeries(Year, SearchResult);
         }
 
 

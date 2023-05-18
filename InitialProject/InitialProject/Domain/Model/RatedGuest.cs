@@ -30,7 +30,6 @@ namespace InitialProject.Domain.Model
             RuleFollowingRating = ruleFollowingRating;
             CleanlinessRating = cleanlinessRating;
             AdditionalComment = additionalComment;
-
         }
 
         public string[] ToCSV()
@@ -46,7 +45,6 @@ namespace InitialProject.Domain.Model
             RuleFollowingRating = Convert.ToInt32(values[2]);
             CleanlinessRating = Convert.ToInt32(values[3]);
             AdditionalComment = values[4];
-
         }
     }
 }
