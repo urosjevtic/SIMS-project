@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="MyAccommodationsMainView" Height="637" Width="345">
     <Page.Background>
@@ -80,9 +81,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="My Accommodations" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="See all accommodations that you own" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenAccommodationListCommand}" Content="See accommodations" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc MyAccommodations}" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc See_all_accommodations_that_you_own}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenAccommodationListCommand}" Content="{ns:Loc See_accommodations}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
             <Border Grid.Row="1" BorderBrush="#3A3D55" BorderThickness="2">
@@ -92,9 +93,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Accommodation statistic" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="See all statistic for your accommodations" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenAccommodationStatisticsCommand}" Content="See statistics" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Accommodation_statistic}" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc See_all_statistic_for_your_accommodations}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenAccommodationStatisticsCommand}" Content="{ns:Loc See_statistics}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
 
                 </Grid>
             </Border>
@@ -105,9 +106,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Registrate new accommodation" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="Add new property to your list of accommodations" TextWrapping="Wrap"  FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenRegistrationFormCommand}" Content="Registrate" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Registrate_new_accommodation}" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc Add_new_property_to_your_list_of_accommodations}" TextWrapping="Wrap"  FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenRegistrationFormCommand}" Content="{ns:Loc Registrate}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
             <Border Grid.Row="3" BorderBrush="#3A3D55" BorderThickness="2">
@@ -117,9 +118,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Registration sugestion" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="Sugestions for opening new accommodations" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Content="See sugestions" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Registration_sugestion}" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc Sugestions_for_opening_new_accommodations}" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Content="{ns:Loc See_sugestions}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
         </Grid>

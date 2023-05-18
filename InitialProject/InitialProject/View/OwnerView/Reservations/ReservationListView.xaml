@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Reservations"
         mc:Ignorable="d"
         Title="ReservationListView" Height="637" Width="345">
@@ -56,12 +57,12 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Foreground="#3A3D55" Text="All reservations"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Foreground="#3A3D55" Text="{ns:Loc All_reservations}"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="reschedulingListBox"
                  ItemsSource="{Binding Reservations}"
@@ -99,11 +100,11 @@
 
                             <!--Guest username and number of guests-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
-                                <TextBlock Text="Guest username: " 
+                                <TextBlock Text="{ns:Loc Guest_username}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding User.Username}" />
-                                <TextBlock Margin="5,0,0,0" Text="Number of guests: " 
+                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc Number_of_guests}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding GuestNumber}" />
                             </StackPanel>
@@ -112,7 +113,7 @@
 
                             <!--Accommodation-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Accommodation: " 
+                                <TextBlock Text="{ns:Loc Accommodation}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Accommodation.Name}" />
@@ -121,17 +122,17 @@
 
                             <!--From to-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Start date: " 
+                                <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="End date: " 
+                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
                             <!--Button-->
-                            <Button Content="Cancel reservation"                                    
+                            <Button Content="{ns:Loc Cancel_reservation}"                                    
                                     Margin="10,15"
                                     Grid.Row="7"
                                     Style="{StaticResource LogInButtonStyle}"

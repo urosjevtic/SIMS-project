@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Notifications"
+      xmlns:ns="clr-namespace:InitialProject.Utilities"
       mc:Ignorable="d" 
       Title="OwnerNotificationsView" Height="637" Width="345">
     <Page.Background>
@@ -80,9 +81,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Reservation rescheduling" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Reservation_rescheduling}" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="{Binding RescheduleRequestCount, StringFormat='You have {0} rescheduling requests'}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenRescheduleRequestsCommand}" Content="See requests" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenRescheduleRequestsCommand}" Content="{ns:Loc See_requests}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
             <Border Grid.Row="1" BorderBrush="#3A3D55" BorderThickness="2">
@@ -92,9 +93,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Renovation recomendations" FontSize="26" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Renovation_recomendations}" FontSize="26" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="{Binding RenovationRecommendationCount, StringFormat='You have {0} renovation recommendations'}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenRenovationSugestionsCommand}" Content="See recommendations" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenRenovationSugestionsCommand}" Content="{ns:Loc See_reccommendations}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
 
                 </Grid>
             </Border>
@@ -105,9 +106,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="New forum notification" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc New_forum_notification}" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="{Binding ForumNotificationCount, StringFormat='You have {0} forum notifications'}" TextWrapping="Wrap"  FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenRegistrationFormCommand}" Content="See forums" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenRegistrationFormCommand}" Content="{ns:Loc See_forums}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
             <Border Grid.Row="3" BorderBrush="#3A3D55" BorderThickness="2">
@@ -117,9 +118,9 @@
                         <RowDefinition></RowDefinition>
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Unrated guests" Style="{StaticResource TitleStyle}"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="{ns:Loc Unrated_guests}" Style="{StaticResource TitleStyle}"></TextBlock>
                     <TextBlock Grid.Row="1" Text="{Binding UnratedGuestsCount, StringFormat='You have {0} unrated guests'}" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenUnratedGuestsCommand}" Content="Rate guests" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <Button Grid.Row="2" Command="{Binding OpenUnratedGuestsCommand}" Content="{ns:Loc Rate_guests}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
                 </Grid>
             </Border>
         </Grid>

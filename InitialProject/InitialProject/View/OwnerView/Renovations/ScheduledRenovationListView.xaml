@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="ScheduledRenovationListView" Height="637" Width="345">
     <Page.Background>
@@ -75,12 +76,12 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Scheduled renovations" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Schedule_renovation}" Foreground="#3A3D55"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="reservationListBox"
                  ItemsSource="{Binding Renovations}"
@@ -121,11 +122,11 @@
                            Margin="10,10,10,0"/>
                         <!--Location-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Country: " 
+                                <TextBlock Text="{ns:Loc Country}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Accommodation.Location.Country }" />
-                                <TextBlock Margin="10,0" Text="City: " 
+                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                                FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Accommodation.Location.City }" />
                             </StackPanel>
@@ -135,17 +136,17 @@
                                        Margin="0,0,5,0"/>
                         <!--Start date, end date-->
                         <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                            <TextBlock Text="Start: " 
+                            <TextBlock Text="{ns:Loc Start_date}" 
                                        FontWeight="Bold"
                                        Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
-                            <TextBlock Margin="10,0" Text="End: " 
+                            <TextBlock Margin="10,0" Text="{ns:Loc End_date}" 
                                        FontWeight="Bold"/>
                                 <TextBlock Text="{Binding EndDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
                         </StackPanel>
                         <!--Finished renovation-->
                         <StackPanel Orientation="Horizontal" Grid.Row="4">
-                            <TextBlock Text="Finished: " 
+                            <TextBlock Text="{ns:Loc Finished}" 
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
                                        FontSize="15"
@@ -167,7 +168,7 @@
                                 </Image.Style>
                             </Image>
                         </StackPanel>
-                        <Button Content="Cancel"
+                            <Button Content="{ns:Loc Cancel}"
                                 Margin="10,15"
                                 Grid.Row="5"
                                 Style="{StaticResource LogInButtonStyle}"

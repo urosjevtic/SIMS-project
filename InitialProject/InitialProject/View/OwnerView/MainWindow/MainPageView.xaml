@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.MainWindow"
+      xmlns:ns="clr-namespace:InitialProject.Utilities"
       mc:Ignorable="d" 
       d:DesignHeight="650" d:DesignWidth="345"
       Title="MainPageView">
@@ -76,42 +77,42 @@
             <Button Grid.Column="0" Command="{Binding MyAccommoadionsOpenCommand}" Grid.Row="0"  Style="{StaticResource LogInButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/myAccommodation.png" Width="20"/>
-                    <TextBlock Padding="5">My accommodation</TextBlock>
+                    <TextBlock Padding="5" Text="{ns:Loc MyAccommodations}"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Grid.Column="1" Command="{Binding RatingsOpenCommand}" Grid.Row="0"  Style="{StaticResource LogInButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/ratings.png" Width="20"/>
-                    <TextBlock Padding="5">Ratings</TextBlock>
+                    <TextBlock Padding="5" Text="{ns:Loc Ratings}"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Grid.Column="0" Grid.Row="1" Command="{Binding RenovationsOpenCommand}"  Style="{StaticResource LogInButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/renovations.png" Width="20"/>
-                    <TextBlock Padding="5">Renovations</TextBlock>
+                    <TextBlock Padding="5" Text="{ns:Loc Renovations}"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Grid.Column="1" Command="{Binding ReservationsOpenCommand}" Grid.Row="1"  Style="{StaticResource LogInButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/reservations.png" Width="20"/>
-                    <TextBlock Padding="5">Reservations</TextBlock>
+                    <TextBlock Padding="5" Text="{ns:Loc Reservations}"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Grid.Column="0" Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/forums.png" Width="20"/>
-                    <TextBlock Padding="5">Forums</TextBlock>
+                    <TextBlock Padding="5" Text="{ns:Loc Forums}"></TextBlock>
                 </StackPanel>
             </Button>
             <Button Grid.Column="1" Grid.Row="2"  Style="{StaticResource LogInButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/settings.png" Width="20"/>
-                    <TextBlock Padding="5">Settings</TextBlock>
+                    <TextBlock Padding="5" Text="{ns:Loc Settings}"></TextBlock>
                 </StackPanel>
             </Button>
         </Grid>
 
 
-        <Button Content="Log out" Style="{StaticResource LogInButtonStyle}" Grid.Row="3" Margin="50, 30, 50, 30"></Button>
+        <Button Content="{ns:Loc Log_out}" Style="{StaticResource LogInButtonStyle}" Grid.Row="3" Margin="50, 30, 50, 30"></Button>
     </Grid>
 </Page>

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="MyAccommodationYearlyStatisticView" Height="637" Width="345">
     <Page.Background>
@@ -12,43 +13,7 @@
     <Page.Resources>
         <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
+ 
 
 
 <!--Naslovi-->
@@ -72,7 +37,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
@@ -87,11 +52,11 @@
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding Accommodation.Name}" Foreground="#3A3D55"></TextBlock>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5" >
-                <TextBlock Text="Country: " 
+                <TextBlock Text="{ns:Loc Country}" 
                            FontWeight="Bold"
                            Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding Accommodation.Location.Country}" />
-                <TextBlock Margin="10,0" Text="City: " 
+                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                            FontWeight="Bold"/>
                 <TextBlock Text="{Binding Accommodation.Location.City}" />
             </StackPanel>
@@ -99,7 +64,7 @@
 
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,5">
-                <TextBlock Text="Busiest year: " 
+                <TextBlock Text="{ns:Loc Buisiest_year}" 
                            FontWeight="Bold"
                            Margin="0,0,5,0"/>
                 <TextBlock Text="{Binding YearWithMostReservations}" />
@@ -148,27 +113,27 @@
                            Margin="10,10,10,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Reservation count: " 
+                                <TextBlock Text="{ns:Loc Reservation_count}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding ReservationsCount}" />
-                                <TextBlock Margin="10,0" Text="Reschedule count: " 
+                                <TextBlock Margin="10,0" Text="{ns:Loc Reschedule_count}" 
                                FontWeight="Bold"/>
                                 <TextBlock Text="{Binding ReschedulesCount}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Cancelation count: " 
+                                <TextBlock Text="{ns:Loc Cancelation_count}" 
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding CancelationsCount}" />
-                                <TextBlock Margin="10,0" Text="Renovation count: " 
+                                <TextBlock Margin="10,0" Text="{ns:Loc Renovation_count}" 
                                            FontWeight="Bold"/>
                                 <TextBlock Text="{Binding RenovationsCount}" />
                             </StackPanel>
 
 
-                            <Button Content="See statistics by months" 
+                            <Button Content="{ns:Loc See_statistics_by_months}" 
                         Margin="10,15"
                         Grid.Row="6"
                         Style="{StaticResource LogInButtonStyle}"

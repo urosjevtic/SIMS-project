@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="ScheduleRenovationForm" Height="637" Width="345">
     <Page.Background>
@@ -71,12 +72,12 @@
             <RowDefinition Height="0.1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Renovations" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovations}" Foreground="#3A3D55"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
                  ItemsSource="{Binding Accommodations}"
@@ -119,30 +120,30 @@
                            Margin="10,10,10,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Country: " 
+                                <TextBlock Text="{ns:Loc Country}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Location.Country}" />
-                                <TextBlock Margin="10,0" Text="City: " 
+                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                                FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Location.City}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Accommodation type: " 
+                                <TextBlock Text="{ns:Loc Accommodation_type}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Type}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Max number of guests: " 
+                                <TextBlock Text="{ns:Loc Maximum_number_of_guests}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding MaxGuests}" />
                             </StackPanel>
 
-                            <Button Content="Schedule renovation"
+                            <Button Content="{ns:Loc Schedule_renovation}"
                                     Margin="10,15"
                                     Grid.Row="6"
                                     Style="{StaticResource LogInButtonStyle}"

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Notes"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="NotesView" Height="500" Width="320"
         WindowStyle="None"
@@ -59,7 +60,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Notes" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="0" Text="{ns:Loc Notes}" FontSize="30" HorizontalAlignment="Center"></TextBlock>
 
         <ListBox Grid.Row="1" x:Name="notesListBox"
                  ItemsSource="{Binding Notes}"
@@ -92,12 +93,12 @@
 
         <TextBox Text="{Binding NewNote}" Grid.Row="2" TextWrapping="Wrap" Margin="5" Height="60"></TextBox>
 
-        <Button Grid.Row="3" Content="Add note" Style="{StaticResource LogInButtonStyle}" 
+        <Button Grid.Row="3" Content="{ns:Loc Add_note}" Style="{StaticResource LogInButtonStyle}" 
                 HorizontalAlignment="Left" Height="46" Width="120"
                 Margin="20,0,0,10"
                 Command="{Binding AddNewNoteCommand}">
         </Button>
-        <Button Grid.Row="3" Content="Close" Style="{StaticResource LogInButtonStyle}" 
+        <Button Grid.Row="3" Content="{ns:Loc Close}" Style="{StaticResource LogInButtonStyle}" 
                 HorizontalAlignment="Right" Height="46" Width="120"
                 Margin="0,0,20,10"
                 Command="{Binding CloseNotesCommand}">

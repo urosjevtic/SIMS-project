@@ -4,6 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
+      xmlns:ns="clr-namespace:InitialProject.Utilities"
       mc:Ignorable="d" 
       Title="RenovationSugestionView" Height="637" Width="345">
     <Page.Background>
@@ -71,13 +72,13 @@
 
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Renovation sugestions" Foreground="#3A3D55"></TextBlock>
-        <TextBlock Grid.Row="1" Text="Suggestion for renovations" VerticalAlignment="Bottom"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation_sugestions}" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" Text="{ns:Loc Suggestion_for_renovations}" VerticalAlignment="Bottom"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="sugestionsListBox"
                  ItemsSource="{Binding Recommendations}"
@@ -120,11 +121,11 @@
                            Margin="10,10,10,0"/>
                             <!--Location-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Country: " 
+                                <TextBlock Text="{ns:Loc Country}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.Accommodation.Country}" />
-                                <TextBlock Margin="10,0" Text="City: " 
+                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
                                FontWeight="Bold"/>
                                 <TextBlock Text="{Binding Location.City}" />
                             </StackPanel>
@@ -135,18 +136,18 @@
                             </StackPanel>
                             <!--Renovation urgency-->
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Renovation urgency: " 
+                                <TextBlock Text="{ns:Loc Renovation_urgency}" 
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding UrgencyLevel}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="Proceed" Style="{StaticResource ConfirmButtonStyle}" 
+                                <Button Content="{ns:Loc Proceed}" Style="{StaticResource ConfirmButtonStyle}" 
                                         Margin="10, 5"
                                         Command="{Binding DataContext.ScheduleRenovationCommand, ElementName=sugestionsListBox}"
                                         CommandParameter="{Binding}" Width="120"/>
-                                <Button Content="Delete" Style="{StaticResource ConfirmButtonStyle}" 
+                                <Button Content="{ns:Loc Delete}" Style="{StaticResource ConfirmButtonStyle}" 
                                         Margin="10, 5"
                                         Command="{Binding DataContext.DeleteSugestionCommand, ElementName=sugestionsListBox}"
                                         CommandParameter="{Binding}" Width="120"/>
