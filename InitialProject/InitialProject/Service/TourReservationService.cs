@@ -26,6 +26,17 @@ namespace InitialProject.Service
             reservation.DateAndTime = dateTime;
             _tourReservationRepository.Save(reservation);
         }
+        public TourReservation CreateReservation(Tour tour, int numberOfPeople, User LoggedUser, bool IsUsingVoucher, double age, DateTime dateTime)
+        {
+            TourReservation reservation = new TourReservation();
+            reservation.IdTour = tour.Id;
+            reservation.IdGuest = LoggedUser.Id;
+            reservation.NumberOfPeople = numberOfPeople;
+            reservation.IsUsingVoucher = IsUsingVoucher;
+            reservation.AverageAge = age;
+            reservation.DateAndTime = dateTime;
+            return reservation;
+        }
         public int CountUnreservedSeats(Tour tour, DateTime dateTime)
         {
             int sum = 0;

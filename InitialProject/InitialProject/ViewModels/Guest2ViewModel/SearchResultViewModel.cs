@@ -199,36 +199,10 @@ namespace InitialProject.ViewModels
                 if (numberOfPeople <= freeSeats)
                 {
                     MessageBoxResult answer = MessageBox.Show("Do you want to make PDF document of this reservation?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                   /* if(answer == MessageBoxResult.Yes)
+                    if(answer == MessageBoxResult.Yes)
                     {
-                        // Kreiranje PDF dokumenta
-                        Document document = new Document();
-
-                        // Definisanje putanje za čuvanje PDF fajla
-                        string filePath = "InitialProject/bin/pdf_forms";
-
-                        // Kreiranje PDF writer-a za generisanje PDF fajla
-                        PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
-
-                        // Otvorite dokument
-                        document.Open();
-
-                        // Kreiranje PDF sadržaja iz XAML-a
-                        MemoryStream xamlStream = new MemoryStream();
-                        TextRange range = new TextRange(txtContent.Document.ContentStart, txtContent.Document.ContentEnd);
-                        range.Save(xamlStream, DataFormats.XamlPackage);
-
-                        iTextSharp.text.Image xamlImage = iTextSharp.text.Image.GetInstance(xamlStream.GetBuffer());
-                        xamlImage.ScaleToFit(document.PageSize.Width, document.PageSize.Height);
-
-                        // Dodavanje sadržaja u dokument
-                        document.Add(xamlImage);
-
-                        // Zatvorite dokument
-                        document.Close();
-
-                        MessageBox.Show("PDF fajl je uspešno generisan na putanji: " + filePath);
-                    }*/
+                        PDFService.GenerateTourReservationPDF(_tourReservationService.CreateReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime));
+                    }
                     _tourReservationService.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     if (SelectedVoucher != null)
