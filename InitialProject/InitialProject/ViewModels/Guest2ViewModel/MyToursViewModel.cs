@@ -31,6 +31,7 @@ namespace InitialProject.ViewModels
             public ICommand SubmitRateCommand { get; private set; }
             public ICommand ViewCheckpointsCommand { get; private set; }
             public ICommand RatingCommand { get; private set; }
+            public ICommand AddCommand { get; private set; }
             public ICommand OpenCommentFormCommand { get; private set; }
 
             private ObservableCollection<Tour> _activeTours;
@@ -165,7 +166,20 @@ namespace InitialProject.ViewModels
                     }
                 }
             }
-            public List<CheckPoint> checkPoints { get; set; }
+            private ObservableCollection<string> _imagelist;
+            public ObservableCollection<string> ImageList
+            {
+                get { return _imagelist; }
+                set
+                {
+                    if (value != _imagelist)
+                    {
+                        _imagelist = value;
+                        OnPropertyChanged();
+                    }
+                }
+            }
+        public List<CheckPoint> checkPoints { get; set; }
             public NavigationService navService { get; }
             public MyToursViewModel(NavigationService nav)
             {
@@ -181,6 +195,8 @@ namespace InitialProject.ViewModels
                 ViewCheckpointsCommand = new RelayCommand<Tour>(ViewCheckpoints);
                 RatingCommand = new RelayCommand<Tour>(Rating);
                 OpenCommentFormCommand = new RelayCommand(OpenCommentForm);
+                AddCommand = new RelayCommand(AddToList);
+                ImageList = new ObservableCollection<string>();
             }
 
             public event PropertyChangedEventHandler PropertyChanged;
@@ -195,7 +211,11 @@ namespace InitialProject.ViewModels
                     navService.GoBack();
                 }
             }
-
+            public void AddToList()
+            {
+                ImageList.Add(ImageTextBox);
+                ImageTextBox = "";
+            }
             private void ViewCheckpoints(Tour tour)
             {
                 SelectedActiveTour = tour;
@@ -210,9 +230,9 @@ namespace InitialProject.ViewModels
                 {
                     _ratedGuideTourService.Create(LoggedUser, SelectedEndedTour.Id, GuideKnowledge, GuideLanguage, InterestingTour);
                     _tourService.RateTour(SelectedEndedTour);
-                    if (ImageTextBox != null)
+                    if (ImageList != null)
                     {
-                        _tourService.AddGuestsImage(SelectedEndedTour, ImageTextBox);
+                        _tourService.AddGuestsImage(SelectedEndedTour, ImageList);
                     }
                     MessageBox.Show("Tour sucessfully rated!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                     EndedTours.Remove(SelectedEndedTour);

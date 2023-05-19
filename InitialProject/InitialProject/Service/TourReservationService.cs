@@ -26,14 +26,14 @@ namespace InitialProject.Service
             reservation.DateAndTime = dateTime;
             _tourReservationRepository.Save(reservation);
         }
-        public int CountUnreservedSeats(Tour tour)
+        public int CountUnreservedSeats(Tour tour, DateTime dateTime)
         {
             int sum = 0;
             List<TourReservation> reservations = new List<TourReservation>();
             reservations = _tourReservationRepository.GetAll();
             foreach (TourReservation reservation in reservations)
             {
-                if (reservation.IdTour == tour.Id)
+                if (reservation.IdTour == tour.Id && dateTime == reservation.DateAndTime)
                 {
                     sum += reservation.NumberOfPeople;
                 }

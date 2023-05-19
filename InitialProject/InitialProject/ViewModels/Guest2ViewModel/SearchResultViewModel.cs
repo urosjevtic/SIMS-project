@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
@@ -15,6 +17,8 @@ using InitialProject.Repository;
 using InitialProject.Service;
 using InitialProject.View;
 using InitialProject.View.Guest2View;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace InitialProject.ViewModels
 {
@@ -189,11 +193,42 @@ namespace InitialProject.ViewModels
             else
             {
                 int numberOfPeople = int.Parse(_numberOfPeople);
-                int freeSeats = SelectedTour.MaxGuests - _tourReservationService.CountUnreservedSeats(SelectedTour);
+                int freeSeats = SelectedTour.MaxGuests - _tourReservationService.CountUnreservedSeats(SelectedTour, SelectedDateTime);
                 double age = double.Parse(_averageAge);
 
                 if (numberOfPeople <= freeSeats)
                 {
+                    MessageBoxResult answer = MessageBox.Show("Do you want to make PDF document of this reservation?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                   /* if(answer == MessageBoxResult.Yes)
+                    {
+                        // Kreiranje PDF dokumenta
+                        Document document = new Document();
+
+                        // Definisanje putanje za čuvanje PDF fajla
+                        string filePath = "InitialProject/bin/pdf_forms";
+
+                        // Kreiranje PDF writer-a za generisanje PDF fajla
+                        PdfWriter writer = PdfWriter.GetInstance(document, new FileStream(filePath, FileMode.Create));
+
+                        // Otvorite dokument
+                        document.Open();
+
+                        // Kreiranje PDF sadržaja iz XAML-a
+                        MemoryStream xamlStream = new MemoryStream();
+                        TextRange range = new TextRange(txtContent.Document.ContentStart, txtContent.Document.ContentEnd);
+                        range.Save(xamlStream, DataFormats.XamlPackage);
+
+                        iTextSharp.text.Image xamlImage = iTextSharp.text.Image.GetInstance(xamlStream.GetBuffer());
+                        xamlImage.ScaleToFit(document.PageSize.Width, document.PageSize.Height);
+
+                        // Dodavanje sadržaja u dokument
+                        document.Add(xamlImage);
+
+                        // Zatvorite dokument
+                        document.Close();
+
+                        MessageBox.Show("PDF fajl je uspešno generisan na putanji: " + filePath);
+                    }*/
                     _tourReservationService.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     if (SelectedVoucher != null)
@@ -201,7 +236,7 @@ namespace InitialProject.ViewModels
                         _voucherService.ChangeToUsed(SelectedVoucher);
                     }
                 }
-                else if (SelectedTour.MaxGuests == _tourReservationService.CountUnreservedSeats(SelectedTour))
+                else if (SelectedTour.MaxGuests == _tourReservationService.CountUnreservedSeats(SelectedTour, SelectedDateTime))
                 {
                     MessageBox.Show("Tour is completely reserved! Now there are shown other tours on this location.", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     FindAlternatives(SelectedTour);

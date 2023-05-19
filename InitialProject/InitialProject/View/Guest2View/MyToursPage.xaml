@@ -210,9 +210,9 @@
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                             <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
-                                            <RowDefinition></RowDefinition>
+                                            <RowDefinition Height="25"></RowDefinition>
+                                            <RowDefinition Height="30"></RowDefinition>
+                                            <RowDefinition Height="57"></RowDefinition>
                                             <RowDefinition></RowDefinition>
                                         </Grid.RowDefinitions>
                                         <Label Content="Guide's knowledge" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Grid.Row="0" FontSize="20"/>
@@ -224,17 +224,15 @@
                                         <Label Content="How interesting the tour was?" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Grid.Row="4" FontSize="20"/>
                                         <Slider x:Name="InterestingTourSlider"  Value="{Binding InterestingTour, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" VerticalAlignment="Top" Minimum="1" Maximum="5" TickFrequency="1" IsSnapToTickEnabled="True" Margin="15,7,25,0"/>
                                         <TextBlock Text="{Binding ElementName=InterestingTourSlider,Path=Value, UpdateSourceTrigger=PropertyChanged}" FontSize="25" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="370,0,0,0" Height="35" Grid.Row="5"/>
-                                        <Label HorizontalContentAlignment="Center" Grid.Row="7" FontSize="12">
-                                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Margin="-2">
-                                                Type the URL of image that you want to share with us (separated by comma if there is more):
-                                            </TextBlock>
-                                        </Label>
-                                        <TextBox x:Name="imageTextBox" Text="{Binding ImageTextBox}" BorderThickness="2" Grid.Row="8" TextWrapping="Wrap" FontSize="15" Margin="2,2,5,2"/>
                                         <Label HorizontalContentAlignment="Center" Grid.Row="6" FontSize="12">
-                                            <TextBlock TextWrapping="Wrap" TextAlignment="Center">
-                                                *pull the scrollbar to rate the tour (from 1 to 5), then click Submit
+                                            <TextBlock TextWrapping="Wrap" TextAlignment="Center" Margin="-2">
+                                                Type URL of image that you want to share, then click button Add:
                                             </TextBlock>
                                         </Label>
+                                        <Button Content="Add" Grid.Row="7" Width="70" Height="25" Margin="313,3,7,2" FontSize="16" Background="LightSteelBlue" Command="{Binding AddCommand}"/>
+                                        <TextBox x:Name="imageTextBox" Text="{Binding ImageTextBox}" BorderThickness="2" Grid.Row="7" TextWrapping="Wrap" FontSize="15" Margin="2,2,87,2"/>
+                                        <ListBox x:Name="imageListBox" ItemsSource="{Binding ImageList, UpdateSourceTrigger=PropertyChanged}" BorderThickness="2" Grid.Row="8" FontSize="15" Margin="2,2,5,2"/>
+                                        
                                         <Button Grid.Row="9" FontSize="18" BorderThickness="2" Command="{Binding OpenCommentFormCommand}" Width="160" Background="LightSteelBlue">
                                             <StackPanel Orientation="Horizontal">
                                                 <Image Source="/Resources/Images/comment.png" Height="30"></Image>
