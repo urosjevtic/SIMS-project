@@ -49,11 +49,10 @@ namespace InitialProject.ViewModels
         public User LoggedUser { get; set; }
 
         private readonly VoucherService _voucherService;
-        public ShowVouchersViewModel(User user, NavigationService nav)
+        public ShowVouchersViewModel(NavigationService nav)
         {
             _voucherService = new VoucherService();
             this.navService = nav;
-            LoggedUser = user;
             vouchers = _voucherService.GetAllCreated();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
             GoBackCommand = new RelayCommand(GoBack);
@@ -61,7 +60,10 @@ namespace InitialProject.ViewModels
 
         private void GoBack()
         {
-            navService.Navigate(new ShowTourPage(LoggedUser, navService));
+            if (navService.CanGoBack)
+            {
+                navService.GoBack();
+            }
         }
     }
 }

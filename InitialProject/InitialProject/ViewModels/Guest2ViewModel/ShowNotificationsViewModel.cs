@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Model;
@@ -57,23 +58,30 @@ namespace InitialProject.ViewModels.Guest2ViewModel
         public CheckPointService _checkPointService;
         public TourGuestService _tourGuestService;
 
-        public User LoggedUser { get; set; }
+        public User LoggedUser { get; set; } = App.LoggedUser;
         public MyDataTemplateSelector MyDataTemplateSelector { get; set; }
-
-        public ShowNotificationsViewModel(User user)
+        public NavigationService navService { get; }
+        public ShowNotificationsViewModel(NavigationService nav)
         {
+            this.navService = nav;
             _notificationService = new NotificationService();
             _guestsCheckPointService = new GuestsCheckPointService();
             _checkPointService = new CheckPointService();
             _tourGuestService = new TourGuestService();
             MyDataTemplateSelector = new MyDataTemplateSelector();
-            OkCommand = new RelayCommand(CloseCurrentWindow);
+            OkCommand = new RelayCommand(GoBack);
             OkCommandTemplate = new RelayCommand<TourNotification>(Ok);
             YesCommand = new RelayCommand<TourNotification>(Yes);
             NoCommand = new RelayCommand<TourNotification>(No);
-            TourNotifications = new ObservableCollection<TourNotification>(_notificationService.GetToursForNotifications(user.Id));
-            LoggedUser = user;
-            Guest = _tourGuestService.GetById(user.Id);
+            TourNotifications = new ObservableCollection<TourNotification>(_notificationService.GetToursForNotifications(LoggedUser.Id));
+            Guest = _tourGuestService.GetById(LoggedUser.Id);
+        }
+        public void GoBack()
+        {
+            if (navService.CanGoBack)
+            {
+                navService.GoBack();
+            }
         }
         public void Yes(TourNotification n)
         {

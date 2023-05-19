@@ -10,6 +10,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
 using InitialProject.ViewModels;
@@ -17,16 +18,14 @@ using InitialProject.ViewModels;
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for MakeRequests.xaml
+    /// Interaction logic for SearchResultPage.xaml
     /// </summary>
-    public partial class MakeRequests : Window
+    public partial class SearchResultPage : Page
     {
-        public MakeRequestsViewModel MakeRequestsViewModel;
-        public MakeRequests(User LoggedUser)
+        public SearchResultPage(Tour tour, NavigationService nav)
         {
             InitializeComponent();
-            MakeRequestsViewModel = new MakeRequestsViewModel(LoggedUser);
-            this.DataContext = MakeRequestsViewModel;
+            this.DataContext = new SearchResultViewModel(tour, nav);
         }
     }
 }

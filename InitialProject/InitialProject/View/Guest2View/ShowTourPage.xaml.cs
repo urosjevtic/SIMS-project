@@ -23,7 +23,8 @@ namespace InitialProject.View.Guest2View
     public partial class ShowTourPage : Page
     {
         public ShowTourViewModel showTourViewModel;
-        public ShowTourPage(User user, NavigationService ns)
+        public User LoggedUser { get; set; } = App.LoggedUser;
+        public ShowTourPage(NavigationService ns)
         {
             InitializeComponent();
             showTourViewModel = new ShowTourViewModel(ns);

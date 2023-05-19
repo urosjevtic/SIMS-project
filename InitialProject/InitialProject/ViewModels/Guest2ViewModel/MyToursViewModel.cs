@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Forms;
@@ -25,7 +26,7 @@ namespace InitialProject.ViewModels
             private readonly TourService _tourService;
             public Tour SelectedActiveTour { get; set; }
             public Tour SelectedEndedTour { get; set; }
-            public User LoggedUser { get; set; }
+            public User LoggedUser { get; set; } = App.LoggedUser;
             public ICommand GoBackCommand { get; private set; }
             public ICommand SubmitRateCommand { get; private set; }
             public ICommand ViewCheckpointsCommand { get; private set; }
@@ -165,9 +166,10 @@ namespace InitialProject.ViewModels
                 }
             }
             public List<CheckPoint> checkPoints { get; set; }
-            public MyToursViewModel(User user)
+            public NavigationService navService { get; }
+            public MyToursViewModel(NavigationService nav)
             {
-                LoggedUser = user;
+                navService = nav;
                 _tourService = new TourService();
                 _ratedGuideTourService = new RatedGuideTourService();
                 ActiveTours = new ObservableCollection<Tour>(_tourService.FindAllMyActiveTours(LoggedUser));
@@ -187,9 +189,11 @@ namespace InitialProject.ViewModels
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
             }
             private void GoBack()
+            {
+                if (navService.CanGoBack)
                 {
-                Window currentWindow = Application.Current.Windows.OfType<MyTours>().SingleOrDefault(w => w.IsActive);
-                currentWindow?.Close();
+                    navService.GoBack();
+                }
             }
 
             private void ViewCheckpoints(Tour tour)

@@ -31,7 +31,6 @@ namespace InitialProject.ViewModels
         public NavigationService navigationService { get; set; }
         public ShowTourViewModel(NavigationService nav)
         {
-            //LoggedUser = user;
             this.navigationService = nav;
             SearchCommand = new RelayCommand(Search);
             ShowMyToursCommand = new RelayCommand(ShowMyTours);
@@ -43,18 +42,15 @@ namespace InitialProject.ViewModels
         }
         private void Search()
         {
-            TourSearch tourSearch = new TourSearch(LoggedUser);
-            tourSearch.Show();
+            navigationService.Navigate(new TourSearchPage(navigationService));
         }
         private void ShowMyTours()
         {
-            MyTours myTours = new MyTours(LoggedUser);
-            myTours.Show();
+            navigationService.Navigate(new MyToursPage(navigationService));
         }
         private void OpenMakingRequests()
         {
-            MakeRequests makeRequests = new MakeRequests(LoggedUser);
-            makeRequests.Show();
+            navigationService.Navigate(new MakeRequestsPage(navigationService));
         }
         private void ShowRequests()
         {
@@ -62,16 +58,19 @@ namespace InitialProject.ViewModels
         }
         private void ShowVouchers()
         {
-            navigationService.Navigate(new ShowVouchersPage(LoggedUser, navigationService));
+            navigationService.Navigate(new ShowVouchersPage(navigationService));
         }
         private void ShowNotifications()
         {
-            ShowNotifications showNotifications = new ShowNotifications(LoggedUser);
-            showNotifications.Show();
+            navigationService.Navigate(new ShowNotificationsPage(navigationService));
         }
         private void Exit()
         {
-            //CloseCurrentWindow();
+            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+            }
         } 
     }
 }

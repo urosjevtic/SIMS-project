@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Repository;
@@ -24,7 +25,7 @@ namespace InitialProject.ViewModels
         private readonly VoucherService _voucherService;
         public List<Tour> tours { get; set; }
         public List<Voucher> vouchers { get; set; }
-        public User LoggedUser { get; set; }
+        public User LoggedUser { get; set; } = App.LoggedUser;
         public ICommand ReserveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
         public ICommand UpButtonCommand { get; set; }
@@ -134,22 +135,23 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-        public SearchResultViewModel(User user, Tour tour)
+        public NavigationService navigationService { get; }
+        public SearchResultViewModel(Tour tour, NavigationService nav)
         {
+            this.navigationService = nav;
+            SelectedTour = tour;
             _tourService = new TourService();
             _tourReservationService = new TourReservationService();
             _voucherService = new VoucherService();
             UpButtonCommand = new RelayCommand(UpButton);
             DownButtonCommand = new RelayCommand(DownButton);
             ReserveCommand = new RelayCommand(Reserve);
-            CancelCommand = new RelayCommand(Cancel);
+            CancelCommand = new RelayCommand(GoBack);
             vouchers = _voucherService.GetAllCreated();
-            LoggedUser = user;
             Tours = new ObservableCollection<Tour>();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
             DateTimes = new ObservableCollection<DateTime>(_tourService.GetById(tour.Id).StartDates);
             NumberOfPeople = "0";
-            SelectedTour = tour;
             SelectedDateTime = DateTimes[0];
         }
         private void UpButton()
@@ -162,10 +164,9 @@ namespace InitialProject.ViewModels
             int currentNumber = int.Parse(NumberOfPeople);
             NumberOfPeople = (currentNumber - 1).ToString();
         }
-        private void Cancel()
+        private void GoBack()
         {
-            Window currentWindow = Application.Current.Windows.OfType<SearchResult>().SingleOrDefault(w => w.IsActive);
-            currentWindow?.Close();
+            navigationService.Navigate(new ShowTourPage(navigationService));
         }
         private void Reserve()
         {
@@ -199,8 +200,6 @@ namespace InitialProject.ViewModels
                     {
                         _voucherService.ChangeToUsed(SelectedVoucher);
                     }
-                    Window currentWindow = Application.Current.Windows.OfType<SearchResult>().SingleOrDefault(w => w.IsActive);
-                    currentWindow?.Close();
                 }
                 else if (SelectedTour.MaxGuests == _tourReservationService.CountUnreservedSeats(SelectedTour))
                 {
@@ -217,16 +216,14 @@ namespace InitialProject.ViewModels
         {
             tours = _tourService.FindAllAlternatives(tour);
             Tours.Clear();
-            foreach(var t in tours)
+            foreach(Tour t in tours)
             {
-                if(t != tour)
+                if(t.Id != tour.Id)
                 {
                     Tours.Add(t);
                 }
             }
-            TourSearch ts = new(LoggedUser, Tours);
-            Cancel();
-            ts.Show();
+            navigationService.Navigate(new TourSearchPage(navigationService, Tours));
         }
     }
 }

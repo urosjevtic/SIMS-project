@@ -10,23 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Domain.Model;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for MakeShortTourRequest.xaml
+    /// Interaction logic for ShowShortTourStatisticsPage.xaml
     /// </summary>
-    public partial class MakeShortTourRequest : Window
+    public partial class ShowShortTourStatisticsPage : Page
     {
-        public MakeShortTourRequestViewModel MakeShortTourRequestViewModel;
-        public MakeShortTourRequest(User LoggedUser)
+        public ShowShortTourStatisticsPage(NavigationService nav)
         {
             InitializeComponent();
-            MakeShortTourRequestViewModel = new MakeShortTourRequestViewModel(LoggedUser);
-            this.DataContext = MakeShortTourRequestViewModel;
+            this.DataContext = new ShowShortTourStatisticsViewModel(nav);
         }
     }
 }

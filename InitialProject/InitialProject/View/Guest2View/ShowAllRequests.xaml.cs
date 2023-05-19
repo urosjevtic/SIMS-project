@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
@@ -21,6 +22,7 @@ namespace InitialProject.View.Guest2View
     /// </summary>
     public partial class ShowAllRequests : Page
     {
+        public User LoggedUser { get; set; } = App.LoggedUser;
         public ShowAllRequests(NavigationService nav)
         {
             InitializeComponent();

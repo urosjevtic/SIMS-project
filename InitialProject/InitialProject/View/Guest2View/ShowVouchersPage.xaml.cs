@@ -23,10 +23,10 @@ namespace InitialProject.View.Guest2View
     /// </summary>
     public partial class ShowVouchersPage : Page
     {
-        public ShowVouchersPage(User LoggedUser, NavigationService nav)
+        public ShowVouchersPage(NavigationService nav)
         {
             InitializeComponent();
-            this.DataContext = new ShowVouchersViewModel(LoggedUser, nav);
+            this.DataContext = new ShowVouchersViewModel(nav);
         }
     }
 }

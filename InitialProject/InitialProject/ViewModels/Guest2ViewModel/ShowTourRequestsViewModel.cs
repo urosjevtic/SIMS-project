@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
+using InitialProject.Domain.Model;
 using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
@@ -17,6 +18,7 @@ namespace InitialProject.ViewModels
         public ICommand ShowComplexTourRequestsCommand { get; private set; }
         public NavigationService NavigationService { get; private set; }
 
+        public User LoggedUser { get; set; } = App.LoggedUser;
         public ShowTourRequestsViewModel(NavigationService navigation)
         {
             this.NavigationService = navigation;
@@ -26,15 +28,11 @@ namespace InitialProject.ViewModels
         }
         public void ShowShortRequests()
         {
-            ShowShortTourRequests showShort = new();
-            CloseCurrentWindow();
-            showShort.Show();
+            NavigationService.Navigate(new ShowShortTourRequestsPage(NavigationService));
         }
         public void ShowShortStatistics()
         {
-            ShowShortTourStatistics showShortStatistics = new();
-            CloseCurrentWindow();
-            showShortStatistics.Show();
+            NavigationService.Navigate(new ShowShortTourStatisticsPage(NavigationService));
         }
     }
 }
