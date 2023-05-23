@@ -70,6 +70,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accommodation menagment.
+        /// </summary>
+        public static string Accommodation_managment {
+            get {
+                return ResourceManager.GetString("Accommodation_managment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accommodation registration.
         /// </summary>
         public static string Accommodation_registration {
@@ -354,6 +363,15 @@ namespace InitialProject.Properties {
         public static string Generate_a_pdf_report_for_a_renovations {
             get {
                 return ResourceManager.GetString("Generate_a_pdf_report_for_a_renovations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate PDF.
+        /// </summary>
+        public static string Generate_PDF {
+            get {
+                return ResourceManager.GetString("Generate_PDF", resourceCulture);
             }
         }
         
@@ -745,6 +763,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renovation report.
+        /// </summary>
+        public static string Renovation_report {
+            get {
+                return ResourceManager.GetString("Renovation_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renovation reports.
         /// </summary>
         public static string Renovation_reports {
@@ -1033,6 +1060,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a period for renovation report.
+        /// </summary>
+        public static string Select_a_period_for_renovation_report {
+            get {
+                return ResourceManager.GetString("Select_a_period_for_renovation_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select available date:.
         /// </summary>
         public static string Select_available_date {
@@ -1146,6 +1182,15 @@ namespace InitialProject.Properties {
         public static string Suggestion_for_renovations {
             get {
                 return ResourceManager.GetString("Suggestion_for_renovations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suggestions for opening new or closing old accommodations.
+        /// </summary>
+        public static string Suggestions_for_opening_new_or_closing_old_accommodations {
+            get {
+                return ResourceManager.GetString("Suggestions_for_opening_new_or_closing_old_accommodations", resourceCulture);
             }
         }
         

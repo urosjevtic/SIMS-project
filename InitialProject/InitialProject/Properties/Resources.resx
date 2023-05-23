@@ -120,6 +120,9 @@
   <data name="Accommodation" xml:space="preserve">
     <value>Accommodation:</value>
   </data>
+  <data name="Accommodation_managment" xml:space="preserve">
+    <value>Accommodation menagment</value>
+  </data>
   <data name="Accommodation_registration" xml:space="preserve">
     <value>Accommodation registration</value>
   </data>
@@ -215,6 +218,9 @@
   </data>
   <data name="Generate_a_pdf_report_for_a_renovations" xml:space="preserve">
     <value>Generate a pdf report for a renovations</value>
+  </data>
+  <data name="Generate_PDF" xml:space="preserve">
+    <value>Generate PDF</value>
   </data>
   <data name="Generate_report" xml:space="preserve">
     <value>Generate report</value>
@@ -348,6 +354,9 @@
   <data name="Renovation_recomendations" xml:space="preserve">
     <value>Renovation recomendations</value>
   </data>
+  <data name="Renovation_report" xml:space="preserve">
+    <value>Renovation report</value>
+  </data>
   <data name="Renovation_reports" xml:space="preserve">
     <value>Renovation reports</value>
   </data>
@@ -447,6 +456,9 @@
   <data name="Select_a_month_you_want_to_see_statistic_for" xml:space="preserve">
     <value>Select a month you want to see statistic for</value>
   </data>
+  <data name="Select_a_period_for_renovation_report" xml:space="preserve">
+    <value>Select a period for renovation report</value>
+  </data>
   <data name="Select_date_range_for_renovations" xml:space="preserve">
     <value>Select date range for renovations</value>
   </data>
@@ -476,6 +488,9 @@
   </data>
   <data name="Sugestions_for_opening_new_accommodations" xml:space="preserve">
     <value>Sugestions for opening new accommodations</value>
+  </data>
+  <data name="Suggestions_for_opening_new_or_closing_old_accommodations" xml:space="preserve">
+    <value>Suggestions for opening new or closing old accommodations</value>
   </data>
   <data name="Suggestion_for_renovations" xml:space="preserve">
     <value>Suggestion for renovations</value>
