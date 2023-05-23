@@ -120,6 +120,9 @@
   <data name="Accommodation" xml:space="preserve">
     <value>Smeštaj:</value>
   </data>
+  <data name="Accommodation_managment" xml:space="preserve">
+    <value>Upravljenje smestajem</value>
+  </data>
   <data name="Accommodation_registration" xml:space="preserve">
     <value>Registracija smeštaja</value>
   </data>
@@ -215,6 +218,9 @@
   </data>
   <data name="Generate_a_pdf_report_for_a_renovations" xml:space="preserve">
     <value>Generiši pdf izveštaj o renovaciji</value>
+  </data>
+  <data name="Generate_PDF" xml:space="preserve">
+    <value>Generiši PDF</value>
   </data>
   <data name="Generate_report" xml:space="preserve">
     <value>Generiši izveštaj</value>
@@ -348,6 +354,9 @@
   <data name="Renovation_recomendations" xml:space="preserve">
     <value>Predlozi za renoviranje</value>
   </data>
+  <data name="Renovation_report" xml:space="preserve">
+    <value>Izveštaj o renoviranju</value>
+  </data>
   <data name="Renovation_reports" xml:space="preserve">
     <value>Izveštaj o renoviranju</value>
   </data>
@@ -447,6 +456,9 @@
   <data name="Select_a_month_you_want_to_see_statistic_for" xml:space="preserve">
     <value>Izaberite mesec za koji želite videti statistiku</value>
   </data>
+  <data name="Select_a_period_for_renovation_report" xml:space="preserve">
+    <value>Odaberite period za vaš izveštaj o renoviranju</value>
+  </data>
   <data name="Select_date_range_for_renovations" xml:space="preserve">
     <value>Izaberite opseg datuma za renoviranje</value>
   </data>
@@ -476,6 +488,9 @@
   </data>
   <data name="Sugestions_for_opening_new_accommodations" xml:space="preserve">
     <value>Predlozi za otvaranje novog smeštaja</value>
+  </data>
+  <data name="Suggestions_for_opening_new_or_closing_old_accommodations" xml:space="preserve">
+    <value>Predlozi za otvaranje novog ili zatvaranje starog smeštaja</value>
   </data>
   <data name="Suggestion_for_renovations" xml:space="preserve">
     <value>Predlozi za renoviranja</value>
