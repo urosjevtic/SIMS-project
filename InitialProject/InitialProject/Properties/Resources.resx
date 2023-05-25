@@ -159,6 +159,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Cancelation_count" xml:space="preserve">
+    <value>Cancelation count:</value>
+  </data>
   <data name="Cancelation_period" xml:space="preserve">
     <value>Cancelation period:</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Change_application_theme" xml:space="preserve">
     <value>Change application theme</value>
+  </data>
+  <data name="Change_theme" xml:space="preserve">
+    <value>Change theme</value>
   </data>
   <data name="Change_username_and_password" xml:space="preserve">
     <value>Change ussername and password</value>
@@ -191,6 +197,9 @@
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country:</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
   </data>
   <data name="Days_left_to_rate_guest" xml:space="preserve">
     <value>Days left to rate guest:</value>
@@ -260,6 +269,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
   </data>
   <data name="Log_out" xml:space="preserve">
     <value>Log out</value>
@@ -345,6 +357,9 @@
   <data name="Renovations" xml:space="preserve">
     <value>Renovations</value>
   </data>
+  <data name="Renovation_count" xml:space="preserve">
+    <value>Renovation count:</value>
+  </data>
   <data name="Renovation_description" xml:space="preserve">
     <value>Renovation description</value>
   </data>
@@ -372,8 +387,14 @@
   <data name="Reschedule" xml:space="preserve">
     <value>Reschedule</value>
   </data>
+  <data name="Reschedule_count" xml:space="preserve">
+    <value>Reschedule count:</value>
+  </data>
   <data name="Reservations" xml:space="preserve">
     <value>Reservations</value>
+  </data>
+  <data name="Reservation_count" xml:space="preserve">
+    <value>Reservation count:</value>
   </data>
   <data name="Reservation_rescheduling" xml:space="preserve">
     <value>Reservation rescheduling</value>
@@ -464,6 +485,9 @@
   </data>
   <data name="Select_language" xml:space="preserve">
     <value>Select language</value>
+  </data>
+  <data name="Select_theme" xml:space="preserve">
+    <value>Select theme</value>
   </data>
   <data name="Serbian" xml:space="preserve">
     <value>Serbian</value>

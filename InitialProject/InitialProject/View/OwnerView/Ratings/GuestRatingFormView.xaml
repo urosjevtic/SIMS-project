@@ -9,7 +9,7 @@
         mc:Ignorable="d"
         Title="GuestRatingFormView" Height="637" Width="345">
     <Page.Background>
-        LightGray
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
     <Page.Resources>
         <ControlTemplate x:Key="ValidationTemplate">
@@ -21,47 +21,6 @@
 
         </ControlTemplate>
 
-        <!--  Confirm button style  -->
-        <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#3A3D55" />
-            <!--  set the button background color  -->
-            <Setter Property="Foreground" Value="#fff" />
-            <!--  set the text color of the button  -->
-            <Setter Property="FontSize" Value="20" />
-            <!--  set the font size of the button  -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E" />
-                                <!--  set the background color when the mouse is over the button  -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E" />
-                                <!--  set the background color when the button is pressed  -->
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-        <!--  Naslovi  -->
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Foreground" Value="#3A3D55" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
 
     </Page.Resources>
     <Grid>
@@ -72,7 +31,7 @@
             <RowDefinition Height="0.2*" />
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" Foreground="#3A3D55" BorderThickness="0"  FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Left" />
+        <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" Foreground="{DynamicResource TextColor}" BorderThickness="0"  FontSize="16" FontWeight="DemiBold" HorizontalAlignment="Left" />
         <TextBlock Grid.Row="1" Text="{ns:Loc Rate_a_guest}" Style="{StaticResource TitleStyle}" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
         <Grid
@@ -81,40 +40,40 @@
             HorizontalAlignment="Center">
             <StackPanel Margin="0,42,0,0">
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
-                    <TextBlock Text="{ns:Loc Guest_username}" Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
-                    <TextBlock Text="{Binding UnratedGuest.Reservation.User.Username}" Foreground="#3A3D55" />
+                    <TextBlock Text="{ns:Loc Guest_username}" Foreground="{DynamicResource TextColor}" FontWeight="Bold" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding UnratedGuest.Reservation.User.Username}" Foreground="{DynamicResource TextColor}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
-                    <TextBlock Text="{ns:Loc Stayed_at}" Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
-                    <TextBlock Text="{Binding UnratedGuest.Reservation.Accommodation.Name}" Foreground="#3A3D55" />
+                    <TextBlock Text="{ns:Loc Stayed_at}" Foreground="{DynamicResource TextColor}" FontWeight="Bold" Margin="0 0 5 0" />
+                    <TextBlock Text="{Binding UnratedGuest.Reservation.Accommodation.Name}" Foreground="{DynamicResource TextColor}" />
                 </StackPanel>
 
                 <StackPanel Margin="0,0,0,15" Orientation="Horizontal">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{ns:Loc From}" Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
-                        <TextBlock Text="{Binding UnratedGuest.Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" Foreground="#3A3D55" />
+                        <TextBlock Text="{ns:Loc From}" Foreground="{DynamicResource TextColor}" FontWeight="Bold" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding UnratedGuest.Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" Foreground="{DynamicResource TextColor}" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="20 0 0 0">
-                        <TextBlock Text="{ns:Loc To}" Foreground="#3A3D55" FontWeight="Bold" Margin="0 0 5 0" />
-                        <TextBlock Text="{Binding UnratedGuest.Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" Foreground="#3A3D55"/>
+                        <TextBlock Text="{ns:Loc To}" Foreground="{DynamicResource TextColor}" FontWeight="Bold" Margin="0 0 5 0" />
+                        <TextBlock Text="{Binding UnratedGuest.Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" Foreground="{DynamicResource TextColor}"/>
                     </StackPanel>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10" Height="35">
-                    <TextBlock Text="{ns:Loc Cleanlines}" Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <TextBlock Text="{ns:Loc Cleanlines}" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                     <rating:Rating Width="109"
                                    Value="{Binding CleanlinessRating, Mode=TwoWay}" RenderTransformOrigin="0.681,0.139" Height="34" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal"  Margin="0 0 0 10" Height="35">
-                    <TextBlock Text="{ns:Loc Rule_following}" Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <TextBlock Text="{ns:Loc Rule_following}" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                     <rating:Rating Width="100" Height="42" 
                                    Value="{Binding RuleFollowingRating, Mode=TwoWay}" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <TextBlock Text="{ns:Loc Additional_comment}" Foreground="#3A3D55" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
+                    <TextBlock Text="{ns:Loc Additional_comment}" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="5 0" />
                 </StackPanel>
                 <TextBox
                     x:Name="AdditionalCommentTextBox"
@@ -127,7 +86,7 @@
             </StackPanel>
         </Grid>
 
-        <Button Grid.Row="3" Command="{Binding RateAGuestCommand}" Content="{ns:Loc Confirm}" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmButtonStyle}"/>
+        <Button Grid.Row="3" Command="{Binding RateAGuestCommand}" Content="{ns:Loc Confirm}" Margin="50, 0, 50, 40" Style="{StaticResource RateGuestButtonStyle}"/>
 
 
     </Grid>

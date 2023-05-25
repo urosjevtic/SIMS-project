@@ -17,14 +17,14 @@ using InitialProject.ViewModels.SettingsViewModel;
 namespace InitialProject.View.OwnerView.Settings
 {
     /// <summary>
-    /// Interaction logic for OwnerChooseLanguageView.xaml
+    /// Interaction logic for OwnerChooseThemeView.xaml
     /// </summary>
-    public partial class OwnerChooseLanguageView : Window
+    public partial class OwnerChooseThemeView : Window
     {
-        public OwnerChooseLanguageView(User logedInUser)
+        public OwnerChooseThemeView(User logedInUser)
         {
             InitializeComponent();
-            DataContext = new OwnerChooseLanguageViewModel(logedInUser);
+            DataContext = new OwnerChooseThemeViewModel(logedInUser);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
 
             _locationService = new LocationService();
             _accommodationSuggestionService = new AccommodationSuggestionService();
-            SuggestedLocations = new ObservableCollection<Location>(_locationService.GetLocations());
+            SuggestedLocations = new ObservableCollection<Location>(_accommodationSuggestionService.ReccommmendPlaceForNewAccommdoation());
         }
 
     }

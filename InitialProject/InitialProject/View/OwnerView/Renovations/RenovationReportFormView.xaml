@@ -10,44 +10,9 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <!--LogIn button style-->
-
-    <Window.Resources>
-    <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-        <Setter Property="Background" Value="#3A3D55"/>
-        <!-- set the button background color -->
-        <Setter Property="Foreground" Value="#fff"/>
-        <!-- set the text color of the button -->
-        <Setter Property="FontSize" Value="20"/>
-        <!-- set the font size of the button -->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                        <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#005A9E"/>
-                            <!-- set the background color when the mouse is over the button -->
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter Property="Background" Value="#004F8E"/>
-                            <!-- set the background color when the button is pressed -->
-                        </Trigger>
-
-
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    </Window.Resources>
-
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource LighterBackground}" />
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -55,17 +20,17 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="{ns:Loc Select_a_period_for_renovation_report}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"></TextBlock>
+        <TextBlock Grid.Row="0" Text="{ns:Loc Select_a_period_for_renovation_report}" Foreground="{DynamicResource TextColor}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"></TextBlock>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{ns:Loc From}" Margin="0, 0, 20, 0"></TextBlock>
+                <TextBlock Text="{ns:Loc From}" Foreground="{DynamicResource TextColor}"  Margin="0, 0, 20, 0"></TextBlock>
                 <DatePicker SelectedDate="{Binding FromDate}"></DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{ns:Loc To}" Margin="0, 0, 20, 0"></TextBlock>
+                <TextBlock Text="{ns:Loc To}" Foreground="{DynamicResource TextColor}"  Margin="0, 0, 20, 0"></TextBlock>
                 <DatePicker SelectedDate="{Binding ToDate}"></DatePicker>
             </StackPanel>
         </StackPanel>
-        <Button Grid.Row="2" Command="{Binding GeneratePdfCommand}" Content="{ns:Loc Generate_report}" Style="{StaticResource LogInButtonStyle}" Margin="10, 10, 10 ,10"></Button>
+        <Button Grid.Row="2" Command="{Binding GeneratePdfCommand}" Content="{ns:Loc Generate_report}" Style="{StaticResource ButtonStyle}" Margin="10, 10, 10 ,10"></Button>
     </Grid>
 </Window>

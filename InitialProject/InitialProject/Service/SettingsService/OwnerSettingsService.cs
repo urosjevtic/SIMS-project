@@ -34,5 +34,19 @@ namespace InitialProject.Service.SettingsService
         {
             _ownerSettingsRepository.Update(ownerSettings);
         }
+
+        public void UpdateLanguage(int ownerId, string language)
+        {
+            OwnerSettings ownerSettings = _ownerSettingsRepository.GetByOwnerId(ownerId);
+            ownerSettings.Language = language;
+            _ownerSettingsRepository.Update(ownerSettings);
+        }
+
+        public void UpdateTheme(int ownerId, string theme)
+        {
+            OwnerSettings ownerSettings = _ownerSettingsRepository.GetByOwnerId(ownerId);
+            ownerSettings.Theme = theme;
+            _ownerSettingsRepository.Update(ownerSettings);
+        }
     }
 }

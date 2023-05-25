@@ -196,6 +196,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancelation count:.
+        /// </summary>
+        public static string Cancelation_count {
+            get {
+                return ResourceManager.GetString("Cancelation_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancelation period:.
         /// </summary>
         public static string Cancelation_period {
@@ -219,6 +228,15 @@ namespace InitialProject.Properties {
         public static string Change_application_theme {
             get {
                 return ResourceManager.GetString("Change_application_theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change theme.
+        /// </summary>
+        public static string Change_theme {
+            get {
+                return ResourceManager.GetString("Change_theme", resourceCulture);
             }
         }
         
@@ -282,6 +300,15 @@ namespace InitialProject.Properties {
         public static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string Dark {
+            get {
+                return ResourceManager.GetString("Dark", resourceCulture);
             }
         }
         
@@ -489,6 +516,15 @@ namespace InitialProject.Properties {
         public static string Language {
             get {
                 return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string Light {
+            get {
+                return ResourceManager.GetString("Light", resourceCulture);
             }
         }
         
@@ -736,6 +772,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renovation count:.
+        /// </summary>
+        public static string Renovation_count {
+            get {
+                return ResourceManager.GetString("Renovation_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renovation description.
         /// </summary>
         public static string Renovation_description {
@@ -822,6 +867,24 @@ namespace InitialProject.Properties {
         public static string Reschedule {
             get {
                 return ResourceManager.GetString("Reschedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reschedule count:.
+        /// </summary>
+        public static string Reschedule_count {
+            get {
+                return ResourceManager.GetString("Reschedule_count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reservation count:.
+        /// </summary>
+        public static string Reservation_count {
+            get {
+                return ResourceManager.GetString("Reservation_count", resourceCulture);
             }
         }
         
@@ -1092,6 +1155,15 @@ namespace InitialProject.Properties {
         public static string Select_language {
             get {
                 return ResourceManager.GetString("Select_language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select theme.
+        /// </summary>
+        public static string Select_theme {
+            get {
+                return ResourceManager.GetString("Select_theme", resourceCulture);
             }
         }
         
