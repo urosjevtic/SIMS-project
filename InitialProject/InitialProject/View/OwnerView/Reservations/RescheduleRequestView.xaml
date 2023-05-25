@@ -8,55 +8,9 @@
         mc:Ignorable="d"
         Title="RescheduleRequestView" Height="700" Width="345">
     <Page.Background>
-        <SolidColorBrush Color="LightGray" />
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
-    <Page.Resources>
-        <!--LogIn button style-->
-        <!--Confirm button style-->
-        <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
 
-
-        <!--Naslovi-->
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#3A3D55"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-
-
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
@@ -64,33 +18,33 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation_rescheduling}" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation_rescheduling}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="reschedulingListBox"
                  ItemsSource="{Binding RescheduleRequests}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 Background="LightGray"
+                 Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
-                            BorderBrush="#007acc"
+                            BorderBrush="{DynamicResource TextColor}"
                             Margin="5"
                             CornerRadius="5"
                             Padding="10"
-                            Background="#fafafa">
+                            Background="{DynamicResource BackgroundColorLighter}">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="5"
                                               BlurRadius="10"
                                               Opacity="0.5"
-                                              Color="Black"/>
+                                              Color="{DynamicResource Shadow}"/>
                         </Border.Effect>
                         <Grid Margin="10,10,10,0">
                             <Grid.RowDefinitions>
@@ -108,8 +62,9 @@
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
                                 <TextBlock Text="{ns:Loc Guest_username}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Reservation.User.Username}" />
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.User.Username}" />
                             </StackPanel>
 
 
@@ -117,45 +72,51 @@
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Accommodation}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Reservation.Accommodation.Name}" />
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.Accommodation.Name}" />
                             </StackPanel>
                             <!--Initial start and end date-->
-                            <TextBlock Text="{ns:Loc Initial_date}" Grid.Row="2"></TextBlock>
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{ns:Loc Initial_date}" Grid.Row="2"></TextBlock>
 
 
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
                                 <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                                 <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
-                                           FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
                             <!--New start and end date-->
-                            <TextBlock Text="{ns:Loc New_date}" Grid.Row="4"></TextBlock>
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{ns:Loc New_date}" Grid.Row="4"></TextBlock>
 
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
                                 <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding RescheduleStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding RescheduleStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                                 <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
+                                           Foreground="{DynamicResource TextColor}"
                                            FontWeight="Bold"/>
-                                <TextBlock Text="{Binding RescheduleEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding RescheduleEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
                             <!--Is already reserved-->
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="6">
                                 <TextBlock Text="{ns:Loc Is_already_ocupied}" 
+                                           Foreground="{DynamicResource TextColor}"
                                            FontWeight="Bold"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding IsAlreadyReserved}" />
+                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding IsAlreadyReserved}" />
                             </StackPanel>
 
                             <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">

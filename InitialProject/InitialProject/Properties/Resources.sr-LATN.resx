@@ -159,6 +159,9 @@
   <data name="Cancel" xml:space="preserve">
     <value>Otkaži</value>
   </data>
+  <data name="Cancelation_count" xml:space="preserve">
+    <value>Broj otkazivanja:</value>
+  </data>
   <data name="Cancelation_period" xml:space="preserve">
     <value>Period za otkazivanje:</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Change_application_theme" xml:space="preserve">
     <value>Promeni temu aplikacije</value>
+  </data>
+  <data name="Change_theme" xml:space="preserve">
+    <value>Proemeni temu</value>
   </data>
   <data name="Change_username_and_password" xml:space="preserve">
     <value>Promeni korisničko ime i lozinku</value>
@@ -191,6 +197,9 @@
   </data>
   <data name="Country" xml:space="preserve">
     <value>Država:</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Mracna</value>
   </data>
   <data name="Days_left_to_rate_guest" xml:space="preserve">
     <value>Dani ostali da ocenite gosta:</value>
@@ -260,6 +269,9 @@
   </data>
   <data name="Language" xml:space="preserve">
     <value>Jezik</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Svetla</value>
   </data>
   <data name="Log_out" xml:space="preserve">
     <value>Izloguj se</value>
@@ -345,6 +357,9 @@
   <data name="Renovations" xml:space="preserve">
     <value>Renoviranje</value>
   </data>
+  <data name="Renovation_count" xml:space="preserve">
+    <value>Broj renoviranja:</value>
+  </data>
   <data name="Renovation_description" xml:space="preserve">
     <value>Opis renoviranja</value>
   </data>
@@ -372,8 +387,14 @@
   <data name="Reschedule" xml:space="preserve">
     <value>Pomeri</value>
   </data>
+  <data name="Reschedule_count" xml:space="preserve">
+    <value>Broj pomeranja:</value>
+  </data>
   <data name="Reservations" xml:space="preserve">
     <value>Rezervacije</value>
+  </data>
+  <data name="Reservation_count" xml:space="preserve">
+    <value>Broj rezervacija:</value>
   </data>
   <data name="Reservation_rescheduling" xml:space="preserve">
     <value>Pomeranje rezervacija</value>
@@ -464,6 +485,9 @@
   </data>
   <data name="Select_language" xml:space="preserve">
     <value>Izaberite jezik</value>
+  </data>
+  <data name="Select_theme" xml:space="preserve">
+    <value>Izaberi temu</value>
   </data>
   <data name="Serbian" xml:space="preserve">
     <value>Srpski</value>

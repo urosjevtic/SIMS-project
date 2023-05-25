@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="ObjectsBackgroundColor" Color="#3A3D55" />
+    <SolidColorBrush x:Key="BackgroundColorLighter" Color="#fff"></SolidColorBrush>
+    <SolidColorBrush x:Key="ForegroundColorLighter" Color="#fff"></SolidColorBrush>
+    <SolidColorBrush x:Key="BackgroundColorDarker" Color="lightgray"></SolidColorBrush>
+    <SolidColorBrush x:Key="NavBarColor" Color="#9394a5"></SolidColorBrush>
+    <SolidColorBrush x:Key="ShadowColor" Color="Black"></SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonMouseOver" Color="#005A9E"></SolidColorBrush>
+    <SolidColorBrush x:Key="ButtonMouseClick" Color="#004F8E"></SolidColorBrush>
+    <SolidColorBrush x:Key="ClickParticalEffect" Color="#80FFFFFF"></SolidColorBrush>
+    <SolidColorBrush x:Key="TextColor" Color="#3A3D55"></SolidColorBrush>
+    <Color x:Key="LighterBackground">#fafafa</Color>
+    <Color x:Key="DarkerBackground">LightGray</Color>
+    <Color x:Key="Shadow">Black</Color>
+
+</ResourceDictionary>

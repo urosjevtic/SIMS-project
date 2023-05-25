@@ -7,44 +7,94 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.Model.Statistics;
 using InitialProject.Service.ReservationServices;
+using InitialProject.Service.StatisticService;
 
 namespace InitialProject.Service.AccommodationServices
 {
     public class AccommodationSuggestionService
     {
 
-        private readonly AccommodationReservationService _accommodationReservationService;
+        private readonly AccommodationService _accommodationService;
+        private readonly YearlyAccommodationStatisticService _yearlyAccommodationStatisticService;
 
         public AccommodationSuggestionService()
         {
-            _accommodationReservationService = new AccommodationReservationService();
-            SortAccommodationByLocation();
+            _yearlyAccommodationStatisticService = new YearlyAccommodationStatisticService();
+            _accommodationService = new AccommodationService();
         }
 
 
-        private Dictionary<Location, List<Accommodation>> SortAccommodationByLocation()
+
+        public List<Location> ReccommmendPlaceForNewAccommdoation()
         {
-            List<AccommodationReservation> reservations = new List<AccommodationReservation>();
-            reservations = _accommodationReservationService.GetAll();
-            Dictionary<Location, List<Accommodation>> accommdoationsByLocation = new Dictionary<Location, List<Accommodation>>();
+            Dictionary<int, List<AccommodationStatistic>> accommodationStatistics = GetAccommdoationStatistic();
+            Dictionary<int, int> numberOfReservationsForAccommoadations =
+                GetNumberOfReservationsForAccommoadations(accommodationStatistics);
 
-            foreach (var reservation in reservations)
+            List<Location> locations = new List<Location>();
+            locations.Add(FindBuisiestLocation(numberOfReservationsForAccommoadations));
+            return locations;
+
+
+        }
+
+        private Location FindBuisiestLocation(Dictionary<int, int> numberOfReservationsForAccommoadations)
+        {
+            Dictionary<Location, int> reservationsPerLocation = new Dictionary<Location, int>();
+            foreach (var accommdoationId in numberOfReservationsForAccommoadations.Keys)
             {
-                if (!accommdoationsByLocation.ContainsKey(reservation.Accommodation.Location))
+                Location location = _accommodationService.GetById(accommdoationId).Location;
+                if (!reservationsPerLocation.ContainsKey(location))
                 {
-                    accommdoationsByLocation[reservation.Accommodation.Location] = new List<Accommodation>()
-                    {
-                        reservation.Accommodation
-                    };
-                }
-                else
-                {
-                    accommdoationsByLocation[reservation.Accommodation.Location].Add(reservation.Accommodation);
+                    reservationsPerLocation[location] = numberOfReservationsForAccommoadations[accommdoationId];
                 }
 
+                reservationsPerLocation[location] += numberOfReservationsForAccommoadations[accommdoationId];
             }
 
-            return accommdoationsByLocation;
+            var busiestLocation = reservationsPerLocation.OrderByDescending(kvp => kvp.Value).FirstOrDefault();
+            return busiestLocation.Key;
+        }
+
+        private Dictionary<int, List<AccommodationStatistic>> GetAccommdoationStatistic()
+        {
+            Dictionary<int, List<AccommodationStatistic>> accommodationStatistics =
+                new Dictionary<int, List<AccommodationStatistic>>();
+
+            List<Accommodation> accommodations = _accommodationService.GetAll();
+            foreach (var accommodation in accommodations)
+            {
+                accommodationStatistics[accommodation.Id] =
+                    _yearlyAccommodationStatisticService.GetStatisticByAccommodationId(accommodation.Id);
+            }
+
+            return accommodationStatistics;
+        }
+
+        private Dictionary<int, int> GetNumberOfReservationsForAccommoadations(Dictionary<int, List<AccommodationStatistic>> accommodationStatistics)
+        {
+            Dictionary<int, int> reservationStatistic = new Dictionary<int, int>();
+            foreach (var accommodation in accommodationStatistics.Keys)
+            {
+
+                reservationStatistic[accommodation] = GetNumberOfReservationsForLastSixMonths(accommodationStatistics[accommodation]);
+            }
+
+            return reservationStatistic;
+        }
+
+        private int GetNumberOfReservationsForLastSixMonths(List<AccommodationStatistic> statistics)
+        {
+            int numberOfReservations = 0;
+            foreach (var statistic in statistics)
+            {
+                if (statistic.MonthAndYear.Month >= DateTime.Now.AddMonths(-6).Month)
+                {
+                    numberOfReservations += statistic.ReservationsCount;
+                }
+            }
+
+            return numberOfReservations;
         }
     }
 }
