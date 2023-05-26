@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 
 namespace InitialProject.View.OwnerView.MyAccommodations
 {
@@ -21,10 +22,10 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// </summary>
     public partial class NewAccommodationSuggestionsView : Page
     {
-        public NewAccommodationSuggestionsView()
+        public NewAccommodationSuggestionsView(User logedInUser, NavigationService navigationService)
         {
             InitializeComponent();
-            DataContext = new NewAccommodationSuggestionsViewModel();
+            DataContext = new NewAccommodationSuggestionsViewModel(logedInUser, navigationService);
         }
     }
 }
