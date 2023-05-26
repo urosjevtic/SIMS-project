@@ -7,7 +7,7 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Domain.Model
 {
-    public class Location : ISerializable
+    public class Location : ISerializable, IEquatable<Location>
     {
         public int Id { get; set; }
         public string Country { get; set; }
@@ -43,5 +43,24 @@ namespace InitialProject.Domain.Model
         {
             return $"{Country}, {City}";
         }
+
+        public bool Equals(Location other)
+        {
+            if (other == null)
+                return false;
+
+            return string.Equals(Country, other.Country) && string.Equals(City, other.City);
+        }
+
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Location);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Country, City);
+        }
+
     }
 }

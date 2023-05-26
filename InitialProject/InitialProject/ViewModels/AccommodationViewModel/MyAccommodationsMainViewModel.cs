@@ -54,7 +54,7 @@ namespace InitialProject.ViewModels
 
         private void OpenRegistrationSuggestion()
         {
-            NavigationService.Navigate(new NewAccommodationSuggestionsView());
+            NavigationService.Navigate(new NewAccommodationSuggestionsView(LogedInUser, NavigationService));
         }
 
 

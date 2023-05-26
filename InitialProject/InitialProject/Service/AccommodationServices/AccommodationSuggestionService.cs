@@ -25,20 +25,74 @@ namespace InitialProject.Service.AccommodationServices
 
 
 
-        public List<Location> ReccommmendPlaceForNewAccommdoation()
+        public LocationStatistic ReccommmendPlaceForNewAccommdoation()
         {
             Dictionary<int, List<AccommodationStatistic>> accommodationStatistics = GetAccommdoationStatistic();
             Dictionary<int, int> numberOfReservationsForAccommoadations =
                 GetNumberOfReservationsForAccommoadations(accommodationStatistics);
 
-            List<Location> locations = new List<Location>();
-            locations.Add(FindBuisiestLocation(numberOfReservationsForAccommoadations));
-            return locations;
+            return FindBuisiestLocation(numberOfReservationsForAccommoadations);
 
 
         }
 
-        private Location FindBuisiestLocation(Dictionary<int, int> numberOfReservationsForAccommoadations)
+        public Accommodation ReccommendedAccommodationForClosing(int ownerId)
+        {
+            Dictionary<int, List<AccommodationStatistic>> accommodationStatistics = GetAccommdoationStatistic();
+            Dictionary<int, int> numberOfReservationsForAccommoadations =
+                GetNumberOfReservationsForAccommoadations(accommodationStatistics);
+
+            List<LocationStatistic> leastVisitedLocations =
+                FindLeastVisitedLocation(numberOfReservationsForAccommoadations);
+
+            return FindAccommodationForClosing(ownerId, leastVisitedLocations);
+
+
+        }
+
+        private Accommodation FindAccommodationForClosing(int ownerId, List<LocationStatistic> leastVisidetLocations)
+        {
+            List<Accommodation> accommodations = _accommodationService.GetAllAccommodationByOwnerId(ownerId);
+            foreach (var leastVisitedLocation in leastVisidetLocations.OrderByDescending(ls => ls.NumberOfReservations).ToList())
+            {
+                foreach (var accommdoation in accommodations)
+                {
+                    if (accommdoation.Location.Equals(leastVisitedLocation.Location))
+                    {
+                        return accommdoation;
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private List<LocationStatistic> FindLeastVisitedLocation(Dictionary<int, int> numberOfReservationsForAccommoadations)
+        {
+            Dictionary<Location, int> reservationsPerLocation = GetNumberOFReservationsForLocations(numberOfReservationsForAccommoadations);
+
+            List<LocationStatistic> leastVisitedLocations = new List<LocationStatistic>();
+
+            foreach (var reservationPerLocation in reservationsPerLocation)
+            {
+                if (reservationPerLocation.Value < 10)
+                {
+                    leastVisitedLocations.Add(new LocationStatistic(reservationPerLocation.Key, reservationPerLocation.Value));
+                }
+            }
+
+            return leastVisitedLocations;
+        }
+
+        private LocationStatistic FindBuisiestLocation(Dictionary<int, int> numberOfReservationsForAccommoadations)
+        {
+            Dictionary<Location, int> reservationsPerLocation = GetNumberOFReservationsForLocations(numberOfReservationsForAccommoadations);
+
+            var busiestLocation = reservationsPerLocation.OrderByDescending(kvp => kvp.Value).FirstOrDefault();
+            return new LocationStatistic(busiestLocation.Key, busiestLocation.Value);
+        }
+
+        private Dictionary<Location, int> GetNumberOFReservationsForLocations(Dictionary<int, int> numberOfReservationsForAccommoadations)
         {
             Dictionary<Location, int> reservationsPerLocation = new Dictionary<Location, int>();
             foreach (var accommdoationId in numberOfReservationsForAccommoadations.Keys)
@@ -52,9 +106,9 @@ namespace InitialProject.Service.AccommodationServices
                 reservationsPerLocation[location] += numberOfReservationsForAccommoadations[accommdoationId];
             }
 
-            var busiestLocation = reservationsPerLocation.OrderByDescending(kvp => kvp.Value).FirstOrDefault();
-            return busiestLocation.Key;
+            return reservationsPerLocation;
         }
+
 
         private Dictionary<int, List<AccommodationStatistic>> GetAccommdoationStatistic()
         {
@@ -77,18 +131,18 @@ namespace InitialProject.Service.AccommodationServices
             foreach (var accommodation in accommodationStatistics.Keys)
             {
 
-                reservationStatistic[accommodation] = GetNumberOfReservationsForLastSixMonths(accommodationStatistics[accommodation]);
+                reservationStatistic[accommodation] = GetNumberOfReservationsForLastYear(accommodationStatistics[accommodation]);
             }
 
             return reservationStatistic;
         }
 
-        private int GetNumberOfReservationsForLastSixMonths(List<AccommodationStatistic> statistics)
+        private int GetNumberOfReservationsForLastYear(List<AccommodationStatistic> statistics)
         {
             int numberOfReservations = 0;
             foreach (var statistic in statistics)
             {
-                if (statistic.MonthAndYear.Month >= DateTime.Now.AddMonths(-6).Month)
+                if (statistic.MonthAndYear.Year >= DateTime.Now.AddYears(-1).Year)
                 {
                     numberOfReservations += statistic.ReservationsCount;
                 }
