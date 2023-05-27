@@ -128,8 +128,8 @@
                             Width="150"
                             Margin="40,0,0,0"
                             HorizontalAlignment="Left"
-                            SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                            <!--SelectedDateChanged="dpStart_SelectedDateChanged"--> 
+                            SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <!--  SelectedDateChanged="dpStart_SelectedDateChanged"  -->
                         <Label
                             Margin="37,5,0,0"
                             Content="End date"
@@ -140,8 +140,8 @@
                                 Width="150"
                                 Margin="40,0,0,0"
                                 HorizontalAlignment="Left"
-                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                                <!--SelectedDateChanged="dpEnd_SelectedDateChanged" />-->
+                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <!--  SelectedDateChanged="dpEnd_SelectedDateChanged" />  -->
                             <TextBlock
                                 Name="tbNotFound"
                                 Width="270"
@@ -162,7 +162,6 @@
                     HorizontalAlignment="Left"
                     Background="LightGray"
                     BorderBrush="LightGray"
-                   
                     Content="Search"
                     ToolTip="Search on which dates the accommodation is available" />
                 <Grid Grid.Row="6">
@@ -175,6 +174,7 @@
                         Grid.Column="0"
                         Margin="20,10"
                         HorizontalAlignment="Left"
+                        Background="AliceBlue"
                         ItemsSource="{Binding Path=ReservationDates}"
                         SelectedItem="{Binding Path=SelectedDate}"
                         ToolTip="Date in which accommodatioon is available">
@@ -198,7 +198,6 @@
                         VerticalAlignment="Bottom"
                         Background="LightGray"
                         BorderBrush="LightGray"
-                       
                         Content="Reserve"
                         ToolTip="Choose the desired dates and make a reservation" />
                 </Grid>
