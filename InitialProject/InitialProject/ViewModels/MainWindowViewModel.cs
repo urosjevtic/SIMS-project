@@ -31,10 +31,6 @@ namespace InitialProject.ViewModels
         public User LoggedUser { get; set; } = App.LoggedUser;
         //public Guest Bonus { get; set; } //= _superGuestService.GetNumberOfPoints(LoggedUser.Id);
         int bonus;
-        public MainWindowViewModel()
-        {
-            
-        }
 
         public MainWindowViewModel(NavigationService navigationService)
         {

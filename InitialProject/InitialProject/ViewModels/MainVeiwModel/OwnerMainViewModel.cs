@@ -18,11 +18,16 @@ using InitialProject.View.OwnerView.Renovations;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using FluentScheduler;
+using InitialProject.Domain.Model.Users;
 using InitialProject.Service;
 using InitialProject.Service.NotificationServices;
 using InitialProject.Service.RenovationServices;
+using InitialProject.Service.SettingsService;
 using InitialProject.View.OwnerView.MainWindow;
 using InitialProject.View.OwnerView.Notifications;
+using InitialProject.View.OwnerView.Settings;
+using System;
+using InitialProject.Properties;
 
 namespace InitialProject.ViewModel
 {
@@ -34,6 +39,7 @@ namespace InitialProject.ViewModel
 
         private readonly OwnerNotificationService _notificationService;
         private readonly OwnerEventsService _eventsService;
+        private readonly OwnerSettingsService _settingsService;
 
         public OwnerMainViewModel(User user)
         {
@@ -42,9 +48,35 @@ namespace InitialProject.ViewModel
             SelectedPage.Content = new MainPageView(user, NavigationService);
             _notificationService = new OwnerNotificationService();
             _eventsService = new OwnerEventsService();
+            _settingsService = new OwnerSettingsService();
+            LoadSettings();
             CheckNotifications();
             CheckForEvents();
 
+        }
+
+
+        private void LoadSettings()
+        {
+            var app = (App)Application.Current;
+            OwnerSettings setting = _settingsService.GetByOwnerId(_loggedInUser.Id);
+            app.ChangeLanguage(setting.Language);
+            LoadTheme(setting.Theme);
+        }
+
+
+        private void LoadTheme(string theme)
+        {
+            ResourceDictionary themeDictionary = new ResourceDictionary();
+            if (theme.Equals("light"))
+            {
+                themeDictionary.Source = new Uri("../../Themes/LightTheme.xaml", UriKind.Relative);
+            }
+            else
+            {
+                themeDictionary.Source = new Uri("../../Themes/DarkTheme.xaml", UriKind.Relative);
+            }
+            App.Current.Resources.MergedDictionaries.Add(themeDictionary);
         }
 
 
@@ -154,6 +186,12 @@ namespace InitialProject.ViewModel
         {
             NotesView notesView = new NotesView(_loggedInUser);
             notesView.ShowDialog();
+        }
+
+        protected override void SettingsOpen()
+        {
+            NavigationService.Navigate(new OwnerSettingsView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
         }
 
         public ICommand NotificationOpenCommand => new RelayCommand(NotificationOpen);

@@ -11,12 +11,12 @@ using InitialProject.Service.ReservationServices;
 
 namespace InitialProject.Service.StatisticService
 {
-    public class YearlyAccommodationService
+    public class YearlyAccommodationStatisticService
     {
         private readonly IAccommodationStatisticsDataRepository _accommodationStatisticsDataRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
-        public YearlyAccommodationService()
+        public YearlyAccommodationStatisticService()
         {
             _accommodationStatisticsDataRepository = Injector.Injector.CreateInstance<IAccommodationStatisticsDataRepository>();
             _accommodationReservationService = new AccommodationReservationService();

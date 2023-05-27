@@ -50,6 +50,13 @@ namespace InitialProject.ViewModels
             NavigationService.Navigate(new MyAccommodationStatisticView(LogedInUser, NavigationService));
         }
 
+        public ICommand OpenRegistrationSuggestionCommand => new RelayCommand(OpenRegistrationSuggestion);
+
+        private void OpenRegistrationSuggestion()
+        {
+            NavigationService.Navigate(new NewAccommodationSuggestionsView(LogedInUser, NavigationService));
+        }
+
 
     }
 }
