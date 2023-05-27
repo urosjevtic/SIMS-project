@@ -54,7 +54,8 @@ namespace InitialProject.Injector
             {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()},
             {typeof(IOwnerSettingsRepository), new OwnerSettingsRepository()},
             {typeof(IGuestRepository), new GuestRepository()},
-            {typeof(IForumCommentRepository), new ForumCommentRepository()}
+            {typeof(IForumCommentRepository), new ForumCommentRepository()},
+            {typeof(IForumRepository), new ForumRepository()}
             
             // Add more implementations here
         };

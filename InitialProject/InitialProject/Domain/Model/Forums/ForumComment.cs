@@ -16,7 +16,10 @@ namespace InitialProject.Domain.Model.Forums
 
         public int NumberOfReports { get; set; }
 
-        public ForumComment() { }
+        public ForumComment()
+        {
+            Author = new User();
+        }
 
         public ForumComment(int id, string comment, User author, int numberOfReports)
         {

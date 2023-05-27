@@ -68,7 +68,7 @@
                     <TextBlock Padding="5" Text="{ns:Loc Reservations}"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Row="6"  Style="{StaticResource MainPageButtonStyle}" FontSize="16" >
+            <Button Grid.Row="6" Command="{Binding ForumOpenCommand}" Style="{StaticResource MainPageButtonStyle}" FontSize="16" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/forums.png" Width="20"/>
                     <TextBlock Padding="5" Text="{ns:Loc Forums}"></TextBlock>

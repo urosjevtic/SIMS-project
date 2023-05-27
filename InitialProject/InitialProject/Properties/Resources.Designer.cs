@@ -151,6 +151,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Author:.
+        /// </summary>
+        public static string Author {
+            get {
+                return ResourceManager.GetString("Author", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avrage rating:.
         /// </summary>
         public static string Avrage_rating {
@@ -286,6 +295,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm.
         /// </summary>
         public static string Confirm {
@@ -300,6 +318,15 @@ namespace InitialProject.Properties {
         public static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creation date.
+        /// </summary>
+        public static string Creation_date {
+            get {
+                return ResourceManager.GetString("Creation_date", resourceCulture);
             }
         }
         
@@ -669,6 +696,15 @@ namespace InitialProject.Properties {
         public static string Number_of_reservations {
             get {
                 return ResourceManager.GetString("Number_of_reservations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
             }
         }
         
@@ -1285,7 +1321,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Unrated guest.
         /// </summary>
         public static string Unrated_guest {
             get {

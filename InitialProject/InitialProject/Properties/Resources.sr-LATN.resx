@@ -147,6 +147,9 @@
   <data name="All_reservations" xml:space="preserve">
     <value>Sve rezervacije</value>
   </data>
+  <data name="Author" xml:space="preserve">
+    <value>Autor:</value>
+  </data>
   <data name="Avrage_rating" xml:space="preserve">
     <value>Prosečna ocena:</value>
   </data>
@@ -192,11 +195,17 @@
   <data name="Close" xml:space="preserve">
     <value>Zatvori</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Komentari:</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Potvrdi</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Država:</value>
+  </data>
+  <data name="Creation_date" xml:space="preserve">
+    <value>Datum kreiranja:</value>
   </data>
   <data name="Dark" xml:space="preserve">
     <value>Mracna</value>
@@ -320,6 +329,9 @@
   </data>
   <data name="Number_of_reservations" xml:space="preserve">
     <value>Broj rezervacija:</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Otvori</value>
   </data>
   <data name="Owner_fairnes" xml:space="preserve">
     <value>Korektnost vlasnika:</value>
@@ -526,7 +538,7 @@
     <value>Do:</value>
   </data>
   <data name="Unrated_guest" xml:space="preserve">
-    <value />
+    <value>Neocenjen gost</value>
   </data>
   <data name="Unrated_guests" xml:space="preserve">
     <value>Neocenjeni gosti</value>
