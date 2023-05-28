@@ -30,9 +30,7 @@ namespace InitialProject.ViewModels
         }
         public void MakeComplexRequest()
         {
-            MakeComplexTourRequest makeComplex = new();
-            CloseCurrentWindow();
-            makeComplex.Show();
+            navService.Navigate(new MakeComplexTourRequestPage(navService));
         }
     }
 }

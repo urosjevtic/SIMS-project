@@ -27,7 +27,7 @@ namespace InitialProject.Service
             throw new Exception("Save file dialog returned error!");
         }
 
-        public static void GenerateTourReservationPDF(TourReservation reservation)
+        public static void GenerateTourReservationPDF(Tour tour, TourReservation reservation)
         {
             try
             {
@@ -41,7 +41,7 @@ namespace InitialProject.Service
                 document.Open();
 
                 string assemblyName = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-                string imagePath = $"{assemblyName}.Resources.Images.logo.png";
+                string imagePath = $"{assemblyName}.Resources.Images.logopdf.png";
 
                 using(Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(imagePath))
                 {
@@ -56,7 +56,7 @@ namespace InitialProject.Service
                         PdfPTable table = new PdfPTable(2);
                         table.DefaultCell.Border = Rectangle.NO_BORDER;
 
-                        PdfPCell imageCell = new PdfPCell();
+                        PdfPCell imageCell = new PdfPCell(logoImage);
                         imageCell.FixedHeight = desiredHeight;
                         imageCell.Border = Rectangle.NO_BORDER;
                         table.AddCell(imageCell);
@@ -88,7 +88,7 @@ namespace InitialProject.Service
                 };
                 document.Add(heading);
 
-                Paragraph details = new($"Your tour starts at {reservation.DateAndTime:dd.MM.yyyy hh:mm:ss}, \n" +
+                Paragraph details = new($"Your tour through {tour.Location.City}, {tour.Location.Country} starts at {reservation.DateAndTime:dd.MM.yyyy hh:mm:ss}, \n" +
                                         $"Number of guests you reserved for: {reservation.NumberOfPeople}",
                                         new Font(Font.FontFamily.HELVETICA, 16, Font.BOLD))
                                         {

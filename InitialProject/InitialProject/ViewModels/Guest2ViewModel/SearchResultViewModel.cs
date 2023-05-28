@@ -201,7 +201,7 @@ namespace InitialProject.ViewModels
                     MessageBoxResult answer = MessageBox.Show("Do you want to make PDF document of this reservation?", "Question", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if(answer == MessageBoxResult.Yes)
                     {
-                        PDFService.GenerateTourReservationPDF(_tourReservationService.CreateReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime));
+                        PDFService.GenerateTourReservationPDF(SelectedTour, _tourReservationService.CreateReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime));
                     }
                     _tourReservationService.SaveReservation(SelectedTour, numberOfPeople, LoggedUser, _voucherService.IsSelectedVoucher(SelectedVoucher), age, SelectedDateTime);
                     MessageBox.Show("Successfully reserved!", "Announcement", MessageBoxButton.OK, MessageBoxImage.Asterisk);
