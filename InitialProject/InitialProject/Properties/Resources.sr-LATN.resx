@@ -195,6 +195,9 @@
   <data name="Close" xml:space="preserve">
     <value>Zatvori</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Komentariši</value>
+  </data>
   <data name="Comments" xml:space="preserve">
     <value>Komentari:</value>
   </data>

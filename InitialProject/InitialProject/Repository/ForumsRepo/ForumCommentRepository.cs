@@ -60,5 +60,24 @@ namespace InitialProject.Repository.ForumsRepo
             _comments.Remove(forumComment);
             _serializer.ToCSV(FilePath, _comments);
         }
+
+        private int NextId()
+        {
+            _comments = _serializer.FromCSV(FilePath);
+            if (_comments.Count < 1)
+            {
+                return 1;
+            }
+            return _comments.Max(c => c.Id) + 1;
+        }
+        public ForumComment Save(ForumComment comment)
+        {
+            comment.Id = NextId();
+            _comments = _serializer.FromCSV(FilePath);
+            _comments.Add(comment);
+            _serializer.ToCSV(FilePath, _comments);
+
+            return comment;
+        }
     }
 }

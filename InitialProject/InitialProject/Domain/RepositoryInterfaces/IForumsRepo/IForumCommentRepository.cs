@@ -13,5 +13,7 @@ namespace InitialProject.Domain.RepositoryInterfaces.IForumsRepo
         ForumComment GetById(int id);
         void Update(ForumComment forumComment);
         void Delete(ForumComment forumComment);
+
+        ForumComment Save(ForumComment forumComment);
     }
 }

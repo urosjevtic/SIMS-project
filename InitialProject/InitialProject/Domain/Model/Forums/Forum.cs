@@ -15,8 +15,14 @@ namespace InitialProject.Domain.Model.Forums
         public User Author { get; set; }
 
         public Location Location { get; set; }
+        public DateTime CreationDate { get; set; }
 
         public List<ForumComment> Comments { get; set; }
+
+        public int CommentNumber
+        {
+            get { return Comments.Count; }
+        }
 
 
         public Forum()
@@ -26,19 +32,20 @@ namespace InitialProject.Domain.Model.Forums
             Comments = new List<ForumComment>();
         }
 
-        public Forum(int id, string topic, string authorsComment, User author, Location location, List<ForumComment> comments)
+        public Forum(int id, string topic, string authorsComment, User author, Location location, DateTime creationDate, List<ForumComment> comments)
         {
             Id = id;
             Topic = topic;
             AuthorsComment = authorsComment;
             Author = author;
             Location = location;
+            CreationDate = creationDate;
             Comments = comments;
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Topic, AuthorsComment, Author.Id.ToString(), Location.Id.ToString() };
+            string[] csvValues = { Id.ToString(), Topic, AuthorsComment, Author.Id.ToString(), Location.Id.ToString(), CreationDate.ToString() };
 
             if (Comments.Count() > 0)
             {
@@ -63,13 +70,14 @@ namespace InitialProject.Domain.Model.Forums
             AuthorsComment = values[2];
             Author.Id = Convert.ToInt32(values[3]);
             Location.Id = Convert.ToInt32(values[4]);
+            CreationDate = Convert.ToDateTime(values[5]);
 
-            int i = 5;
+            int i = 6;
 
             while (values[i] != "[END]")
             {
                 int ids = Convert.ToInt32(values[i]);
-                Comments.Add(new ForumComment(ids, "", new User(), 0));
+                Comments.Add(new ForumComment(ids, "", new User(), 0, new List<User>()));
                 i++;
             }
         }

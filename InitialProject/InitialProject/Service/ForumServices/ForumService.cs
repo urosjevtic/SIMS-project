@@ -22,6 +22,7 @@ namespace InitialProject.Service.ForumServices
             _forumRepository = Injector.Injector.CreateInstance<IForumRepository>();
             _forumCommentsService = new ForumCommentsService();
             _accommodationService = new AccommodationService();
+            _userService = new UserService();
             _locationService = new LocationService();
         }
 
@@ -38,6 +39,7 @@ namespace InitialProject.Service.ForumServices
             List<Accommodation> accommdoations = _accommodationService.GetAllAccommodationByOwnerId(ownerId);
             List<Forum> ownerForums = new List<Forum>();
             BindLocationsToForums(forums);
+            BindAuthorToForum(forums);
             foreach (var accommodation in accommdoations)
             {
                 foreach (var forum in forums)
@@ -80,11 +82,46 @@ namespace InitialProject.Service.ForumServices
                         comment.Comment = forumComment.Comment;
                         comment.Author = forumComment.Author;
                         comment.NumberOfReports = forumComment.NumberOfReports;
+                        comment.ReportedBy = forumComment.ReportedBy;
+                        comment.HasUserReported = forumComment.HasUserReported;
                         break;
                     }
                 }
             }
 
+        }
+
+        private void BindAuthorToForum(List<Forum> forums)
+        {
+            List<User> users = _userService.GetAll();
+            foreach (var forum in forums)
+            {
+                foreach (var user in users)
+                {
+                    if (user.Id == forum.Author.Id)
+                    {
+                        forum.Author = user;
+                    }
+                }
+            }
+        }
+
+        public ForumComment AddNewComment(Forum forum, User user, string comment)
+        {
+           ForumComment newComment = _forumCommentsService.Save(user, comment);
+           forum.Comments.Add(newComment);
+           _forumRepository.Update(forum);
+           return newComment;
+        }
+
+        public void ReportComment(ForumComment comment, User reporter)
+        {
+            _forumCommentsService.Report(comment, reporter);
+        }
+
+        public void CheckWhatCommentsAreReported(User user, List<ForumComment> comments)
+        {
+            _forumCommentsService.HasUserReported(user, comments);
         }
     }
 }

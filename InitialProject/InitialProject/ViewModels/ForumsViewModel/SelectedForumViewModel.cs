@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -10,6 +11,8 @@ using System.Windows.Navigation;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Forums;
 using InitialProject.Service.ForumServices;
+using InitialProject.Service.NotesServices;
+using InitialProject.Service.RatingServices;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Forums;
 using InitialProject.View.OwnerView.MyAccommodations;
@@ -32,9 +35,50 @@ namespace InitialProject.ViewModels.ForumsViewModel
             NavigationService = navigationService;
 
             _forumService.BindCommentsToForum(SelectedForum);
+            _forumService.CheckWhatCommentsAreReported(_logedInUser, SelectedForum.Comments);
             ForumComments = new ObservableCollection<ForumComment>(SelectedForum.Comments);
         }
 
 
+        private string _newComment;
+
+        public string NewComment
+        {
+            get { return _newComment;}
+            set
+            {
+                _newComment = value;
+                OnPropertyChanged("NewComment");
+            }
+        }
+
+
+        public ICommand MakeCommentCommand => new RelayCommand(MakeComment);
+
+        private void MakeComment()
+        {
+            ForumComment newComment = _forumService.AddNewComment(SelectedForum, _logedInUser, _newComment);
+            ForumComments.Add(newComment);
+            _newComment = "";
+        }
+
+
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+
+        private void GoBack()
+        {
+            NavigationService.Navigate(new ForumSelcetionView(_logedInUser, NavigationService));
+        }
+
+        public ICommand ReportCommentCommand => new RelayCommandWithParams(ReportComment);
+
+        private void ReportComment(object parameter)
+        {
+            if (parameter is ForumComment selectedComment)
+            {
+                
+                _forumService.ReportComment(selectedComment, _logedInUser);
+            }
+        }
     }
 }

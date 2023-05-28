@@ -29,6 +29,8 @@ namespace InitialProject.ViewModels.ForumsViewModel
             Forums = new ObservableCollection<Forum>(_forumService.GetByOwnerId(_logedInUser.Id));
         }
 
+
+
         public ICommand OpenSelectedForumCommand => new RelayCommandWithParams(OpenSelectedForum);
 
         private void OpenSelectedForum(object parameter)

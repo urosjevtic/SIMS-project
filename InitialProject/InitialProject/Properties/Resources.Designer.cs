@@ -295,7 +295,16 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comments.
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments:.
         /// </summary>
         public static string Comments {
             get {
@@ -322,7 +331,7 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Creation date.
+        ///   Looks up a localized string similar to Creation date:.
         /// </summary>
         public static string Creation_date {
             get {

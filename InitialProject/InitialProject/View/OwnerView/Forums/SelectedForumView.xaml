@@ -68,11 +68,12 @@
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding MaxGuests}"
+                    <TextBlock Text="{Binding SelectedForum.CreationDate, StringFormat=\{0:dd/MM/yyyy\}}"
                                            Foreground="{DynamicResource TextColor}"/>
                 </StackPanel>
                 <!--First Comment-->
                 <TextBlock Grid.Row="3" Text="{Binding SelectedForum.AuthorsComment}"
+                           Margin="10, 5"
                            Foreground="{DynamicResource TextColor}"></TextBlock>
             </Grid>
            <Grid Grid.Row="1">
@@ -97,38 +98,59 @@
                         Background="{DynamicResource BackgroundColorLighter}"
                         Width="340"
                >
-                   <ListBox.ItemTemplate>
-                       <DataTemplate>
-                           <Grid>
-                               <Border Background="White" CornerRadius="5" Padding="5" Margin="5">
-                                   <Grid>
-                                       <Grid.RowDefinitions>
-                                           <RowDefinition Height="Auto"/>
-                                           <RowDefinition Height="*"/>
-                                       </Grid.RowDefinitions>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Border Background="White" CornerRadius="5" Padding="5" Margin="5">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
 
-                                        <TextBlock Text="{Binding Author.Username}" Foreground="Black" Margin="5" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                        <Grid Grid.Row="0" Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                            </Grid.ColumnDefinitions>
 
-                                       <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                           <TextBlock Text="{Binding Comment}" Foreground="Black" Margin="5"  Width="220" TextWrapping="Wrap"/>
-                                           <Button Command="{Binding DataContext.RemoveNoteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
-                                                   CommandParameter="{Binding}" 
-                                                   Margin="20, 0, 0, 0" 
-                                                   Background="Transparent" 
-                                                   BorderThickness="0" 
-                                                   BorderBrush="Transparent"
-                                                   Height="25"
-                                                   HorizontalAlignment="Left"
-                                                   VerticalAlignment="Bottom">
-                                               <Image Source="/Resources/Images/delete.png" Height="20"/>
-                                           </Button>
-                                       </StackPanel>
-                                   </Grid>
-                               </Border>
-                           </Grid>
+                                            <!-- Add an Image control for the picture -->
+                                            <Image Source="../../../Resources/Images/user.png" Width="25" Height="25" Margin="0,0,5,0"/>
+
+                                            <TextBlock Text="{Binding Author.Username}" Foreground="Black" Margin="5,0" FontWeight="DemiBold" VerticalAlignment="Center" Grid.Column="1"/>
+                                        </Grid>
+
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Comment}" Foreground="Black" Margin="5" Width="220" TextWrapping="Wrap"/>
+                                            <StackPanel Orientation="Horizontal" Margin="20, 0, 0, 0">
+                                                <Button Command="{Binding DataContext.ReportCommentCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
+                                                        CommandParameter="{Binding}" 
+                                                        Background="Transparent" 
+                                                        BorderThickness="0" 
+                                                        BorderBrush="Transparent"
+                                                        Height="25"
+                                                        VerticalAlignment="Bottom">
+                                                    <Button.Template>
+                                                        <ControlTemplate TargetType="Button">
+                                                            <Image x:Name="ImageControl" Source="/Resources/Images/not_reported .png" Height="20"/>
+                                                            <ControlTemplate.Triggers>
+                                                                <DataTrigger Binding="{Binding HasUserReported}" Value="True">
+                                                                    <Setter TargetName="ImageControl" Property="Source" Value="/Resources/Images/reported.png"/>
+                                                                </DataTrigger>
+                                                            </ControlTemplate.Triggers>
+                                                        </ControlTemplate>
+                                                    </Button.Template>
+                                                </Button>
+
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <TextBlock Grid.Row="1" Text="{Binding NumberOfReports}" Foreground="Black" FontWeight="DemiBold"  VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,4,5"/>
+                                    </Grid>
+                                </Border>
+                            </Grid>
                         </DataTemplate>
-                   </ListBox.ItemTemplate>
-               </ListBox>
+                    </ListBox.ItemTemplate>
+                </ListBox>
 
             </Grid>
            <Grid Grid.Row="2">
@@ -136,11 +158,11 @@
                    <RowDefinition></RowDefinition>
                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
-               <TextBox Text="{Binding NewNote}" Grid.Row="0" TextWrapping="Wrap" Margin="5" Height="60"></TextBox>
-               <Button Grid.Row="1" Content="{ns:Loc Add_note}" Style="{StaticResource ButtonStyle}" 
+                <TextBox Text="{Binding NewComment}" Grid.Row="0" TextWrapping="Wrap" Margin="5" Height="60"></TextBox>
+               <Button Grid.Row="1" Content="{ns:Loc Comment}" Style="{StaticResource ButtonStyle}" 
                        HorizontalAlignment="Center" Height="30" Width="120"
                        Margin="20,0,0,10"
-                       Command="{Binding AddNewNoteCommand}">
+                       Command="{Binding MakeCommentCommand}">
                </Button>
             </Grid>
        </Grid>
