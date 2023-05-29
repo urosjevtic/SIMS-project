@@ -27,9 +27,9 @@ namespace InitialProject.ViewModels.Guest2ViewModel
         public User LoggedUser { get; set; }
         public StartWindowViewModel(User user)
         {
-            LoggedUser = user;
+            App.LoggedUser = user;
             NavigationService = SelectedPage.NavigationService;
-            SelectedPage.Content = new ShowTourPage(user, NavigationService);
+            SelectedPage.Content = new ShowTourPage(NavigationService);
         }
     }
 }

@@ -10,23 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowShortTourStatistics.xaml
+    /// Interaction logic for MyToursPage.xaml
     /// </summary>
-    public partial class ShowShortTourStatistics : Window
+    public partial class MyToursPage : Page
     {
-        public ShowShortTourStatisticsViewModel showShortTourStatisticsViewModel { get; set; }
-        public ShowShortTourStatistics()
+        public MyToursPage(NavigationService nav)
         {
             InitializeComponent();
-            showShortTourStatisticsViewModel = new ShowShortTourStatisticsViewModel();
-            this.DataContext = showShortTourStatisticsViewModel;
+            this.DataContext = new MyToursViewModel(nav);
         }
-
     }
 }

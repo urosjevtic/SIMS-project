@@ -12,20 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Domain.Model;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowTourPage.xaml
+    /// Interaction logic for ShowShortTourRequestsPage.xaml
     /// </summary>
-    public partial class ShowTourPage : Page
+    public partial class ShowShortTourRequestsPage : Page
     {
-        public ShowTourPage(NavigationService ns)
+        public ShowShortTourRequestsPage(NavigationService nav)
         {
             InitializeComponent();
-            this.DataContext  = new ShowTourViewModel(ns);
+            this.DataContext = new ShowShortTourRequestsViewModel(nav);
         }
     }
 }

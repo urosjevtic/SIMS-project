@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,26 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Domain.Model;
-using InitialProject.Repository;
-using InitialProject.Service;
 using InitialProject.ViewModels;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowVouchers.xaml
+    /// Interaction logic for MakeRequestsPage.xaml
     /// </summary>
-    public partial class ShowVouchers : Window
+    public partial class MakeRequestsPage : Page
     {
-        public ShowVouchersViewModel ShowVouchersViewModel;
-        public ShowVouchers()
+        public MakeRequestsPage(NavigationService navService)
         {
             InitializeComponent();
-            /*ShowVouchersViewModel = new ShowVouchersViewModel();
-            this.DataContext = ShowVouchersViewModel;*/
+            this.DataContext = new MakeRequestsViewModel(navService);
         }
-
     }
 }

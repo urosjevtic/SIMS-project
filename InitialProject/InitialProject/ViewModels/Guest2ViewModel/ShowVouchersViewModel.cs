@@ -46,6 +46,7 @@ namespace InitialProject.ViewModels
             }
         }
         public NavigationService navService;
+        public User LoggedUser { get; set; }
 
         private readonly VoucherService _voucherService;
         public ShowVouchersViewModel(NavigationService nav)
@@ -59,8 +60,10 @@ namespace InitialProject.ViewModels
 
         private void GoBack()
         {
-            this.navService.Navigate(
-            new Uri("View/Guest2View/ShowTourPage.xaml", UriKind.Relative));
+            if (navService.CanGoBack)
+            {
+                navService.GoBack();
+            }
         }
     }
 }

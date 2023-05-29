@@ -13,19 +13,19 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using InitialProject.Domain.Model;
-using InitialProject.ViewModels;
+using InitialProject.ViewModels.Guest2ViewModel;
 
 namespace InitialProject.View.Guest2View
 {
     /// <summary>
-    /// Interaction logic for ShowTourPage.xaml
+    /// Interaction logic for AddPartOfComplexTour.xaml
     /// </summary>
-    public partial class ShowTourPage : Page
+    public partial class AddPartOfComplexTour : Page
     {
-        public ShowTourPage(NavigationService ns)
+        public AddPartOfComplexTour(NavigationService navService, List<ShortTourRequest> list)
         {
             InitializeComponent();
-            this.DataContext  = new ShowTourViewModel(ns);
+            this.DataContext = new MakeComplexRequestViewModel(navService, list);
         }
     }
 }

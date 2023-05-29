@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.ViewModels;
 using InitialProject.ViewModels.Guest2ViewModel;
 
@@ -22,10 +23,10 @@ namespace InitialProject.View.Guest2View
     /// </summary>
     public partial class ShowVouchersPage : Page
     {
-        public ShowVouchersPage(ShowVouchersViewModel sv)
+        public ShowVouchersPage(NavigationService nav)
         {
             InitializeComponent();
-            this.DataContext = sv;
+            this.DataContext = new ShowVouchersViewModel(nav);
         }
     }
 }

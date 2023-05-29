@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
@@ -40,22 +41,28 @@ namespace InitialProject.ViewModels.Guest2ViewModel
         public List<string> Checkpoints { get; set; }
         public ImageService _imageService;
         public CheckPointService _checkPointService;
-        public SelectedTourViewModel(Tour t, User loggedUser)
+        public NavigationService navService { get; }
+        public SelectedTourViewModel(Tour t, NavigationService nav)
         {
             selectedTour = t;
-            LoggedUser = loggedUser;
+            this.navService = nav;
             _imageService = new ImageService();
             _checkPointService = new CheckPointService();
-            GoBackCommand = new RelayCommand(CloseCurrentWindow);
-            ReserveCommand = new RelayCommand<Tour>(Reserve);
+            GoBackCommand = new RelayCommand(GoBack);
+            ReserveCommand = new RelayCommand(Reserve);
             Images = _imageService.GetAllById(selectedTour);
             Checkpoints = FindCheckPointNames();
         }
-        public void Reserve(Tour tour)
+        private void GoBack()
         {
-            SearchResult searchResult = new SearchResult(LoggedUser, selectedTour);
-            CloseCurrentWindow();
-            searchResult.Show();
+            if (navService.CanGoBack)
+            {
+                navService.GoBack();
+            }
+        }
+        public void Reserve()
+        {
+            navService.Navigate(new SearchResultPage(selectedTour,navService));
         }
         public List<string> FindCheckPointNames()
         {
