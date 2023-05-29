@@ -17,14 +17,12 @@ namespace InitialProject.ViewModels
         public ICommand ShowShortTourStatisticsCommand { get; private set; }
         public ICommand ShowComplexTourRequestsCommand { get; private set; }
         public NavigationService NavigationService { get; private set; }
-
-        public User LoggedUser { get; set; } = App.LoggedUser;
         public ShowTourRequestsViewModel(NavigationService navigation)
         {
             this.NavigationService = navigation;
             ShowShortTourRequestsCommand = new RelayCommand(ShowShortRequests);
             ShowShortTourStatisticsCommand = new RelayCommand(ShowShortStatistics);
-            ShowComplexTourRequestsCommand = new RelayCommand(ShowShortRequests);
+            ShowComplexTourRequestsCommand = new RelayCommand(ShowComplexRequests);
         }
         public void ShowShortRequests()
         {
@@ -33,6 +31,10 @@ namespace InitialProject.ViewModels
         public void ShowShortStatistics()
         {
             NavigationService.Navigate(new ShowShortTourStatisticsPage(NavigationService));
+        }
+        public void ShowComplexRequests()
+        {
+            NavigationService.Navigate(new ShowComplexTourRequests(NavigationService));
         }
     }
 }
