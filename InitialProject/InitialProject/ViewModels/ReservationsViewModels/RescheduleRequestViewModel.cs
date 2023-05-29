@@ -25,7 +25,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
     {
         private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
         private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedReservationRescheduleRequestService;
-        private readonly YearlyAccommodationService _yearlyAcoommodationStatisticService;
+        private readonly YearlyAccommodationStatisticService _yearlyAcoommodationStatisticStatisticService;
         private readonly AccommodationStatisticService _statisticService;
         private readonly User _loggedInUser;
 
@@ -34,7 +34,7 @@ namespace InitialProject.ViewModels.ReservationsViewModels
         public RescheduleRequestViewModel(User loggedInUser, NavigationService navigationService)
         {
             _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
-            _yearlyAcoommodationStatisticService = new YearlyAccommodationService();
+            _yearlyAcoommodationStatisticStatisticService = new YearlyAccommodationStatisticService();
             _statisticService = new AccommodationStatisticService();
             _loggedInUser = loggedInUser;
             NavigationService = navigationService;

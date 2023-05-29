@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -85,11 +86,16 @@ namespace InitialProject.Repository
         {
             throw new NotImplementedException();
         }
-        public void Update(Tour tour, string[] text)
+        public void Update(Tour tour, ObservableCollection<string> urls)
         {
             _images = _serializer.FromCSV(FilePath);
+<<<<<<< HEAD
             Image found = _images.Find(c => c == tour.CoverImageUrl);
             foreach(string s in text)
+=======
+            Image found = _images.Find(c => c.Id == tour.CoverImageUrl.Id);
+            foreach(string s in urls)
+>>>>>>> f534d28c9e35d115634c2b14fc130ad55abd0402
             {
                 found.Url.Add(s);
             }

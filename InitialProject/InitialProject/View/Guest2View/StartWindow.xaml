@@ -1,0 +1,12 @@
+﻿<Window x:Class="InitialProject.View.Guest2View.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:guest2viewmodel="clr-namespace:InitialProject.ViewModels.Guest2ViewModel" d:DataContext="{d:DesignInstance Type=guest2viewmodel:StartWindowViewModel}"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="616" Width="916" Background="#F5F9FC" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Frame x:Name="frame" Content="{Binding SelectedPage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

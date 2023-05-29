@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
+
 
 namespace InitialProject.Domain.RepositoryInterfaces
 {
@@ -16,3 +18,4 @@ namespace InitialProject.Domain.RepositoryInterfaces
         List<RatedOwner> GetAll();
     }
 }
+

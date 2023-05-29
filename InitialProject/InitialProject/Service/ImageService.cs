@@ -18,11 +18,12 @@ namespace InitialProject.Service
             _imageRepository = Injector.Injector.CreateInstance<IImageRepository>();
         }
 
+
         public Image GetById(int id)
         {
             return _imageRepository.GetById(id);
         }
-        
+
         public List<string> GetAllById(Tour t)
         {
             return _imageRepository.GetAllImagesById(t.CoverImageUrl.Id);

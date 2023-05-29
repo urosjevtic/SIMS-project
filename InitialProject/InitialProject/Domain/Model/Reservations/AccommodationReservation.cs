@@ -14,28 +14,27 @@ namespace InitialProject.Domain.Model.Reservations
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int UserId { get; set; }
-        //public User Guest { get; set; } 
         public int AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
         public int GuestNumber { get; set; }
+
         public List<DateTime> ReservedDates { get; set; }
 
         public bool IsAbleToCancel
         {
             get { return !(Accommodation.CancelationPeriod < (StartDate - DateTime.Now).Days); }
         }
-
         public User User { get; set; }
-
+        public bool IsRated { get; set; }
+        //public int broj;
         public AccommodationReservation()
         {
-            //  Guest = new User();
             Accommodation = new Accommodation();
             ReservedDates = new List<DateTime>();
             User = new User();
         }
 
-        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation, int guestNumber, List<DateTime> reservedDates)
+        public AccommodationReservation(int id, DateTime startDate, DateTime endDate, int userId, int accommodationId, Accommodation accommodation, int guestNumber, List<DateTime> reservedDates, User user, bool isRated=false)
         {
             Id = id;
             StartDate = startDate;
@@ -44,13 +43,14 @@ namespace InitialProject.Domain.Model.Reservations
             AccommodationId = accommodationId;
             Accommodation = accommodation;
             GuestNumber = guestNumber;
+            User = user;
+            IsRated = isRated;
             ReservedDates = reservedDates;
-
         }
 
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), StartDate.ToString(), EndDate.ToString(), UserId.ToString(), AccommodationId.ToString(), Accommodation.Id.ToString(), GuestNumber.ToString() };
+            string[] csvValues = { Id.ToString(), StartDate.ToString(), EndDate.ToString(), UserId.ToString(), AccommodationId.ToString(), GuestNumber.ToString() };
             return csvValues;
         }
 
@@ -61,9 +61,8 @@ namespace InitialProject.Domain.Model.Reservations
             EndDate = DateTime.Parse(values[2]);
             UserId = Convert.ToInt32(values[3]);
             AccommodationId = Convert.ToInt32(values[4]);
-            Accommodation.Id = Convert.ToInt32(values[4]);
+            //Accommodation.Id = Convert.ToInt32(values[4]);
             GuestNumber = Convert.ToInt32(values[5]);
-            //ReservedDates = DateTime.Parse(values[6]);
         }
 
     }

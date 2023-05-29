@@ -1,0 +1,57 @@
+﻿<Page x:Class="InitialProject.View.Guest2View.ShowShortTourRequestsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.Guest2View"
+      mc:Ignorable="d" 
+      d:DesignHeight="616" d:DesignWidth="916"
+      Title="ShowShortTourRequestsPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="20"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="180"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="0" Grid.Column="1">
+            <Underline>All requests for short tours</Underline>
+        </Label>
+        <DataGrid ItemsSource="{Binding AllRequests}" AutoGenerateColumns="False" Grid.Row="1" Grid.Column="1" FontSize="18" IsReadOnly="True" CanUserResizeColumns="False" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Country" Width="90" Binding="{Binding Country}"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Width="110" Binding="{Binding City}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Width="260" Binding="{Binding Description}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nr. of people" Binding="{Binding NumberOfPeople}" Width="115"></DataGridTextColumn>
+                <DataGridTextColumn Header="From" Binding="{Binding From}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="To" Binding="{Binding To}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="32" Grid.Row="2" Grid.Column="1">
+            <Underline>Accepted short tours requests</Underline>
+        </Label>
+        <DataGrid ItemsSource="{Binding AcceptedRequests}" AutoGenerateColumns="False" Grid.Row="3" IsReadOnly="True" CanUserResizeColumns="False" Grid.Column="1" FontSize="18" CanUserReorderColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Country" Binding="{Binding Country}" Width="90"></DataGridTextColumn>
+                <DataGridTextColumn Header="City" Binding="{Binding City}" Width="110"></DataGridTextColumn>
+                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="250"></DataGridTextColumn>
+                <DataGridTextColumn Header="Nr. of people" Binding="{Binding NumberOfPeople}" Width="130"></DataGridTextColumn>
+                <DataGridTextColumn Header="Date" Binding="{Binding From}" Width="*"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Command="{Binding GoBackCommand}" Grid.Column="1" Grid.Row="4" Height="60" Width="160" BorderThickness="2" FontSize="28" HorizontalAlignment="Left" Background="LightSteelBlue" VerticalAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
+                <TextBlock Text=" Go Back" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

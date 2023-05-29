@@ -21,6 +21,11 @@ namespace InitialProject.Service
         }
         public void SaveShortRequest(User LoggedUser, string country, string city, string language, string number, string description, DateTime from, DateTime to)
         {
+            ShortTourRequest shortRequest = Create(LoggedUser,country,city,language,number,description,from,to);
+            _shortRequestRepository.Save(shortRequest);
+        }
+        public ShortTourRequest Create(User LoggedUser, string country, string city, string language, string number, string description, DateTime from, DateTime to)
+        {
             ShortTourRequest shortRequest = new ShortTourRequest();
             shortRequest.IdRequest = _shortRequestRepository.NextId();
             shortRequest.IdUser = LoggedUser.Id;
@@ -33,7 +38,7 @@ namespace InitialProject.Service
             shortRequest.To = to;
             shortRequest.Status = RequestStatus.Active;
 
-            _shortRequestRepository.Save(shortRequest);
+            return shortRequest;
         }
         public List<ShortTourRequest> GetAll()
         {

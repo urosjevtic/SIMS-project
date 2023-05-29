@@ -4,67 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="MyAccommodationYearlyStatisticView" Height="637" Width="345">
     <Page.Background>
-        <SolidColorBrush Color="lightgray" />
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
-    <Page.Resources>
-        <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-
-
-<!--Naslovi-->
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#3A3D55"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
-            <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
-        </Style>
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
@@ -72,7 +18,7 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
@@ -84,25 +30,31 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
 
-            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding Accommodation.Name}" Foreground="#3A3D55"></TextBlock>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding Accommodation.Name}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
             <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5" >
-                <TextBlock Text="Country: " 
+                <TextBlock Text="{ns:Loc Country}" 
+                           Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"
                            Margin="0,0,5,0"/>
-                <TextBlock Text="{Binding Accommodation.Location.Country}" />
-                <TextBlock Margin="10,0" Text="City: " 
+                <TextBlock Text="{Binding Accommodation.Location.Country}" 
+                           Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
+                           Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"/>
-                <TextBlock Text="{Binding Accommodation.Location.City}" />
+                <TextBlock Text="{Binding Accommodation.Location.City}"
+                           Foreground="{DynamicResource TextColor}"/>
             </StackPanel>
 
 
 
             <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,5">
-                <TextBlock Text="Busiest year: " 
+                <TextBlock Text="{ns:Loc Buisiest_year}" 
+                           Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"
                            Margin="0,0,5,0"/>
-                <TextBlock Text="{Binding YearWithMostReservations}" />
+                <TextBlock Text="{Binding YearWithMostReservations}" 
+                           Foreground="{DynamicResource TextColor}"/>
 
             </StackPanel>
         </Grid>
@@ -110,23 +62,23 @@
                  ItemsSource="{Binding Statistics}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                 Background="LightGray"
+                 Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
-                            BorderBrush="#007acc"
+                            BorderBrush="{DynamicResource TextColor}"
                             Margin="5"
                             CornerRadius="5"
                             Padding="10"
-                            Background="#fafafa">
+                            Background="{DynamicResource BackgroundColorLighter}">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="5"
                                               BlurRadius="10"
                                               Opacity="0.5"
-                                              Color="Black"/>
+                                              Color="{DynamicResource Shadow}"/>
                         </Border.Effect>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -144,34 +96,43 @@
                            FontWeight="Bold"
                            FontSize="20"
                            TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextColor}"
                            HorizontalAlignment="Center"
                            Margin="10,10,10,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Reservation count: " 
+                                <TextBlock Text="{ns:Loc Reservation_count}" 
                                FontWeight="Bold"
+                               Foreground="{DynamicResource TextColor}"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding ReservationsCount}" />
-                                <TextBlock Margin="10,0" Text="Reschedule count: " 
-                               FontWeight="Bold"/>
-                                <TextBlock Text="{Binding ReschedulesCount}" />
+                                <TextBlock Text="{Binding ReservationsCount}" 
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Margin="10,0" Text="{ns:Loc Reschedule_count}" 
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Text="{Binding ReschedulesCount}"
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Cancelation count: " 
+                                <TextBlock Text="{ns:Loc Cancelation_count}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding CancelationsCount}" />
-                                <TextBlock Margin="10,0" Text="Renovation count: " 
-                                           FontWeight="Bold"/>
-                                <TextBlock Text="{Binding RenovationsCount}" />
+                                <TextBlock Text="{Binding CancelationsCount}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Margin="10,0" Text="{ns:Loc Renovation_count}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Text="{Binding RenovationsCount}"
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
 
-                            <Button Content="See statistics by months" 
+                            <Button Content="{ns:Loc See_statistics_by_months}" 
                         Margin="10,15"
                         Grid.Row="6"
-                        Style="{StaticResource LogInButtonStyle}"
+                        Style="{StaticResource ButtonStyle}"
                         Command="{Binding DataContext.SeeStatisticsByMonthsCommand, ElementName=statisticsListBox}"
                         CommandParameter="{Binding}"/>
                         </Grid>

@@ -62,8 +62,8 @@ namespace InitialProject
                     }
                     if(user.Role == UserRole.Guest)
                     {
-                        AccommodationSearch accommodationSearch = new AccommodationSearch(user);
-                        accommodationSearch.Show();
+                        AccommodationShow accommodationShow = new AccommodationShow(user);
+                        accommodationShow.Show();
                     }
                     if(user.Role == UserRole.Guide)
                     {
@@ -72,7 +72,7 @@ namespace InitialProject
                     }
                     if (user.Role == UserRole.Guest2)
                     {
-                        ShowTour showTour = new ShowTour(user);
+                        StartWindow showTour = new StartWindow(user);
                         showTour.Show();
                     }
                     Close();

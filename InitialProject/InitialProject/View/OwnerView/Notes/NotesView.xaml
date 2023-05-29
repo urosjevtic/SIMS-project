@@ -4,53 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Notes"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="NotesView" Height="500" Width="320"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <SolidColorBrush Color="#fafafa" />
-        
+        <SolidColorBrush Color="{DynamicResource LighterBackground}" />
+
     </Window.Background>
-    <Window.Resources>
-        <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -59,7 +22,7 @@
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="Notes" FontSize="30" HorizontalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="0" Text="{ns:Loc Notes}" Foreground="{DynamicResource TextColor}" FontSize="30" HorizontalAlignment="Center"></TextBlock>
 
         <ListBox Grid.Row="1" x:Name="notesListBox"
                  ItemsSource="{Binding Notes}"
@@ -68,12 +31,13 @@
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
                  Margin="10"
+                 Background="{DynamicResource BackgroundColorLighter}"
                  Width="280"
         >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" Margin="5"  Width="220" TextWrapping="Wrap"/>
+                        <TextBlock Text="{Binding}" Foreground="{DynamicResource TextColor}" Margin="5"  Width="220" TextWrapping="Wrap"/>
                         <Button Command="{Binding DataContext.RemoveNoteCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" 
                                 CommandParameter="{Binding}" 
                                 Margin="5" 
@@ -92,12 +56,12 @@
 
         <TextBox Text="{Binding NewNote}" Grid.Row="2" TextWrapping="Wrap" Margin="5" Height="60"></TextBox>
 
-        <Button Grid.Row="3" Content="Add note" Style="{StaticResource LogInButtonStyle}" 
+        <Button Grid.Row="3" Content="{ns:Loc Add_note}" Style="{StaticResource ButtonStyle}" 
                 HorizontalAlignment="Left" Height="46" Width="120"
                 Margin="20,0,0,10"
                 Command="{Binding AddNewNoteCommand}">
         </Button>
-        <Button Grid.Row="3" Content="Close" Style="{StaticResource LogInButtonStyle}" 
+        <Button Grid.Row="3" Content="{ns:Loc Close}" Style="{StaticResource ButtonStyle}" 
                 HorizontalAlignment="Right" Height="46" Width="120"
                 Margin="0,0,20,10"
                 Command="{Binding CloseNotesCommand}">

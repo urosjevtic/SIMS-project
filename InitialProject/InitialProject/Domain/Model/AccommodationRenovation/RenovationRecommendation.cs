@@ -15,9 +15,11 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
         public AccommodationReservation Reservation { get; set; }
         public string Recommendation { get; set; }
         public int UrgencyLevel { get; set; }
-        public RenovationRecommendation()
+
+        public RenovationRecommendation() 
         {
-            Reservation = new AccommodationReservation();
+            Reservation = new AccommodationReservation();    
+
         }
         public RenovationRecommendation(int id, AccommodationReservation reservation, string recommendation, int urgencyLevel)
         {
@@ -28,7 +30,7 @@ namespace InitialProject.Domain.Model.AccommodationRenovation
         }
         public string[] ToCSV()
         {
-            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), Recommendation, UrgencyLevel.ToString() };
+            string[] csvValues = { Id.ToString(), Reservation.Id.ToString(), Recommendation, UrgencyLevel.ToString()};
             return csvValues;
         }
         public void FromCSV(string[] values)

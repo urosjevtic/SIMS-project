@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
@@ -32,6 +33,7 @@ namespace InitialProject.Injector
             {typeof(IUnratedGuestRepository), new UnratedGuestRepository()},
             {typeof(IDeclinedAccommodationReservationRescheduleRequestRepository), new DeclinedAccommodationReservationRescheduleRequestRepository()},
             {typeof(IRatedOwnerRepository), new RatedOwnerRepository()},
+            {typeof(IUnratedOwnerRepository), new UnratedOwnerRepository()},
             {typeof(IOwnerRepository), new OwnerRepository()},
             {typeof(IRatedGuideTourRepository), new RatedGuideTourRepository()},
             {typeof(IVoucherRepository), new VoucherRepository()},
@@ -48,8 +50,14 @@ namespace InitialProject.Injector
             {typeof(IRenovationRepository), new RenovationRepository()},
             {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()},
             {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()},
-            {typeof(ISuperGuideStatusRepository), new SuperGuideStatusRepository()}
 
+            {typeof(ISuperGuideStatusRepository), new SuperGuideStatusRepository()},
+
+
+            {typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository()},
+            {typeof(IOwnerSettingsRepository), new OwnerSettingsRepository()},
+            {typeof(IGuestRepository), new GuestRepository()}
+            
             // Add more implementations here
         };
 

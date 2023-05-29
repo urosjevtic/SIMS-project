@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
+using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
@@ -38,8 +40,10 @@ namespace InitialProject.ViewModels
         }
         public List<ShortTourRequest> allRequests { get; set; }
         public List<ShortTourRequest> acceptedRequests { get; set; }
-        public ShowShortTourRequestsViewModel()
+        public NavigationService NavigationService { get; }
+        public ShowShortTourRequestsViewModel(NavigationService navService)
         {
+            NavigationService = navService;
             GoBackCommand = new RelayCommand(GoBack);
             _shortRequestService = new ShortTourRequestService();
             allRequests = _shortRequestService.GetAll();
@@ -49,7 +53,7 @@ namespace InitialProject.ViewModels
         }
         public void GoBack()
         {
-            CloseCurrentWindow();
+            NavigationService.Navigate(new ShowTourPage(NavigationService));
         }
     }
 }

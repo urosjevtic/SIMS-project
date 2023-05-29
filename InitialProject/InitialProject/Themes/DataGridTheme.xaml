@@ -1,65 +1,71 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 
     <Style TargetType="DataGrid">
+<<<<<<< HEAD
         <Setter Property="ColumnHeaderStyle" Value="{DynamicResource columnHeader}"></Setter>
         <Setter Property="BorderThickness" Value="0"></Setter>
         <Setter Property="RowStyle" Value="{DynamicResource row}"></Setter>
         <Setter Property="CellStyle" Value="{DynamicResource cell }"></Setter>
         <Setter Property="Background" Value="#D1EEEE"></Setter>
         <Setter Property="FontSize" Value="16"></Setter>
+=======
+        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource columnHeader}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="RowStyle" Value="{DynamicResource row}" />
+        <Setter Property="CellStyle" Value="{DynamicResource cell}" />
+        <Setter Property="Background" Value="#D1EEEE" />
+>>>>>>> f534d28c9e35d115634c2b14fc130ad55abd0402
     </Style>
-    
-    
-    <Style x:Key="columnHeader" TargetType="DataGridColumnHeader" >
-        <Setter Property="Background" Value="#008080"></Setter>
-        <Setter Property="Foreground" Value="White"></Setter>
-        <Setter Property="FontSize" Value="15"></Setter>
-        <Setter Property="FontWeight" Value="Bold"></Setter>
-        <Setter Property="Padding" Value="10 0 0 0"></Setter>
-        <Setter Property="BorderThickness" Value="1"></Setter>
-        <Setter Property="Height" Value="25"></Setter>
+
+
+    <Style x:Key="columnHeader" TargetType="DataGridColumnHeader">
+        <Setter Property="Background" Value="#008080" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Padding" Value="10,0,0,0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Height" Value="25" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-                    <Border x:Name="HeaderBorder"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                Padding="{TemplateBinding Padding}"
-                                SnapsToDevicePixels="True"
-                            CornerRadius="10,10,0,0">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    <Border
+                        x:Name="HeaderBorder"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="10,10,0,0"
+                        SnapsToDevicePixels="True">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                     </Border>
-                    <ControlTemplate.Triggers>
-                       
-                        
-                    </ControlTemplate.Triggers>
+                    <ControlTemplate.Triggers />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
 
     </Style>
 
-    <Style TargetType="{x:Type DataGridRow}" x:Key="row">
+    <Style x:Key="row" TargetType="{x:Type DataGridRow}">
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="#008080"/>
+                <Setter Property="Background" Value="#008080" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#008080"/>
+                <Setter Property="Background" Value="#008080" />
             </Trigger>
         </Style.Triggers>
     </Style>
-    
-    <Style TargetType="{x:Type DataGridCell}" x:Key="cell">
-        <Setter Property="Background" Value="Transparent"/>
+
+    <Style x:Key="cell" TargetType="{x:Type DataGridCell}">
+        <Setter Property="Background" Value="Transparent" />
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="#008080"/>
+                <Setter Property="Background" Value="#008080" />
             </Trigger>
         </Style.Triggers>
     </Style>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Navigation;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -17,7 +18,7 @@ using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
-    public class ShowTourViewModel : BaseViewModel
+    public class ShowTourViewModel : Page
     {
         public User LoggedUser { get; set; }
         public ICommand SearchCommand { get; set; }
@@ -27,10 +28,10 @@ namespace InitialProject.ViewModels
         public ICommand ShowVouchersCommand { get; set; }
         public ICommand ShowNotificationsCommand { get; set; }
         public ICommand ExitCommand { get; set; }
-
-        public ShowTourViewModel(User user)
+        public NavigationService navigationService { get; set; }
+        public ShowTourViewModel(NavigationService nav)
         {
-            LoggedUser = user;
+            this.navigationService = nav;
             SearchCommand = new RelayCommand(Search);
             ShowMyToursCommand = new RelayCommand(ShowMyTours);
             MakingTourRequestsCommand = new RelayCommand(OpenMakingRequests);
@@ -41,37 +42,35 @@ namespace InitialProject.ViewModels
         }
         private void Search()
         {
-            TourSearch tourSearch = new TourSearch(LoggedUser);
-            tourSearch.Show();
+            navigationService.Navigate(new TourSearchPage(navigationService));
         }
         private void ShowMyTours()
         {
-            MyTours myTours = new MyTours(LoggedUser);
-            myTours.Show();
+            navigationService.Navigate(new MyToursPage(navigationService));
         }
         private void OpenMakingRequests()
         {
-            MakeRequests makeRequests = new MakeRequests(LoggedUser);
-            makeRequests.Show();
+            navigationService.Navigate(new MakeRequestsPage(navigationService));
         }
         private void ShowRequests()
         {
-            ShowRequests showRequests = new ShowRequests();
-            showRequests.Show();
+            navigationService.Navigate(new ShowAllRequests(navigationService));
         }
         private void ShowVouchers()
         {
-            ShowVouchers showVouchers = new ShowVouchers();
-            showVouchers.Show();
+            navigationService.Navigate(new ShowVouchersPage(navigationService));
         }
         private void ShowNotifications()
         {
-            ShowNotifications showNotifications = new ShowNotifications(LoggedUser);
-            showNotifications.Show();
+            navigationService.Navigate(new ShowNotificationsPage(navigationService));
         }
         private void Exit()
         {
-            CloseCurrentWindow();
+            Window currentWindow = Application.Current.Windows.OfType<Window>().SingleOrDefault(w => w.IsActive);
+            if (currentWindow != null)
+            {
+                currentWindow.Close();
+            }
         } 
     }
 }
