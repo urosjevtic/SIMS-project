@@ -14,14 +14,10 @@ namespace InitialProject.ViewModels
 {
     public class VisitationViewModel : BaseViewModel
     {
-        private readonly TourStatisticService _tourStatisticService;
-        public int PeopleUntil18 { get; set; }  
-        public int People18and50 { get; set; }
-        public int PeopleOver50 { get; set; }
-
+        private readonly TourStatisticService _tourStatisticService;        
         public ObservableCollection<AgeCategory> AgeCategories { get; set; }
         public PieChart PieChart { get; set; }
-
+        public string TourName { get; set; }
         public VisitationViewModel(Tour tour,PieChart pieChart)
         {
             _tourStatisticService = new TourStatisticService();
@@ -31,7 +27,7 @@ namespace InitialProject.ViewModels
             AgeCategories.Add(new AgeCategory() { Category = "18-50", Count = _tourStatisticService.FindPeopleBetween18and50(tour) });
             AgeCategories.Add(new AgeCategory() { Category = "Over 50", Count = _tourStatisticService.FindPeopleOver50(tour) });
              
-
+            TourName = tour.Name;
 
             PieChart = pieChart;    
 
@@ -58,7 +54,7 @@ namespace InitialProject.ViewModels
         public class AgeCategory
         {
             public string Category { get; set; } // kazem koja je kategorija koju prikazujem
-            public int Count { get; set; }  //koliko iammm u roj
+            public int Count { get; set; }  //koliko iammm u njoj
         }
 
 

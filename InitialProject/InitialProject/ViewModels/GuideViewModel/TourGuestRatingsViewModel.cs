@@ -47,6 +47,10 @@ namespace InitialProject.ViewModels
                 }
             }
         }
+        public string TourName { get; set; }
+        public string AverageGuideKnowledgeRating { get; set; }
+        public string AverageGuideLanguageRating { get; set; }
+        public string AverageTourInterestingRating { get; set; }
 
         public TourGuestRatingsViewModel(Tour tour)
         {
@@ -60,10 +64,14 @@ namespace InitialProject.ViewModels
             TourGuests = _ratedTourGuideService.FindAllTourRatings(tour);
             Comments = _commentRepository.GetByTour(tour);                       
             Guests = _tourGuestRepository.GetAll();                              
-            Tour = tour;
+            
             GuideCommentsOverview = GetAllGuideComments();
-
+            Tour = tour;
+            TourName  =tour.Name;
             ReportCommand = new RelayCommandWithParams(ExecuteReporting);
+            AverageGuideKnowledgeRating = "Average rating for guide knowledge: " + _ratedTourGuideService.FindAverageKnowledgeRating(tour).ToString();
+            AverageGuideLanguageRating = "Average rating for guide language: " + _ratedTourGuideService.FindAverageLanguageRating(tour).ToString();
+            AverageTourInterestingRating = "Average rating for interesting tour: " + _ratedTourGuideService.FindAverageInterestingTourRating(tour).ToString();
 
         }
 

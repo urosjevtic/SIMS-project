@@ -47,7 +47,8 @@ namespace InitialProject.Injector
             {typeof(IAccommodationStatisticsDataRepository), new AccommodationStatisticDataRepository()},
             {typeof(IRenovationRepository), new RenovationRepository()},
             {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()},
-            {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()}
+            {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()},
+            {typeof(ISuperGuideStatusRepository), new SuperGuideStatusRepository()}
 
             // Add more implementations here
         };

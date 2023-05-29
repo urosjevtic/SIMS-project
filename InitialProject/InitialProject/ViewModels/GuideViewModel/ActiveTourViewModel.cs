@@ -27,7 +27,6 @@ namespace InitialProject.ViewModels.GuideViewModel
 
 
         public List<CheckPoint> CheckedCheckPoints { get; set; }
-        public List<User> TourReservations { get; set; }
         public List<Notification> Notifications { get; set; }
         public ObservableCollection<CheckPoint> CheckPoints { get; set; }
         public ObservableCollection<TourGuest> TourGuests { get; set; }
@@ -36,6 +35,7 @@ namespace InitialProject.ViewModels.GuideViewModel
         public List<User> Guests { get; set; }
         public Tour ActiveTour { get; set; }
         public User User { get; set; }
+        public ICommand CheckBoxCheckedCommand { get; private set; }
 
         public ActiveTourViewModel(User user)
         {
@@ -52,13 +52,25 @@ namespace InitialProject.ViewModels.GuideViewModel
             ActiveTour = FindActiveTour();
             
             CheckPoints = new ObservableCollection<CheckPoint>(ActiveTour.CheckPoints);
-            TourName = ActiveTour.Name;
-            TourLocation = ActiveTour.Location.ToString();
+            TourName ="Tour name: " + ActiveTour.Name;
+            TourLocation ="Location: " + ActiveTour.Location.ToString();
             Guests = _tourReservationRepository.GetReservationGuest(ActiveTour);  // svi gosti na ovoj turi
             MakeGuestsFirst();
+            CheckBoxCheckedCommand = new RelayCommandWithParams(CheckBoxChecked);
         }
 
-       
+
+        private void CheckBoxChecked(object parameter)
+        {
+            CheckPoint checkedCheckPoint = parameter as CheckPoint;
+            CheckCheckPoint(checkedCheckPoint);
+            SendNotification(checkedCheckPoint);
+            if (CheckPoints.Last().Id == checkedCheckPoint.Id)
+            {
+                EndTour();
+            }
+        }
+
         public Tour FindActiveTour()
         {
             Tour tour = new Tour();

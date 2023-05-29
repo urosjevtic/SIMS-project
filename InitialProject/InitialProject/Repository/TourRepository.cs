@@ -86,7 +86,7 @@ namespace InitialProject.Repository
             newTour.MaxGuests = tour.MaxGuests;
             newTour.StartDates = tour.StartDates;
             newTour.Duration = tour.Duration;
-            newTour.CoverImageUrl.Id = tour.CoverImageUrl.Id;
+           // newTour.CoverImageUrl = tour.CoverImageUrl;
             newTour.IsActive = tour.IsActive;
             newTour.IsRated = tour.IsRated;
 

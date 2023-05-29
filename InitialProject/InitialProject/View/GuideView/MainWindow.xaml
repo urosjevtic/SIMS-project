@@ -38,26 +38,26 @@
                 <UniformGrid Rows="9">
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="MyAccount"  Style="{StaticResource MenuButtonTheme}" >
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Resources/Images/covjeculjakBijeli.png" Width="32" Margin="30,0,0,0"></Image>
-                            <TextBlock Text="    My account" Margin="10,10,10,0" FontWeight="Bold"></TextBlock>
+                            <Image Source="/Resources/Images/covjeculjakBijeli.png" Width="30" Margin="30,0,0,0"></Image>
+                            <TextBlock Text="My account" Margin="20,10,20,0" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="MyTours"  Style="{StaticResource MenuButtonTheme}" >
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Images/myToursBijela.png" Width="39"></Image>
-                            <TextBlock Text="     My tours" Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="    My tours   " Margin="0,10,0,10" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="TodayTours"  Style="{StaticResource MenuButtonTheme}">
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Resources/Images/todayTours.png" Width="34"></Image>
-                            <TextBlock Text="Today tours" Margin="20,10,0,0" FontWeight="Bold"></TextBlock>
+                            <Image Source="/Resources/Images/todayTours.png" Width="30" Margin="10 0 0 0"></Image>
+                            <TextBlock Text="     Today tours" Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="ActiveTour"  Style="{StaticResource MenuButtonTheme}" >
                         <StackPanel Orientation="Horizontal">
-                            <Image Source="/Resources/Images/activeTour.png" Width="54"></Image>
-                            <TextBlock Text="Active tour" Margin="10,20,0,0" FontWeight="Bold"></TextBlock>
+                            <Image Source="/Resources/Images/activeTour.png" Width="44"></Image>
+                            <TextBlock Text="  Active tour" Margin="0,20,0,20" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </Button>
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Statistic"  Style="{StaticResource MenuButtonTheme}" >
@@ -69,14 +69,14 @@
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Reviews"  Style="{StaticResource MenuButtonTheme}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Images/zvijezdaBijela.png" Width="44"></Image>
-                            <TextBlock Text="Reviews     " Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="   Reviews    " Margin="0,12,0,0" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </Button>
 
                     <Button  Command="{Binding NavigationButtonCommand}" CommandParameter="Requests"  Style="{StaticResource MenuButtonTheme}">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Resources/Images/requests.png" Width="44"></Image>
-                            <TextBlock Text="   Requests     " Margin="0,10,0,0" FontWeight="Bold"></TextBlock>
+                            <TextBlock Text="   Requests     " Margin="0,9,0,0" FontWeight="Bold"></TextBlock>
                         </StackPanel>
                     </Button>
                 </UniformGrid>

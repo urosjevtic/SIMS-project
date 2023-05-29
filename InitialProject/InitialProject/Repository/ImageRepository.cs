@@ -88,7 +88,7 @@ namespace InitialProject.Repository
         public void Update(Tour tour, string[] text)
         {
             _images = _serializer.FromCSV(FilePath);
-            Image found = _images.Find(c => c.Id == tour.CoverImageUrl.Id);
+            Image found = _images.Find(c => c == tour.CoverImageUrl);
             foreach(string s in text)
             {
                 found.Url.Add(s);

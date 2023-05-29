@@ -126,16 +126,20 @@ namespace InitialProject.Service
 
         public string GetMostWantedLanguage()
         {
+            DateTime oneYearAgo = DateTime.Now.AddYears(-1);
             Dictionary<string, int> languageCounts = new Dictionary<string, int>();
             foreach (ShortTourRequest request in _shortRequestRepository.GetAll())
             {
-                if (languageCounts.ContainsKey(request.Language))
+                if(request.To >= oneYearAgo)
                 {
-                    languageCounts[request.Language]++;
-                }
-                else
-                {
-                    languageCounts[request.Language] = 1;
+                    if (languageCounts.ContainsKey(request.Language))
+                    {
+                        languageCounts[request.Language]++;
+                    }
+                    else
+                    {
+                        languageCounts[request.Language] = 1;
+                    }
                 }
             }
             return languageCounts.OrderByDescending(x=> x.Value).First().Key;

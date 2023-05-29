@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using InitialProject.View;
+using InitialProject.View.GuideView;
 
 namespace InitialProject.ViewModels
 {

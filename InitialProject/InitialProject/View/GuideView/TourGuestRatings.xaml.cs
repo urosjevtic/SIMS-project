@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InitialProject.Domain.Model;
+using InitialProject.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,29 +13,26 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.Serializer;
-using InitialProject.Repository;
-using System.Collections.ObjectModel;
-using InitialProject.ViewModel;
-using InitialProject.Domain.Model;
 
-namespace InitialProject.View
+namespace InitialProject.View.GuideView
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for TourGuestRatings.xaml
     /// </summary>
-    public partial class GuideMainWindow : Window
+    public partial class TourGuestRating : Window
     {
+       
+        
 
-        public GuideMainWindow(User user)
+        public TourGuestRating(Tour tour)
         {
             InitializeComponent();
-           // this.DataContext =  new GuideMainViewModel(user);
-           
+
+
+            this.DataContext = new TourGuestRatingsViewModel(tour);
+
         }
 
-      
     }
 }
-    
 

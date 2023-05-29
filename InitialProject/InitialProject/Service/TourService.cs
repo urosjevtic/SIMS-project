@@ -19,6 +19,7 @@ namespace InitialProject.Service
         private readonly ITourReservationRepository _tourReservationRepository;
 
         private readonly IVoucherRepository _voucherRepository;
+        private SuperGuideStatusService _superGuideStatusService;   
 
         public LocationService _locationService { get; set; }
 
@@ -30,6 +31,8 @@ namespace InitialProject.Service
             _tourGuestsRepository = Injector.Injector.CreateInstance<ITourGuestRepository>(); 
             _tourReservationRepository = Injector.Injector.CreateInstance<ITourReservationRepository>();   
             _voucherRepository = Injector.Injector.CreateInstance<IVoucherRepository>();
+            _superGuideStatusService = new SuperGuideStatusService();
+
         }
 
         public List<Tour> GetTodayTours(User user)
@@ -211,6 +214,8 @@ namespace InitialProject.Service
         }
         public List<Tour> Search(string state, string city, string language, string duration, string number)
         {
+            List<Tour> superGuideTours = new List<Tour>();
+            List<Tour> result = new List<Tour>();
             List<Tour> tours = _tourRepository.GetAll();
             List<Location> locations = _locationService.GetLocations();
             AddTourLocation(tours, locations);
@@ -219,8 +224,26 @@ namespace InitialProject.Service
 
             RemoveByLocation(searchResults, state, city, language);
             RemoveByNumbers(searchResults, duration, number);
-
-            return searchResults;
+            
+            foreach(Tour tour in searchResults)
+            {
+                foreach(string superGuideLanguage in _superGuideStatusService.GetSuperGuideLanguages())
+                {
+                    if (tour.Language.Equals(superGuideLanguage))
+                    {
+                        superGuideTours.Add(tour);  
+                    }
+                }
+            }
+            result = superGuideTours;                     //provjetiti da li radi kakko treba
+            foreach (Tour tour in searchResults)
+            {
+                if (!result.Contains(tour))
+                {
+                    result.Add(tour);
+                }
+            }
+            return result;
         }
         public List<Tour> LoadTours()
         {
@@ -275,7 +298,7 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-            foreach (Tour tour in tours)  // mijenjala sam provjeritiiii
+            foreach (Tour tour in tours)  
             {
                 foreach (DateTime start in tour.StartDates)
                 {
@@ -296,6 +319,7 @@ namespace InitialProject.Service
             SelectedTour.IsRated = true;
             _tourRepository.Update(SelectedTour);
         }
+        
         public void AddGuestsImage(Tour tour, string text)
         {
             _imageRepository.Update(tour, SplitStringByComma(text));
@@ -314,6 +338,24 @@ namespace InitialProject.Service
                 }
             }
             return active;
+        }
+
+       
+
+        public List<Tour> GetLastYearTours()
+        {
+            List<Tour> tours = new List<Tour>();
+            foreach (Tour tour in GetAll())
+            {
+                foreach (DateTime start in tour.StartDates)
+                {
+                    if (start.Year == DateTime.Now.Year - 1)
+                    {
+                        tours.Add(tour);
+                    }
+                }
+            }
+            return tours;
         }
 
     }

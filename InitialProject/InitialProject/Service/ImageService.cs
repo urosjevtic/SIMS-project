@@ -22,11 +22,12 @@ namespace InitialProject.Service
         {
             return _imageRepository.GetById(id);
         }
+        
         public List<string> GetAllById(Tour t)
         {
             return _imageRepository.GetAllImagesById(t.CoverImageUrl.Id);
         }
-
+        
         public void SaveImages(int entityId, string urls)
         {
             Image images = new Image();

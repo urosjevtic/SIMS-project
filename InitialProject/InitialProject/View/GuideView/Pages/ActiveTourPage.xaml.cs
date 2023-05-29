@@ -32,9 +32,11 @@ namespace InitialProject.View.GuideView.Pages
             DataContext = _activeTourViewModel; 
         }
 
+
+        /*
         private void CheckBoxChecked(object sender, RoutedEventArgs e)
         {
-            _activeTourViewModel. CheckPoints = new ObservableCollection<CheckPoint>(_activeTourViewModel.ActiveTour.CheckPoints);
+           // _activeTourViewModel. CheckPoints = new ObservableCollection<CheckPoint>(_activeTourViewModel.ActiveTour.CheckPoints);
             CheckPoint checkedCheckPoint = ((CheckBox)sender).DataContext as CheckPoint;
             _activeTourViewModel.CheckCheckPoint(checkedCheckPoint);
             _activeTourViewModel.SendNotification(checkedCheckPoint);
@@ -43,5 +45,6 @@ namespace InitialProject.View.GuideView.Pages
                 _activeTourViewModel.EndTour();
             }
         }
+        */
     }
 }

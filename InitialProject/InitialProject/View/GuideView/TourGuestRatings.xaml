@@ -1,0 +1,145 @@
+﻿<Window x:Class="InitialProject.View.GuideView.TourGuestRating"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InitialProject.View.GuideView"
+        mc:Ignorable="d" Background="#D1EEEE"
+        Title="TourGuestRating" Height="600" Width="800" WindowStartupLocation="CenterScreen" Foreground="#004040">
+
+    <Window.Resources>
+        <Style x:Key="ListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="#D1EEEE" />
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="ScrollViewer.BorderThickness"  Value="0"></Setter>
+            <Setter Property="BorderBrush" Value="#D1EEEE"></Setter>
+
+        </Style>
+
+        <!-- Style for ListView header -->
+        <Style x:Key="ListViewHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="#008080" />
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            Padding="6,4"
+                            CornerRadius="7"
+                            SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="textblock" TargetType="TextBlock">
+            <Setter Property="Background" Value="White" />
+            <Setter Property="Foreground" Value="#004040"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            
+         
+        </Style>
+    </Window.Resources>
+
+
+    <Grid Margin="0,0,-54,19">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition ></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="13*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+
+        </Grid.RowDefinitions>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding TourName}" FontWeight="Bold" FontSize="20"></Label>
+
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding AverageGuideKnowledgeRating}" Grid.ColumnSpan="2" FontSize="16" Margin="50 0 0 0"></TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding AverageGuideLanguageRating}" Grid.ColumnSpan="2" FontSize="16" Margin="50 0 0 0"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding AverageTourInterestingRating}" Grid.ColumnSpan="2" FontSize="16" Margin="50 0 0 0"></TextBlock>
+
+        <!--ListView 
+          HorizontalAlignment="Left" 
+          Name="listView2" 
+          Grid.Row="2"
+          VerticalAlignment="Top" 
+          
+          ItemsSource="{Binding TourGuests}"
+          IsSynchronizedWithCurrentItem="True" Height="119">
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id usera" Width="70" />
+                        <GridViewColumn DisplayMemberBinding="{Binding GuideKnowledge}" Header="Guide knowledge"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding GuideLanguage}" Header="Language"  Width="70"/>
+                        <GridViewColumn DisplayMemberBinding="{Binding InterestingTour}" Header="Interesting tour"  Width="90"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView-->
+
+
+
+        <!--ListView  Style="{StaticResource ListViewStyle}"
+          HorizontalAlignment="Left" 
+          Name="listView" 
+          Grid.Row="5"
+          VerticalAlignment="Top" 
+          ItemsSource="{Binding GuideCommentsOverview}"
+          SelectedItem="{Binding SelectedComment}"
+          IsSynchronizedWithCurrentItem="True" Height="119" Margin="31,0,0,0" Width="750" Grid.ColumnSpan="2">
+            <ListView.ItemContainerStyle >
+                <Style TargetType="{x:Type ListViewItem}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsReported}" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.View >
+                <GridView ColumnHeaderContainerStyle="{StaticResource ListViewHeaderStyle}">
+                    <GridView.Columns>
+                        <GridViewColumn DisplayMemberBinding="{Binding User.Username}"  Header="Username" Width="110" />
+                        <GridViewColumn DisplayMemberBinding="{Binding CheckPoint.Name}" Header="Check point" Width="110" />
+                        <GridViewColumn DisplayMemberBinding="{Binding Comment}"  Header="Comment" Width="520" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView-->
+        <!--Button Content="Report" Width="120" Height="40" Grid.Row="7" Grid.Column="1" 
+                Command="{Binding ReportCommand}" Style="{StaticResource MenuButtonTheme}"></Button-->
+
+        
+        <ListBox Grid.Row="5"
+              VerticalAlignment="Top" 
+              Background="#D1EEEE" 
+              ItemsSource="{Binding GuideCommentsOverview}"
+              SelectedItem="{Binding SelectedComment}"
+                 BorderThickness="0"
+                 BorderBrush="#D1EEEE"
+              IsSynchronizedWithCurrentItem="True" Height="219" Margin="68,40,113,0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Border CornerRadius="10" Background="White" BorderBrush="#008080" BorderThickness="3"  Height="70" >
+                            <TextBlock  Text="{Binding Comment}" FontSize="16" Height="69"  Style="{StaticResource textblock}"  />
+                        </Border>
+                        <Button Content="Report"  Command="{Binding ReportCommentCommand}"  Margin="80 0 0 0 " Style="{StaticResource MenuButtonTheme}" HorizontalAlignment="Right"></Button>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Window>

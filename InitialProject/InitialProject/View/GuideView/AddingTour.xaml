@@ -3,10 +3,213 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:val="clr-namespace:InitialProject.Validation"
+
         xmlns:local="clr-namespace:InitialProject.ViewModels"
         mc:Ignorable="d"
-        Title="AddingTour" Height="700" Width="900" WindowStartupLocation="CenterScreen" Background="#D1EEEE">
-   
+        Title="AddingTour" Height="700" Width="850" WindowStartupLocation="CenterScreen" Background="#D1EEEE">
+
+    <Window.Resources>
+
+        <!-- Flat ComboBox -->
+        <SolidColorBrush x:Key="ComboBoxNormalBorderBrush" Color="#008080" />
+        <SolidColorBrush x:Key="ComboBoxNormalBackgroundBrush" Color="#fff" />
+        <SolidColorBrush x:Key="ComboBoxDisabledForegroundBrush" Color="#888" />
+        <SolidColorBrush x:Key="ComboBoxDisabledBackgroundBrush" Color="#3A3D55" />
+        <SolidColorBrush x:Key="ComboBoxDisabledBorderBrush" Color="#888" />
+
+        <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="20" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="2" Name="Border"
+              BorderBrush="{StaticResource ComboBoxNormalBorderBrush}" 
+              CornerRadius="10" BorderThickness="1, 1, 1, 1"  
+              Background="{StaticResource ComboBoxNormalBackgroundBrush}" />
+                <Border Grid.Column="1" Margin="1, 1, 1, 1" BorderBrush="#444" Name="ButtonBorder"
+              CornerRadius="10" BorderThickness="0, 0, 0, 0" 
+              Background="{StaticResource ComboBoxNormalBackgroundBrush}" />
+
+                <Path Name="Arrow" Grid.Column="1" 
+            Data="M0,0 L0,2 L4,6 L8,2 L8,0 L4,4 z"
+            HorizontalAlignment="Center" Fill="#444"
+            VerticalAlignment="Center" />
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="UIElement.IsMouseOver" Value="True">
+                    <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="WhiteSmoke"/>
+                </Trigger>
+                <Trigger Property="ToggleButton.IsChecked" Value="True">
+                    <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="WhiteSmoke"/>
+                    <Setter Property="Shape.Fill" TargetName="Arrow" Value="#FF8D979E"/>
+                </Trigger>
+                <Trigger Property="UIElement.IsEnabled" Value="False">
+                    <Setter Property="Panel.Background" TargetName="Border" Value="{StaticResource ComboBoxDisabledBackgroundBrush}"/>
+                    <Setter Property="Panel.Background" TargetName="ButtonBorder" Value="{StaticResource ComboBoxDisabledBackgroundBrush}"/>
+                    <Setter Property="Border.BorderBrush" TargetName="ButtonBorder" Value="{StaticResource ComboBoxDisabledBorderBrush}"/>
+                    <Setter Property="TextElement.Foreground" Value="{StaticResource ComboBoxDisabledForegroundBrush}"/>
+                    <Setter Property="Shape.Fill" TargetName="Arrow" Value="#999"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+
+
+        <!--LogIn button style-->
+        <Style x:Key="ConfirmButtonStyle" TargetType="{x:Type Button}">
+
+            <Setter Property="Background" Value="#008080"/>
+            <!-- set the button background color -->
+            <Setter Property="Foreground" Value="White"/>
+            <!-- set the text color of the button -->
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <!-- set the font size of the button -->
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#008080"/>
+                                <!-- set the background color when the mouse is over the button -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#008080"/>
+                                <!-- set the background color when the button is pressed -->
+                            </Trigger>
+
+                            <!--Button blocked, validation-->
+                            <DataTrigger Binding="{Binding ElementName=name, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=duration, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=maxGuests, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=language, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=first, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=last, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=description, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+        <Style x:Key="ComboBoxFlatStyle"  TargetType="{x:Type ComboBox}">
+            <Setter Property="UIElement.SnapsToDevicePixels" Value="True"/>
+            <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="TextElement.Foreground" Value="Black"/>
+            <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="ToggleButton" Grid.Column="2"
+                ClickMode="Press" Focusable="False" 
+                IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
+
+                            <ContentPresenter Name="ContentSite" Margin="5, 3, 23, 3" IsHitTestVisible="False"
+                              HorizontalAlignment="Left" VerticalAlignment="Center"                              
+                              Content="{TemplateBinding ComboBox.SelectionBoxItem}" 
+                                           
+                              ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}"
+                              ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+                            <TextBox Name="PART_EditableTextBox" Margin="3, 3, 23, 3"                     
+                     IsReadOnly="{TemplateBinding IsReadOnly}"
+                     Visibility="Hidden" Background="Transparent"
+                     HorizontalAlignment="Left" VerticalAlignment="Center"
+                     Focusable="True" >
+                                <TextBox.Template>
+                                    <ControlTemplate TargetType="TextBox" >
+                                        <Border Name="PART_ContentHost" Focusable="False" />
+                                    </ControlTemplate>
+                                </TextBox.Template>
+                            </TextBox>
+                            <!-- Popup showing items -->
+                            <Popup Name="Popup" Placement="Bottom"
+                   Focusable="False" AllowsTransparency="True"
+                   IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}"
+                   PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True"
+                    MinWidth="{TemplateBinding FrameworkElement.ActualWidth}"
+                    MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
+                                    <Border Name="DropDownBorder" Background="White" Margin="0, 1, 0, 0"
+                        CornerRadius="0" BorderThickness="1,1,1,1" 
+                        BorderBrush="{StaticResource ComboBoxNormalBorderBrush}"/>
+                                    <ScrollViewer Margin="4" SnapsToDevicePixels="True">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ItemsControl.HasItems" Value="False">
+                                <Setter Property="FrameworkElement.MinHeight" TargetName="DropDownBorder" Value="95"/>
+                            </Trigger>
+                            <Trigger Property="UIElement.IsEnabled" Value="False">
+                                <Setter Property="TextElement.Foreground" Value="{StaticResource ComboBoxDisabledForegroundBrush}"/>
+                            </Trigger>
+                            <Trigger Property="ItemsControl.IsGrouping" Value="True">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                            </Trigger>
+                            <Trigger Property="ComboBox.IsEditable" Value="True">
+                                <Setter Property="KeyboardNavigation.IsTabStop" Value="False"/>
+                                <Setter Property="UIElement.Visibility" TargetName="PART_EditableTextBox" Value="Visible"/>
+                                <Setter Property="UIElement.Visibility" TargetName="ContentSite" Value="Hidden"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- End of Flat ComboBox -->
+
+        <!--Validation error template-->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
+                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+            </Grid>
+        </ControlTemplate>
+        <!--End of Validation error template-->
+    </Window.Resources>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,59 +231,148 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30" />
             <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1.5*" />
             <ColumnDefinition Width="30" />
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="0.8*" />
+            <ColumnDefinition Width="1.5*" />
             <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
 
-        <Label Content="Name: " Grid.Row="1" Grid.Column="1" FontSize="16"  FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Location:" Grid.Row="2" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Country:" Grid.Row="3" Grid.Column="1"  FontSize="16"   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label Content="City:" Grid.Row="4" Grid.Column="1"  FontSize="16"   HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        <Label Content="Description: " Grid.Row="5" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Name: " Grid.Row="1" Grid.Column="1" FontSize="16"  FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,10,0,0"/>
+        <Label Content="Country:" Grid.Row="2" Grid.Column="1"   FontWeight="Bold" FontSize="16"   HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0"/>
+        <Label Content="City:" Grid.Row="3" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,7,0,0" RenderTransformOrigin="0.475,0.345"/>
+        <Label Content="Description: " Grid.Row="4" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="1,2,0,0"/>
 
-        <Label Content="Language: " Grid.Row="6" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Max Guests: " Grid.Row="7" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Duration: " Grid.Row="8" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
-        <Label Content="Image URL: " Grid.Row="9" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Language: " Grid.Row="6" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0"/>
+        <Label Content="Max Guests: " Grid.Row="8" Grid.Column="4"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0"/>
+        <Label Content="Duration: " Grid.Row="9" Grid.Column="4"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,6,0,0"/>
+        <Label Content="Images: " Grid.Row="7" Grid.Column="1"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0"/>
         <Label Content="Check points: " Grid.Row="1" Grid.Column="4" FontSize="16" FontWeight="Bold"/>
-        <Label Grid.Column="4" Grid.Row="2" Content="First:" FontSize="16" HorizontalAlignment="Center"></Label>
+        <Label Grid.Column="4" Grid.Row="1" Content="First:" FontSize="16" HorizontalAlignment="Center" Margin="0,52,0,3" Grid.RowSpan="2"></Label>
         <Label Grid.Column="4" Grid.Row="3" Content="Last:" FontSize="16" HorizontalAlignment="Center"></Label>
         <Label Grid.Column="4" Grid.Row="4" Content="Other:" FontSize="16" HorizontalAlignment="Center"></Label>
-        <Label Content="Start: " Grid.Row="5" Grid.Column="4"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        <Label Content="Start: " Grid.Row="5" Grid.Column="4"  FontSize="16" FontWeight="Bold"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,5,0,0"/>
 
-        <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="5" Grid.Column="5"  Height="30" Width="150"  Margin="0,0,50,0"/>
+        <DatePicker SelectedDate="{Binding Start, UpdateSourceTrigger=PropertyChanged}"  Grid.Row="5" Grid.Column="5"  Height="30" Width="130"  Margin="28,12,79,13"/>
 
-        <Button Content="Add" Width="50" Height="40" Grid.Row="5" Grid.Column="5" Margin="150,0,10,0" Style="{StaticResource MenuButtonTheme}" Command="{Binding AddDateTimeCommand}"></Button>
+        <Button Content="Add" Width="40" Height="40" Grid.Row="5" FontSize="10" Grid.Column="5" Margin="150,0,10,0" Style="{StaticResource MenuButtonTheme}" Command="{Binding AddDateTimeCommand}"></Button>
 
-        <Border Grid.Column="5" Grid.Row="6" Grid.RowSpan="4" CornerRadius="10" BorderBrush="#008080" BorderThickness="2" Background="#D1EEEE">
-            <ListBox Grid.Column="5" Grid.Row="6" Grid.RowSpan="4" Background="#D1EEEE"  FontSize="15" ItemsSource="{Binding StartDates}">
-                
+        <Border Grid.Column="5" Grid.Row="6" Grid.RowSpan="2" CornerRadius="10" Width="180" BorderBrush="#008080" BorderThickness="2" Background="#D1EEEE" >
+            <ListBox Grid.Column="5" Grid.Row="6" Grid.RowSpan="2" Width="180" Background="#D1EEEE"  FontSize="15" ItemsSource="{Binding StartDates}" >
+
             </ListBox>
         </Border>
-       
 
 
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Namee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Center" TextAlignment="Center" />
-        <ComboBox x:Name="CountryComboBox" Grid.Column="2" Grid.Row="3" Width="180" Height="40"   ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" FontSize="15"  >
+
+
+        <TextBox Name="name" Style="{StaticResource inputFIeld}" Grid.Row="1" Grid.Column="2"  HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" >
+            <TextBox.Text>
+                <Binding Path="Namee" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <ComboBox x:Name="CountryComboBox" Style="{StaticResource ComboBoxFlatStyle}"  Grid.Column="2" Grid.Row="2" Width="180" Height="40" HorizontalAlignment="Left"  ItemsSource="{Binding Path=Locations.Keys}" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" FontSize="16"  >
         </ComboBox>
-        <ComboBox  x:Name="CityComboBox" Grid.Column="2" Grid.Row="4" Width="180" Height="40"  ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  FontSize="15"></ComboBox>
-        <TextBox Style="{StaticResource inputFIeld}" Text="{Binding Path=Description, UpdateSourceTrigger=PropertyChanged}" Grid.Row="5" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Languagee, UpdateSourceTrigger=PropertyChanged}" Grid.Row="6" Grid.Column="2"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=MaxGuests, UpdateSourceTrigger=PropertyChanged}" Grid.Row="7" Grid.Column="2"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
+        <ComboBox  x:Name="CityComboBox"  Style="{StaticResource ComboBoxFlatStyle}" Grid.Column="2" Grid.Row="3" Width="180" Height="40" HorizontalAlignment="Left" ItemsSource="{Binding Path=Cities }" SelectedItem="{Binding Path=City, UpdateSourceTrigger=PropertyChanged}"  FontSize="16"></ComboBox>
+        <TextBox x:Name="description" Style="{StaticResource inputFIeld}" Grid.Row="4" Grid.RowSpan="2" Height="70" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Left" TextAlignment="Center" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Description" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox  x:Name="language" Style="{StaticResource inputFIeld}"  Grid.Row="6" Grid.Column="1"  Margin="158,4,0,0" HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <TextBox.Text>
+                <Binding Path="Languagee" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox  x:Name="maxGuests"  Style="{StaticResource inputFIeld}" Grid.Row="8" Grid.Column="5"  Margin="0,5,0,0" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16" VerticalAlignment="Top">
+            <TextBox.Text>
+                <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:PositiveNumberValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
 
 
 
+        <TextBox Name="images" Style="{StaticResource inputFIeld}" Grid.Row="7" Grid.RowSpan="4" Height="198" Grid.Column="1"  HorizontalAlignment="Left" TextAlignment="Center" FontSize="16" Grid.ColumnSpan="2" Margin="158,0,0,0" >
+            <TextBox.Text>
+                <Binding Path="ImagesUrl" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation/>
+                        <val:ImagesUrlValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
 
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=ImagesUrl, UpdateSourceTrigger=PropertyChanged}" Grid.Row="9" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Duration, UpdateSourceTrigger=PropertyChanged}" Grid.Row="8" Grid.Column="2"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=First, UpdateSourceTrigger=PropertyChanged}" Grid.Row="2" Grid.Column="5"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Last, UpdateSourceTrigger=PropertyChanged}" Grid.Row="3" Grid.Column="5"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Other, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="5"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="15"/>
-        <Button Content="Save"  Grid.Row="11" Grid.Column="2" Width="140" Height="50" Margin="10,0,0,0" Command="{Binding SaveCommand}" Style="{StaticResource MenuButtonTheme}"></Button>
-        <Button Content="Cancel"  Grid.Row="11" Grid.Column="5" Width="140" Height="50" Margin="10,0,0,0" Command="{Binding CancelCommand}" Style="{StaticResource MenuButtonTheme}"></Button>
+        <TextBox x:Name="duration" Style="{StaticResource inputFIeld}"  Grid.Row="9" Grid.Column="5"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="16" VerticalAlignment="Center">
+            <TextBox.Text>
+                <Binding Path="Duration" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:PositiveNumberValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox x:Name="first"  Style="{StaticResource inputFIeld}" Grid.Row="2" Grid.Column="5"  Margin="0,0,0,15"  HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="First" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox x:Name="last" Style="{StaticResource inputFIeld}" Grid.Row="3" Grid.Column="5"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Last" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <val:EmptyStringValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+            <Validation.ErrorTemplate>
+                <StaticResource ResourceKey="ValidationErrorTemplate" />
+            </Validation.ErrorTemplate>
+        </TextBox>
+        <TextBox  Style="{StaticResource inputFIeld}" Text="{Binding Path=Other, UpdateSourceTrigger=PropertyChanged}" Grid.Row="4" Grid.Column="5"  Margin="0,0,0,15" HorizontalAlignment="Center" TextAlignment="Center" FontSize="16"/>
+        <Button Content="Save"  Grid.Row="11" Grid.Column="2" Width="120" Height="40" Margin="10,0,0,0" Command="{Binding SaveCommand}" Style="{StaticResource ConfirmButtonStyle}"></Button>
+        <Button Content="Cancel"  Grid.Row="11" Grid.Column="5" Width="120" Height="40" Margin="10,0,0,0" Command="{Binding CancelCommand}" Style="{StaticResource MenuButtonTheme}"></Button>
 
 
     </Grid>

@@ -59,6 +59,12 @@ namespace InitialProject.ViewModels.MainVeiwModel
                 case "Requests":
                     navigationService.Navigate(new Requests(LoggedInUser));
                     break;
+                case "Reviews":
+                    navigationService.Navigate(new Reviews());
+                    break;
+                case "MyAccount":
+                    navigationService.Navigate(new MyAccount());
+                    break;
 
             }
         }

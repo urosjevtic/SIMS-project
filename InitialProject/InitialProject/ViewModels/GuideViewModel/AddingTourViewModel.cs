@@ -20,12 +20,14 @@ using Microsoft.Win32;
 using System.Windows.Media.Imaging;
 using InitialProject.ViewModels.MainVeiwModel;
 
+using System.IO;
+
 namespace InitialProject.ViewModels
 {
     public class AddingTourViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private readonly IImageRepository _imageRepository;
-        
+
         public LocationService _locationService;
         private CheckPointService _checkPointService;
         private readonly ShortTourRequestService _shortTourRequestService;
@@ -36,20 +38,20 @@ namespace InitialProject.ViewModels
         public User LoggedUser { get; set; }
         public ICommand SaveCommand { get; private set; }
         public ICommand CancelCommand { get; private set; }
-        public ICommand AddImageCommand { get; private set; }   
-        public ICommand AddDateTimeCommand { get; private set; }    
+        public ICommand AddImageCommand { get; private set; }
+        public ICommand AddDateTimeCommand { get; private set; }
         public ObservableCollection<DateTime> StartDates { get; set; }
         public string AllUrls { get; set; }
-        public ShortTourRequest Request { get; set;}
-  
-      
-        public AddingTourViewModel(User user,ShortTourRequest request, bool enter)
+        public ShortTourRequest Request { get; set; }
+
+
+        public AddingTourViewModel(User user, ShortTourRequest request, bool enter)
         {
-           
+
             _imageRepository = new ImageRepository();
             _shortTourRequestService = new ShortTourRequestService();
             _checkPointService = new CheckPointService();
-            _tourService = new TourService();  
+            _tourService = new TourService();
             _notificationService = new NotificationService();
             //_guideMainWindow = new GuideMainViewModel(user);
 
@@ -62,7 +64,7 @@ namespace InitialProject.ViewModels
             _locationService = new LocationService();
             Locations = _locationService.GetCountriesAndCities();
             StartDates = new ObservableCollection<DateTime>();
-            Languagee = _shortTourRequestService.GetMostWantedLanguage();   
+            Languagee = _shortTourRequestService.GetMostWantedLanguage();
             Country = _shortTourRequestService.GetMostWantedLocation().Country;
             City = _shortTourRequestService.GetMostWantedLocation().City;
             Request = request;
@@ -78,7 +80,7 @@ namespace InitialProject.ViewModels
 
         private void MakeTourFromRequest(ShortTourRequest request)
         {
-            if(request.Language == null)
+            if (request.Language == null)
             {
                 return;
             }
@@ -93,7 +95,7 @@ namespace InitialProject.ViewModels
                 request.Status = RequestStatus.Accepted;
                 _shortTourRequestService.Update(request);
             }
-            
+
         }
 
 
@@ -273,20 +275,26 @@ namespace InitialProject.ViewModels
             }
         }
 
-        
+
 
         public List<CheckPoint> MakeCheckPointList()
         {
             List<CheckPoint> checkPoints = new List<CheckPoint>();
-            checkPoints.Add(MakeNewCheckPoint(First,1));
-            int i = 2;
-            string[] checkPoint = SplitString(Other);
-            foreach (string point in checkPoint)
+            checkPoints.Add(MakeNewCheckPoint(First, 1));
+            if(Other != null)
             {
-                checkPoints.Add(MakeNewCheckPoint(point, i));
-                i++;
+                int i = 2;
+                string[] checkPoint = SplitString(Other);
+                foreach (string point in checkPoint)
+                {
+                    checkPoints.Add(MakeNewCheckPoint(point, i));
+                    i++;
+                }
+                checkPoints.Add(MakeNewCheckPoint(Last, i));
+                return checkPoints;
             }
-            checkPoints.Add(MakeNewCheckPoint(Last, i));
+            
+            checkPoints.Add(MakeNewCheckPoint(Last, 2));
             return checkPoints;
         }
 
@@ -295,7 +303,7 @@ namespace InitialProject.ViewModels
             return s.Split(new string[] { ", ", "," }, StringSplitOptions.RemoveEmptyEntries);
         }
 
-      
+
 
         public CheckPoint MakeNewCheckPoint(string point, int i)
         {
@@ -325,7 +333,7 @@ namespace InitialProject.ViewModels
                 image.Url.Add(url);
             }
             _imageRepository.Save(image);
-            return image;   
+            return image;
         }
 
 
@@ -339,7 +347,7 @@ namespace InitialProject.ViewModels
             DateTime newTourEnd = _start.AddHours(_duration);
             foreach (Tour tour in _tourService.GetAll())
             {
-                foreach(DateTime start in tour.StartDates)
+                foreach (DateTime start in tour.StartDates)
                 {
                     DateTime end = start.AddHours(tour.Duration);
                     if ((_start >= start && _start < end) || (newTourEnd > start && newTourEnd <= end))
@@ -350,11 +358,11 @@ namespace InitialProject.ViewModels
                 }
             }
             StartDates.Add(_start);
-        } 
+        }
         public void ConfirmAddingTour()
         {
             List<DateTime> dates = new List<DateTime>();
-            foreach(DateTime date in StartDates)
+            foreach (DateTime date in StartDates)
             {
                 dates.Add(date);
             }
@@ -370,22 +378,22 @@ namespace InitialProject.ViewModels
             tour.CoverImageUrl = MakeNewImage(tour);
             tour.CheckPoints = MakeCheckPointList();
             tour.IsActive = false;
-        
+
             _tourService.Save(tour);
             _notificationService.SendNotifications(tour);
 
         }
 
-      
+
 
         private void AddImage()
         {
             OpenFileDialog op = new OpenFileDialog();
             op.Title = "Select a picture";
             op.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
-          
-            op.Multiselect = true;  
-            if(op.ShowDialog() == true)
+
+            op.Multiselect = true;
+            if (op.ShowDialog() == true)
             {
                 int i = 0;
                 foreach (var imageUrl in op.FileNames)

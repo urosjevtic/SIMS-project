@@ -29,8 +29,10 @@ namespace InitialProject.ViewModels
         public List<Tour> EndedTours { get; set; }
         public Tour SelectedTour { get; set; }
         public Tour MostVisitedTour { get; set; }
+        public string MostVisitedTourText { get; set; }
        
-        public Tour MostVisitedInYear { get; set; }
+        public Tour MostVisitedTourInYear { get; set; }
+       
         public Dictionary<string, List<string>> Locations { get; set; }
         public ICommand SearchCommand { get; private set; }
         public ObservableCollection<TourRequest> TourRequests { get; set; }
@@ -58,8 +60,10 @@ namespace InitialProject.ViewModels
 
             SetLineSeriesForYears();
             Year = 0;
-            MostVisitedInYear = _tourService.GetMostVisitedInYear(2023);
+            MostVisitedTourInYear = _tourService.GetMostVisitedInYear(2023);
             SearchResult = new List<ShortTourRequest>();
+            MostVisitedTourInYearText = "Most visited tour in year " + SelectedYear.ToString() + " is " + MostVisitedTourInYear.Name;
+            MostVisitedTourText = "Most visited tour ever is: " + MostVisitedTour.Name;
         }
 
 
@@ -88,6 +92,16 @@ namespace InitialProject.ViewModels
             }
 
         }
+        private string _mostVisitedTourInYear;
+        public string MostVisitedTourInYearText 
+        {
+            get { return _mostVisitedTourInYear; }
+            set
+            {
+                _mostVisitedTourInYear = value;
+                OnPropertyChanged(MostVisitedTourInYearText);
+            }
+        }
         private int _selectedYear;
         public int SelectedYear
         {
@@ -95,8 +109,9 @@ namespace InitialProject.ViewModels
             set
             {
                 _selectedYear = value;
-                OnPropertyChanged(nameof(SelectedYear));
-                MostVisitedInYear = _tourService.GetMostVisitedInYear(SelectedYear);
+                OnPropertyChanged("SelectedYear");
+                MostVisitedTourInYear = _tourService.GetMostVisitedInYear(SelectedYear);
+                MostVisitedTourInYearText = "Most visited tour in year " + SelectedYear.ToString() + " is " + MostVisitedTourInYear.Name;
             }
 
         }

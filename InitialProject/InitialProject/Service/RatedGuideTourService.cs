@@ -40,5 +40,63 @@ namespace InitialProject.Service
             }
             return ratings;
         }
+
+        public double FindAverageKnowledgeRating(Tour tour)
+        {
+            double ratingSum = 0;
+            int ratingNumber = 0;
+            foreach (RatedGuideTour ratedTour in _ratedGuideTourRepository.GetAll())
+            {
+                if (tour.Id == ratedTour.IdTour)
+                {
+                    ratingSum+=ratedTour.GuideKnowledge;
+                    ratingNumber++;
+                }
+            }
+            if (ratingNumber == 0)
+            {
+                return 0;
+            }
+            return ratingSum / ratingNumber;
+        }
+        public double FindAverageLanguageRating(Tour tour)
+        {
+            double ratingSum = 0;
+            int ratingNumber = 0;
+            foreach (RatedGuideTour ratedTour in _ratedGuideTourRepository.GetAll())
+            {
+                if (tour.Id == ratedTour.IdTour)
+                {
+                    ratingSum += ratedTour.GuideLanguage;
+                    ratingNumber++;
+                }
+            }
+            if (ratingNumber == 0)
+            {
+                return 0;
+            }
+            return ratingSum / ratingNumber;
+        }
+        public double FindAverageInterestingTourRating(Tour tour)
+        {
+            double ratingSum = 0;
+            int ratingNumber = 0;
+            foreach (RatedGuideTour ratedTour in _ratedGuideTourRepository.GetAll())
+            {
+                if (tour.Id == ratedTour.IdTour)
+                {
+                    ratingSum += ratedTour.InterestingTour;
+                    ratingNumber++;
+                }
+            }
+            if (ratingNumber == 0)
+            {
+                return 0;
+            }
+            return ratingSum / ratingNumber;
+        }
+
+        
+     
     }
 }

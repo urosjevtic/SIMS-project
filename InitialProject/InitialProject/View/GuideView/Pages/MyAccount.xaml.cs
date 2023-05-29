@@ -10,31 +10,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.Domain.Model;
-using InitialProject.Repository;
-using InitialProject.Service;
-using InitialProject.ViewModels;
+using InitialProject.ViewModels.GuideViewModel;
 
-namespace InitialProject.View
+namespace InitialProject.View.GuideView.Pages
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for MyAccount.xaml
     /// </summary>
-    public partial class TourGuestRating : Window
+    public partial class MyAccount : Page
     {
-        public Comment selectedComment { get; set; }
-       
-        public TourGuestRating(Tour tour)
+        public MyAccount()
         {
             InitializeComponent();
-          
-
-            this.DataContext = new TourGuestRatingsViewModel(tour);
-          
+            DataContext = new MyAccountViewModel();
         }
-
-        
-
     }
 }
