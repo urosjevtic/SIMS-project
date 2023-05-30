@@ -182,10 +182,6 @@
                                                                 <Bold>Number of people:</Bold>
                                                             </Label>
                                                             <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
-                                                            <Label FontSize="15" FontWeight="Bold" Grid.Row="5" Grid.Column="0">
-                                                                <Bold>Date:</Bold>
-                                                            </Label>
-                                                            <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
                                                             <Button Content="Rate" FontSize="18" BorderThickness="2" Grid.Column="2" Background="LightSteelBlue" Width="100" Grid.Row="5" HorizontalAlignment="Right" Command="{Binding DataContext.RatingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
         CommandParameter="{Binding}" Padding="5" Margin="8"/>
                                                         </Grid>
