@@ -74,7 +74,7 @@ namespace InitialProject.ViewModels
                 }
             }
 
-            private int _guideKnowledge;
+            private int _guideKnowledge = 1;
             public int GuideKnowledge
             {
                 get { return _guideKnowledge; }
@@ -88,7 +88,7 @@ namespace InitialProject.ViewModels
                 }
             }
 
-            private int _guideLanguage;
+            private int _guideLanguage = 1;
             public int GuideLanguage
             {
                 get { return _guideLanguage; }
@@ -101,7 +101,7 @@ namespace InitialProject.ViewModels
                     }
                 }
             }
-            private int _interestingTour;
+            private int _interestingTour = 1;
             public int InterestingTour
             {
                 get { return _interestingTour; }
