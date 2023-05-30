@@ -160,6 +160,7 @@
                                                                 <RowDefinition></RowDefinition>
                                                                 <RowDefinition></RowDefinition>
                                                                 <RowDefinition></RowDefinition>
+                                                                <RowDefinition></RowDefinition>
                                                             </Grid.RowDefinitions>
                                                             <Label FontSize="15" FontWeight="Bold" Grid.Row="0" Grid.Column="0">
                                                                 <Bold>Name of tour:</Bold>
@@ -181,7 +182,7 @@
                                                                 <Bold>Number of people:</Bold>
                                                             </Label>
                                                             <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
-                                                            <Button Content="Rate" FontSize="18" BorderThickness="2" Grid.Column="2" Background="LightSteelBlue" Width="100" Grid.Row="4" HorizontalAlignment="Right" Command="{Binding DataContext.RatingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                                            <Button Content="Rate" FontSize="18" BorderThickness="2" Grid.Column="2" Background="LightSteelBlue" Width="100" Grid.Row="5" HorizontalAlignment="Right" Command="{Binding DataContext.RatingCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
         CommandParameter="{Binding}" Padding="5" Margin="8"/>
                                                         </Grid>
                                                     </Border>

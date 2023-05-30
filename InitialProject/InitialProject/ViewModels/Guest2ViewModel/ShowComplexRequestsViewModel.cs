@@ -31,7 +31,17 @@ namespace InitialProject.ViewModels.Guest2ViewModel
                 OnPropertyChanged(nameof(ComplexRequests));
             }
         }
-
+        private ComplexTourRequest _selectedRequest;
+        public ComplexTourRequest SelectedRequest
+        {
+            get { return _selectedRequest; }
+            set
+            {
+                if (value != _selectedRequest)
+                    _selectedRequest = value;
+                OnPropertyChanged(nameof(SelectedRequest));
+            }
+        }
         public ShowComplexRequestsViewModel(NavigationService navService)
         {
             this.navigationService = navService;
@@ -46,7 +56,8 @@ namespace InitialProject.ViewModels.Guest2ViewModel
         }
         public void FullView(ComplexTourRequest complexRequest)
         {
-
+            SelectedRequest = complexRequest;
+            navigationService.Navigate(new FullViewComplexRequest(navigationService, SelectedRequest));
         }
     }
 }

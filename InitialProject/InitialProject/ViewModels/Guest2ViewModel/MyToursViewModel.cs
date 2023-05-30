@@ -180,7 +180,7 @@ namespace InitialProject.ViewModels
                 }
             }
         public List<CheckPoint> checkPoints { get; set; }
-            public NavigationService navService { get; }
+        public NavigationService navService { get; }
             public MyToursViewModel(NavigationService nav)
             {
                 navService = nav;

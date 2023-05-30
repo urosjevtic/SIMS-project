@@ -23,7 +23,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="10"></ColumnDefinition>
-                    <ColumnDefinition Width="600"></ColumnDefinition>
+                    <ColumnDefinition Width="500"></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -31,18 +31,21 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition Height="10"></RowDefinition>
                 </Grid.RowDefinitions>
-                <DataGrid ItemsSource="{Binding ComplexRequests}" Grid.Row="1" Grid.Column="1" IsReadOnly="True" FontSize="22" AutoGenerateColumns="False">
-                    <DataGridTextColumn Header="Ordinal number" Binding="{Binding IdRequest}"/>
-                    <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button Content="Full view" Command="{Binding FullViewCommand}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                <DataGrid ItemsSource="{Binding ComplexRequests}" SelectedItem="{Binding SelectedRequest, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" IsReadOnly="True" FontSize="26" AutoGenerateColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Ordinal number" Binding="{Binding IdRequest}"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" Width="120"/>
+                        <DataGridTemplateColumn Width="*">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Full view" Command="{Binding DataContext.FullViewCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}" 
+                    CommandParameter="{Binding}" Background="LightSteelBlue"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
                 </DataGrid>
-                <Button x:Name="GoBack" Grid.Column="2" Grid.Row="1" BorderThickness="2" Width="180" Height="60" FontSize="28" Command="{Binding GoBackCommand}" Background="LightSteelBlue" Margin="47,455,47,14">
+                <Button x:Name="GoBack" Grid.Column="2" Grid.Row="1" BorderThickness="2" Width="180" Height="60" FontSize="28" Command="{Binding GoBackCommand}" Background="LightSteelBlue" Margin="35,425,35,0">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/Images/go-back-arrow.png" Height="30"></Image>
                         <TextBlock Text=" Go Back" VerticalAlignment="Center"/>

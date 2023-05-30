@@ -29,5 +29,18 @@ namespace InitialProject.Service
             _complexTourRepository.NextIdForParts(list);
             _complexTourRepository.Save(complexRequest);
         }
+        /*public ComplexTourRequest CheckValidation(ComplexTourRequest request)
+        {
+            TimeSpan ts = new TimeSpan(48, 0, 0);
+
+            foreach (ShortTourRequest shortRequest in request.Requests)
+            {
+                if (shortRequest.From.Subtract(ts) <= DateTime.Now && shortRequest.Status == RequestStatus.Active)
+                {
+                    _complexTourRepository.Invalidate(shortRequest);
+                }
+            }
+            return request;
+        }*/
     }
 }
