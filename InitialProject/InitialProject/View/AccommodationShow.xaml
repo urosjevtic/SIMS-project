@@ -135,8 +135,8 @@
                     HorizontalAlignment="Center"
                     Background="LightGray"
                     BorderBrush="LightGray"
-                    Command=""
-                    CommandParameter=""
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="AnywhereWheneverPage"              
                     Content="Anywhere/Whenever"
                     ToolTip="Search for available accommodation anywhere and on any date" />
                 <Button

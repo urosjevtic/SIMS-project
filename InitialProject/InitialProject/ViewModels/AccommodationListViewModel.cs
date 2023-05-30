@@ -63,8 +63,6 @@ namespace InitialProject.ViewModels
         public AccommodationListViewModel(NavigationService navigationService)
         {
            _imageService = new ImageService();
-           // _images = _imageService.GetAll();
-           // _imageUrl = _images.Url[0];
             _navigationService = navigationService;
             _accommodationRepository = new AccommodationRepository();
             LoadData();
