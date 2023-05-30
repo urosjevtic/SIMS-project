@@ -12,6 +12,7 @@ using System.Windows;
 using InitialProject.View.OwnerView.MyAccommodations;
 using InitialProject.View.OwnerView.Ratings;
 using System.Windows.Navigation;
+using NuGet.Protocol;
 
 namespace InitialProject.ViewModels
 {
@@ -21,17 +22,19 @@ namespace InitialProject.ViewModels
         private readonly LocationService _locationService;
         private readonly User _logedInUser;
         NavigationService NavigationService { get; set; }
-        public AccommodationRegistrationViewModel(User logedInUser, NavigationService navigationService)
+        public AccommodationRegistrationViewModel(User logedInUser, NavigationService navigationService, string country = "", string city = "")
         {
             _accommodationService = new AccommodationService();
             _locationService = new LocationService();
+            _country = country;
+            _city = city;
 
             Locations = _locationService.GetCountriesAndCities();
             _logedInUser = logedInUser;
             NavigationService = navigationService;
         }
-        public Dictionary<string, List<string>> Locations { get; set; }
 
+        public Dictionary<string, List<string>> Locations { get; set; }
 
 
         private string _accommodationName;

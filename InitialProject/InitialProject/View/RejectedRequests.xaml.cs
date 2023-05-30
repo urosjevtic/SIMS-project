@@ -60,9 +60,6 @@ namespace InitialProject.View
             Request = new ObservableCollection<DeclinedAccommodationReservationRescheduleRequest>(_declinedAccommodationReservationRescheduleRequestService.GetAll());
         }
 
-        private void BackButton1_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
+        
     }
 }

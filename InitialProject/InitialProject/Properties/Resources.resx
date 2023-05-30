@@ -1,0 +1,534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accommodation" xml:space="preserve">
+    <value>Accommodation:</value>
+  </data>
+  <data name="Accommodation_managment" xml:space="preserve">
+    <value>Accommodation menagment</value>
+  </data>
+  <data name="Accommodation_registration" xml:space="preserve">
+    <value>Accommodation registration</value>
+  </data>
+  <data name="Accommodation_reviews" xml:space="preserve">
+    <value>Accommodation reviews</value>
+  </data>
+  <data name="Accommodation_statistic" xml:space="preserve">
+    <value>Accommodation statistic</value>
+  </data>
+  <data name="Accommodation_type" xml:space="preserve">
+    <value>Accommodation type:</value>
+  </data>
+  <data name="Additional_comment" xml:space="preserve">
+    <value>Additional comment:</value>
+  </data>
+  <data name="Add_new_property_to_your_list_of_accommodations" xml:space="preserve">
+    <value>Add new property to your list of accommodations</value>
+  </data>
+  <data name="Add_note" xml:space="preserve">
+    <value>Add note</value>
+  </data>
+  <data name="All_reservations" xml:space="preserve">
+    <value>All reservations</value>
+  </data>
+  <data name="Avrage_rating" xml:space="preserve">
+    <value>Avrage rating:</value>
+  </data>
+  <data name="Buisiest_month" xml:space="preserve">
+    <value>Buisiest month:</value>
+  </data>
+  <data name="Buisiest_year" xml:space="preserve">
+    <value>Buisiest year</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Cancelation_count" xml:space="preserve">
+    <value>Cancelation count:</value>
+  </data>
+  <data name="Cancelation_period" xml:space="preserve">
+    <value>Cancelation period:</value>
+  </data>
+  <data name="Cancel_reservation" xml:space="preserve">
+    <value>Cancel reservation</value>
+  </data>
+  <data name="Change_application_language" xml:space="preserve">
+    <value>Change application language</value>
+  </data>
+  <data name="Change_application_theme" xml:space="preserve">
+    <value>Change application theme</value>
+  </data>
+  <data name="Change_theme" xml:space="preserve">
+    <value>Change theme</value>
+  </data>
+  <data name="Change_username_and_password" xml:space="preserve">
+    <value>Change ussername and password</value>
+  </data>
+  <data name="Choose_lanugage" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="Cleanlines" xml:space="preserve">
+    <value>Cleanlines:</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Country" xml:space="preserve">
+    <value>Country:</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="Days_left_to_rate_guest" xml:space="preserve">
+    <value>Days left to rate guest:</value>
+  </data>
+  <data name="Decline" xml:space="preserve">
+    <value>Decline</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="End_date" xml:space="preserve">
+    <value>End date:</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Finished" xml:space="preserve">
+    <value>Finished:</value>
+  </data>
+  <data name="Forums" xml:space="preserve">
+    <value>Forums</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>From:</value>
+  </data>
+  <data name="Generate_a_pdf_report_for_a_renovations" xml:space="preserve">
+    <value>Generate a pdf report for a renovations</value>
+  </data>
+  <data name="Generate_PDF" xml:space="preserve">
+    <value>Generate PDF</value>
+  </data>
+  <data name="Generate_report" xml:space="preserve">
+    <value>Generate report</value>
+  </data>
+  <data name="Go_back" xml:space="preserve">
+    <value>&lt; Go back</value>
+  </data>
+  <data name="Guest_username" xml:space="preserve">
+    <value>Guest username:</value>
+  </data>
+  <data name="Handle_rescheduling" xml:space="preserve">
+    <value>Handle rescheduling</value>
+  </data>
+  <data name="Here_you_can_see_all_requests_for_rescheduling_reservations" xml:space="preserve">
+    <value>Here you can see all requests for rescheduling reservations</value>
+  </data>
+  <data name="Here_you_can_see_all_reservations_that_gusts_have_made" xml:space="preserve">
+    <value>Here you can see all reservations that gusts have made</value>
+  </data>
+  <data name="Here_you_can_see_guests_that_you_still_havent_rated_and_rate_them" xml:space="preserve">
+    <value>Here you can see guests that you still haven't rated, and rate them</value>
+  </data>
+  <data name="Here_you_can_see_ratings_and_reviews_that_guests_have_left" xml:space="preserve">
+    <value>Here you can see ratings and reviews that guests have left</value>
+  </data>
+  <data name="Images_url" xml:space="preserve">
+    <value>Imgaes url:</value>
+  </data>
+  <data name="Initial_date" xml:space="preserve">
+    <value>Initial dates</value>
+  </data>
+  <data name="Is_already_ocupied" xml:space="preserve">
+    <value>Is already ocupied:</value>
+  </data>
+  <data name="Is_super_owner" xml:space="preserve">
+    <value>Is super owner:</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="Log_out" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="Maximum_number_of_guests" xml:space="preserve">
+    <value>Maximum number of guests:</value>
+  </data>
+  <data name="Minimum_renovation_days" xml:space="preserve">
+    <value>Minimum renovation days:</value>
+  </data>
+  <data name="MyAccommodations" xml:space="preserve">
+    <value>MyAccommodations</value>
+  </data>
+  <data name="My_ratings" xml:space="preserve">
+    <value>My ratings</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="New_date" xml:space="preserve">
+    <value>New date</value>
+  </data>
+  <data name="New_forum_notification" xml:space="preserve">
+    <value>New forum notification</value>
+  </data>
+  <data name="New_renovations" xml:space="preserve">
+    <value>New renovations</value>
+  </data>
+  <data name="Notes" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Number_of_cancelations" xml:space="preserve">
+    <value>Number of cancelations:</value>
+  </data>
+  <data name="Number_of_guests" xml:space="preserve">
+    <value>Number of guests:</value>
+  </data>
+  <data name="Number_of_renovations" xml:space="preserve">
+    <value>Number of renovations:</value>
+  </data>
+  <data name="Number_of_reschedules" xml:space="preserve">
+    <value>Number of reschedules:</value>
+  </data>
+  <data name="Number_of_reservations" xml:space="preserve">
+    <value>Number of reservations:</value>
+  </data>
+  <data name="Owner_fairnes" xml:space="preserve">
+    <value>Owner fairnes:</value>
+  </data>
+  <data name="Personal_info" xml:space="preserve">
+    <value>Personal info</value>
+  </data>
+  <data name="Proceed" xml:space="preserve">
+    <value>Proceed</value>
+  </data>
+  <data name="Rate_a_guest" xml:space="preserve">
+    <value>Rate a guest</value>
+  </data>
+  <data name="Rate_guests" xml:space="preserve">
+    <value>Rate guests</value>
+  </data>
+  <data name="Ratings" xml:space="preserve">
+    <value>Ratings</value>
+  </data>
+  <data name="Reason_for_declining" xml:space="preserve">
+    <value>Reason for declining: </value>
+  </data>
+  <data name="Registrate" xml:space="preserve">
+    <value>Registrate</value>
+  </data>
+  <data name="Registrate_new_accommodation" xml:space="preserve">
+    <value>Registrate new accommodation</value>
+  </data>
+  <data name="Registration_sugestion" xml:space="preserve">
+    <value>Registration sugestion</value>
+  </data>
+  <data name="Renovation" xml:space="preserve">
+    <value>Renovation</value>
+  </data>
+  <data name="Renovations" xml:space="preserve">
+    <value>Renovations</value>
+  </data>
+  <data name="Renovation_count" xml:space="preserve">
+    <value>Renovation count:</value>
+  </data>
+  <data name="Renovation_description" xml:space="preserve">
+    <value>Renovation description</value>
+  </data>
+  <data name="Renovation_length" xml:space="preserve">
+    <value>Renovation length:</value>
+  </data>
+  <data name="Renovation_recomendations" xml:space="preserve">
+    <value>Renovation recomendations</value>
+  </data>
+  <data name="Renovation_report" xml:space="preserve">
+    <value>Renovation report</value>
+  </data>
+  <data name="Renovation_reports" xml:space="preserve">
+    <value>Renovation reports</value>
+  </data>
+  <data name="Renovation_rescheduling" xml:space="preserve">
+    <value>Renovation rescheduling</value>
+  </data>
+  <data name="Renovation_sugestions" xml:space="preserve">
+    <value>Renovation sugestions</value>
+  </data>
+  <data name="Renovation_urgency" xml:space="preserve">
+    <value>Renovation urgency:</value>
+  </data>
+  <data name="Reschedule" xml:space="preserve">
+    <value>Reschedule</value>
+  </data>
+  <data name="Reschedule_count" xml:space="preserve">
+    <value>Reschedule count:</value>
+  </data>
+  <data name="Reservations" xml:space="preserve">
+    <value>Reservations</value>
+  </data>
+  <data name="Reservation_count" xml:space="preserve">
+    <value>Reservation count:</value>
+  </data>
+  <data name="Reservation_rescheduling" xml:space="preserve">
+    <value>Reservation rescheduling</value>
+  </data>
+  <data name="Review_date" xml:space="preserve">
+    <value>Review date:</value>
+  </data>
+  <data name="Rule_following" xml:space="preserve">
+    <value>Rule following:</value>
+  </data>
+  <data name="S" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Schedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="Scheduled_renovations" xml:space="preserve">
+    <value>Scheduled renovations</value>
+  </data>
+  <data name="Schedule_renovation" xml:space="preserve">
+    <value>Schedule renovation</value>
+  </data>
+  <data name="Schedule_renovation_for_one_of_your_accomodations" xml:space="preserve">
+    <value>Schedule renovation for one of your accommodations</value>
+  </data>
+  <data name="See" xml:space="preserve">
+    <value />
+  </data>
+  <data name="See_accommodations" xml:space="preserve">
+    <value>See accommodations</value>
+  </data>
+  <data name="See_all_accommodations_that_you_own" xml:space="preserve">
+    <value>See all accommodations that you own</value>
+  </data>
+  <data name="See_all_scheduled_renovations" xml:space="preserve">
+    <value>See all scheduled renovations</value>
+  </data>
+  <data name="See_all_statistic_for_your_accommodations" xml:space="preserve">
+    <value>See all statistic for your accommodations</value>
+  </data>
+  <data name="See_forums" xml:space="preserve">
+    <value>See forums</value>
+  </data>
+  <data name="See_images" xml:space="preserve">
+    <value>See images</value>
+  </data>
+  <data name="See_reccommendations" xml:space="preserve">
+    <value>See recommendations</value>
+  </data>
+  <data name="See_requests" xml:space="preserve">
+    <value>See requests</value>
+  </data>
+  <data name="See_reservations" xml:space="preserve">
+    <value>See_reservations</value>
+  </data>
+  <data name="See_reviews" xml:space="preserve">
+    <value>See reviews</value>
+  </data>
+  <data name="See_scheduled_renovations" xml:space="preserve">
+    <value>See scheduled renovations</value>
+  </data>
+  <data name="See_statistics" xml:space="preserve">
+    <value>See statistics</value>
+  </data>
+  <data name="See_statistics_by_months" xml:space="preserve">
+    <value>See statistics by months</value>
+  </data>
+  <data name="See_sugestions" xml:space="preserve">
+    <value>See sugestions</value>
+  </data>
+  <data name="See_sugestions_for_renovations_that_guests_have_left" xml:space="preserve">
+    <value>See sugestions for renovations that guests have left</value>
+  </data>
+  <data name="Selected_accommodation" xml:space="preserve">
+    <value>Selected accommodation</value>
+  </data>
+  <data name="Select_available_date" xml:space="preserve">
+    <value>Select available date:</value>
+  </data>
+  <data name="Select_a_month_you_want_to_see_statistic_for" xml:space="preserve">
+    <value>Select a month you want to see statistic for</value>
+  </data>
+  <data name="Select_a_period_for_renovation_report" xml:space="preserve">
+    <value>Select a period for renovation report</value>
+  </data>
+  <data name="Select_date_range_for_renovations" xml:space="preserve">
+    <value>Select date range for renovations</value>
+  </data>
+  <data name="Select_language" xml:space="preserve">
+    <value>Select language</value>
+  </data>
+  <data name="Select_theme" xml:space="preserve">
+    <value>Select theme</value>
+  </data>
+  <data name="Serbian" xml:space="preserve">
+    <value>Serbian</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Start_date" xml:space="preserve">
+    <value>Start date:</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="Statistic_by_months" xml:space="preserve">
+    <value>Statistic by months</value>
+  </data>
+  <data name="Stayed_at" xml:space="preserve">
+    <value>Stayed at:</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="Sugestions_for_opening_new_accommodations" xml:space="preserve">
+    <value>Sugestions for opening new accommodations</value>
+  </data>
+  <data name="Suggestions_for_opening_new_or_closing_old_accommodations" xml:space="preserve">
+    <value>Suggestions for opening new or closing old accommodations</value>
+  </data>
+  <data name="Suggestion_for_renovations" xml:space="preserve">
+    <value>Suggestion for renovations</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>To:</value>
+  </data>
+  <data name="Unrated_guest" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Unrated_guests" xml:space="preserve">
+    <value>Unrated guests</value>
+  </data>
+</root>

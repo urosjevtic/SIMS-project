@@ -13,15 +13,19 @@ using GalaSoft.MvvmLight.Command;
 using System.Windows;
 using System.Windows.Navigation;
 using InitialProject.View;
+using InitialProject.Service;
+using System.Security.Policy;
 
 namespace InitialProject.ViewModels
 {
     public class AccommodationListViewModel : BaseViewModel
     {
+        private readonly ImageService _imageService;
+        private readonly List<Image>_images;
         private NavigationService _navigationService;
         private readonly AccommodationRepository _accommodationRepository;
         private ObservableCollection<Accommodation> _accommodations;
-
+        public Accommodation Accommodation { get;  set; }
         public ObservableCollection<Accommodation> Accommodations
         {
             get
@@ -39,6 +43,18 @@ namespace InitialProject.ViewModels
             }
         }
 
+        private string _imageUrl;
+
+        public string ImageUrl
+        {
+            get { return _imageUrl; }
+            set
+            {
+                _imageUrl = value; 
+                OnPropertyChanged("ImageUrl");
+            }
+        }
+
         public Accommodation SelectedAccommodation { get; set; }
         public Domain.Model.User LoggedUser { get; set; }
         public ICommand ShowAccommodationInfoCommand => new RelayCommand(OnShowAccommodationInfo);
@@ -46,11 +62,17 @@ namespace InitialProject.ViewModels
 
         public AccommodationListViewModel(NavigationService navigationService)
         {
+           _imageService = new ImageService();
+           // _images = _imageService.GetAll();
+           // _imageUrl = _images.Url[0];
             _navigationService = navigationService;
             _accommodationRepository = new AccommodationRepository();
             LoadData();
+           
         }
 
+      
+       
         private void LoadData()
         {
             Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());

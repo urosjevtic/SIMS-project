@@ -4,65 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
+        xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
         Title="ScheduleRenovationForm" Height="637" Width="345">
     <Page.Background>
-        <SolidColorBrush Color="lightgray" />
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
-    <Page.Resources>
-        <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-        <!--Naslovi-->
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#3A3D55"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-
-        <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Background" Value="{Binding Background, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
-            <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"/>
-        </Style>
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
@@ -71,34 +19,34 @@
             <RowDefinition Height="0.1*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="&lt; Go Back" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="Renovations" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovations}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
                  ItemsSource="{Binding Accommodations}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                 Background="LightGray"
+                 Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
                  >
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
-                            BorderBrush="#007acc"
+                            BorderBrush="{DynamicResource TextColor}"
                             Margin="5"
                             CornerRadius="5"
                             Padding="10"
-                            Background="#fafafa">
+                            Background="{DynamicResource BackgroundColorLighter}">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="5"
                                               BlurRadius="10"
                                               Opacity="0.5"
-                                              Color="Black"/>
+                                              Color="{DynamicResource Shadow}"/>
                         </Border.Effect>
                         <Grid>
                             <Grid.RowDefinitions>
@@ -116,36 +64,45 @@
                            FontWeight="Bold"
                            FontSize="20"
                            TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextColor}"
                            Margin="10,10,10,0"/>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="Country: " 
+                                <TextBlock Text="{ns:Loc Country}" 
                                FontWeight="Bold"
+                               Foreground="{DynamicResource TextColor}"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Location.Country}" />
-                                <TextBlock Margin="10,0" Text="City: " 
+                                <TextBlock Text="{Binding Location.Country}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
+                                           Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Location.City}" />
+                                <TextBlock Text="{Binding Location.City}" 
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="Accommodation type: " 
+                                <TextBlock Text="{ns:Loc Accommodation_type}" 
+                                           Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Type}" />
+                                <TextBlock Text="{Binding Type}" 
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="Max number of guests: " 
+                                <TextBlock Text="{ns:Loc Maximum_number_of_guests}" 
+                                           Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding MaxGuests}" />
+                                <TextBlock Text="{Binding MaxGuests}"
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
-                            <Button Content="Schedule renovation"
+                            <Button Content="{ns:Loc Schedule_renovation}"
                                     Margin="10,15"
                                     Grid.Row="6"
-                                    Style="{StaticResource LogInButtonStyle}"
+                                    Style="{StaticResource ButtonStyle}"
                                     Command="{Binding DataContext.ScheduleRenovationCommand, ElementName=accommodationListBox}"
                                     CommandParameter="{Binding}"/>
                         </Grid>
@@ -154,9 +111,8 @@
             </ListBox.ItemTemplate>
         </ListBox>
 
-        <Button Grid.Row="3" Style="{StaticResource LogInButtonStyle}" 
+        <Button Grid.Row="3" Style="{StaticResource ButtonStyle}" 
                 Content="See recommended renovations"
                 Margin="20, 2, 20, 2"></Button>
     </Grid>
 </Page>
-

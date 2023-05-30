@@ -50,5 +50,13 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         {
             NavigationService.Navigate(new RenovationSugestionView(_logedInUser, NavigationService));
         }
+
+        public ICommand OpenGeneratePdfCommand => new RelayCommand(OpenGeneratePdf);
+
+        private void OpenGeneratePdf()
+        {
+            RenovationReportFormView renovationReportFormView = new RenovationReportFormView(_logedInUser, NavigationService);
+            renovationReportFormView.ShowDialog();
+        }
     }
 }
