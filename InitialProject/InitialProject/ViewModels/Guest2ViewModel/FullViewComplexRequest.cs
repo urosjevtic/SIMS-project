@@ -17,7 +17,6 @@ namespace InitialProject.ViewModels.Guest2ViewModel
     {
         public ICommand GoBackCommand { get; private set; }
         public ComplexTourRequestService _complexRequestService { get; set; }
-
         public List<ShortTourRequest> allRequests { get; set; }
         public List<ShortTourRequest> acceptedRequests { get; set; }
         public NavigationService NavigationService { get; }

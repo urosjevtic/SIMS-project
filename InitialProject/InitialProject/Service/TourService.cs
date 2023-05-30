@@ -276,11 +276,11 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-             foreach (Tour tour in tours)  
+            foreach (Tour tour in tours)  
             {
                 foreach (DateTime start in tour.StartDates)
                 {
-                  if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
+                    if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
                     {
                         ended.Add(tour);
                     }
