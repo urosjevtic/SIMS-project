@@ -280,11 +280,7 @@ namespace InitialProject.Service
             {
                 foreach (DateTime start in tour.StartDates)
                 {
-                    if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
-                    {
-                        ended.Add(tour);
-                    }
-                    if(start.Year < DateTime.Now.Year)
+                    if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false && start.Year <= DateTime.Now.Year)
                     {
                         ended.Add(tour);
                     }
