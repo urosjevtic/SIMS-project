@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,17 +10,51 @@ using InitialProject.Serializer;
 
 namespace InitialProject.Domain.Model.Forums
 {
-    public class ForumComment : ISerializable
+    public class ForumComment : ISerializable, INotifyPropertyChanged
     {
         public int Id { get; set; }
         public string Comment { get; set; }
         public User Author { get; set; }
 
-        public int NumberOfReports { get; set; }
+        private int _numberOfReports;
+        public int NumberOfReports
+        {
+            get { return _numberOfReports; }
+            set
+            {
+                if (_numberOfReports != value)
+                {
+                    _numberOfReports = value;
+                    OnPropertyChanged(nameof(NumberOfReports));
+                }
+            }
+        }
+
 
         public List<User> ReportedBy {get; set; }
 
-        public bool HasUserReported { get; set; }
+        private bool _hasUserReported;
+        public bool HasUserReported
+        {
+            get { return _hasUserReported; }
+            set
+            {
+                if (_hasUserReported != value)
+                {
+                    _hasUserReported = value;
+                    OnPropertyChanged(nameof(HasUserReported));
+                }
+            }
+        }
+
+        //private bool _isByOwnerThatHasAccommdoationOnThisLocation;
+        public bool IsByOwnerThatHasAccommdoationOnThisLocation {get; set; }
+
+        //private bool _isByGuestThatVisited;
+        public bool IsByGuestThatVisited { get; set; }
+
+
+
 
         public ForumComment()
         {
@@ -75,6 +110,13 @@ namespace InitialProject.Domain.Model.Forums
                 ReportedBy.Add(reporter);
                 i++;
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 

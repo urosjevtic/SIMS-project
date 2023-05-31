@@ -26,11 +26,30 @@ namespace InitialProject.ViewModels.ForumsViewModel
             _logedInUser = logedInUser;
             NavigationService = navigationService;
             _forumService = new ForumService();
-            Forums = new ObservableCollection<Forum>(_forumService.GetByOwnerId(_logedInUser.Id));
+            var forumList = _forumService.GetAll();
+            Forums = new ObservableCollection<Forum>();
+
+            foreach (var forum in forumList)
+            {
+                // Set the IsSpecial value for each forum
+                forum.IsSpecial = _forumService.IsSpecial(forum);
+
+                Forums.Add(forum);
+            }
         }
 
 
+        private bool _isSpecial;
 
+        public bool IsSpecial
+        {
+            get { return _isSpecial; }
+            set
+            {
+                _isSpecial = value; 
+                OnPropertyChanged("IsSpecial");
+            }
+        }
         public ICommand OpenSelectedForumCommand => new RelayCommandWithParams(OpenSelectedForum);
 
         private void OpenSelectedForum(object parameter)

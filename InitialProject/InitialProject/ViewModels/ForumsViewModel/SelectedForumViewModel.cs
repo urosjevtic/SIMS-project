@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using ceTe.DynamicPDF;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Forums;
 using InitialProject.Service.ForumServices;
@@ -36,8 +37,15 @@ namespace InitialProject.ViewModels.ForumsViewModel
 
             _forumService.BindCommentsToForum(SelectedForum);
             _forumService.CheckWhatCommentsAreReported(_logedInUser, SelectedForum.Comments);
-            ForumComments = new ObservableCollection<ForumComment>(SelectedForum.Comments);
+
+            ForumComments = new ObservableCollection<ForumComment>();
+            foreach (var comment in SelectedForum.Comments)
+            {
+                _forumService.CheckUserRole(selectedForum, comment);
+                ForumComments.Add(comment);
+            }
         }
+
 
 
         private string _newComment;
@@ -51,6 +59,7 @@ namespace InitialProject.ViewModels.ForumsViewModel
                 OnPropertyChanged("NewComment");
             }
         }
+
 
 
         public ICommand MakeCommentCommand => new RelayCommand(MakeComment);
@@ -70,14 +79,40 @@ namespace InitialProject.ViewModels.ForumsViewModel
             NavigationService.Navigate(new ForumSelcetionView(_logedInUser, NavigationService));
         }
 
+
+        private bool _hasUserReported;
+        public bool HasUserReported
+        {
+            get { return _hasUserReported; }
+            set
+            {
+                if (_hasUserReported != value)
+                {
+                    _hasUserReported = value;
+                    OnPropertyChanged(nameof(HasUserReported));
+                }
+            }
+        }
         public ICommand ReportCommentCommand => new RelayCommandWithParams(ReportComment);
+
+
 
         private void ReportComment(object parameter)
         {
             if (parameter is ForumComment selectedComment)
             {
-                
-                _forumService.ReportComment(selectedComment, _logedInUser);
+
+                if (!selectedComment.HasUserReported)
+                {
+                    _forumService.ReportComment(selectedComment, _logedInUser);
+                    selectedComment.HasUserReported = true;
+                }
+                else
+                {
+                    _forumService.RemoveCommentReport(selectedComment, _logedInUser);
+                    selectedComment.HasUserReported = false;
+                }
+
             }
         }
     }

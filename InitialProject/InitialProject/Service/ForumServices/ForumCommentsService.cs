@@ -5,7 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Forums;
+using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.RepositoryInterfaces.IForumsRepo;
+using InitialProject.Service.ReservationServices;
 
 namespace InitialProject.Service.ForumServices
 {
@@ -13,11 +15,15 @@ namespace InitialProject.Service.ForumServices
     {
         private readonly IForumCommentRepository _forumCommentRepository;
         private readonly UserService _userService;
+        private readonly AccommodationService _accommodationService;
+        private readonly AccommodationReservationService _accommodationReservationService;
 
         public ForumCommentsService()
         {
             _forumCommentRepository = Injector.Injector.CreateInstance<IForumCommentRepository>();
             _userService = new UserService();
+            _accommodationService = new AccommodationService();
+            _accommodationReservationService = new AccommodationReservationService();
         }
 
 
@@ -56,6 +62,22 @@ namespace InitialProject.Service.ForumServices
         {
             comment.NumberOfReports++;
             comment.ReportedBy.Add(reporter);
+            comment.HasUserReported = true;
+            _forumCommentRepository.Update(comment);
+        }
+
+        public void RemoveReport(ForumComment comment, User reporter)
+        {
+            comment.NumberOfReports--;
+            foreach (var user in comment.ReportedBy)
+            {
+                if (user.Id == reporter.Id)
+                {
+                    comment.ReportedBy.Remove(user);
+                    break;
+                }
+            }
+            comment.HasUserReported = false;
             _forumCommentRepository.Update(comment);
         }
 
@@ -70,6 +92,34 @@ namespace InitialProject.Service.ForumServices
                         comment.HasUserReported = true;
                         break;
                     }
+                }
+            }
+        }
+
+        public void IsByOwnerWithAccommodationOnLocation(Forum forum, ForumComment comment)
+        {
+            List<Accommodation> accommodations = _accommodationService.GetAllAccommodationByOwnerId(comment.Author.Id);
+            foreach (var accommodation in accommodations)
+            {
+                if (accommodation.Location.Equals(forum.Location))
+                {
+                    comment.IsByOwnerThatHasAccommdoationOnThisLocation = true;
+                    break;
+                }
+            }
+
+        }
+
+        public void IsByGuestThatVisitedLocation(Forum forum, ForumComment comment)
+        {
+            List<AccommodationReservation> accommodationReservations =
+                _accommodationReservationService.GetAllReservationByGuestId(comment.Author.Id);
+            foreach (var reservation in accommodationReservations)
+            {
+                if (reservation.Accommodation.Location.Equals(forum.Location))
+                {
+                    comment.IsByGuestThatVisited = true;
+                    break;
                 }
             }
         }

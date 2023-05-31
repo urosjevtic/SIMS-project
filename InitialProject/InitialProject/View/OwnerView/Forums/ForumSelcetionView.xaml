@@ -14,18 +14,14 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
-
-        </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Forums}" Foreground="{DynamicResource TextColor}"></TextBlock>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Forums}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
-        <ListBox Grid.Row="2" x:Name="forumListBox"
+        <ListBox Grid.Row="1" x:Name="forumListBox"
                  ItemsSource="{Binding Forums}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Disabled"
@@ -58,30 +54,33 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
-
-                            <!--Forum topic-->
-                            <TextBlock Text="{Binding Topic}" 
-                           FontWeight="Bold"
-                           FontSize="20"
-                           TextWrapping="Wrap"
-                           Foreground="{DynamicResource TextColor}"
-                           Margin="10,10,10,0"/>
+                            <Image Source="../../../Resources/Images/star.png" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Width="20" Height="20">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSpecial}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
                             <!--Location-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
-                                <TextBlock Text="{ns:Loc Country}" 
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource TextColor}"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Location.Country}"
-                                           Foreground="{DynamicResource TextColor}"/>
-                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
+                                <TextBlock Text="{Binding Location.Country}" 
+                                           FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"
-                               FontWeight="Bold"/>
+                                           FontSize="20"/>
+                                <TextBlock Text=","
+                                           Foreground="{DynamicResource TextColor}"
+                                           FontSize="20"/>
                                 <TextBlock Text="{Binding Location.City}" 
-                                           Foreground="{DynamicResource TextColor}"/>
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           FontSize="20"/>
                             </StackPanel>
                             <!--Author-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Author}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -90,7 +89,7 @@
                                            Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
                             <!--creation date-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
                                 <TextBlock Text="{ns:Loc Creation_date}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -99,7 +98,7 @@
                                            Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
                             <!--Comments-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
                                 <TextBlock Text="{ns:Loc Comments}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
