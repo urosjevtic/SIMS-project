@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
+using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
@@ -19,7 +21,7 @@ namespace InitialProject.ViewModels
         public ICommand SubmitCommand { get; private set; }
         public ICommand GoBackCommand { get; private set; }
         public ShortTourRequestService _shortTourService { get; set; }
-        public User LoggedUser { get; set; }
+        public User LoggedUser { get; set; } = App.LoggedUser;
 
         private string _country;
         public string Country
@@ -118,16 +120,20 @@ namespace InitialProject.ViewModels
 
             }
         }
-
-        public MakeShortTourRequestViewModel(User user)
+        public NavigationService navService { get; }
+        public MakeShortTourRequestViewModel(NavigationService nav)
         {
+            this.navService = nav;
             UpButtonCommand = new RelayCommand(UpButton);
             DownButtonCommand = new RelayCommand(DownButton);
             SubmitCommand = new RelayCommand(Submit);
-            GoBackCommand = new RelayCommand(CloseCurrentWindow);
+            GoBackCommand = new RelayCommand(GoBack);
             _shortTourService = new ShortTourRequestService();
             NrOfPeople = "0";
-            LoggedUser = user;
+        }
+        private void GoBack()
+        {
+            navService.Navigate(new ShowTourPage(navService));
         }
         private void UpButton()
         {

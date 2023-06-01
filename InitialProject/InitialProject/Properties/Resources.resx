@@ -147,6 +147,9 @@
   <data name="All_reservations" xml:space="preserve">
     <value>All reservations</value>
   </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author:</value>
+  </data>
   <data name="Avrage_rating" xml:space="preserve">
     <value>Avrage rating:</value>
   </data>
@@ -192,11 +195,20 @@
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments:</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country:</value>
+  </data>
+  <data name="Creation_date" xml:space="preserve">
+    <value>Creation date:</value>
   </data>
   <data name="Dark" xml:space="preserve">
     <value>Dark</value>
@@ -320,6 +332,9 @@
   </data>
   <data name="Number_of_reservations" xml:space="preserve">
     <value>Number of reservations:</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
   </data>
   <data name="Owner_fairnes" xml:space="preserve">
     <value>Owner fairnes:</value>
@@ -526,7 +541,7 @@
     <value>To:</value>
   </data>
   <data name="Unrated_guest" xml:space="preserve">
-    <value />
+    <value>Unrated guest</value>
   </data>
   <data name="Unrated_guests" xml:space="preserve">
     <value>Unrated guests</value>

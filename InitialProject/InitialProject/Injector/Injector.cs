@@ -7,6 +7,7 @@ using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRenovationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IAccommodationRepo;
+using InitialProject.Domain.RepositoryInterfaces.IForumsRepo;
 using InitialProject.Domain.RepositoryInterfaces.INotificationRepo;
 using InitialProject.Domain.RepositoryInterfaces.IReservationsRepo;
 using InitialProject.Domain.RepositoryInterfaces.IStatisticsRepo;
@@ -14,6 +15,7 @@ using InitialProject.Domain.RepositoryInterfaces.IUsersRepo;
 using InitialProject.Repository;
 using InitialProject.Repository.AccommodationRenovationRepo;
 using InitialProject.Repository.AccommodationRepo;
+using InitialProject.Repository.ForumsRepo;
 using InitialProject.Repository.NotificationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Repository.StatisticRepo;
@@ -50,8 +52,11 @@ namespace InitialProject.Injector
             {typeof(IRenovationRepository), new RenovationRepository()},
             {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()},
             {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()},
+            {typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository()},
             {typeof(IOwnerSettingsRepository), new OwnerSettingsRepository()},
-            {typeof(IGuestRepository), new GuestRepository()}
+            {typeof(IGuestRepository), new GuestRepository()},
+            {typeof(IForumCommentRepository), new ForumCommentRepository()},
+            {typeof(IForumRepository), new ForumRepository()}
             
             // Add more implementations here
         };

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
@@ -19,7 +20,7 @@ namespace InitialProject.ViewModels
     public class TourSearchViewModel : BaseViewModel
     {
         private readonly TourService _tourService;
-        public User LoggedUser { get; set; }
+        public User LoggedUser { get; set; } = App.LoggedUser;
         public ICommand SearchCommand { get; set; }
         public ICommand GoBackCommand { get; set; }
         public ICommand ShowTourCommand { get; set; }
@@ -41,12 +42,13 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-        public TourSearchViewModel(User user)
+        public NavigationService navigationService { get; }
+        public TourSearchViewModel(NavigationService nav)
         {
+            this.navigationService = nav;
             _tourService = new TourService();
-            LoggedUser = user;
             SearchCommand = new RelayCommand(Search);
-            GoBackCommand = new RelayCommand(CloseCurrentWindow);
+            GoBackCommand = new RelayCommand(GoBack);
             ShowTourCommand = new RelayCommand<Tour>(ShowSelectedTour);
             UpButtonCommand = new RelayCommand(UpButton);
             DownButtonCommand = new RelayCommand(DownButton);
@@ -56,12 +58,12 @@ namespace InitialProject.ViewModels
             NumberOfPeople = "0";
             Duration = "0";
         }
-        public TourSearchViewModel(User user, ObservableCollection<Tour> Tours)
+        public TourSearchViewModel(NavigationService nav, ObservableCollection<Tour> Tours)
         {
+            this.navigationService = nav;
             _tourService = new TourService();
-            LoggedUser = user;
             SearchCommand = new RelayCommand(Search);
-            GoBackCommand = new RelayCommand(CloseCurrentWindow);
+            GoBackCommand = new RelayCommand(GoBack);
             ShowTourCommand = new RelayCommand<Tour>(ShowSelectedTour);
             UpButtonCommand = new RelayCommand(UpButton);
             DownButtonCommand = new RelayCommand(DownButton);
@@ -70,6 +72,10 @@ namespace InitialProject.ViewModels
             filteredTours = Tours;
             NumberOfPeople = "0";
             Duration = "0";
+        }
+        private void GoBack()
+        {
+            navigationService.Navigate(new ShowTourPage(navigationService));
         }
         private void UpButton()
         {
@@ -162,8 +168,7 @@ namespace InitialProject.ViewModels
         }
         public void ShowSelectedTour(Tour tour)
         {
-            SelectedTour selectedTour = new SelectedTour(tour, LoggedUser);
-            selectedTour.Show();
+            navigationService.Navigate(new SelectedTourPage(tour, navigationService));
         }
     }
 }

@@ -56,13 +56,13 @@
                     <TextBlock Padding="5" Text="{ns:Loc Reservations}"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Column="0" Grid.Row="2"  Style="{StaticResource MainPageButtonStyle}" >
+            <Button Grid.Column="0" Grid.Row="2" Command="{Binding ForumsOpenCommand}"  Style="{StaticResource MainPageButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/forums.png" Width="20"/>
                     <TextBlock Padding="5" Text="{ns:Loc Forums}"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button Grid.Column="1" Grid.Row="2"  Style="{StaticResource MainPageButtonStyle}" >
+            <Button Grid.Column="1" Grid.Row="2" Command="{Binding SettingsOpenCommand}"  Style="{StaticResource MainPageButtonStyle}" >
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Resources/Images/settings.png" Width="20"/>
                     <TextBlock Padding="5" Text="{ns:Loc Settings}"></TextBlock>

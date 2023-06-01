@@ -43,5 +43,15 @@ namespace InitialProject.Service
         {
             _voucherRepository.ChangeUsed(voucher);
         }
+        public void CreateVoucher(User user)
+        {
+            Voucher voucher = new Voucher();
+            voucher.Status = VoucherStatus.Created;
+            voucher.Text = "Ovaj vaučer možete iskoristiti u roku od 6 meseci za bilo koju turu.";
+            voucher.CreationDate = DateTime.Now;
+            voucher.IdUser = user.Id;
+            voucher.Id = _voucherRepository.NextId();
+            _voucherRepository.Save(voucher);
+        }
     }
 }
