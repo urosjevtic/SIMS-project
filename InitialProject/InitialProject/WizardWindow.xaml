@@ -11,8 +11,8 @@
     Title="Wizard for getting to know the applicatio"
     Width="800"
     Height="450"
-    mc:Ignorable="d"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
     <Window.DataContext>
         <viewModels:WizardViewModel />
     </Window.DataContext>
@@ -24,13 +24,14 @@
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="137*"/>
-            <ColumnDefinition Width="663*"/>
+            <ColumnDefinition Width="137*" />
+            <ColumnDefinition Width="663*" />
         </Grid.ColumnDefinitions>
         <xctk:Wizard
+            Grid.ColumnSpan="2"
             CanHelp="False"
             CancelButtonVisibility="Collapsed"
-            HelpButtonVisibility="Collapsed" Grid.ColumnSpan="2">
+            HelpButtonVisibility="Collapsed">
             <xctk:WizardPage
                 x:Name="IntroWizardPage"
                 Title="Welcome to Booking Application!"

@@ -66,7 +66,7 @@ namespace InitialProject.ViewModels
             _navigationService = navigationService;
             _accommodationRepository = new AccommodationRepository();
             LoadData();
-           
+               
         }
 
       

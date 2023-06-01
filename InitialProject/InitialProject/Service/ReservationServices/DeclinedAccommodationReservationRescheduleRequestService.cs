@@ -20,13 +20,14 @@ namespace InitialProject.Service.ReservationServices
         {
             _repository =
                 Injector.Injector.CreateInstance<IDeclinedAccommodationReservationRescheduleRequestRepository>();
+            _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
         }
 
         public List<DeclinedAccommodationReservationRescheduleRequest> GetAll()
         {
             List<DeclinedAccommodationReservationRescheduleRequest> rejected = new List<DeclinedAccommodationReservationRescheduleRequest>();
             rejected=_repository.GetAll();
-            //BindDeclinedToRescheduled(rejected);
+            BindDeclinedToRescheduled(rejected);
             return rejected;
         }
 

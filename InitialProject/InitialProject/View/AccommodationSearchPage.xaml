@@ -45,15 +45,16 @@
     </Page.Resources>
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="35" />
-            <RowDefinition Height="170" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="200" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label
             Grid.Row="0"
+            Margin="48,0,0,0"
             Content="Search accommodation"
             FontSize="20" />
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Margin="30,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -62,37 +63,58 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TextBlock
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     Text="Name" />
                 <TextBox
                     Name="tbAccommodationName"
                     Width="150"
                     Height="30"
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     FontSize="15"
                     TextAlignment="Left">
                     <TextBox.Text>
-                        <Binding Path="AccommodationNameSearchInput" UpdateSourceTrigger="PropertyChanged">
-                        </Binding>
+                        <Binding Path="AccommodationNameSearchInput" UpdateSourceTrigger="PropertyChanged" />
                     </TextBox.Text>
                 </TextBox>
+
                 <TextBlock
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
+                    HorizontalAlignment="Left"
+                    Text="Accommodation type" />
+                <ComboBox
+                    x:Name="cbAccommodationType"
+                    Width="150"
+                    Height="30"
+                    Margin="25,0,0,20"
+                    HorizontalAlignment="Left"
+                    FontSize="15"
+                    ItemsSource="{Binding Path=AccommodationType}"
+                    SelectedValuePath="content"
+                    Text="{Binding AccommodationTypeSearchInput}">
+                    <ComboBoxItem Content="house" />
+                    <ComboBoxItem Content="appartment" />
+                    <ComboBoxItem Content="cabin" />
+                    <ComboBoxItem Content="" />
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBlock
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     Text="Location (City)" />
                 <TextBox
                     Name="tbCityName"
                     Width="150"
                     Height="30"
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     FontSize="15"
                     Text="{Binding CityNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Left" />
                 <TextBlock
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     Text="Location (Country)" />
                 <TextBox
@@ -105,43 +127,33 @@
                     Text="{Binding CountryNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
                     TextAlignment="Left" />
             </StackPanel>
-            <StackPanel Grid.Column="1">
-                <TextBlock
-                    Margin="20,0,0,10"
-                    HorizontalAlignment="Left"
-                    Text="Accommodation type" />
-                <ComboBox
-                    x:Name="cbAccommodationType"
-                    Width="150"
-                    Height="30"
-                    Margin="20,0,0,20"
-                    HorizontalAlignment="Left"
-                    FontSize="15"
-                    ItemsSource="{Binding Path=AccommodationType}"
-                    SelectedValuePath="content"
-                    Text="{Binding AccommodationTypeSearchInput}">
-                    <ComboBoxItem Content="house" />
-                    <ComboBoxItem Content="appartment" />
-                    <ComboBoxItem Content="cabin" />
-                    <ComboBoxItem Content="" />
-                </ComboBox>
-            </StackPanel>
             <StackPanel Grid.Column="2">
                 <TextBlock
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     Text="Number of guests" />
                 <TextBox
                     Name="tbGuestNumber"
                     Width="150"
                     Height="30"
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     FontSize="15"
-                    Text="{Binding Path=GuestNumberSearchInput, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                    TextAlignment="Left" />
+                    TextAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="GuestNumberSearchInput" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <val:PositiveNumberValidation />
+                            </Binding.ValidationRules>
+
+                        </Binding>
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <StaticResource ResourceKey="ValidationErrorTemplate" />
+                    </Validation.ErrorTemplate>
+                </TextBox>
                 <TextBlock
-                    Margin="25,0,0,0"
+                    Margin="25,0,0,10"
                     HorizontalAlignment="Left"
                     Text="Reservation days" />
                 <TextBox
@@ -151,8 +163,19 @@
                     Margin="25,0,0,15"
                     HorizontalAlignment="Left"
                     FontSize="15"
-                    Text="{Binding Path=ReservationDaysSearchInput, UpdateSourceTrigger=PropertyChanged}"
-                    TextAlignment="Left" />
+                    TextAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="ReservationDaysSearchInput" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <val:PositiveNumberValidation />
+                            </Binding.ValidationRules>
+
+                        </Binding>
+                    </TextBox.Text>
+                    <Validation.ErrorTemplate>
+                        <StaticResource ResourceKey="ValidationErrorTemplate" />
+                    </Validation.ErrorTemplate>
+                </TextBox>
 
             </StackPanel>
             <Button
@@ -160,19 +183,32 @@
                 Grid.Column="3"
                 Width="150"
                 Height="40"
-                Margin="0,0,70,20"
+                Margin="0,0,0,70"
+                HorizontalAlignment="Left"
                 VerticalAlignment="Bottom"
                 Background="LightGray"
                 BorderBrush="LightGray"
                 Command="{Binding SearchCommand}"
                 Content="Search"
                 ToolTip="Search accommodation according to the given parameters" />
+            <Button
+                Grid.Column="3"
+                Width="150"
+                Height="40"
+                Margin="0,0,0,20"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Background="LightGray"
+                BorderBrush="LightGray"
+                Content="Refresh"
+                ToolTip="Refresh the page and show all accommodation" />
         </Grid>
 
         <ListBox
             x:Name="accommodationList"
             Grid.Row="2"
             Width="800"
+            Margin="0,2,0,-2"
             HorizontalContentAlignment="Stretch"
             Background="AliceBlue"
             BorderThickness="0"
@@ -249,7 +285,8 @@
                                 Background="LightGray"
                                 BorderBrush="LightGray"
                                 Command="{Binding ElementName=AccommodationsSearchPage, Path=DataContext.ShowAccommodationInfoCommand}"
-                                Content="Show" />
+                                Content="Show"
+                                ToolTip="View the selected accommodation and reserve it" />
                         </Grid>
                     </Border>
                 </DataTemplate>
