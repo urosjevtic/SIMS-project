@@ -8,6 +8,7 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Model;
+using System.Collections.ObjectModel;
 
 namespace InitialProject.Service
 {
@@ -275,15 +276,11 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-             foreach (Tour tour in tours)  
+            foreach (Tour tour in tours)  
             {
                 foreach (DateTime start in tour.StartDates)
                 {
-                  if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
-                    {
-                        ended.Add(tour);
-                    }
-                    if(start.Year < DateTime.Now.Year)
+                    if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false && start.Year <= DateTime.Now.Year)
                     {
                         ended.Add(tour);
                     }
@@ -296,9 +293,9 @@ namespace InitialProject.Service
             SelectedTour.IsRated = true;
             _tourRepository.Update(SelectedTour);
         }
-        public void AddGuestsImage(Tour tour, string text)
+        public void AddGuestsImage(Tour tour, ObservableCollection<string> urls)
         {
-            _imageRepository.Update(tour, SplitStringByComma(text));
+            _imageRepository.Update(tour, urls);
         }
         public List<Tour> FindActiveTours(User user)
         {

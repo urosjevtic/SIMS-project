@@ -30,7 +30,7 @@ namespace InitialProject.ViewModels
             set
             {
                 _vouchers = value;
-                RaisePropertyChanged("Vouchers");
+                OnPropertyChanged("Vouchers");
             }
         }
         public event PropertyChangedEventHandler PropertyChanged;
@@ -38,20 +38,17 @@ namespace InitialProject.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
-        private void RaisePropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
         public NavigationService navService;
+        public User LoggedUser { get; set; } = App.LoggedUser;
 
         private readonly VoucherService _voucherService;
+        private readonly TourReservationService _tourReservationService;
         public ShowVouchersViewModel(NavigationService nav)
         {
             _voucherService = new VoucherService();
+            _tourReservationService = new TourReservationService();
             this.navService = nav;
+            _tourReservationService.CheckPresenceForNewVouchers(LoggedUser);
             vouchers = _voucherService.GetAllCreated();
             Vouchers = new ObservableCollection<Voucher>(vouchers);
             GoBackCommand = new RelayCommand(GoBack);
@@ -59,8 +56,10 @@ namespace InitialProject.ViewModels
 
         private void GoBack()
         {
-            this.navService.Navigate(
-            new Uri("View/Guest2View/ShowTourPage.xaml", UriKind.Relative));
+            if (navService.CanGoBack)
+            {
+                navService.GoBack();
+            }
         }
     }
 }

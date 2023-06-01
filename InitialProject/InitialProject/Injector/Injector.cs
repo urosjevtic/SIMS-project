@@ -52,6 +52,7 @@ namespace InitialProject.Injector
             {typeof(IRenovationRepository), new RenovationRepository()},
             {typeof(IOwnerNotificationRepository), new OwnerNotificationRepositorty()},
             {typeof(IRenovationRecommendationRepository), new RenovationRecommendationRepository()},
+            {typeof(IComplexTourRequestRepository), new ComplexTourRequestRepository()},
             {typeof(IOwnerSettingsRepository), new OwnerSettingsRepository()},
             {typeof(IGuestRepository), new GuestRepository()},
             {typeof(IForumCommentRepository), new ForumCommentRepository()},

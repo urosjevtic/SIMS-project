@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:val="clr-namespace:InitialProject.Validation"
     xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
     x:Name="AccommodationsSearchPage"
     Title="AccommodationSearchPage"
@@ -16,7 +17,32 @@
     <!--<Page.DataContext>
         <viewModels:AccommodationSearchViewModel/>
     </Page.DataContext>-->
+    <Page.Resources>
+        <!--  Validation error template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
+                <AdornedElementPlaceholder
+                    x:Name="textBox"
+                    Grid.Row="0"
+                    Grid.Column="0" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </Grid>
+        </ControlTemplate>
+        <!--  End of Validation error template  -->
+    </Page.Resources>
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="35" />
@@ -46,8 +72,12 @@
                     Margin="25,0,0,0"
                     HorizontalAlignment="Left"
                     FontSize="15"
-                    Text="{Binding AccommodationNameSearchInput, UpdateSourceTrigger=PropertyChanged}"
-                    TextAlignment="Left" />
+                    TextAlignment="Left">
+                    <TextBox.Text>
+                        <Binding Path="AccommodationNameSearchInput" UpdateSourceTrigger="PropertyChanged">
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
                 <TextBlock
                     Margin="25,0,0,0"
                     HorizontalAlignment="Left"

@@ -16,6 +16,10 @@ namespace InitialProject.Domain.RepositoryInterfaces
         public List<TourReservation> GetAll();
 
         public List<User> GetReservationGuest(Tour tour);
+
+        public void DeleteList(List<TourReservation> reservationList);
+
+        public void Delete(TourReservation reservation);
         
     }
 }
