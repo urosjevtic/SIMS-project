@@ -28,6 +28,7 @@ using InitialProject.View.OwnerView.Notifications;
 using InitialProject.View.OwnerView.Settings;
 using System;
 using InitialProject.Properties;
+using InitialProject.View.OwnerView.Forums;
 
 namespace InitialProject.ViewModel
 {
@@ -191,6 +192,12 @@ namespace InitialProject.ViewModel
         protected override void SettingsOpen()
         {
             NavigationService.Navigate(new OwnerSettingsView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
+        }
+
+        protected override void ForumOpen()
+        {
+            NavigationService.Navigate(new ForumSelcetionView(_loggedInUser, NavigationService));
             BurgerBarClosed();
         }
 

@@ -59,6 +59,7 @@ namespace InitialProject.ViewModels
         public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
 
         public ICommand SettingsOpenCommand => new RelayCommand(SettingsOpen);
+        public ICommand ForumOpenCommand => new RelayCommand(ForumOpen);
 
 
         protected abstract void MyAccommoadionsOpen();
@@ -69,5 +70,6 @@ namespace InitialProject.ViewModels
         protected abstract void NotificationOpen();
         protected abstract void NotesOpen();
         protected abstract void SettingsOpen();
+        protected abstract void ForumOpen();
     }
 }
