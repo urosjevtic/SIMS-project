@@ -31,33 +31,25 @@ namespace InitialProject.View
         public AccommodationReservationPage(Accommodation accommodation)
         {
             InitializeComponent();
-            this.DataContext = new AccommodationReservationViewModel(accommodation);
-          //  Accommodations = new List<Accommodation>();
-            SelectedAccommodation = accommodation;
-           // Accommodations.Add(SelectedAccommodation);
-
-            _accommodationRepository = new AccommodationRepository();
-            _accommodationReservationRepository = new AccommodationReservationRepository();
-            //_accommodationReservationRepository = new AccommodationReservationRepository();
-            ReservationDates = new ObservableCollection<AccommodationReservation>();
+          this.DataContext = new AccommodationReservationViewModel(accommodation);
         }
 
-        private readonly AccommodationRepository _accommodationRepository;
-        private readonly AccommodationReservationRepository _accommodationReservationRepository;
 
-        public Accommodation SelectedAccommodation { get; set; }
-        public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
+        //public Accommodation SelectedAccommodation { get; set; }
+        //public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
 
-        public List<Accommodation> Accommodations { get; set; }
-        public List<AccommodationReservation> reservations;
-        public ObservableCollection<Accommodation> accommodations { get; set; }
-        public ObservableCollection<AccommodationReservation> ReservationDates { get; set; }
-        public AccommodationReservation SelectedDate { get; set; }
-        public DateTime StartDate { get; set; } = DateTime.Now.Date;
-        public DateTime EndDate { get; set; } = DateTime.Now.Date;
+        //public List<Accommodation> Accommodations { get; set; }
+        //public List<AccommodationReservation> reservations;
+        //public ObservableCollection<Accommodation> accommodations { get; set; }
+        //public ObservableCollection<AccommodationReservation> ReservationDates { get; set; }
+        //public AccommodationReservation SelectedDate { get; set; }
+        //public DateTime StartDate { get; set; } = DateTime.Now.Date;
+        //public DateTime EndDate { get; set; } = DateTime.Now.Date;
 
 
-        int recursion = 0;
+        //int recursion = 0;
+
+   
 
         //private void dpEnd_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         //{

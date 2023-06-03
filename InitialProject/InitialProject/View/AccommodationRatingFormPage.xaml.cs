@@ -26,13 +26,6 @@ namespace InitialProject.View
     /// </summary>
     public partial class AccommodationRatingFormPage : Page
     {
-        //public UnratedOwner UnratedOwner{ get; set; }
-        //public AccommodationReservation Reservation { get; set; }
-        //public Domain.Model.User LoggedUser { get; set; } = App.LoggedUser;
-        //private readonly AccommodationReservationRepository _accommodationReservationRepository;
-        //private readonly AccommodationRepository _accommodationRepository;
-        //public readonly OwnerRatingService _ownerRatingService;
-        //public readonly RenovationRecommendationService _renovationRecommendationService;
     
         public AccommodationRatingFormPage(UnratedOwner unratedOwner, NavigationService navigationService)
         {

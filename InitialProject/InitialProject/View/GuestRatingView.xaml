@@ -14,14 +14,23 @@
 
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label
+            Margin="134,0,0,0"
             VerticalAlignment="Center"
             Content="Ratings from the owner"
             FontSize="20" />
-
+        <Button
+            Width="150"
+            Height="40"
+            Margin="0,0,100,0"
+            HorizontalAlignment="Right"
+            BorderBrush="LightGray"
+            Command="{Binding GeneratePdfCommand}"
+            Content="View report"
+            ToolTip="Generate a report on the average ratings that the guest received from the owner" />
         <ListBox
             x:Name="accommodationListBox"
             Grid.Row="1"
@@ -78,14 +87,18 @@
                                 Orientation="Horizontal">
                                 <TextBlock
                                     Margin="0,5,0,5"
-                                    FontWeight="Bold"
                                     FontSize="15"
+                                    FontWeight="Bold"
                                     Text="Name: " />
-                                <TextBlock FontWeight="Bold"  Margin="0,5,0,5" FontSize="15" Text="{Binding Reservation.Accommodation.Name}" />
+                                <TextBlock
+                                    Margin="0,5,0,5"
+                                    FontSize="15"
+                                    FontWeight="Bold"
+                                    Text="{Binding Reservation.Accommodation.Name}" />
                             </StackPanel>
 
-                              <!--Start and end date-->  
-                            
+                            <!--  Start and end date  -->
+
                             <StackPanel
                                 Grid.Row="2"
                                 Margin="10,0,0,0"
@@ -94,7 +107,7 @@
                                     Margin="0,5,0,5"
                                     FontWeight="Bold"
                                     Text="Start date: " />
-                                <TextBlock  Margin="0,5,0,5" Text="{Binding Reservation.StartDate}" />
+                                <TextBlock Margin="0,5,0,5" Text="{Binding Reservation.StartDate}" />
                             </StackPanel>
                             <StackPanel
                                 Grid.Row="3"
@@ -104,13 +117,13 @@
                                     Margin="0,5,0,5"
                                     FontWeight="Bold"
                                     Text="End date: " />
-                                <TextBlock  Margin="0,5,0,5" Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                <TextBlock Margin="0,5,0,5" Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
 
-                            
-                              <!--Ratings-->  
-                            
+
+                            <!--  Ratings  -->
+
                             <StackPanel
                                 Grid.Row="4"
                                 Margin="10,0,0,0"
@@ -119,7 +132,7 @@
                                     Margin="0,5,0,5"
                                     FontWeight="Bold"
                                     Text="Cleanlines: " />
-                                <TextBlock  Margin="0,5,0,5" Text="{Binding CleanlinessRating}" />
+                                <TextBlock Margin="0,5,0,5" Text="{Binding CleanlinessRating}" />
                             </StackPanel>
                             <StackPanel
                                 Grid.Row="5"
@@ -129,12 +142,12 @@
                                     Margin="0,5,0,5"
                                     FontWeight="Bold"
                                     Text="Following rules: " />
-                                <TextBlock  Margin="0,5,0,5" Text="{Binding RuleFollowingRating}" />
+                                <TextBlock Margin="0,5,0,5" Text="{Binding RuleFollowingRating}" />
                             </StackPanel>
 
-                            
-                              <!--Additional comment-->  
-                            
+
+                            <!--  Additional comment  -->
+
                             <StackPanel
                                 Grid.Row="6"
                                 Margin="10,0,0,0"
@@ -148,7 +161,6 @@
                                     Width="400"
                                     Margin="0,5,10,5"
                                     HorizontalAlignment="Left"
-                                    
                                     Text="{Binding AdditionalComment}"
                                     TextWrapping="Wrap" />
                             </StackPanel>

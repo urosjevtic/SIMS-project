@@ -30,7 +30,6 @@ namespace InitialProject.View
         //private readonly LocationRepository _locationRepository;
         //private ObservableCollection<Accommodation> _accommodations;
 
-        //public User User { get; set; }
         public User LoggedUser { get; set; }
 
         //public Accommodation SelectedAccommodation { get; set; }
@@ -64,39 +63,6 @@ namespace InitialProject.View
             // Proveri za notifikacije - Ako postoji, prikazi neki novi prozor sa porukom
 
         }
-
-        //private void LoadData()
-        //{
-        //    Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
-        //}
-
-
-        //private void MyReservation_Click(object sender, RoutedEventArgs e)
-        //{
-        //    MyReservations myReservation = new MyReservations(LoggedUser);
-        //    myReservation.Show();
-        //}
-
-        //private void DeclinedButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    RejectedRequests req = new RejectedRequests();
-        //    req.Show();
-        //}
-
-        //private void ApprovedButton_Click(object sender, RoutedEventArgs e)
-        //{
-        //    ApprovedReservations approved=new ApprovedReservations();
-        //    approved.Show();
-        //}
-
-        //private void PendingAccommodation_Click(object sender, RoutedEventArgs e)
-        //{
-        //    PendingReservations pending=new PendingReservations();
-        //    pending.Show();
-        //}
-        ////////////////////////////////////////
-        ////////////////////////////////////////
-        ////////////////////////////////////////
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             App.LoggedUser = null;
@@ -105,11 +71,6 @@ namespace InitialProject.View
             this.Close();
         }
 
-        //private void SearchButton1_Click(object sender, RoutedEventArgs e)
-        //{
-        //    AccommodationSearch accommodationSearch = new AccommodationSearch(LoggedUser);
-        //    accommodationSearch.Show();
-        //}
 
         //private void BackButton_Click(object sender, RoutedEventArgs e)
         //{
@@ -126,9 +87,6 @@ namespace InitialProject.View
         //    }
         //}
 
-        //private void Window_Closing(object sender, CancelEventArgs e)
-        //{
-        //    Properties.Settings.Default.Save();
-        //}
+   
     }
 }

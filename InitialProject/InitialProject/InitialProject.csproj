@@ -384,4 +384,8 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Reports\Guest\" />
+  </ItemGroup>
+
 </Project>

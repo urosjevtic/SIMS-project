@@ -16,7 +16,7 @@
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
-            <RowDefinition Height="60" />
+            <RowDefinition Height="130" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label
@@ -25,16 +25,64 @@
             FontSize="20" />
         <Button
             Name="ViewButton"
-            Grid.Row="1"
+            Grid.Column="3"
             Width="100"
             Height="40"
-            Margin="0,10,55,10"
+            Margin="0,10,55,0"
             HorizontalAlignment="Right"
-            VerticalAlignment="Center"
+            VerticalAlignment="Top"
             Background="LightGray"
             BorderBrush="LightGray"
             Command="{Binding ElementName=PreviousTrip, Path=DataContext.ReviewsFromOwnersInfoCommand}"
-            Content="View recension" />
+            Content="View recension"
+            ToolTip="See reviews given to you by the owner" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Label
+                    Margin="50,0,0,0"
+                    Content="Search travel:"
+                    FontWeight="Bold" />
+                <Label Margin="50,0,0,0" Content="Name" />
+                <TextBox
+                    Width="150"
+                    Height="30"
+                    Margin="35,0,0,0" />
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Label Margin="33,27,0,0" Content="City" />
+                <TextBox Width="150" Height="30" />
+            </StackPanel>
+            <Button
+                Grid.Column="2"
+                Width="100"
+                Height="40"
+                Margin="20,0,0,4"
+                HorizontalAlignment="Left"
+                Background="LightGray"
+                BorderBrush="LightGray"
+                Content="Search"
+                ToolTip="Search trips by accommodation name and location" />
+            <!--<Button
+                Name="ViewButton"
+
+                Grid.Column="3"
+                Width="100"
+                Height="40"
+                Margin="0,10,55,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="LightGray"
+                BorderBrush="LightGray"
+                Command="{Binding ElementName=PreviousTrip, Path=DataContext.ReviewsFromOwnersInfoCommand}"
+                Content="View recension" />-->
+        </Grid>
+
         <ListBox
             x:Name="previousTrips"
             Grid.Row="2"
@@ -59,65 +107,71 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Blue" BorderThickness="1">
-                        <Grid Margin="10,10,10,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="1" Margin="10,10,10,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
 
-                            <TextBlock
-                                Grid.Row="0"
-                                Margin="0,0,0,10"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                Text="{Binding Reservation.Accommodation.Name}"
-                                TextWrapping="Wrap" />
-
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
                                 <TextBlock
-                                    Margin="0,0,5,0"
+                                    Grid.Row="0"
+                                    Margin="0,0,0,10"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
                                     FontWeight="Bold"
-                                    Text="Start date: " />
-                                <TextBlock Text="{Binding Reservation.StartDate}" />
-                            </StackPanel>
+                                    Text="{Binding Reservation.Accommodation.Name}"
+                                    TextWrapping="Wrap" />
 
-                            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    FontWeight="Bold"
-                                    Text="End date: " />
-                                <TextBlock Text="{Binding Reservation.EndDate}" />
-                            </StackPanel>
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,5,0"
+                                        FontWeight="Bold"
+                                        Text="Start date: " />
+                                    <TextBlock Text="{Binding Reservation.StartDate}" />
+                                </StackPanel>
 
-                            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    FontWeight="Bold"
-                                    Text="City: " />
-                                <TextBlock Text="{Binding Reservation.Accommodation.Location.City}" />
-                            </StackPanel>
-                            <StackPanel
-                                Grid.Row="4"
-                                HorizontalAlignment="Right"
-                                Orientation="Horizontal">
-                                <Button
-                                    x:Name="RateButton"
-                                    Width="100"
-                                    Height="40"
-                                    Margin="20,0,0,5"
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,5,0"
+                                        FontWeight="Bold"
+                                        Text="End date: " />
+                                    <TextBlock Text="{Binding Reservation.EndDate}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,5,0"
+                                        FontWeight="Bold"
+                                        Text="City: " />
+                                    <TextBlock Text="{Binding Reservation.Accommodation.Location.City}" />
+                                </StackPanel>
+                                <StackPanel
+                                    Grid.Row="4"
                                     HorizontalAlignment="Right"
-                                    Background="LightGray"
-                                    BorderBrush="LightGray"
-                                    Command="{Binding  DataContext.RateAccommodationInfoCommand, ElementName=PreviousTrip}"
-                                    CommandParameter="{Binding}"
-                                    Content="Rate"
-                                    ToolTip="Rate the accommodation and make a recommendation for renovation" />
-                            </StackPanel>
+                                    Orientation="Horizontal">
+                                    <Button
+                                        x:Name="RateButton"
+                                        Width="100"
+                                        Height="40"
+                                        Margin="20,0,0,5"
+                                        HorizontalAlignment="Right"
+                                        Background="LightGray"
+                                        BorderBrush="LightGray"
+                                        Command="{Binding DataContext.RateAccommodationInfoCommand, ElementName=PreviousTrip}"
+                                        CommandParameter="{Binding}"
+                                        Content="Rate"
+                                        ToolTip="Rate the accommodation and make a recommendation for renovation" />
+                                </StackPanel>
+                            </Grid>
                         </Grid>
                     </Border>
                 </DataTemplate>

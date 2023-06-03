@@ -38,9 +38,10 @@
                 FontWeight="Bold" />
             <TextBlock
                 Width="100"
+                Margin="10,0,0,15"
                 VerticalAlignment="Center"
                 FontSize="15"
-                Text="{Binding Reservation.Accommodation.Name}" />
+                Text="{Binding UnratedOwner.Reservation.Accommodation.Name}" />
         </StackPanel>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -54,7 +55,7 @@
                     HorizontalAlignment="Left"
                     Text="Cleanness" />
                 <StackPanel Orientation="Horizontal">
-                    <Slider
+                    <!--<Slider
                         x:Name="sCleanliness"
                         Width="150"
                         Height="30"
@@ -65,8 +66,14 @@
                         Minimum="1"
                         TickFrequency="1"
                         ToolTip="Rate the cleanliness of the accommodation"
-                        Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sCleanliness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                        Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" />-->
+                    <RadioButton  Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">2</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">3</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">4</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">5</RadioButton>
+
+                    <!--<TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sCleanliness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />-->
                 </StackPanel>
                 <TextBlock
                     Margin="10,10,0,10"
@@ -74,7 +81,7 @@
                     HorizontalAlignment="Left"
                     Text="Correctness the owner" />
                 <StackPanel Orientation="Horizontal">
-                    <Slider
+                    <!--<Slider
                         x:Name="sOwnerCorrectness"
                         Width="150"
                         Height="30"
@@ -85,8 +92,13 @@
                         Minimum="1"
                         TickFrequency="1"
                         ToolTip="Rate the correctness of the owner"
-                        Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sOwnerCorrectness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                        Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}" />-->
+                    <!--<TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sOwnerCorrectness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />-->
+                    <RadioButton  Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">2</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">3</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">4</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">5</RadioButton>
                 </StackPanel>
                 <TextBlock
                     Margin="10,10,0,10"
@@ -125,7 +137,8 @@
                     Margin="0,20,130,0"
                     HorizontalAlignment="Right"
                     Command="{Binding RateAOwnerCommand}"
-                    Content="Rate" />
+                    Content="Rate" 
+                    ToolTip="Fill in all the required fields and rate the accommodation and the owner"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Label Margin="10,10,0,10" Content="State of accommodation" />
@@ -139,9 +152,9 @@
                     Text="{Binding Recommendation, UpdateSourceTrigger=PropertyChanged}"
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto" />
-                <Label Margin="10,10,0,10" Content="Renovation urgency" />
-                <StackPanel Orientation="Horizontal">
-                    <Slider
+                <Label Margin="15,10,0,10" Content="Renovation urgency" />
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                    <!--<Slider
                         x:Name="sRenovationUrgency"
                         Width="150"
                         Height="30"
@@ -153,7 +166,12 @@
                         TickFrequency="1"
                         ToolTip="Rate the correctness of the owner"
                         Value="{Binding UrgencyLevel, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sRenovationUrgency, Path=Value, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sRenovationUrgency, Path=Value, UpdateSourceTrigger=PropertyChanged}" />-->
+                    <RadioButton  Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">2</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">3</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">4</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">5</RadioButton>
                 </StackPanel>
                 <TextBlock
                     Width="300"

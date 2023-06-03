@@ -4,15 +4,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:InitialProject.View"
-     xmlns:val="clr-namespace:InitialProject.Validation"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ns="clr-namespace:InitialProject.Utilities"
+    xmlns:val="clr-namespace:InitialProject.Validation"
+    xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
     Title="AccommodationReservationPage"
     d:DesignHeight="600"
     d:DesignWidth="800"
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!--Validation error template-->
+        <!--  Validation error template  -->
         <ControlTemplate x:Key="ValidationErrorTemplate">
             <Grid>
                 <Grid.RowDefinitions>
@@ -24,13 +26,20 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <AdornedElementPlaceholder Grid.Column="0" Grid.Row="0" x:Name="textBox"/>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding [0].ErrorContent}" Foreground="Red"/>
+                <AdornedElementPlaceholder
+                    x:Name="textBox"
+                    Grid.Row="0"
+                    Grid.Column="0" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
             </Grid>
         </ControlTemplate>
-        <!--End of Validation error template-->
+        <!--  End of Validation error template  -->
     </Page.Resources>
-    
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="45" />
@@ -49,8 +58,8 @@
             BorderThickness="2">
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="450"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="450" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
@@ -64,52 +73,52 @@
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
                         <Label
-                        Margin="20,0,0,0"
-                        Content="Name:"
-                        FontSize="15"
-                        FontWeight="Bold" />
+                            Margin="20,0,0,0"
+                            Content="Name:"
+                            FontSize="15"
+                            FontWeight="Bold" />
                         <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding Accommodation.Name}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            Text="{Binding SelectedAccommodation.Name}" />
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
                         <Label
-                        Margin="20,0,0,0"
-                        Content="City:"
-                        FontSize="15"
-                        FontWeight="Bold" />
+                            Margin="20,0,0,0"
+                            Content="City:"
+                            FontSize="15"
+                            FontWeight="Bold" />
                         <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding Accommodation.Location.City}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            Text="{Binding SelectedAccommodation.Location.City}" />
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <Label
-                        Margin="20,0,0,0"
-                        Content="Country:"
-                        FontSize="15"
-                        FontWeight="Bold" />
+                            Margin="20,0,0,0"
+                            Content="Country:"
+                            FontSize="15"
+                            FontWeight="Bold" />
                         <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding Accommodation.Location.Country}" />
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            Text="{Binding SelectedAccommodation.Location.Country}" />
                     </StackPanel>
                     <StackPanel Grid.Row="3" Orientation="Horizontal">
                         <Label
-                        Margin="20,0,0,0"
-                        Content="Type:"
-                        FontSize="15"
-                        FontWeight="Bold" />
+                            Margin="20,0,0,0"
+                            Content="Type:"
+                            FontSize="15"
+                            FontWeight="Bold" />
                         <TextBlock
-                        Margin="0,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding Accommodation.Type}" />
+                            Margin="0,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="15"
+                            Text="{Binding SelectedAccommodation.Type}" />
                     </StackPanel>
                     <Grid Grid.Row="4">
                         <Grid.ColumnDefinitions>
@@ -118,21 +127,21 @@
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="0">
                             <Label
-                            Margin="20,0,0,0"
-                            Content="Number of days"
-                            FontSize="15" />
+                                Margin="20,0,0,0"
+                                Content="Number of days"
+                                FontSize="15" />
                             <TextBox
-                            Name="tbReservationDays"
-                            Width="150"
-                            Height="30"
-                            Margin="20,0,0,10"
-                            HorizontalAlignment="Left"
-                            FontSize="15"
-                            TextAlignment="Left" >
+                                Name="tbReservationDays"
+                                Width="150"
+                                Height="30"
+                                Margin="20,0,0,10"
+                                HorizontalAlignment="Left"
+                                FontSize="15"
+                                TextAlignment="Left">
                                 <TextBox.Text>
                                     <Binding Path="ReservationDays" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
-                                            <val:PositiveNumberValidation/>
+                                            <val:PositiveNumberValidation />
                                         </Binding.ValidationRules>
 
                                     </Binding>
@@ -142,21 +151,21 @@
                                 </Validation.ErrorTemplate>
                             </TextBox>
                             <Label
-                            Margin="20,0,0,0"
-                            Content="Number of guests"
-                            FontSize="15" />
+                                Margin="20,0,0,0"
+                                Content="Number of guests"
+                                FontSize="15" />
                             <TextBox
-                            Name="tbGuestNumber"
-                            Width="150"
-                            Height="30"
-                            Margin="20,0,0,0"
-                            HorizontalAlignment="Left"
-                            FontSize="15"
-                            TextAlignment="Left" >
+                                Name="tbGuestNumber"
+                                Width="150"
+                                Height="30"
+                                Margin="20,0,0,0"
+                                HorizontalAlignment="Left"
+                                FontSize="15"
+                                TextAlignment="Left">
                                 <TextBox.Text>
-                                    <Binding Path="GuestsNumber" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding Path="GuestNumber" UpdateSourceTrigger="PropertyChanged">
                                         <Binding.ValidationRules>
-                                            <val:PositiveNumberValidation/>
+                                            <val:PositiveNumberValidation />
                                         </Binding.ValidationRules>
 
                                     </Binding>
@@ -168,77 +177,79 @@
                         </StackPanel>
                         <StackPanel Grid.Column="1">
                             <Label
-                            Margin="37,0,0,0"
-                            Content="Start date"
-                            FontSize="15" />
+                                Margin="37,0,0,0"
+                                Content="Start date"
+                                FontSize="15" />
                             <DatePicker
-                            Name="dpStart"
-                            Width="150"
-                            Margin="40,0,0,10"
-                            HorizontalAlignment="Left"
-                            SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                Name="dpStart"
+                                Width="150"
+                                Margin="40,0,0,10"
+                                HorizontalAlignment="Left"
+                                SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                             <!--  SelectedDateChanged="dpStart_SelectedDateChanged"  -->
                             <Label
-                            Margin="37,5,0,0"
-                            Content="End date"
-                            FontSize="15" />
+                                Margin="37,5,0,0"
+                                Content="End date"
+                                FontSize="15" />
                             <StackPanel Orientation="Horizontal">
                                 <DatePicker
-                                Name="dpEnd"
-                                Width="150"
-                                Margin="40,0,0,0"
-                                HorizontalAlignment="Left"
-                                SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                                    Name="dpEnd"
+                                    Width="150"
+                                    Margin="40,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                                 <!--  SelectedDateChanged="dpEnd_SelectedDateChanged" />  -->
                                 <TextBlock
-                                Name="tbNotFound"
-                                Width="270"
-                                Height="30"
-                                Margin="20,0,0,0"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
-                                Foreground="Red"
-                                TextWrapping="Wrap" />
+                                    Name="tbNotFound"
+                                    Width="270"
+                                    Height="30"
+                                    Margin="20,0,0,0"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Foreground="Red"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </StackPanel>
                     </Grid>
                     <Button
-                    Grid.Row="5"
-                    Width="150"
-                    Height="35"
-                    Margin="140,10,0,0"
-                    HorizontalAlignment="Left"
-                    Background="LightGray"
-                    BorderBrush="LightGray"
-                    Content="Search"
-                    ToolTip="Search on which dates the accommodation is available" />
+                        Grid.Row="5"
+                        Width="150"
+                        Height="35"
+                        Margin="140,10,0,0"
+                        HorizontalAlignment="Left"
+                        Background="LightGray"
+                        BorderBrush="LightGray"
+                        Content="Search"
+                        ToolTip="Search on which dates the accommodation is available" />
                     <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="350" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <DataGrid
-                        Name="resultDataGrid"
-                        Grid.Column="0"
-                        Margin="20,10,0,10"
-                        HorizontalAlignment="Left"
-                        Background="AliceBlue"
-                        ItemsSource="{Binding Path=ReservationDates}"
-                        SelectedItem="{Binding Path=SelectedDate}"
-                        ToolTip="Date in which accommodatioon is available" Grid.ColumnSpan="2" Width="387">
+                            Name="resultDataGrid"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Width="387"
+                            Margin="20,10,0,10"
+                            HorizontalAlignment="Left"
+                            Background="AliceBlue"
+                            ItemsSource="{Binding Path=ReservationDates}"
+                            SelectedItem="{Binding Path=SelectedDate}"
+                            ToolTip="Date in which accommodatioon is available">
                             <DataGrid.Columns>
                                 <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Path=StarDate}"
-                                Header="Start date" />
+                                    Width="*"
+                                    Binding="{Binding Path=StarDate}"
+                                    Header="Start date" />
                                 <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Path=EndDate}"
-                                Header="End date" />
+                                    Width="*"
+                                    Binding="{Binding Path=EndDate}"
+                                    Header="End date" />
                                 <DataGridTextColumn
-                                Width="*"
-                                Binding="{Binding Path=EndDate}"
-                                Header="Reserve" />
+                                    Width="*"
+                                    Binding="{Binding Path=EndDate}"
+                                    Header="Reserve" />
                             </DataGrid.Columns>
                         </DataGrid>
                         <!--<Button
@@ -254,8 +265,57 @@
                         ToolTip="Choose the desired dates and make a reservation" />-->
                     </Grid>
                 </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="320" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <GroupBox
+                        Grid.Row="0"
+                        Width="280"
+                        Height="280"
+                        Margin="10,30,10,0"
+                        VerticalAlignment="Top"
+                        Background="AliceBlue"
+                        BorderBrush="Black"
+                        BorderThickness="2"
+                        Header="Images">
+                        <Image
+                            Name="accommodationImages"
+                            Source="{Binding ImageUrl}"
+                            Stretch="Fill"
+                            ToolTip="Here you can see all the pictures of the accommodation" />
+                    </GroupBox>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <Button
+                            Width="120"
+                            Height="40"
+                            Margin="75,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="LightGray"
+                            BorderBrush="LightGray"
+                            Command="{Binding PreviousImageCommand}"
+                            Content="&lt;&lt;" />
+                        <Button
+                            Width="120"
+                            Height="40"
+                            Margin="10,0,0,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Background="LightGray"
+                            BorderBrush="LightGray"
+                            Command="{Binding NextImageCommand}"
+                            Content="&gt;&gt;" />
+                    </StackPanel>
+                </Grid>
             </Grid>
+
+
+
         </Border>
+
     </Grid>
-    
+
 </Page>
