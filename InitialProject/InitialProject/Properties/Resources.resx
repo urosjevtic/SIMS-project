@@ -132,6 +132,12 @@
   <data name="Accommodation_statistic" xml:space="preserve">
     <value>Accommodation statistic</value>
   </data>
+  <data name="Accommodation_statistic1" xml:space="preserve">
+    <value>*See statistic for all you accommodations</value>
+  </data>
+  <data name="Accommodation_statistic2" xml:space="preserve">
+    <value>*Select accommdoation and click on statistic to show yearly statistic. Furthermore clickg on see monthly statistic you will be able to see all statistic by months</value>
+  </data>
   <data name="Accommodation_type" xml:space="preserve">
     <value>Accommodation type:</value>
   </data>
@@ -146,6 +152,12 @@
   </data>
   <data name="All_reservations" xml:space="preserve">
     <value>All reservations</value>
+  </data>
+  <data name="All_reservations1" xml:space="preserve">
+    <value>*See all reservations that guests have made</value>
+  </data>
+  <data name="All_reservations2" xml:space="preserve">
+    <value>*On this screen you will also be able to cancel reservations if needed</value>
   </data>
   <data name="Author" xml:space="preserve">
     <value>Author:</value>
@@ -234,6 +246,15 @@
   <data name="Forums" xml:space="preserve">
     <value>Forums</value>
   </data>
+  <data name="Forums1" xml:space="preserve">
+    <value>*Interact with other guests and owners on forums</value>
+  </data>
+  <data name="Forums2" xml:space="preserve">
+    <value>*You will be able to leave comment on the selected forum only if you own accommdoation on that location</value>
+  </data>
+  <data name="Forums3" xml:space="preserve">
+    <value>*You can't leave comments on closed forums</value>
+  </data>
   <data name="From" xml:space="preserve">
     <value>From:</value>
   </data>
@@ -254,6 +275,9 @@
   </data>
   <data name="Handle_rescheduling" xml:space="preserve">
     <value>Handle rescheduling</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="Here_you_can_see_all_requests_for_rescheduling_reservations" xml:space="preserve">
     <value>Here you can see all requests for rescheduling reservations</value>
@@ -295,10 +319,25 @@
     <value>Minimum renovation days:</value>
   </data>
   <data name="MyAccommodations" xml:space="preserve">
-    <value>MyAccommodations</value>
+    <value>My Accommodations</value>
+  </data>
+  <data name="My_accommdoation1" xml:space="preserve">
+    <value>*See accommodation option enables you to see all accommodation that you currently own</value>
+  </data>
+  <data name="My_accommdoation2" xml:space="preserve">
+    <value>*See all details about accommodations</value>
+  </data>
+  <data name="My_accommdoation3" xml:space="preserve">
+    <value>*Clicking on See images button you will be able to see all accommodation images</value>
   </data>
   <data name="My_ratings" xml:space="preserve">
     <value>My ratings</value>
+  </data>
+  <data name="My_ratings1" xml:space="preserve">
+    <value>*See super owner status. To become super owner you need at least 50 reviews and avrege rating of 4.5</value>
+  </data>
+  <data name="My_ratings2" xml:space="preserve">
+    <value>*See ratings for the accommodations you have selected. To be able to see review from the specific guest first you need to rate that guest</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Name:</value>
@@ -312,8 +351,20 @@
   <data name="New_renovations" xml:space="preserve">
     <value>New renovations</value>
   </data>
+  <data name="New_renovations1" xml:space="preserve">
+    <value>*Schedule new renovations</value>
+  </data>
+  <data name="New_renovations2" xml:space="preserve">
+    <value>*Select accommdoations that you want to renovate, select date range that you want renovations to be and choose one of the available dates.</value>
+  </data>
+  <data name="New_renovations3" xml:space="preserve">
+    <value>*To finish just write renovation descritpiton and click on confirm</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="Notification1" xml:space="preserve">
+    <value>*On this screen you will be able to see every notification that you recive</value>
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
@@ -357,14 +408,29 @@
   <data name="Reason_for_declining" xml:space="preserve">
     <value>Reason for declining: </value>
   </data>
+  <data name="Recived_notifications" xml:space="preserve">
+    <value>Recieved notifications</value>
+  </data>
   <data name="Registrate" xml:space="preserve">
     <value>Registrate</value>
   </data>
   <data name="Registrate_new_accommodation" xml:space="preserve">
     <value>Registrate new accommodation</value>
   </data>
+  <data name="Registrate_new_accommodation1" xml:space="preserve">
+    <value>*Fill the form and registrate new accommodation</value>
+  </data>
+  <data name="Registrate_new_accommodation2" xml:space="preserve">
+    <value>*Every field is obligatory</value>
+  </data>
   <data name="Registration_sugestion" xml:space="preserve">
     <value>Registration sugestion</value>
+  </data>
+  <data name="Registration_sugestion1" xml:space="preserve">
+    <value>*See sugestions for opening new accommodation on most popular locations based on reservations count in the past year</value>
+  </data>
+  <data name="Registration_sugestion2" xml:space="preserve">
+    <value>*See suggestions for closing accommodation on the locations that are not popular</value>
   </data>
   <data name="Renovation" xml:space="preserve">
     <value>Renovation</value>
@@ -390,11 +456,23 @@
   <data name="Renovation_reports" xml:space="preserve">
     <value>Renovation reports</value>
   </data>
+  <data name="Renovation_reports1" xml:space="preserve">
+    <value>*Select date range for your report and all renovations in that period will be adad to the report that will be later saved on your device localy</value>
+  </data>
   <data name="Renovation_rescheduling" xml:space="preserve">
     <value>Renovation rescheduling</value>
   </data>
   <data name="Renovation_sugestions" xml:space="preserve">
     <value>Renovation sugestions</value>
+  </data>
+  <data name="Renovation_sugestions1" xml:space="preserve">
+    <value>*See all renovation sugestins that guests that have visited left</value>
+  </data>
+  <data name="Renovation_sugestions2" xml:space="preserve">
+    <value>*You can proceed with them or delete suggestion</value>
+  </data>
+  <data name="Renovation_sugestions3" xml:space="preserve">
+    <value>*Every sugestion have urgency level from 1 to 5</value>
   </data>
   <data name="Renovation_urgency" xml:space="preserve">
     <value>Renovation urgency:</value>
@@ -414,6 +492,12 @@
   <data name="Reservation_rescheduling" xml:space="preserve">
     <value>Reservation rescheduling</value>
   </data>
+  <data name="Reservation_rescheduling1" xml:space="preserve">
+    <value>*See all reschedule request from guests. You can approve them even if new date is already reserved by another guest and later cancel that reservations</value>
+  </data>
+  <data name="Reservation_rescheduling2" xml:space="preserve">
+    <value>*If you decline you will be able to leave messege to the guest why his request was declined</value>
+  </data>
   <data name="Review_date" xml:space="preserve">
     <value>Review date:</value>
   </data>
@@ -428,6 +512,12 @@
   </data>
   <data name="Scheduled_renovations" xml:space="preserve">
     <value>Scheduled renovations</value>
+  </data>
+  <data name="Scheduled_renovations1" xml:space="preserve">
+    <value>*See all renovations that have been scheduled</value>
+  </data>
+  <data name="Scheduled_renovations2" xml:space="preserve">
+    <value>*Here you can also cancel renovation but only if cancel it 5 days before the start</value>
   </data>
   <data name="Schedule_renovation" xml:space="preserve">
     <value>Schedule renovation</value>
@@ -463,7 +553,7 @@
     <value>See requests</value>
   </data>
   <data name="See_reservations" xml:space="preserve">
-    <value>See_reservations</value>
+    <value>See reservations</value>
   </data>
   <data name="See_reviews" xml:space="preserve">
     <value>See reviews</value>
@@ -510,6 +600,12 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Settings1" xml:space="preserve">
+    <value>*Select theme for your application(light or dark)</value>
+  </data>
+  <data name="Settings2" xml:space="preserve">
+    <value>*Choose language for your applocation(Serbian or English)</value>
+  </data>
   <data name="Start_date" xml:space="preserve">
     <value>Start date:</value>
   </data>
@@ -545,5 +641,8 @@
   </data>
   <data name="Unrated_guests" xml:space="preserve">
     <value>Unrated guests</value>
+  </data>
+  <data name="Unrated_guests1" xml:space="preserve">
+    <value>*Rate guests that have visited your accommodations. Just select guest that you want to rate and fill the form</value>
   </data>
 </root>

@@ -9,6 +9,7 @@
         Title="MainWindowOwner" Height="700" Width="356"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
         DataContext="{Binding OwnerMainViewModel}">
     <Window.Background>
         <SolidColorBrush Color="{DynamicResource LighterBackground}" />
@@ -24,6 +25,7 @@
         <!--SIDE SCREEN-->
         <Grid Name="SideScreen" Grid.Column="0" Width="300" Height="700" Background="{DynamicResource NavBarColor}" Visibility="{Binding SideScreenVisibility}">
             <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -86,7 +88,13 @@
                     <TextBlock Padding="5" Text="{ns:Loc Notes}"></TextBlock>
                 </StackPanel>
             </Button>
-            <Button  Content="{ns:Loc Log_out}" Style="{StaticResource MainPageButtonStyle}" Grid.Row="9" Margin="0,87,0,29"/>
+            <Button Grid.Row="9" Command="{Binding HelpCommand}" Style="{StaticResource MainPageButtonStyle}" FontSize="16" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Resources/Images/help.png" Width="20"/>
+                    <TextBlock Padding="5" Text="{ns:Loc Help}"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button  Content="{ns:Loc Log_out}" Command="{Binding LogOutCommand}" Style="{StaticResource MainPageButtonStyle}" Grid.Row="10" Margin="0,87,0,29"/>
         </Grid>
 
         <!--MAIN SCREEN-->

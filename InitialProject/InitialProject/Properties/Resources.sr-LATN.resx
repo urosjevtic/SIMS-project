@@ -132,6 +132,12 @@
   <data name="Accommodation_statistic" xml:space="preserve">
     <value>Statistika smeštaja</value>
   </data>
+  <data name="Accommodation_statistic1" xml:space="preserve">
+    <value>*Pogledajte statistiku za sve vaše smeštaje</value>
+  </data>
+  <data name="Accommodation_statistic2" xml:space="preserve">
+    <value>*Izaberite smeštaj i kliknite na statistiku da biste prikazali godišnju statistiku. Pored toga, kliknite na pogledajte mesečnu statistiku, moći ćete da vidite svu statistiku po mesecima</value>
+  </data>
   <data name="Accommodation_type" xml:space="preserve">
     <value>Tip smeštaja:</value>
   </data>
@@ -146,6 +152,12 @@
   </data>
   <data name="All_reservations" xml:space="preserve">
     <value>Sve rezervacije</value>
+  </data>
+  <data name="All_reservations1" xml:space="preserve">
+    <value>*Pogledajte sve rezervacije koje su gosti napravili</value>
+  </data>
+  <data name="All_reservations2" xml:space="preserve">
+    <value>*Na ovom ekranu ćete takođe moći da otkažete rezervacije ako je potrebno</value>
   </data>
   <data name="Author" xml:space="preserve">
     <value>Autor:</value>
@@ -234,6 +246,15 @@
   <data name="Forums" xml:space="preserve">
     <value>Forumi</value>
   </data>
+  <data name="Forums1" xml:space="preserve">
+    <value>* Interakcija sa drugim gostima i vlasnicima na forumima</value>
+  </data>
+  <data name="Forums2" xml:space="preserve">
+    <value>*Moći ćete da ostavite komentar na odabranom forumu samo ako posedujete smeštaj na toj lokaciji</value>
+  </data>
+  <data name="Forums3" xml:space="preserve">
+    <value>*Ne možete ostavljati komentare na zatvorenim forumima</value>
+  </data>
   <data name="From" xml:space="preserve">
     <value>Od:</value>
   </data>
@@ -254,6 +275,9 @@
   </data>
   <data name="Handle_rescheduling" xml:space="preserve">
     <value>Pomeraj reservacije</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Pomoć</value>
   </data>
   <data name="Here_you_can_see_all_requests_for_rescheduling_reservations" xml:space="preserve">
     <value>Ovde možete videti sve zahteve za pomeranje rezervacija</value>
@@ -297,8 +321,23 @@
   <data name="MyAccommodations" xml:space="preserve">
     <value>Moj smeštaj</value>
   </data>
+  <data name="My_accommdoation1" xml:space="preserve">
+    <value>*Opcija Vidi smeštaj vam omogućava da vidite sav smeštaj koji trenutno posedujete</value>
+  </data>
+  <data name="My_accommdoation2" xml:space="preserve">
+    <value>*Pogledajte sve detalje o smeštaju</value>
+  </data>
+  <data name="My_accommdoation3" xml:space="preserve">
+    <value>*Klikom na dugme Vidi slike moći ćete da vidite sve slike smeštaja</value>
+  </data>
   <data name="My_ratings" xml:space="preserve">
     <value>Moje ocene</value>
+  </data>
+  <data name="My_ratings1" xml:space="preserve">
+    <value>*Pogledajte status supervlasnika. Da biste postali super vlasnik, potrebno vam je najmanje 50 recenzija i prosečna ocena 4,5</value>
+  </data>
+  <data name="My_ratings2" xml:space="preserve">
+    <value>*Pogledajte ocene za smeštaj koji ste izabrali. Da biste mogli da vidite recenziju određenog gosta, prvo morate da ocenite tog gosta</value>
   </data>
   <data name="Name" xml:space="preserve">
     <value>Naziv:</value>
@@ -312,8 +351,20 @@
   <data name="New_renovations" xml:space="preserve">
     <value>Novo renoviranje</value>
   </data>
+  <data name="New_renovations1" xml:space="preserve">
+    <value>*Zakažite nove renovacije</value>
+  </data>
+  <data name="New_renovations2" xml:space="preserve">
+    <value>*Izaberite smeštaj koji želite da renovirate, izaberite period za koji želite da bude renoviranja i izaberite jedan od dostupnih datuma.</value>
+  </data>
+  <data name="New_renovations3" xml:space="preserve">
+    <value>*Da biste završili, samo napišite opis renoviranja i kliknite na potvrdi</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Beleške</value>
+  </data>
+  <data name="Notification1" xml:space="preserve">
+    <value>*Na ovom ekranu ćete moći da vidite svako obaveštenje koje dobijete</value>
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Obaveštenja</value>
@@ -357,14 +408,29 @@
   <data name="Reason_for_declining" xml:space="preserve">
     <value>Rezlog za odbijanje:</value>
   </data>
+  <data name="Recived_notifications" xml:space="preserve">
+    <value>Primljena obaveštenja</value>
+  </data>
   <data name="Registrate" xml:space="preserve">
     <value>Registruj</value>
   </data>
   <data name="Registrate_new_accommodation" xml:space="preserve">
     <value>Registruj novi smeštaj</value>
   </data>
+  <data name="Registrate_new_accommodation1" xml:space="preserve">
+    <value>*Popunite formular i prijavite novi smeštaj</value>
+  </data>
+  <data name="Registrate_new_accommodation2" xml:space="preserve">
+    <value>*Svako polje je obavezno</value>
+  </data>
   <data name="Registration_sugestion" xml:space="preserve">
     <value>Predlozi za registraciju</value>
+  </data>
+  <data name="Registration_sugestion1" xml:space="preserve">
+    <value>*Pogledajte predloge za otvaranje novog smeštaja na najpopularnijim lokacijama na osnovu broja rezervacija u prošloj godini</value>
+  </data>
+  <data name="Registration_sugestion2" xml:space="preserve">
+    <value>*Pogledajte predloge za zatvaranje smeštaja na lokacijama koje nisu popularne</value>
   </data>
   <data name="Renovation" xml:space="preserve">
     <value>Renoviranje</value>
@@ -390,11 +456,23 @@
   <data name="Renovation_reports" xml:space="preserve">
     <value>Izveštaj o renoviranju</value>
   </data>
+  <data name="Renovation_reports1" xml:space="preserve">
+    <value>*Izaberite period za svoj izveštaj i sva renoviranja u tom periodu će biti dodata izveštaju koji će kasnije biti sačuvan na vašem uređaju lokalno</value>
+  </data>
   <data name="Renovation_rescheduling" xml:space="preserve">
     <value>Pomeranje renoviranja</value>
   </data>
   <data name="Renovation_sugestions" xml:space="preserve">
     <value>Predlozi za renoviranje</value>
+  </data>
+  <data name="Renovation_sugestions1" xml:space="preserve">
+    <value>*Pogledajte sve predloge za renoviranje koje su gosti koji su posetili otišli</value>
+  </data>
+  <data name="Renovation_sugestions2" xml:space="preserve">
+    <value>*Možete nastaviti sa njima ili izbrisati predlog</value>
+  </data>
+  <data name="Renovation_sugestions3" xml:space="preserve">
+    <value>*Svaka sugestija ima nivo hitnosti od 1 do 5</value>
   </data>
   <data name="Renovation_urgency" xml:space="preserve">
     <value>Urgentnost renoviranja:</value>
@@ -414,6 +492,12 @@
   <data name="Reservation_rescheduling" xml:space="preserve">
     <value>Pomeranje rezervacija</value>
   </data>
+  <data name="Reservation_rescheduling1" xml:space="preserve">
+    <value>*Pogledajte sve zahteve gostiju za promenu rasporeda. Možete ih odobriti čak i ako je novi datum već rezervisan od strane drugog gosta i kasnije otkazati tu rezervaciju</value>
+  </data>
+  <data name="Reservation_rescheduling2" xml:space="preserve">
+    <value>*Ako odbijete, moći ćete da ostavite poruku gostu zašto je njegov zahtev odbijen</value>
+  </data>
   <data name="Review_date" xml:space="preserve">
     <value>Datum ocenjivanja:</value>
   </data>
@@ -428,6 +512,12 @@
   </data>
   <data name="Scheduled_renovations" xml:space="preserve">
     <value>Zakaži renoviranje</value>
+  </data>
+  <data name="Scheduled_renovations1" xml:space="preserve">
+    <value>*Pogledajte sva renoviranja koja su zakazana</value>
+  </data>
+  <data name="Scheduled_renovations2" xml:space="preserve">
+    <value>*Ovde možete i da otkažete renoviranje, ali samo ako ga otkažete 5 dana pre početka</value>
   </data>
   <data name="Schedule_renovation" xml:space="preserve">
     <value>Zakaži renoviranje</value>
@@ -510,6 +600,12 @@
   <data name="Settings" xml:space="preserve">
     <value>Podešavanja</value>
   </data>
+  <data name="Settings1" xml:space="preserve">
+    <value>* Izaberite temu za svoju aplikaciju (svetla ili tamna)</value>
+  </data>
+  <data name="Settings2" xml:space="preserve">
+    <value>*Izaberite jezik za svoju aplikaciju (srpski ili engleski)</value>
+  </data>
   <data name="Start_date" xml:space="preserve">
     <value>Datum početka:</value>
   </data>
@@ -545,5 +641,8 @@
   </data>
   <data name="Unrated_guests" xml:space="preserve">
     <value>Neocenjeni gosti</value>
+  </data>
+  <data name="Unrated_guests1" xml:space="preserve">
+    <value>*Ocenite goste koji su posetili vaš smeštaj. Samo izaberite gosta kojeg želite da ocenite i popunite formular</value>
   </data>
 </root>

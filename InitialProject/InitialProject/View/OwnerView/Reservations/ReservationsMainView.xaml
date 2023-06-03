@@ -26,7 +26,7 @@
                 <RowDefinition></RowDefinition>
 
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="{ns:Loc Ratings}" HorizontalAlignment="Center" FontSize="30"></TextBlock>
+
             <Border Grid.Row="1" BorderBrush="{DynamicResource TextColor}" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -35,7 +35,7 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{ns:Loc All_reservations}" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{ns:Loc Here_you_can_see_all_reservations_that_gusts_have_made}"  TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc Here_you_can_see_all_reservations_that_gusts_have_made}"  TextWrapping="Wrap" Foreground="{DynamicResource TextColor}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
                     <Button Grid.Row="2" Command="{Binding ShowAllReservationsCommand}" Content="{ns:Loc See_reservations}" Foreground="{DynamicResource TextColor}"  Margin="30 0 30 5" Style="{StaticResource ButtonStyle}"></Button>
                 </Grid>
             </Border>

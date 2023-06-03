@@ -23,8 +23,7 @@
                 <RowDefinition Height="1.6*"></RowDefinition>
                 <RowDefinition Height="0.5*"></RowDefinition>
                 <RowDefinition Height="1.6*"></RowDefinition>
-                <RowDefinition Height="0.5*"></RowDefinition>
-                <RowDefinition Height="1.6*"></RowDefinition>
+                <RowDefinition Height="0.9*"></RowDefinition>
 
             </Grid.RowDefinitions>
 
@@ -56,19 +55,7 @@
 
                 </Grid>
             </Border>
-            <Border Grid.Row="5" BorderBrush="{DynamicResource TextColor}" BorderThickness="2">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                        <RowDefinition></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{ns:Loc Personal_info}" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{ns:Loc Change_username_and_password}" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding ChangeLanguageCommand}" Content="{ns:Loc Change}" Margin="30 0 30 5" Style="{StaticResource ButtonStyle}"></Button>
 
-                </Grid>
-            </Border>
         </Grid>
     </Grid>
 </Page>
