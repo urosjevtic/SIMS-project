@@ -234,6 +234,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
   <data name="End_date" xml:space="preserve">
     <value>End date:</value>
   </data>

@@ -190,7 +190,10 @@
                             <DataTrigger Binding="{Binding SelectedForum.IsOpen}" Value="False">
                                <Setter Property="Visibility" Value="Collapsed" />
                            </DataTrigger>
-                       </Style.Triggers>
+                            <DataTrigger Binding="{Binding CanOwnerComment}" Value="False">
+                               <Setter Property="Visibility" Value="Collapsed" />
+                           </DataTrigger>
+                        </Style.Triggers>
                    </Style>
                </Grid.Style>
            </Grid>

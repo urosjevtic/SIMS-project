@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="MyAccommodationsMainView" Height="637" Width="345">
+        Title="MyAccommodationsMainView" Height="645" Width="355.5">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource LighterBackground}" />
     </Page.Background>

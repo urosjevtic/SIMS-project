@@ -11,6 +11,7 @@ using System.Windows.Navigation;
 using ceTe.DynamicPDF;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Forums;
+using InitialProject.Service;
 using InitialProject.Service.ForumServices;
 using InitialProject.Service.NotesServices;
 using InitialProject.Service.RatingServices;
@@ -37,6 +38,8 @@ namespace InitialProject.ViewModels.ForumsViewModel
 
             _forumService.BindCommentsToForum(SelectedForum);
             _forumService.CheckWhatCommentsAreReported(_logedInUser, SelectedForum.Comments);
+
+            _canOwnerComment = _forumService.CanOwnerMakeComment(selectedForum, _logedInUser.Id);
 
             ForumComments = new ObservableCollection<ForumComment>();
             foreach (var comment in SelectedForum.Comments)
@@ -79,6 +82,21 @@ namespace InitialProject.ViewModels.ForumsViewModel
             NavigationService.Navigate(new ForumSelcetionView(_logedInUser, NavigationService));
         }
 
+        
+
+        private bool _canOwnerComment;
+        public bool CanOwnerComment
+        {
+            get { return _canOwnerComment; }
+            set
+            {
+                if (_canOwnerComment != value)
+                {
+                    _canOwnerComment = value;
+                    OnPropertyChanged(nameof(CanOwnerComment));
+                }
+            }
+        }
 
         private bool _hasUserReported;
         public bool HasUserReported

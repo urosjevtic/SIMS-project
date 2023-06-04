@@ -40,6 +40,18 @@ namespace InitialProject.Service
             _imageRepository.Save(images);
         }
 
+        public void SaveImages(List<string> urls)
+        {
+            Image images = new Image();
+            images.EntityLd = 0;
+            foreach (string imageUrl in urls)
+            {
+                images.Url.Add(imageUrl);
+            }
+
+            _imageRepository.Save(images);
+        }
+
         private string[] SplitUrlByComma(string input)
         {
             return input.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

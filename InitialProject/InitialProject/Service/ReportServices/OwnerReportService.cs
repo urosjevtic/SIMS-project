@@ -26,22 +26,22 @@ namespace InitialProject.Service.ReportService
         }
 
 
-        public void GenerateRenovationReport(int ownerId, DateTime starDate, DateTime endTime)
+        public void GenerateRenovationReport(List<Renovation> renovations, DateTime fromDate, DateTime toDate)
         {
             Document pdfDocument = new Document();
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
             pdfDocument.Pages.Add(page);
-            Label label = new Label("Hello world!", 0, 0, 504, 100, Font.Helvetica, 18, TextAlign.Center);
+            Label label = new Label($"Renovation report containing all the information about renovations in the period between {fromDate.ToString("dd/MM/yyyy")} and {toDate.ToString("dd/MM/yyyy")}", 0, 0, 504, 100, Font.Helvetica, 18, TextAlign.Center);
+
             page.Elements.Add(label);
 
-            List<Renovation> renovations = GetAllRenovationInDateRange(ownerId, starDate, endTime);
 
             int initialY = 120;
 
             foreach (var renovation in renovations)
             {
                 Label nameLabel = new Label(renovation.Accommodation.Name, 10, initialY, 504, 30, Font.Helvetica, 16, TextAlign.Left);
-                Label starEndDateLabel = new Label($"Star: {renovation.StartDate}, End Date: {renovation.EndDate}", 10, initialY + 40, 504, 30, Font.Helvetica, 12, TextAlign.Left);
+                Label starEndDateLabel = new Label($"Start date: {renovation.StartDate}, End Date: {renovation.EndDate}", 10, initialY + 40, 504, 30, Font.Helvetica, 12, TextAlign.Left);
                 Label renovationLabel = new Label(renovation.Description, 10, initialY + 80, 504, 30, Font.Helvetica, 12, TextAlign.Left);
                 Label finishedLabel = new Label($"Finished: {renovation.IsFinished}", 10, initialY + 120, 504, 30, Font.Helvetica, 12, TextAlign.Left);
 
@@ -50,12 +50,23 @@ namespace InitialProject.Service.ReportService
                 page.Elements.Add(renovationLabel);
                 page.Elements.Add(finishedLabel);
 
-                initialY += 220;
+                initialY += 210;
             }
 
 
+            StringBuilder title = new StringBuilder();
+            title.Append("../../../Reports/Owner/RenovationReport_");
+            title.Append(fromDate.ToString("ddMMyyyy"));  // Convert fromDate to the desired format
+            title.Append("_");
+            title.Append(toDate.ToString("ddMMyyyy"));  // Convert toDate to the desired format
+            title.Append(".pdf");
 
-            pdfDocument.Draw("../../../Reports/Owner/NewPdf.pdf");
+            pdfDocument.Draw(title.ToString());
+        }
+
+        public List<Renovation> PrepareReport(int ownerId, DateTime startDate, DateTime endDate)
+        {
+            return GetAllRenovationInDateRange(ownerId, startDate, endDate);
         }
 
         private List<Renovation> GetAllRenovationInDateRange(int ownerId, DateTime startDate, DateTime endDate)
