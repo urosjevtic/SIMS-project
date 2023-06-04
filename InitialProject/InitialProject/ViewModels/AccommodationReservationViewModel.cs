@@ -3,14 +3,10 @@ using InitialProject.Domain.Model.Reservations;
 using InitialProject.Repository.AccommodationRepo;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Service;
-using InitialProject.Service.RenovationServices;
 using InitialProject.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Navigation;
 
@@ -18,7 +14,7 @@ namespace InitialProject.ViewModels
 {
     class AccommodationReservationViewModel : BaseViewModel
     {
-        public Accommodation Accommodation { get; set; }
+        //   public Accommodation Accommodation { get; set; }
         public NavigationService _navigationService;
         private readonly ImageService _imageService;
         private readonly Image _images;
@@ -28,12 +24,17 @@ namespace InitialProject.ViewModels
             SelectedAccommodation = accommodation;
 
             _imageService = new ImageService();
-            _images = _imageService.GetById(SelectedAccommodation.Images.Id);
-            _imageUrl = _images.Url[ImageCounter];
+            if (_imageService.GetById(SelectedAccommodation.Images.Id) != null)
+            {
+                _images = _imageService.GetById(SelectedAccommodation.Images.Id);
+                _imageUrl = _images.Url[ImageCounter];
+            }
+            //_images = _imageService.GetById(SelectedAccommodation.Images.Id);
+            //  _imageUrl = _images.Url[ImageCounter];
 
             _accommodationRepository = new AccommodationRepository();
             _accommodationReservationRepository = new AccommodationReservationRepository();
-          //  ReservationDates = new ObservableCollection<AccommodationReservation>();
+            //  ReservationDates = new ObservableCollection<AccommodationReservation>();
         }
 
         private readonly AccommodationRepository _accommodationRepository;
@@ -69,19 +70,29 @@ namespace InitialProject.ViewModels
         private void NextImage()
         {
             ImageCounter++;
-            if (ImageCounter > _images.Url.Count - 1)
-                ImageCounter = 0;
-            _imageUrl = _images.Url[ImageCounter];
-            OnPropertyChanged(nameof(ImageUrl));
+            if (_images != null)
+            {
+                if (ImageCounter > _images.Url.Count - 1)
+                {
+                    ImageCounter = 0;
+                }
+                ImageUrl = _images.Url[ImageCounter];
+            }
+            //OnPropertyChanged(nameof(ImageUrl));
         }
         public ICommand PreviousImageCommand => new RelayCommand(PreviousImage);
         private void PreviousImage()
         {
             ImageCounter--;
-            if (ImageCounter < 0)
-                ImageCounter = _images.Url.Count - 1;
-            _imageUrl = _images.Url[ImageCounter];
-            OnPropertyChanged(nameof(ImageUrl));
+            if (_images != null)
+            {
+                if (ImageCounter < 0)
+                {
+                    ImageCounter = _images.Url.Count - 1;
+                }
+                ImageUrl = _images.Url[ImageCounter];
+            }
+            //OnPropertyChanged(nameof(ImageUrl));
         }
 
 

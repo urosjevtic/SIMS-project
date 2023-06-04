@@ -1,4 +1,6 @@
-﻿using InitialProject.Domain.Model.Reservations;
+﻿using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Reservations;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,9 +23,17 @@ namespace InitialProject.View
     /// </summary>
     public partial class ReservationMoveRequestPage : Page
     {
+        //public AccommodationReservation SelectedReservation;
         public ReservationMoveRequestPage(AccommodationReservation selectedReservation)
         {
             InitializeComponent();
+           // SelectedReservation = selectedReservation;
+            this.DataContext = new MoveRequestViewModel(selectedReservation);
         }
+
+        //private void Page_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    this.DataContext = new MoveRequestViewModel(selectedReservation, this.NavigationService);
+        //}
     }
 }

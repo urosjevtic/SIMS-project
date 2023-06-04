@@ -10,7 +10,7 @@ namespace InitialProject.Domain.Model
     public class Image : ISerializable
     {
         public int Id;
-        public List<string> Url;
+        public List<string> Url { get; set; }
         public int EntityLd;
 
         public Image()

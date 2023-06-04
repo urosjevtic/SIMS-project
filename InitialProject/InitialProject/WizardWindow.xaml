@@ -29,8 +29,10 @@
         </Grid.ColumnDefinitions>
         <xctk:Wizard
             Grid.ColumnSpan="2"
+            CanCancel="True"
             CanHelp="False"
-            CancelButtonVisibility="Collapsed"
+            CancelButtonClosesWindow="True"
+            CancelButtonVisibility="Visible"
             HelpButtonVisibility="Collapsed">
             <xctk:WizardPage
                 x:Name="IntroWizardPage"
@@ -93,6 +95,7 @@
             <xctk:WizardPage
                 x:Name="LastWizardPage"
                 Title="Forum"
+                CanCancel="False"
                 CanFinish="True"
                 Description="On these pages you have a form where you can create a new forum and add comments and see an old one and its comments."
                 PageType="Interior">

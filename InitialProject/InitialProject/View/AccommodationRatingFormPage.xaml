@@ -11,39 +11,39 @@
     d:DesignWidth="800"
     mc:Ignorable="d">
 
-    <Grid Background="AliceBlue">
+    <Grid Margin="0,0,0,0" Background="AliceBlue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
             <RowDefinition Height="50" />
+            <RowDefinition Height="80" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal">
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
             <Label
-                Margin="10,0,0,0"
+                Margin="40,0,0,0"
                 VerticalAlignment="Center"
                 Content="Rating accommodation"
                 FontSize="20" />
             <Label
-                Margin="230,0,0,0"
+                Margin="215,0,0,0"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Center"
                 Content="Recommendation for renovation"
                 FontSize="20" />
         </StackPanel>
-        <StackPanel Grid.Row="1" Orientation="Horizontal">
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Label
-                Margin="10,0,0,0"
+                Margin="40,10,0,0"
                 Content="Name:"
-                FontSize="18"
+                FontSize="15"
                 FontWeight="Bold" />
             <TextBlock
                 Width="100"
-                Margin="10,0,0,15"
+                Margin="10,10,0,10"
                 VerticalAlignment="Center"
                 FontSize="15"
                 Text="{Binding UnratedOwner.Reservation.Accommodation.Name}" />
         </StackPanel>
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="2" Margin="30,0,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -67,11 +67,11 @@
                         TickFrequency="1"
                         ToolTip="Rate the cleanliness of the accommodation"
                         Value="{Binding CleanlinessRating, UpdateSourceTrigger=PropertyChanged}" />-->
-                    <RadioButton  Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">2</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">3</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">4</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">5</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">1</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">2</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">3</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">4</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">5</RadioButton>
 
                     <!--<TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sCleanliness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />-->
                 </StackPanel>
@@ -94,11 +94,11 @@
                         ToolTip="Rate the correctness of the owner"
                         Value="{Binding OwnerCorrectness, UpdateSourceTrigger=PropertyChanged}" />-->
                     <!--<TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sOwnerCorrectness, Path=Value, UpdateSourceTrigger=PropertyChanged}" />-->
-                    <RadioButton  Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">2</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">3</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">4</RadioButton>
-                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">5</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">1</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">2</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">3</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">4</RadioButton>
+                    <RadioButton Margin="20,0,0,10" VerticalAlignment="Center">5</RadioButton>
                 </StackPanel>
                 <TextBlock
                     Margin="10,10,0,10"
@@ -109,7 +109,7 @@
                     x:Name="tbAdditionalComment"
                     Width="300"
                     Height="110"
-                    Margin="20,10,0,0"
+                    Margin="20,0,0,10"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     AcceptsReturn="True"
@@ -117,7 +117,7 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto" />
                 <TextBlock
-                    Margin="10,10,0,10"
+                    Margin="10,10,0,0"
                     Padding="10"
                     HorizontalAlignment="Left"
                     Text="Post a picture url" />
@@ -137,9 +137,31 @@
                     Margin="0,20,130,0"
                     HorizontalAlignment="Right"
                     Command="{Binding RateAOwnerCommand}"
-                    Content="Rate" 
-                    ToolTip="Fill in all the required fields and rate the accommodation and the owner"/>
+                    Content="Rate"
+                    ToolTip="Fill in all the required fields and rate the accommodation and the owner" />
             </StackPanel>
+
+
+            <Separator
+                Grid.ColumnSpan="2"
+                Width="626"
+                Height="1000"
+                Margin="54,-237,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                BorderBrush="Black"
+                BorderThickness="10"
+                RenderTransformOrigin="0.495,0.45">
+                <Separator.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="90" />
+                        <TranslateTransform X="78" Y="47.21" />
+                    </TransformGroup>
+                </Separator.RenderTransform>
+            </Separator>
+
             <StackPanel Grid.Column="1">
                 <Label Margin="10,10,0,10" Content="State of accommodation" />
                 <TextBox
@@ -153,7 +175,7 @@
                     TextWrapping="Wrap"
                     VerticalScrollBarVisibility="Auto" />
                 <Label Margin="15,10,0,10" Content="Renovation urgency" />
-                <StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+                <StackPanel Margin="0,0,0,20" Orientation="Horizontal">
                     <!--<Slider
                         x:Name="sRenovationUrgency"
                         Width="150"
@@ -167,7 +189,7 @@
                         ToolTip="Rate the correctness of the owner"
                         Value="{Binding UrgencyLevel, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Margin="20,10,0,10" Text="{Binding ElementName=sRenovationUrgency, Path=Value, UpdateSourceTrigger=PropertyChanged}" />-->
-                    <RadioButton  Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
+                    <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">1</RadioButton>
                     <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">2</RadioButton>
                     <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">3</RadioButton>
                     <RadioButton Margin="20,0,0,0" VerticalAlignment="Center">4</RadioButton>
