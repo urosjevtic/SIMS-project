@@ -14,17 +14,17 @@ namespace InitialProject.Validation
         {
             if (value == null)
             {
-                return new ValidationResult(false, "Value cannot be null.");
+                return new ValidationResult(false, "Value can't be null");
             }
 
             if (!int.TryParse(value.ToString(), out int number))
             {
-                return new ValidationResult(false, "Value must be a valid number.");
+                return new ValidationResult(false, "Must be valid");
             }
 
             if (number <= 0)
             {
-                return new ValidationResult(false, "Value must be greater than zero.");
+                return new ValidationResult(false, "Must be > 0");
             }
 
             return ValidationResult.ValidResult;

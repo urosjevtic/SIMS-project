@@ -19,7 +19,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
     {
 
         private readonly RenovationService _renovationService;
-        private readonly Accommodation _accommodation;
+        public Accommodation Accommodation { get; set; }
         private readonly User _logedInUser;
         private readonly AccommodationReservationService _accommodationReservationService;
         public NavigationService NavigationService { get; set; }
@@ -27,7 +27,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         {
             _renovationService = new RenovationService();
             _accommodationReservationService = new AccommodationReservationService();
-            _accommodation = accommodation;
+            Accommodation = accommodation;
             _logedInUser = logedInUser;
             NavigationService = navigationService;
             _renovationDescription = renovationDescription;
@@ -52,7 +52,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             set
             {
                 _fromDate = value;
-                AvailableDates = _renovationService.FindAvailableDates(_accommodation.Id, _fromDate, _toDate, _renovationLength);
+                AvailableDates = _renovationService.FindAvailableDates(Accommodation.Id, _fromDate, _toDate, _renovationLength);
                 OnPropertyChanged("FromDate");
             }
         }
@@ -65,7 +65,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             set
             {
                 _toDate = value;
-                AvailableDates = _renovationService.FindAvailableDates(_accommodation.Id, _fromDate, _toDate, _renovationLength);
+                AvailableDates = _renovationService.FindAvailableDates(Accommodation.Id, _fromDate, _toDate, _renovationLength);
                 OnPropertyChanged("ToDate");
             }
         }
@@ -78,7 +78,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             set
             {
                 _renovationLength = value;
-                AvailableDates = _renovationService.FindAvailableDates(_accommodation.Id, _fromDate, _toDate, _renovationLength);
+                AvailableDates = _renovationService.FindAvailableDates(Accommodation.Id, _fromDate, _toDate, _renovationLength);
                 OnPropertyChanged("RenovationLength");
             }
         }
@@ -112,7 +112,7 @@ namespace InitialProject.ViewModels.RenovationsViewModel
 
         private void ScheduleRenovation()
         {
-            _renovationService.ScheduleRenovation(_accommodation, _selectedStartDate, _renovationLength, _renovationDescription);
+            _renovationService.ScheduleRenovation(Accommodation, _selectedStartDate, _renovationLength, _renovationDescription);
             NavigationService.Navigate(new ScheduleRenovationListView(_logedInUser, NavigationService));
         }
 

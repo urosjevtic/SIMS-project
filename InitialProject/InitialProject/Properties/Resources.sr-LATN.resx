@@ -234,6 +234,9 @@
   <data name="Delete" xml:space="preserve">
     <value>Obriši</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Opis:</value>
+  </data>
   <data name="Download" xml:space="preserve">
     <value>Preuzmi</value>
   </data>

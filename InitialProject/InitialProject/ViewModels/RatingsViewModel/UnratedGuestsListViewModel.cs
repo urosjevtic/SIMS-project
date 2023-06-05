@@ -27,10 +27,13 @@ namespace InitialProject.ViewModels.RatingsViewModel
         public UnratedGuestsListViewModel(User logedInUser, NavigationService navigationService)
         {
             _unratedGuestService = new UnratedGuestService();
+            
             UnratedGuests = new ObservableCollection<UnratedGuest>(_unratedGuestService.GetUnratedGuestsByOwnerId(logedInUser.Id));
             _logedInUser = logedInUser;
             NavigationService = navigationService;
         }
+
+
 
         public ICommand OpenRatingWindowCommand => new RelayCommandWithParams(OpenRatingWindow);
         private void OpenRatingWindow(object parameter)

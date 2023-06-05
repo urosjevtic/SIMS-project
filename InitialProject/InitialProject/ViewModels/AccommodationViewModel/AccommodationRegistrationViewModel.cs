@@ -178,7 +178,7 @@ namespace InitialProject.ViewModels
 
         private bool CanRegistrate()
         {
-            return !(_accommodationName == null || _country == null || _city == null || _accommodationTypes == null || _maxGuests <= 0 || _minReservationDays <= 0 || _imagesUrl == null);
+            return !(_accommodationName == null || _country == null || _city == null || _accommodationTypes == null || _maxGuests <= 0 || _minReservationDays <= 0 || !_urlList.Any());
         }
         public ICommand GoBackCommand => new RelayCommand(GoBack);
 

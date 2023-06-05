@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
       xmlns:ns="clr-namespace:InitialProject.Utilities"
       mc:Ignorable="d" 
-      Title="RenovationSugestionView" Height="637" Width="345">
+      Title="RenovationSugestionView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -59,6 +59,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
                             <!--Accommodation name-->
                             <TextBlock Text="{Binding Reservation.Accommodation.Name}" 
@@ -68,24 +69,32 @@
                            Foreground="{DynamicResource TextColor}"
                            Margin="10,10,10,0"/>
                             <!--Location-->
+
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Country}" 
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource TextColor}"
-                               Margin="0,0,5,0"/>
-                                <TextBlock
-                                    Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.Accommodation.Country}" />
-                                <TextBlock  Foreground="{DynamicResource TextColor}" Margin="10,0" Text="{ns:Loc City}" 
-                                            FontWeight="Bold"/>
-                                <TextBlock  Foreground="{DynamicResource TextColor}" Text="{Binding Location.City}" />
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Reservation.Accommodation.Location.Country}"
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                            <StackPanel Margin="10,5" Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc City}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}" />
+                                <TextBlock Text="{Binding Reservation.Accommodation.Location.City}" 
+                                           Foreground="{DynamicResource TextColor}" />
                             </StackPanel>
                             <!--Sugestion-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                            <TextBlock Grid.Row="3" Margin="10,5,10,0" Text="{ns:Loc Description}" 
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource TextColor}" />
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
                                 <TextBlock  Foreground="{DynamicResource TextColor}" Text="{Binding Recommendation}" 
                                             Margin="0,0,5,0"/>
                             </StackPanel>
                             <!--Renovation urgency-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
                                 <TextBlock Text="{ns:Loc Renovation_urgency}" 
                                FontWeight="Bold"
                                Foreground="{DynamicResource TextColor}"
@@ -93,7 +102,7 @@
                                 <TextBlock Text="{Binding UrgencyLevel}"  Foreground="{DynamicResource TextColor}" />
                             </StackPanel>
 
-                            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Grid.Row="6" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="{ns:Loc Proceed}" Style="{StaticResource ConfirmButtonStyle}" 
                                         Margin="10, 5"
                                         Command="{Binding DataContext.ScheduleRenovationCommand, ElementName=sugestionsListBox}"

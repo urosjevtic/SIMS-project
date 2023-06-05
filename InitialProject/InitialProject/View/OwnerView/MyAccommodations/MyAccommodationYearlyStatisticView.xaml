@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="MyAccommodationYearlyStatisticView" Height="637" Width="345">
+        Title="MyAccommodationYearlyStatisticView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -32,7 +32,7 @@
 
             <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding Accommodation.Name}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
-            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="10,5" >
+            <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,5" >
                 <TextBlock Text="{ns:Loc Country}" 
                            Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"
@@ -48,7 +48,7 @@
 
 
 
-            <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,5">
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
                 <TextBlock Text="{ns:Loc Buisiest_year}" 
                            Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"

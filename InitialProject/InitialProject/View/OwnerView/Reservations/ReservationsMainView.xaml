@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Reservations"
         mc:Ignorable="d"
-        Title="ReservationsMainView" Height="637" Width="345">
+        Title="ReservationsMainView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource LighterBackground}" />
     </Page.Background>

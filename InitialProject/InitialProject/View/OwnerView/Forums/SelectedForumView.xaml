@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Forums"
       mc:Ignorable="d" 
       xmlns:ns="clr-namespace:InitialProject.Utilities"
-      Title="SelectedForumView" Height="637" Width="345">
+      Title="SelectedForumView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -36,24 +36,25 @@
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
                     <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <!--Location-->
                 <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
-                    <TextBlock Text="{ns:Loc Country}" 
+                    <TextBlock Text="{Binding SelectedForum.Location.Country}" 
                                FontWeight="Bold"
                                Foreground="{DynamicResource TextColor}"
-                               Margin="0,0,5,0"/>
-                    <TextBlock Text="{Binding SelectedForum.Location.Country}"
-                                           Foreground="{DynamicResource TextColor}"/>
-                    <TextBlock Margin="10,0" Text="{ns:Loc City}" 
-                                           Foreground="{DynamicResource TextColor}"
-                               FontWeight="Bold"/>
+                               FontSize="20"/>
+                    <TextBlock Text=", "
+                               Foreground="{DynamicResource TextColor}"
+                               FontSize="20"/>
                     <TextBlock Text="{Binding SelectedForum.Location.City}" 
-                                           Foreground="{DynamicResource TextColor}"/>
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource TextColor}"
+                               FontSize="20"/>
                 </StackPanel>
                 <!--Author-->
-                <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
                     <TextBlock Text="{ns:Loc Author}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -62,7 +63,7 @@
                                            Foreground="{DynamicResource TextColor}"/>
                 </StackPanel>
                 <!--creation date-->
-                <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
                     <TextBlock Text="{ns:Loc Creation_date}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"

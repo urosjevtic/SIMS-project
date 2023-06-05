@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Settings"
       mc:Ignorable="d" 
-      Title="OwnerSettingsView" Height="637" Width="345">
+      Title="OwnerSettingsView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource LighterBackground}" />
     </Page.Background>

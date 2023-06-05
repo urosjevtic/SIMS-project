@@ -28,5 +28,10 @@ namespace InitialProject.View.OwnerView.MyAccommodations
             InitializeComponent();
             DataContext = new AccommodationRegistrationViewModel(logedInUser, navigationService, country, city);
         }
+
+        private void CityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

@@ -7,7 +7,7 @@
         xmlns:rating="clr-namespace:InitialProject.View.OwnerView"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="GuestRatingFormView" Height="637" Width="345">
+        Title="GuestRatingFormView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>

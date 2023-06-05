@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="RescheduleRequestView" Height="700" Width="345">
+        Title="RescheduleRequestView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -56,6 +56,9 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <!--Guest username-->
@@ -77,7 +80,7 @@
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.Accommodation.Name}" />
                             </StackPanel>
                             <!--Initial start and end date-->
-                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{ns:Loc Initial_date}" Grid.Row="2"></TextBlock>
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{ns:Loc Initial_date}" FontWeight="Bold" Grid.Row="2" Margin="10,5"></TextBlock>
 
 
 
@@ -87,23 +90,33 @@
                                            Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
+
+
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
-
+                            <TextBlock Grid.Row="5" Text="------------------------------" 
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource TextColor}"
+                                       Margin="0,0,5,0"/>
                             <!--New start and end date-->
-                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{ns:Loc New_date}" Grid.Row="4"></TextBlock>
+                            <TextBlock Foreground="{DynamicResource TextColor}" Text="{ns:Loc New_date}" Grid.Row="6" FontWeight="Bold" Margin="10,5"></TextBlock>
 
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="7">
                                 <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding RescheduleStartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="8">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc End_date}" 
                                            Foreground="{DynamicResource TextColor}"
                                            FontWeight="Bold"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding RescheduleEndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
@@ -111,7 +124,7 @@
 
                             <!--Is already reserved-->
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="6">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="9">
                                 <TextBlock Text="{ns:Loc Is_already_ocupied}" 
                                            Foreground="{DynamicResource TextColor}"
                                            FontWeight="Bold"
@@ -119,7 +132,7 @@
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding IsAlreadyReserved}" />
                             </StackPanel>
 
-                            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <StackPanel Grid.Row="10" Orientation="Horizontal" HorizontalAlignment="Center">
                                 <Button Content="{ns:Loc Reschedule}" Style="{StaticResource ConfirmButtonStyle}" 
                                         Margin="10, 5"
                                         Command="{Binding DataContext.ApproveRescheduleCommand, ElementName=reschedulingListBox}"
