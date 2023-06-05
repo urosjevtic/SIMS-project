@@ -17,12 +17,14 @@ namespace InitialProject.Repository.AccommodationRepo
 
         private readonly Serializer<Accommodation> _serializer;
         private readonly LocationRepository _locationRepository;
+        private readonly ImageRepository _imageRepository;
 
         private List<Accommodation> _accommodations;
 
         public AccommodationRepository()
         {
             _locationRepository = new LocationRepository();
+            _imageRepository = new ImageRepository();
             _serializer = new Serializer<Accommodation>();
             _accommodations = _serializer.FromCSV(FilePath);
         }
@@ -53,6 +55,7 @@ namespace InitialProject.Repository.AccommodationRepo
             foreach (Accommodation accommodation in accommodations)
             {
                 accommodation.Location = _locationRepository.GetById(accommodation.Location.Id);
+                accommodation.Images = _imageRepository.GetById(accommodation.Images.Id);
             }
 
             return accommodations;

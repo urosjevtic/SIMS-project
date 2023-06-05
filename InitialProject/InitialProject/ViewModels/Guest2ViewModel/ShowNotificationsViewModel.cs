@@ -23,7 +23,7 @@ namespace InitialProject.ViewModels.Guest2ViewModel
         public ICommand OkCommandTemplate { get; set; }
         public ICommand YesCommand { get; set; }
         public ICommand NoCommand { get; set; }
-        public List<Notification> ListNotifications { get; set; }
+        public List<Domain.Model.Notification> ListNotifications { get; set; }
         public TourGuest Guest { get; set; }
 
         private ObservableCollection<TourNotification> _tourNotifications;

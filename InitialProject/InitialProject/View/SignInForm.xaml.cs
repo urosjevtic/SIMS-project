@@ -86,7 +86,6 @@ namespace InitialProject
             {
                 MessageBox.Show("Wrong username!");
             }
-            
         }
     }
 }

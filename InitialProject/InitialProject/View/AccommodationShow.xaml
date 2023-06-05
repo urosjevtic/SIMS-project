@@ -7,6 +7,7 @@
     xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:notifications="clr-namespace:Notification.Wpf.Controls;assembly=Notification.Wpf"
     xmlns:properties="clr-namespace:InitialProject.Properties"
     xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
     Title="AccommodationShow"
@@ -53,10 +54,10 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
+                    <!--<RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="2*" />
-                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />-->
                     <!--<RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="57*" />-->
@@ -68,7 +69,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Width="200"
-                    Margin="0,5,0,5"
+                    Margin="0,10,0,5"
                     HorizontalAlignment="Center"
                     Content="Show tooltips"
                     IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowTooltips}"
@@ -80,159 +81,166 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Width="200"
-                    Margin="0,5,0,5"
+                    Margin="0,5,0,10"
                     HorizontalAlignment="Center"
                     Content="Show wizard  "
                     IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowWizard}"
                     Style="{StaticResource ResourceKey=ToggleSwitch}"
                     ToolTip="Show wizard on next application startup" />
-                <Image
+                <Button
                     Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Width="200"
+                    Height="40"
+                    Margin="10,10,10,10"
+                    Content="help" />
+                <Image
+                    Grid.Row="3"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Width="100"
                     Margin="0,5,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Source="/Resources/Images/user.png" />
+                    Source="/Resources/Images/logo.png" />
 
-                <!--<Button
-                    Name="HomePageButton"
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Height="40"
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="LightGray"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="AccommodationListPage"
-                    Content="Home page" />-->
-
-
-
-                <Button
-                    Name="SearchButton"
+                <Grid
+                    x:Name="SideMenuButtonsGrid"
                     Grid.Row="4"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Height="40"
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="LightGray"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="AccommodationSearchPage"
-                    ToolTip="Search for available accommodation">
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterialDesign
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="Black"
-                            Kind="Home" />
-                        <TextBlock Margin="5,0,0,0" Text="Accommodations" />
-                    </StackPanel>
-                </Button>
+                    Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Button
+                        Name="SearchButton"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Center"
+                        Background="LightGray"
+                        BorderBrush="LightGray"
+                        Click="MenuButton_Click"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="AccommodationSearchPage"
+                        ToolTip="Search for available accommodation">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Home" />
+                            <TextBlock Margin="5,0,0,0" Text="Accommodations" />
+                        </StackPanel>
+                    </Button>
 
-                <Button
-                    Name="AnywhereButton"
+                    <Button
+                        Name="AnywhereButton"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Center"
+                        Background="LightGray"
+                        BorderBrush="LightGray"
+                        Click="MenuButton_Click"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="AnywhereWheneverPage"
+                        ToolTip="Search for available accommodation anywhere and on any date">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Hotel" />
+                            <TextBlock Margin="5,0,0,0" Text="Anywhere/Whenever" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Name="PreviousTripButton"
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Center"
+                        Background="LightGray"
+                        BorderBrush="LightGray"
+                        Click="MenuButton_Click"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="PreviousTripPage"
+                        ToolTip="View your previous booking">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Place" />
+                            <TextBlock Margin="5,0,0,0" Text="Previous trip" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Name="MyResrvationsButton"
+                        Grid.Row="3"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Center"
+                        Background="LightGray"
+                        BorderBrush="LightGray"
+                        Click="MenuButton_Click"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="MyReservationsPage"
+                        ToolTip="Display upcoming bookings">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="PermContactCalendar" />
+                            <TextBlock Margin="5,0,0,0" Text="My reservation" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Name="ForumButton"
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Height="40"
+                        Margin="0,10,0,10"
+                        HorizontalAlignment="Center"
+                        Background="LightGray"
+                        BorderBrush="LightSlateGray"
+                        Click="MenuButton_Click"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="ForumPage"
+                        ToolTip="Open and start the forum">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="chat" />
+                            <TextBlock Margin="5,0,0,0" Text="Forum" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+                <Grid
                     Grid.Row="5"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Width="200"
-                    Height="40"
                     Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="LightGray"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="AnywhereWheneverPage"
-                    ToolTip="Search for available accommodation anywhere and on any date">
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterialDesign
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="Black"
-                            Kind="Hotel" />
-                        <TextBlock Margin="5,0,0,0" Text="Anywhere/Whenever" />
-                    </StackPanel>
-                </Button>
-                <Button
-                    Name="PreviousTripButton"
-                    Grid.Row="6"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Height="40"
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="LightGray"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="PreviousTripPage"
-                    ToolTip="View your previous booking">
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterialDesign
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="Black"
-                            Kind="Place" />
-                        <TextBlock Margin="5,0,0,0" Text="Previous trip" />
-                    </StackPanel>
-                </Button>
-                <Button
-                    Name="MyResrvationsButton"
-                    Grid.Row="7"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Height="40"
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="LightGray"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="MyReservationsPage"
-                    ToolTip="Display upcoming bookings">
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterialDesign
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="Black"
-                            Kind="CardTravel" />
-                        <TextBlock Margin="5,0,0,0" Text="My reservation" />
-                    </StackPanel>
-                </Button>
-                <Button
-                    Name="ForumButton"
-                    Grid.Row="8"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Width="200"
-                    Height="40"
-                    Margin="0,10,0,10"
-                    HorizontalAlignment="Center"
-                    Background="LightGray"
-                    BorderBrush="LightSlateGray"
-                    Command="{Binding NavigateCommand}"
-                    CommandParameter="AccommodationRatingFormPage"
-                    ToolTip="Open and start the forum">
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterialDesign
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="Black"
-                            Kind="chat" />
-                        <TextBlock Margin="5,0,0,0" Text="Forum" />
-                    </StackPanel>
-                </Button>
-                <Grid
-                    Grid.Row="9"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="2"
-                    Margin="0,10,0,0"
                     Background="DarkCyan">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -298,7 +306,7 @@
                         Grid.Column="0"
                         Grid.ColumnSpan="2"
                         Width="200"
-                        Margin="0,5,0,5"
+                        Margin="0,5,0,10"
                         HorizontalAlignment="Center"
                         Content="Number of points" />
                     <Label
@@ -306,22 +314,22 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="100"
-                        Margin="0,5,0,5"
+                        Margin="0,5,0,10"
                         HorizontalAlignment="Left"
                         Content="{Binding bonus}" />
                 </Grid>
                 <Button
                     Name="SignOutButton"
-                    Grid.Row="13"
+                    Grid.Row="6"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Width="200"
                     Height="40"
-                    Margin="0,10,0,10"
+                    Margin="0,15,0,10"
                     HorizontalAlignment="Center"
                     Background="LightGray"
                     BorderBrush="LightGray"
-                    Click="Button_Click"
+                    Click="SignOutButton_Click"
                     Command="{Binding NavigateCommand}"
                     CommandParameter="SignInForm"
                     ToolTip="Sign out and return to LogIn page">
@@ -330,7 +338,7 @@
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Foreground="Black"
-                            Kind="Router" />
+                            Kind="OpenInBrowser" />
                         <TextBlock Margin="5,0,0,0" Text="Sign out" />
                     </StackPanel>
                 </Button>
@@ -385,18 +393,25 @@
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 Foreground="Black"
-                                Kind="List" />
+                                Kind="Notifications" />
                             <TextBlock Margin="5,0,0,0" Text="Notifications" />
                         </StackPanel>
                     </Button>
-
                 </Grid>
 
-                <Frame
-                    x:Name="NavigationFrame"
-                    DockPanel.Dock="Bottom"
-                    NavigationUIVisibility="Hidden"
-                    Source="AccommodationSearchPage.xaml" />
+
+                <Grid DockPanel.Dock="Bottom">
+                    <notifications:NotificationArea
+                        x:Name="WindowNotificationArea"
+                        Panel.ZIndex="1000"
+                        MaxItems="3"
+                        Position="TopRight" />
+
+                    <Frame
+                        x:Name="NavigationFrame"
+                        NavigationUIVisibility="Hidden"
+                        Source="AccommodationSearchPage.xaml" />
+                </Grid>
             </DockPanel>
         </Border>
     </Grid>

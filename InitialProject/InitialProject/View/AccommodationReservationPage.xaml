@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ns="clr-namespace:InitialProject.Utilities"
@@ -219,8 +220,16 @@
                         HorizontalAlignment="Left"
                         Background="LightGray"
                         BorderBrush="LightGray"
-                        Content="Search"
-                        ToolTip="Search on which dates the accommodation is available" />
+                        ToolTip="Search on which dates the accommodation is available">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Search" />
+                            <TextBlock Margin="5,0,0,0" Text="Search" />
+                        </StackPanel>
+                    </Button>
                     <Grid Grid.Row="6">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="350" />
@@ -248,7 +257,7 @@
                                     Header="End date" />
                                 <DataGridTextColumn
                                     Width="*"
-                                    Binding="{Binding Path=EndDate}"
+                                    Binding="{Binding Button}"
                                     Header="Reserve" />
                             </DataGrid.Columns>
                         </DataGrid>

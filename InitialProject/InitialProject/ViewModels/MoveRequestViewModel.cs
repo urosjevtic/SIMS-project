@@ -8,13 +8,31 @@ using System.Windows.Navigation;
 
 namespace InitialProject.ViewModels
 {
-    public class MoveRequestViewModel
+    public class MoveRequestViewModel : BaseViewModel
     {
-        public AccommodationReservation SelectedReservation;
+        private AccommodationReservation _selectedReservation;
         public NavigationService _navigationService;
-        public MoveRequestViewModel(AccommodationReservation selectedReservation)
+
+        public AccommodationReservation SelectedReservation
         {
-            //_navigationService= navigationService;
+            get
+            {
+                return _selectedReservation;
+            }
+            set
+            {
+                if(value != _selectedReservation)
+                {
+                    _selectedReservation = value;
+                    OnPropertyChanged(nameof(SelectedReservation));
+                }
+            }
+        }
+
+
+        public MoveRequestViewModel(AccommodationReservation selectedReservation, NavigationService navigationService)
+        {
+            _navigationService= navigationService;
             SelectedReservation = selectedReservation;
         }
     }

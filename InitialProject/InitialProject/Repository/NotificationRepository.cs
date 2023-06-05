@@ -13,27 +13,27 @@ namespace InitialProject.Repository
     {
         private const string FilePath = "../../../Resources/Data/notifications.csv";
 
-        private readonly Serializer<Notification> _serializer;
+        private readonly Serializer<Domain.Model.Notification> _serializer;
 
-        private List<Notification> _notifications;
+        private List<Domain.Model.Notification> _notifications;
 
         public NotificationRepository()
         {
-            _serializer = new Serializer<Notification>();
+            _serializer = new Serializer<Domain.Model.Notification>();
             _notifications = _serializer.FromCSV(FilePath);
         }
 
-        public List<Notification> GetAll()
+        public List<Domain.Model.Notification> GetAll()
         {
             return _serializer.FromCSV(FilePath);
         }
 
-        public Notification FindById(int id)
+        public Domain.Model.Notification FindById(int id)
         {
-            Notification notification = new Notification();
-            List<Notification> notifications = new List<Notification>();
+            Domain.Model.Notification notification = new Domain.Model.Notification();
+            List<Domain.Model.Notification> notifications = new List<Domain.Model.Notification>();
             notifications = GetAll();
-            foreach (Notification not in notifications)
+            foreach (Domain.Model.Notification not in notifications)
             {
                 if (not.Id == id)
                 {
@@ -43,10 +43,10 @@ namespace InitialProject.Repository
             }
             return notification;
         }
-        public List<Notification> GetAllById(int id)
+        public List<Domain.Model.Notification> GetAllById(int id)
         {
-            List<Notification> notifications = new List<Notification>();
-            foreach (Notification not in GetAll())
+            List<Domain.Model.Notification> notifications = new List<Domain.Model.Notification>();
+            foreach (Domain.Model.Notification not in GetAll())
             {
                 if (not.GuestId == id && not.IsChecked == false)
                 {
@@ -56,7 +56,7 @@ namespace InitialProject.Repository
             return notifications;
         }
 
-        public void Save(Notification notification)
+        public void Save(Domain.Model.Notification notification)
         {
             notification.Id = NextId();
             _notifications = _serializer.FromCSV(FilePath);
@@ -74,20 +74,20 @@ namespace InitialProject.Repository
             return _notifications.Max(c => c.Id) + 1;
         }
 
-        public void Delete(Notification notification)
+        public void Delete(Domain.Model.Notification notification)
         {
             _notifications = _serializer.FromCSV(FilePath);
-            Notification founded = _notifications.Find(c => c.Id == notification.Id);
+            Domain.Model.Notification founded = _notifications.Find(c => c.Id == notification.Id);
             _notifications.Remove(founded);
             _serializer.ToCSV(FilePath, _notifications);
         }
-        public void SaveAll(List<Notification> notifications)
+        public void SaveAll(List<Domain.Model.Notification> notifications)
         {
             _serializer.ToCSV(FilePath, notifications);
         }
-        public void Update(Notification notification)
+        public void Update(Domain.Model.Notification notification)
         {
-            Notification newNotifcation = _notifications.Find(p1 => p1.Id == notification.Id);
+            Domain.Model.Notification newNotifcation = _notifications.Find(p1 => p1.Id == notification.Id);
             newNotifcation.Id = notification.Id;
             newNotifcation.GuestId = notification.GuestId;
             newNotifcation.TourId = notification.TourId;
@@ -99,7 +99,7 @@ namespace InitialProject.Repository
         public void DeleteAll()
         {
             _notifications = _serializer.FromCSV(FilePath);
-            foreach(Notification notification in _notifications)
+            foreach(Domain.Model.Notification notification in _notifications)
             {
                 Delete(notification);
             }

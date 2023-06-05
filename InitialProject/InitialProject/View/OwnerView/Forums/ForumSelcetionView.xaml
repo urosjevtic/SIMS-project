@@ -7,11 +7,11 @@
       xmlns:ns="clr-namespace:InitialProject.Utilities"
       mc:Ignorable="d" 
       Title="ForumSelcetionView" Height="637" Width="345">
-    <Page.Background>
+    <!--<Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
-    </Page.Background>
+    </Page.Background>-->
 
-    <Grid>
+    <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>

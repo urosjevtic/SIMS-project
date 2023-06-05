@@ -1,14 +1,17 @@
-﻿using InitialProject.Domain.Model;
+﻿using ceTe.DynamicPDF.PageElements;
+using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Service;
 using InitialProject.Service.RenovationServices;
 using InitialProject.Service.ReportService;
 using InitialProject.Service.ReportServices;
 using InitialProject.Utilities;
+using InitialProject.View;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -44,7 +47,13 @@ namespace InitialProject.ViewModels
 
         private void GeneratePdf()
         {
-            _guestReportService.GenerateRenovationReport();
+            string fileName = "Reviews Report - " + DateTime.Now.ToString("dd.MM.yyyy") + ".pdf";
+            string filePath = "../../../Reports/" + fileName;
+
+            string absoluteFilePath = System.IO.Path.GetFullPath(filePath);
+
+            _guestReportService.GenerateReviewsReport(absoluteFilePath);
+            this.NavigationService.Navigate(new PDFViewerPage(absoluteFilePath));
         }
     }
 }

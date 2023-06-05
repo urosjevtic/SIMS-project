@@ -1,4 +1,4 @@
-﻿using System;
+﻿  using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,11 +10,14 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Users;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Utilities;
+using Notification.Wpf;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace InitialProject.ViewModels
 {
     public class MainWindowViewModel
     {
+        private NotificationManager _notificationManager;
         private NavigationService _navigationService;
         public SuperGuestService _superGuestService;
         public ICommand NavigateCommand => new RelayCommand<string>(OnNavigateTo);
@@ -35,6 +38,11 @@ namespace InitialProject.ViewModels
         public MainWindowViewModel(NavigationService navigationService)
         {
             _navigationService = navigationService;
+            _notificationManager = new NotificationManager();
+
+            //Subscribe to notifications
+            Messenger.Default.Register<ToastNotification>(this, ShowToastNotification);
+
             //bonus = _superGuestService.GetNumberOfPoints(App.LoggedUser.Id);
          }
 
@@ -64,6 +72,11 @@ namespace InitialProject.ViewModels
         private void OnSaveSettings()
         {
             Properties.Settings.Default.Save();
+        }
+
+        private void ShowToastNotification(ToastNotification notification)
+        {
+            _notificationManager.Show(notification.Title, notification.Message, notification.Type, "WindowNotificationArea");
         }
     }
 }

@@ -37,7 +37,20 @@ namespace InitialProject.Domain.Model.Forums
             }
         }
 
-        public bool IsOpen { get; set; }
+        private bool _isOpen;
+
+        public bool IsOpen
+        {
+            get { return _isOpen; }
+            set
+            {
+                if (_isOpen != value)
+                {
+                    _isOpen = value;
+                    OnPropertyChanged(nameof(IsOpen));
+                }
+            }
+        }
 
 
         public Forum()

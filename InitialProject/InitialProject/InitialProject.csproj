@@ -9,88 +9,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Images\activeTour.png" />
-    <None Remove="Resources\Images\add.png" />
-    <None Remove="Resources\Images\burgerBar.png" />
-    <None Remove="Resources\Images\burgerBarWhite.png" />
-    <None Remove="Resources\Images\clipboard1.png" />
-    <None Remove="Resources\Images\comment.png" />
-    <None Remove="Resources\Images\covjeculjakBijeli.png" />
-    <None Remove="Resources\Images\delete.png" />
-    <None Remove="Resources\Images\earth.jpg" />
-    <None Remove="Resources\Images\earth.png" />
-    <None Remove="Resources\Images\edit.png" />
-    <None Remove="Resources\Images\forums.png" />
-    <None Remove="Resources\Images\gift-card1.png" />
-    <None Remove="Resources\Images\go-back-arrow.png" />
-    <None Remove="Resources\Images\grafikBijeli.png" />
-    <None Remove="Resources\Images\log-out1.png" />
     <None Remove="Resources\Images\logo.png" />
-    <None Remove="Resources\Images\logopdf.png" />
-    <None Remove="Resources\Images\magnifying-glass.png" />
-    <None Remove="Resources\Images\more.png" />
-    <None Remove="Resources\Images\myAccommodation.png" />
-    <None Remove="Resources\Images\myToursBijela.png" />
-    <None Remove="Resources\Images\notes.png" />
     <None Remove="Resources\Images\notification.png" />
-    <None Remove="Resources\Images\not_reported .png" />
-    <None Remove="Resources\Images\owner.png" />
-    <None Remove="Resources\Images\paper-32.png" />
-    <None Remove="Resources\Images\pausee.png" />
-    <None Remove="Resources\Images\pehar.png" />
-    <None Remove="Resources\Images\next.png" />
-    <None Remove="Resources\Images\next1.png" />
-    <None Remove="Resources\Images\no.png" />
-    <None Remove="Resources\Images\notes.png" />
-    <None Remove="Resources\Images\notification.png" />
-    <None Remove="Resources\Images\open-book.png" />
-    <None Remove="Resources\Images\notificationNew.png" />
-    <None Remove="Resources\Images\paper-32.png" />
-    <None Remove="Resources\Images\pencil.png" />
-    <None Remove="Resources\Images\personBlue.png" />
-    <None Remove="Resources\Images\play-button.png" />
-    <None Remove="Resources\Images\quote-request - Copy.png" />
-    <None Remove="Resources\Images\quote-request.png" />
-    <None Remove="Resources\Images\quote-request1.png" />
-
-    <None Remove="Resources\Images\ratings.png" />
-
-    <None Remove="Resources\Images\remove.png" />
-    <None Remove="Resources\Images\renovations.png" />
-    <None Remove="Resources\Images\report.png" />
-    <None Remove="Resources\Images\reported.png" />
-    <None Remove="Resources\Images\requests.png" />
-    <None Remove="Resources\Images\reservations.png" />
-    <None Remove="Resources\Images\reviews.png" />
-    <None Remove="Resources\Images\settings.png" />
-    <None Remove="Resources\Images\star.png" />
-    <None Remove="Resources\Images\statistics.png" />
-
-
     <None Remove="Resources\Images\user.png" />
-    <None Remove="Resources\Images\view.png" />
-    <None Remove="Resources\Images\visited.png" />
-    <None Remove="Resources\Images\WizardImages\Screenshot1.png" />
-    <None Remove="Resources\Images\Wizard\Screenshot1.png" />
+    <None Remove="Resources\Images\WizardImages\Accommodations.png" />
+    <None Remove="Resources\Images\WizardImages\MyReservations.png" />
+    <None Remove="Resources\Images\WizardImages\PreviousTrip.png" />
+    <None Remove="Resources\Images\WizardImages\Reservation.png" />
+  </ItemGroup>
 
-
-    <None Remove="Resources\Images\tick.png" />
-    <None Remove="Resources\Images\trend.png" />
-    <None Remove="Resources\Images\upload.png" />
-
-    <None Remove="Resources\Images\statistic.png" />
-    <None Remove="Resources\Images\todayTours.png" />
-    <None Remove="Resources\Images\todayToursBijela.png" />
-    <None Remove="Resources\Images\TourReport.png" />
-    <None Remove="Resources\Images\tourRequests.png" />
-    <None Remove="Resources\Images\user.png" />
-    <None Remove="Resources\Images\tick.png" />
-    <None Remove="Resources\Images\trend.png" />
-    <None Remove="Resources\Images\upload.png" />
-    <None Remove="Resources\Images\view.png" />
-    <None Remove="Resources\Images\yes.png" />
-    <None Remove="Resources\Images\zvijezdaBijela.png" />
-
+  <ItemGroup>
+    <Resource Include="Resources\Images\WizardImages\MyReservations.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -103,176 +34,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\add.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\burgerBar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\burgerBarWhite.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\clipboard1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\comment.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\delete.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\earth.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\edit.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\forums.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\gift-card1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\go-back-arrow.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\log-out1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\logo.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\magnifying-glass.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\more.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\myAccommodation.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Content Include="Resources\Images\next1.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\no.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Content Include="Resources\Images\notification.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Content Include="Resources\Images\not_reported .png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\open-book.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\owner.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\paper-32.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Content Include="Resources\Images\notes.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\notification.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\open-book.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\paper-32.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\pencil.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\personBlue.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\play-button.png">
-		<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-	</Content>
-    <Content Include="Resources\Images\notificationNew.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\paper-32.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\quote-request - Copy.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\ratings.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\remove.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\renovations.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\report.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\reported.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\reservations.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\settings.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\star.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\statistics.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-
-    <Content Include="Resources\Images\user.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Content Include="Resources\Images\tick.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\trend.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\upload.png">
-
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\view.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\visited.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-    <Resource Include="Resources\Images\WizardImages\Screenshot1.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-
-    <Content Include="Resources\Images\yes.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\Images\logopdf.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94" />
     <PackageReference Include="DynamicPDF" Version="8.0.0" />
 
@@ -281,7 +42,9 @@
     <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.6" />
     <PackageReference Include="MahApps.Metro.IconPacks.MaterialDesign" Version="4.11.0" />
+    <PackageReference Include="MVVMLight.Messaging" Version="1.0.0" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
+    <PackageReference Include="Notification.Wpf" Version="7.0.0" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
   </ItemGroup>
 
@@ -312,56 +75,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Resources\Images\activeTour.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\covjeculjakBijeli.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\earth.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\grafikBijeli.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\myToursBijela.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\pausee.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\pehar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\requests.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\reviews.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\statistic.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\todayTours.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\todayToursBijela.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\TourReport.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Resources\Images\tourRequests.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Resource Include="Resources\Images\user.png" />
-    <Content Include="Resources\Images\zvijezdaBijela.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Update="Properties\Resources.sr-LATN.Designer.cs">
       <DependentUpon>Resources.sr-LATN.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -387,6 +100,23 @@
 
   <ItemGroup>
     <Folder Include="Reports\Guest\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Images\logo.png" />
+    <Content Include="Resources\Images\notification.png" />
+    <Resource Include="Resources\Images\user.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\WizardImages\Accommodations.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\WizardImages\PreviousTrip.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\WizardImages\Reservation.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

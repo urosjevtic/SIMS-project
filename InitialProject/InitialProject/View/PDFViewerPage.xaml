@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="InitialProject.View.PDFViewerPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:InitialProject.View"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="PdfViewerPage"
+    Title="PDFViewerPage"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    Unloaded="PdfViewerPage_Unloaded"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Grid.Row="0"
+            Margin="10,0,0,0"
+            FontSize="20"
+            Text="View Report" />
+        <WebBrowser
+            x:Name="PdfWebViewer"
+            Grid.Row="1"
+            Margin="10,30,10,0" />
+    </Grid>
+</Page>

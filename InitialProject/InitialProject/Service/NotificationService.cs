@@ -25,20 +25,20 @@ namespace InitialProject.Service
             _locationService = new LocationService();
         }
 
-        public List<Notification> GetAll()
+        public List<Domain.Model.Notification> GetAll()
         {
             return _notificationRepository.GetAll();
         }
-        public List<Notification> GetAllById(int id)
+        public List<Domain.Model.Notification> GetAllById(int id)
         {
             return _notificationRepository.GetAllById(id);
         }
-        public Notification FindById(int id)
+        public Domain.Model.Notification FindById(int id)
         {
             return _notificationRepository.FindById(id);
         }
 
-        public void Save(Notification notification)
+        public void Save(Domain.Model.Notification notification)
         {
             _notificationRepository.Save(notification);
         }
@@ -48,15 +48,15 @@ namespace InitialProject.Service
             return _notificationRepository.NextId();
         }
 
-        public void Delete(Notification notification)
+        public void Delete(Domain.Model.Notification notification)
         {
             _notificationRepository.Delete(notification);
         }
-        public void SaveAll(List<Notification> notifications)
+        public void SaveAll(List<Domain.Model.Notification> notifications)
         {
             _notificationRepository.SaveAll(notifications);
         }
-        public void Update(Notification notification)
+        public void Update(Domain.Model.Notification notification)
         {
             _notificationRepository.Update(notification);
         }
@@ -81,7 +81,7 @@ namespace InitialProject.Service
         }
         public void MakeNotification(int tourId, int IdUser)
         {
-            Notification notification = new Notification();
+            Domain.Model.Notification notification = new Domain.Model.Notification();
             notification.GuestId = IdUser;
             notification.TourId = tourId;
             notification.CheckPointId = -1;
@@ -91,7 +91,7 @@ namespace InitialProject.Service
         public List<TourNotification> GetToursForNotifications(int id)
         {
             List<TourNotification> list = new List<TourNotification>();
-            foreach(Notification notification in _notificationRepository.GetAllById(id))
+            foreach(Domain.Model.Notification notification in _notificationRepository.GetAllById(id))
             {
                 foreach(Tour tour in _tourService.GetAll())
                 {

@@ -2,7 +2,9 @@
     x:Class="InitialProject.View.PreviousTripPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:InitialProject.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
     xmlns:local="clr-namespace:InitialProject.View"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
@@ -12,7 +14,9 @@
     d:DesignWidth="800"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <converters:ImageListToFirstImageConverter x:Key="ImageListToFirstImageConverter" />
+    </Page.Resources>
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="50" />
@@ -26,7 +30,7 @@
         <Button
             Name="ViewButton"
             Grid.Column="3"
-            Width="100"
+            Width="120"
             Height="40"
             Margin="0,10,55,0"
             HorizontalAlignment="Right"
@@ -34,8 +38,16 @@
             Background="LightGray"
             BorderBrush="LightGray"
             Command="{Binding ElementName=PreviousTrip, Path=DataContext.ReviewsFromOwnersInfoCommand}"
-            Content="View recension"
-            ToolTip="See reviews given to you by the owner" />
+            ToolTip="See reviews given to you by the owner">
+            <StackPanel Orientation="Horizontal">
+                <iconPacks:PackIconMaterialDesign
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="Black"
+                    Kind="Star" />
+                <TextBlock Margin="5,0,0,0" Text="View recension" />
+            </StackPanel>
+        </Button>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -66,8 +78,16 @@
                 HorizontalAlignment="Left"
                 Background="LightGray"
                 BorderBrush="LightGray"
-                Content="Search"
-                ToolTip="Search trips by accommodation name and location" />
+                ToolTip="Search trips by accommodation name and location">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterialDesign
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Kind="Search" />
+                    <TextBlock Margin="5,0,0,0" Text="Search" />
+                </StackPanel>
+            </Button>
             <!--<Button
                 Name="ViewButton"
 
@@ -112,6 +132,12 @@
                                 <ColumnDefinition Width="150" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.Column="0"
+                                Width="150"
+                                Height="120"
+                                Margin="5,0,0,5"
+                                Source="{Binding Reservation.Accommodation.Images.Url, Converter={StaticResource ImageListToFirstImageConverter}}" />
                             <Grid Grid.Column="1" Margin="10,10,10,0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -168,8 +194,16 @@
                                         BorderBrush="LightGray"
                                         Command="{Binding DataContext.RateAccommodationInfoCommand, ElementName=PreviousTrip}"
                                         CommandParameter="{Binding}"
-                                        Content="Rate"
-                                        ToolTip="Rate the accommodation and make a recommendation for renovation" />
+                                        ToolTip="Rate the accommodation and make a recommendation for renovation">
+                                        <StackPanel Orientation="Horizontal">
+                                            <iconPacks:PackIconMaterialDesign
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Foreground="Black"
+                                                Kind="RateReview" />
+                                            <TextBlock Margin="5,0,0,0" Text="Rate" />
+                                        </StackPanel>
+                                    </Button>
                                 </StackPanel>
                             </Grid>
                         </Grid>

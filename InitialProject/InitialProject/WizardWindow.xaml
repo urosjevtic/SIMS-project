@@ -38,7 +38,7 @@
                 x:Name="IntroWizardPage"
                 Title="Welcome to Booking Application!"
                 Description="This Wizard will guide you through the user interface and the main functionalities of the application." />
-            <xctk:WizardPage
+            <!--<xctk:WizardPage
                 x:Name="WizardPage2"
                 Title="Home Page"
                 Description="This page shows all the accommodations that you can search for. You can also view new notifications."
@@ -46,15 +46,15 @@
                 PageType="Interior"
                 PreviousPage="{Binding ElementName=IntroWizardPage}">
                 <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
-            </xctk:WizardPage>
+            </xctk:WizardPage>-->
             <xctk:WizardPage
                 x:Name="WizardPage3"
                 Title="Search Accommodation"
                 Description="Here you can search for accommodation according to certain parameters and choose the one you want to look at in more detail."
                 NextPage="{Binding ElementName=WizardPage4}"
                 PageType="Interior"
-                PreviousPage="{Binding ElementName=WizardPage2}">
-                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+                PreviousPage="{Binding ElementName=IntroWizardPage}">
+                <Image Source="/Resources/Images/WizardImages/Accommodations.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="WizardPage4"
@@ -63,7 +63,7 @@
                 NextPage="{Binding ElementName=WizardPage5}"
                 PageType="Interior"
                 PreviousPage="{Binding ElementName=WizardPage3}">
-                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+                <Image Source="/Resources/Images/WizardImages/Reservation.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="WizardPage5"
@@ -72,7 +72,7 @@
                 NextPage="{Binding ElementName=WizardPage6}"
                 PageType="Interior"
                 PreviousPage="{Binding ElementName=WizardPage4}">
-                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+                <Image Source="/Resources/Images/WizardImages/PreviousTrip.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="WizardPage6"
@@ -81,7 +81,7 @@
                 NextPage="{Binding ElementName=WizardPage7}"
                 PageType="Interior"
                 PreviousPage="{Binding ElementName=WizardPage5}">
-                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+                <Image Source="/Resources/Images/WizardImages/MyReservations.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="WizardPage7"

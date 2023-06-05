@@ -149,7 +149,7 @@ namespace InitialProject.ViewModels
         public AccommodationSearchViewModel()
         {
             _accommodationRepository = new AccommodationRepository();
-            _accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
+            Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
             ResetSearchFields();
         }
 
@@ -157,7 +157,7 @@ namespace InitialProject.ViewModels
         {
             _navigationService = navigationService;
             _accommodationRepository = new AccommodationRepository();
-            _accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
+            Accommodations = new ObservableCollection<Accommodation>(_accommodationRepository.GetAll());
         }
 
         private void ResetSearchFields()

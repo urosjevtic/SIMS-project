@@ -29,7 +29,7 @@ namespace InitialProject.Service.ReportServices
         }
 
 
-        public void GenerateRenovationReport()
+        public void GenerateReviewsReport(string filePath)
         {
             Document pdfDocument = new Document();
             Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
@@ -64,7 +64,7 @@ namespace InitialProject.Service.ReportServices
 
 
 
-            pdfDocument.Draw("../../../Reports/Guest/NewPdf.pdf");
+            pdfDocument.Draw(filePath);
         }
 
         public static Dictionary<string, double> AverageGrade(List<RatedGuest> guests)

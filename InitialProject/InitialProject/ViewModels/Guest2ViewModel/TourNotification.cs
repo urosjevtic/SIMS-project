@@ -10,8 +10,8 @@ namespace InitialProject.ViewModels.Guest2ViewModel
     public class TourNotification
     {
         public Tour tour { get; set; }
-        public Notification notification { get; set; }
-        public TourNotification(Tour t, Notification n)
+        public Domain.Model.Notification notification { get; set; }
+        public TourNotification(Tour t, Domain.Model.Notification n)
         {
             tour = t;
             notification = n;

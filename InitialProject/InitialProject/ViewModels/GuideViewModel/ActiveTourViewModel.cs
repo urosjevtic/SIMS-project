@@ -28,7 +28,7 @@ namespace InitialProject.ViewModels.GuideViewModel
 
         public List<CheckPoint> CheckedCheckPoints { get; set; }
         public List<User> TourReservations { get; set; }
-        public List<Notification> Notifications { get; set; }
+        public List<Domain.Model.Notification> Notifications { get; set; }
         public ObservableCollection<CheckPoint> CheckPoints { get; set; }
         public ObservableCollection<TourGuest> TourGuests { get; set; }
         public string TourName { get; set; }    
@@ -76,7 +76,7 @@ namespace InitialProject.ViewModels.GuideViewModel
                 {
                     if (tourGuest.Id == guest.Id && !(tourGuest.Presence == UserPresence.Yes))
                     {
-                        Notification notification = new Notification();
+                        Domain.Model.Notification notification = new Domain.Model.Notification();
                         notification.TourId = ActiveTour.Id;
                         notification.CheckPointId = checkedCheckPoint.Id;
                         notification.GuestId = guest.Id;

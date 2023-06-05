@@ -17,10 +17,14 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Label
-            Margin="20,0,0,0"
+            Grid.ColumnSpan="2"
+            Margin="20,10,0,0"
             Content="Reservation Anywhere/Whenever"
-            FontSize="20" Grid.ColumnSpan="2" />
-        <Grid Grid.Row="1" Margin="25,0,25,0" Grid.ColumnSpan="2">
+            FontSize="20" />
+        <Grid
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            Margin="25,0,25,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -30,19 +34,27 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical">
                 <Label Content="Number of guests" />
-                <TextBox Margin="5,10,80,0" Height="30"/>
+                <TextBox Height="30" Margin="5,10,80,0" />
             </StackPanel>
             <StackPanel Grid.Column="1" Orientation="Vertical">
                 <Label Content="Number of days" />
-                <TextBox Margin="5,10,80,0"  Height="30" />
+                <TextBox Height="30" Margin="5,10,80,0" />
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Label Content="Start date" />
-                <DatePicker  Margin="5,10,10,0" Width="110" HorizontalAlignment="Left" Height="30"/>
+                <DatePicker
+                    Width="110"
+                    Height="30"
+                    Margin="5,10,10,0"
+                    HorizontalAlignment="Left" />
             </StackPanel>
             <StackPanel Grid.Column="3" Orientation="Vertical">
                 <Label Content="End date" />
-                <DatePicker  Margin="5,10,10,0" Width="110" HorizontalAlignment="Left" Height="30"/>
+                <DatePicker
+                    Width="110"
+                    Height="30"
+                    Margin="5,10,10,0"
+                    HorizontalAlignment="Left" />
             </StackPanel>
             <Button
                 Grid.Column="4"
@@ -50,18 +62,39 @@
                 Height="40"
                 Margin="0,0,0,10"
                 VerticalAlignment="Bottom"
-             ToolTip="Search for accommodation according to the given parameters"
-                Content="Search"/>
+                Content="Search"
+                ToolTip="Search for accommodation according to the given parameters" />
 
         </Grid>
-        <DataGrid Grid.Row="2" Margin="70,40,70,50" Grid.ColumnSpan="2">
+        <DataGrid
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            Margin="70,40,70,50">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Start date" Binding="{Binding Name}" Width="*" />
-                <DataGridTextColumn Header="End date" Binding="{Binding Location.City}" Width="*"/>
-                <DataGridTextColumn Header="Name" Binding="{Binding Location.Country}" Width="*"/>
-                <DataGridTextColumn Header="City" Binding="{Binding Type}" Width="*"/>
-                <DataGridTextColumn Header="Country" Binding="{Binding MaxGuests}" Width="*"/>
-                <DataGridTextColumn Header="Reserve" Binding="{Binding MinReservationDays}" Width="*"/>
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Name}"
+                    Header="Start date" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Location.City}"
+                    Header="End date" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Location.Country}"
+                    Header="Name" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding Type}"
+                    Header="City" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding MaxGuests}"
+                    Header="Country" />
+                <DataGridTextColumn
+                    Width="*"
+                    Binding="{Binding MinReservationDays}"
+                    Header="Reserve" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

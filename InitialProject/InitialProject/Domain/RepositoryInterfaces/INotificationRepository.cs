@@ -9,22 +9,22 @@ namespace InitialProject.Domain.RepositoryInterfaces
 {
     public interface INotificationRepository
     {
-        public List<Notification> GetAll();
+        public List<Domain.Model.Notification> GetAll();
 
 
-        public Notification FindById(int id);
+        public Domain.Model.Notification FindById(int id);
 
 
-        public void Save(Notification notification);
+        public void Save(Domain.Model.Notification notification);
 
-        public List<Notification> GetAllById(int id);
+        public List<Domain.Model.Notification> GetAllById(int id);
         public int NextId();
 
-        public void Delete(Notification notification);
+        public void Delete(Domain.Model.Notification notification);
 
-        public void SaveAll(List<Notification> notifications);
+        public void SaveAll(List<Domain.Model.Notification> notifications);
 
-        public void Update(Notification notification);
+        public void Update(Domain.Model.Notification notification);
 
         public void DeleteAll();
        
