@@ -71,6 +71,6 @@
         </Grid>
 
 
-        <Button Content="{ns:Loc Log_out}" Style="{StaticResource MainPageButtonStyle}" Grid.Row="3" Margin="50, 30, 50, 30"></Button>
+        <Button Content="{ns:Loc Log_out}" Command="{Binding LogOutCommand}" Style="{StaticResource MainPageButtonStyle}" Grid.Row="3" Margin="50, 30, 50, 30"></Button>
     </Grid>
 </Page>

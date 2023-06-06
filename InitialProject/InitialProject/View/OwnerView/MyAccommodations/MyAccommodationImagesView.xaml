@@ -1,4 +1,4 @@
-﻿<Page
+<Page
     x:Class="InitialProject.View.OwnerView.MyAccommodations.MyAccommodationImagesView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,15 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:ns="clr-namespace:InitialProject.Utilities"
     Title="MyAccommodationImagesView"
-    Width="345"
-    Height="637"
+    Width="356"
+    Height="648"
     mc:Ignorable="d">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
         </Grid.RowDefinitions>

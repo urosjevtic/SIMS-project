@@ -39,13 +39,7 @@ namespace InitialProject.Service.ForumServices
             List<User> users = _userService.GetAll();
             foreach (var comment in forumComments)
             {
-                foreach (var user in users)
-                {
-                    if (user.Id == comment.Author.Id)
-                    {
-                        comment.Author = user;
-                    }
-                }
+                comment.Author = users.FirstOrDefault(user => user.Id == comment.Author.Id);
             }
         }
 

@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="AccommodationRegistrationForm" Height="637" Width="345">
+        Title="AccommodationRegistrationForm" Height="648" Width="356">
 
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
@@ -31,12 +31,13 @@
         </ControlTemplate>
         <!--End of Validation error template-->
     </Page.Resources>
+    <ScrollViewer VerticalScrollBarVisibility="Hidden">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition Height="0.1*"></RowDefinition>
-            <RowDefinition></RowDefinition>
-            <RowDefinition Height="0.2*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0" Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold"></Button>
@@ -45,7 +46,7 @@
 
         <Grid Grid.Row="2">
             <StackPanel HorizontalAlignment="Center">
-                <Label Content="{ns:Loc Name}" Foreground="{DynamicResource TextColor}"/>
+                    <Label Content="{ns:Loc Name_requiered}" Foreground="{DynamicResource TextColor}"/>
                 <TextBox x:Name="accommodationName" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                     <TextBox.Text>
                         <Binding Path="AccommodationName" UpdateSourceTrigger="PropertyChanged">
@@ -60,18 +61,18 @@
                     </Validation.ErrorTemplate>
                 </TextBox>
 
-                <StackPanel Margin="0,-10,0,15" Orientation="Horizontal">
+                <StackPanel Margin="0,-10,0,15" Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
-                        <Label Content="{ns:Loc Country}" Foreground="{DynamicResource TextColor}"/>
-                        <ComboBox  x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Locations.Keys}" Height="30" Margin="0,0,10,0" Width="100"/>
+                            <Label Content="{ns:Loc Country_requiered}" Foreground="{DynamicResource TextColor}"/>
+                        <ComboBox  x:Name="CountryComboBox" SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}"  ItemsSource="{Binding Path=Locations.Keys}" Height="30" Margin="0,0,10,0" Width="210"/>
                     </StackPanel>
                     <StackPanel Orientation="Vertical">
-                        <Label Content="{ns:Loc City}" Foreground="{DynamicResource TextColor}"/>
-                        <ComboBox  x:Name="CityComboBox" ItemsSource="{Binding Cities}" SelectedItem="{Binding Path=City}"  Width="100" Height="30"/>
+                            <Label Content="{ns:Loc City_requiered}" Foreground="{DynamicResource TextColor}"/>
+                            <ComboBox  x:Name="CityComboBox" ItemsSource="{Binding Cities}" SelectedItem="{Binding Path=City}"  Width="210" Height="30" Margin="0,0,10,0"/>
                     </StackPanel>
                 </StackPanel>
 
-                <Label Content="{ns:Loc Accommodation_type}" Foreground="{DynamicResource TextColor}"/>
+                    <Label Content="{ns:Loc Accommodation_type_requeired}" Foreground="{DynamicResource TextColor}"/>
                 <ComboBox  x:Name="accommodationType" SelectedValuePath="content" Text="{Binding Path=AccommodationTypes}" Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" FontSize="15">
                     <ComboBoxItem Content="house"/>
                     <ComboBoxItem Content="appartment"/>
@@ -83,8 +84,8 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="{ns:Loc Maximum_number_of_guests}" Foreground="{DynamicResource TextColor}"/>
-                    <TextBox Grid.Column="1" x:Name="MaxNumberOfGuests" Height="30" TextAlignment="Center" FontSize="15" Margin="4,0,0,0">
+                        <Label Grid.Column="0" Content="{ns:Loc Max_Number_Of_Guests_requiered}" Foreground="{DynamicResource TextColor}"/>
+                        <TextBox  x:Name="MaxNumberOfGuests" Height="30" TextAlignment="Center" FontSize="15" Width="44" Margin="166,0,0,15">
                         <TextBox.Text>
                             <Binding Path="MaxGuests" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
@@ -103,7 +104,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="{ns:Loc Minimum_renovation_days}" Foreground="{DynamicResource TextColor}"/>
+                        <Label Grid.Column="0" Content="{ns:Loc Min_reservation_days_requieded}" Foreground="{DynamicResource TextColor}"/>
                     <TextBox x:Name="MinimumReservationDays" Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                         <TextBox.Text>
                             <Binding Path="MinReservationDays" UpdateSourceTrigger="PropertyChanged">
@@ -123,7 +124,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" Content="{ns:Loc Cancelation_period}" Foreground="{DynamicResource TextColor}"/>
+                        <Label Grid.Column="0" Content="{ns:Loc Cancelation_period_requiered}" Foreground="{DynamicResource TextColor}"/>
                     <TextBox x:Name="CancelationPeriod"  Margin="166,0,0,15" Height="30" Width="44" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
                         <TextBox.Text>
                             <Binding Path="CancelationPeriod" UpdateSourceTrigger="PropertyChanged">
@@ -139,28 +140,45 @@
                     </TextBox>
 
                 </Grid>
-                <Label Content="{ns:Loc Images_url}" Foreground="{DynamicResource TextColor}"></Label>
-                <TextBox x:Name="imagesUrlTextbox"  Margin="0,0,0,15" Height="30" Width="210" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
-                    <TextBox.Text>
-                        <Binding Path="ImagesUrl" UpdateSourceTrigger="PropertyChanged">
-                            <Binding.ValidationRules>
-                                <val:ImagesUrlValidation/>
-                                <val:EmptyStringValidation/>
-                            </Binding.ValidationRules>
-                        </Binding>
-                    </TextBox.Text>
-                    <Validation.ErrorTemplate>
-                        <StaticResource ResourceKey="ValidationErrorTemplate" />
-                    </Validation.ErrorTemplate>
-                </TextBox>
+                    <Label Content="{ns:Loc Images_url_requiered}" Foreground="{DynamicResource TextColor}"></Label>
+                <StackPanel Orientation="Horizontal">
+                    <TextBox x:Name="imagesUrlTextbox"  Margin="0,0,0,15" Height="30" Width="170" HorizontalAlignment="Left" TextAlignment="Center" FontSize="15">
+                        <TextBox.Text>
+                            <Binding Path="ImagesUrl" UpdateSourceTrigger="PropertyChanged">
+                                <Binding.ValidationRules>
+                                    <val:ImagesUrlValidation/>
+                                    <val:EmptyStringValidation/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                        <Validation.ErrorTemplate>
+                            <StaticResource ResourceKey="ValidationErrorTemplate" />
+                        </Validation.ErrorTemplate>
+                    </TextBox>
+                        <Button Style="{StaticResource AddImageButtonStyle}" Command="{Binding AddUrlToListCommand}">  
+
+                    </Button>
+                </StackPanel>
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                        <ListBox Width="210" Height="70" Background="White" ItemsSource="{Binding UrlList}" Margin="0,0,10,0">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                </ScrollViewer>
             </StackPanel>
 
 
         </Grid>
 
-        <Button Grid.Row="3" Command="{Binding ConfirmRegistrationCommand}" Content="{ns:Loc Confirm}" Margin="50, 0, 50, 40" Style="{StaticResource ConfirmRegistrationButtonStyle}">
+        <Button Grid.Row="3" Command="{Binding ConfirmRegistrationCommand}" Content="{ns:Loc Confirm}" Margin="50, 30, 50, 40" Style="{StaticResource ConfirmRegistrationButtonStyle}">
 
         </Button>
 
+            <TextBlock Grid.Row="3" FontSize="14" Foreground="{DynamicResource TextColor}" Text="{ns:Loc Every_field_is_requiered}" HorizontalAlignment="Center" Margin="0, 65, 0,0 "></TextBlock>
+
     </Grid>
+        </ScrollViewer>
 </Page>

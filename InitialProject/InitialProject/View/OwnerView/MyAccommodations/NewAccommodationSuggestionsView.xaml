@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
       mc:Ignorable="d" 
       xmlns:ns="clr-namespace:InitialProject.Utilities"
-      Title="NewAccommodationSuggestionsView" Height="637" Width="345">
+      Title="NewAccommodationSuggestionsView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -172,7 +172,6 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
 
                             <StackPanel Grid.Row="0">
@@ -221,13 +220,6 @@
                                            Foreground="{DynamicResource TextColor}" />
                                 <TextBlock Text="{Binding Location.City}" 
                                            Foreground="{DynamicResource TextColor}" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
-                                <Button Content="{ns:Loc Proceed}" Style="{StaticResource ConfirmButtonStyle}" 
-                                Margin="10, 5"
-                                Command="{Binding DataContext.GoBackCommand, ElementName=accommodationContentControl}"
-                                CommandParameter="{Binding}" Width="160" />
                             </StackPanel>
                         </Grid>
                     </Border>

@@ -11,6 +11,7 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Service.RenovationServices;
 using InitialProject.Service.ReportService;
+using InitialProject.View.OwnerView.Renovations;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
 {
@@ -19,12 +20,10 @@ namespace InitialProject.ViewModels.RenovationsViewModel
 
         private readonly RenovationService _renovationService;
         private readonly User _logedInUser;
-        private readonly OwnerReportService _ownerReportService;
         public ObservableCollection<Renovation> Renovations {get; set; }
         public NavigationService NavigationService { get; set; }
         public RenovationReportSelectionViewModel(User logedInUser, NavigationService navigationService)
         {
-            _ownerReportService = new OwnerReportService();
             _renovationService = new RenovationService();
             _logedInUser = logedInUser;
             NavigationService = navigationService;
@@ -61,7 +60,15 @@ namespace InitialProject.ViewModels.RenovationsViewModel
 
         private void GeneratePdf()
         {
-            _ownerReportService.GenerateRenovationReport(_logedInUser.Id, _fromDate, _toDate);
+            NavigationService.Navigate(new RenovationReportPreviewView(_logedInUser, NavigationService, _fromDate, _toDate));
+            CloseCurrentWindow();
+        }
+
+        public ICommand CancelCommand => new RelayCommand(CloseWindow);
+
+        private void CloseWindow()
+        {
+            CloseCurrentWindow();
         }
     }
 }
