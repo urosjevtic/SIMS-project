@@ -176,5 +176,20 @@ namespace InitialProject.Service.ForumServices
             if (comment.Author.Role.Equals(UserRole.Guest))
                 _forumCommentsService.IsByGuestThatVisitedLocation(forum, comment);
         }
+
+        public bool CanOwnerMakeComment(Forum forum, int ownerId)
+        {
+            List<Accommodation> accommodations = _accommodationService.GetAllAccommodationByOwnerId(ownerId);
+
+            foreach (var accommdoation in accommodations)
+            {
+                if (accommdoation.Location.Equals(forum.Location))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

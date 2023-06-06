@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="MyAccommodationsListView" Height="637" Width="345">
+        Title="MyAccommodationsListView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -26,13 +26,26 @@
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc MyAccommodations}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
-                 ItemsSource="{Binding Accommodations}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                 Background="{DynamicResource BackgroundColorDarker}"
-                 BorderThickness="0"
-                 HorizontalContentAlignment="Stretch"
-                 >
+         ItemsSource="{Binding Accommodations}"
+         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+         Background="{DynamicResource BackgroundColorDarker}"
+         BorderThickness="0"
+         HorizontalContentAlignment="Stretch">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
@@ -57,6 +70,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
                             <TextBlock Text="{Binding Name}" 
@@ -66,21 +80,24 @@
                            Foreground="{DynamicResource TextColor}"
                            Margin="10,10,10,0"/>
 
+
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Country}" 
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource TextColor}"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Location.Country}"
-                                           Foreground="{DynamicResource TextColor}"/>
-                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
+                                           FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"
-                               FontWeight="Bold"/>
+                                           Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Location.Country}"
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                            <StackPanel Margin="10,5" Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc City}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}" />
                                 <TextBlock Text="{Binding Location.City}" 
-                                           Foreground="{DynamicResource TextColor}"/>
+                                           Foreground="{DynamicResource TextColor}" />
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
                                 <TextBlock Text="{ns:Loc Accommodation_type}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -89,7 +106,7 @@
                                            Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
                                 <TextBlock Text="{ns:Loc Maximum_number_of_guests}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -98,7 +115,7 @@
                                            Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
                                 <TextBlock Text="{ns:Loc Minimum_renovation_days}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -107,7 +124,7 @@
                                            Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="6">
                                 <TextBlock Text="{ns:Loc Cancelation_period}" 
                                            Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
@@ -118,7 +135,7 @@
 
                             <Button Content="{ns:Loc See_images}"
                         Margin="10,15"
-                        Grid.Row="6"
+                        Grid.Row="7"
                         Style="{StaticResource ButtonStyle}"
                         Command="{Binding DataContext.SeeImagesCommand, ElementName=accommodationListBox}"
                         CommandParameter="{Binding}"/>

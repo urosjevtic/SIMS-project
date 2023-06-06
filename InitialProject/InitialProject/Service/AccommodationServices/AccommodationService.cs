@@ -31,7 +31,7 @@ namespace InitialProject.Service
             _accommodationStatisticService = new AccommodationStatisticService();
         }
 
-        public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
+        public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> imagesUrl, int ownerId)
         {
             Accommodation accommodation = new Accommodation();
             CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
@@ -42,7 +42,7 @@ namespace InitialProject.Service
 
 
 
-        private void CreateNewAccommodation(Accommodation accommodation, string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
+        private void CreateNewAccommodation(Accommodation accommodation, string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, List<string> imagesUrl, int ownerId)
         {
             accommodation.Owner.Id = ownerId;
             accommodation.Name = name;
@@ -51,7 +51,7 @@ namespace InitialProject.Service
             accommodation.MaxGuests = maxGuests;
             accommodation.MinReservationDays = minReservationDays;
             accommodation.CancelationPeriod = cancelationPeriod;
-            _imageService.SaveImages(0, imagesUrl);
+            _imageService.SaveImages(imagesUrl);
         }
 
         public List<Accommodation> GetAll()

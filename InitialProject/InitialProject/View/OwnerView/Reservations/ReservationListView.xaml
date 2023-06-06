@@ -6,13 +6,13 @@
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Reservations"
         mc:Ignorable="d"
-        Title="ReservationListView" Height="637" Width="345">
+        Title="ReservationListView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -31,6 +31,18 @@
                  Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
@@ -65,16 +77,18 @@
                                            Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding User.Username}" />
-                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc Number_of_guests}" 
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc Number_of_guests}" 
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding GuestNumber}" />
                             </StackPanel>
 
 
-
-                            <!--Accommodation-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                <!--Accommodation-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
                                 <TextBlock Text="{ns:Loc Accommodation}" 
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"
@@ -84,22 +98,26 @@
 
 
                             <!--From to-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
                                 <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
-                                           FontWeight="Bold"
-                                           Foreground="{DynamicResource TextColor}"/>
+
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
+                                <TextBlock  Margin="0,0,5,0" Text="{ns:Loc End_date}" 
+                                            FontWeight="Bold"
+                                            Foreground="{DynamicResource TextColor}"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
                             </StackPanel>
 
                             <!--Button-->
                             <Button Content="{ns:Loc Cancel_reservation}"                                    
                                     Margin="10,15"
-                                    Grid.Row="7"
+                                    Grid.Row="5"
                                     Style="{StaticResource AllReservationButtonStyle}"
                                     Command="{Binding DataContext.CancelReservationCommand, ElementName=reschedulingListBox}"
                                     CommandParameter="{Binding}"/>

@@ -29,6 +29,7 @@ using InitialProject.View.OwnerView.Settings;
 using System;
 using InitialProject.Properties;
 using InitialProject.View.OwnerView.Forums;
+using InitialProject.View.OwnerView.Help;
 
 namespace InitialProject.ViewModel
 {
@@ -198,6 +199,20 @@ namespace InitialProject.ViewModel
         protected override void ForumOpen()
         {
             NavigationService.Navigate(new ForumSelcetionView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
+        }
+
+        protected override void LogOut()
+        {
+            SignInForm signInForm = new SignInForm();
+            CloseCurrentWindow();
+            signInForm.Show();
+
+        }
+
+        protected override void Help()
+        {
+            NavigationService.Navigate(new OwnerHelpView(NavigationService));
             BurgerBarClosed();
         }
 

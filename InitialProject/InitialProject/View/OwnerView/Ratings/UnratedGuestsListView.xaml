@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="UnratedGuestsListView" Height="637" Width="345">
+        Title="UnratedGuestsListView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -31,6 +31,18 @@
                  Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border
@@ -92,7 +104,10 @@
                                            Margin="0,0,5,0"/>
                                 <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" 
                                            Foreground="{DynamicResource TextColor}"/>
-                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,5">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"/>
                                 <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}"
@@ -100,15 +115,6 @@
                             </StackPanel>
 
 
-                            <!--Days left to rate guest-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="{ns:Loc Days_left_to_rate_guest}" 
-                                           FontWeight="Bold"
-                                           Foreground="{DynamicResource TextColor}"
-                                           Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding }"
-                                           Foreground="{DynamicResource TextColor}"/>
-                            </StackPanel>
 
 
 

@@ -90,5 +90,14 @@ namespace InitialProject.ViewModels.MainVeiwModel
             NotesView notesView = new NotesView(_loggedInUser);
             notesView.Show();
         }
+
+        public ICommand LogOutCommand => new RelayCommand(LogOut);
+
+        private void LogOut()
+        {
+            SignInForm signInForm = new SignInForm();
+            CloseCurrentWindow();
+            signInForm.Show();
+        }
     }
 }

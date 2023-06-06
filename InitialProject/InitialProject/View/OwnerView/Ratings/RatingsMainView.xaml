@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="RatingsMainView" Height="637" Width="345">
+        Title="RatingsMainView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource LighterBackground}" />
     </Page.Background>

@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="ScheduledRenovationListView" Height="637" Width="345">
+        Title="ScheduledRenovationListView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
@@ -33,6 +33,18 @@
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
                  >
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
@@ -56,6 +68,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
                             <!--Accommodation name-->
                             <TextBlock Grid.Row="0" Text="{Binding Accommodation.Name}" 
@@ -65,42 +78,54 @@
                            Foreground="{DynamicResource TextColor}"
                            Margin="10,10,10,0"/>
                             <!--Location-->
+
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Country}" 
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource TextColor}"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Accommodation.Location.Country }" />
-                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
-                               FontWeight="Bold"
-                               Foreground="{DynamicResource TextColor}"/>
-                                <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding Accommodation.Location.City }" />
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Accommodation.Location.Country}"
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                            <StackPanel Margin="10,5" Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc City}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}" />
+                                <TextBlock Text="{Binding Accommodation.Location.City}" 
+                                           Foreground="{DynamicResource TextColor}" />
                             </StackPanel>
                             <!--Description-->
-                            <TextBlock Grid.Row="2" Text="{Binding Description}"
-                                       TextWrapping="Wrap"
-                                       Foreground="{DynamicResource TextColor}"
-                                       Margin="0,0,5,0"/>
+                            <TextBlock Grid.Row="3" Margin="10,5,10,0" Text="{ns:Loc Description}" 
+                                       FontWeight="Bold"
+                                       Foreground="{DynamicResource TextColor}" />
+                                <TextBlock Grid.Row="4" Text="{Binding Description}"
+                                           TextWrapping="Wrap"
+                                           Foreground="{DynamicResource TextColor}"
+                                           Margin="10, 1"/>
                             <!--Start date, end date-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="5">
                                 <TextBlock Text="{ns:Loc Start_date}" 
                                        FontWeight="Bold"
                                        Foreground="{DynamicResource TextColor}"
                                        Margin="0,0,5,0"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
-                                <TextBlock Margin="10,0" Text="{ns:Loc End_date}" 
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="6" Margin="10,5" Orientation="Horizontal"> 
+                                <TextBlock  Text="{ns:Loc End_date}" 
                                            Foreground="{DynamicResource TextColor}"
-                                           FontWeight="Bold"/>
+                                           FontWeight="Bold"
+                                           Margin="0,0,5,0"/>
                                 <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding EndDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
                             </StackPanel>
                             <!--Finished renovation-->
-                            <StackPanel Orientation="Horizontal" Grid.Row="4">
+                            <StackPanel Orientation="Horizontal" Grid.Row="7">
                                 <TextBlock Text="{ns:Loc Finished}" 
                                        FontWeight="Bold"
                                        VerticalAlignment="Center"
-                                       FontSize="15"
+                                       FontSize="13"
                                        Foreground="{DynamicResource TextColor}"
-                                       Margin="0,0,5,0"/>
+                                       Margin="10, 5"/>
                                 <Image Height="18">
                                     <Image.Style>
                                         <Style TargetType="{x:Type Image}">
@@ -119,7 +144,7 @@
                             </StackPanel>
                             <Button Content="{ns:Loc Cancel}"
                                 Margin="10,15"
-                                Grid.Row="5"
+                                Grid.Row="7"
                                 Style="{StaticResource RenovationReportButtonStyle}"
                                 Command="{Binding DataContext.CancelRenovationCommand, ElementName=reservationListBox}"
                                 CommandParameter="{Binding}">
