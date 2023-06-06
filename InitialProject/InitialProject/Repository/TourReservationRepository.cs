@@ -58,5 +58,19 @@ namespace InitialProject.Repository
             }
             return guests;
         }
+        public void DeleteList(List<TourReservation> list)
+        {
+            _reservations = _serializer.FromCSV(FilePath);
+            foreach(TourReservation reservation in list)
+            {
+                Delete(reservation);
+            }
+        }
+        public void Delete(TourReservation reservation)
+        {
+            TourReservation founded = _reservations.Find(c => c.IdReservation == reservation.IdReservation);
+            _reservations.Remove(founded);
+            _serializer.ToCSV(FilePath, _reservations);
+        }
     }
 }

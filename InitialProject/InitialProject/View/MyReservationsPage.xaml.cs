@@ -39,6 +39,13 @@ namespace InitialProject.View
         private readonly AccommodationReservationRepository _accommodationReservationRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
         private ObservableCollection<Domain.Model.Reservations.AccommodationReservation> _reservations;
+        
+        private readonly AccommodationReservationRescheduleRequestService _accommodationReservationRescheduleRequestService;
+        private ObservableCollection<AccommodationReservationRescheduleRequest> _pending;
+        private ObservableCollection<AccommodationReservationRescheduleRequest> _approved;
+
+        private readonly DeclinedAccommodationReservationRescheduleRequestService _declinedAccommodationReservationRescheduleRequestService;
+        private ObservableCollection<DeclinedAccommodationReservationRescheduleRequest> _request;
 
         public AccommodationReservation SelectedAccommodation { get; set; }
         public Domain.Model.Reservations.AccommodationReservation SelectedReservation { get; set; }
@@ -59,15 +66,75 @@ namespace InitialProject.View
                 }
             }
         }
+
+        public ObservableCollection<AccommodationReservationRescheduleRequest> Pending
+        {
+            get
+            {
+                return _pending;
+            }
+
+            set
+            {
+                if (value != _pending)
+                {
+                    _pending = value;
+                    OnPropertyChanged("Pending");
+                }
+            }
+        }
+
+        public ObservableCollection<AccommodationReservationRescheduleRequest> Approved
+        {
+            get
+            {
+                return _approved;
+            }
+
+            set
+            {
+                if (value != _approved)
+                {
+                    _approved = value;
+                    OnPropertyChanged("Approved");
+                }
+            }
+        }
+
+
+        public ObservableCollection<DeclinedAccommodationReservationRescheduleRequest> Request
+        {
+            get
+            {
+                return _request;
+            }
+
+            set
+            {
+                if (value != _request)
+                {
+                    _request = value;
+                    OnPropertyChanged("Request");
+                }
+            }
+        }
+
+
         public MyReservationsPage()
         {
             InitializeComponent();
             this.DataContext = this;
-            // User = LoggedUser;
             _accommodationReservationService = new AccommodationReservationService();
             _accommodationReservationRepository = new AccommodationReservationRepository();
             _canceledResrvationsRepository = new CanceledResrvationsRepository();
             LoadAllReservations();
+
+            _accommodationReservationRescheduleRequestService = new AccommodationReservationRescheduleRequestService();
+            Pending = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetPending());
+            Approved = new ObservableCollection<AccommodationReservationRescheduleRequest>(_accommodationReservationRescheduleRequestService.GetApproved());
+
+            _declinedAccommodationReservationRescheduleRequestService = new DeclinedAccommodationReservationRescheduleRequestService();
+            Request = new ObservableCollection<DeclinedAccommodationReservationRescheduleRequest>(_declinedAccommodationReservationRescheduleRequestService.GetAll());
         }
         public UnratedOwner UnratedOwner { get; set; }
 

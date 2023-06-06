@@ -27,7 +27,9 @@
     <None Remove="Resources\Images\help.png" />
     <None Remove="Resources\Images\log-out1.png" />
     <None Remove="Resources\Images\logo.png" />
+    <None Remove="Resources\Images\logopdf.png" />
     <None Remove="Resources\Images\magnifying-glass.png" />
+    <None Remove="Resources\Images\more.png" />
     <None Remove="Resources\Images\myAccommodation.png" />
     <None Remove="Resources\Images\myToursBijela.png" />
     <None Remove="Resources\Images\notes.png" />
@@ -147,6 +149,9 @@
     <Content Include="Resources\Images\magnifying-glass.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\more.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\myAccommodation.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -233,6 +238,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
 
+
     <Content Include="Resources\Images\user.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -265,10 +271,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Images\logopdf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="DotNetProjects.WpfToolkit.DataVisualization" Version="6.1.94" />
     <PackageReference Include="DynamicPDF" Version="8.0.0" />
 
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
+
+    <PackageReference Include="iTextSharp" Version="5.5.13.3" />
     <PackageReference Include="LiveCharts.Wpf" Version="0.9.6" />
     <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
