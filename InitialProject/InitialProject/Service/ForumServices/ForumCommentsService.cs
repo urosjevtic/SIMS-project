@@ -66,6 +66,20 @@ namespace InitialProject.Service.ForumServices
             _forumCommentRepository.Update(comment);
         }
 
+
+        public int GetCommentId(string comment)
+        {
+            List<ForumComment> allComments = _forumCommentRepository.GetAll();
+            foreach (ForumComment forumComment in allComments)
+            {
+                if (forumComment.Comment == comment)
+                {
+                    return forumComment.Id;
+                }
+            }
+            throw new Exception("Error has occurred");
+        }
+
         public void RemoveReport(ForumComment comment, User reporter)
         {
             comment.NumberOfReports--;

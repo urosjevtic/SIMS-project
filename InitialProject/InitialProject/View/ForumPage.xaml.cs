@@ -1,6 +1,8 @@
-﻿using InitialProject.ViewModels;
+﻿using GalaSoft.MvvmLight.Views;
+using InitialProject.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +26,12 @@ namespace InitialProject.View
         public ForumPage()
         {
             InitializeComponent();
+            //DataContext = new ForumViewModel(navigationService);
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            this.DataContext = new ForumViewModel(this.NavigationService);
+           this.DataContext = new ForumViewModel(this.NavigationService);
         }
     }
 }

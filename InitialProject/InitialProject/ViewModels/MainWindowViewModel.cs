@@ -12,10 +12,11 @@ using InitialProject.Domain.Model.Reservations;
 using InitialProject.Utilities;
 using Notification.Wpf;
 using GalaSoft.MvvmLight.Messaging;
+using InitialProject.Service.RatingServices;
 
 namespace InitialProject.ViewModels
 {
-    public class MainWindowViewModel
+    public class MainWindowViewModel : BaseViewModel
     {
         private NotificationManager _notificationManager;
         private NavigationService _navigationService;
@@ -39,12 +40,42 @@ namespace InitialProject.ViewModels
         {
             _navigationService = navigationService;
             _notificationManager = new NotificationManager();
-
+            _superGuestService = new SuperGuestService();
             //Subscribe to notifications
             Messenger.Default.Register<ToastNotification>(this, ShowToastNotification);
 
             //bonus = _superGuestService.GetNumberOfPoints(App.LoggedUser.Id);
          }
+
+        private bool _superGuest;
+        public bool IsSuperGuest
+        {
+            get { return _superGuestService.IsSuperGuest(LoggedUser.Id); }
+            set
+            {
+                if (value != _superGuest)
+                {
+                    _superGuest = value;
+                    OnPropertyChanged(nameof(IsSuperGuest));
+                }
+            }
+        }
+
+        private int _bonus;
+
+        public int Bonus
+        {
+            get { return _superGuestService.GetNumberOfPoints(LoggedUser.Id); }
+            set
+            {
+                if(value != _bonus)
+                {
+                    _bonus = value;
+                    OnPropertyChanged(nameof(Bonus));
+                }
+            }
+        
+        }
 
         private void OnNavigateTo(string destinationPage)
         {

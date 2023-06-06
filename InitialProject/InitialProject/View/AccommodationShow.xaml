@@ -102,7 +102,7 @@
                     Margin="0,5,0,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Source="/Resources/Images/logo.png" />
+                    Source="/Resources/Images/user.png" />
 
                 <Grid
                     x:Name="SideMenuButtonsGrid"
@@ -277,7 +277,7 @@
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Width="200"
-                        Margin="0,5,0,5"
+                        Margin="-20,5,0,5"
                         HorizontalAlignment="Left"
                         Content="{Binding LoggedUser.Username}" />
 
@@ -290,7 +290,71 @@
                         Margin="0,5,0,5"
                         HorizontalAlignment="Center"
                         Content="Super guest" />
-                    <CheckBox
+                    <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Check"
+                         Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Height="18"
+                        Margin="0,0,120,0">
+                        <iconPacks:PackIconMaterialDesign.Style>
+                            <Style TargetType="iconPacks:PackIconMaterialDesign">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSuperGuest}" Value="False">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </iconPacks:PackIconMaterialDesign.Style>
+                    </iconPacks:PackIconMaterialDesign>
+                    <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="NotInterested"
+                         Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Height="18"
+                        Margin="0,0,120,0">
+                        <iconPacks:PackIconMaterialDesign.Style>
+                            <Style TargetType="iconPacks:PackIconMaterialDesign">
+                                <Setter Property="Visibility" Value="Visible" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </iconPacks:PackIconMaterialDesign.Style>
+                    </iconPacks:PackIconMaterialDesign>
+
+                    <!--<Image
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="2"
+                        Height="18"
+                        Margin="0,0,120,0">
+                        
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="/Resources/Images/yes.png" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsSuperGuest}" Value="True">
+                                        <Setter Property="Source" Value="/Resources/Images/yes.png" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsSuperGuest}" Value="False">
+                                        <Setter Property="Source" Value="/Resources/Images/no.png" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>-->
+                    <!--<CheckBox
                         x:Name="cbSuperGuest"
                         Grid.Row="2"
                         Grid.Column="1"
@@ -299,7 +363,7 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
                         IsChecked="True"
-                        IsEnabled="False" />
+                        IsEnabled="False" />-->
                     <Label
                         Name="PointsLabel"
                         Grid.Row="3"
@@ -314,9 +378,9 @@
                         Grid.Row="3"
                         Grid.Column="1"
                         Width="100"
-                        Margin="0,5,0,10"
+                        Margin="15,5,0,10"
                         HorizontalAlignment="Left"
-                        Content="{Binding bonus}" />
+                        Content="{Binding Bonus}" />
                 </Grid>
                 <Button
                     Name="SignOutButton"
@@ -375,7 +439,7 @@
                             <TextBlock Margin="5,0,0,0" Text="Back" />
                         </StackPanel>
                     </Button>
-                    <Button
+                    <!--<Button
                         Name="NotificationButton"
                         Grid.Column="0"
                         Width="200"
@@ -396,7 +460,7 @@
                                 Kind="Notifications" />
                             <TextBlock Margin="5,0,0,0" Text="Notifications" />
                         </StackPanel>
-                    </Button>
+                    </Button>-->
                 </Grid>
 
 

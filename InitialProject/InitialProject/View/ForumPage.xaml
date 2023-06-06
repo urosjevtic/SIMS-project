@@ -26,7 +26,7 @@
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="520" />
-                <ColumnDefinition />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <ListBox
                 x:Name="forumListBox"
@@ -64,7 +64,7 @@
                                     Margin="0,5,5,0"
                                     HorizontalAlignment="Right"
                                     VerticalAlignment="Top"
-                                    Source="../../../Resources/Images/star.png">
+                                    Source="../../../Resources/Images/blackStar.png">
                                     <Image.Style>
                                         <Style TargetType="Image">
                                             <Style.Triggers>
@@ -75,6 +75,25 @@
                                         </Style>
                                     </Image.Style>
                                 </Image>
+                                <iconPacks:PackIconMaterialDesign
+                                    Width="20"
+                                    Height="20"
+                                    Margin="0,5,5,0"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Foreground="Black"
+                                    Kind="Star">
+                                    <iconPacks:PackIconMaterialDesign.Style>
+                                        <Style TargetType="iconPacks:PackIconMaterialDesign">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSpecial}" Value="False">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </iconPacks:PackIconMaterialDesign.Style>
+                                </iconPacks:PackIconMaterialDesign>
                                 <!--  Location  -->
                                 <StackPanel
                                     Grid.Row="0"
@@ -132,7 +151,8 @@
                                     Background="LightGray"
                                     BorderBrush="LightGray"
                                     Command="{Binding DataContext.SelectedForumCommand, ElementName=forumListBox}"
-                                    CommandParameter="{Binding}">
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Open the forum and leave a comment">
                                     <StackPanel Orientation="Horizontal">
                                         <iconPacks:PackIconMaterialDesign
                                             HorizontalAlignment="Center"
@@ -147,7 +167,75 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Margin="30,-10,0,0"
+                    Content="Make new forum"
+                    FontSize="18" />
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Label
+                            Grid.Column="0"
+                            Margin="30,20,0,0"
+                            Content="City" />
+                        <ComboBox
+                            x:Name="CityComboBox"
+                            Width="100"
+                            Height="30"
+                            Margin="-20,10,0,10"
+                            ItemsSource="{Binding Cities}"
+                            SelectedItem="{Binding Path=City}" />
 
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                        <Label
+                            Grid.Row="3"
+                            Margin="10,20,0,0"
+                            Content="Country" />
+                        <ComboBox
+                            x:Name="CountryComboBox"
+                            Grid.Row="2"
+                            Width="100"
+                            Height="30"
+                            Margin="-60,10,0,10"
+                            ItemsSource="{Binding Path=Locations.Keys}"
+                            SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" />
+
+                    </StackPanel>
+                </Grid>
+                <Label
+                    Grid.Row="2"
+                    Margin="30,20,0,0"
+                    Content="Write the first comment" />
+                <TextBox
+                    Grid.Row="3"
+                    Height="100"
+                    Margin="35,10,75,10"
+                    AcceptsReturn="True"
+                    Text="{Binding Comment, UpdateSourceTrigger=PropertyChanged}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" />
+                <Button
+                    Grid.Row="4"
+                    Width="150"
+                    Height="40"
+                    Margin="0,10,75,0"
+                    HorizontalAlignment="Right"
+                     Command="{Binding MakeForumCommand}"
+                    Content="Make forum" />
+            </Grid>
         </Grid>
 
 

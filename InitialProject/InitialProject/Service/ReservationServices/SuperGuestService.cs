@@ -15,6 +15,7 @@ namespace InitialProject.Domain.Model.Reservations
         {
             _accommodationReservationService = new AccommodationReservationService();
         }
+
         public bool IsSuperGuest(int guestId)
         {
             if (ReservationsCount(guestId) > 5)

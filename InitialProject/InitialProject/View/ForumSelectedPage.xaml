@@ -73,6 +73,7 @@
                 <Border
                     Grid.Row="1"
                     Width="500"
+                    Height="520"
                     Margin="0,-25,0,0"
                     BorderBrush="CadetBlue"
                     BorderThickness="1">
@@ -249,6 +250,7 @@
                     Grid.Row="2"
                     Grid.RowSpan="2"
                     Grid.Column="1"
+                    Margin="0,-10,0,0"
                     Orientation="Vertical">
                     <StackPanel.Style>
                         <Style TargetType="StackPanel">
@@ -260,11 +262,11 @@
                             </Style.Triggers>
                         </Style>
                     </StackPanel.Style>
-
+                    <Label Margin="-5,0,0,0" Content="Write a comment" />
                     <TextBox
                         Grid.Row="2"
                         Height="60"
-                        Margin="0,5,0,5"
+                        Margin="0,0,0,5"
                         Text="{Binding NewComment}"
                         TextWrapping="Wrap" />
                     <Button
@@ -277,18 +279,36 @@
                         Background="LightGray"
                         BorderBrush="LightGray"
                         Command="{Binding MakeCommentCommand}"
-                        Content="Post" />
+                        ToolTip="Write a comment and post it on the forum">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Keyboard" />
+                            <TextBlock Margin="5,0,0,0" Text="Post" />
+                        </StackPanel>
+                    </Button>
                     <Button
                         x:Name="closeButton"
                         Grid.Column="2"
                         Width="120"
                         Height="40"
-                        Margin="10,0,10,15"
+                        Margin="90,-50,10,20"
                         VerticalAlignment="Bottom"
                         Background="LightGray"
                         BorderBrush="LightGray"
                         Command="{Binding CloseForumCommand}"
-                        Content="Close forum" />
+                        ToolTip="Close the forum and disable new comments">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Close" />
+                            <TextBlock Margin="5,0,0,0" Text="Close forum" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>

@@ -9,13 +9,76 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\activeTour - Copy.png" />
+    <None Remove="Resources\Images\activeTour.png" />
+    <None Remove="Resources\Images\add.png" />
+    <None Remove="Resources\Images\blackStar.png" />
+    <None Remove="Resources\Images\burgerBar.png" />
+    <None Remove="Resources\Images\burgerBarWhite.png" />
+    <None Remove="Resources\Images\clipboard1.png" />
+    <None Remove="Resources\Images\comment.png" />
+    <None Remove="Resources\Images\covjeculjakBijeli.png" />
+    <None Remove="Resources\Images\delete.png" />
+    <None Remove="Resources\Images\earth.jpg" />
+    <None Remove="Resources\Images\earth.png" />
+    <None Remove="Resources\Images\edit.png" />
+    <None Remove="Resources\Images\forums.png" />
+    <None Remove="Resources\Images\gift-card1.png" />
+    <None Remove="Resources\Images\go-back-arrow.png" />
+    <None Remove="Resources\Images\grafikBijeli.png" />
+    <None Remove="Resources\Images\log-out1.png" />
     <None Remove="Resources\Images\logo.png" />
+    <None Remove="Resources\Images\logopdf.png" />
+    <None Remove="Resources\Images\magnifying-glass.png" />
+    <None Remove="Resources\Images\more.png" />
+    <None Remove="Resources\Images\myAccommodation.png" />
+    <None Remove="Resources\Images\myToursBijela.png" />
+    <None Remove="Resources\Images\next1.png" />
+    <None Remove="Resources\Images\no.png" />
+    <None Remove="Resources\Images\NoImagesPlaceholder.jpg" />
+    <None Remove="Resources\Images\notes.png" />
     <None Remove="Resources\Images\notification.png" />
+    <None Remove="Resources\Images\notificationNew.png" />
+    <None Remove="Resources\Images\not_reported .png" />
+    <None Remove="Resources\Images\open-book.png" />
+    <None Remove="Resources\Images\owner.png" />
+    <None Remove="Resources\Images\paper-32.png" />
+    <None Remove="Resources\Images\pausee.png" />
+    <None Remove="Resources\Images\pehar.png" />
+    <None Remove="Resources\Images\pencil.png" />
+    <None Remove="Resources\Images\personBlue.png" />
+    <None Remove="Resources\Images\play-button.png" />
+    <None Remove="Resources\Images\quote-request - Copy.png" />
+    <None Remove="Resources\Images\quote-request.png" />
+    <None Remove="Resources\Images\quote-request1.png" />
+    <None Remove="Resources\Images\ratings.png" />
+    <None Remove="Resources\Images\remove.png" />
+    <None Remove="Resources\Images\renovations.png" />
+    <None Remove="Resources\Images\report.png" />
+    <None Remove="Resources\Images\reported.png" />
+    <None Remove="Resources\Images\requests.png" />
+    <None Remove="Resources\Images\reservations.png" />
+    <None Remove="Resources\Images\reviews.png" />
+    <None Remove="Resources\Images\settings.png" />
+    <None Remove="Resources\Images\star.png" />
+    <None Remove="Resources\Images\statistic.png" />
+    <None Remove="Resources\Images\statistics.png" />
+    <None Remove="Resources\Images\tick.png" />
+    <None Remove="Resources\Images\todayTours.png" />
+    <None Remove="Resources\Images\todayToursBijela.png" />
+    <None Remove="Resources\Images\TourReport.png" />
+    <None Remove="Resources\Images\tourRequests.png" />
+    <None Remove="Resources\Images\trend.png" />
+    <None Remove="Resources\Images\upload.png" />
     <None Remove="Resources\Images\user.png" />
+    <None Remove="Resources\Images\view.png" />
+    <None Remove="Resources\Images\visited.png" />
     <None Remove="Resources\Images\WizardImages\Accommodations.png" />
     <None Remove="Resources\Images\WizardImages\MyReservations.png" />
     <None Remove="Resources\Images\WizardImages\PreviousTrip.png" />
     <None Remove="Resources\Images\WizardImages\Reservation.png" />
+    <None Remove="Resources\Images\yes.png" />
+    <None Remove="Resources\Images\zvijezdaBijela.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -103,14 +166,77 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Images\activeTour - Copy.png" />
+    <Content Include="Resources\Images\activeTour.png" />
+    <Content Include="Resources\Images\add.png" />
+    <Content Include="Resources\Images\blackStar.png" />
+    <Content Include="Resources\Images\burgerBar.png" />
+    <Content Include="Resources\Images\burgerBarWhite.png" />
+    <Content Include="Resources\Images\clipboard1.png" />
+    <Content Include="Resources\Images\comment.png" />
+    <Content Include="Resources\Images\covjeculjakBijeli.png" />
+    <Content Include="Resources\Images\delete.png" />
+    <Content Include="Resources\Images\earth.jpg" />
+    <Content Include="Resources\Images\earth.png" />
+    <Content Include="Resources\Images\edit.png" />
+    <Content Include="Resources\Images\forums.png" />
+    <Content Include="Resources\Images\gift-card1.png" />
+    <Content Include="Resources\Images\go-back-arrow.png" />
+    <Content Include="Resources\Images\grafikBijeli.png" />
+    <Content Include="Resources\Images\log-out1.png" />
     <Content Include="Resources\Images\logo.png" />
+    <Content Include="Resources\Images\logopdf.png" />
+    <Content Include="Resources\Images\magnifying-glass.png" />
+    <Content Include="Resources\Images\more.png" />
+    <Content Include="Resources\Images\myAccommodation.png" />
+    <Content Include="Resources\Images\myToursBijela.png" />
+    <Content Include="Resources\Images\next1.png" />
+    <Content Include="Resources\Images\no.png" />
+    <Content Include="Resources\Images\NoImagesPlaceholder.jpg" />
+    <Content Include="Resources\Images\notes.png" />
     <Content Include="Resources\Images\notification.png" />
-    <Resource Include="Resources\Images\user.png">
+    <Content Include="Resources\Images\notificationNew.png" />
+    <Content Include="Resources\Images\not_reported .png" />
+    <Content Include="Resources\Images\open-book.png" />
+    <Content Include="Resources\Images\owner.png" />
+    <Content Include="Resources\Images\paper-32.png" />
+    <Content Include="Resources\Images\pausee.png" />
+    <Content Include="Resources\Images\pehar.png" />
+    <Content Include="Resources\Images\pencil.png" />
+    <Content Include="Resources\Images\personBlue.png" />
+    <Content Include="Resources\Images\play-button.png" />
+    <Content Include="Resources\Images\quote-request - Copy.png" />
+    <Content Include="Resources\Images\quote-request.png" />
+    <Content Include="Resources\Images\quote-request1.png" />
+    <Content Include="Resources\Images\ratings.png" />
+    <Content Include="Resources\Images\remove.png" />
+    <Content Include="Resources\Images\renovations.png" />
+    <Content Include="Resources\Images\report.png" />
+    <Content Include="Resources\Images\reported.png" />
+    <Content Include="Resources\Images\requests.png" />
+    <Content Include="Resources\Images\reservations.png" />
+    <Content Include="Resources\Images\reviews.png" />
+    <Content Include="Resources\Images\settings.png" />
+    <Content Include="Resources\Images\star.png" />
+    <Content Include="Resources\Images\statistic.png" />
+    <Content Include="Resources\Images\statistics.png" />
+    <Content Include="Resources\Images\tick.png" />
+    <Content Include="Resources\Images\todayTours.png" />
+    <Content Include="Resources\Images\todayToursBijela.png" />
+    <Content Include="Resources\Images\TourReport.png" />
+    <Content Include="Resources\Images\tourRequests.png" />
+    <Content Include="Resources\Images\trend.png" />
+    <Content Include="Resources\Images\upload.png" />
+    <Content Include="Resources\Images\user.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Resources\Images\WizardImages\Accommodations.png">
+    </Content>
+    <Content Include="Resources\Images\view.png" />
+    <Content Include="Resources\Images\visited.png" />
+    <Content Include="Resources\Images\yes.png" />
+    <Content Include="Resources\Images\zvijezdaBijela.png" />
+    <Content Include="Resources\Images\WizardImages\Accommodations.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
+    </Content>
     <Resource Include="Resources\Images\WizardImages\PreviousTrip.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Packaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using InitialProject.Domain.Model.Forums;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.RepositoryInterfaces.IForumsRepo;
 using InitialProject.Service.ReservationServices;
+using InitialProject.Service.StatisticService;
 using InitialProject.ViewModels.ForumsViewModel;
 
 namespace InitialProject.Service.ForumServices
@@ -20,6 +22,8 @@ namespace InitialProject.Service.ForumServices
         private readonly UserService _userService;
         private readonly ForumCommentsService _forumCommentsService;
         private readonly AccommodationReservationService _accommodationReservationService;
+
+        public User LoggedUser = App.LoggedUser;
 
         public ForumService()
         {
@@ -114,6 +118,43 @@ namespace InitialProject.Service.ForumServices
             }
         }
 
+
+        public void CreateForum(int author, string country, string city, bool isOpen, string comment)
+        {
+            Forum forum= new Forum();
+            CreateNewForum(forum, author, country, city, isOpen, comment);  
+            int forumId=_forumRepository.ToString
+        }
+
+
+        private void CreateNewForum(Forum forum, int author, string country, string city, bool isOpen, string comment)
+        {
+            forum.Author.Id= author;
+            forum.Location.Id= _locationService.GetLocationId(country, city);
+            forum.IsOpen = isOpen;
+            //forum.Comments = _forumCommentsService.GetCommentId(comment);
+            _forumCommentsService.Save(LoggedUser,comment);
+        }
+
+
+
+
+        public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
+        {
+            Accommodation accommodation = new Accommodation();
+            CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
+            int accommodationId = _accommodationRepository.Save(accommodation).Id;
+            _accommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
+
+        }
+
+
+       
+
+
+
+
+
         public ForumComment AddNewComment(Forum forum, User user, string comment)
         {
            ForumComment newComment = _forumCommentsService.Save(user, comment);
@@ -154,7 +195,7 @@ namespace InitialProject.Service.ForumServices
                 }
             }
 
-            return ownerCommentCount > 10 && visitingGuestCommentCount > 20;
+            return ownerCommentCount > 1 && visitingGuestCommentCount > 2;
         }
 
         private bool HasVisitedLocation(User user, Location location)

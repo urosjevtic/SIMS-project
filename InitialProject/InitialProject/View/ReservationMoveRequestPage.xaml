@@ -10,11 +10,37 @@
     xmlns:val="clr-namespace:InitialProject.Validation"
     xmlns:viewModels="clr-namespace:InitialProject.ViewModels"
     Title="ReservationMoveRequestPage"
-    d:DesignHeight="600"
+    d:DesignHeight="800"
     d:DesignWidth="800"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <!--  Validation error template  -->
+        <ControlTemplate x:Key="ValidationErrorTemplate">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <AdornedElementPlaceholder
+                    x:Name="textBox"
+                    Grid.Row="0"
+                    Grid.Column="0" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Foreground="Red"
+                    Text="{Binding [0].ErrorContent}" />
+            </Grid>
+        </ControlTemplate>
+        <!--  End of Validation error template  -->
+    </Page.Resources>
     <Grid Background="AliceBlue">
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -30,107 +56,261 @@
             Margin="20,20,20,20"
             BorderBrush="Black"
             BorderThickness="1">
-            <Grid Margin="0,30,0,0">
+            <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="40" />
-                    <RowDefinition Height="80" />
-
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal">
-                    <Label
-                        Margin="20,0,0,0"
-                        Content="Name:"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding SelectedReservation.Accommodation.Name}" />
-                </StackPanel>
-                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                    <Label
-                        Margin="20,0,0,0"
-                        Content="City:"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding SelectedReservation.Accommodation.Location.City}" />
-                </StackPanel>
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
-                    <Label
-                        Margin="20,0,0,0"
-                        Content="Country:"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <TextBlock
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding SelectedReservation.Accommodation.Location.Country}" />
-                </StackPanel>
-                <StackPanel Grid.Row="3" Orientation="Horizontal">
-                    <Label
-                        Margin="20,0,0,0"
-                        Content="Type:"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <TextBlock
-                        Margin="0,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding SelectedReservation.Accommodation.Type}" />
-                </StackPanel>
-                <StackPanel Grid.Row="4" Orientation="Horizontal">
-                    <Label
-                        Margin="20,0,0,0"
-                        Content="Old start date:"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <TextBlock
-                        Margin="0,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding SeletedResrvation.StartDate}" />
-                </StackPanel>
-                <StackPanel Grid.Row="5" Orientation="Horizontal">
-                    <Label
-                        Margin="20,0,0,0"
-                        Content="Old end date:"
-                        FontSize="15"
-                        FontWeight="Bold" />
-                    <TextBlock
-                        Width="200"
-                        Margin="0,0,0,0"
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"
-                        FontSize="15"
-                        Text="{Binding SelectedReservation.EndDate}" />
-                </StackPanel>
-                <Button
-                    Grid.Row="6"
-                    Width="130"
-                    Height="40">
-                    <StackPanel Orientation="Horizontal">
-                        <iconPacks:PackIconMaterialDesign
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Foreground="Black"
-                            Kind="Send" />
-                        <TextBlock Margin="5,0,0,0" Text="Move reservation" />
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="0,40,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="80" />
+
+                        </Grid.RowDefinitions>
+                        <StackPanel
+                            Grid.Row="0"
+                            Margin="0,0,0,0"
+                            Orientation="Horizontal">
+                            <Label
+                                Margin="20,0,0,0"
+                                Content="Name:"
+                                FontSize="15"
+                                FontWeight="Bold" />
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="{Binding SelectedReservation.Accommodation.Name}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <Label
+                                Margin="20,0,0,0"
+                                Content="City:"
+                                FontSize="15"
+                                FontWeight="Bold" />
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="{Binding SelectedReservation.Accommodation.Location.City}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <Label
+                                Margin="20,0,0,0"
+                                Content="Country:"
+                                FontSize="15"
+                                FontWeight="Bold" />
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="{Binding SelectedReservation.Accommodation.Location.Country}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="3" Orientation="Horizontal">
+                            <Label
+                                Margin="20,0,0,0"
+                                Content="Type:"
+                                FontSize="15"
+                                FontWeight="Bold" />
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="{Binding SelectedReservation.Accommodation.Type}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="4" Orientation="Horizontal">
+                            <Label
+                                Margin="20,0,0,0"
+                                Content="Old start date:"
+                                FontSize="15"
+                                FontWeight="Bold" />
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="{Binding SelectedReservation.StartDate}" />
+                        </StackPanel>
+                        <StackPanel Grid.Row="5" Orientation="Horizontal">
+                            <Label
+                                Margin="20,0,0,0"
+                                Content="Old end date:"
+                                FontSize="15"
+                                FontWeight="Bold" />
+                            <TextBlock
+                                Width="200"
+                                Margin="0,0,0,10"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="15"
+                                Text="{Binding SelectedReservation.EndDate}" />
+                        </StackPanel>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="300" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <GroupBox
+                            Grid.Row="0"
+                            Width="280"
+                            Height="280"
+                            Margin="10,10,10,0"
+                            VerticalAlignment="Top"
+                            Background="AliceBlue"
+                            BorderBrush="Black"
+                            BorderThickness="2"
+                            Header="Images">
+                            <Image
+                                Name="accommodationImages"
+                                Source="{Binding ImageUrl}"
+                                Stretch="Fill"
+                                ToolTip="Here you can see all the pictures of the accommodation" />
+                        </GroupBox>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <Button
+                                Width="120"
+                                Height="40"
+                                Margin="90,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="LightGray"
+                                BorderBrush="LightGray"
+                                Command="{Binding PreviousImageCommand}"
+                                Content="&lt;&lt;" />
+                            <Button
+                                Width="120"
+                                Height="40"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="LightGray"
+                                BorderBrush="LightGray"
+                                Command="{Binding NextImageCommand}"
+                                Content="&gt;&gt;" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+                <Separator
+                    Grid.RowSpan="2"
+                    Width="800"
+                    Height="1000"
+                    Margin="60,-68,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    BorderBrush="Black"
+                    BorderThickness="10"
+                    RenderTransformOrigin="0.45,0.45">
+                    <Separator.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform />
+                            <SkewTransform />
+                            <RotateTransform Angle="180" />
+                            <TranslateTransform X="47" Y="47.21" />
+                        </TransformGroup>
+                    </Separator.RenderTransform>
+                </Separator>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                        <Label
+                            Margin="30,50,0,0"
+                            Content="New start date"
+                            FontSize="15" />
+                        <DatePicker
+                            Width="120"
+                            Height="30"
+                            Margin="20,10,115,10"
+                            SelectedDate="{Binding Path=StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Label
+                            Margin="30,0,0,0"
+                            Content="New start date"
+                            FontSize="15" />
+                        <DatePicker
+                            Width="120"
+                            Height="30"
+                            Margin="-95,10,0,0"
+                            SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                        <Button
+                            Grid.Column="1"
+                            Width="130"
+                            Height="40"
+                            Margin="-85,20,0,0"
+                            Command="{Binding MoveRequestCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <iconPacks:PackIconMaterialDesign
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="Black"
+                                    Kind="Send" />
+                                <TextBlock Margin="5,0,0,0" Text="Move reservation" />
+                            </StackPanel>
+                        </Button>
                     </StackPanel>
-                </Button>
+                    <!--<Button
+                        Grid.Column="1"
+                        Grid.ColumnSpan="1"
+                        Width="130"
+                        Height="40"
+                        Margin="0,70,0,0"
+                        Command="{Binding MoveRequestCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Send" />
+                            <TextBlock Margin="5,0,0,0" Text="Move reservation" />
+                        </StackPanel>
+                    </Button>-->
+                    <!--<StackPanel Grid.Column="1" Orientation="Vertical">
+                        <Label
+                            Margin="0,70,0,0"
+                            Content="New start date"
+                            FontSize="15" />
+                        <DatePicker
+                            Width="120"
+                            Height="30"
+                            Margin="-115,10,0,0"
+                            SelectedDate="{Binding Path=EndDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    </StackPanel>
+                    <Button
+                        Grid.Column="2"
+                        Width="130"
+                        Height="40"
+                        Margin="-220,0,0,42"
+                        Command="{Binding MoveRequestCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Send" />
+                            <TextBlock Margin="5,0,0,0" Text="Move reservation" />
+                        </StackPanel>
+                    </Button>-->
+                </Grid>
             </Grid>
+
         </Border>
     </Grid>
 </Page>
