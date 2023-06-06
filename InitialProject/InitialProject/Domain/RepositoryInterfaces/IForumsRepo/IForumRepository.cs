@@ -11,6 +11,7 @@ namespace InitialProject.Domain.RepositoryInterfaces.IForumsRepo
     {
         List<Forum> GetAll();
         Forum GetByLocationId(int locationId);
+        Forum Save(Forum forum);
         void Update(Forum forum);
         void Delete(Forum forum);
     }

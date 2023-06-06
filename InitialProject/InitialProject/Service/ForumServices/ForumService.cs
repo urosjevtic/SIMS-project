@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.IO.Packaging;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using InitialProject.Domain.Model;
 using InitialProject.Domain.Model.Forums;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Domain.RepositoryInterfaces.IForumsRepo;
+using InitialProject.Repository.ForumsRepo;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Service.StatisticService;
 using InitialProject.ViewModels.ForumsViewModel;
@@ -21,6 +23,7 @@ namespace InitialProject.Service.ForumServices
         private readonly LocationService _locationService;
         private readonly UserService _userService;
         private readonly ForumCommentsService _forumCommentsService;
+        private readonly ForumCommentRepository _forumCommentRepository;
         private readonly AccommodationReservationService _accommodationReservationService;
 
         public User LoggedUser = App.LoggedUser;
@@ -29,6 +32,7 @@ namespace InitialProject.Service.ForumServices
         {
             _forumRepository = Injector.Injector.CreateInstance<IForumRepository>();
             _forumCommentsService = new ForumCommentsService();
+            _forumCommentRepository= new ForumCommentRepository();
             _accommodationService = new AccommodationService();
             _userService = new UserService();
             _locationService = new LocationService();
@@ -62,10 +66,40 @@ namespace InitialProject.Service.ForumServices
                     }
                 }
             }
-
-
             return ownerForums;
         }
+
+
+        public List<Forum> GetByCity(string city)
+        {
+            List<Forum> forums = _forumRepository.GetAll();
+            // List<Accommodation> accommdoations = _accommodationService.GetAllAccommodationByOwnerId(ownerId);
+            List<Accommodation> accommodations = _accommodationService.GetAll();
+            List<Forum> ownerForums = new List<Forum>();
+            BindLocationsToForums(forums);
+           // BindAuthorToForum(forums);
+           foreach(var forum in forums)
+            {
+                if (forum.Location.Equals(city))
+                {
+                    ownerForums.Add(forum);
+                }
+            }
+            //foreach (var accommodation in accommodations)
+            //{
+
+            //    //foreach (var forum in forums)
+            //    //{
+            //    //    if (forum.Location.Equals(accommodation.Location))
+            //    //    {
+            //    //        ownerForums.Add(forum);
+            //    //    }
+            //    //}
+            //}
+            return ownerForums;
+        }
+
+
 
         private void BindLocationsToForums(List<Forum> forums)
         {
@@ -118,40 +152,76 @@ namespace InitialProject.Service.ForumServices
             }
         }
 
-
-        public void CreateForum(int author, string country, string city, bool isOpen, string comment)
+        public Forum Save( User author, string country, string city,DateTime date, bool isOpen, string comment)
         {
-            Forum forum= new Forum();
-            CreateNewForum(forum, author, country, city, isOpen, comment);  
-            int forumId=_forumRepository.ToString
-        }
+            ForumComment forumComment = new ForumComment();
+            forumComment.Comment = comment;
 
-
-        private void CreateNewForum(Forum forum, int author, string country, string city, bool isOpen, string comment)
-        {
-            forum.Author.Id= author;
-            forum.Location.Id= _locationService.GetLocationId(country, city);
+            Forum forum = new Forum();
+            forum.Author = author;
+           forum.Location.Id = _locationService.GetLocationId(country, city);
+           //forum.Location.City = city;
+            //forum.Location.Country = country;
+            forum.CreationDate = date;
             forum.IsOpen = isOpen;
-            //forum.Comments = _forumCommentsService.GetCommentId(comment);
-            _forumCommentsService.Save(LoggedUser,comment);
+            AddNewComment(forum, author, comment);
+            //forum.Comments.Add(forumComment);
+            return _forumRepository.Save(forum);
+
         }
 
 
+        //public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
+        //{
+        //    Accommodation accommodation = new Accommodation();
+        //    CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
+        //   // int accommodationId = _accommodationRepository.Save(accommodation).Id;
+        //   // _accommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
 
+        //}
 
-        public void CreateAccommodation(string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
+        public void CreateForum(User author, string country, string city, DateTime date, bool isOpen, string comment)
         {
-            Accommodation accommodation = new Accommodation();
-            CreateNewAccommodation(accommodation, name, country, city, type, maxGuests, minReservationDays, cancelationPeriod, imagesUrl, ownerId);
-            int accommodationId = _accommodationRepository.Save(accommodation).Id;
-            _accommodationStatisticService.CreateStatisticForNewAccommodation(accommodationId);
-
+            Forum forum = new Forum();
+            Create(forum, author, country, city, date, isOpen, comment);
+            int forumId = _forumRepository.Save(forum).Id;
         }
 
 
-       
+        //private void CreateNewAccommodation(Accommodation accommodation, string name, string country, string city, string type, int maxGuests, int minReservationDays, int cancelationPeriod, string imagesUrl, int ownerId)
+        //{
+        //    accommodation.Owner.Id = ownerId;
+        //    accommodation.Name = name;
+        //    accommodation.Location.Id = _locationService.GetLocationId(country, city);
+        //    accommodation.Type = GetType(type);
+        //    accommodation.MaxGuests = maxGuests;
+        //    accommodation.MinReservationDays = minReservationDays;
+        //    accommodation.CancelationPeriod = cancelationPeriod;
+        //    _imageService.SaveImages(0, imagesUrl);
+        //}
+
+        public void Create(Forum forum, User author, string country, string city, DateTime date, bool isOpen, string comment)
+        {
+            ForumComment forumComment = new ForumComment();
+            forumComment.Comment = comment;
+            AddNewComment(forum, author, comment);
+            forum.Author = author;
+            forum.Location.Id = _locationService.GetLocationId(country, city);
+            forum.CreationDate = date;
+            forum.IsOpen = isOpen;
+            forum.Comments.Add(forumComment);
+           // return _forumRepository.Save(forum);
+        }
 
 
+
+
+
+        public void ChangeStatus(Forum forum, bool isOpen)
+        {
+            forum.IsOpen=isOpen;
+            _forumRepository.Update(forum);
+        }
 
 
 

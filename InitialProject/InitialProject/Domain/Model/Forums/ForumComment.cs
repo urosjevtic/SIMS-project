@@ -118,6 +118,11 @@ namespace InitialProject.Domain.Model.Forums
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public static implicit operator List<object>(ForumComment v)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

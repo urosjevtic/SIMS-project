@@ -72,6 +72,7 @@ namespace InitialProject.ViewModels
         }
 
        
+       
 
         public ICommand CloseForumCommand => new RelayCommand(CloseForum);
 
@@ -79,7 +80,7 @@ namespace InitialProject.ViewModels
         {
             SelectedForum.IsOpen = false;
             // pozovi servis da sacuvas forum sada kada je njegov status izmenjen - Sacuvas SelectedForum
-
+            _forumService.ChangeStatus(SelectedForum, SelectedForum.IsOpen);
             Messenger.Default.Send<ToastNotification>(new ToastNotification("Success", "You have successfully closed the forum.", NotificationType.Success));
         }
 
@@ -93,12 +94,12 @@ namespace InitialProject.ViewModels
         }
 
 
-        public ICommand GoBackCommand => new RelayCommand(GoBack);
+        //public ICommand GoBackCommand => new RelayCommand(GoBack);
 
-        private void GoBack()
-        {
-            NavigationService.Navigate(new ForumSelcetionView(_logedInUser, NavigationService));
-        }
+        //private void GoBack()
+        //{
+        //    NavigationService.Navigate(new ForumSelcetionView(_logedInUser, NavigationService));
+        //}
 
 
         private bool _hasUserReported;
@@ -115,25 +116,25 @@ namespace InitialProject.ViewModels
             }
         }
 
-        public ICommand ReportCommentCommand => new RelayCommandWithParams(ReportComment);
+        //public ICommand ReportCommentCommand => new RelayCommandWithParams(ReportComment);
 
-        private void ReportComment(object parameter)
-        {
-            if (parameter is ForumComment selectedComment)
-            {
+        //private void ReportComment(object parameter)
+        //{
+        //    if (parameter is ForumComment selectedComment)
+        //    {
 
-                if (!selectedComment.HasUserReported)
-                {
-                    _forumService.ReportComment(selectedComment, _logedInUser);
-                    selectedComment.HasUserReported = true;
-                }
-                else
-                {
-                    _forumService.RemoveCommentReport(selectedComment, _logedInUser);
-                    selectedComment.HasUserReported = false;
-                }
-            }
-        }
+        //        if (!selectedComment.HasUserReported)
+        //        {
+        //            _forumService.ReportComment(selectedComment, _logedInUser);
+        //            selectedComment.HasUserReported = true;
+        //        }
+        //        else
+        //        {
+        //            _forumService.RemoveCommentReport(selectedComment, _logedInUser);
+        //            selectedComment.HasUserReported = false;
+        //        }
+        //    }
+        //}
     }
 }
 

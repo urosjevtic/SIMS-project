@@ -185,31 +185,31 @@
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0" Orientation="Vertical">
+                    <StackPanel Grid.Column="1" Orientation="Vertical">
                         <Label
                             Grid.Column="0"
-                            Margin="30,20,0,0"
+                            Margin="10,20,0,0"
                             Content="City" />
                         <ComboBox
                             x:Name="CityComboBox"
                             Width="100"
                             Height="30"
-                            Margin="-20,10,0,10"
+                            Margin="-60,10,0,10"
                             ItemsSource="{Binding Cities}"
                             SelectedItem="{Binding Path=City}" />
 
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Orientation="Vertical">
+                    <StackPanel Grid.Column="0" Orientation="Vertical">
                         <Label
                             Grid.Row="3"
-                            Margin="10,20,0,0"
+                            Margin="30,20,0,0"
                             Content="Country" />
                         <ComboBox
                             x:Name="CountryComboBox"
                             Grid.Row="2"
                             Width="100"
                             Height="30"
-                            Margin="-60,10,0,10"
+                            Margin="-20,10,0,10"
                             ItemsSource="{Binding Path=Locations.Keys}"
                             SelectedItem="{Binding Path=Country, UpdateSourceTrigger=PropertyChanged}" />
 
@@ -233,7 +233,7 @@
                     Height="40"
                     Margin="0,10,75,0"
                     HorizontalAlignment="Right"
-                     Command="{Binding MakeForumCommand}"
+                    Command="{Binding MakeForumCommand}"
                     Content="Make forum" />
             </Grid>
         </Grid>

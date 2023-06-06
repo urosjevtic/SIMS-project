@@ -36,6 +36,14 @@ namespace InitialProject.Repository.ForumsRepo
             return _forums.FirstOrDefault(f => f.Location.Id == locationId);
         }
 
+        public Forum Save(Forum forum)
+        {
+            _forums = _serializer.FromCSV(FilePath);
+            _forums.Add(forum);
+            _serializer.ToCSV(FilePath, _forums);
+            return forum;
+        }
+
         public void Update(Forum forum)
         {
             _forums = _serializer.FromCSV(FilePath);
