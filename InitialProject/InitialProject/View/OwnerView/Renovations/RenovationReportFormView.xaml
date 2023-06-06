@@ -21,16 +21,30 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="{ns:Loc Select_a_period_for_renovation_report}" Foreground="{DynamicResource TextColor}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="24"></TextBlock>
-        <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{ns:Loc From}" Foreground="{DynamicResource TextColor}"  Margin="0, 0, 20, 0"></TextBlock>
-                <DatePicker SelectedDate="{Binding FromDate}"></DatePicker>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{ns:Loc To}" Foreground="{DynamicResource TextColor}"  Margin="0, 0, 20, 0"></TextBlock>
-                <DatePicker SelectedDate="{Binding ToDate}"></DatePicker>
-            </StackPanel>
+        
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="{ns:Loc From}" Foreground="{DynamicResource TextColor}"></TextBlock>
+            <DatePicker Grid.Row="0" Grid.Column="2" SelectedDate="{Binding FromDate}"></DatePicker>
+
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{ns:Loc To}" Foreground="{DynamicResource TextColor}" ></TextBlock>
+            <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding ToDate}"></DatePicker>
+
+        </Grid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Command="{Binding GeneratePdfCommand}" Content="{ns:Loc Generate}" Style="{StaticResource ButtonStyle}" Width="100" Margin="10, 10, 40 ,10"></Button>
+            <Button Command="{Binding CancelCommand}" Content="{ns:Loc Cancel}" Style="{StaticResource ButtonStyle}" Width="100" Margin="10, 10, 10 ,10"></Button>
         </StackPanel>
-        <Button Grid.Row="2" Command="{Binding GeneratePdfCommand}" Content="{ns:Loc Generate_report}" Style="{StaticResource ButtonStyle}" Margin="10, 10, 10 ,10"></Button>
     </Grid>
 </Window>

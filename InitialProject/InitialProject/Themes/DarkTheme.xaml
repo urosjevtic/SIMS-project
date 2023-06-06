@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <SolidColorBrush x:Key="ObjectsBackgroundColor" Color="#222222" />
+    <SolidColorBrush x:Key="ObjectsBackgroundColor" Color="#161616" />
     <SolidColorBrush x:Key="BackgroundColorLighter" Color="#222222"></SolidColorBrush>
     <SolidColorBrush x:Key="ForegroundColorLighter" Color="#ffffff"></SolidColorBrush>
     <SolidColorBrush x:Key="BackgroundColorDarker" Color="#333333"></SolidColorBrush>

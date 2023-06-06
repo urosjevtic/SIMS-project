@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="ScheduleRenovationFormView" Height="637" Width="345">
+        Title="ScheduleRenovationFormView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -41,7 +41,7 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
@@ -66,8 +66,9 @@
                 <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation}" Foreground="{DynamicResource TextColor}"></TextBlock>
                 <!--Accommodation location-->
                 <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,5" >
-                    <TextBlock Text="{ns:Loc Selected_accommodation}" 
+                    <TextBlock Text="{Binding Accommodation.Name}" 
                            FontWeight="Bold"
+                           FontSize="20"
                            Foreground="{DynamicResource TextColor}"
                            Margin="0,0,5,0"/>
                     <TextBlock Text="" />
@@ -76,30 +77,43 @@
                 <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="20" FontWeight="DemiBold" Text="{ns:Loc Select_date_range_for_renovations}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
                 <!--From and to dates-->
-                <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
-                    <TextBlock Text="{ns:Loc From}" 
-                           FontWeight="Bold"
-                           Margin="0,0,39,0"
-                           Foreground="{DynamicResource TextColor}"/>
-                    <DatePicker SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}">
+
+
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition Width="Auto"></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+
+                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{ns:Loc From}" 
+                               FontWeight="Bold"
+                               Margin="0,0,0,0"
+                               Foreground="{DynamicResource TextColor}"/>
+                    <DatePicker Grid.Row="0" Grid.Column="2" SelectedDate="{Binding FromDate, UpdateSourceTrigger=PropertyChanged}">
                     </DatePicker>
 
-                </StackPanel>
 
-                <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
-                    <TextBlock Text="{ns:Loc To}" 
-                           FontWeight="Bold"
-                           Margin="10,0,20,0"
-                           Foreground="{DynamicResource TextColor}"/>
-                    <DatePicker SelectedDate="{Binding ToDate}"></DatePicker>
+                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{ns:Loc To}" 
+                               FontWeight="Bold"
+                               Margin="10,0,20,0"
+                               Foreground="{DynamicResource TextColor}"/>
+                    <DatePicker Grid.Row="1" Grid.Column="2" SelectedDate="{Binding ToDate}"></DatePicker>
 
-                </StackPanel>
+                </Grid>
                 <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10,5">
                     <TextBlock Text="{ns:Loc Renovation_length}" 
                            FontWeight="Bold"
-                           Margin="10,0,0,0"
+                           Margin="10,15,0,0"
                            Foreground="{DynamicResource TextColor}"/>
-                    <TextBox Width="30" Height="20" Text="{Binding RenovationLength}"></TextBox>
+                    <TextBox Width="30" Height="20" Margin="10, 15, 0, 0" Text="{Binding RenovationLength}"></TextBox>
 
                 </StackPanel>
             </Grid>

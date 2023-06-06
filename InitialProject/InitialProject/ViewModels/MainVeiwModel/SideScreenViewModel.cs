@@ -61,6 +61,9 @@ namespace InitialProject.ViewModels
         public ICommand SettingsOpenCommand => new RelayCommand(SettingsOpen);
         public ICommand ForumOpenCommand => new RelayCommand(ForumOpen);
 
+        public ICommand LogOutCommand => new RelayCommand(LogOut);
+        public ICommand HelpCommand => new RelayCommand(Help);
+
 
         protected abstract void MyAccommoadionsOpen();
         protected abstract void RatingsOpen();
@@ -71,5 +74,9 @@ namespace InitialProject.ViewModels
         protected abstract void NotesOpen();
         protected abstract void SettingsOpen();
         protected abstract void ForumOpen();
+
+        protected abstract void LogOut();
+
+        protected abstract void Help();
     }
 }

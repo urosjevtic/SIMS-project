@@ -46,5 +46,13 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         {
             NavigationService.Navigate(new RenovationsMainView(_logedInUser, NavigationService));
         }
+
+        public ICommand OpenScheduleRenovationSugestionsCommand => new RelayCommand(OpenScheduleRenovationSugestions);
+        private void OpenScheduleRenovationSugestions()
+        {
+            NavigationService.Navigate(new RenovationSugestionView(_logedInUser, NavigationService));
+        }
+
+
     }
 }

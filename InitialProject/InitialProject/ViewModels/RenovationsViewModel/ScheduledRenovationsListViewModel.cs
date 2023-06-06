@@ -9,6 +9,7 @@ using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Service.RatingServices;
 using InitialProject.Service.RenovationServices;
 using InitialProject.Utilities;
+using InitialProject.View.OwnerView.PopupWindows;
 using InitialProject.View.OwnerView.Renovations;
 using RelayCommand = InitialProject.Utilities.RelayCommand;
 
@@ -39,8 +40,9 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         {
             if (parameter is Renovation selectedRenovation)
             {
-                Renovations.Remove(selectedRenovation);
-                _renovationService.Delete(selectedRenovation);
+                ConfirmCancelingRenovationView confirmCancelingRenovationView =
+                    new ConfirmCancelingRenovationView(selectedRenovation, Renovations);
+                confirmCancelingRenovationView.ShowDialog();
             }
         }
 

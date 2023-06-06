@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:InitialProject.View.OwnerView.Forums"
       xmlns:ns="clr-namespace:InitialProject.Utilities"
       mc:Ignorable="d" 
-      Title="ForumSelcetionView" Height="637" Width="345">
+      Title="ForumSelcetionView" Height="648" Width="356">
     <Page.Background>
         <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
@@ -29,6 +29,18 @@
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
                  >
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
@@ -71,7 +83,7 @@
                                            FontWeight="Bold"
                                            Foreground="{DynamicResource TextColor}"
                                            FontSize="20"/>
-                                <TextBlock Text=","
+                                <TextBlock Text=", "
                                            Foreground="{DynamicResource TextColor}"
                                            FontSize="20"/>
                                 <TextBlock Text="{Binding Location.City}" 
