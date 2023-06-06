@@ -26,13 +26,26 @@
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc MyAccommodations}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
-                 ItemsSource="{Binding Accommodations}"
-                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                 Background="{DynamicResource BackgroundColorDarker}"
-                 BorderThickness="0"
-                 HorizontalContentAlignment="Stretch"
-                 >
+         ItemsSource="{Binding Accommodations}"
+         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+         ScrollViewer.VerticalScrollBarVisibility="Disabled"
+         Background="{DynamicResource BackgroundColorDarker}"
+         BorderThickness="0"
+         HorizontalContentAlignment="Stretch">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"

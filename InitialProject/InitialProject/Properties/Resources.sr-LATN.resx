@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accommdation_reserved" xml:space="preserve">
+    <value>Smeštaj registrovan</value>
+  </data>
   <data name="Accommodation" xml:space="preserve">
     <value>Smeštaj:</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="Accommodation_type" xml:space="preserve">
     <value>Tip smeštaja:</value>
   </data>
+  <data name="Accommodation_type_requeired" xml:space="preserve">
+    <value>*Tip smeštaja:</value>
+  </data>
   <data name="Additional_comment" xml:space="preserve">
     <value>Dodatni komentar:</value>
   </data>
@@ -158,6 +164,12 @@
   </data>
   <data name="All_reservations2" xml:space="preserve">
     <value>*Na ovom ekranu ćete takođe moći da otkažete rezervacije ako je potrebno</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_cancel_this_renovation" xml:space="preserve">
+    <value>Are you sure you want to cancel this renovation</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_cancel_this_reservation" xml:space="preserve">
+    <value>Da li ste sigurni da želite da otkažete ovu rezervaciju?</value>
   </data>
   <data name="Author" xml:space="preserve">
     <value>Autor:</value>
@@ -180,6 +192,12 @@
   <data name="Cancelation_period" xml:space="preserve">
     <value>Period za otkazivanje:</value>
   </data>
+  <data name="Cancelation_period_requiered" xml:space="preserve">
+    <value>*Period za otkazivanje</value>
+  </data>
+  <data name="Cancel_renovation" xml:space="preserve">
+    <value>Cancel renovation</value>
+  </data>
   <data name="Cancel_reservation" xml:space="preserve">
     <value>Otkaži rezervaciju</value>
   </data>
@@ -201,6 +219,9 @@
   <data name="City" xml:space="preserve">
     <value>Grad:</value>
   </data>
+  <data name="City_requiered" xml:space="preserve">
+    <value>*Grad:</value>
+  </data>
   <data name="Cleanlines" xml:space="preserve">
     <value>Čistoća:</value>
   </data>
@@ -218,6 +239,9 @@
   </data>
   <data name="Country" xml:space="preserve">
     <value>Država:</value>
+  </data>
+  <data name="Country_requiered" xml:space="preserve">
+    <value>*Država:</value>
   </data>
   <data name="Creation_date" xml:space="preserve">
     <value>Datum kreiranja:</value>
@@ -246,6 +270,9 @@
   <data name="English" xml:space="preserve">
     <value>Engleski</value>
   </data>
+  <data name="Every_field_is_requiered" xml:space="preserve">
+    <value>*Svako polje je obavezno</value>
+  </data>
   <data name="Finished" xml:space="preserve">
     <value>Završeno:</value>
   </data>
@@ -264,6 +291,9 @@
   <data name="From" xml:space="preserve">
     <value>Od:</value>
   </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generiši</value>
+  </data>
   <data name="Generate_a_pdf_report_for_a_renovations" xml:space="preserve">
     <value>Generiši pdf izveštaj o renovaciji</value>
   </data>
@@ -275,6 +305,9 @@
   </data>
   <data name="Go_back" xml:space="preserve">
     <value>&lt; Nazad</value>
+  </data>
+  <data name="Guest_rating" xml:space="preserve">
+    <value>Ocenjivanje gosta</value>
   </data>
   <data name="Guest_username" xml:space="preserve">
     <value>Korisničko ime gosta:</value>
@@ -300,6 +333,9 @@
   <data name="Images_url" xml:space="preserve">
     <value>Url adrese slika:</value>
   </data>
+  <data name="Images_url_requiered" xml:space="preserve">
+    <value>*Url adrese slika:</value>
+  </data>
   <data name="Initial_date" xml:space="preserve">
     <value>Prvobitni datum</value>
   </data>
@@ -321,8 +357,14 @@
   <data name="Maximum_number_of_guests" xml:space="preserve">
     <value>Maksimalni broj gostiju:</value>
   </data>
+  <data name="Max_Number_Of_Guests_requiered" xml:space="preserve">
+    <value>*Maksimalan broj gostiju:</value>
+  </data>
   <data name="Minimum_renovation_days" xml:space="preserve">
     <value>Minimalni broj dana za rezervaciju:</value>
+  </data>
+  <data name="Min_reservation_days_requieded" xml:space="preserve">
+    <value>*Minimalan broj dana za rezervaciju:</value>
   </data>
   <data name="MyAccommodations" xml:space="preserve">
     <value>Moj smeštaj</value>
@@ -348,6 +390,9 @@
   <data name="Name" xml:space="preserve">
     <value>Naziv:</value>
   </data>
+  <data name="Name_requiered" xml:space="preserve">
+    <value>*Naziv:</value>
+  </data>
   <data name="New_date" xml:space="preserve">
     <value>Novi datum</value>
   </data>
@@ -365,6 +410,9 @@
   </data>
   <data name="New_renovations3" xml:space="preserve">
     <value>*Da biste završili, samo napišite opis renoviranja i kliknite na potvrdi</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Ne</value>
   </data>
   <data name="Notes" xml:space="preserve">
     <value>Beleške</value>
@@ -390,11 +438,17 @@
   <data name="Number_of_reservations" xml:space="preserve">
     <value>Broj rezervacija:</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Otvori</value>
   </data>
   <data name="Owner_fairnes" xml:space="preserve">
     <value>Korektnost vlasnika:</value>
+  </data>
+  <data name="Pdf_report" xml:space="preserve">
+    <value>PDF izveštaj</value>
   </data>
   <data name="Personal_info" xml:space="preserve">
     <value>Lični podaci:</value>
@@ -468,6 +522,9 @@
   <data name="Renovation_rescheduling" xml:space="preserve">
     <value>Pomeranje renoviranja</value>
   </data>
+  <data name="Renovation_scheduled" xml:space="preserve">
+    <value>Renoviranje zakazano</value>
+  </data>
   <data name="Renovation_sugestions" xml:space="preserve">
     <value>Predlozi za renoviranje</value>
   </data>
@@ -482,6 +539,9 @@
   </data>
   <data name="Renovation_urgency" xml:space="preserve">
     <value>Urgentnost renoviranja:</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Izveštaj</value>
   </data>
   <data name="Reschedule" xml:space="preserve">
     <value>Pomeri</value>
@@ -650,5 +710,20 @@
   </data>
   <data name="Unrated_guests1" xml:space="preserve">
     <value>*Ocenite goste koji su posetili vaš smeštaj. Samo izaberite gosta kojeg želite da ocenite i popunite formular</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Da</value>
+  </data>
+  <data name="You_have_successfuly_downloaded_your_report" xml:space="preserve">
+    <value>Uspešno ste preuzeli izveštaj</value>
+  </data>
+  <data name="You_have_successfuly_rated_guest" xml:space="preserve">
+    <value>Uspešno ste ocenili gosta</value>
+  </data>
+  <data name="You_have_successfuly_registrated_new_accommodation" xml:space="preserve">
+    <value>Uspešno ste registrovali novi smeštaj</value>
+  </data>
+  <data name="You_have_successfuly_scheduled_renovation" xml:space="preserve">
+    <value>Uspešno ste zakazali renoviranje smeštaja</value>
   </data>
 </root>

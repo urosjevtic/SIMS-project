@@ -11,6 +11,7 @@ using InitialProject.Service.RenovationServices;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Utilities;
 using InitialProject.Validation;
+using InitialProject.View.OwnerView.PopupWindows;
 using InitialProject.View.OwnerView.Renovations;
 
 namespace InitialProject.ViewModels.RenovationsViewModel
@@ -113,6 +114,9 @@ namespace InitialProject.ViewModels.RenovationsViewModel
         private void ScheduleRenovation()
         {
             _renovationService.ScheduleRenovation(Accommodation, _selectedStartDate, _renovationLength, _renovationDescription);
+            SuccessfulRenovationView successfulRenovation = new SuccessfulRenovationView();
+            successfulRenovation.ShowDialog();
+
             NavigationService.Navigate(new ScheduleRenovationListView(_logedInUser, NavigationService));
         }
 

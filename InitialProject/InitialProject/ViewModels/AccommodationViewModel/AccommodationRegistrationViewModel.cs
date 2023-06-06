@@ -14,6 +14,7 @@ using InitialProject.View.OwnerView.Ratings;
 using System.Windows.Navigation;
 using NuGet.Protocol;
 using System.Collections.ObjectModel;
+using InitialProject.View.OwnerView.PopupWindows;
 
 namespace InitialProject.ViewModels
 {
@@ -157,11 +158,13 @@ namespace InitialProject.ViewModels
             }
         }
 
-        public ICommand AddUrlToListCommand => new RelayCommand(AddUrlToList);
+        public ICommand AddUrlToListCommand => new RelayCommand(AddUrlToList, CanAddImage);
 
         private void AddUrlToList()
         {
             _urlList.Add(ImagesUrl);
+            _imagesUrl = null;
+            OnPropertyChanged("ImagesUrl");
             OnPropertyChanged("UrlList");
         }
 
@@ -172,7 +175,15 @@ namespace InitialProject.ViewModels
             _accommodationService.CreateAccommodation
                 (_accommodationName, _country, _city, _accommodationTypes, _maxGuests, _minReservationDays, Convert.ToInt32(_cancelationPeriod), _urlList.ToList(), _logedInUser.Id);
 
+            SuccesfullAccommodationRegistrationView successView = new SuccesfullAccommodationRegistrationView();
+            successView.ShowDialog();
+
             NavigationService.Navigate(new MyAccommodationsMainView(_logedInUser, NavigationService));
+        }
+
+        private bool CanAddImage()
+        {
+            return !(_imagesUrl == null);
         }
 
 

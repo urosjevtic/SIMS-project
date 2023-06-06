@@ -339,4 +339,40 @@
     </Style>
 
 
+
+    <Style x:Key="AddImageButtonStyle" TargetType="Button">
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="30" />
+        <Setter Property="Margin" Value="5,0,0,15" />
+        <Setter Property="Command" Value="{Binding AddUrlToListCommand}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Ellipse x:Name="BackgroundEllipse" Fill="{DynamicResource ObjectsBackgroundColor}" Stroke="{DynamicResource ForegroundColorLighter}" StrokeThickness="1" />
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="BackgroundEllipse" Property="Fill" Value="{DynamicResource ButtonMouseOver}" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="BackgroundEllipse" Property="Fill" Value="{DynamicResource ButtonMouseClick}" />
+                        </Trigger>
+
+                        <!--Button blocked, validation-->
+                        <DataTrigger Binding="{Binding ElementName=imagesUrlTextbox, Path=(Validation.HasError)}" Value="True">
+                                <Setter Property="IsEnabled" Value="False"></Setter>
+                            </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Content">
+            <Setter.Value>
+                <TextBlock FontSize="16" FontWeight="Bold" Foreground="{DynamicResource ForegroundColorLighter}">+</TextBlock>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

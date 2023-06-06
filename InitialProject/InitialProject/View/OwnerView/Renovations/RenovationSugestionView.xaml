@@ -25,7 +25,6 @@
 
 
         <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Renovation_sugestions}" Foreground="{DynamicResource TextColor}"></TextBlock>
-        <TextBlock Grid.Row="1" Text="{ns:Loc Suggestion_for_renovations}" Foreground="{DynamicResource TextColor}" Margin="5, 0" FontSize="14" FontWeight="SemiBold" VerticalAlignment="Bottom"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="sugestionsListBox"
                  ItemsSource="{Binding Recommendations}"
@@ -34,7 +33,19 @@
                  Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch"
-                 >
+        >
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"

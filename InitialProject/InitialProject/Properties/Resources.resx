@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accommdation_reserved" xml:space="preserve">
+    <value>Accommodation reserved</value>
+  </data>
   <data name="Accommodation" xml:space="preserve">
     <value>Accommodation:</value>
   </data>
@@ -141,6 +144,9 @@
   <data name="Accommodation_type" xml:space="preserve">
     <value>Accommodation type:</value>
   </data>
+  <data name="Accommodation_type_requeired" xml:space="preserve">
+    <value>*Accommodation type:</value>
+  </data>
   <data name="Additional_comment" xml:space="preserve">
     <value>Additional comment:</value>
   </data>
@@ -158,6 +164,12 @@
   </data>
   <data name="All_reservations2" xml:space="preserve">
     <value>*On this screen you will also be able to cancel reservations if needed</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_cancel_this_renovation" xml:space="preserve">
+    <value>Da li ste sigurni da zelite da otkazete renoviranje?</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_cancel_this_reservation" xml:space="preserve">
+    <value>Are you sure you want to cancel this reservation?</value>
   </data>
   <data name="Author" xml:space="preserve">
     <value>Author:</value>
@@ -180,6 +192,12 @@
   <data name="Cancelation_period" xml:space="preserve">
     <value>Cancelation period:</value>
   </data>
+  <data name="Cancelation_period_requiered" xml:space="preserve">
+    <value>*Cancelation period: </value>
+  </data>
+  <data name="Cancel_renovation" xml:space="preserve">
+    <value>Otkazi renoviranje</value>
+  </data>
   <data name="Cancel_reservation" xml:space="preserve">
     <value>Cancel reservation</value>
   </data>
@@ -201,6 +219,9 @@
   <data name="City" xml:space="preserve">
     <value>City:</value>
   </data>
+  <data name="City_requiered" xml:space="preserve">
+    <value>*City:</value>
+  </data>
   <data name="Cleanlines" xml:space="preserve">
     <value>Cleanlines:</value>
   </data>
@@ -218,6 +239,9 @@
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country:</value>
+  </data>
+  <data name="Country_requiered" xml:space="preserve">
+    <value>*Country:</value>
   </data>
   <data name="Creation_date" xml:space="preserve">
     <value>Creation date:</value>
@@ -246,6 +270,9 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="Every_field_is_requiered" xml:space="preserve">
+    <value>*Every field is required</value>
+  </data>
   <data name="Finished" xml:space="preserve">
     <value>Finished:</value>
   </data>
@@ -264,6 +291,9 @@
   <data name="From" xml:space="preserve">
     <value>From:</value>
   </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
   <data name="Generate_a_pdf_report_for_a_renovations" xml:space="preserve">
     <value>Generate a pdf report for a renovations</value>
   </data>
@@ -275,6 +305,9 @@
   </data>
   <data name="Go_back" xml:space="preserve">
     <value>&lt; Go back</value>
+  </data>
+  <data name="Guest_rating" xml:space="preserve">
+    <value>Guest rating</value>
   </data>
   <data name="Guest_username" xml:space="preserve">
     <value>Guest username:</value>
@@ -300,6 +333,9 @@
   <data name="Images_url" xml:space="preserve">
     <value>Imgaes url:</value>
   </data>
+  <data name="Images_url_requiered" xml:space="preserve">
+    <value>*Images url:</value>
+  </data>
   <data name="Initial_date" xml:space="preserve">
     <value>Initial dates</value>
   </data>
@@ -321,8 +357,14 @@
   <data name="Maximum_number_of_guests" xml:space="preserve">
     <value>Maximum number of guests:</value>
   </data>
+  <data name="Max_Number_Of_Guests_requiered" xml:space="preserve">
+    <value>*Maximum number of guests:</value>
+  </data>
   <data name="Minimum_renovation_days" xml:space="preserve">
     <value>Minimum renovation days:</value>
+  </data>
+  <data name="Min_reservation_days_requieded" xml:space="preserve">
+    <value>*Minimum reservation days:</value>
   </data>
   <data name="MyAccommodations" xml:space="preserve">
     <value>My Accommodations</value>
@@ -348,6 +390,9 @@
   <data name="Name" xml:space="preserve">
     <value>Name:</value>
   </data>
+  <data name="Name_requiered" xml:space="preserve">
+    <value>*Name:</value>
+  </data>
   <data name="New_date" xml:space="preserve">
     <value>New date</value>
   </data>
@@ -365,6 +410,9 @@
   </data>
   <data name="New_renovations3" xml:space="preserve">
     <value>*To finish just write renovation descritpiton and click on confirm</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
@@ -390,11 +438,17 @@
   <data name="Number_of_reservations" xml:space="preserve">
     <value>Number of reservations:</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
   <data name="Open" xml:space="preserve">
     <value>Open</value>
   </data>
   <data name="Owner_fairnes" xml:space="preserve">
     <value>Owner fairnes:</value>
+  </data>
+  <data name="Pdf_report" xml:space="preserve">
+    <value>PDF report</value>
   </data>
   <data name="Personal_info" xml:space="preserve">
     <value>Personal info</value>
@@ -468,6 +522,9 @@
   <data name="Renovation_rescheduling" xml:space="preserve">
     <value>Renovation rescheduling</value>
   </data>
+  <data name="Renovation_scheduled" xml:space="preserve">
+    <value>Renovation scheduled</value>
+  </data>
   <data name="Renovation_sugestions" xml:space="preserve">
     <value>Renovation sugestions</value>
   </data>
@@ -482,6 +539,9 @@
   </data>
   <data name="Renovation_urgency" xml:space="preserve">
     <value>Renovation urgency:</value>
+  </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
   </data>
   <data name="Reschedule" xml:space="preserve">
     <value>Reschedule</value>
@@ -624,6 +684,9 @@
   <data name="Stayed_at" xml:space="preserve">
     <value>Stayed at:</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
   </data>
@@ -650,5 +713,20 @@
   </data>
   <data name="Unrated_guests1" xml:space="preserve">
     <value>*Rate guests that have visited your accommodations. Just select guest that you want to rate and fill the form</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="You_have_successfuly_downloaded_your_report" xml:space="preserve">
+    <value>You have successfuly downloaded your report</value>
+  </data>
+  <data name="You_have_successfuly_rated_guest" xml:space="preserve">
+    <value>You have successfuly rated guest</value>
+  </data>
+  <data name="You_have_successfuly_registrated_new_accommodation" xml:space="preserve">
+    <value>You have successfuly registrated new accommodation</value>
+  </data>
+  <data name="You_have_successfuly_scheduled_renovation" xml:space="preserve">
+    <value>You have successfuly scheduled renovation</value>
   </data>
 </root>

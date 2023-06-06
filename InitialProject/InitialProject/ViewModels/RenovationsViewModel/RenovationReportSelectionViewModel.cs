@@ -63,5 +63,12 @@ namespace InitialProject.ViewModels.RenovationsViewModel
             NavigationService.Navigate(new RenovationReportPreviewView(_logedInUser, NavigationService, _fromDate, _toDate));
             CloseCurrentWindow();
         }
+
+        public ICommand CancelCommand => new RelayCommand(CloseWindow);
+
+        private void CloseWindow()
+        {
+            CloseCurrentWindow();
+        }
     }
 }

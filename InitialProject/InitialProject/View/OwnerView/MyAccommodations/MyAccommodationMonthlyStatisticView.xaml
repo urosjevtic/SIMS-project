@@ -51,7 +51,7 @@
             <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{Binding SelectedYearText}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
             <!--Number of reservations-->
-            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="10,5">
+            <StackPanel Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center">
                 <TextBlock Text="{ns:Loc Buisiest_month}" 
                            Foreground="{DynamicResource TextColor}"
                            FontWeight="Bold"

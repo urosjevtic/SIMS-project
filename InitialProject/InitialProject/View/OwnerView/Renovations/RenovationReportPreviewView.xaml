@@ -26,7 +26,7 @@
                    FontSize="30"
                    FontWeight="SemiBold"
                    TextWrapping="Wrap"
-                   Text="PDF report"
+                   Text="{ns:Loc Pdf_report}"
                    Foreground="{DynamicResource TextColor}" />
 
 
@@ -50,7 +50,8 @@
                                FontSize="18"
                                FontWeight="SemiBold"
                                TextWrapping="Wrap"
-                               Text="Renovation report containing all the information about renovations in the period between 24/03/2023 and 24/05/2023"
+                               
+                               Text="{Binding HeaderText}"
                                Foreground="{DynamicResource TextColor}" />
                     
 
@@ -62,19 +63,34 @@
                                 <StackPanel>
                                             <TextBlock Text="{Binding Accommodation.Name}" FontWeight="SemiBold" FontSize="15" Foreground="{DynamicResource TextColor}" />
                                 </StackPanel>
+
+
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding StartDate, StringFormat='Start date: {0:dd/MM/yyyy}'}" Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
-                                        </StackPanel>
+                                    <TextBlock Text="{ns:Loc Start_date}" 
+                                               FontWeight="SemiBold"
+                                               Foreground="{DynamicResource TextColor}"
+                                               Margin="0,0,5,0"/>
+                                    <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding StartDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                </StackPanel>
+
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding EndDate, StringFormat='End date: {0:dd/MM/yyyy}'}" Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
-                                        </StackPanel>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Description: " Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
+                                    <TextBlock  Text="{ns:Loc End_date}" 
+                                                Foreground="{DynamicResource TextColor}"
+                                                FontWeight="SemiBold"
+                                                Margin="0,0,5,0"/>
+                                    <TextBlock Foreground="{DynamicResource TextColor}" Text="{Binding EndDate, StringFormat='{}{0:dd/MM/yyyy}'}" />
+                                </StackPanel>
+
+
+
+
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{ns:Loc Description}" Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
                                     
                                 </StackPanel>
                                 <TextBlock Text="{Binding Description}" TextWrapping="Wrap"  Foreground="{DynamicResource TextColor}"/>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Finished: " Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
+                                            <TextBlock Text="{ns:Loc Finished}" Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
                                             <TextBlock Text="{Binding IsFinished}" Foreground="{DynamicResource TextColor}" FontWeight="SemiBold" />
                                 </StackPanel>
 

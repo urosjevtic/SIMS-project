@@ -61,6 +61,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accommodation reserved.
+        /// </summary>
+        public static string Accommdation_reserved {
+            get {
+                return ResourceManager.GetString("Accommdation_reserved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accommodation:.
         /// </summary>
         public static string Accommodation {
@@ -133,6 +142,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Accommodation type:.
+        /// </summary>
+        public static string Accommodation_type_requeired {
+            get {
+                return ResourceManager.GetString("Accommodation_type_requeired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add new property to your list of accommodations.
         /// </summary>
         public static string Add_new_property_to_your_list_of_accommodations {
@@ -187,6 +205,24 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Da li ste sigurni da zelite da otkazete renoviranje?.
+        /// </summary>
+        public static string Are_you_sure_you_want_to_cancel_this_renovation {
+            get {
+                return ResourceManager.GetString("Are_you_sure_you_want_to_cancel_this_renovation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to cancel this reservation?.
+        /// </summary>
+        public static string Are_you_sure_you_want_to_cancel_this_reservation {
+            get {
+                return ResourceManager.GetString("Are_you_sure_you_want_to_cancel_this_reservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author:.
         /// </summary>
         public static string Author {
@@ -232,6 +268,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Otkazi renoviranje.
+        /// </summary>
+        public static string Cancel_renovation {
+            get {
+                return ResourceManager.GetString("Cancel_renovation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel reservation.
         /// </summary>
         public static string Cancel_reservation {
@@ -255,6 +300,15 @@ namespace InitialProject.Properties {
         public static string Cancelation_period {
             get {
                 return ResourceManager.GetString("Cancelation_period", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Cancelation period: .
+        /// </summary>
+        public static string Cancelation_period_requiered {
+            get {
+                return ResourceManager.GetString("Cancelation_period_requiered", resourceCulture);
             }
         }
         
@@ -313,6 +367,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *City:.
+        /// </summary>
+        public static string City_requiered {
+            get {
+                return ResourceManager.GetString("City_requiered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cleanlines:.
         /// </summary>
         public static string Cleanlines {
@@ -363,6 +426,15 @@ namespace InitialProject.Properties {
         public static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Country:.
+        /// </summary>
+        public static string Country_requiered {
+            get {
+                return ResourceManager.GetString("Country_requiered", resourceCulture);
             }
         }
         
@@ -448,6 +520,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Every field is required.
+        /// </summary>
+        public static string Every_field_is_requiered {
+            get {
+                return ResourceManager.GetString("Every_field_is_requiered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finished:.
         /// </summary>
         public static string Finished {
@@ -502,6 +583,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate a pdf report for a renovations.
         /// </summary>
         public static string Generate_a_pdf_report_for_a_renovations {
@@ -534,6 +624,15 @@ namespace InitialProject.Properties {
         public static string Go_back {
             get {
                 return ResourceManager.GetString("Go_back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest rating.
+        /// </summary>
+        public static string Guest_rating {
+            get {
+                return ResourceManager.GetString("Guest_rating", resourceCulture);
             }
         }
         
@@ -610,6 +709,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Images url:.
+        /// </summary>
+        public static string Images_url_requiered {
+            get {
+                return ResourceManager.GetString("Images_url_requiered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Initial dates.
         /// </summary>
         public static string Initial_date {
@@ -664,11 +772,29 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Maximum number of guests:.
+        /// </summary>
+        public static string Max_Number_Of_Guests_requiered {
+            get {
+                return ResourceManager.GetString("Max_Number_Of_Guests_requiered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum number of guests:.
         /// </summary>
         public static string Maximum_number_of_guests {
             get {
                 return ResourceManager.GetString("Maximum_number_of_guests", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Minimum reservation days:.
+        /// </summary>
+        public static string Min_reservation_days_requieded {
+            get {
+                return ResourceManager.GetString("Min_reservation_days_requieded", resourceCulture);
             }
         }
         
@@ -754,6 +880,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Name:.
+        /// </summary>
+        public static string Name_requiered {
+            get {
+                return ResourceManager.GetString("Name_requiered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New date.
         /// </summary>
         public static string New_date {
@@ -804,6 +939,15 @@ namespace InitialProject.Properties {
         public static string New_renovations3 {
             get {
                 return ResourceManager.GetString("New_renovations3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -880,6 +1024,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open.
         /// </summary>
         public static string Open {
@@ -894,6 +1047,15 @@ namespace InitialProject.Properties {
         public static string Owner_fairnes {
             get {
                 return ResourceManager.GetString("Owner_fairnes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PDF report.
+        /// </summary>
+        public static string Pdf_report {
+            get {
+                return ResourceManager.GetString("Pdf_report", resourceCulture);
             }
         }
         
@@ -1105,6 +1267,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renovation scheduled.
+        /// </summary>
+        public static string Renovation_scheduled {
+            get {
+                return ResourceManager.GetString("Renovation_scheduled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renovation sugestions.
         /// </summary>
         public static string Renovation_sugestions {
@@ -1155,6 +1326,15 @@ namespace InitialProject.Properties {
         public static string Renovations {
             get {
                 return ResourceManager.GetString("Renovations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Report.
+        /// </summary>
+        public static string Report {
+            get {
+                return ResourceManager.GetString("Report", resourceCulture);
             }
         }
         
@@ -1582,6 +1762,15 @@ namespace InitialProject.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string String1 {
+            get {
+                return ResourceManager.GetString("String1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string Submit {
@@ -1659,6 +1848,51 @@ namespace InitialProject.Properties {
         public static string Unrated_guests1 {
             get {
                 return ResourceManager.GetString("Unrated_guests1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfuly downloaded your report.
+        /// </summary>
+        public static string You_have_successfuly_downloaded_your_report {
+            get {
+                return ResourceManager.GetString("You_have_successfuly_downloaded_your_report", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfuly rated guest.
+        /// </summary>
+        public static string You_have_successfuly_rated_guest {
+            get {
+                return ResourceManager.GetString("You_have_successfuly_rated_guest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfuly registrated new accommodation.
+        /// </summary>
+        public static string You_have_successfuly_registrated_new_accommodation {
+            get {
+                return ResourceManager.GetString("You_have_successfuly_registrated_new_accommodation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfuly scheduled renovation.
+        /// </summary>
+        public static string You_have_successfuly_scheduled_renovation {
+            get {
+                return ResourceManager.GetString("You_have_successfuly_scheduled_renovation", resourceCulture);
             }
         }
     }

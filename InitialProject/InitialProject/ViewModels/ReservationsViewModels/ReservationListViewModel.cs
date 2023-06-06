@@ -6,6 +6,7 @@ using InitialProject.Domain.Model.Reservations;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Service.StatisticService;
 using InitialProject.Utilities;
+using InitialProject.View.OwnerView.PopupWindows;
 using InitialProject.View.OwnerView.Reservations;
 
 namespace InitialProject.ViewModels.ReservationsViewModels
@@ -38,21 +39,33 @@ namespace InitialProject.ViewModels.ReservationsViewModels
 
         public ICommand CancelReservationCommand => new RelayCommandWithParams(CancelReservation);
 
+        //private void CancelReservation(object parameter)
+        //{
+        //    if (parameter is AccommodationReservation selecterdReservation)
+        //    {
+        //        _accommodationReservationService.Delete(selecterdReservation);
+        //        IncreaseCancelReservationCount(selecterdReservation.AccommodationId);
+        //        Reservations.Remove(selecterdReservation);
+        //    }
+        //}
+
+        //private void IncreaseCancelReservationCount(int accommodationId)
+        //{
+        //    _statisticService.IncreaseCancelationCount(accommodationId);
+        //}
+
+
+
         private void CancelReservation(object parameter)
         {
-            if (parameter is AccommodationReservation selecterdReservation)
-            {
-                _accommodationReservationService.Delete(selecterdReservation);
-                IncreaseCancelReservationCount(selecterdReservation.AccommodationId);
-                Reservations.Remove(selecterdReservation);
-            }
-        }
+                if (parameter is AccommodationReservation selecterdReservation)
+                {
+                    ConfirmCancelingReservationView confirmCancelingReservationView =
+                        new ConfirmCancelingReservationView(selecterdReservation, Reservations);
 
-        private void IncreaseCancelReservationCount(int accommodationId)
-        {
-            _statisticService.IncreaseCancelationCount(accommodationId);
+                    confirmCancelingReservationView.ShowDialog();
+                }
         }
-
 
 
     }
