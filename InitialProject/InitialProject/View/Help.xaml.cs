@@ -12,19 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using InitialProject.ViewModels.HelpViewModel;
 
-namespace InitialProject.View.OwnerView.Help
+namespace InitialProject.View
 {
     /// <summary>
-    /// Interaction logic for OwnerHelpView.xaml
+    /// Interaction logic for Help.xaml
     /// </summary>
-    public partial class OwnerHelpView : Page
+    public partial class Help : Page
     {
-        public OwnerHelpView(NavigationService navigationService)
+        public Help()
         {
-          //  InitializeComponent();
-            DataContext = new OwnerHelpViewModel(navigationService);
+            InitializeComponent();
         }
     }
 }

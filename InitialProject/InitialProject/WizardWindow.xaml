@@ -90,7 +90,7 @@
                 NextPage="{Binding ElementName=WizardPage8}"
                 PageType="Interior"
                 PreviousPage="{Binding ElementName=WizardPage6}">
-                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+                <Image Source="/Resources/Images/WizardImages/anywhere.png" />
             </xctk:WizardPage>
             <xctk:WizardPage
                 x:Name="LastWizardPage"
@@ -99,7 +99,7 @@
                 CanFinish="True"
                 Description="On these pages you have a form where you can create a new forum and add comments and see an old one and its comments."
                 PageType="Interior">
-                <Image Source="/Resources/Images/WizardImages/Screenshot1.png" />
+                <Image Source="/Resources/Images/WizardImages/forum.png" />
             </xctk:WizardPage>
         </xctk:Wizard>
     </Grid>

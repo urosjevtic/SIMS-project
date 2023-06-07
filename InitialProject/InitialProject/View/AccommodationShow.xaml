@@ -87,13 +87,15 @@
                     IsChecked="{Binding Source={x:Static properties:Settings.Default}, Path=ShowWizard}"
                     Style="{StaticResource ResourceKey=ToggleSwitch}"
                     ToolTip="Show wizard on next application startup" />
-                <Button
+                <!--<Button
                     Grid.Row="2"
                     Grid.ColumnSpan="2"
                     Width="200"
                     Height="40"
                     Margin="10,10,10,10"
-                    Content="help" />
+                    Command="{Binding NavigateCommand}"
+                    CommandParameter="Help"
+                    Content="help" />-->
                 <Image
                     Grid.Row="3"
                     Grid.Column="0"
@@ -240,7 +242,7 @@
                     Grid.Row="5"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Margin="0,10,0,10"
+                    Margin="0,40,0,10"
                     Background="DarkCyan">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -291,15 +293,15 @@
                         HorizontalAlignment="Center"
                         Content="Super guest" />
                     <iconPacks:PackIconMaterialDesign
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Foreground="Black"
-                                Kind="Check"
-                         Grid.Row="2"
+                        Grid.Row="2"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Height="18"
-                        Margin="0,0,120,0">
+                        Margin="0,0,120,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Kind="Check">
                         <iconPacks:PackIconMaterialDesign.Style>
                             <Style TargetType="iconPacks:PackIconMaterialDesign">
                                 <Setter Property="Visibility" Value="Visible" />
@@ -312,15 +314,15 @@
                         </iconPacks:PackIconMaterialDesign.Style>
                     </iconPacks:PackIconMaterialDesign>
                     <iconPacks:PackIconMaterialDesign
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                Foreground="Black"
-                                Kind="NotInterested"
-                         Grid.Row="2"
+                        Grid.Row="2"
                         Grid.Column="1"
                         Grid.ColumnSpan="2"
                         Height="18"
-                        Margin="0,0,120,0">
+                        Margin="0,0,120,0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="Black"
+                        Kind="NotInterested">
                         <iconPacks:PackIconMaterialDesign.Style>
                             <Style TargetType="iconPacks:PackIconMaterialDesign">
                                 <Setter Property="Visibility" Value="Visible" />
@@ -339,7 +341,7 @@
                         Grid.ColumnSpan="2"
                         Height="18"
                         Margin="0,0,120,0">
-                        
+
                         <Image.Style>
                             <Style TargetType="{x:Type Image}">
                                 <Setter Property="Source" Value="/Resources/Images/yes.png" />
@@ -389,8 +391,9 @@
                     Grid.ColumnSpan="2"
                     Width="200"
                     Height="40"
-                    Margin="0,15,0,10"
+                    Margin="0,30,0,10"
                     HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
                     Background="LightGray"
                     BorderBrush="LightGray"
                     Click="SignOutButton_Click"
@@ -437,6 +440,27 @@
                                 Foreground="Black"
                                 Kind="Replay" />
                             <TextBlock Margin="5,0,0,0" Text="Back" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Grid.Row="2"
+                        Grid.ColumnSpan="2"
+                        Width="200"
+                        Height="40"
+                        Margin="10,10,10,10"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Background="#58B6CC"
+                        BorderBrush="#58B6CC"
+                        Command="{Binding NavigateCommand}"
+                        CommandParameter="Help">
+                        <StackPanel Orientation="Horizontal">
+                            <iconPacks:PackIconMaterialDesign
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="Black"
+                                Kind="Help" />
+                            <TextBlock Margin="5,0,0,0" Text="Help" />
                         </StackPanel>
                     </Button>
                     <!--<Button

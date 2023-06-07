@@ -201,7 +201,7 @@
                                                     HorizontalAlignment="Right"
                                                     Background="LightGray"
                                                     BorderBrush="LightGray"
-                                                    Command="{Binding ElementName=AccommodationsPage, Path=DataContext.ShowAccommodationInfoCommand}">
+                                                    Command="{Binding ElementName=MyReservationOverview, Path=DataContext.CancelReservationCommand}">
                                                     <StackPanel Orientation="Horizontal">
                                                         <iconPacks:PackIconMaterialDesign
                                                             HorizontalAlignment="Center"

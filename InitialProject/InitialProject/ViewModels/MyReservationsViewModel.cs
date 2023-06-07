@@ -1,9 +1,11 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using GalaSoft.MvvmLight.Messaging;
 using InitialProject.Domain.Model.Reservations;
 using InitialProject.Repository.ReservationRepo;
 using InitialProject.Service.ReservationServices;
 using InitialProject.Utilities;
 using InitialProject.View;
+using MVVMLight.Messaging;
+using Notification.Wpf;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +15,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using InitialProject.Domain.Model;
+using InitialProject.Domain.Model.Forums;
+using InitialProject.Service.ForumServices;
+using InitialProject.View.OwnerView.Forums;
+
 
 namespace InitialProject.ViewModels
 {
@@ -136,7 +143,30 @@ namespace InitialProject.ViewModels
         }
 
 
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
+        //private void CancelButton_Click(object sender, RoutedEventArgs e)
+        //{
+        //    if (SelectedReservation != null)
+        //    {
+        //        if (SelectedReservation.StartDate.AddDays(SelectedReservation.Accommodation.CancelationPeriod) >= DateTime.Now)
+        //        {
+        //            _canceledResrvationsRepository.SaveCanceledReservation(SelectedReservation);
+        //            _accommodationReservationRepository.Delete(SelectedReservation);
+        //            LoadAllReservations();
+        //            MessageBox.Show("You have successfully canceled your reservation");
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("The cancellation period has expired");
+        //        }
+        //    }
+        //    else
+        //    {
+        //       // Messenger.Default.Send<ToastNotification>(new ToastNotification("Success", "You have successfully cancel reservation.", NotificationType.Success));
+        //    }
+        //}
+
+        public ICommand CancelReservationCommand => new RelayCommand(OnCancelReservation);
+        public void OnCancelReservation()
         {
             if (SelectedReservation != null)
             {
@@ -145,20 +175,18 @@ namespace InitialProject.ViewModels
                     _canceledResrvationsRepository.SaveCanceledReservation(SelectedReservation);
                     _accommodationReservationRepository.Delete(SelectedReservation);
                     LoadAllReservations();
-                    MessageBox.Show("You have successfully canceled your reservation");
+                    GalaSoft.MvvmLight.Messaging.Messenger.Default.Send<ToastNotification>(new ToastNotification("Success", "You have successfully cancel reservation.", NotificationType.Success));
                 }
                 else
                 {
-                    MessageBox.Show("The cancellation period has expired");
+                    GalaSoft.MvvmLight.Messaging.Messenger.Default.Send<ToastNotification>(new ToastNotification("", "You have successfully cancel reservation.", NotificationType.Warning));
                 }
             }
             else
             {
-                MessageBox.Show("You must select the reservation you want to delete");
+                GalaSoft.MvvmLight.Messaging.Messenger.Default.Send<ToastNotification>(new ToastNotification("Error", "You must first select reservation.", NotificationType.Success));
             }
         }
-
-
 
         public ICommand MoveReservationCommand => new RelayCommand(OnMoveReservation);
 

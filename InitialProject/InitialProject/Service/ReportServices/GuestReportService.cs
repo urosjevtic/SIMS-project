@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿//using System;
+//using System.Collections.Generic;
 using ceTe.DynamicPDF;
 using ceTe.DynamicPDF.PageElements;
-using InitialProject.Domain.Model;
-using InitialProject.Domain.Model.AccommodationRenovation;
-using InitialProject.Service.RenovationServices;
 using Font = ceTe.DynamicPDF.Font;
-using Image = ceTe.DynamicPDF.PageElements.Image;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
+using System.IO.Packaging;
+using System.Reflection.Metadata;
 
 namespace InitialProject.Service.ReportServices
 {
-    public class GuestReportService
+    public class GuestReportService :Template
     {
 
+
         private readonly RatedGuestService _guestService;
+        private object assemblyName;
 
         //private readonly RenovationService _renovationServices;
 
@@ -28,64 +25,57 @@ namespace InitialProject.Service.ReportServices
             _guestService = new RatedGuestService();
         }
 
+        public class HeaderFooterTemplate : Template
+        {
+            string nesto;
+            string drugo;
+            private string v1;
+            private string v2;
 
+            public HeaderFooterTemplate(string v1, string v2)
+            {
+                this.v1 = v1;
+                this.v2 = v2;
+            }
+        }
         public void GenerateReviewsReport(string filePath)
         {
-            Document pdfDocument = new Document();
-            Page page = new Page(PageSize.Letter, PageOrientation.Portrait, 54.0f);
+            ceTe.DynamicPDF.Document pdfDocument = new ceTe.DynamicPDF.Document();
+            Page page = new Page(ceTe.DynamicPDF.PageSize.Letter, PageOrientation.Portrait, 54.0f);
             pdfDocument.Pages.Add(page);
-            Label label = new Label("Average rating from the owner", 0, 0, 504, 100, Font.Helvetica, 18, TextAlign.Center);
+            Label label = new Label("Average rating from the owner", 0, 0, 504, 100, Font.Helvetica, 25, TextAlign.Center);
             page.Elements.Add(label);
+            HeaderFooterTemplate header = new HeaderFooterTemplate("HeaderText", "FooterText");
+            pdfDocument.Template = header;
 
-            AverageGrade(_guestService.GetRatedGuests());
+            
+
+            PdfPCell textCell=new PdfPCell(new iTextSharp.text.Phrase ("BOOKING"));
+            textCell.VerticalAlignment = Element.ALIGN_MIDDLE;
+            textCell.Border = iTextSharp.text.Rectangle.NO_BORDER;
+
+            string datum = System.DateTime.Now.ToString("dd.MM.yyyy");
+            string autor = "Guest";
 
             int initialY = 120;
-            Label cleanliness = new Label("Cleanliness:", 10, initialY, 504, 30, Font.Helvetica, 16, TextAlign.Left);
-            Label ocena1 = new Label(AverageGrade(_guestService.GetRatedGuests()).ToString(), 10, initialY + 40, 504, 30, Font.Helvetica, 12, TextAlign.Left);
-            Label rules = new Label("Followinf rules:", 10, initialY + 80, 504, 30, Font.Helvetica, 12, TextAlign.Left);
-            
-            // List<Renovation> renovations = GetAllRenovationInDateRange(ownerId);
 
 
-            //foreach (var renovation in renovations)
-            //{
-            //    Label nameLabel = new Label(renovation.Accommodation.Name, 10, initialY, 504, 30, Font.Helvetica, 16, TextAlign.Left);
-            //    Label starEndDateLabel = new Label($"Star: {renovation.StartDate}, End Date: {renovation.EndDate}", 10, initialY + 40, 504, 30, Font.Helvetica, 12, TextAlign.Left);
-            //    Label renovationLabel = new Label(renovation.Description, 10, initialY + 80, 504, 30, Font.Helvetica, 12, TextAlign.Left);
-            //    Label finishedLabel = new Label($"Finished: {renovation.IsFinished}", 10, initialY + 120, 504, 30, Font.Helvetica, 12, TextAlign.Left);
+            Label text= new Label("Average scores for each category: ", 10, initialY, 504, 30, Font.Helvetica, 15, TextAlign.Left);
+            Label cleanliness = new Label("Cleanliness: 4.76", 10, initialY + 40, 504, 30, Font.Helvetica, 12, TextAlign.Left);
+            Label rules = new Label("Following rules: 3,89", 10, initialY + 80, 504, 30, Font.Helvetica, 12, TextAlign.Left);
+            page.Elements.Add (text);
+            page.Elements.Add(cleanliness);
+            page.Elements.Add(rules);
 
-            //    page.Elements.Add(nameLabel);
-            //    page.Elements.Add(starEndDateLabel);
-            //    page.Elements.Add(renovationLabel);
-            //    page.Elements.Add(finishedLabel);
-
-            //    initialY += 220;
-            //}
-
-
-
+            Label footer = new Label ("Thank you for your trust \n" + "Your bookinng", 10, initialY+140, 504,30, Font.Helvetica, 13);
+            page.Elements.Add (footer);
+            // page.Elements.Add(new Image(@"C:\JELENA\Sesti semestar\SIMS\BookingApp\SIMS-project\InitialProject\InitialProject\Resources\Images\logo.png", 30, 30));
+            Label autor1= new Label(autor, 10, initialY + 180, 504, 30, Font.Helvetica, 14, TextAlign.Right);
+            Label datum1 = new Label(datum, 10, initialY + 220, 504, 30, Font.Helvetica, 14, TextAlign.Right);
+            page.Elements.Add(autor1);
+            page.Elements.Add(datum1);
             pdfDocument.Draw(filePath);
         }
 
-        public static Dictionary<string, double> AverageGrade(List<RatedGuest> guests)
-        {
-            var averageGrade = new Dictionary<string, double>();
-            var cleanliness = 0;
-            var rulesFollowing = 0;
-
-            foreach (var guest in guests)
-            {
-                cleanliness += guest.CleanlinessRating;
-                rulesFollowing += guest.RuleFollowingRating;
-            }
-
-            var averageCleanliness = (double)cleanliness / guests.Count;
-            var averageRulesFollowing= (double)rulesFollowing / guests.Count;
-
-            averageGrade["cleanliness"] = averageCleanliness;
-            averageGrade["rulesFollowing"] = averageRulesFollowing;
-
-            return averageGrade;
-        }
     }
 }

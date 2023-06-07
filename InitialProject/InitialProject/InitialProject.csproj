@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
+    <Page Remove="obj\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Resources\Images\activeTour - Copy.png" />
     <None Remove="Resources\Images\activeTour.png" />
     <None Remove="Resources\Images\add.png" />
@@ -75,6 +82,9 @@
     <None Remove="Resources\Images\view.png" />
     <None Remove="Resources\Images\visited.png" />
     <None Remove="Resources\Images\WizardImages\Accommodations.png" />
+    <None Remove="Resources\Images\WizardImages\anywhere.png" />
+    <None Remove="Resources\Images\WizardImages\forum.png" />
+    <None Remove="Resources\Images\WizardImages\forumComment.png" />
     <None Remove="Resources\Images\WizardImages\MyReservations.png" />
     <None Remove="Resources\Images\WizardImages\PreviousTrip.png" />
     <None Remove="Resources\Images\WizardImages\Reservation.png" />
@@ -253,6 +263,9 @@
     <Content Include="Resources\Images\visited.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\WizardImages\anywhere.png" />
+    <Content Include="Resources\Images\WizardImages\forum.png" />
+    <Content Include="Resources\Images\WizardImages\forumComment.png" />
 
     <Resource Include="Resources\Images\WizardImages\Screenshot1.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
