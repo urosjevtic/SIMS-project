@@ -59,62 +59,75 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Blue" BorderThickness="1">
-                        <Grid Margin="10,10,10,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
 
-                            <Image Source="{Binding Images}" />
-
-                            <TextBlock
-                                Grid.Row="0"
-                                Margin="0,0,0,10"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                FontSize="20"
-                                FontWeight="Bold"
-                                Text="{Binding Name}"
-                                TextWrapping="Wrap" />
-
-                            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    FontWeight="Bold"
-                                    Text="City: " />
-                                <TextBlock Text="{Binding Location.City}" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="2" Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    FontWeight="Bold"
-                                    Text="Country: " />
-                                <TextBlock Text="{Binding Location.Country}" />
-                            </StackPanel>
-
-                            <StackPanel Grid.Row="3" Orientation="Horizontal">
-                                <TextBlock
-                                    Margin="0,0,5,0"
-                                    FontWeight="Bold"
-                                    Text="Accommodation type: " />
-                                <TextBlock Text="{Binding Type}" />
-                            </StackPanel>
-
-                            <Button
-                                Name="ViewButton"
-                                Grid.Row="4"
+                            <Image
+                                Grid.Column="0"
                                 Width="100"
-                                Height="40"
-                                Margin="0,0,0,10"
-                                HorizontalAlignment="Right"
-                                Background="LightGray"
-                                Command="{Binding ElementName=AccommodationsPage, Path=DataContext.ShowAccommodationInfoCommand}"
-                                Content="Show"
-                                ToolTip="View and reserve accommodation" />
+                                Height="100"
+                                Source="{Binding ImageUrl}" />
+
+                            <Grid Grid.Column="1" Margin="10,10,10,0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+
+
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Margin="0,0,0,10"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    FontSize="20"
+                                    FontWeight="Bold"
+                                    Text="{Binding Name}"
+                                    TextWrapping="Wrap" />
+
+                                <StackPanel Grid.Row="1" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,5,0"
+                                        FontWeight="Bold"
+                                        Text="City: " />
+                                    <TextBlock Text="{Binding Location.City}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,5,0"
+                                        FontWeight="Bold"
+                                        Text="Country: " />
+                                    <TextBlock Text="{Binding Location.Country}" />
+                                </StackPanel>
+
+                                <StackPanel Grid.Row="3" Orientation="Horizontal">
+                                    <TextBlock
+                                        Margin="0,0,5,0"
+                                        FontWeight="Bold"
+                                        Text="Accommodation type: " />
+                                    <TextBlock Text="{Binding Type}" />
+                                </StackPanel>
+
+                                <Button
+                                    Name="ViewButton"
+                                    Grid.Row="4"
+                                    Width="100"
+                                    Height="40"
+                                    Margin="0,0,0,10"
+                                    HorizontalAlignment="Right"
+                                    Background="LightGray"
+                                    Command="{Binding ElementName=AccommodationsPage, Path=DataContext.ShowAccommodationInfoCommand}"
+                                    Content="Show"
+                                    ToolTip="View and reserve accommodation" />
+                            </Grid>
                         </Grid>
                     </Border>
                 </DataTemplate>

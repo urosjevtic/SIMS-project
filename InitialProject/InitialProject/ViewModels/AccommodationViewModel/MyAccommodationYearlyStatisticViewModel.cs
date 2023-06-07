@@ -19,7 +19,7 @@ namespace InitialProject.ViewModels.AccommodationViewModel
     public class MyAccommodationYearlyStatisticViewModel : BaseViewModel
     {
         public ObservableCollection<AccommodationStatistic> Statistics { get; set; }
-        private readonly YearlyAccommodationService _yearlyAccommodationService;
+        private readonly YearlyAccommodationStatisticService _yearlyAccommodationStatisticService;
         private readonly AccommodationService _accommodationService;
         private readonly User _logedInUser;
         private readonly int AccommodataionId;
@@ -30,12 +30,12 @@ namespace InitialProject.ViewModels.AccommodationViewModel
 
         public MyAccommodationYearlyStatisticViewModel(int accommodationId, User logedInUser, NavigationService navigationService)
         {
-            _yearlyAccommodationService = new YearlyAccommodationService();
+            _yearlyAccommodationStatisticService = new YearlyAccommodationStatisticService();
             _accommodationService = new AccommodationService();
             _logedInUser = logedInUser;
             AccommodataionId = accommodationId;
-            Statistics = new ObservableCollection<AccommodationStatistic>(_yearlyAccommodationService.GetStatisticByAccommodationId(accommodationId));
-            YearWithMostReservations = _yearlyAccommodationService.GetMostOccupiedYear(AccommodataionId);
+            Statistics = new ObservableCollection<AccommodationStatistic>(_yearlyAccommodationStatisticService.GetStatisticByAccommodationId(accommodationId));
+            YearWithMostReservations = _yearlyAccommodationStatisticService.GetMostOccupiedYear(AccommodataionId);
             Accommodation = _accommodationService.GetById(AccommodataionId);
             NavigationService = navigationService;
         }

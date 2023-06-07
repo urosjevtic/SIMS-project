@@ -27,6 +27,7 @@ namespace InitialProject.View.Guest2View
         public StartWindow(User LoggedUser)
         {
             InitializeComponent();
+            App.LoggedUser = LoggedUser;
             _viewModel = new StartWindowViewModel(LoggedUser);
             DataContext = _viewModel;
         }

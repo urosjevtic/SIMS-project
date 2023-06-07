@@ -1,0 +1,232 @@
+﻿<Page x:Class="InitialProject.View.OwnerView.MyAccommodations.NewAccommodationSuggestionsView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.OwnerView.MyAccommodations"
+      mc:Ignorable="d" 
+      xmlns:ns="clr-namespace:InitialProject.Utilities"
+      Title="NewAccommodationSuggestionsView" Height="648" Width="356">
+    <Page.Background>
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
+    </Page.Background>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="55" />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+
+        </Button>
+
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" FontWeight="DemiBold" Text="{ns:Loc Accommodation_managment}" Foreground="{DynamicResource TextColor}"></TextBlock>
+
+            <TextBlock Grid.Row="1" Margin="5, 5, 5, 5" Foreground="{DynamicResource TextColor}" Text="{ns:Loc Suggestions_for_opening_new_or_closing_old_accommodations}"></TextBlock>
+
+
+        </Grid>
+
+        <ContentControl
+            Margin="0, 20"
+            x:Name="accommodationContentControl"
+            Grid.Row="2"
+            HorizontalContentAlignment="Stretch"
+            Background="{DynamicResource BackgroundColorDarker}"
+            BorderThickness="0"
+            Content="{Binding SuggestedLocation}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <Border
+                Margin="5"
+                Padding="10"
+                Background="{DynamicResource BackgroundColorLighter}"
+                BorderBrush="{DynamicResource TextColor}"
+                BorderThickness="2"
+                CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect
+                        BlurRadius="10"
+                        Opacity="0.5"
+                        ShadowDepth="5"
+                        Color="{DynamicResource Shadow}" />
+                        </Border.Effect>
+                        <Grid Margin="10,10,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="{Binding Reservation.User.Username}"
+                            Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+
+                            <!--Suggestion for opening or closing text-->
+                            <TextBlock Text="Your ideal destination for opening new accommodations" TextWrapping="Wrap" 
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       FontSize="16"
+
+                                       Foreground="{DynamicResource TextColor}"
+                                       Margin="0,5" Grid.Row="0" />
+
+                            <!--Country and city-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                <TextBlock Text="{ns:Loc Country}" 
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource TextColor}"
+                                   Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Location.Country}"
+                                   Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                            <StackPanel Margin="10,5" Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc City}" 
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource TextColor}" />
+                                <TextBlock Text="{Binding Location.City}" 
+                                   Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+
+                            <!--Reservation info-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
+                                <TextBlock Text="Number of reservations in the past year:" 
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource TextColor}"
+                                   Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding NumberOfReservations}" 
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Content="{ns:Loc Proceed}" Style="{StaticResource ConfirmButtonStyle}" 
+                                        Margin="10, 5"
+                                        Command="{Binding DataContext.RegistrateNewAccommdoationCommand, ElementName=accommodationContentControl}"
+                                        CommandParameter="{Binding}" Width="160" />
+                            </StackPanel>
+
+
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+
+
+        <!--Accommodation for closing-->
+        <Grid Grid.Row="3">
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Visible" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding AccommodationForClosing}" Value="{x:Null}">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <ContentControl
+            Margin="0, 0, 0, 20"
+            HorizontalContentAlignment="Stretch"
+    Background="{DynamicResource BackgroundColorDarker}"
+    BorderThickness="0"
+    Content="{Binding AccommodationForClosing}">
+            <ContentControl.ContentTemplate>
+                <DataTemplate>
+                    <Border
+                Margin="5"
+                Padding="10"
+                Background="{DynamicResource BackgroundColorLighter}"
+                BorderBrush="{DynamicResource TextColor}"
+                BorderThickness="2"
+                CornerRadius="5">
+                        <Border.Effect>
+                            <DropShadowEffect
+                        BlurRadius="10"
+                        Opacity="0.5"
+                        ShadowDepth="5"
+                        Color="{DynamicResource Shadow}" />
+                        </Border.Effect>
+                        <Grid Margin="10,10,10,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <TextBlock
+                            Margin="0,0,5,0"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="Bold"
+                            Text="{Binding Reservation.User.Username}"
+                            Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+
+
+
+                            <!--Accommodation name-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                <TextBlock Text="Accommodation:" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Name}" 
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                            <!--Suggestion for opening or closing text-->
+                            <TextBlock Grid.Row="0" Text="Make informed decisions by closing accommodations in less sought-after areas" TextWrapping="Wrap" 
+                                       FontWeight="Bold"
+                                       HorizontalAlignment="Center"
+                                       FontSize="16"
+
+                                       Foreground="{DynamicResource TextColor}"
+                                       Margin="0,5"  />
+
+                            <!--Country and city-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                                <TextBlock Text="{ns:Loc Country}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Location.Country}"
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                            <StackPanel Margin="10,5" Grid.Row="3" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc City}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}" />
+                                <TextBlock Text="{Binding Location.City}" 
+                                           Foreground="{DynamicResource TextColor}" />
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </ContentControl>
+        </Grid>
+
+    </Grid>
+</Page>

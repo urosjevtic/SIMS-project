@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.ViewModels.SettingsViewModel;
 
 namespace InitialProject.View.OwnerView.Settings
@@ -20,10 +21,10 @@ namespace InitialProject.View.OwnerView.Settings
     /// </summary>
     public partial class OwnerChooseLanguageView : Window
     {
-        public OwnerChooseLanguageView()
+        public OwnerChooseLanguageView(User logedInUser)
         {
             InitializeComponent();
-            DataContext = new OwnerChooseLanguageViewModel();
+            DataContext = new OwnerChooseLanguageViewModel(logedInUser);
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InitialProject.Domain.Model.AccommodationRenovation;
 using InitialProject.Domain.Model.Notifications;
 using InitialProject.Domain.RepositoryInterfaces.INotificationRepo;
+using InitialProject.Service.ForumServices;
 using InitialProject.Service.RenovationServices;
 using InitialProject.Service.ReservationServices;
 
@@ -17,6 +18,7 @@ namespace InitialProject.Service.NotificationServices
         private readonly AccommodationReservationRescheduleRequestService _reservationRescheduleService;
         private readonly UnratedGuestService _unratedGuestService;
         private readonly RenovationRecommendationService _renovationRecommendationService;
+        private readonly ForumService _forumService;
 
         public OwnerNotificationService()
         {
@@ -24,6 +26,7 @@ namespace InitialProject.Service.NotificationServices
             _reservationRescheduleService = new AccommodationReservationRescheduleRequestService();
             _unratedGuestService = new UnratedGuestService();
             _renovationRecommendationService = new RenovationRecommendationService();
+            _forumService = new ForumService();
         }
 
         public List<OwnerNotification> GetAll()
@@ -56,11 +59,13 @@ namespace InitialProject.Service.NotificationServices
             OwnerNotification notification = _notificationRepository.GetByOwnerId(ownerId);
             int currentRescheduleCount = _reservationRescheduleService.GetAllByOwnerId(ownerId).Count;
             int currentUnratedGuestsCount = _unratedGuestService.GetUnratedGuestsByOwnerId(ownerId).Count;
-            int currentRenovationSugestionsCount = _renovationRecommendationService.GetByOwnerId(ownerId).Count; 
+            int currentRenovationSugestionsCount = _renovationRecommendationService.GetByOwnerId(ownerId).Count;
+            int currentForumCount = _forumService.GetByOwnerId(ownerId).Count;
 
             return (currentRescheduleCount > notification.ReservationReschedulingCount ||
                     currentUnratedGuestsCount > notification.UnradtedGuestsCount ||
-                    currentRenovationSugestionsCount > notification.RenovationRecommendationCount);
+                    currentRenovationSugestionsCount > notification.RenovationRecommendationCount ||
+                    currentForumCount > notification.ForumNotificationCount);
         }
 
         public void UpdateNewNotifications(int ownerId)
@@ -68,12 +73,14 @@ namespace InitialProject.Service.NotificationServices
             int currentRescheduleCount = _reservationRescheduleService.GetAllByOwnerId(ownerId).Count;
             int currentUnratedGuestsCount = _unratedGuestService.GetUnratedGuestsByOwnerId(ownerId).Count;
             int currentRenovationSugestionsCount = _renovationRecommendationService.GetByOwnerId(ownerId).Count;
+            int currentForumCount = _forumService.GetByOwnerId(ownerId).Count;
 
             OwnerNotification notification = new OwnerNotification();
             notification.Owner.Id = ownerId;
             notification.ReservationReschedulingCount = currentRescheduleCount;
             notification.UnradtedGuestsCount = currentUnratedGuestsCount;
             notification.RenovationRecommendationCount = currentRenovationSugestionsCount;
+            notification.ForumNotificationCount = currentForumCount;
 
 
             _notificationRepository.Update(notification);

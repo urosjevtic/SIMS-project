@@ -13,6 +13,8 @@ using System.Windows;
 using InitialProject.Domain.Model;
 using InitialProject.Utilities;
 using System.Windows.Navigation;
+using InitialProject.View.OwnerView.Forums;
+using InitialProject.View.OwnerView.Settings;
 
 namespace InitialProject.ViewModels.MainVeiwModel
 {
@@ -69,12 +71,33 @@ namespace InitialProject.ViewModels.MainVeiwModel
             NavigationService.Navigate(new RenovationsMainView(_loggedInUser, NavigationService));
         }
 
+        public ICommand SettingsOpenCommand => new RelayCommand(SettingsOpen);
+        public void SettingsOpen()
+        {
+            NavigationService.Navigate(new OwnerSettingsView(_loggedInUser, NavigationService));
+        }
+
+        public ICommand ForumsOpenCommand => new RelayCommand(ForumsOpen);
+        public void ForumsOpen()
+        {
+            NavigationService.Navigate(new ForumSelcetionView(_loggedInUser, NavigationService));
+        }
+
         public ICommand NotesOpenCommand => new RelayCommand(NotesOpen);
 
         private void NotesOpen()
         {
             NotesView notesView = new NotesView(_loggedInUser);
             notesView.Show();
+        }
+
+        public ICommand LogOutCommand => new RelayCommand(LogOut);
+
+        private void LogOut()
+        {
+            SignInForm signInForm = new SignInForm();
+            CloseCurrentWindow();
+            signInForm.Show();
         }
     }
 }

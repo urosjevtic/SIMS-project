@@ -26,6 +26,10 @@ using InitialProject.Service.SettingsService;
 using InitialProject.View.OwnerView.MainWindow;
 using InitialProject.View.OwnerView.Notifications;
 using InitialProject.View.OwnerView.Settings;
+using System;
+using InitialProject.Properties;
+using InitialProject.View.OwnerView.Forums;
+using InitialProject.View.OwnerView.Help;
 
 namespace InitialProject.ViewModel
 {
@@ -59,8 +63,23 @@ namespace InitialProject.ViewModel
             var app = (App)Application.Current;
             OwnerSettings setting = _settingsService.GetByOwnerId(_loggedInUser.Id);
             app.ChangeLanguage(setting.Language);
+            LoadTheme(setting.Theme);
         }
 
+
+        private void LoadTheme(string theme)
+        {
+            ResourceDictionary themeDictionary = new ResourceDictionary();
+            if (theme.Equals("light"))
+            {
+                themeDictionary.Source = new Uri("../../Themes/LightTheme.xaml", UriKind.Relative);
+            }
+            else
+            {
+                themeDictionary.Source = new Uri("../../Themes/DarkTheme.xaml", UriKind.Relative);
+            }
+            App.Current.Resources.MergedDictionaries.Add(themeDictionary);
+        }
 
 
         private bool _hasNewNotifications;
@@ -174,6 +193,26 @@ namespace InitialProject.ViewModel
         protected override void SettingsOpen()
         {
             NavigationService.Navigate(new OwnerSettingsView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
+        }
+
+        protected override void ForumOpen()
+        {
+            NavigationService.Navigate(new ForumSelcetionView(_loggedInUser, NavigationService));
+            BurgerBarClosed();
+        }
+
+        protected override void LogOut()
+        {
+            SignInForm signInForm = new SignInForm();
+            CloseCurrentWindow();
+            signInForm.Show();
+
+        }
+
+        protected override void Help()
+        {
+            NavigationService.Navigate(new OwnerHelpView(NavigationService));
             BurgerBarClosed();
         }
 

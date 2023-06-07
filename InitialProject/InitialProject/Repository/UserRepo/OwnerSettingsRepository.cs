@@ -56,6 +56,7 @@ namespace InitialProject.Repository.UserRepo
                     allSettings.Remove(settings);
                     allSettings.Add(ownerSettings);
                     _serializer.ToCSV(FilePath, allSettings);
+                    break;
                 }
             }
         }

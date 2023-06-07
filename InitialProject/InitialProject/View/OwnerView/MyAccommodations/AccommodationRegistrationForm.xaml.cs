@@ -23,10 +23,15 @@ namespace InitialProject.View.OwnerView.MyAccommodations
     /// </summary>
     public partial class AccommodationRegistrationForm : Page
     {
-        public AccommodationRegistrationForm(User logedInUser, NavigationService navigationService)
+        public AccommodationRegistrationForm(User logedInUser, NavigationService navigationService, string country = "", string city = "")
         {
             InitializeComponent();
-            DataContext = new AccommodationRegistrationViewModel(logedInUser, navigationService);
+            DataContext = new AccommodationRegistrationViewModel(logedInUser, navigationService, country, city);
+        }
+
+        private void CityComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

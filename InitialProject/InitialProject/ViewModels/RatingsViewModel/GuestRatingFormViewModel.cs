@@ -11,6 +11,7 @@ using InitialProject.Service;
 using InitialProject.Utilities;
 using InitialProject.View.OwnerView.Ratings;
 using System.Windows.Navigation;
+using InitialProject.View.OwnerView.PopupWindows;
 
 namespace InitialProject.ViewModels.RatingsViewModel
 {
@@ -79,6 +80,10 @@ namespace InitialProject.ViewModels.RatingsViewModel
         private void RateAGuest()
         {
             _guestRatingService.SubmitRating(UnratedGuest, _ruleFollowingRating, _cleanlinessRating, _additionalComment);
+
+            SuccessfullGuestRatingView guestRatingView = new SuccessfullGuestRatingView();
+            guestRatingView.ShowDialog();
+
             NavigationService.Navigate(new UnratedGuestsListView(_logedInUser, NavigationService));
         }
 

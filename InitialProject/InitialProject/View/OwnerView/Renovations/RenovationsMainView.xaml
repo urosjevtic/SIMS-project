@@ -6,61 +6,11 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Renovations"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="RenovationsMain" Height="637" Width="345">
+        Title="RenovationsMain" Height="648" Width="356">
     <Page.Background>
-        <SolidColorBrush Color="#fafafa" />
+        <SolidColorBrush Color="{DynamicResource LighterBackground}" />
     </Page.Background>
-    <Page.Resources>
-        <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-        <!--Naslovi-->
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#3A3D55"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
-
-
-    </Page.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -74,7 +24,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Border Grid.Row="0" BorderBrush="#3A3D55" BorderThickness="2">
+            <Border Grid.Row="0" BorderBrush="{DynamicResource TextColor}" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -82,11 +32,11 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{ns:Loc New_renovations}" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{ns:Loc Schedule_renovation_for_one_of_your_accomodations}" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenScheduleRenovationCommand}" Content="{ns:Loc Schedule_renovation}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc Schedule_renovation_for_one_of_your_accomodations}" TextWrapping="Wrap" Foreground="{DynamicResource TextColor}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenScheduleRenovationCommand}" Content="{ns:Loc Schedule_renovation}" Margin="30 0 30 5" Style="{StaticResource ButtonStyle}"></Button>
                 </Grid>
             </Border>
-            <Border Grid.Row="1" BorderBrush="#3A3D55" BorderThickness="2">
+            <Border Grid.Row="1" BorderBrush="{DynamicResource TextColor}" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -94,12 +44,12 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{ns:Loc Scheduled_renovations}" FontSize="28" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{ns:Loc See_all_scheduled_renovations}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenScheduledRenovationsCommand}" Content="{ns:Loc See_scheduled_renovations}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc See_all_scheduled_renovations}" FontSize="18" HorizontalAlignment="Center" Foreground="{DynamicResource TextColor}"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenScheduledRenovationsCommand}" Content="{ns:Loc See_scheduled_renovations}" Margin="30 0 30 5" Style="{StaticResource ButtonStyle}"></Button>
 
                 </Grid>
             </Border>
-            <Border Grid.Row="2" BorderBrush="#3A3D55" BorderThickness="2">
+            <Border Grid.Row="2" BorderBrush="{DynamicResource TextColor}" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -107,11 +57,11 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{ns:Loc Renovation_sugestions}" FontSize="23" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{ns:Loc See_sugestions_for_renovations_that_guests_have_left}" TextWrapping="Wrap"  FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Command="{Binding OpenSugestedRenovationsCommand}" Content="{ns:Loc See_sugestions}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc See_sugestions_for_renovations_that_guests_have_left}" TextWrapping="Wrap" Foreground="{DynamicResource TextColor}" FontSize="18" HorizontalAlignment="Center"></TextBlock>
+                    <Button Grid.Row="2" Command="{Binding OpenSugestedRenovationsCommand}" Content="{ns:Loc See_sugestions}" Margin="30 0 30 5" Style="{StaticResource ButtonStyle}"></Button>
                 </Grid>
             </Border>
-            <Border Grid.Row="3" BorderBrush="#3A3D55" BorderThickness="2">
+            <Border Grid.Row="3" BorderBrush="{DynamicResource TextColor}" BorderThickness="2">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition></RowDefinition>
@@ -119,8 +69,8 @@
                         <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" Text="{ns:Loc Renovation_reports}" Style="{StaticResource TitleStyle}"></TextBlock>
-                    <TextBlock Grid.Row="1" Text="{ns:Loc Generate_a_pdf_report_for_a_renovations}" TextWrapping="Wrap" FontSize="18" HorizontalAlignment="Center"></TextBlock>
-                    <Button Grid.Row="2" Content="{ns:Loc Generate_report}" Margin="30 0 30 5" Style="{StaticResource LogInButtonStyle}"></Button>
+                    <TextBlock Grid.Row="1" Text="{ns:Loc Generate_a_pdf_report_for_a_renovations}" TextWrapping="Wrap" FontSize="18" Foreground="{DynamicResource TextColor}" HorizontalAlignment="Center"></TextBlock>
+                    <Button Command="{Binding OpenGeneratePdfCommand}" Grid.Row="2" Content="{ns:Loc Generate_report}" Margin="30 0 30 5" Style="{StaticResource ButtonStyle}"></Button>
                 </Grid>
             </Border>
         </Grid>

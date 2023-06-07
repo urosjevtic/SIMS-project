@@ -6,58 +6,11 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="AccommodationReviewsSelectionView" Height="637" Width="345">
+        Title="AccommodationReviewsSelectionView" Height="648" Width="356">
     <Page.Background>
-        <SolidColorBrush Color="LightGray" />
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
     <Page.Resources>
-        <!--LogIn button style-->
-
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-        <!--Naslovi-->
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30"/>
-            <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="Foreground" Value="#3A3D55"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Center"/>
-        </Style>
 
         <Style x:Key="SuperOwnerStatusImage"  TargetType="Image">
             <Setter Property="Visibility" Value="Collapsed"/>
@@ -75,37 +28,40 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition Height="0.1*"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Accommodation_reviews}" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Accommodation_reviews}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
 
         <StackPanel Grid.Row="2" Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text="{ns:Loc Avrage_rating}" 
-                           FontWeight="Bold"
+                           FontWeight="DemiBold"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
-                           FontSize="15"
-                           Foreground="#3A3D55"/>
-                <TextBlock Text="{Binding AvrageRating}" />
+                           FontSize="14"
+                           Margin="10,0,5,0"
+                           Foreground="{DynamicResource TextColor}"/>
+                <TextBlock Text="{Binding AvrageRating}"
+                           Margin="0,5,5,0"
+                           Foreground="{DynamicResource TextColor}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Grid.Row="2">
                 <TextBlock Text="{ns:Loc Is_super_owner}" 
-                       FontWeight="Bold"
+                       FontWeight="DemiBold"
                        VerticalAlignment="Center"
-                       FontSize="15"
-                       Foreground="#3A3D55"
-                       Margin="0,0,5,0"/>
+                       FontSize="14"
+                       Foreground="{DynamicResource TextColor}"
+                       Margin="10,0,5,0"/>
                 <Image Height="18">
                     <Image.Style>
                         <Style TargetType="{x:Type Image}">
@@ -130,22 +86,34 @@
                  ItemsSource="{Binding Accommodations}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                 Background="LightGray"
+                 Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border BorderThickness="2"
-                            BorderBrush="#007acc"
+                            BorderBrush="{DynamicResource TextColor}"
                             Margin="5"
                             CornerRadius="5"
                             Padding="10"
-                            Background="#fafafa">
+                            Background="{DynamicResource BackgroundColorLighter}">
                         <Border.Effect>
                             <DropShadowEffect ShadowDepth="5"
                                               BlurRadius="10"
                                               Opacity="0.5"
-                                              Color="Black"/>
+                                              Color="{DynamicResource Shadow}"/>
                         </Border.Effect>
                         <Grid Margin="10,10,10,0">
                             <Grid.RowDefinitions>
@@ -157,43 +125,69 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"></RowDefinition>
                             </Grid.RowDefinitions>
 
-                             <TextBlock Text="{Binding Name}" 
+                            <TextBlock Text="{Binding Name}" 
                            FontWeight="Bold"
                            FontSize="20"
                            TextWrapping="Wrap"
+                           Foreground="{DynamicResource TextColor}"
                            Margin="10,10,10,0"/>
+
+                            <!--<StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                <TextBlock Text="{ns:Loc Country}"
+                                           Foreground="{DynamicResource TextColor}"
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Location.Country}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
+                                           Foreground="{DynamicResource TextColor}"
+                               FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Location.City}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                            </StackPanel>-->
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Country}" 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Location.Country}" />
-                                <TextBlock Margin="10,0" Text="{ns:Loc City}" 
-                               FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Location.City}" />
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           Margin="0,0,5,0" />
+                                <TextBlock Text="{Binding Location.Country}"
+                                           Foreground="{DynamicResource TextColor}" />
                             </StackPanel>
-
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
-                                <TextBlock Text="{ns:Loc Accommodation_type}" 
-                               FontWeight="Bold"
-                               Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Type}" />
+                            <StackPanel Margin="10,5" Grid.Row="2" Orientation="Horizontal">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc City}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}" />
+                                <TextBlock Text="{Binding Location.City}" 
+                                           Foreground="{DynamicResource TextColor}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="{ns:Loc Maximum_number_of_guests}" 
+                                <TextBlock Text="{ns:Loc Accommodation_type}" 
+                                           Foreground="{DynamicResource TextColor}"
                                FontWeight="Bold"
                                Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding MaxGuests}" />
+                                <TextBlock Text="{Binding Type}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="4">
+                                <TextBlock Text="{ns:Loc Maximum_number_of_guests}" 
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource TextColor}"
+                               Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding MaxGuests}"
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
 
                             <Button Content="{ns:Loc See_reviews}"
                                     Margin="10,15"
-                                    Grid.Row="4"
-                                    Style="{StaticResource LogInButtonStyle}"
+                                    Grid.Row="5"
+                                    Style="{StaticResource ButtonStyle}"
                                 Command="{Binding DataContext.SeeRatingsCommand, ElementName=accommodationListBox}"
                                 CommandParameter="{Binding}"/>
                         </Grid>

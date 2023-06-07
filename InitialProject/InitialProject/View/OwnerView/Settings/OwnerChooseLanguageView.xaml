@@ -9,44 +9,10 @@
         Title="OwnerChooseLanguageView" Height="200" Width="300"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen">
-    <Window.Resources>
-        <!--LogIn button style-->
 
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55"/>
-            <!-- set the button background color -->
-            <Setter Property="Foreground" Value="#fff"/>
-            <!-- set the text color of the button -->
-            <Setter Property="FontSize" Value="20"/>
-            <!-- set the font size of the button -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center"
-                                              VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E"/>
-                                <!-- set the background color when the mouse is over the button -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E"/>
-                                <!-- set the background color when the button is pressed -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
+    <Window.Background>
+        <SolidColorBrush Color="{DynamicResource LighterBackground}" />
+    </Window.Background>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition></RowDefinition>
@@ -54,11 +20,11 @@
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Row="0" Text="{ns:Loc Select_language}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22"></TextBlock>
+        <TextBlock Grid.Row="0" Text="{ns:Loc Select_language}" Foreground="{DynamicResource TextColor}" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="22"></TextBlock>
         <StackPanel Grid.Row="1" Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
-            <RadioButton GroupName="language" FontSize="20" IsChecked="{Binding IsSerbianSelected, Mode=TwoWay}" Content="{ns:Loc Serbian}"></RadioButton>
-            <RadioButton GroupName="language" FontSize="20" IsChecked="{Binding IsEnglishSelected, Mode=TwoWay}" Content="{ns:Loc English}"></RadioButton>
+            <RadioButton GroupName="language" FontSize="20" IsChecked="{Binding IsSerbianSelected, Mode=TwoWay}" Content="{ns:Loc Serbian}"  Foreground="{DynamicResource TextColor}"></RadioButton>
+            <RadioButton GroupName="language" FontSize="20" IsChecked="{Binding IsEnglishSelected, Mode=TwoWay}" Content="{ns:Loc English}"  Foreground="{DynamicResource TextColor}"></RadioButton>
         </StackPanel>
-        <Button Grid.Row="2" Command="{Binding ChangeLanguageCommand}" Content="{ns:Loc Confirm}" Style="{StaticResource LogInButtonStyle}" Margin="10, 10, 10 ,10"></Button>
+        <Button Grid.Row="2" Command="{Binding ChangeLanguageCommand}" Content="{ns:Loc Confirm}" Style="{StaticResource ButtonStyle}" Margin="10, 10, 10 ,10"></Button>
     </Grid>
 </Window>

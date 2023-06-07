@@ -1,0 +1,136 @@
+﻿<Page x:Class="InitialProject.View.OwnerView.Forums.ForumSelcetionView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:InitialProject.View.OwnerView.Forums"
+      xmlns:ns="clr-namespace:InitialProject.Utilities"
+      mc:Ignorable="d" 
+      Title="ForumSelcetionView" Height="648" Width="356">
+    <Page.Background>
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
+    </Page.Background>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Forums}" Foreground="{DynamicResource TextColor}"></TextBlock>
+
+        <ListBox Grid.Row="1" x:Name="forumListBox"
+                 ItemsSource="{Binding Forums}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                 Background="{DynamicResource BackgroundColorDarker}"
+                 BorderThickness="0"
+                 HorizontalContentAlignment="Stretch"
+                 >
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="2"
+                            BorderBrush="{DynamicResource TextColor}"
+                            Margin="5"
+                            CornerRadius="5"
+                            Padding="10"
+                            Background="{DynamicResource BackgroundColorLighter}">
+                        <Border.Effect>
+                            <DropShadowEffect ShadowDepth="5"
+                                              BlurRadius="10"
+                                              Opacity="0.5"
+                                              Color="{DynamicResource Shadow}"/>
+                        </Border.Effect>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="../../../Resources/Images/star.png" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,5,5,0" Width="20" Height="20">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSpecial}" Value="False">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <!--Location-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
+                                <TextBlock Text="{Binding Location.Country}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           FontSize="20"/>
+                                <TextBlock Text=", "
+                                           Foreground="{DynamicResource TextColor}"
+                                           FontSize="20"/>
+                                <TextBlock Text="{Binding Location.City}" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
+                                           FontSize="20"/>
+                            </StackPanel>
+                            <!--Author-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
+                                <TextBlock Text="{ns:Loc Author}" 
+                                           Foreground="{DynamicResource TextColor}"
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Author.Username}" 
+                                           Foreground="{DynamicResource TextColor}"/>
+                            </StackPanel>
+                            <!--creation date-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
+                                <TextBlock Text="{ns:Loc Creation_date}" 
+                                           Foreground="{DynamicResource TextColor}"
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding CreationDate, StringFormat=\{0:dd/MM/yyyy\}}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                            </StackPanel>
+                            <!--Comments-->
+                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
+                                <TextBlock Text="{ns:Loc Comments}" 
+                                           Foreground="{DynamicResource TextColor}"
+                               FontWeight="Bold"
+                               Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding CommentNumber}"
+                                           Foreground="{DynamicResource TextColor}"/>
+                            </StackPanel>
+
+
+                            <Button Content="{ns:Loc Open}"
+                        Margin="10,15"
+                        Grid.Row="6"
+                        Style="{StaticResource ButtonStyle}"
+                        Command="{Binding DataContext.OpenSelectedForumCommand, ElementName=forumListBox}"
+                        CommandParameter="{Binding}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Page>

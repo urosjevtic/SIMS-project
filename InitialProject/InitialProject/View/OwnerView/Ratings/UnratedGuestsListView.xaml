@@ -6,93 +6,50 @@
         xmlns:local="clr-namespace:InitialProject.View.OwnerView.Ratings"
         xmlns:ns="clr-namespace:InitialProject.Utilities"
         mc:Ignorable="d"
-        Title="UnratedGuestsListView" Height="637" Width="345">
+        Title="UnratedGuestsListView" Height="648" Width="356">
     <Page.Background>
-        <SolidColorBrush Color="LightGray" />
+        <SolidColorBrush Color="{DynamicResource DarkerBackground}" />
     </Page.Background>
-    <Page.Resources>
-
-        <!--  LogIn button style  -->
-
-        <Style x:Key="LogInButtonStyle" TargetType="{x:Type Button}">
-
-            <Setter Property="Background" Value="#3A3D55" />
-            <!--  set the button background color  -->
-            <Setter Property="Foreground" Value="#fff" />
-            <!--  set the text color of the button  -->
-            <Setter Property="FontSize" Value="20" />
-            <!--  set the font size of the button  -->
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="5">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#005A9E" />
-                                <!--  set the background color when the mouse is over the button  -->
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#004F8E" />
-                                <!--  set the background color when the button is pressed  -->
-                            </Trigger>
-
-
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-
-        <!--  Naslovi  -->
-
-        <Style x:Key="TitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="FontSize" Value="30" />
-            <Setter Property="FontWeight" Value="Bold" />
-            <Setter Property="Foreground" Value="#3A3D55" />
-            <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="HorizontalAlignment" Value="Center" />
-        </Style>
-
-
-    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="0.1*" />
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="#3A3D55" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
+        <Button Command="{Binding GoBackCommand}" Content="{ns:Loc Go_back}" Background="Transparent" BorderThickness="0" Foreground="{DynamicResource TextColor}" FontSize="16" HorizontalAlignment="Left" FontWeight="DemiBold">
 
         </Button>
 
 
-        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Unrated_guests}" Foreground="#3A3D55"></TextBlock>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" FontWeight="DemiBold" Text="{ns:Loc Unrated_guests}" Foreground="{DynamicResource TextColor}"></TextBlock>
 
         <ListBox Grid.Row="2" x:Name="accommodationListBox"
                  ItemsSource="{Binding UnratedGuests}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  ScrollViewer.VerticalScrollBarVisibility="Auto"
-                 Background="LightGray"
+                 Background="{DynamicResource BackgroundColorDarker}"
                  BorderThickness="0"
                  HorizontalContentAlignment="Stretch">
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter />
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </ListBox.ItemContainerStyle>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Border
                         Margin="5"
                         Padding="10"
-                        Background="#fafafa"
-                        BorderBrush="#3A3D55"
+                        Background="{DynamicResource BackgroundColorLighter}"
+                        BorderBrush="{DynamicResource TextColor}"
                         BorderThickness="2"
                         CornerRadius="5">
                         <Border.Effect>
@@ -100,7 +57,7 @@
                                 BlurRadius="10"
                                 Opacity="0.5"
                                 ShadowDepth="5"
-                                Color="Black" />
+                                Color="{DynamicResource Shadow}" />
                         </Border.Effect>
                         <Grid Margin="10,10,10,0">
                             <Grid.RowDefinitions>
@@ -120,8 +77,10 @@
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="0">
                                 <TextBlock Text="{ns:Loc Guest_username}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Reservation.User.Username}" />
+                                <TextBlock Text="{Binding Reservation.User.Username}"
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
 
@@ -130,8 +89,10 @@
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="1">
                                 <TextBlock Text="{ns:Loc Accommodation}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Reservation.Accommodation.Name}" />
+                                <TextBlock Text="{Binding Reservation.Accommodation.Name}" 
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
 
@@ -139,28 +100,28 @@
                             <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="2">
                                 <TextBlock Text="{ns:Loc Start_date}" 
                                            FontWeight="Bold"
+                                           Foreground="{DynamicResource TextColor}"
                                            Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" />
-                                <TextBlock Margin="5,0,0,0" Text="{ns:Loc End_date}" 
-                                           FontWeight="Bold"/>
-                                <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}" />
+                                <TextBlock Text="{Binding Reservation.StartDate, StringFormat=\{0:dd/MM/yyyy\}}" 
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
 
-
-                            <!--Days left to rate guest-->
-                            <StackPanel Orientation="Horizontal" Margin="10,5" Grid.Row="3">
-                                <TextBlock Text="{ns:Loc Days_left_to_rate_guest}" 
+                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="10,5">
+                                <TextBlock Margin="0,0,5,0" Text="{ns:Loc End_date}" 
                                            FontWeight="Bold"
-                                           Margin="0,0,5,0"/>
-                                <TextBlock Text="{Binding }" />
+                                           Foreground="{DynamicResource TextColor}"/>
+                                <TextBlock Text="{Binding Reservation.EndDate, StringFormat=\{0:dd/MM/yyyy\}}"
+                                           Foreground="{DynamicResource TextColor}"/>
                             </StackPanel>
+
+
 
 
 
                             <Button Content="{ns:Loc Rate_a_guest}"
                                     Margin="10,15"
                                     Grid.Row="6"
-                                    Style="{StaticResource LogInButtonStyle}"
+                                    Style="{StaticResource ButtonStyle}"
                                     Command="{Binding DataContext.OpenRatingWindowCommand, ElementName=accommodationListBox}"
                                     CommandParameter="{Binding}" />
                         </Grid>
@@ -171,4 +132,3 @@
 
     </Grid>
 </Page>
-

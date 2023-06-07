@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Accommdation_reserved" xml:space="preserve">
+    <value>Accommodation reserved</value>
+  </data>
   <data name="Accommodation" xml:space="preserve">
     <value>Accommodation:</value>
+  </data>
+  <data name="Accommodation_managment" xml:space="preserve">
+    <value>Accommodation menagment</value>
   </data>
   <data name="Accommodation_registration" xml:space="preserve">
     <value>Accommodation registration</value>
@@ -129,8 +135,17 @@
   <data name="Accommodation_statistic" xml:space="preserve">
     <value>Accommodation statistic</value>
   </data>
+  <data name="Accommodation_statistic1" xml:space="preserve">
+    <value>*See statistic for all you accommodations</value>
+  </data>
+  <data name="Accommodation_statistic2" xml:space="preserve">
+    <value>*Select accommdoation and click on statistic to show yearly statistic. Furthermore clickg on see monthly statistic you will be able to see all statistic by months</value>
+  </data>
   <data name="Accommodation_type" xml:space="preserve">
     <value>Accommodation type:</value>
+  </data>
+  <data name="Accommodation_type_requeired" xml:space="preserve">
+    <value>*Accommodation type:</value>
   </data>
   <data name="Additional_comment" xml:space="preserve">
     <value>Additional comment:</value>
@@ -144,6 +159,21 @@
   <data name="All_reservations" xml:space="preserve">
     <value>All reservations</value>
   </data>
+  <data name="All_reservations1" xml:space="preserve">
+    <value>*See all reservations that guests have made</value>
+  </data>
+  <data name="All_reservations2" xml:space="preserve">
+    <value>*On this screen you will also be able to cancel reservations if needed</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_cancel_this_renovation" xml:space="preserve">
+    <value>Da li ste sigurni da zelite da otkazete renoviranje?</value>
+  </data>
+  <data name="Are_you_sure_you_want_to_cancel_this_reservation" xml:space="preserve">
+    <value>Are you sure you want to cancel this reservation?</value>
+  </data>
+  <data name="Author" xml:space="preserve">
+    <value>Author:</value>
+  </data>
   <data name="Avrage_rating" xml:space="preserve">
     <value>Avrage rating:</value>
   </data>
@@ -156,8 +186,17 @@
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="Cancelation_count" xml:space="preserve">
+    <value>Cancelation count:</value>
+  </data>
   <data name="Cancelation_period" xml:space="preserve">
     <value>Cancelation period:</value>
+  </data>
+  <data name="Cancelation_period_requiered" xml:space="preserve">
+    <value>*Cancelation period: </value>
+  </data>
+  <data name="Cancel_renovation" xml:space="preserve">
+    <value>Otkazi renoviranje</value>
   </data>
   <data name="Cancel_reservation" xml:space="preserve">
     <value>Cancel reservation</value>
@@ -168,6 +207,9 @@
   <data name="Change_application_theme" xml:space="preserve">
     <value>Change application theme</value>
   </data>
+  <data name="Change_theme" xml:space="preserve">
+    <value>Change theme</value>
+  </data>
   <data name="Change_username_and_password" xml:space="preserve">
     <value>Change ussername and password</value>
   </data>
@@ -177,17 +219,35 @@
   <data name="City" xml:space="preserve">
     <value>City:</value>
   </data>
+  <data name="City_requiered" xml:space="preserve">
+    <value>*City:</value>
+  </data>
   <data name="Cleanlines" xml:space="preserve">
     <value>Cleanlines:</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments:</value>
+  </data>
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country:</value>
+  </data>
+  <data name="Country_requiered" xml:space="preserve">
+    <value>*Country:</value>
+  </data>
+  <data name="Creation_date" xml:space="preserve">
+    <value>Creation date:</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Dark</value>
   </data>
   <data name="Days_left_to_rate_guest" xml:space="preserve">
     <value>Days left to rate guest:</value>
@@ -198,11 +258,20 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
   <data name="End_date" xml:space="preserve">
     <value>End date:</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="Every_field_is_requiered" xml:space="preserve">
+    <value>*Every field is required</value>
   </data>
   <data name="Finished" xml:space="preserve">
     <value>Finished:</value>
@@ -210,11 +279,26 @@
   <data name="Forums" xml:space="preserve">
     <value>Forums</value>
   </data>
+  <data name="Forums1" xml:space="preserve">
+    <value>*Interact with other guests and owners on forums</value>
+  </data>
+  <data name="Forums2" xml:space="preserve">
+    <value>*You will be able to leave comment on the selected forum only if you own accommdoation on that location</value>
+  </data>
+  <data name="Forums3" xml:space="preserve">
+    <value>*You can't leave comments on closed forums</value>
+  </data>
   <data name="From" xml:space="preserve">
     <value>From:</value>
   </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generate</value>
+  </data>
   <data name="Generate_a_pdf_report_for_a_renovations" xml:space="preserve">
     <value>Generate a pdf report for a renovations</value>
+  </data>
+  <data name="Generate_PDF" xml:space="preserve">
+    <value>Generate PDF</value>
   </data>
   <data name="Generate_report" xml:space="preserve">
     <value>Generate report</value>
@@ -222,11 +306,17 @@
   <data name="Go_back" xml:space="preserve">
     <value>&lt; Go back</value>
   </data>
+  <data name="Guest_rating" xml:space="preserve">
+    <value>Guest rating</value>
+  </data>
   <data name="Guest_username" xml:space="preserve">
     <value>Guest username:</value>
   </data>
   <data name="Handle_rescheduling" xml:space="preserve">
     <value>Handle rescheduling</value>
+  </data>
+  <data name="Help" xml:space="preserve">
+    <value>Help</value>
   </data>
   <data name="Here_you_can_see_all_requests_for_rescheduling_reservations" xml:space="preserve">
     <value>Here you can see all requests for rescheduling reservations</value>
@@ -243,6 +333,9 @@
   <data name="Images_url" xml:space="preserve">
     <value>Imgaes url:</value>
   </data>
+  <data name="Images_url_requiered" xml:space="preserve">
+    <value>*Images url:</value>
+  </data>
   <data name="Initial_date" xml:space="preserve">
     <value>Initial dates</value>
   </data>
@@ -255,23 +348,50 @@
   <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
   <data name="Log_out" xml:space="preserve">
     <value>Log out</value>
   </data>
   <data name="Maximum_number_of_guests" xml:space="preserve">
     <value>Maximum number of guests:</value>
   </data>
+  <data name="Max_Number_Of_Guests_requiered" xml:space="preserve">
+    <value>*Maximum number of guests:</value>
+  </data>
   <data name="Minimum_renovation_days" xml:space="preserve">
     <value>Minimum renovation days:</value>
   </data>
+  <data name="Min_reservation_days_requieded" xml:space="preserve">
+    <value>*Minimum reservation days:</value>
+  </data>
   <data name="MyAccommodations" xml:space="preserve">
-    <value>MyAccommodations</value>
+    <value>My Accommodations</value>
+  </data>
+  <data name="My_accommdoation1" xml:space="preserve">
+    <value>*See accommodation option enables you to see all accommodation that you currently own</value>
+  </data>
+  <data name="My_accommdoation2" xml:space="preserve">
+    <value>*See all details about accommodations</value>
+  </data>
+  <data name="My_accommdoation3" xml:space="preserve">
+    <value>*Clicking on See images button you will be able to see all accommodation images</value>
   </data>
   <data name="My_ratings" xml:space="preserve">
     <value>My ratings</value>
   </data>
+  <data name="My_ratings1" xml:space="preserve">
+    <value>*See super owner status. To become super owner you need at least 50 reviews and avrege rating of 4.5</value>
+  </data>
+  <data name="My_ratings2" xml:space="preserve">
+    <value>*See ratings for the accommodations you have selected. To be able to see review from the specific guest first you need to rate that guest</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name:</value>
+  </data>
+  <data name="Name_requiered" xml:space="preserve">
+    <value>*Name:</value>
   </data>
   <data name="New_date" xml:space="preserve">
     <value>New date</value>
@@ -282,8 +402,23 @@
   <data name="New_renovations" xml:space="preserve">
     <value>New renovations</value>
   </data>
+  <data name="New_renovations1" xml:space="preserve">
+    <value>*Schedule new renovations</value>
+  </data>
+  <data name="New_renovations2" xml:space="preserve">
+    <value>*Select accommdoations that you want to renovate, select date range that you want renovations to be and choose one of the available dates.</value>
+  </data>
+  <data name="New_renovations3" xml:space="preserve">
+    <value>*To finish just write renovation descritpiton and click on confirm</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="Notes" xml:space="preserve">
     <value>Notes</value>
+  </data>
+  <data name="Notification1" xml:space="preserve">
+    <value>*On this screen you will be able to see every notification that you recive</value>
   </data>
   <data name="Notifications" xml:space="preserve">
     <value>Notifications</value>
@@ -303,8 +438,17 @@
   <data name="Number_of_reservations" xml:space="preserve">
     <value>Number of reservations:</value>
   </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
   <data name="Owner_fairnes" xml:space="preserve">
     <value>Owner fairnes:</value>
+  </data>
+  <data name="Pdf_report" xml:space="preserve">
+    <value>PDF report</value>
   </data>
   <data name="Personal_info" xml:space="preserve">
     <value>Personal info</value>
@@ -324,20 +468,38 @@
   <data name="Reason_for_declining" xml:space="preserve">
     <value>Reason for declining: </value>
   </data>
+  <data name="Recived_notifications" xml:space="preserve">
+    <value>Recieved notifications</value>
+  </data>
   <data name="Registrate" xml:space="preserve">
     <value>Registrate</value>
   </data>
   <data name="Registrate_new_accommodation" xml:space="preserve">
     <value>Registrate new accommodation</value>
   </data>
+  <data name="Registrate_new_accommodation1" xml:space="preserve">
+    <value>*Fill the form and registrate new accommodation</value>
+  </data>
+  <data name="Registrate_new_accommodation2" xml:space="preserve">
+    <value>*Every field is obligatory</value>
+  </data>
   <data name="Registration_sugestion" xml:space="preserve">
     <value>Registration sugestion</value>
+  </data>
+  <data name="Registration_sugestion1" xml:space="preserve">
+    <value>*See sugestions for opening new accommodation on most popular locations based on reservations count in the past year</value>
+  </data>
+  <data name="Registration_sugestion2" xml:space="preserve">
+    <value>*See suggestions for closing accommodation on the locations that are not popular</value>
   </data>
   <data name="Renovation" xml:space="preserve">
     <value>Renovation</value>
   </data>
   <data name="Renovations" xml:space="preserve">
     <value>Renovations</value>
+  </data>
+  <data name="Renovation_count" xml:space="preserve">
+    <value>Renovation count:</value>
   </data>
   <data name="Renovation_description" xml:space="preserve">
     <value>Renovation description</value>
@@ -348,26 +510,59 @@
   <data name="Renovation_recomendations" xml:space="preserve">
     <value>Renovation recomendations</value>
   </data>
+  <data name="Renovation_report" xml:space="preserve">
+    <value>Renovation report</value>
+  </data>
   <data name="Renovation_reports" xml:space="preserve">
     <value>Renovation reports</value>
+  </data>
+  <data name="Renovation_reports1" xml:space="preserve">
+    <value>*Select date range for your report and all renovations in that period will be adad to the report that will be later saved on your device localy</value>
   </data>
   <data name="Renovation_rescheduling" xml:space="preserve">
     <value>Renovation rescheduling</value>
   </data>
+  <data name="Renovation_scheduled" xml:space="preserve">
+    <value>Renovation scheduled</value>
+  </data>
   <data name="Renovation_sugestions" xml:space="preserve">
     <value>Renovation sugestions</value>
+  </data>
+  <data name="Renovation_sugestions1" xml:space="preserve">
+    <value>*See all renovation sugestins that guests that have visited left</value>
+  </data>
+  <data name="Renovation_sugestions2" xml:space="preserve">
+    <value>*You can proceed with them or delete suggestion</value>
+  </data>
+  <data name="Renovation_sugestions3" xml:space="preserve">
+    <value>*Every sugestion have urgency level from 1 to 5</value>
   </data>
   <data name="Renovation_urgency" xml:space="preserve">
     <value>Renovation urgency:</value>
   </data>
+  <data name="Report" xml:space="preserve">
+    <value>Report</value>
+  </data>
   <data name="Reschedule" xml:space="preserve">
     <value>Reschedule</value>
+  </data>
+  <data name="Reschedule_count" xml:space="preserve">
+    <value>Reschedule count:</value>
   </data>
   <data name="Reservations" xml:space="preserve">
     <value>Reservations</value>
   </data>
+  <data name="Reservation_count" xml:space="preserve">
+    <value>Reservation count:</value>
+  </data>
   <data name="Reservation_rescheduling" xml:space="preserve">
     <value>Reservation rescheduling</value>
+  </data>
+  <data name="Reservation_rescheduling1" xml:space="preserve">
+    <value>*See all reschedule request from guests. You can approve them even if new date is already reserved by another guest and later cancel that reservations</value>
+  </data>
+  <data name="Reservation_rescheduling2" xml:space="preserve">
+    <value>*If you decline you will be able to leave messege to the guest why his request was declined</value>
   </data>
   <data name="Review_date" xml:space="preserve">
     <value>Review date:</value>
@@ -383,6 +578,12 @@
   </data>
   <data name="Scheduled_renovations" xml:space="preserve">
     <value>Scheduled renovations</value>
+  </data>
+  <data name="Scheduled_renovations1" xml:space="preserve">
+    <value>*See all renovations that have been scheduled</value>
+  </data>
+  <data name="Scheduled_renovations2" xml:space="preserve">
+    <value>*Here you can also cancel renovation but only if cancel it 5 days before the start</value>
   </data>
   <data name="Schedule_renovation" xml:space="preserve">
     <value>Schedule renovation</value>
@@ -418,7 +619,7 @@
     <value>See requests</value>
   </data>
   <data name="See_reservations" xml:space="preserve">
-    <value>See_reservations</value>
+    <value>See reservations</value>
   </data>
   <data name="See_reviews" xml:space="preserve">
     <value>See reviews</value>
@@ -447,17 +648,29 @@
   <data name="Select_a_month_you_want_to_see_statistic_for" xml:space="preserve">
     <value>Select a month you want to see statistic for</value>
   </data>
+  <data name="Select_a_period_for_renovation_report" xml:space="preserve">
+    <value>Select a period for renovation report</value>
+  </data>
   <data name="Select_date_range_for_renovations" xml:space="preserve">
     <value>Select date range for renovations</value>
   </data>
   <data name="Select_language" xml:space="preserve">
     <value>Select language</value>
   </data>
+  <data name="Select_theme" xml:space="preserve">
+    <value>Select theme</value>
+  </data>
   <data name="Serbian" xml:space="preserve">
     <value>Serbian</value>
   </data>
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="Settings1" xml:space="preserve">
+    <value>*Select theme for your application(light or dark)</value>
+  </data>
+  <data name="Settings2" xml:space="preserve">
+    <value>*Choose language for your applocation(Serbian or English)</value>
   </data>
   <data name="Start_date" xml:space="preserve">
     <value>Start date:</value>
@@ -471,11 +684,17 @@
   <data name="Stayed_at" xml:space="preserve">
     <value>Stayed at:</value>
   </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
   <data name="Submit" xml:space="preserve">
     <value>Submit</value>
   </data>
   <data name="Sugestions_for_opening_new_accommodations" xml:space="preserve">
     <value>Sugestions for opening new accommodations</value>
+  </data>
+  <data name="Suggestions_for_opening_new_or_closing_old_accommodations" xml:space="preserve">
+    <value>Suggestions for opening new or closing old accommodations</value>
   </data>
   <data name="Suggestion_for_renovations" xml:space="preserve">
     <value>Suggestion for renovations</value>
@@ -487,9 +706,27 @@
     <value>To:</value>
   </data>
   <data name="Unrated_guest" xml:space="preserve">
-    <value />
+    <value>Unrated guest</value>
   </data>
   <data name="Unrated_guests" xml:space="preserve">
     <value>Unrated guests</value>
+  </data>
+  <data name="Unrated_guests1" xml:space="preserve">
+    <value>*Rate guests that have visited your accommodations. Just select guest that you want to rate and fill the form</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="You_have_successfuly_downloaded_your_report" xml:space="preserve">
+    <value>You have successfuly downloaded your report</value>
+  </data>
+  <data name="You_have_successfuly_rated_guest" xml:space="preserve">
+    <value>You have successfuly rated guest</value>
+  </data>
+  <data name="You_have_successfuly_registrated_new_accommodation" xml:space="preserve">
+    <value>You have successfuly registrated new accommodation</value>
+  </data>
+  <data name="You_have_successfuly_scheduled_renovation" xml:space="preserve">
+    <value>You have successfuly scheduled renovation</value>
   </data>
 </root>

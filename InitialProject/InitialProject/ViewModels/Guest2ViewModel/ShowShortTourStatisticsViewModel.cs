@@ -6,9 +6,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using GalaSoft.MvvmLight.Command;
 using InitialProject.Domain.Model;
 using InitialProject.Service;
+using InitialProject.View.Guest2View;
 
 namespace InitialProject.ViewModels
 {
@@ -99,12 +101,18 @@ namespace InitialProject.ViewModels
                 }
             }
         }
-        public ShowShortTourStatisticsViewModel()
+        public NavigationService navigationService { get; }
+        public ShowShortTourStatisticsViewModel(NavigationService nav)
         {
-            GoBackCommand = new RelayCommand(CloseCurrentWindow);
+            this.navigationService = nav;
+            GoBackCommand = new RelayCommand(GoBack);
             _tourStatisticService = new TourStatisticService();
             ToursByLanguage = new ObservableCollection<DataPoint>();
             ToursByLocation = new ObservableCollection<DataPoint>();
+        }
+        public void GoBack()
+        {
+            navigationService.Navigate(new ShowTourPage(navigationService));
         }
         public void Refresh(string Year)
         {
