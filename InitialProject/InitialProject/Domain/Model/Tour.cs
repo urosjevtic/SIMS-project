@@ -51,6 +51,7 @@ namespace InitialProject.Domain.Model
             IsActive = isActve;
             IsRated = rated;
         }
+        
         public string Concatenate()
         {
             return Location.Country + " " + Location.City + " " + Language;

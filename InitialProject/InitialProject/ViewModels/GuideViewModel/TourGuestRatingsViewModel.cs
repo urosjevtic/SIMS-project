@@ -30,7 +30,7 @@ namespace InitialProject.ViewModels
         private readonly ITourGuestRepository _tourGuestRepository;
         private readonly IGuestsCheckPointRepository _guestsCheckPointRepository;
         private UserService _userService;
-        public RelayCommandWithParams ReportCommand { get; set; }
+        public ICommand ReportCommentCommand { get; private set; }
         public List<GuideCommentsOverview> GuideCommentsOverview { get; set; }
        // public GuideCommentsOverview SelectedComment{get; set;}
 
@@ -68,19 +68,20 @@ namespace InitialProject.ViewModels
             GuideCommentsOverview = GetAllGuideComments();
             Tour = tour;
             TourName  =tour.Name;
-            ReportCommand = new RelayCommandWithParams(ExecuteReporting);
-            AverageGuideKnowledgeRating = "Average rating for guide knowledge: " + _ratedTourGuideService.FindAverageKnowledgeRating(tour).ToString();
-            AverageGuideLanguageRating = "Average rating for guide language: " + _ratedTourGuideService.FindAverageLanguageRating(tour).ToString();
-            AverageTourInterestingRating = "Average rating for interesting tour: " + _ratedTourGuideService.FindAverageInterestingTourRating(tour).ToString();
+            ReportCommentCommand = new RelayCommandWithParams(ExecuteReporting);
+            AverageGuideKnowledgeRating = _ratedTourGuideService.FindAverageKnowledgeRating(tour).ToString();
+            AverageGuideLanguageRating =  _ratedTourGuideService.FindAverageLanguageRating(tour).ToString();
+            AverageTourInterestingRating = _ratedTourGuideService.FindAverageInterestingTourRating(tour).ToString();
 
         }
 
         public void ExecuteReporting(object sender)
         {
-           if(SelectedComment != null)
+            GuideCommentsOverview comment = (GuideCommentsOverview)sender;
+           if(comment != null)
             {
-                SelectedComment.IsReported = true;
-                Comment reported = _commentRepository.GetByText(SelectedComment.Comment);
+                comment.IsReported = true;
+                Comment reported = _commentRepository.GetByText(comment.Comment);
                 reported.IsReported = true;
                 _commentRepository.Update(reported);
                 MessageBox.Show("Komentar je prijavljen!","Information",MessageBoxButton.OK,MessageBoxImage.Information);

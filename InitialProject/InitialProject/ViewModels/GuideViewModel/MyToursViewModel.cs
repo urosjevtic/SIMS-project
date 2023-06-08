@@ -71,9 +71,10 @@ namespace InitialProject.ViewModels.GuideViewModel
             showingTour.CheckPoints = tour.CheckPoints;
             showingTour.CoverImageUrl = MakeCoverImage(tour);
             showingTour.Language = tour.Language;
+            showingTour.MaxGuests = tour.MaxGuests;
         }
 
-       
+
 
         private string MakeCoverImage(Tour tour)
         {
@@ -99,7 +100,7 @@ namespace InitialProject.ViewModels.GuideViewModel
                     if(DateTime.Now.DayOfYear +2 <= SelectedTour.Start.DayOfYear)
                     {
                     Tour tour = GetTourByShowingTour(SelectedTour);
-                        _tourService.SendVauchers(tour);
+                        _tourService.SendVauchers(tour,LoggedUser);
                         _tourService.Delete(tour);
                         Tours.Remove(tour);
                         MessageBox.Show("Tura je uspjesno otkazana.", "Information", MessageBoxButton.OK, MessageBoxImage.Information);

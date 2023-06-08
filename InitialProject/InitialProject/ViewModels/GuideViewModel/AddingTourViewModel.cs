@@ -55,7 +55,7 @@ namespace InitialProject.ViewModels
             _notificationService = new NotificationService();
             //_guideMainWindow = new GuideMainViewModel(user);
 
-            SaveCommand = new RelayCommand(Save);
+            SaveCommand = new RelayCommand(Save, CanAddTour);
             CancelCommand = new RelayCommand(Cancel);
             AddImageCommand = new RelayCommand(AddImage);
             AddDateTimeCommand = new RelayCommand(AddStartDate);
@@ -384,7 +384,12 @@ namespace InitialProject.ViewModels
 
         }
 
+      
 
+        private bool CanAddTour()
+        {
+            return !(_tourName == null || _country == null || _city == null || _description == null || _maxGuests <= 0 || _duration <= 0 || _imagesUrl == null || _first ==null || _last == null || _language==null);
+        }
 
         private void AddImage()
         {

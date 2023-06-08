@@ -23,17 +23,48 @@
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
-        <Label Grid.Column="0" Grid.ColumnSpan="2" FontSize="25" Content="My Tours" Foreground="#004040" HorizontalAlignment="Center"></Label>
-        <DataGrid  x:Name="ToursDataGrid" Grid.ColumnSpan="2"
+        <Label Grid.Column="0" Grid.ColumnSpan="2" FontSize="25"  FontWeight="Bold"
+               Content="My Tours" Foreground="#004040" HorizontalAlignment="Center"></Label>
+        <DataGrid Style="{StaticResource DataGridStyle}" x:Name="ToursDataGrid" Grid.ColumnSpan="2"
                    ItemsSource="{Binding MyTours}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}" 
                    AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" CanUserResizeRows="False" 
                    Margin="64,16,32,64" Grid.Row="2">
             <DataGrid.Columns >
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*"/>
-                <DataGridTextColumn Header="Location" Binding="{Binding Location}"  Width="12*"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*"/>
-                <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
-                <DataGridTextColumn Header="StartDates " Binding="{Binding Start }"  Width="10*"/>
+                <DataGridTemplateColumn Header="Name" Width="12*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Description" Width="15*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Location" Width="12*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Location}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Language" Width="10*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Language}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Start" Width="11*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Start ,StringFormat='{}{0:dd/MM/yyyy}'}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Image"   Width="12*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.Domain.Model;
 using InitialProject.ViewModels.GuideViewModel;
 
 namespace InitialProject.View.GuideView.Pages
@@ -21,10 +22,10 @@ namespace InitialProject.View.GuideView.Pages
     /// </summary>
     public partial class MyAccount : Page
     {
-        public MyAccount()
+        public MyAccount(User user)
         {
             InitializeComponent();
-            DataContext = new MyAccountViewModel();
+            DataContext = new MyAccountViewModel(user);
         }
     }
 }

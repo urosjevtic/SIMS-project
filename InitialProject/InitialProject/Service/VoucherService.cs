@@ -16,6 +16,7 @@ namespace InitialProject.Service
         public VoucherService()
         {
             _voucherRepository = Injector.Injector.CreateInstance<IVoucherRepository>();
+            CheckVoucherStatus(GetAllCreated());
         }
 
         public bool IsSelectedVoucher(Voucher SelectedVoucher)
@@ -29,6 +30,7 @@ namespace InitialProject.Service
         public List<Voucher> GetAllCreated()
         {
             List<Voucher> vouchers = _voucherRepository.GetAll();
+
             List<Voucher> result = new();
             foreach(Voucher v in vouchers)
             {
@@ -39,9 +41,29 @@ namespace InitialProject.Service
             }
             return result;
         }
+        public void CheckVoucherStatus(List<Voucher> vouchers)
+        {
+            foreach(Voucher voucher in vouchers)
+            {
+                if (voucher.CreationDate < DateTime.Now.AddYears(-1))
+                {
+                    voucher.Status = VoucherStatus.Expired;
+                }
+            }
+        }
         public void ChangeToUsed(Voucher voucher)
         {
             _voucherRepository.ChangeUsed(voucher);
+        }
+
+        public void Save(Voucher voucher)
+        {
+            _voucherRepository.Save(voucher);
+        }
+
+        public void Update(Voucher voucher)
+        {
+            _voucherRepository.Update(voucher);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace InitialProject.View.GuideView.Pages
     /// </summary>
     public partial class StatisticsPage : Page
     {
-        public StatisticsPage(User user)
+        public StatisticsPage()
         {
             InitializeComponent();
             DataContext = new TourStatisticViewModel();

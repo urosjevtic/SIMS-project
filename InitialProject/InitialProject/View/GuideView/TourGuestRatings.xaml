@@ -62,84 +62,74 @@
             <RowDefinition Height="2*"></RowDefinition>
 
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding TourName}" FontWeight="Bold" FontSize="20"></Label>
+        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" Content="{Binding TourName}" FontWeight="Bold" FontSize="22"></Label>
 
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding AverageGuideKnowledgeRating}" Grid.ColumnSpan="2" FontSize="16" Margin="50 0 0 0"></TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding AverageGuideLanguageRating}" Grid.ColumnSpan="2" FontSize="16" Margin="50 0 0 0"></TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding AverageTourInterestingRating}" Grid.ColumnSpan="2" FontSize="16" Margin="50 0 0 0"></TextBlock>
+        <Label Content="Average rating for: " Grid.Row="1" FontSize="18" FontWeight="Bold" Margin="65 0 0 0"></Label>
+        <Label Content="Guide knowledge: " Grid.Row="2" FontSize="16" FontWeight="SemiBold" Margin="85 0 0 0"></Label>
+        <Label Content="Guide language: " Grid.Row="3" FontSize="16" FontWeight="SemiBold" Margin="85 0 0 0"></Label>
+        <Label Content="Tour interesting: " Grid.Row="4" FontSize="16" FontWeight="SemiBold" Margin="85 0 0 0"></Label>
 
-        <!--ListView 
-          HorizontalAlignment="Left" 
-          Name="listView2" 
-          Grid.Row="2"
-          VerticalAlignment="Top" 
-          
-          ItemsSource="{Binding TourGuests}"
-          IsSynchronizedWithCurrentItem="True" Height="119">
-            <ListView.View>
-                <GridView>
-                    <GridView.Columns>
-                        <GridViewColumn DisplayMemberBinding="{Binding Id}" Header="Id usera" Width="70" />
-                        <GridViewColumn DisplayMemberBinding="{Binding GuideKnowledge}" Header="Guide knowledge"  Width="70"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding GuideLanguage}" Header="Language"  Width="70"/>
-                        <GridViewColumn DisplayMemberBinding="{Binding InterestingTour}" Header="Interesting tour"  Width="90"/>
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView-->
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding AverageGuideKnowledgeRating}" Grid.ColumnSpan="2" FontSize="16" Margin="230 8 0 0"></TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding AverageGuideLanguageRating}" Grid.ColumnSpan="2" FontSize="16" Margin="220 8 0 0"></TextBlock>
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding AverageTourInterestingRating}" Grid.ColumnSpan="2" FontSize="16" Margin="220 8 0 0"></TextBlock>
 
+    
 
-
-        <!--ListView  Style="{StaticResource ListViewStyle}"
-          HorizontalAlignment="Left" 
-          Name="listView" 
-          Grid.Row="5"
-          VerticalAlignment="Top" 
-          ItemsSource="{Binding GuideCommentsOverview}"
-          SelectedItem="{Binding SelectedComment}"
-          IsSynchronizedWithCurrentItem="True" Height="119" Margin="31,0,0,0" Width="750" Grid.ColumnSpan="2">
-            <ListView.ItemContainerStyle >
-                <Style TargetType="{x:Type ListViewItem}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding IsReported}" Value="True">
-                            <Setter Property="Foreground" Value="Red" />
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </ListView.ItemContainerStyle>
-            <ListView.View >
-                <GridView ColumnHeaderContainerStyle="{StaticResource ListViewHeaderStyle}">
-                    <GridView.Columns>
-                        <GridViewColumn DisplayMemberBinding="{Binding User.Username}"  Header="Username" Width="110" />
-                        <GridViewColumn DisplayMemberBinding="{Binding CheckPoint.Name}" Header="Check point" Width="110" />
-                        <GridViewColumn DisplayMemberBinding="{Binding Comment}"  Header="Comment" Width="520" />
-                    </GridView.Columns>
-                </GridView>
-            </ListView.View>
-        </ListView-->
-        <!--Button Content="Report" Width="120" Height="40" Grid.Row="7" Grid.Column="1" 
-                Command="{Binding ReportCommand}" Style="{StaticResource MenuButtonTheme}"></Button-->
-
+        <Label Content="Comments:" FontSize="18" FontWeight="Bold" Grid.Row="5" Margin="65 0 0 0"></Label>
         
         <ListBox Grid.Row="5"
-              VerticalAlignment="Top" 
-              Background="#D1EEEE" 
-              ItemsSource="{Binding GuideCommentsOverview}"
-              SelectedItem="{Binding SelectedComment}"
-                 BorderThickness="0"
-                 BorderBrush="#D1EEEE"
-              IsSynchronizedWithCurrentItem="True" Height="219" Margin="68,40,113,0" Grid.ColumnSpan="2" Grid.RowSpan="2" >
+          VerticalAlignment="Top" 
+          Background="#D1EEEE" 
+          ItemsSource="{Binding GuideCommentsOverview}"
+          SelectedItem="{Binding SelectedComment}"
+          BorderThickness="2"
+          BorderBrush="#008080"
+          IsSynchronizedWithCurrentItem="True"
+          Height="219"
+          Margin="65,40,113,0"
+          Grid.ColumnSpan="2"
+          Grid.RowSpan="2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <Border CornerRadius="10" Background="White" BorderBrush="#008080" BorderThickness="3"  Height="70" >
-                            <TextBlock  Text="{Binding Comment}" FontSize="16" Height="69"  Style="{StaticResource textblock}"  />
+                        <Border CornerRadius="10" Background="White" BorderBrush="#008080" BorderThickness="3" Height="70">
+                            <TextBlock Text="{Binding Comment}" FontSize="14" Height="70" Style="{StaticResource textblock}" TextWrapping="Wrap" Width="400" />
                         </Border>
-                        <Button Content="Report"  Command="{Binding ReportCommentCommand}"  Margin="80 0 0 0 " Style="{StaticResource MenuButtonTheme}" HorizontalAlignment="Right"></Button>
+                        <ContentControl >
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsReported}" Value="True">
+                                            <Setter Property="Content">
+                                                <Setter.Value>
+                                                    <Button Background="#D1eeee" Width="170" Height="60" Margin="50 0 0 0" BorderThickness="0">
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <Image Source="/Resources/Images/reported.png" Margin="0 0 0 0" Width="40" Height="30"></Image>
+                                                            <TextBlock Text="Reported" Margin="10 20 0 0" Background="#D1eeee" Foreground="Red" FontSize="14" Height="50" 
+                                                                       TextWrapping="Wrap"  Width="70" FontWeight="Bold" />
+                                                        </StackPanel>
+                                                    </Button>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                        <DataTrigger Binding="{Binding IsReported}" Value="False">
+                                            <Setter Property="Content">
+                                                <Setter.Value>
+                                                    <Button Content="Report" Command="{Binding DataContext.ReportCommentCommand, RelativeSource={RelativeSource AncestorType={x:Type ListBox}}}"
+                                                            CommandParameter="{Binding}" Width="120" Height="40" FontSize="12"
+                                                            Margin="80 0 0 0" Style="{StaticResource MenuButtonTheme}" HorizontalAlignment="Center" />
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
 
     </Grid>
 </Window>

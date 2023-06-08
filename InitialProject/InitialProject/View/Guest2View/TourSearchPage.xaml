@@ -77,7 +77,8 @@
                                             <TextBlock Text="{Binding Language}" FontSize="15" Grid.Row="3" Grid.Column="1" Padding="5"/>
                                             <Label Content="Number of people:" FontSize="15" Grid.Row="4" Grid.Column="0"/>
                                             <TextBlock Text="{Binding MaxGuests}" FontSize="15" Grid.Row="4" Grid.Column="1" Padding="5"/>
-                                            <Button Content="Show tour" FontSize="18" Width="100" Grid.Column="2" Grid.Row="4" Background="LightSteelBlue" BorderThickness="2" HorizontalAlignment="Right" Command="{Binding DataContext.ShowTourCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
+                                            <Button Content="Show tour" FontSize="18" Width="100" Grid.Column="2" Grid.Row="4" Background="LightSteelBlue"
+                                                    BorderThickness="2" HorizontalAlignment="Right" Command="{Binding DataContext.ShowTourCommand, RelativeSource={RelativeSource AncestorType=ItemsControl}}"
         CommandParameter="{Binding}" Padding="5" Margin="8"/>
                                         </Grid>
                                     </Border>

@@ -89,19 +89,21 @@ namespace InitialProject.Repository
         public void Update(Tour tour, ObservableCollection<string> urls)
         {
             _images = _serializer.FromCSV(FilePath);
-<<<<<<< HEAD
-            Image found = _images.Find(c => c == tour.CoverImageUrl);
-            foreach(string s in text)
-=======
+           
+
             Image found = _images.Find(c => c.Id == tour.CoverImageUrl.Id);
             foreach(string s in urls)
->>>>>>> f534d28c9e35d115634c2b14fc130ad55abd0402
             {
                 found.Url.Add(s);
             }
             _serializer.ToCSV(FilePath, _images);
         }
         public void Update(Image entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Tour tour, Image entity)
         {
             throw new NotImplementedException();
         }

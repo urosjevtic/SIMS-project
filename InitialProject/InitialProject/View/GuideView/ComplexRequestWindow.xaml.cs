@@ -11,20 +11,20 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using InitialProject.ViewModels;
+using InitialProject.Domain.Model;
+using InitialProject.ViewModels.GuideViewModel;
 
-namespace InitialProject.View
+namespace InitialProject.View.GuideView
 {
     /// <summary>
-    /// Interaction logic for Window1.xaml
+    /// Interaction logic for ComplexRequestWindow.xaml
     /// </summary>
-    public partial class EndedTourRatings : Window
+    public partial class ComplexRequestWindow : Window
     {
-        public EndedTourRatings()
+        public ComplexRequestWindow(User user,List<ShortTourRequest> requests)
         {
             InitializeComponent();
-            
-            this.DataContext = new EndedTourRatingsViewModel();
+            DataContext = new ComplexRequestsViewModel(user,requests);   
         }
     }
 }

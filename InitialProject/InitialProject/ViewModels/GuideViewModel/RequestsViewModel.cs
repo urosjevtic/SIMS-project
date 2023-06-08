@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using InitialProject.View.GuideView;
 
 namespace InitialProject.ViewModels.GuideViewModel
 {
@@ -24,7 +25,11 @@ namespace InitialProject.ViewModels.GuideViewModel
         public ShortTourRequest SelectedRequest { get; set; }
         public ICommand SearchCommand { get; private set; }
         public ICommand ResetCommand { get; private set; }
-        public ICommand AcceptRequestCommand { get; private set; }  
+        public ICommand AcceptRequestCommand { get; private set; }
+        public ICommand ShowComplexRequestCommand { get; private set; }
+
+        private ComplexTourRequestService _complexTourRequestService;
+        public List<ComplexTourRequest> ComplexTourRequests { get; set; }
         public RequestsViewModel(User user)
         {
             _shortTourRequestService = new ShortTourRequestService();
@@ -34,10 +39,28 @@ namespace InitialProject.ViewModels.GuideViewModel
             LoggedUser = user;
             Locations = _locationService.GetCountriesAndCities();
             Requests = new ObservableCollection<ShortTourRequest>(_shortTourRequestService.GetAll());
+            ShowComplexRequestCommand = new RelayCommandWithParams(ShowComplexTourRequest);
             SearchResult = new ObservableCollection<ShortTourRequest>();
             ResetCommand = new RelayCommand(ResetSearch);
             From = DateTime.Now;
             To = DateTime.Now;
+            _complexTourRequestService = new ComplexTourRequestService();
+            ComplexTourRequests = new List<ComplexTourRequest>();
+            ComplexTourRequests = _complexTourRequestService.GetAllRequests();
+        }
+        private void ShowComplexTourRequest(object complexRequest)
+        {
+            ComplexTourRequest complexTourRequest = (ComplexTourRequest)complexRequest; 
+            if(complexRequest != null)
+            {
+                ComplexRequestWindow complexRequestWindow = new ComplexRequestWindow(LoggedUser, complexTourRequest.Requests);
+                complexRequestWindow.Show();
+            }
+            else
+            {
+                MessageBox.Show("Grreska!");
+            }
+           
         }
 
         private void ResetSearch()
@@ -65,6 +88,8 @@ namespace InitialProject.ViewModels.GuideViewModel
                 MessageBox.Show("");
             }
         }
+
+     
 
 
         private string _country="";

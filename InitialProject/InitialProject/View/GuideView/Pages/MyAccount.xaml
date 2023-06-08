@@ -8,6 +8,86 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="MyAccount" Background="#D1EEEE">
 
+    <Page.Resources>
+        <!-- Style for ListView -->
+        <Style x:Key="ListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="#D1EEEE" />
+        </Style>
+
+
+
+        <!-- Style for ListView header -->
+        <Style x:Key="ListViewHeaderStyle" TargetType="GridViewColumnHeader">
+            <Setter Property="Background" Value="#008080" />
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="FontWeight" Value="SemiBold"></Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            Padding="6,4"
+                            CornerRadius="7"
+                            SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="PrimaryBackgroundColor" Color="#D1eeee"></SolidColorBrush>
+        <SolidColorBrush x:Key="PrimaryTextColor" Color="#004040"></SolidColorBrush>
+        <SolidColorBrush x:Key="ButtonMouseOverColor" Color="#20B2AA"></SolidColorBrush>
+        <SolidColorBrush x:Key="ButtonPressedColor" Color="#009090"></SolidColorBrush>
+
+        <Style 
+           TargetType="{x:Type Button}"
+           x:Key="QuiteJobButtonTheme">
+            <Style.Setters>
+                <Setter Property="Background" Value="{DynamicResource PrimaryBackgroundColor}"></Setter>
+                <Setter Property="Foreground" Value="{DynamicResource PrimaryTextColor}"></Setter>
+                <Setter Property="BorderThickness" Value="0"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="HorizontalAlignment" Value="Center" ></Setter>
+                <Setter Property="VerticalAlignment" Value="Center" ></Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border x:Name="ButtonBorder" CornerRadius="10" Background="{TemplateBinding Background}"
+                                Width="{TemplateBinding Width}"
+                                MaxHeight="{TemplateBinding MaxHeight}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                SnapsToDevicePixels="True">
+                                <ContentPresenter x:Name="ContentPresenter" Focusable="False" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                              Margin="{TemplateBinding Padding}"
+                                              SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              RecognizesAccessKey="True"></ContentPresenter>
+
+                            </Border>
+                            <ControlTemplate.Triggers >
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="ButtonBorder" Property="BorderBrush" Value="#008080" ></Setter>
+                                    <Setter TargetName="ButtonBorder" Property="BorderThickness" Value="3" ></Setter>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource ButtonPressedColor}"></Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+            </Style.Setters>
+
+
+
+        </Style>
+    </Page.Resources>
+
     <Grid>
 
         <Grid.RowDefinitions>
@@ -31,19 +111,38 @@
         <Image Source="/Resources/Images/guideUser.png" Width="40" Height="40" Grid.Row="1" HorizontalAlignment="Left" Margin="50 0 0 0"/>
         <Image Source="/Resources/Images/znacka.png" Width="40" Height="40" Grid.Row="1" HorizontalAlignment="Left" Margin="235,5,0,30" Grid.RowSpan="2"/>
 
+
+
         <Label Content="Dajana Skočajić" FontSize="18" FontWeight="Bold" Foreground="#004040"
                    Grid.Column="0" Grid.Row="1"
                    HorizontalAlignment="Left" Margin="90,7,0,30" Grid.RowSpan="2"/>
 
         <Image Source="/Resources/Images/superGuide.png" Width="45" Height="45" Grid.Row="3" HorizontalAlignment="Left" Margin="50 0 0 0"/>
+
+        <Button Grid.Row="1" Grid.Column="1" Background="#D1eeee" Height="50" Width="200" Style="{StaticResource QuiteJobButtonTheme}"
+                FontSize="16" FontWeight="SemiBold" Foreground="#004040" BorderThickness="0" Margin="90 0 0 0 "
+                Command="{Binding QuitJobCommand}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/Images/otkaz.png" Width="40" Height="40" ></Image>
+                <TextBlock Text="Quite your job"  FontSize="16" FontWeight="Bold" Foreground="#004040"  Margin="0 7 0 0"></TextBlock>
+            </StackPanel>
+        </Button>
+        <TextBlock Text="By quiting job all tours will be canceled and registed guests will receive vouchers for." Grid.Row="2" Grid.Column="1" TextWrapping="Wrap" Grid.RowSpan="2" FontSize="13" Height="70" Width="150" Margin="210,5,40,0"></TextBlock>
+
         <Label Content="Super guide status: " Grid.Row="3"  FontSize="16" Margin="90,7,10,0" FontWeight="Bold" Foreground="#004040"></Label>
         <Label Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Languages ​​for which you are a super guide:" Foreground="#004040" Margin="90 0 0 0" FontSize="14"></Label>
-        <DataGrid ItemsSource="{Binding SuperGuideStatus}"  Width="700"
-                  AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="5" Grid.Column="0" Grid.RowSpan="6" Grid.ColumnSpan="2">
+        <DataGrid Style="{StaticResource DataGridStyle}" ItemsSource="{Binding SuperGuideStatus}"  CanUserResizeRows="False"  FontSize="14"
+                  AutoGenerateColumns="False" IsReadOnly="True" Grid.Row="5" Grid.Column="0" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="73,0,296,41">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Language" Binding="{Binding Language}" FontSize="16" Width="1*"></DataGridTextColumn>
+                <DataGridTemplateColumn  Width="1*" Header="Language">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Language}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Header="Status" Width="1*">
+                <DataGridTemplateColumn Header="Status" Width="2*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -67,7 +166,7 @@
                                                 </Grid.RowDefinitions>
                                             </Grid>
                                             <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="0">
-                                                <Image Source="/Resources/Images/pehar.png" Width="28" Height="28"  ></Image>
+                                                <Image Source="/Resources/Images/pehar1.png" Width="28" Height="28"  ></Image>
                                             </Grid>
                                             <Grid Margin="30 0 0 0"  Grid.Column="1" Grid.Row="0">
                                                 <Label Content="Tours number: "  Foreground="#004040" FontSize="14"   ></Label>
@@ -92,13 +191,13 @@
                                             </Grid>
                                             <Grid></Grid>
                                             <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="0">
-                                                <Image Source="/Resources/Images/recenzije.png" Width="28" Height="28" ></Image>
+                                                <Image Source="/Resources/Images/recenzije1.png" Width="28" Height="28" ></Image>
                                             </Grid>
                                             <Grid  Margin="30 0 0 0" Grid.Column="1" Grid.Row="0">
                                                 <Label Content="Average rating: " FontSize="14" Foreground="#004040"></Label>
                                             </Grid>
                                             <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="1">
-                                                <TextBlock Text="{Binding AverageRating}" FontSize="14" TextAlignment="Center"  Margin="0 7 0 0" Foreground="#004040"></TextBlock>
+                                                <TextBlock Text="{Binding AverageRating}" FontSize="14" TextAlignment="Center"  Margin="-5 7 0 0" Foreground="#004040"></TextBlock>
                                             </Grid>
                                         </StackPanel>
                                     </Grid>
@@ -109,6 +208,99 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <!--ListView Height="250" 
+              HorizontalAlignment="Left" 
+              Name="CheckPoListView" 
+              Grid.Column="0"
+              Grid.Row="5"
+              Margin="50 0 0 0"
+              VerticalAlignment="Top" 
+              Width="350" 
+              Style="{StaticResource ListViewStyle}"
+              Background="#D1EEEE"
+              BorderThickness="0"
+              FontSize="14"
+              ItemsSource="{Binding SuperGuideStatus}"
+              IsSynchronizedWithCurrentItem="True">
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource ListViewHeaderStyle}">
+                    <GridView.Columns  >
+                        <GridViewColumn Width="100" Header="Language">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Language}" Background="#D1eeee" Foreground="#004040" HorizontalAlignment="Center"></TextBlock>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn >
+                        <GridViewColumn Width="250" Header="Status">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                                <RowDefinition />
+                                            </Grid.RowDefinitions>
+                                            <Grid Grid.Row="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                    </Grid>
+                                                    <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="0">
+                                                        <Image Source="/Resources/Images/pehar1.png" Width="28" Height="28"  ></Image>
+                                                    </Grid>
+                                                    <Grid Margin="30 0 0 0"  Grid.Column="1" Grid.Row="0">
+                                                        <Label Content="Tours number: "  Foreground="#004040" FontSize="14"   ></Label>
+                                                    </Grid>
+                                                    <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="2">
+                                                        <TextBlock Text="{Binding ToursNumber}" FontSize="14" TextAlignment="Center"  Margin="0 7 0 0" Foreground="#004040"></TextBlock>
+                                                    </Grid>
+                                                </StackPanel>
+                                                <Grid></Grid>
+                                            </Grid>
+                                            <Grid Grid.Row="2">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                            <ColumnDefinition/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition/>
+                                                        </Grid.RowDefinitions>
+                                                    </Grid>
+                                                    <Grid></Grid>
+                                                    <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="0">
+                                                        <Image Source="/Resources/Images/recenzije1.png" Width="28" Height="28" ></Image>
+                                                    </Grid>
+                                                    <Grid  Margin="30 0 0 0" Grid.Column="1" Grid.Row="0">
+                                                        <Label Content="Average rating: " FontSize="14" Foreground="#004040"></Label>
+                                                    </Grid>
+                                                    <Grid  Margin="30 0 0 0" Grid.Row="0" Grid.Column="1">
+                                                        <TextBlock Text="{Binding AverageRating}" FontSize="14" TextAlignment="Center"  Margin="-5 7 0 0" Foreground="#004040"></TextBlock>
+                                                    </Grid>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Grid>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn >
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView-->
 
 
     </Grid>

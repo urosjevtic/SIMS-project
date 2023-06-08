@@ -15,6 +15,7 @@ using InitialProject.ViewModels;
 using InitialProject.Domain.Model;
 using LiveCharts.Charts;
 using InitialProject.Service;
+using System.Globalization;
 
 namespace InitialProject.View.GuideView
 {
@@ -27,8 +28,6 @@ namespace InitialProject.View.GuideView
         {
             InitializeComponent();
             DataContext = new VisitationViewModel(tour,MyPieChart);
-
-            
         }
     }
 }

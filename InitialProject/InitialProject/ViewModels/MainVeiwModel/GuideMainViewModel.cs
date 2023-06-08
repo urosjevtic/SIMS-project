@@ -14,10 +14,12 @@ namespace InitialProject.ViewModels.MainVeiwModel
 {
     public class GuideMainViewModel
     {
-        private readonly TourService _tourService;  
+        private readonly TourService _tourService;
+
         public MainWindow _guideMainWindow { get; set; }
         public User LoggedInUser { get; set; }
         public ICommand NavigationButtonCommand => new RelayCommandWithParams(Navigationations);
+        public ICommand GenerateReportCommand { get; private set; }
 
         public List<Tour> ActiveTours { get; set; } 
         public GuideMainViewModel(User user, MainWindow guideMain)
@@ -26,7 +28,13 @@ namespace InitialProject.ViewModels.MainVeiwModel
             _guideMainWindow = guideMain;
             LoggedInUser = user;
             ActiveTours = _tourService.FindActiveTours(user);
-
+            GenerateReportCommand = new RelayCommand(GenerateReport);
+            StartUp();
+        }
+        private void StartUp()
+        {
+            var navigationService = _guideMainWindow.MainFrame.NavigationService;
+            navigationService.Navigate(new MyTours(LoggedInUser));
         }
         public void Navigationations(object param)
         {
@@ -53,7 +61,7 @@ namespace InitialProject.ViewModels.MainVeiwModel
                         break;
                     }
                 case "Statistic":
-                    navigationService.Navigate(new StatisticsPage(LoggedInUser));
+                    navigationService.Navigate(new StatisticsPage());
                     break;
 
                 case "Requests":
@@ -63,10 +71,16 @@ namespace InitialProject.ViewModels.MainVeiwModel
                     navigationService.Navigate(new Reviews());
                     break;
                 case "MyAccount":
-                    navigationService.Navigate(new MyAccount());
+                    navigationService.Navigate(new MyAccount(LoggedInUser));
                     break;
 
             }
+        }
+
+        public void GenerateReport()
+        {
+            ReportForTours view = new ReportForTours();
+            view.Show();
         }
     }
 }

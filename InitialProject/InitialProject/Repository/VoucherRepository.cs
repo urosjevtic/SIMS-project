@@ -50,5 +50,23 @@ namespace InitialProject.Repository
             _vouchers.Add(found);
             _serializer.ToCSV(FilePath, _vouchers);
         }
+
+        public void Update(Voucher voucher)
+        {
+            Voucher newNotifcation = _vouchers.Find(p1 => p1.Id == voucher.Id);
+            newNotifcation.Id = voucher.Id;
+            newNotifcation.GuideId = voucher.GuideId;
+            newNotifcation.Text = voucher.Text;
+            newNotifcation.Status = voucher.Status;
+            newNotifcation.IdUser = voucher.IdUser;
+            SaveAll(_vouchers);
+
+        }
+
+        public void SaveAll(List<Voucher> vouchers)
+        {
+            _serializer.ToCSV(FilePath, vouchers);
+        }
+
     }
 }

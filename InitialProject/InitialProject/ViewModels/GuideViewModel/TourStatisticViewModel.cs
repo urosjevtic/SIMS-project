@@ -25,7 +25,7 @@ namespace InitialProject.ViewModels
         public TourService _tourService;
         private readonly LocationService _locationService;
         private readonly ShortTourRequestService _shortTourRequestService;  
-
+        public ObservableCollection<Tour> MostVisitedToursInYear { get; set; }
         public List<Tour> EndedTours { get; set; }
         public Tour SelectedTour { get; set; }
         public Tour MostVisitedTour { get; set; }
@@ -41,7 +41,6 @@ namespace InitialProject.ViewModels
         public List<ShortTourRequest> SearchResult { get; set; }    
 
 
-
         public TourStatisticViewModel()
         {
             _shortTourRequestService = new ShortTourRequestService();
@@ -49,7 +48,7 @@ namespace InitialProject.ViewModels
             _tourStatisticService = new TourStatisticService();
             EndedTours = _tourService.FindAllEndedTours();
             MostVisitedTour = _tourService.FindMostVisited();
-
+            MostVisitedToursInYear = new ObservableCollection<Tour>();
 
             ShowVisitation = new RelayCommand(ShowVisitatons);
             _locationService = new LocationService();
@@ -57,12 +56,12 @@ namespace InitialProject.ViewModels
             SearchCommand = new RelayCommand(Search);
             Years = new List<int>() { 2023,2022,2021,2020,0};
             VisitationYears = new List<int>() { 2023, 2022, 2021, 2020 };
-
             SetLineSeriesForYears();
             Year = 0;
+            SelectedYear = 2023;
             MostVisitedTourInYear = _tourService.GetMostVisitedInYear(2023);
             SearchResult = new List<ShortTourRequest>();
-            MostVisitedTourInYearText = "Most visited tour in year " + SelectedYear.ToString() + " is " + MostVisitedTourInYear.Name;
+            
             MostVisitedTourText = "Most visited tour ever is: " + MostVisitedTour.Name;
         }
 
@@ -97,7 +96,7 @@ namespace InitialProject.ViewModels
         {
             get { return _mostVisitedTourInYear; }
             set
-            {
+            { 
                 _mostVisitedTourInYear = value;
                 OnPropertyChanged(MostVisitedTourInYearText);
             }
@@ -108,10 +107,13 @@ namespace InitialProject.ViewModels
             get { return _selectedYear; }
             set
             {
+                MostVisitedToursInYear.Clear();
                 _selectedYear = value;
                 OnPropertyChanged("SelectedYear");
                 MostVisitedTourInYear = _tourService.GetMostVisitedInYear(SelectedYear);
-                MostVisitedTourInYearText = "Most visited tour in year " + SelectedYear.ToString() + " is " + MostVisitedTourInYear.Name;
+                MostVisitedToursInYear.Add(MostVisitedTourInYear);  
+                MostVisitedTourInYearText = MostVisitedToursInYear.FirstOrDefault().Name;
+                OnPropertyChanged(MostVisitedTourInYearText);
             }
 
         }
@@ -297,9 +299,9 @@ namespace InitialProject.ViewModels
             ShortTourRequest shortTourRequest = new ShortTourRequest(Country,City,Languagee);
             foreach (ShortTourRequest request in _shortTourRequestService.GetAll())
             {
-                if(request.Country.Equals(shortTourRequest.Country) || /*shortTourRequest.Country.Equals("")*/ shortTourRequest.Country == null)
+                if(request.Country.Equals(shortTourRequest.Country) || shortTourRequest.Country == null)
                 {
-                    if(request.City.Equals(shortTourRequest.City) || /*shortTourRequest.City.Equals("")*/ shortTourRequest.City == null)
+                    if(request.City.Equals(shortTourRequest.City) || shortTourRequest.City == null)
                     {
                         if(request.Language.ToLower().Contains(shortTourRequest.Language.ToLower()) || shortTourRequest.Language.Equals(""))
                         {

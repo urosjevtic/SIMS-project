@@ -9,33 +9,33 @@
       Title="ActiveTourPage">
 
     <Page.Resources>
-     
-            <!-- Style for ListView -->
-            <Style x:Key="ListViewStyle" TargetType="ListView">
-                <Setter Property="Background" Value="#D1EEEE" />
-           
+
+        <!-- Style for ListView -->
+        <Style x:Key="ListViewStyle" TargetType="ListView">
+            <Setter Property="Background" Value="#D1EEEE" />
+
         </Style>
 
-            <!-- Style for ListView header -->
-            <Style x:Key="ListViewHeaderStyle" TargetType="GridViewColumnHeader">
+        <!-- Style for ListView header -->
+        <Style x:Key="ListViewHeaderStyle" TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="#008080" />
             <Setter Property="Foreground" Value="White"></Setter>
             <Setter Property="FontWeight" Value="SemiBold"></Setter>
             <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="GridViewColumnHeader">
-                            <Border Background="{TemplateBinding Background}"
+                <Setter.Value>
+                    <ControlTemplate TargetType="GridViewColumnHeader">
+                        <Border Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="1"
                             Padding="6,4"
                             CornerRadius="7"
                             SnapsToDevicePixels="True">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
     </Page.Resources>
 
@@ -55,11 +55,11 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="1*"></RowDefinition>
         </Grid.RowDefinitions>
-        <TextBlock  Text="Currently active tour" Grid.Row="0" Grid.ColumnSpan="2" 
+        <TextBlock  Text="Currently active tour" Grid.Row="0" Grid.ColumnSpan="2"  Grid.Column="0"
                   HorizontalAlignment="Center" FontSize="25" FontWeight="Bold"
-                   Background="#D1EEEE" Margin="50 0 0 0"
+                   Background="#D1EEEE" 
          ></TextBlock>
-        
+
         <TextBlock Text="{Binding TourName}"  HorizontalAlignment="Left" 
                  Grid.Row="2" FontSize="16" Margin="50 0 0 0" FontWeight="SemiBold"
                    Background="#D1EEEE" 
@@ -69,9 +69,9 @@
                   Grid.Row="3" FontSize="16" FontWeight="SemiBold" Margin="50 0 0 0"
                    Background="#D1EEEE"></TextBlock>
 
-        <Label Grid.Row="2" Grid.Column="1" Content="Guests:" FontSize="16" HorizontalAlignment="Left" Foreground="#004040"></Label>
+        <Label Grid.Row="2" Grid.Column="1" Content="Guests:" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Left" Foreground="#004040"></Label>
 
-         
+
         <ListView Height="278" 
               HorizontalAlignment="Left" 
               Name="CheckPoListView" 
@@ -130,7 +130,7 @@
             </ListView.View>
         </ListView>
 
-        <Button Grid.Column="1"  Style="{StaticResource MenuButtonTheme}" Margin="150,0,0,0" 
-                Height="40" Width="120" Grid.Row="7" Content="End tour" Command="{Binding EndTourCommand}"/>
+        <Button Grid.Column="1"  Style="{StaticResource MenuButtonTheme}" Margin="297,0,0,0" 
+                Height="40" Width="120" Grid.Row="7" Content="End tour" Command="{Binding EndTourCommand}" HorizontalAlignment="Center"/>
     </Grid>
 </Page>

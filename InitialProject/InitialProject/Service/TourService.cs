@@ -8,7 +8,6 @@ using InitialProject.Domain.Model;
 using InitialProject.Domain.RepositoryInterfaces;
 using InitialProject.Injector;
 using InitialProject.Model;
-using System.Collections.ObjectModel;
 
 namespace InitialProject.Service
 {
@@ -111,25 +110,48 @@ namespace InitialProject.Service
         {
             _tourRepository.Delete(tour);
         }
-        public void SendVauchers(Tour tour)
+        public void SendVauchers(Tour tour,User loggedUser)
         {
             foreach (User user in _tourReservationRepository.GetReservationGuest(tour))
             {
                 TourGuest guest = _tourGuestsRepository.GetGuest(user);
-                MakeVaucher(guest);
+                MakeVaucher(guest, loggedUser);
             }
         }
 
-        public void MakeVaucher(TourGuest guest)
+        public void MakeVaucher(TourGuest guest,User user)
         {
             Voucher voucher = new Voucher();
             voucher.IdUser = guest.Id;
             voucher.CreationDate = DateTime.Now;
             voucher.Status = VoucherStatus.Created;
-            voucher.Text = "Ovaj vaucer mozete koristiti 2 godine od datuma kreiranja";
+            voucher.Text = "Ovaj vaucer mozete koristiti godinu dana od datuma kreiranja";
+            voucher.GuideId = user.Id;
             _voucherRepository.Save(voucher);
         }
-       
+
+
+        public void SendVauchersForAllTours(Tour tour, User loggedUser)
+        {
+            foreach (User user in _tourReservationRepository.GetReservationGuest(tour))
+            {
+                TourGuest guest = _tourGuestsRepository.GetGuest(user);
+                MakeVaucherForTwoYears(guest, loggedUser);
+            }
+        }
+
+        public void MakeVaucherForTwoYears(TourGuest guest, User user)
+        {
+            Voucher voucher = new Voucher();
+            voucher.IdUser = guest.Id;
+            voucher.CreationDate = DateTime.Now;
+            voucher.Status = VoucherStatus.Created;
+            voucher.Text = "Ovaj vaucer mozete koristiti dvije godine od dana od datuma kreiranja";
+            voucher.GuideId = -1;
+            _voucherRepository.Save(voucher);
+        }
+
+
         public int NextId()
         {
             return _tourRepository.NextId();
@@ -299,22 +321,17 @@ namespace InitialProject.Service
             List<Tour> ended = new List<Tour>();
             AddTourLocation(tours, locations);
 
-<<<<<<< HEAD
             foreach (Tour tour in tours)  
-=======
-             foreach (Tour tour in tours)  
->>>>>>> f534d28c9e35d115634c2b14fc130ad55abd0402
             {
                 foreach (DateTime start in tour.StartDates)
                 {
-                  if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && tour.IsRated == false)
+                  if(start.Date.DayOfYear < DateTime.Now.Date.DayOfYear && tour.IsActive == false && start.Year <= DateTime.Now.Year)
                     {
-                        ended.Add(tour);
-                    }
-                    if(start.Year < DateTime.Now.Year)
-                    {
-                        ended.Add(tour);
-                    }
+                        if (!ended.Contains(tour))
+                        {
+                            ended.Add(tour);
+                        }
+                    }   
                 }     
             }
             return ended;
@@ -324,14 +341,10 @@ namespace InitialProject.Service
             SelectedTour.IsRated = true;
             _tourRepository.Update(SelectedTour);
         }
-<<<<<<< HEAD
         
-        public void AddGuestsImage(Tour tour, string text)
-=======
-        public void AddGuestsImage(Tour tour, ObservableCollection<string> urls)
->>>>>>> f534d28c9e35d115634c2b14fc130ad55abd0402
+        public void AddGuestsImage(Tour tour, Image text)
         {
-            _imageRepository.Update(tour, urls);
+            _imageRepository.Update(tour,text);
         }
         public List<Tour> FindActiveTours(User user)
         {

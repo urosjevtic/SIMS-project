@@ -56,7 +56,10 @@ namespace InitialProject.Service
                 }
 
             }
-            return sum / i;
+
+            double averageRating = sum / i;
+            double roundedAverageRating = Math.Round(averageRating, 2);
+            return roundedAverageRating;
         }
 
 

@@ -36,17 +36,47 @@
 
 
 
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="2" CanUserAddRows="False" CanUserReorderColumns="False" FontSize="16"
+        <DataGrid Style="{StaticResource DataGridStyle}" Grid.Row="2" Grid.ColumnSpan="2" CanUserAddRows="False" CanUserReorderColumns="False" FontSize="16"
                   CanUserSortColumns="True" ItemsSource="{Binding EndedTours}" SelectedItem="{Binding SelectedTour, UpdateSourceTrigger=PropertyChanged}"
-                  AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False"
-                  CanUserResizeRows="False" Margin="36,0,139,0" Grid.RowSpan="6" VerticalScrollBarVisibility="Auto"  >
+                  AutoGenerateColumns="False" IsReadOnly="True"  CanUserResizeColumns="False" SelectionMode="Single" MinRowHeight="80" 
+                   CanUserResizeRows="False" Margin="36,0,139,0" Grid.RowSpan="6" VerticalScrollBarVisibility="Auto"  >
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}"  Width="13*" />
-                <DataGridTextColumn Header="Location" Binding="{Binding Location.City}"  Width="12*"/>
-                <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="15*" />
-                <DataGridTextColumn Header="Language" Binding="{Binding Language}"  Width="10*"/>
-                <DataGridTextColumn Header="Duration " Binding="{Binding Duration }"  Width="10*" />
+                <DataGridTemplateColumn Header="Name" Width="12*" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Description" Width="15*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Description}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Location" Width="12*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Location}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Language" Width="10*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Language}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Duration" Width="10*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Duration}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
 

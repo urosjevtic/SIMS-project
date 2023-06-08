@@ -51,5 +51,13 @@ namespace InitialProject.Service
             }
             return sum;
         }
+        public List<TourReservation> GetAll()
+        {
+            return _tourReservationRepository.GetAll();
+        }
+        public void Delete(TourReservation reservation)
+        {
+            _tourReservationRepository.Delete(reservation);
+        }
     }
 }

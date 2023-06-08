@@ -5,6 +5,7 @@
         <Setter Property="Background" Value="#FCFFFF"></Setter>
         <Setter Property="BorderThickness" Value="1"></Setter>
         <Setter Property="BorderBrush" Value="#008080"></Setter>
+        <Setter Property="Foreground" Value="#004040"></Setter>
         <Setter Property="Width" Value="170"></Setter>
         <Setter Property="Height" Value="35"></Setter>
         <Setter Property="Width" Value="180"></Setter>
@@ -20,12 +21,11 @@
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}"
-                                SnapsToDevicePixels="True"
+                                
                                 CornerRadius="10,10,10,10">
                             <ContentPresenter Content="{TemplateBinding Text}" 
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                    
                     <ControlTemplate.Triggers>

@@ -14,6 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using InitialProject.View.GuideView;
+using System.ComponentModel;
 
 namespace InitialProject.View.GuideView.Pages
 {
@@ -27,5 +29,7 @@ namespace InitialProject.View.GuideView.Pages
             InitializeComponent();
             DataContext = new RequestsViewModel(user);
         }
+     
+     
     }
 }

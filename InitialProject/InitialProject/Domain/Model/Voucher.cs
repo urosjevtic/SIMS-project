@@ -14,7 +14,8 @@ namespace InitialProject.Domain.Model
         public int IdUser { get; set; }
         public DateTime CreationDate { get; set; }
         public VoucherStatus Status { get; set; }
-        public String Text { get; set; }    
+        public String Text { get; set; }
+        public int GuideId { get; set; }
         public Voucher()
         {
 
@@ -34,7 +35,8 @@ namespace InitialProject.Domain.Model
                IdUser.ToString(),
                CreationDate.ToString(),
                Status.ToString(),
-               Text
+               Text,
+               GuideId.ToString()
             };
 
             return csvValues;
@@ -46,6 +48,7 @@ namespace InitialProject.Domain.Model
             CreationDate = DateTime.Parse(values[2]);
             Status = (VoucherStatus)Enum.Parse(typeof(VoucherStatus),values[3]);
             Text = values[4];
+            GuideId = Convert.ToInt32(values[5]);
         }
 
     }
